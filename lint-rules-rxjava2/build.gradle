@@ -1,0 +1,32 @@
+apply plugin: 'com.android.library'
+
+android {
+  compileSdkVersion rootProject.ext.compileSdkVersion
+  buildToolsVersion rootProject.ext.buildToolsVersion
+
+  defaultConfig {
+    minSdkVersion rootProject.ext.minSdkVersion
+  }
+}
+
+configurations {
+  lintChecks
+}
+
+dependencies {
+  lintChecks project(path: ':lint-rules-rxjava2-lint', configuration: 'lintChecks')
+}
+
+task copyLintJar(type: Copy) {
+  from(configurations.lintChecks) {
+    rename { 'lint.jar' }
+  }
+  into 'build/intermediates/lint/'
+}
+
+project.afterEvaluate {
+  def compileLintTask = project.tasks.find { it.name == 'compileLint' }
+  compileLintTask.dependsOn(copyLintJar)
+}
+
+apply from: rootProject.file('gradle/gradle-mvn-push.gradle')
