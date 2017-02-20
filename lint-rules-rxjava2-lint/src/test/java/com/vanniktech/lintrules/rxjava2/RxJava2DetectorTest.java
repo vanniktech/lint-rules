@@ -1,6 +1,5 @@
 package com.vanniktech.lintrules.rxjava2;
 
-import com.android.tools.lint.checks.infrastructure.LintDetectorTest;
 import com.android.tools.lint.detector.api.Detector;
 import com.android.tools.lint.detector.api.Issue;
 import java.util.Arrays;
@@ -9,74 +8,7 @@ import org.intellij.lang.annotations.Language;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 
-public class RxJava2DetectorTest extends LintDetectorTest {
-  private static final String NO_WARNINGS = "No warnings.";
-
-  private final TestFile compositeDisposableStub = java(""
-      + "package io.reactivex.disposables;\n"
-      + "public class CompositeDisposable {\n"
-      + "  public void dispose() {}\n"
-      + "  public void addAll() {}\n"
-      + "}");
-
-  private final TestFile consumerStub = java(""
-      + "package io.reactivex.functions;\n"
-      + "public interface Consumer<T> {\n"
-      + "  void accept(T t) throws Exception;\n"
-      + "}");
-
-  private final TestFile actionStub = java(""
-      + "package io.reactivex.functions;\n"
-      + "public interface Action {\n"
-      + "  void run() throws Exception;\n"
-      + "}");
-
-  private final TestFile observableStub = java(""
-      + "package io.reactivex;\n"
-      + "import io.reactivex.functions.Consumer;\n"
-      + "public class Observable<T> {\n"
-      + "  public void subscribe() {}\n"
-      + "  public void subscribe(Consumer<T> onNext) {}\n"
-      + "  public void subscribe(Consumer<T> onNext, Consumer<Throwable> onError) {}\n"
-      + "}");
-
-  private final TestFile flowableStub = java(""
-      + "package io.reactivex;\n"
-      + "import io.reactivex.functions.Consumer;\n"
-      + "public class Flowable<T> {\n"
-      + "  public void subscribe() {}\n"
-      + "  public void subscribe(Consumer<T> onNext) {}\n"
-      + "  public void subscribe(Consumer<T> onNext, Consumer<Throwable> onError) {}\n"
-      + "}");
-
-  private final TestFile singleStub = java(""
-      + "package io.reactivex;\n"
-      + "import io.reactivex.functions.Consumer;\n"
-      + "public class Single<T> {\n"
-      + "  public void subscribe() {}\n"
-      + "  public void subscribe(Consumer<T> onSuccess) {}\n"
-      + "  public void subscribe(Consumer<T> onSuccess, Consumer<Throwable> onError) {}\n"
-      + "}");
-
-  private final TestFile completableStub = java(""
-      + "package io.reactivex;\n"
-      + "import io.reactivex.functions.Action;\n"
-      + "import io.reactivex.functions.Consumer;\n"
-      + "public class Completable {\n"
-      + "  public void subscribe() {}\n"
-      + "  public void subscribe(Action onComplete) {}\n"
-      + "  public void subscribe(Action onComplete, Consumer<Throwable> onError) {}\n"
-      + "}");
-
-  private final TestFile maybeStub = java(""
-      + "package io.reactivex;\n"
-      + "import io.reactivex.functions.Consumer;\n"
-      + "public class Maybe<T> {\n"
-      + "  public void subscribe() {}\n"
-      + "  public void subscribe(Consumer<T> onSuccess) {}\n"
-      + "  public void subscribe(Consumer<T> onSuccess, Consumer<Throwable> onError) {}\n"
-      + "}");
-
+public class RxJava2DetectorTest extends RxJavaLintDetectorTest {
   public void testCallingCompositeDisposableDispose() throws Exception {
     @Language("JAVA") final String source = ""
         + "package foo;\n"
@@ -87,7 +19,7 @@ public class RxJava2DetectorTest extends LintDetectorTest {
         + "    cd.dispose();\n"
         + "  }\n"
         + "}";
-    assertThat(lintProject(compositeDisposableStub, java(source))).isEqualTo("src/foo/Example.java:6: "
+    assertThat(lintProject(stubCompositeDisposable, java(source))).isEqualTo("src/foo/Example.java:6: "
         + "Warning: Using dispose() instead of clear() [CompositeDisposableDispose]\n"
         + "    cd.dispose();\n"
         + "       ~~~~~~~\n"
@@ -104,7 +36,7 @@ public class RxJava2DetectorTest extends LintDetectorTest {
         + "    cd.addAll();\n"
         + "  }\n"
         + "}";
-    assertThat(lintProject(compositeDisposableStub, java(source))).isEqualTo("src/foo/Example.java:6: "
+    assertThat(lintProject(stubCompositeDisposable, java(source))).isEqualTo("src/foo/Example.java:6: "
         + "Warning: Using addAll() instead of add() separately [CompositeDisposableAddAll]\n"
         + "    cd.addAll();\n"
         + "       ~~~~~~\n"
@@ -121,7 +53,7 @@ public class RxJava2DetectorTest extends LintDetectorTest {
         + "    o.subscribe();\n"
         + "  }\n"
         + "}";
-    assertThat(lintProject(consumerStub, observableStub, java(source))).isEqualTo("src/foo/Example.java:6: "
+    assertThat(lintProject(stubConsumer, stubObservable, java(source))).isEqualTo("src/foo/Example.java:6: "
         + "Error: Using a version of subscribe() without an error Consumer [SubscribeMissingErrorConsumer]\n"
         + "    o.subscribe();\n"
         + "      ~~~~~~~~~\n"
@@ -139,7 +71,7 @@ public class RxJava2DetectorTest extends LintDetectorTest {
         + "    o.subscribe(c);\n"
         + "  }\n"
         + "}";
-    assertThat(lintProject(consumerStub, observableStub, java(source))).isEqualTo("src/foo/Example.java:7: "
+    assertThat(lintProject(stubConsumer, stubObservable, java(source))).isEqualTo("src/foo/Example.java:7: "
         + "Error: Using a version of subscribe() without an error Consumer [SubscribeMissingErrorConsumer]\n"
         + "    o.subscribe(c);\n"
         + "      ~~~~~~~~~\n"
@@ -157,7 +89,7 @@ public class RxJava2DetectorTest extends LintDetectorTest {
         + "    osubscribe(c, c);\n"
         + "  }\n"
         + "}";
-    assertThat(lintProject(consumerStub, observableStub, java(source))).isEqualTo(NO_WARNINGS);
+    assertThat(lintProject(stubConsumer, stubObservable, java(source))).isEqualTo(NO_WARNINGS);
   }
 
   public void testCallingFlowableSubscribe() throws Exception {
@@ -170,7 +102,7 @@ public class RxJava2DetectorTest extends LintDetectorTest {
         + "    f.subscribe();\n"
         + "  }\n"
         + "}";
-    assertThat(lintProject(consumerStub, flowableStub, java(source))).isEqualTo("src/foo/Example.java:6: "
+    assertThat(lintProject(stubConsumer, stubFlowable, java(source))).isEqualTo("src/foo/Example.java:6: "
         + "Error: Using a version of subscribe() without an error Consumer [SubscribeMissingErrorConsumer]\n"
         + "    f.subscribe();\n"
         + "      ~~~~~~~~~\n"
@@ -188,7 +120,7 @@ public class RxJava2DetectorTest extends LintDetectorTest {
         + "    f.subscribe(c);\n"
         + "  }\n"
         + "}";
-    assertThat(lintProject(consumerStub, flowableStub, java(source))).isEqualTo("src/foo/Example.java:7: "
+    assertThat(lintProject(stubConsumer, stubFlowable, java(source))).isEqualTo("src/foo/Example.java:7: "
         + "Error: Using a version of subscribe() without an error Consumer [SubscribeMissingErrorConsumer]\n"
         + "    f.subscribe(c);\n"
         + "      ~~~~~~~~~\n"
@@ -206,7 +138,7 @@ public class RxJava2DetectorTest extends LintDetectorTest {
         + "    f.subscribe(c, c);\n"
         + "  }\n"
         + "}";
-    assertThat(lintProject(consumerStub, flowableStub, java(source))).isEqualTo(NO_WARNINGS);
+    assertThat(lintProject(stubConsumer, stubFlowable, java(source))).isEqualTo(NO_WARNINGS);
   }
 
   public void testCallingSingleSubscribe() throws Exception {
@@ -219,7 +151,7 @@ public class RxJava2DetectorTest extends LintDetectorTest {
         + "    s.subscribe();\n"
         + "  }\n"
         + "}";
-    assertThat(lintProject(consumerStub, singleStub, java(source))).isEqualTo("src/foo/Example.java:6: "
+    assertThat(lintProject(stubConsumer, stubSingle, java(source))).isEqualTo("src/foo/Example.java:6: "
         + "Error: Using a version of subscribe() without an error Consumer [SubscribeMissingErrorConsumer]\n"
         + "    s.subscribe();\n"
         + "      ~~~~~~~~~\n"
@@ -237,7 +169,7 @@ public class RxJava2DetectorTest extends LintDetectorTest {
         + "    s.subscribe(c);\n"
         + "  }\n"
         + "}";
-    assertThat(lintProject(consumerStub, singleStub, java(source))).isEqualTo("src/foo/Example.java:7: "
+    assertThat(lintProject(stubConsumer, stubSingle, java(source))).isEqualTo("src/foo/Example.java:7: "
         + "Error: Using a version of subscribe() without an error Consumer [SubscribeMissingErrorConsumer]\n"
         + "    s.subscribe(c);\n"
         + "      ~~~~~~~~~\n"
@@ -255,7 +187,7 @@ public class RxJava2DetectorTest extends LintDetectorTest {
         + "    s.subscribe(c, c);\n"
         + "  }\n"
         + "}";
-    assertThat(lintProject(consumerStub, singleStub, java(source))).isEqualTo(NO_WARNINGS);
+    assertThat(lintProject(stubConsumer, stubSingle, java(source))).isEqualTo(NO_WARNINGS);
   }
 
   public void testCallingCompletableSubscribe() throws Exception {
@@ -268,7 +200,7 @@ public class RxJava2DetectorTest extends LintDetectorTest {
         + "    cp.subscribe();\n"
         + "  }\n"
         + "}";
-    assertThat(lintProject(actionStub, completableStub, java(source))).isEqualTo("src/foo/Example.java:6: "
+    assertThat(lintProject(stubAction, stubCompletable, java(source))).isEqualTo("src/foo/Example.java:6: "
         + "Error: Using a version of subscribe() without an error Consumer [SubscribeMissingErrorConsumer]\n"
         + "    cp.subscribe();\n"
         + "       ~~~~~~~~~\n"
@@ -286,7 +218,7 @@ public class RxJava2DetectorTest extends LintDetectorTest {
         + "    cp.subscribe(a);\n"
         + "  }\n"
         + "}";
-    assertThat(lintProject(actionStub, completableStub, java(source))).isEqualTo("src/foo/Example.java:7: "
+    assertThat(lintProject(stubAction, stubCompletable, java(source))).isEqualTo("src/foo/Example.java:7: "
         + "Error: Using a version of subscribe() without an error Consumer [SubscribeMissingErrorConsumer]\n"
         + "    cp.subscribe(a);\n"
         + "       ~~~~~~~~~\n"
@@ -305,7 +237,7 @@ public class RxJava2DetectorTest extends LintDetectorTest {
         + "    cp.subscribe(a, c);\n"
         + "  }\n"
         + "}";
-    assertThat(lintProject(actionStub, consumerStub, completableStub, java(source))).isEqualTo(NO_WARNINGS);
+    assertThat(lintProject(stubAction, stubConsumer, stubCompletable, java(source))).isEqualTo(NO_WARNINGS);
   }
 
   public void testCallingMaybeSubscribe() throws Exception {
@@ -318,7 +250,7 @@ public class RxJava2DetectorTest extends LintDetectorTest {
         + "    m.subscribe();\n"
         + "  }\n"
         + "}";
-    assertThat(lintProject(consumerStub, maybeStub, java(source))).isEqualTo("src/foo/Example.java:6: "
+    assertThat(lintProject(stubConsumer, stubMaybe, java(source))).isEqualTo("src/foo/Example.java:6: "
         + "Error: Using a version of subscribe() without an error Consumer [SubscribeMissingErrorConsumer]\n"
         + "    m.subscribe();\n"
         + "      ~~~~~~~~~\n"
@@ -336,7 +268,7 @@ public class RxJava2DetectorTest extends LintDetectorTest {
         + "    m.subscribe(c);\n"
         + "  }\n"
         + "}";
-    assertThat(lintProject(consumerStub, maybeStub, java(source))).isEqualTo("src/foo/Example.java:7: "
+    assertThat(lintProject(stubConsumer, stubMaybe, java(source))).isEqualTo("src/foo/Example.java:7: "
         + "Error: Using a version of subscribe() without an error Consumer [SubscribeMissingErrorConsumer]\n"
         + "    m.subscribe(c);\n"
         + "      ~~~~~~~~~\n"
@@ -354,7 +286,7 @@ public class RxJava2DetectorTest extends LintDetectorTest {
         + "    m.subscribe(c, c);\n"
         + "  }\n"
         + "}";
-    assertThat(lintProject(consumerStub, maybeStub, java(source))).isEqualTo(NO_WARNINGS);
+    assertThat(lintProject(stubConsumer, stubMaybe, java(source))).isEqualTo(NO_WARNINGS);
   }
 
   @Override protected Detector getDetector() {
