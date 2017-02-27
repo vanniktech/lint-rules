@@ -18,6 +18,13 @@ public abstract class RxJavaLintDetectorTest extends LintDetectorTest {
       + "  void accept(T t) throws Exception;\n"
       + "}");
 
+  final TestFile stubDisposable = java(""
+      + "package io.reactivex.disposables;\n"
+      + "public interface Disposable<T> {\n"
+      + "  boolean isDisposed();\n"
+      + "  void dispose();\n"
+      + "}");
+
   final TestFile stubAction = java(""
       + "package io.reactivex.functions;\n"
       + "public interface Action {\n"
