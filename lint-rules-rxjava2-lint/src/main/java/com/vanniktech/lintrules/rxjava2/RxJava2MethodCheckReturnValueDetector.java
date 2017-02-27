@@ -51,11 +51,11 @@ public final class RxJava2MethodCheckReturnValueDetector extends Detector implem
     public void visitMethod(final PsiMethod method) {
       final PsiType returnType = method.getReturnType();
 
-      if (returnType != null && Utils.isRxJava2ReactiveType(returnType)) {
+      if (returnType != null && Utils.isRxJava2TypeThatRequiresCheckReturnValueAnnotation(returnType)) {
         final PsiAnnotation[] annotations = method.getModifierList().getAnnotations();
 
         for (final PsiAnnotation annotation : annotations) {
-          if ("CheckReturnValue".equals(annotation.getQualifiedName())) {
+          if ("io.reactivex.annotations.CheckReturnValue".equals(annotation.getQualifiedName())) {
             return;
           }
         }

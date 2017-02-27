@@ -29,7 +29,7 @@ public class RxJava2MethodCheckReturnValueDetectorTest extends RxJavaLintDetecto
     @Language("JAVA") final String source = ""
         + "package foo;\n"
         + "import io.reactivex.Observable;\n"
-        + "import io.reactivex.annotations;\n"
+        + "import io.reactivex.annotations.CheckReturnValue;\n"
         + "public class Example {\n"
         + "  @CheckReturnValue public Observable<Object> foo() {\n"
         + "    return null;\n"
@@ -58,7 +58,7 @@ public class RxJava2MethodCheckReturnValueDetectorTest extends RxJavaLintDetecto
     @Language("JAVA") final String source = ""
         + "package foo;\n"
         + "import io.reactivex.Flowable;\n"
-        + "import io.reactivex.annotations;\n"
+        + "import io.reactivex.annotations.CheckReturnValue;\n"
         + "public class Example {\n"
         + "  @CheckReturnValue public Flowable<Object> foo() {\n"
         + "    return null;\n"
@@ -87,7 +87,7 @@ public class RxJava2MethodCheckReturnValueDetectorTest extends RxJavaLintDetecto
     @Language("JAVA") final String source = ""
         + "package foo;\n"
         + "import io.reactivex.Single;\n"
-        + "import io.reactivex.annotations;\n"
+        + "import io.reactivex.annotations.CheckReturnValue;\n"
         + "public class Example {\n"
         + "  @CheckReturnValue public Single<Object> foo() {\n"
         + "    return null;\n"
@@ -116,7 +116,7 @@ public class RxJava2MethodCheckReturnValueDetectorTest extends RxJavaLintDetecto
     @Language("JAVA") final String source = ""
         + "package foo;\n"
         + "import io.reactivex.Maybe;\n"
-        + "import io.reactivex.annotations;\n"
+        + "import io.reactivex.annotations.CheckReturnValue;\n"
         + "public class Example {\n"
         + "  @CheckReturnValue public Maybe<Object> foo() {\n"
         + "    return null;\n"
@@ -145,13 +145,42 @@ public class RxJava2MethodCheckReturnValueDetectorTest extends RxJavaLintDetecto
     @Language("JAVA") final String source = ""
         + "package foo;\n"
         + "import io.reactivex.Completable;\n"
-        + "import io.reactivex.annotations;\n"
+        + "import io.reactivex.annotations.CheckReturnValue;\n"
         + "public class Example {\n"
         + "  @CheckReturnValue public Completable foo() {\n"
         + "    return null;\n"
         + "  }\n"
         + "}";
     assertThat(lintProject(stubCompletable, stubCheckReturnValue, java(source))).isEqualTo(NO_WARNINGS);
+  }
+
+  public void testMethodReturningDisposableMissingCheckReturnValue() throws Exception {
+    @Language("JAVA") final String source = ""
+        + "package foo;\n"
+        + "import io.reactivex.disposables.Disposable;\n"
+        + "public class Example {\n"
+        + "  public Disposable foo() {\n"
+        + "    return null;\n"
+        + "  }\n"
+        + "}";
+    assertThat(lintProject(stubDisposable, java(source))).isEqualTo("src/foo/Example.java:4: "
+        + "Warning: Method should have @CheckReturnValue annotation [MethodMissingCheckReturnValue]\n"
+        + "  public Disposable foo() {\n"
+        + "  ^\n"
+        + "0 errors, 1 warnings\n");
+  }
+
+  public void testMethodReturningDisposableHavingCheckReturnValue() throws Exception {
+    @Language("JAVA") final String source = ""
+        + "package foo;\n"
+        + "import io.reactivex.disposables.Disposable;\n"
+        + "import io.reactivex.annotations.CheckReturnValue;\n"
+        + "public class Example {\n"
+        + "  @CheckReturnValue public Disposable foo() {\n"
+        + "    return null;\n"
+        + "  }\n"
+        + "}";
+    assertThat(lintProject(stubDisposable, stubCheckReturnValue, java(source))).isEqualTo(NO_WARNINGS);
   }
 
   @Override protected Detector getDetector() {
