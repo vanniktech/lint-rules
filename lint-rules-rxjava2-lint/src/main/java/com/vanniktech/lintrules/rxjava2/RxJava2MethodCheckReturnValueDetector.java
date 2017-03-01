@@ -18,13 +18,7 @@ import static com.android.tools.lint.detector.api.Scope.JAVA_FILE_SCOPE;
 import static com.android.tools.lint.detector.api.Severity.WARNING;
 
 public final class RxJava2MethodCheckReturnValueDetector extends Detector implements Detector.JavaPsiScanner {
-  static Issue[] getIssues() {
-    return new Issue[] {
-        METHOD_MISSING_CHECK_RETURN_VALUE
-    };
-  }
-
-  static final Issue METHOD_MISSING_CHECK_RETURN_VALUE =
+  static final Issue ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE =
       Issue.create("MethodMissingCheckReturnValue", "Method is missing the @CheckReturnValue annotation",
           "Methods returning RxJava Reactive Types should be annotated with the @CheckReturnValue annotation.",
               MESSAGES, 8, WARNING,
@@ -60,7 +54,7 @@ public final class RxJava2MethodCheckReturnValueDetector extends Detector implem
           }
         }
 
-        context.report(METHOD_MISSING_CHECK_RETURN_VALUE, context.getLocation(method), "Method should have @CheckReturnValue annotation");
+        context.report(ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE, context.getLocation(method), "Method should have @CheckReturnValue annotation");
       }
     }
   }
