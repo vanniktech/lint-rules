@@ -10,6 +10,7 @@ public abstract class RxJavaLintDetectorTest extends LintDetectorTest {
       + "public class CompositeDisposable {\n"
       + "  public void dispose() {}\n"
       + "  public void addAll() {}\n"
+      + "  public void clear() {}\n"
       + "}");
 
   final TestFile stubConsumer = java(""
@@ -81,4 +82,8 @@ public abstract class RxJavaLintDetectorTest extends LintDetectorTest {
       + "  public void subscribe(Consumer<T> onSuccess) {}\n"
       + "  public void subscribe(Consumer<T> onSuccess, Consumer<Throwable> onError) {}\n"
       + "}");
+
+  @Override protected boolean allowCompilationErrors() {
+    return false;
+  }
 }
