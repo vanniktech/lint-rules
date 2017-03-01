@@ -2,10 +2,11 @@ package com.vanniktech.lintrules.rxjava2;
 
 import com.android.tools.lint.detector.api.Detector;
 import com.android.tools.lint.detector.api.Issue;
-import java.util.Arrays;
 import java.util.List;
 import org.intellij.lang.annotations.Language;
 
+import static com.vanniktech.lintrules.rxjava2.RxJava2MethodCheckReturnValueDetector.ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE;
+import static java.util.Collections.singletonList;
 import static org.fest.assertions.api.Assertions.assertThat;
 
 public class RxJava2MethodCheckReturnValueDetectorTest extends RxJavaLintDetectorTest {
@@ -188,7 +189,7 @@ public class RxJava2MethodCheckReturnValueDetectorTest extends RxJavaLintDetecto
   }
 
   @Override protected List<Issue> getIssues() {
-    return Arrays.asList(RxJava2MethodCheckReturnValueDetector.getIssues());
+    return singletonList(ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE);
   }
 
   @Override protected boolean allowCompilationErrors() {

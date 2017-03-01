@@ -10,7 +10,7 @@ import org.intellij.lang.annotations.Language;
 import static org.fest.assertions.api.Assertions.assertThat;
 
 public class AndroidDetectorTest extends LintDetectorTest {
-  private static final String NO_WARNINGS = "No warnings.";
+  static final String NO_WARNINGS = "No warnings.";
 
   private final TestFile windowStub = java(""
       + "package android.view;\n"
