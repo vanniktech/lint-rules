@@ -184,6 +184,64 @@ public class RxJava2MethodCheckReturnValueDetectorTest extends RxJavaLintDetecto
     assertThat(lintProject(stubDisposable, stubCheckReturnValue, java(source))).isEqualTo(NO_WARNINGS);
   }
 
+  public void testMethodReturningTestObserverMissingCheckReturnValue() throws Exception {
+    @Language("JAVA") final String source = ""
+        + "package foo;\n"
+        + "import io.reactivex.observers.TestObserver;\n"
+        + "public class Example {\n"
+        + "  public TestObserver foo() {\n"
+        + "    return null;\n"
+        + "  }\n"
+        + "}";
+    assertThat(lintProject(stubTestObserver, java(source))).isEqualTo("src/foo/Example.java:4: "
+        + "Warning: Method should have @CheckReturnValue annotation [MethodMissingCheckReturnValue]\n"
+        + "  public TestObserver foo() {\n"
+        + "  ^\n"
+        + "0 errors, 1 warnings\n");
+  }
+
+  public void testMethodReturningTestObserverHavingCheckReturnValue() throws Exception {
+    @Language("JAVA") final String source = ""
+        + "package foo;\n"
+        + "import io.reactivex.observers.TestObserver;\n"
+        + "import io.reactivex.annotations.CheckReturnValue;\n"
+        + "public class Example {\n"
+        + "  @CheckReturnValue public TestObserver foo() {\n"
+        + "    return null;\n"
+        + "  }\n"
+        + "}";
+    assertThat(lintProject(stubTestObserver, stubCheckReturnValue, java(source))).isEqualTo(NO_WARNINGS);
+  }
+
+  public void testMethodReturningTestSubscriberMissingCheckReturnValue() throws Exception {
+    @Language("JAVA") final String source = ""
+        + "package foo;\n"
+        + "import io.reactivex.subscribers.TestSubscriber;\n"
+        + "public class Example {\n"
+        + "  public TestSubscriber foo() {\n"
+        + "    return null;\n"
+        + "  }\n"
+        + "}";
+    assertThat(lintProject(stubTestSubscriber, java(source))).isEqualTo("src/foo/Example.java:4: "
+        + "Warning: Method should have @CheckReturnValue annotation [MethodMissingCheckReturnValue]\n"
+        + "  public TestSubscriber foo() {\n"
+        + "  ^\n"
+        + "0 errors, 1 warnings\n");
+  }
+
+  public void testMethodReturningTestSubscriberHavingCheckReturnValue() throws Exception {
+    @Language("JAVA") final String source = ""
+        + "package foo;\n"
+        + "import io.reactivex.subscribers.TestSubscriber;\n"
+        + "import io.reactivex.annotations.CheckReturnValue;\n"
+        + "public class Example {\n"
+        + "  @CheckReturnValue public TestSubscriber foo() {\n"
+        + "    return null;\n"
+        + "  }\n"
+        + "}";
+    assertThat(lintProject(stubTestSubscriber, stubCheckReturnValue, java(source))).isEqualTo(NO_WARNINGS);
+  }
+
   @Override protected Detector getDetector() {
     return new RxJava2MethodCheckReturnValueDetector();
   }

@@ -9,7 +9,9 @@ final class Utils {
         || "io.reactivex.Single".equals(psiType.getCanonicalText())
         || "io.reactivex.Completable".equals(psiType.getCanonicalText())
         || "io.reactivex.Maybe".equals(psiType.getCanonicalText())
-        || "io.reactivex.disposables.Disposable".equals(psiType.getCanonicalText());
+        || "io.reactivex.disposables.Disposable".equals(psiType.getCanonicalText())
+        || "io.reactivex.observers.TestObserver".equals(psiType.getCanonicalText())
+        || "io.reactivex.subscribers.TestSubscriber".equals(psiType.getCanonicalText());
   }
 
   private Utils() {
