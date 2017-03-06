@@ -19,6 +19,13 @@ public class RawDimenDetectorTest extends LintDetectorTest {
     assertThat(lintProject(xml("/res/layout/ids.xml", source))).isEqualTo(NO_WARNINGS);
   }
 
+  public void testAndroidMarginIgnored() throws Exception {
+    @Language("XML") final String source = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
+        + "<TextView xmlns:android=\"http://schemas.android.com/apk/res/android\" xmlns:tools=\"http://schemas.android.com/tools\" tools:ignore=\"RawDimen\" android:layout_margin=\"16dp\"/>\n";
+
+    assertThat(lintProject(xml("/res/layout/ids.xml", source))).isEqualTo(NO_WARNINGS);
+  }
+
   public void testAndroidMargin() throws Exception {
     @Language("XML") final String source = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
         + "<TextView xmlns:android=\"http://schemas.android.com/apk/res/android\" android:layout_margin=\"16dp\"/>\n";

@@ -31,22 +31,26 @@ public final class AndroidDetector extends Detector implements Detector.JavaPsiS
 
   private void handleFindViewById(final JavaContext context, final PsiMethodCallExpression call,
       final PsiReferenceExpression methodExpression, final String fullyQualifiedMethodName) {
-    if ("android.view.Window.findViewById".equals(fullyQualifiedMethodName)) {
+    final boolean isWindowFindViewByIdSuppressed = context.getDriver().isSuppressed(context, ISSUE_WINDOW_FIND_VIEW_BY_ID, methodExpression);
+    if ("android.view.Window.findViewById".equals(fullyQualifiedMethodName) && !isWindowFindViewByIdSuppressed) {
       context.report(ISSUE_WINDOW_FIND_VIEW_BY_ID, call, context.getLocation(methodExpression.getReferenceNameElement()),
           "Using findViewById instead of ButterKnife");
     }
 
-    if ("android.view.View.findViewById".equals(fullyQualifiedMethodName)) {
+    final boolean isViewFindViewByIdSuppressed = context.getDriver().isSuppressed(context, ISSUE_VIEW_FIND_VIEW_BY_ID, methodExpression);
+    if ("android.view.View.findViewById".equals(fullyQualifiedMethodName) && !isViewFindViewByIdSuppressed) {
       context.report(ISSUE_VIEW_FIND_VIEW_BY_ID, call, context.getLocation(methodExpression.getReferenceNameElement()),
           "Using findViewById instead of ButterKnife");
     }
 
-    if ("android.app.Dialog.findViewById".equals(fullyQualifiedMethodName)) {
+    final boolean isDialogFindViewByIdSuppressed = context.getDriver().isSuppressed(context, ISSUE_DIALOG_FIND_VIEW_BY_ID, methodExpression);
+    if ("android.app.Dialog.findViewById".equals(fullyQualifiedMethodName) && !isDialogFindViewByIdSuppressed) {
       context.report(ISSUE_DIALOG_FIND_VIEW_BY_ID, call, context.getLocation(methodExpression.getReferenceNameElement()),
           "Using findViewById instead of ButterKnife");
     }
 
-    if ("android.app.Activity.findViewById".equals(fullyQualifiedMethodName)) {
+    final boolean isActivityFindViewByIdSuppressed = context.getDriver().isSuppressed(context, ISSUE_ACTIVITY_FIND_VIEW_BY_ID, methodExpression);
+    if ("android.app.Activity.findViewById".equals(fullyQualifiedMethodName) && !isActivityFindViewByIdSuppressed) {
       context.report(ISSUE_ACTIVITY_FIND_VIEW_BY_ID, call, context.getLocation(methodExpression.getReferenceNameElement()),
           "Using findViewById instead of ButterKnife");
     }
@@ -54,17 +58,20 @@ public final class AndroidDetector extends Detector implements Detector.JavaPsiS
 
   private void handleResourcesCalls(final JavaContext context, final PsiMethodCallExpression call,
       final PsiReferenceExpression methodExpression, final String fullyQualifiedMethodName) {
-    if ("android.content.res.Resources.getDrawable".equals(fullyQualifiedMethodName)) {
+    final boolean isResourcesGetDrawableSuppressed = context.getDriver().isSuppressed(context, ISSUE_RESOURCES_GET_DRAWABLE, methodExpression);
+    if ("android.content.res.Resources.getDrawable".equals(fullyQualifiedMethodName) && !isResourcesGetDrawableSuppressed) {
       context.report(ISSUE_RESOURCES_GET_DRAWABLE, call, context.getLocation(methodExpression.getReferenceNameElement()),
           "Using deprecated getDrawable()");
     }
 
-    if ("android.content.res.Resources.getColor".equals(fullyQualifiedMethodName)) {
+    final boolean isResourcesGetColorSuppressed = context.getDriver().isSuppressed(context, ISSUE_RESOURCES_GET_COLOR, methodExpression);
+    if ("android.content.res.Resources.getColor".equals(fullyQualifiedMethodName) && !isResourcesGetColorSuppressed) {
       context.report(ISSUE_RESOURCES_GET_COLOR, call, context.getLocation(methodExpression.getReferenceNameElement()),
           "Using deprecated getColor()");
     }
 
-    if ("android.content.res.Resources.getColorStateList".equals(fullyQualifiedMethodName)) {
+    final boolean isResourcesGetColorStateListSuppressed = context.getDriver().isSuppressed(context, ISSUE_RESOURCES_GET_COLOR_STATE_LIST, methodExpression);
+    if ("android.content.res.Resources.getColorStateList".equals(fullyQualifiedMethodName) && !isResourcesGetColorStateListSuppressed) {
       context.report(ISSUE_RESOURCES_GET_COLOR_STATE_LIST, call, context.getLocation(methodExpression.getReferenceNameElement()),
           "Using deprecated getColorStateList()");
     }

@@ -85,7 +85,11 @@ public final class RxJava2MissingCompositeDisposableClearDetector extends Detect
       }
 
       for (final PsiField compositeDisposable : compositeDisposables) {
-        context.report(ISSUE_MISSING_COMPOSITE_DISPOSABLE_CLEAR, context.getLocation(compositeDisposable), "clear() is not called.");
+        final boolean isCompositeDisposableClearMissingSuppressed = context.getDriver().isSuppressed(context, ISSUE_MISSING_COMPOSITE_DISPOSABLE_CLEAR, compositeDisposable);
+
+        if (!isCompositeDisposableClearMissingSuppressed) {
+          context.report(ISSUE_MISSING_COMPOSITE_DISPOSABLE_CLEAR, context.getLocation(compositeDisposable), "clear() is not called.");
+        }
       }
     }
   }

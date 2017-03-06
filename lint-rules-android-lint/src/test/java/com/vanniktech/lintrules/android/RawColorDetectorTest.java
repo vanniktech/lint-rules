@@ -19,6 +19,13 @@ public class RawColorDetectorTest extends LintDetectorTest {
     assertThat(lintProject(xml("/res/layout/ids.xml", source))).isEqualTo(NO_WARNINGS);
   }
 
+  public void testAndroidTextColorIgnored() throws Exception {
+    @Language("XML") final String source = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
+        + "<TextView xmlns:android=\"http://schemas.android.com/apk/res/android\" xmlns:tools=\"http://schemas.android.com/tools\" tools:ignore=\"RawColor\" android:textColor=\"#fff\"/>\n";
+
+    assertThat(lintProject(xml("/res/layout/ids.xml", source))).isEqualTo(NO_WARNINGS);
+  }
+
   public void testAndroidTextColor() throws Exception {
     @Language("XML") final String source = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
         + "<TextView xmlns:android=\"http://schemas.android.com/apk/res/android\" android:textColor=\"#fff\"/>\n";

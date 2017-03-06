@@ -15,6 +15,7 @@ import static com.android.resources.ResourceFolderType.MENU;
 import static com.android.tools.lint.detector.api.Category.CORRECTNESS;
 import static com.android.tools.lint.detector.api.Scope.RESOURCE_FILE_SCOPE;
 import static com.android.tools.lint.detector.api.Severity.WARNING;
+import static com.vanniktech.lintrules.android.RawDimenDetector.ISSUE_RAW_DIMEN;
 import static com.vanniktech.lintrules.android.WrongViewIdFormatDetector.isCamelCase;
 
 public final class WrongMenuIdFormatDetector extends LayoutDetector {
@@ -33,8 +34,9 @@ public final class WrongMenuIdFormatDetector extends LayoutDetector {
   @Override public void visitAttribute(@NonNull final XmlContext context, @NonNull final Attr attribute) {
     if (ATTR_ID.equals(attribute.getLocalName())) {
       final String id = attribute.getValue().replace("@+id/", "");
+      final boolean isSuppressed = context.getDriver().isSuppressed(context, ISSUE_WRONG_MENU_ID_FORMAT, attribute);
 
-      if (!isCamelCase(id)) {
+      if (!isCamelCase(id) && !isSuppressed) {
         context.report(ISSUE_WRONG_MENU_ID_FORMAT, context.getValueLocation(attribute), "Id is not in lowerCamelCaseFormat");
       }
     }
