@@ -26,6 +26,16 @@ public abstract class RxJavaLintDetectorTest extends LintDetectorTest {
       + "  void dispose();\n"
       + "}");
 
+  final TestFile stubTestObserver = java(""
+      + "package io.reactivex.observers;\n"
+      + "public interface TestObserver<T> {\n"
+      + "}");
+
+  final TestFile stubTestSubscriber = java(""
+      + "package io.reactivex.subscribers;\n"
+      + "public interface TestSubscriber<T> {\n"
+      + "}");
+
   final TestFile stubAction = java(""
       + "package io.reactivex.functions;\n"
       + "public interface Action {\n"
