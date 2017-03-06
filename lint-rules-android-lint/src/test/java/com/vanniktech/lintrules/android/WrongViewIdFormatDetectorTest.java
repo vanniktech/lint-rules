@@ -7,7 +7,7 @@ import java.util.List;
 import org.intellij.lang.annotations.Language;
 
 import static com.vanniktech.lintrules.android.AndroidDetectorTest.NO_WARNINGS;
-import static com.vanniktech.lintrules.android.WrongViewIdFormatDetector.ISSUE_WRONG_ID_FORMAT;
+import static com.vanniktech.lintrules.android.WrongViewIdFormatDetector.ISSUE_WRONG_VIEW_ID_FORMAT;
 import static java.util.Collections.singletonList;
 import static org.fest.assertions.api.Assertions.assertThat;
 
@@ -48,7 +48,7 @@ public class WrongViewIdFormatDetectorTest extends LintDetectorTest {
   }
 
   @Override protected List<Issue> getIssues() {
-    return singletonList(ISSUE_WRONG_ID_FORMAT);
+    return singletonList(ISSUE_WRONG_VIEW_ID_FORMAT);
   }
 
   @Override protected boolean allowCompilationErrors() {
