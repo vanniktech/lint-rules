@@ -11,18 +11,19 @@ import java.util.Collections;
 import org.w3c.dom.Attr;
 
 import static com.android.SdkConstants.ATTR_ID;
-import static com.android.resources.ResourceFolderType.LAYOUT;
+import static com.android.resources.ResourceFolderType.MENU;
 import static com.android.tools.lint.detector.api.Category.CORRECTNESS;
 import static com.android.tools.lint.detector.api.Scope.RESOURCE_FILE_SCOPE;
 import static com.android.tools.lint.detector.api.Severity.WARNING;
+import static com.vanniktech.lintrules.android.WrongViewIdFormatDetector.isCamelCase;
 
-public final class WrongViewIdFormatDetector extends LayoutDetector {
-  static final Issue ISSUE_WRONG_VIEW_ID_FORMAT = Issue.create("WrongViewIdFormat", "Ids should be in lowerCamelCase Format.",
+public final class WrongMenuIdFormatDetector extends LayoutDetector {
+  static final Issue ISSUE_WRONG_MENU_ID_FORMAT = Issue.create("WrongMenuIdFormat", "Ids should be in lowerCamelCase Format.",
       "Ids should be in lowerCamelCase Format.", CORRECTNESS, 8, WARNING,
-      new Implementation(WrongViewIdFormatDetector.class, RESOURCE_FILE_SCOPE));
+      new Implementation(WrongMenuIdFormatDetector.class, RESOURCE_FILE_SCOPE));
 
   @Override public boolean appliesTo(@NonNull final ResourceFolderType folderType) {
-    return folderType == LAYOUT;
+    return folderType == MENU;
   }
 
   @Override public Collection<String> getApplicableAttributes() {
@@ -34,12 +35,8 @@ public final class WrongViewIdFormatDetector extends LayoutDetector {
       final String id = attribute.getValue().replace("@+id/", "");
 
       if (!isCamelCase(id)) {
-        context.report(ISSUE_WRONG_VIEW_ID_FORMAT, context.getValueLocation(attribute), "Id is not in lowerCamelCaseFormat");
+        context.report(ISSUE_WRONG_MENU_ID_FORMAT, context.getValueLocation(attribute), "Id is not in lowerCamelCaseFormat");
       }
     }
-  }
-
-  static boolean isCamelCase(final String string) {
-    return !Character.isUpperCase(string.charAt(0)) && !string.contains("_");
   }
 }

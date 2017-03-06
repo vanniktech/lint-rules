@@ -11,7 +11,8 @@ import static com.vanniktech.lintrules.android.AndroidDetector.ISSUE_VIEW_FIND_V
 import static com.vanniktech.lintrules.android.AndroidDetector.ISSUE_WINDOW_FIND_VIEW_BY_ID;
 import static com.vanniktech.lintrules.android.RawColorDetector.ISSUE_RAW_COLOR;
 import static com.vanniktech.lintrules.android.RawDimenDetector.ISSUE_RAW_DIMEN;
-import static com.vanniktech.lintrules.android.WrongViewIdFormatDetector.ISSUE_WRONG_ID_FORMAT;
+import static com.vanniktech.lintrules.android.WrongMenuIdFormatDetector.ISSUE_WRONG_MENU_ID_FORMAT;
+import static com.vanniktech.lintrules.android.WrongViewIdFormatDetector.ISSUE_WRONG_VIEW_ID_FORMAT;
 import static org.fest.assertions.api.Assertions.assertThat;
 
 public class IssueRegistryTest {
@@ -24,7 +25,8 @@ public class IssueRegistryTest {
         ISSUE_RESOURCES_GET_DRAWABLE,
         ISSUE_RESOURCES_GET_COLOR,
         ISSUE_RESOURCES_GET_COLOR_STATE_LIST,
-        ISSUE_WRONG_ID_FORMAT,
+        ISSUE_WRONG_VIEW_ID_FORMAT,
+        ISSUE_WRONG_MENU_ID_FORMAT,
         ISSUE_RAW_DIMEN,
         ISSUE_RAW_COLOR
     );
