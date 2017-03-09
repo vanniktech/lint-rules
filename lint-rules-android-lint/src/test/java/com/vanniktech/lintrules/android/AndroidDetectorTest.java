@@ -44,6 +44,20 @@ public class AndroidDetectorTest extends LintDetectorTest {
       + "  public void getColorStateList(int id) {}\n"
       + "}");
 
+  public void testCallingWindowFindViewByIdSuppressed() throws Exception {
+    @Language("JAVA") final String source = ""
+        + "package foo;\n"
+        + "import android.view.Window;\n"
+        + "public class Example {\n"
+        + "  public void foo() {\n"
+        + "    Window window = null;\n"
+        + "    //noinspection AndroidLintWindowFindViewById\n"
+        + "    window.findViewById(0);\n"
+        + "  }\n"
+        + "}";
+    assertThat(lintProject(java(source), windowStub)).isEqualTo(NO_WARNINGS);
+  }
+
   public void testCallingWindowFindViewById() throws Exception {
     @Language("JAVA") final String source = ""
         + "package foo;\n"
@@ -75,6 +89,20 @@ public class AndroidDetectorTest extends LintDetectorTest {
         + "    findViewById(0);\n"
         + "    ~~~~~~~~~~~~\n"
         + "0 errors, 1 warnings\n");
+  }
+
+  public void testCallingViewFindViewByIdSuppressed() throws Exception {
+    @Language("JAVA") final String source = ""
+        + "package foo;\n"
+        + "import android.view.View;\n"
+        + "public class Example {\n"
+        + "  public void foo() {\n"
+        + "    View view = null;\n"
+        + "    //noinspection AndroidLintViewFindViewById\n"
+        + "    view.findViewById(0);\n"
+        + "  }\n"
+        + "}";
+    assertThat(lintProject(java(source), viewStub)).isEqualTo(NO_WARNINGS);
   }
 
   public void testCallingViewFindViewById() throws Exception {
@@ -110,6 +138,20 @@ public class AndroidDetectorTest extends LintDetectorTest {
         + "0 errors, 1 warnings\n");
   }
 
+  public void testCallingDialogFindViewByIdSuppressed() throws Exception {
+    @Language("JAVA") final String source = ""
+        + "package foo;\n"
+        + "import android.app.Dialog;\n"
+        + "public class Example {\n"
+        + "  public void foo() {\n"
+        + "    Dialog dialog = null;\n"
+        + "    //noinspection AndroidLintDialogFindViewById\n"
+        + "    dialog.findViewById(0);\n"
+        + "  }\n"
+        + "}";
+    assertThat(lintProject(java(source), dialogStub)).isEqualTo(NO_WARNINGS);
+  }
+
   public void testCallingDialogFindViewById() throws Exception {
     @Language("JAVA") final String source = ""
         + "package foo;\n"
@@ -141,6 +183,20 @@ public class AndroidDetectorTest extends LintDetectorTest {
         + "    findViewById(0);\n"
         + "    ~~~~~~~~~~~~\n"
         + "0 errors, 1 warnings\n");
+  }
+
+  public void testCallingActivityFindViewByIdSuppressed() throws Exception {
+    @Language("JAVA") final String source = ""
+        + "package foo;\n"
+        + "import android.app.Activity;\n"
+        + "public class Example {\n"
+        + "  public void foo() {\n"
+        + "    Activity activity = null;\n"
+        + "    //noinspection AndroidLintActivityFindViewById\n"
+        + "    activity.findViewById(0);\n"
+        + "  }\n"
+        + "}";
+    assertThat(lintProject(java(source), activityStub)).isEqualTo(NO_WARNINGS);
   }
 
   public void testCallingActivityFindViewById() throws Exception {
@@ -193,6 +249,20 @@ public class AndroidDetectorTest extends LintDetectorTest {
         + "0 errors, 1 warnings\n");
   }
 
+  public void testCallingGetDrawableSuppressed() throws Exception {
+    @Language("JAVA") final String source = ""
+        + "package foo;\n"
+        + "import android.content.res.Resources;\n"
+        + "public class Example {\n"
+        + "  public void foo() {\n"
+        + "    Resources resources = null;\n"
+        + "    //noinspection AndroidLintResourcesGetDrawable\n"
+        + "    resources.getDrawable(0);\n"
+        + "  }\n"
+        + "}";
+    assertThat(lintProject(java(source), resourcesStub)).isEqualTo(NO_WARNINGS);
+  }
+
   public void testCallingGetColor() throws Exception {
     @Language("JAVA") final String source = ""
         + "package foo;\n"
@@ -210,6 +280,20 @@ public class AndroidDetectorTest extends LintDetectorTest {
         + "0 errors, 1 warnings\n");
   }
 
+  public void testCallingGetColorSuppressed() throws Exception {
+    @Language("JAVA") final String source = ""
+        + "package foo;\n"
+        + "import android.content.res.Resources;\n"
+        + "public class Example {\n"
+        + "  public void foo() {\n"
+        + "    Resources resources = null;\n"
+        + "    //noinspection AndroidLintResourcesGetColor\n"
+        + "    resources.getColor(0);\n"
+        + "  }\n"
+        + "}";
+    assertThat(lintProject(java(source), resourcesStub)).isEqualTo(NO_WARNINGS);
+  }
+
   public void testCallingGetColorStateList() throws Exception {
     @Language("JAVA") final String source = ""
         + "package foo;\n"
@@ -225,6 +309,20 @@ public class AndroidDetectorTest extends LintDetectorTest {
         + "    resources.getColorStateList(0);\n"
         + "              ~~~~~~~~~~~~~~~~~\n"
         + "0 errors, 1 warnings\n");
+  }
+
+  public void testCallingGetColorStateListSuppressed() throws Exception {
+    @Language("JAVA") final String source = ""
+        + "package foo;\n"
+        + "import android.content.res.Resources;\n"
+        + "public class Example {\n"
+        + "  public void foo() {\n"
+        + "    Resources resources = null;\n"
+        + "    //noinspection AndroidLintResourcesGetColorStateList\n"
+        + "    resources.getColorStateList(0);\n"
+        + "  }\n"
+        + "}";
+    assertThat(lintProject(java(source), resourcesStub)).isEqualTo(NO_WARNINGS);
   }
 
   @Override protected Detector getDetector() {

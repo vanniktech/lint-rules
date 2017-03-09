@@ -32,8 +32,9 @@ public final class WrongViewIdFormatDetector extends LayoutDetector {
   @Override public void visitAttribute(@NonNull final XmlContext context, @NonNull final Attr attribute) {
     if (ATTR_ID.equals(attribute.getLocalName())) {
       final String id = attribute.getValue().replace("@+id/", "");
+      final boolean isSuppressed = context.getDriver().isSuppressed(context, ISSUE_WRONG_VIEW_ID_FORMAT, attribute);
 
-      if (!isCamelCase(id)) {
+      if (!isCamelCase(id) && !isSuppressed) {
         context.report(ISSUE_WRONG_VIEW_ID_FORMAT, context.getValueLocation(attribute), "Id is not in lowerCamelCaseFormat");
       }
     }

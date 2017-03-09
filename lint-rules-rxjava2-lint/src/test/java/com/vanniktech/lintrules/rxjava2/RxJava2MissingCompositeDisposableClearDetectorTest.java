@@ -19,6 +19,17 @@ public class RxJava2MissingCompositeDisposableClearDetectorTest extends RxJavaLi
     assertThat(lintProject(stubCompositeDisposable, java(source))).isEqualTo(NO_WARNINGS);
   }
 
+  public void testCompositeDisposableMissingClearSuppressed() throws Exception {
+    @Language("JAVA") final String source = ""
+        + "package foo;\n"
+        + "import io.reactivex.disposables.CompositeDisposable;\n"
+        + "import android.annotation.SuppressLint;\n"
+        + "public class Example {\n"
+        + "  @SuppressLint(\"MissingCompositeDisposableClear\") CompositeDisposable cd;\n"
+        + "}";
+    assertThat(lintProject(stubSuppressLint, stubCompositeDisposable, java(source))).isEqualTo(NO_WARNINGS);
+  }
+
   public void testCompositeDisposableMissingClear() throws Exception {
     @Language("JAVA") final String source = ""
         + "package foo;\n"

@@ -21,6 +21,15 @@ public class WrongMenuIdFormatDetectorTest extends LintDetectorTest {
     assertThat(lintProject(xml("/res/menu/ids.xml", source))).isEqualTo(NO_WARNINGS);
   }
 
+  public void testIdIgnored() throws Exception {
+    @Language("XML") final String source = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
+        + "<menu xmlns:android=\"http://schemas.android.com/apk/res/android\" xmlns:tools=\"http://schemas.android.com/tools\">\n"
+        + "  <item tools:ignore=\"WrongMenuIdFormat\" android:id=\"@+id/CamelCaseIgnored\"/>\n"
+        + "</menu>\n";
+
+    assertThat(lintProject(xml("/res/menu/ids.xml", source))).isEqualTo(NO_WARNINGS);
+  }
+
   public void testIdCamelCase() throws Exception {
     @Language("XML") final String source = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
         + "<menu xmlns:android=\"http://schemas.android.com/apk/res/android\">\n"

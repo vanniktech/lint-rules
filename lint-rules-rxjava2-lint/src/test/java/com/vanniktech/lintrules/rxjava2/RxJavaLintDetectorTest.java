@@ -13,6 +13,12 @@ public abstract class RxJavaLintDetectorTest extends LintDetectorTest {
       + "  public void clear() {}\n"
       + "}");
 
+  final TestFile stubSuppressLint = java(""
+      + "package io.reactivex.functions;\n"
+      + "public @interface SuppressLint {\n"
+      + "  String[] value();\n"
+      + "}");
+
   final TestFile stubConsumer = java(""
       + "package io.reactivex.functions;\n"
       + "public interface Consumer<T> {\n"

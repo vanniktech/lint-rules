@@ -62,8 +62,9 @@ public final class RawDimenDetector extends LayoutDetector {
   @Override public void visitAttribute(@NonNull final XmlContext context, @NonNull final Attr attribute) {
     final String value = attribute.getValue();
     final boolean isToolsAttribute = "http://schemas.android.com/tools".equalsIgnoreCase(attribute.getNamespaceURI());
+    final boolean isSuppressed = context.getDriver().isSuppressed(context, ISSUE_RAW_DIMEN, attribute);
 
-    if (value.matches("[\\d]+(sp|dp|dip)") && !isToolsAttribute) {
+    if (value.matches("[\\d]+(sp|dp|dip)") && !isToolsAttribute && !isSuppressed) {
       context.report(ISSUE_RAW_DIMEN, context.getValueLocation(attribute), "Should be using dimen instead.");
     }
   }

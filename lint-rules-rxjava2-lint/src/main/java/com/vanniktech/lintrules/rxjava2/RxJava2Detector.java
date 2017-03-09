@@ -32,12 +32,14 @@ public final class RxJava2Detector extends Detector implements Detector.JavaPsiS
 
   private void handleCompositeDisposable(final JavaContext context, final PsiMethodCallExpression call,
       final PsiReferenceExpression methodExpression, final String fullyQualifiedMethodName) {
-    if ("io.reactivex.disposables.CompositeDisposable.dispose".equals(fullyQualifiedMethodName)) {
+    final boolean isCompositeDisposableDisposeSuppressed = context.getDriver().isSuppressed(context, COMPOSITE_DISPOSABLE_DISPOSE, methodExpression);
+    if ("io.reactivex.disposables.CompositeDisposable.dispose".equals(fullyQualifiedMethodName) && !isCompositeDisposableDisposeSuppressed) {
       context.report(COMPOSITE_DISPOSABLE_DISPOSE, call, context.getLocation(methodExpression.getReferenceNameElement()),
           "Using dispose() instead of clear()");
     }
 
-    if ("io.reactivex.disposables.CompositeDisposable.addAll".equals(fullyQualifiedMethodName)) {
+    final boolean isCompositeDisposableAddAllSuppressed = context.getDriver().isSuppressed(context, COMPOSITE_DISPOSABLE_ADD_ALL, methodExpression);
+    if ("io.reactivex.disposables.CompositeDisposable.addAll".equals(fullyQualifiedMethodName) && !isCompositeDisposableAddAllSuppressed) {
       context.report(COMPOSITE_DISPOSABLE_ADD_ALL, call, context.getLocation(methodExpression.getReferenceNameElement()),
           "Using addAll() instead of add() separately");
     }
@@ -51,7 +53,8 @@ public final class RxJava2Detector extends Detector implements Detector.JavaPsiS
         || "io.reactivex.Completable.subscribe".equals(fullyQualifiedMethodName)
         || "io.reactivex.Maybe.subscribe".equals(fullyQualifiedMethodName)) {
 
-      if (call.getArgumentList().getExpressions().length < 2) {
+      final boolean isSubscribeMissingErrorConsumerSuppressed = context.getDriver().isSuppressed(context, SUBSCRIBE_MISSING_ERROR_CONSUMER, methodExpression);
+      if (call.getArgumentList().getExpressions().length < 2 && !isSubscribeMissingErrorConsumerSuppressed) {
         context.report(SUBSCRIBE_MISSING_ERROR_CONSUMER, call, context.getLocation(methodExpression.getReferenceNameElement()),
             "Using a version of subscribe() without an error Consumer");
       }

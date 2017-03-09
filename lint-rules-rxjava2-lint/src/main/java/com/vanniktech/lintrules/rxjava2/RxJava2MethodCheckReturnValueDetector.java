@@ -54,7 +54,11 @@ public final class RxJava2MethodCheckReturnValueDetector extends Detector implem
           }
         }
 
-        context.report(ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE, context.getLocation(method), "Method should have @CheckReturnValue annotation");
+        final boolean isMethodMissingCheckReturnValueSuppressed = context.getDriver().isSuppressed(context, ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE, method);
+
+        if (!isMethodMissingCheckReturnValueSuppressed) {
+          context.report(ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE, context.getLocation(method), "Method should have @CheckReturnValue annotation");
+        }
       }
     }
   }

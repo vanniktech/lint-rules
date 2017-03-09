@@ -55,8 +55,9 @@ public final class RawColorDetector extends LayoutDetector {
   @Override public void visitAttribute(@NonNull final XmlContext context, @NonNull final Attr attribute) {
     final String value = attribute.getValue();
     final boolean isToolsAttribute = "http://schemas.android.com/tools".equalsIgnoreCase(attribute.getNamespaceURI());
+    final boolean isSuppressed = context.getDriver().isSuppressed(context, ISSUE_RAW_COLOR, attribute);
 
-    if (value.matches("#[a-fA-F\\d]{3,8}") && !isToolsAttribute) {
+    if (value.matches("#[a-fA-F\\d]{3,8}") && !isToolsAttribute && !isSuppressed) {
       context.report(ISSUE_RAW_COLOR, context.getValueLocation(attribute), "Should be using color instead.");
     }
   }

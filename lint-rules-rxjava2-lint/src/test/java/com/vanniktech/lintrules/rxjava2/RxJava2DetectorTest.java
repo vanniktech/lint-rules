@@ -26,6 +26,20 @@ public class RxJava2DetectorTest extends RxJavaLintDetectorTest {
         + "0 errors, 1 warnings\n");
   }
 
+  public void testCallingCompositeDisposableDisposeSuppressed() throws Exception {
+    @Language("JAVA") final String source = ""
+        + "package foo;\n"
+        + "import io.reactivex.disposables.CompositeDisposable;\n"
+        + "public class Example {\n"
+        + "  public void foo() {\n"
+        + "    CompositeDisposable cd = null;\n"
+        + "    //noinspection AndroidLintCompositeDisposableDispose\n"
+        + "    cd.dispose();\n"
+        + "  }\n"
+        + "}";
+    assertThat(lintProject(stubCompositeDisposable, java(source))).isEqualTo(NO_WARNINGS);
+  }
+
   public void testCallingCompositeDisposableAddAll() throws Exception {
     @Language("JAVA") final String source = ""
         + "package foo;\n"
@@ -41,6 +55,34 @@ public class RxJava2DetectorTest extends RxJavaLintDetectorTest {
         + "    cd.addAll();\n"
         + "       ~~~~~~\n"
         + "0 errors, 1 warnings\n");
+  }
+
+  public void testCallingCompositeDisposableSuppressed() throws Exception {
+    @Language("JAVA") final String source = ""
+        + "package foo;\n"
+        + "import io.reactivex.disposables.CompositeDisposable;\n"
+        + "public class Example {\n"
+        + "  public void foo() {\n"
+        + "    CompositeDisposable cd = null;\n"
+        + "    //noinspection AndroidLintCompositeDisposableAddAll\n"
+        + "    cd.addAll();\n"
+        + "  }\n"
+        + "}";
+    assertThat(lintProject(stubCompositeDisposable, java(source))).isEqualTo(NO_WARNINGS);
+  }
+
+  public void testCallingObservableSubscribeSuppressed() throws Exception {
+    @Language("JAVA") final String source = ""
+        + "package foo;\n"
+        + "import io.reactivex.Observable;\n"
+        + "public class Example {\n"
+        + "  public void foo() {\n"
+        + "    Observable o = null;\n"
+        + "    //noinspection AndroidLintSubscribeMissingErrorConsumer\n"
+        + "    o.subscribe();\n"
+        + "  }\n"
+        + "}";
+    assertThat(lintProject(stubConsumer, stubObservable, java(source))).isEqualTo(NO_WARNINGS);
   }
 
   public void testCallingObservableSubscribe() throws Exception {
