@@ -30,13 +30,11 @@ public final class RxJava2MissingCompositeDisposableClearDetector extends Detect
               MESSAGES, 10, ERROR,
           new Implementation(RxJava2MissingCompositeDisposableClearDetector.class, JAVA_FILE_SCOPE));
 
-  @Override
-  public List<Class<? extends PsiElement>> getApplicablePsiTypes() {
+  @Override public List<Class<? extends PsiElement>> getApplicablePsiTypes() {
     return Collections.<Class<? extends PsiElement>>singletonList(PsiClass.class);
   }
 
-  @Override
-  public JavaElementVisitor createPsiVisitor(@NonNull final JavaContext context) {
+  @Override public JavaElementVisitor createPsiVisitor(@NonNull final JavaContext context) {
     return new MissingCompositeDisposableClearVisitor(context);
   }
 
