@@ -11,6 +11,7 @@ import static com.vanniktech.lintrules.android.AndroidDetector.ISSUE_VIEW_FIND_V
 import static com.vanniktech.lintrules.android.AndroidDetector.ISSUE_WINDOW_FIND_VIEW_BY_ID;
 import static com.vanniktech.lintrules.android.RawColorDetector.ISSUE_RAW_COLOR;
 import static com.vanniktech.lintrules.android.RawDimenDetector.ISSUE_RAW_DIMEN;
+import static com.vanniktech.lintrules.android.ShouldUseStaticImportDetector.ISSUE_SHOULD_USE_STATIC_IMPORT;
 import static com.vanniktech.lintrules.android.SuperfluousMarginDeclarationDetector.SUPERFLUOUS_MARGIN_DECLARATION;
 import static com.vanniktech.lintrules.android.SuperfluousPaddingDeclarationDetector.SUPERFLUOUS_PADDING_DECLARATION;
 import static com.vanniktech.lintrules.android.WrongMenuIdFormatDetector.ISSUE_WRONG_MENU_ID_FORMAT;
@@ -32,7 +33,8 @@ public class IssueRegistryTest {
         ISSUE_RAW_DIMEN,
         ISSUE_RAW_COLOR,
         SUPERFLUOUS_MARGIN_DECLARATION,
-        SUPERFLUOUS_PADDING_DECLARATION
+        SUPERFLUOUS_PADDING_DECLARATION,
+        ISSUE_SHOULD_USE_STATIC_IMPORT
     );
   }
 }
