@@ -10,6 +10,8 @@ import java.util.Arrays;
 import java.util.Collection;
 import org.w3c.dom.Attr;
 
+import static com.android.SdkConstants.ATTR_CARD_ELEVATION;
+import static com.android.SdkConstants.ATTR_ELEVATION;
 import static com.android.SdkConstants.ATTR_LAYOUT_MARGIN;
 import static com.android.SdkConstants.ATTR_LAYOUT_MARGIN_BOTTOM;
 import static com.android.SdkConstants.ATTR_LAYOUT_MARGIN_END;
@@ -55,7 +57,9 @@ public final class RawDimenDetector extends LayoutDetector {
         ATTR_PADDING_BOTTOM,
         ATTR_PADDING_START,
         ATTR_PADDING_END,
-        ATTR_TEXT_SIZE
+        ATTR_TEXT_SIZE,
+        ATTR_ELEVATION,
+        ATTR_CARD_ELEVATION
     );
   }
 
