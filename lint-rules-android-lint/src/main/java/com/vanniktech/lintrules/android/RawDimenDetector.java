@@ -6,27 +6,12 @@ import com.android.tools.lint.detector.api.Implementation;
 import com.android.tools.lint.detector.api.Issue;
 import com.android.tools.lint.detector.api.LayoutDetector;
 import com.android.tools.lint.detector.api.XmlContext;
-import java.util.Arrays;
 import java.util.Collection;
 import org.w3c.dom.Attr;
+import org.w3c.dom.Element;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
 
-import static com.android.SdkConstants.ATTR_CARD_ELEVATION;
-import static com.android.SdkConstants.ATTR_ELEVATION;
-import static com.android.SdkConstants.ATTR_LAYOUT_MARGIN;
-import static com.android.SdkConstants.ATTR_LAYOUT_MARGIN_BOTTOM;
-import static com.android.SdkConstants.ATTR_LAYOUT_MARGIN_END;
-import static com.android.SdkConstants.ATTR_LAYOUT_MARGIN_LEFT;
-import static com.android.SdkConstants.ATTR_LAYOUT_MARGIN_RIGHT;
-import static com.android.SdkConstants.ATTR_LAYOUT_MARGIN_START;
-import static com.android.SdkConstants.ATTR_LAYOUT_MARGIN_TOP;
-import static com.android.SdkConstants.ATTR_PADDING;
-import static com.android.SdkConstants.ATTR_PADDING_BOTTOM;
-import static com.android.SdkConstants.ATTR_PADDING_END;
-import static com.android.SdkConstants.ATTR_PADDING_LEFT;
-import static com.android.SdkConstants.ATTR_PADDING_RIGHT;
-import static com.android.SdkConstants.ATTR_PADDING_START;
-import static com.android.SdkConstants.ATTR_PADDING_TOP;
-import static com.android.SdkConstants.ATTR_TEXT_SIZE;
 import static com.android.resources.ResourceFolderType.LAYOUT;
 import static com.android.tools.lint.detector.api.Category.CORRECTNESS;
 import static com.android.tools.lint.detector.api.Scope.RESOURCE_FILE_SCOPE;
@@ -41,35 +26,23 @@ public final class RawDimenDetector extends LayoutDetector {
     return folderType == LAYOUT;
   }
 
-  @Override public Collection<String> getApplicableAttributes() {
-    return Arrays.asList(
-        ATTR_LAYOUT_MARGIN,
-        ATTR_LAYOUT_MARGIN_LEFT,
-        ATTR_LAYOUT_MARGIN_TOP,
-        ATTR_LAYOUT_MARGIN_RIGHT,
-        ATTR_LAYOUT_MARGIN_BOTTOM,
-        ATTR_LAYOUT_MARGIN_START,
-        ATTR_LAYOUT_MARGIN_END,
-        ATTR_PADDING,
-        ATTR_PADDING_LEFT,
-        ATTR_PADDING_TOP,
-        ATTR_PADDING_RIGHT,
-        ATTR_PADDING_BOTTOM,
-        ATTR_PADDING_START,
-        ATTR_PADDING_END,
-        ATTR_TEXT_SIZE,
-        ATTR_ELEVATION,
-        ATTR_CARD_ELEVATION
-    );
+  @Override public Collection<String> getApplicableElements() {
+    return XmlScanner.ALL;
   }
 
-  @Override public void visitAttribute(@NonNull final XmlContext context, @NonNull final Attr attribute) {
-    final String value = attribute.getValue();
-    final boolean isToolsAttribute = "http://schemas.android.com/tools".equalsIgnoreCase(attribute.getNamespaceURI());
-    final boolean isSuppressed = context.getDriver().isSuppressed(context, ISSUE_RAW_DIMEN, attribute);
+  @Override public void visitElement(final XmlContext context, final Element element) {
+    final NamedNodeMap attributes = element.getAttributes();
 
-    if (value.matches("[\\d]+(sp|dp|dip)") && !isToolsAttribute && !isSuppressed) {
-      context.report(ISSUE_RAW_DIMEN, context.getValueLocation(attribute), "Should be using dimen instead.");
+    for (int i = 0; i < attributes.getLength(); i++) {
+      final Node item = attributes.item(i);
+      final String value = item.getNodeValue();
+
+      final boolean isToolsAttribute = "http://schemas.android.com/tools".equalsIgnoreCase(item.getNamespaceURI());
+      final boolean isSuppressed = context.getDriver().isSuppressed(context, ISSUE_RAW_DIMEN, item);
+
+      if (value.matches("[\\d]+(sp|dp|dip)") && !isToolsAttribute && !isSuppressed) {
+        context.report(ISSUE_RAW_DIMEN, context.getValueLocation((Attr) item), "Should be using dimen instead.");
+      }
     }
   }
 }
