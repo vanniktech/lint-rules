@@ -12,6 +12,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
+import static com.android.resources.ResourceFolderType.DRAWABLE;
 import static com.android.resources.ResourceFolderType.LAYOUT;
 import static com.android.tools.lint.detector.api.Category.CORRECTNESS;
 import static com.android.tools.lint.detector.api.Scope.RESOURCE_FILE_SCOPE;
@@ -23,7 +24,7 @@ public final class RawDimenDetector extends LayoutDetector {
       new Implementation(RawDimenDetector.class, RESOURCE_FILE_SCOPE));
 
   @Override public boolean appliesTo(@NonNull final ResourceFolderType folderType) {
-    return folderType == LAYOUT;
+    return folderType == LAYOUT || folderType == DRAWABLE;
   }
 
   @Override public Collection<String> getApplicableElements() {

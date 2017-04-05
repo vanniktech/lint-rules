@@ -29,6 +29,21 @@ public class RawColorDetectorTest extends LintDetectorTest {
         + "0 errors, 1 warnings\n");
   }
 
+  public void testAndroidDrawable() throws Exception {
+    @Language("XML") final String source = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
+        + "<shape\n"
+        + "    xmlns:android=\"http://schemas.android.com/apk/res/android\"\n"
+        + "    android:shape=\"rectangle\">\n"
+        + "  <solid android:color=\"#1aeebf\"/>\n"
+        + "  <size android:height=\"4dp\"/>\n"
+        + "</shape>\n";
+
+    assertThat(lintProject(xml("/res/drawable/drawable.xml", source))).isEqualTo("res/drawable/drawable.xml:5: Warning: Should be using color instead. [RawColor]\n"
+        + "  <solid android:color=\"#1aeebf\"/>\n"
+        + "                        ~~~~~~~\n"
+        + "0 errors, 1 warnings\n");
+  }
+
   public void testAndroidTextColorIgnored() throws Exception {
     @Language("XML") final String source = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
         + "<TextView xmlns:android=\"http://schemas.android.com/apk/res/android\" xmlns:tools=\"http://schemas.android.com/tools\" tools:ignore=\"RawColor\" android:textColor=\"#fff\"/>\n";

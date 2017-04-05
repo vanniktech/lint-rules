@@ -36,6 +36,22 @@ public class RawDimenDetectorTest extends LintDetectorTest {
     assertThat(lintProject(xml("/res/layout/ids.xml", source))).isEqualTo(NO_WARNINGS);
   }
 
+
+  public void testAndroidDrawable() throws Exception {
+    @Language("XML") final String source = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
+        + "<shape\n"
+        + "    xmlns:android=\"http://schemas.android.com/apk/res/android\"\n"
+        + "    android:shape=\"rectangle\">\n"
+        + "  <solid android:color=\"#1aeebf\"/>\n"
+        + "  <size android:height=\"4dp\"/>\n"
+        + "</shape>\n";
+
+    assertThat(lintProject(xml("/res/drawable/drawable.xml", source))).isEqualTo("res/drawable/drawable.xml:6: Warning: Should be using dimen instead. [RawDimen]\n"
+        + "  <size android:height=\"4dp\"/>\n"
+        + "                        ~~~\n"
+        + "0 errors, 1 warnings\n");
+  }
+
   public void testAndroidLayoutWidth() throws Exception {
     @Language("XML") final String source = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
         + "<TextView xmlns:android=\"http://schemas.android.com/apk/res/android\" android:layout_width=\"16dp\"/>\n";
