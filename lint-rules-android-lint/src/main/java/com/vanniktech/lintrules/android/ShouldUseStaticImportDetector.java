@@ -8,19 +8,21 @@ import com.intellij.psi.JavaElementVisitor;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReferenceExpression;
 import java.util.Collections;
+import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import static com.android.tools.lint.detector.api.Category.CORRECTNESS;
-import static com.android.tools.lint.detector.api.Scope.JAVA_FILE_SCOPE;
+import static com.android.tools.lint.detector.api.Scope.JAVA_FILE;
+import static com.android.tools.lint.detector.api.Scope.TEST_SOURCES;
 import static com.android.tools.lint.detector.api.Severity.WARNING;
 
 public class ShouldUseStaticImportDetector extends Detector implements Detector.JavaPsiScanner {
   static final Issue ISSUE_SHOULD_USE_STATIC_IMPORT =
       Issue.create("ShouldUseStaticImport", "Should be using a static import.",
           "Should be using a static import.", CORRECTNESS, 3,
-          WARNING, new Implementation(ShouldUseStaticImportDetector.class, JAVA_FILE_SCOPE));
+          WARNING, new Implementation(ShouldUseStaticImportDetector.class, EnumSet.of(JAVA_FILE, TEST_SOURCES)));
 
   @Override public List<Class<? extends PsiElement>> getApplicablePsiTypes() {
     return Collections.<Class<? extends PsiElement>>singletonList(PsiReferenceExpression.class);
