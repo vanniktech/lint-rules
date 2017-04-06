@@ -14,13 +14,15 @@ import com.intellij.psi.PsiField;
 import com.intellij.psi.PsiMethod;
 import com.intellij.psi.PsiStatement;
 import java.util.Collections;
+import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
 import static com.android.tools.lint.detector.api.Category.MESSAGES;
-import static com.android.tools.lint.detector.api.Scope.JAVA_FILE_SCOPE;
+import static com.android.tools.lint.detector.api.Scope.JAVA_FILE;
+import static com.android.tools.lint.detector.api.Scope.TEST_SOURCES;
 import static com.android.tools.lint.detector.api.Severity.ERROR;
 
 public final class RxJava2MissingCompositeDisposableClearDetector extends Detector implements Detector.JavaPsiScanner {
@@ -28,7 +30,7 @@ public final class RxJava2MissingCompositeDisposableClearDetector extends Detect
       Issue.create("MissingCompositeDisposableClear", "Not calling clear() on CompositeDisposable",
           "A class is using CompositeDisposable and not clearing the List.",
               MESSAGES, 10, ERROR,
-          new Implementation(RxJava2MissingCompositeDisposableClearDetector.class, JAVA_FILE_SCOPE));
+          new Implementation(RxJava2MissingCompositeDisposableClearDetector.class, EnumSet.of(JAVA_FILE, TEST_SOURCES)));
 
   @Override public List<Class<? extends PsiElement>> getApplicablePsiTypes() {
     return Collections.<Class<? extends PsiElement>>singletonList(PsiClass.class);

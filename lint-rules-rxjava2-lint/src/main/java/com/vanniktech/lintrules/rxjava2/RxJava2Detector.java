@@ -9,10 +9,12 @@ import com.intellij.psi.PsiMethod;
 import com.intellij.psi.PsiMethodCallExpression;
 import com.intellij.psi.PsiReferenceExpression;
 import java.util.Arrays;
+import java.util.EnumSet;
 import java.util.List;
 
 import static com.android.tools.lint.detector.api.Category.MESSAGES;
-import static com.android.tools.lint.detector.api.Scope.JAVA_FILE_SCOPE;
+import static com.android.tools.lint.detector.api.Scope.JAVA_FILE;
+import static com.android.tools.lint.detector.api.Scope.TEST_SOURCES;
 import static com.android.tools.lint.detector.api.Severity.ERROR;
 import static com.android.tools.lint.detector.api.Severity.WARNING;
 
@@ -71,17 +73,17 @@ public final class RxJava2Detector extends Detector implements Detector.JavaPsiS
       Issue.create("CompositeDisposableDispose", "Using dispose() instead of clear()",
           "Instead of using dispose(), clear() should be used.",
               MESSAGES, 8, WARNING,
-          new Implementation(RxJava2Detector.class, JAVA_FILE_SCOPE));
+          new Implementation(RxJava2Detector.class, EnumSet.of(JAVA_FILE, TEST_SOURCES)));
 
   static final Issue COMPOSITE_DISPOSABLE_ADD_ALL =
       Issue.create("CompositeDisposableAddAll", "Using addAll() instead of add() separately",
           "Instead of using addAll(), add() should be used separately.",
               MESSAGES, 5, WARNING,
-          new Implementation(RxJava2Detector.class, JAVA_FILE_SCOPE));
+          new Implementation(RxJava2Detector.class, EnumSet.of(JAVA_FILE, TEST_SOURCES)));
 
   static final Issue SUBSCRIBE_MISSING_ERROR_CONSUMER =
       Issue.create("SubscribeMissingErrorConsumer", "Using a version of subscribe() without an error Consumer",
           "When calling subscribe() an error Consumer should always be used.",
               MESSAGES, 10, ERROR,
-          new Implementation(RxJava2Detector.class, JAVA_FILE_SCOPE));
+          new Implementation(RxJava2Detector.class, EnumSet.of(JAVA_FILE, TEST_SOURCES)));
 }

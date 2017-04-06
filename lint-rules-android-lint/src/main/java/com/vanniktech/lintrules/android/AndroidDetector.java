@@ -9,10 +9,12 @@ import com.intellij.psi.PsiMethod;
 import com.intellij.psi.PsiMethodCallExpression;
 import com.intellij.psi.PsiReferenceExpression;
 import java.util.Arrays;
+import java.util.EnumSet;
 import java.util.List;
 
 import static com.android.tools.lint.detector.api.Category.MESSAGES;
-import static com.android.tools.lint.detector.api.Scope.JAVA_FILE_SCOPE;
+import static com.android.tools.lint.detector.api.Scope.JAVA_FILE;
+import static com.android.tools.lint.detector.api.Scope.TEST_SOURCES;
 import static com.android.tools.lint.detector.api.Severity.WARNING;
 
 public final class AndroidDetector extends Detector implements Detector.JavaPsiScanner {
@@ -88,41 +90,41 @@ public final class AndroidDetector extends Detector implements Detector.JavaPsiS
       Issue.create("WindowFindViewById", "Using findViewById() instead of ButterKnife.",
           "Instead of using findViewById ButterKnife should be used.",
               MESSAGES, 5, WARNING,
-          new Implementation(AndroidDetector.class, JAVA_FILE_SCOPE));
+          new Implementation(AndroidDetector.class, EnumSet.of(JAVA_FILE, TEST_SOURCES)));
 
   static final Issue ISSUE_VIEW_FIND_VIEW_BY_ID =
       Issue.create("ViewFindViewById", "Using findViewById() instead of ButterKnife.",
           "Instead of using findViewById ButterKnife should be used.",
               MESSAGES, 5, WARNING,
-          new Implementation(AndroidDetector.class, JAVA_FILE_SCOPE));
+          new Implementation(AndroidDetector.class, EnumSet.of(JAVA_FILE, TEST_SOURCES)));
 
   static final Issue ISSUE_DIALOG_FIND_VIEW_BY_ID =
       Issue.create("DialogFindViewById", "Using findViewById() instead of ButterKnife.",
           "Instead of using findViewById ButterKnife should be used.",
               MESSAGES, 5, WARNING,
-          new Implementation(AndroidDetector.class, JAVA_FILE_SCOPE));
+          new Implementation(AndroidDetector.class, EnumSet.of(JAVA_FILE, TEST_SOURCES)));
 
   static final Issue ISSUE_ACTIVITY_FIND_VIEW_BY_ID =
       Issue.create("ActivityFindViewById", "Using findViewById() instead of ButterKnife.",
           "Instead of using findViewById ButterKnife should be used.",
               MESSAGES, 5, WARNING,
-          new Implementation(AndroidDetector.class, JAVA_FILE_SCOPE));
+          new Implementation(AndroidDetector.class, EnumSet.of(JAVA_FILE, TEST_SOURCES)));
 
   static final Issue ISSUE_RESOURCES_GET_DRAWABLE =
       Issue.create("ResourcesGetDrawable", "Using getDrawable(), which is deprecated.",
           "Instead of getDrawable(), ContextCompat or the method with the Theme Overload should be used instead.",
               MESSAGES, 5, WARNING,
-          new Implementation(AndroidDetector.class, JAVA_FILE_SCOPE));
+          new Implementation(AndroidDetector.class, EnumSet.of(JAVA_FILE, TEST_SOURCES)));
 
   static final Issue ISSUE_RESOURCES_GET_COLOR =
       Issue.create("ResourcesGetColor", "Using getColor(), which is deprecated.",
           "Instead of getColor(), ContextCompat or the method with the Theme Overload should be used instead.",
               MESSAGES, 5, WARNING,
-          new Implementation(AndroidDetector.class, JAVA_FILE_SCOPE));
+          new Implementation(AndroidDetector.class, EnumSet.of(JAVA_FILE, TEST_SOURCES)));
 
   static final Issue ISSUE_RESOURCES_GET_COLOR_STATE_LIST =
       Issue.create("ResourcesGetColorStateList", "Using getColorStateList(), which is deprecated.",
           "Instead of getColorStateList(), ContextCompat or the method with the Theme Overload should be used instead.",
               MESSAGES, 5, WARNING,
-          new Implementation(AndroidDetector.class, JAVA_FILE_SCOPE));
+          new Implementation(AndroidDetector.class, EnumSet.of(JAVA_FILE, TEST_SOURCES)));
 }
