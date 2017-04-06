@@ -36,7 +36,6 @@ public class RawDimenDetectorTest extends LintDetectorTest {
     assertThat(lintProject(xml("/res/layout/ids.xml", source))).isEqualTo(NO_WARNINGS);
   }
 
-
   public void testAndroidDrawable() throws Exception {
     @Language("XML") final String source = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
         + "<shape\n"
@@ -50,6 +49,40 @@ public class RawDimenDetectorTest extends LintDetectorTest {
         + "  <size android:height=\"4dp\"/>\n"
         + "                        ~~~\n"
         + "0 errors, 1 warnings\n");
+  }
+
+  public void testAndroidLayoutWidth0Dp() throws Exception {
+    @Language("XML") final String source = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
+        + "<TextView xmlns:android=\"http://schemas.android.com/apk/res/android\" android:layout_width=\"0dp\"/>\n";
+
+    assertThat(lintProject(xml("/res/layout/ids.xml", source))).isEqualTo("res/layout/ids.xml:2: Warning: Should be using dimen instead. [RawDimen]\n"
+        + "<TextView xmlns:android=\"http://schemas.android.com/apk/res/android\" android:layout_width=\"0dp\"/>\n"
+        + "                                                                                           ~~~\n"
+        + "0 errors, 1 warnings\n");
+  }
+
+  public void testAndroidLayoutWidth0DpIgnoreWhenLayoutWeightSet() throws Exception {
+    @Language("XML") final String source = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
+        + "<TextView xmlns:android=\"http://schemas.android.com/apk/res/android\" android:layout_width=\"0dp\" android:layout_weight=\"1\"/>\n";
+
+    assertThat(lintProject(xml("/res/layout/ids.xml", source))).isEqualTo(NO_WARNINGS);
+  }
+
+  public void testAndroidLayoutHeight0Dp() throws Exception {
+    @Language("XML") final String source = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
+        + "<TextView xmlns:android=\"http://schemas.android.com/apk/res/android\" android:layout_height=\"0dp\"/>\n";
+
+    assertThat(lintProject(xml("/res/layout/ids.xml", source))).isEqualTo("res/layout/ids.xml:2: Warning: Should be using dimen instead. [RawDimen]\n"
+        + "<TextView xmlns:android=\"http://schemas.android.com/apk/res/android\" android:layout_height=\"0dp\"/>\n"
+        + "                                                                                            ~~~\n"
+        + "0 errors, 1 warnings\n");
+  }
+
+  public void testAndroidLayoutHeight0DpIgnoreWhenLayoutWeightSet() throws Exception {
+    @Language("XML") final String source = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
+        + "<TextView xmlns:android=\"http://schemas.android.com/apk/res/android\" android:layout_height=\"0dp\" android:layout_weight=\"1\"/>\n";
+
+    assertThat(lintProject(xml("/res/layout/ids.xml", source))).isEqualTo(NO_WARNINGS);
   }
 
   public void testAndroidLayoutWidth() throws Exception {
