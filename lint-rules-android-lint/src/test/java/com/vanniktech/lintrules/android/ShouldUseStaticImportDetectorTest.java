@@ -103,6 +103,19 @@ public class ShouldUseStaticImportDetectorTest extends LintDetectorTest {
     assertThat(lintProject(java(source))).isEqualTo(NO_WARNINGS);
   }
 
+  public void testMethodReference() throws Exception {
+    @Language("JAVA") final String source = ""
+        + "package foo;\n"
+        + "import static java.util.Arrays.asList;"
+        + "public class Example {\n"
+        + "  public void foo() {\n"
+        + "    asList(1, 2).sort(Integer::compare);\n"
+        + "  }\n"
+        + "}";
+
+    assertThat(lintProject(java(source))).isEqualTo(NO_WARNINGS);
+  }
+
   @Override protected boolean allowCompilationErrors() {
     return false;
   }

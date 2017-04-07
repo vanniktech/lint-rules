@@ -1,5 +1,6 @@
 package com.vanniktech.lintrules.android;
 
+import com.android.annotations.Nullable;
 import com.android.tools.lint.detector.api.Detector;
 import com.android.tools.lint.detector.api.Implementation;
 import com.android.tools.lint.detector.api.Issue;
@@ -77,12 +78,22 @@ public class ShouldUseStaticImportDetector extends Detector implements Detector.
     }
 
     @Override public void visitReferenceExpression(final PsiReferenceExpression expression) {
-      final String qualifiedName = expression.getQualifiedName();
+      final String qualifiedName = getQualifiedName(expression);
+
       final boolean isIgnored = context.getDriver().isSuppressed(context, ISSUE_SHOULD_USE_STATIC_IMPORT, expression);
       final boolean isNotAStaticImport = expression.getText().contains(".");
 
       if (!isIgnored && IMPORTS.contains(qualifiedName) && isNotAStaticImport) {
         context.report(ISSUE_SHOULD_USE_STATIC_IMPORT, context.getLocation(expression), "Should statically import " + getName(qualifiedName));
+      }
+    }
+
+    @Nullable private static String getQualifiedName(final PsiReferenceExpression expression) {
+      try {
+        return expression.getQualifiedName();
+      } catch (final Exception ignore) {
+        // UnimplementedLintPsiApiException can be thrown here, for instance for method references.
+        return null;
       }
     }
 
