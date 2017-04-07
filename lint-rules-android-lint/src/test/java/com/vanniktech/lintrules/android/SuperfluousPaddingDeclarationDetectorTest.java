@@ -97,6 +97,31 @@ public class SuperfluousPaddingDeclarationDetectorTest extends LintDetectorTest 
     assertThat(lintProject(xml("/res/layout/ids.xml", source))).isEqualTo(NO_WARNINGS);
   }
 
+  public void testDeclarationsSplit() throws Exception {
+    @Language("XML") final String source = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
+        + "<merge\n"
+        + "    xmlns:android=\"http://schemas.android.com/apk/res/android\"\n"
+        + "    >\n"
+        + "\n"
+        + "  <TextView\n"
+        + "      android:layout_width=\"match_parent\"\n"
+        + "      android:layout_height=\"wrap_content\"\n"
+        + "      android:paddingStart=\"16dp\"\n"
+        + "      android:paddingEnd=\"16dp\"\n"
+        + "      />\n"
+        + "\n"
+        + "  <View\n"
+        + "      android:layout_width=\"match_parent\"\n"
+        + "      android:layout_height=\"match_parent\"\n"
+        + "      android:paddingTop=\"16dp\"\n"
+        + "      android:paddingBottom=\"16dp\"\n"
+        + "      />\n"
+        + "\n"
+        + "</merge>\n";
+
+    assertThat(lintProject(xml("/res/layout/ids.xml", source))).isEqualTo(NO_WARNINGS);
+  }
+
   public void testToolsMarginSame() throws Exception {
     @Language("XML") final String source = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
         + "<TextView"
