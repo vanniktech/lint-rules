@@ -115,6 +115,16 @@ public class RawDimenDetectorTest extends LintDetectorTest {
         + "0 errors, 1 warnings\n");
   }
 
+  public void testAndroidMarginHalfDp() throws Exception {
+    @Language("XML") final String source = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
+        + "<TextView xmlns:android=\"http://schemas.android.com/apk/res/android\" android:layout_margin=\"0.5dp\"/>\n";
+
+    assertThat(lintProject(xml("/res/layout/ids.xml", source))).isEqualTo("res/layout/ids.xml:2: Warning: Should be using dimen instead. [RawDimen]\n"
+        + "<TextView xmlns:android=\"http://schemas.android.com/apk/res/android\" android:layout_margin=\"0.5dp\"/>\n"
+        + "                                                                                            ~~~~~\n"
+        + "0 errors, 1 warnings\n");
+  }
+
   public void testAndroidMarginLeft() throws Exception {
     @Language("XML") final String source = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
         + "<TextView xmlns:android=\"http://schemas.android.com/apk/res/android\" android:layout_marginLeft=\"16dp\"/>\n";
