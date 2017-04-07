@@ -11,10 +11,12 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiMethod;
 import com.intellij.psi.PsiType;
 import java.util.Collections;
+import java.util.EnumSet;
 import java.util.List;
 
 import static com.android.tools.lint.detector.api.Category.MESSAGES;
-import static com.android.tools.lint.detector.api.Scope.JAVA_FILE_SCOPE;
+import static com.android.tools.lint.detector.api.Scope.JAVA_FILE;
+import static com.android.tools.lint.detector.api.Scope.TEST_SOURCES;
 import static com.android.tools.lint.detector.api.Severity.WARNING;
 
 public final class RxJava2MethodCheckReturnValueDetector extends Detector implements Detector.JavaPsiScanner {
@@ -22,7 +24,7 @@ public final class RxJava2MethodCheckReturnValueDetector extends Detector implem
       Issue.create("MethodMissingCheckReturnValue", "Method is missing the @CheckReturnValue annotation",
           "Methods returning RxJava Reactive Types should be annotated with the @CheckReturnValue annotation.",
               MESSAGES, 8, WARNING,
-          new Implementation(RxJava2MethodCheckReturnValueDetector.class, JAVA_FILE_SCOPE));
+          new Implementation(RxJava2MethodCheckReturnValueDetector.class, EnumSet.of(JAVA_FILE, TEST_SOURCES)));
 
   @Override
   public List<Class<? extends PsiElement>> getApplicablePsiTypes() {
