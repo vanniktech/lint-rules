@@ -12,7 +12,7 @@ import static java.util.Collections.singletonList;
 import static org.fest.assertions.api.Assertions.assertThat;
 
 public class SuperfluousPaddingDeclarationDetectorTest extends LintDetectorTest {
-  public void testAndroidMarginSame() throws Exception {
+  public void testAndroidPaddingSame() throws Exception {
     @Language("XML") final String source = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
         + "<TextView"
         + "  xmlns:android=\"http://schemas.android.com/apk/res/android\""
@@ -27,7 +27,7 @@ public class SuperfluousPaddingDeclarationDetectorTest extends LintDetectorTest 
         + "0 errors, 1 warnings\n");
   }
 
-  public void testAndroidMarginDifferent() throws Exception {
+  public void testAndroidPaddingDifferent() throws Exception {
     @Language("XML") final String source = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
         + "<TextView"
         + "  xmlns:android=\"http://schemas.android.com/apk/res/android\""
@@ -39,7 +39,7 @@ public class SuperfluousPaddingDeclarationDetectorTest extends LintDetectorTest 
     assertThat(lintProject(xml("/res/layout/ids.xml", source))).isEqualTo(NO_WARNINGS);
   }
 
-  public void testAndroidMarginSameIgnored() throws Exception {
+  public void testAndroidPaddingSameIgnored() throws Exception {
     @Language("XML") final String source = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
         + "<TextView"
         + "  xmlns:android=\"http://schemas.android.com/apk/res/android\""
@@ -53,7 +53,7 @@ public class SuperfluousPaddingDeclarationDetectorTest extends LintDetectorTest 
     assertThat(lintProject(xml("/res/layout/ids.xml", source))).isEqualTo(NO_WARNINGS);
   }
 
-  public void testAndroidMarginStartMissing() throws Exception {
+  public void testAndroidPaddingStartMissing() throws Exception {
     @Language("XML") final String source = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
         + "<TextView"
         + "  xmlns:android=\"http://schemas.android.com/apk/res/android\""
@@ -64,7 +64,7 @@ public class SuperfluousPaddingDeclarationDetectorTest extends LintDetectorTest 
     assertThat(lintProject(xml("/res/layout/ids.xml", source))).isEqualTo(NO_WARNINGS);
   }
 
-  public void testAndroidMarginEndMissing() throws Exception {
+  public void testAndroidPaddingEndMissing() throws Exception {
     @Language("XML") final String source = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
         + "<TextView"
         + "  xmlns:android=\"http://schemas.android.com/apk/res/android\""
@@ -75,7 +75,7 @@ public class SuperfluousPaddingDeclarationDetectorTest extends LintDetectorTest 
     assertThat(lintProject(xml("/res/layout/ids.xml", source))).isEqualTo(NO_WARNINGS);
   }
 
-  public void testAndroidMarginBottomMissing() throws Exception {
+  public void testAndroidPaddingBottomMissing() throws Exception {
     @Language("XML") final String source = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
         + "<TextView"
         + "  xmlns:android=\"http://schemas.android.com/apk/res/android\""
@@ -86,7 +86,7 @@ public class SuperfluousPaddingDeclarationDetectorTest extends LintDetectorTest 
     assertThat(lintProject(xml("/res/layout/ids.xml", source))).isEqualTo(NO_WARNINGS);
   }
 
-  public void testAndroidMarginMarginTopMissing() throws Exception {
+  public void testAndroidPaddingPaddingTopMissing() throws Exception {
     @Language("XML") final String source = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
         + "<TextView"
         + "  xmlns:android=\"http://schemas.android.com/apk/res/android\""
@@ -122,7 +122,7 @@ public class SuperfluousPaddingDeclarationDetectorTest extends LintDetectorTest 
     assertThat(lintProject(xml("/res/layout/ids.xml", source))).isEqualTo(NO_WARNINGS);
   }
 
-  public void testToolsMarginSame() throws Exception {
+  public void testToolsPaddingSame() throws Exception {
     @Language("XML") final String source = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
         + "<TextView"
         + "  xmlns:tools=\"http://schemas.android.com/tools\""
