@@ -4,14 +4,11 @@ import com.intellij.psi.PsiType;
 
 final class Utils {
   static boolean isRxJava2TypeThatRequiresCheckReturnValueAnnotation(final PsiType psiType) {
-    return "io.reactivex.Observable".equals(psiType.getCanonicalText())
-        || "io.reactivex.Flowable".equals(psiType.getCanonicalText())
-        || "io.reactivex.Single".equals(psiType.getCanonicalText())
-        || "io.reactivex.Completable".equals(psiType.getCanonicalText())
-        || "io.reactivex.Maybe".equals(psiType.getCanonicalText())
-        || "io.reactivex.disposables.Disposable".equals(psiType.getCanonicalText())
-        || "io.reactivex.observers.TestObserver".equals(psiType.getCanonicalText())
-        || "io.reactivex.subscribers.TestSubscriber".equals(psiType.getCanonicalText());
+    final String canonicalText = psiType.getCanonicalText();
+    return canonicalText.matches("io\\.reactivex\\.[\\w]+")
+        || "io.reactivex.disposables.Disposable".equals(canonicalText)
+        || "io.reactivex.observers.TestObserver".equals(canonicalText)
+        || "io.reactivex.subscribers.TestSubscriber".equals(canonicalText);
   }
 
   private Utils() {
