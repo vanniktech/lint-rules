@@ -116,6 +116,38 @@ public class ShouldUseStaticImportDetectorTest extends LintDetectorTest {
     assertThat(lintProject(java(source))).isEqualTo(NO_WARNINGS);
   }
 
+  public void testArraysAsList() throws Exception {
+    @Language("JAVA") final String source = ""
+        + "package foo;\n"
+        + "import java.util.Arrays;"
+        + "public class Example {\n"
+        + "  public void foo() {\n"
+        + "    Arrays.asList(1, 2);\n"
+        + "  }\n"
+        + "}";
+
+    assertThat(lintProject(java(source))).isEqualTo("src/foo/Example.java:4: Warning: Should statically import asList [ShouldUseStaticImport]\n"
+        + "    Arrays.asList(1, 2);\n"
+        + "    ~~~~~~~~~~~~~\n"
+        + "0 errors, 1 warnings\n");
+  }
+
+  public void testCollectionsSingletonList() throws Exception {
+    @Language("JAVA") final String source = ""
+        + "package foo;\n"
+        + "import java.util.Collections;"
+        + "public class Example {\n"
+        + "  public void foo() {\n"
+        + "    Collections.singletonList(1);\n"
+        + "  }\n"
+        + "}";
+
+    assertThat(lintProject(java(source))).isEqualTo("src/foo/Example.java:4: Warning: Should statically import singletonList [ShouldUseStaticImport]\n"
+        + "    Collections.singletonList(1);\n"
+        + "    ~~~~~~~~~~~~~~~~~~~~~~~~~\n"
+        + "0 errors, 1 warnings\n");
+  }
+
   @Override protected boolean allowCompilationErrors() {
     return false;
   }

@@ -69,6 +69,12 @@ public class ShouldUseStaticImportDetector extends Detector implements Detector.
       IMPORTS.add("android.view.View.VISIBLE");
       IMPORTS.add("android.view.View.GONE");
       IMPORTS.add("android.view.View.INVISIBLE");
+      IMPORTS.add("java.util.Arrays.asList");
+      IMPORTS.add("java.util.Collections.singleton");
+      IMPORTS.add("java.util.Collections.singletonList");
+      IMPORTS.add("java.util.Collections.singletonMap");
+      IMPORTS.add("java.util.Collections.singletonIterator");
+      IMPORTS.add("java.util.Collections.singletonSpliterator");
     }
 
     final JavaContext context;
