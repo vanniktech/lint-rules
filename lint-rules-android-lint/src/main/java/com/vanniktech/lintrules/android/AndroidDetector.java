@@ -36,25 +36,25 @@ public final class AndroidDetector extends Detector implements Detector.JavaPsiS
     final boolean isWindowFindViewByIdSuppressed = context.getDriver().isSuppressed(context, ISSUE_WINDOW_FIND_VIEW_BY_ID, methodExpression);
     if ("android.view.Window.findViewById".equals(fullyQualifiedMethodName) && !isWindowFindViewByIdSuppressed) {
       context.report(ISSUE_WINDOW_FIND_VIEW_BY_ID, call, context.getLocation(methodExpression.getReferenceNameElement()),
-          "Using findViewById instead of ButterKnife");
+          "Using window.findViewById() instead of ButterKnife");
     }
 
     final boolean isViewFindViewByIdSuppressed = context.getDriver().isSuppressed(context, ISSUE_VIEW_FIND_VIEW_BY_ID, methodExpression);
     if ("android.view.View.findViewById".equals(fullyQualifiedMethodName) && !isViewFindViewByIdSuppressed) {
       context.report(ISSUE_VIEW_FIND_VIEW_BY_ID, call, context.getLocation(methodExpression.getReferenceNameElement()),
-          "Using findViewById instead of ButterKnife");
+          "Using view.findViewById() instead of ButterKnife");
     }
 
     final boolean isDialogFindViewByIdSuppressed = context.getDriver().isSuppressed(context, ISSUE_DIALOG_FIND_VIEW_BY_ID, methodExpression);
     if ("android.app.Dialog.findViewById".equals(fullyQualifiedMethodName) && !isDialogFindViewByIdSuppressed) {
       context.report(ISSUE_DIALOG_FIND_VIEW_BY_ID, call, context.getLocation(methodExpression.getReferenceNameElement()),
-          "Using findViewById instead of ButterKnife");
+          "Using dialog.findViewById() instead of ButterKnife");
     }
 
     final boolean isActivityFindViewByIdSuppressed = context.getDriver().isSuppressed(context, ISSUE_ACTIVITY_FIND_VIEW_BY_ID, methodExpression);
     if ("android.app.Activity.findViewById".equals(fullyQualifiedMethodName) && !isActivityFindViewByIdSuppressed) {
       context.report(ISSUE_ACTIVITY_FIND_VIEW_BY_ID, call, context.getLocation(methodExpression.getReferenceNameElement()),
-          "Using findViewById instead of ButterKnife");
+          "Using activity.findViewById() instead of ButterKnife");
     }
   }
 
@@ -81,32 +81,32 @@ public final class AndroidDetector extends Detector implements Detector.JavaPsiS
 
   static Issue[] getIssues() {
     return new Issue[] {
-        ISSUE_WINDOW_FIND_VIEW_BY_ID, ISSUE_VIEW_FIND_VIEW_BY_ID, ISSUE_DIALOG_FIND_VIEW_BY_ID, ISSUE_ACTIVITY_FIND_VIEW_BY_ID,
-        ISSUE_RESOURCES_GET_DRAWABLE, ISSUE_RESOURCES_GET_COLOR, ISSUE_RESOURCES_GET_COLOR_STATE_LIST
+      ISSUE_WINDOW_FIND_VIEW_BY_ID, ISSUE_VIEW_FIND_VIEW_BY_ID, ISSUE_DIALOG_FIND_VIEW_BY_ID, ISSUE_ACTIVITY_FIND_VIEW_BY_ID,
+      ISSUE_RESOURCES_GET_DRAWABLE, ISSUE_RESOURCES_GET_COLOR, ISSUE_RESOURCES_GET_COLOR_STATE_LIST
     };
   }
 
   static final Issue ISSUE_WINDOW_FIND_VIEW_BY_ID =
-      Issue.create("WindowFindViewById", "Using findViewById() instead of ButterKnife.",
-          "Instead of using findViewById ButterKnife should be used.",
+      Issue.create("WindowFindViewById", "Using window.findViewById() instead of ButterKnife.",
+          "Instead of using window.findViewById() ButterKnife should be used.",
               MESSAGES, 5, WARNING,
           new Implementation(AndroidDetector.class, EnumSet.of(JAVA_FILE, TEST_SOURCES)));
 
   static final Issue ISSUE_VIEW_FIND_VIEW_BY_ID =
-      Issue.create("ViewFindViewById", "Using findViewById() instead of ButterKnife.",
-          "Instead of using findViewById ButterKnife should be used.",
+      Issue.create("ViewFindViewById", "Using view.findViewById() instead of ButterKnife.",
+          "Instead of using view.findViewById() ButterKnife should be used.",
               MESSAGES, 5, WARNING,
           new Implementation(AndroidDetector.class, EnumSet.of(JAVA_FILE, TEST_SOURCES)));
 
   static final Issue ISSUE_DIALOG_FIND_VIEW_BY_ID =
-      Issue.create("DialogFindViewById", "Using findViewById() instead of ButterKnife.",
-          "Instead of using findViewById ButterKnife should be used.",
+      Issue.create("DialogFindViewById", "Using dialog.findViewById() instead of ButterKnife.",
+          "Instead of using dialog.findViewById() ButterKnife should be used.",
               MESSAGES, 5, WARNING,
           new Implementation(AndroidDetector.class, EnumSet.of(JAVA_FILE, TEST_SOURCES)));
 
   static final Issue ISSUE_ACTIVITY_FIND_VIEW_BY_ID =
-      Issue.create("ActivityFindViewById", "Using findViewById() instead of ButterKnife.",
-          "Instead of using findViewById ButterKnife should be used.",
+      Issue.create("ActivityFindViewById", "Using activity.findViewById() instead of ButterKnife.",
+          "Instead of using activity.findViewById() ButterKnife should be used.",
               MESSAGES, 5, WARNING,
           new Implementation(AndroidDetector.class, EnumSet.of(JAVA_FILE, TEST_SOURCES)));
 

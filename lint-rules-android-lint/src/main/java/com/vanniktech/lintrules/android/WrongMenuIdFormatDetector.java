@@ -15,7 +15,6 @@ import static com.android.resources.ResourceFolderType.MENU;
 import static com.android.tools.lint.detector.api.Category.CORRECTNESS;
 import static com.android.tools.lint.detector.api.Scope.RESOURCE_FILE_SCOPE;
 import static com.android.tools.lint.detector.api.Severity.WARNING;
-import static com.vanniktech.lintrules.android.RawDimenDetector.ISSUE_RAW_DIMEN;
 import static com.vanniktech.lintrules.android.WrongViewIdFormatDetector.isCamelCase;
 
 public final class WrongMenuIdFormatDetector extends LayoutDetector {

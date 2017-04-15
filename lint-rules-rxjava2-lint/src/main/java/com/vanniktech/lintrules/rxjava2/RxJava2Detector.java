@@ -54,7 +54,6 @@ public final class RxJava2Detector extends Detector implements Detector.JavaPsiS
         || "io.reactivex.Single.subscribe".equals(fullyQualifiedMethodName)
         || "io.reactivex.Completable.subscribe".equals(fullyQualifiedMethodName)
         || "io.reactivex.Maybe.subscribe".equals(fullyQualifiedMethodName)) {
-
       final boolean isSubscribeMissingErrorConsumerSuppressed = context.getDriver().isSuppressed(context, SUBSCRIBE_MISSING_ERROR_CONSUMER, methodExpression);
       if (call.getArgumentList().getExpressions().length < 2 && !isSubscribeMissingErrorConsumerSuppressed) {
         context.report(SUBSCRIBE_MISSING_ERROR_CONSUMER, call, context.getLocation(methodExpression.getReferenceNameElement()),
@@ -65,7 +64,7 @@ public final class RxJava2Detector extends Detector implements Detector.JavaPsiS
 
   static Issue[] getIssues() {
     return new Issue[] {
-        COMPOSITE_DISPOSABLE_DISPOSE, COMPOSITE_DISPOSABLE_ADD_ALL, SUBSCRIBE_MISSING_ERROR_CONSUMER
+      COMPOSITE_DISPOSABLE_DISPOSE, COMPOSITE_DISPOSABLE_ADD_ALL, SUBSCRIBE_MISSING_ERROR_CONSUMER
     };
   }
 
