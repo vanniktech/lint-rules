@@ -17,6 +17,7 @@ import static com.android.resources.ResourceFolderType.LAYOUT;
 import static com.android.tools.lint.detector.api.Category.CORRECTNESS;
 import static com.android.tools.lint.detector.api.Scope.RESOURCE_FILE_SCOPE;
 import static com.android.tools.lint.detector.api.Severity.WARNING;
+import static java.util.Locale.US;
 
 public final class MatchingViewIdDetector extends LayoutDetector {
   static final Issue ISSUE_MATCHING_VIEW_ID = Issue.create("MatchingViewId", "Ids should match in regards to the layout file.",
@@ -50,7 +51,7 @@ public final class MatchingViewIdDetector extends LayoutDetector {
     final StringBuffer sb = new StringBuffer();
 
     while (matcher.find()) {
-      matcher.appendReplacement(sb, matcher.group(1).toUpperCase());
+      matcher.appendReplacement(sb, matcher.group(1).toUpperCase(US));
     }
 
     matcher.appendTail(sb);
