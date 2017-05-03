@@ -75,7 +75,7 @@ public final class RxJava2MissingCompositeDisposableClearDetector extends Detect
               while (iterator.hasNext()) {
                 final PsiField psiField = iterator.next();
 
-                if (expressionStatement.getExpression().getText().equals(psiField.getName() + ".clear()")) {
+                if (expressionStatement.getExpression().getText().equals(psiField.getName() + ".clear()")) { // NOPMD
                   iterator.remove();
                 }
               }

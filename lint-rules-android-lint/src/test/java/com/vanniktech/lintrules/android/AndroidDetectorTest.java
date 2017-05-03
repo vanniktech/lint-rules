@@ -69,7 +69,7 @@ public class AndroidDetectorTest extends LintDetectorTest {
         + "  }\n"
         + "}";
     assertThat(lintProject(java(source), windowStub)).isEqualTo("src/foo/Example.java:6: "
-        + "Warning: Using findViewById instead of ButterKnife [WindowFindViewById]\n"
+        + "Warning: Using window.findViewById() instead of ButterKnife [WindowFindViewById]\n"
         + "    window.findViewById(0);\n"
         + "           ~~~~~~~~~~~~\n"
         + "0 errors, 1 warnings\n");
@@ -85,7 +85,7 @@ public class AndroidDetectorTest extends LintDetectorTest {
         + "  }\n"
         + "}";
     assertThat(lintProject(java(source), windowStub)).isEqualTo("src/foo/Example.java:5: "
-        + "Warning: Using findViewById instead of ButterKnife [WindowFindViewById]\n"
+        + "Warning: Using window.findViewById() instead of ButterKnife [WindowFindViewById]\n"
         + "    findViewById(0);\n"
         + "    ~~~~~~~~~~~~\n"
         + "0 errors, 1 warnings\n");
@@ -116,7 +116,7 @@ public class AndroidDetectorTest extends LintDetectorTest {
         + "  }\n"
         + "}";
     assertThat(lintProject(java(source), viewStub)).isEqualTo("src/foo/Example.java:6: "
-        + "Warning: Using findViewById instead of ButterKnife [ViewFindViewById]\n"
+        + "Warning: Using view.findViewById() instead of ButterKnife [ViewFindViewById]\n"
         + "    view.findViewById(0);\n"
         + "         ~~~~~~~~~~~~\n"
         + "0 errors, 1 warnings\n");
@@ -132,7 +132,7 @@ public class AndroidDetectorTest extends LintDetectorTest {
         + "  }\n"
         + "}";
     assertThat(lintProject(java(source), viewStub)).isEqualTo("src/foo/Example.java:5: "
-        + "Warning: Using findViewById instead of ButterKnife [ViewFindViewById]\n"
+        + "Warning: Using view.findViewById() instead of ButterKnife [ViewFindViewById]\n"
         + "    findViewById(0);\n"
         + "    ~~~~~~~~~~~~\n"
         + "0 errors, 1 warnings\n");
@@ -163,7 +163,7 @@ public class AndroidDetectorTest extends LintDetectorTest {
         + "  }\n"
         + "}";
     assertThat(lintProject(java(source), dialogStub)).isEqualTo("src/foo/Example.java:6: "
-        + "Warning: Using findViewById instead of ButterKnife [DialogFindViewById]\n"
+        + "Warning: Using dialog.findViewById() instead of ButterKnife [DialogFindViewById]\n"
         + "    dialog.findViewById(0);\n"
         + "           ~~~~~~~~~~~~\n"
         + "0 errors, 1 warnings\n");
@@ -179,7 +179,7 @@ public class AndroidDetectorTest extends LintDetectorTest {
         + "  }\n"
         + "}";
     assertThat(lintProject(java(source), dialogStub)).isEqualTo("src/foo/Example.java:5: "
-        + "Warning: Using findViewById instead of ButterKnife [DialogFindViewById]\n"
+        + "Warning: Using dialog.findViewById() instead of ButterKnife [DialogFindViewById]\n"
         + "    findViewById(0);\n"
         + "    ~~~~~~~~~~~~\n"
         + "0 errors, 1 warnings\n");
@@ -210,7 +210,7 @@ public class AndroidDetectorTest extends LintDetectorTest {
         + "  }\n"
         + "}";
     assertThat(lintProject(java(source), activityStub)).isEqualTo("src/foo/Example.java:6: "
-        + "Warning: Using findViewById instead of ButterKnife [ActivityFindViewById]\n"
+        + "Warning: Using activity.findViewById() instead of ButterKnife [ActivityFindViewById]\n"
         + "    activity.findViewById(0);\n"
         + "             ~~~~~~~~~~~~\n"
         + "0 errors, 1 warnings\n");
@@ -226,7 +226,7 @@ public class AndroidDetectorTest extends LintDetectorTest {
         + "  }\n"
         + "}";
     assertThat(lintProject(java(source), activityStub)).isEqualTo("src/foo/Example.java:5: "
-        + "Warning: Using findViewById instead of ButterKnife [ActivityFindViewById]\n"
+        + "Warning: Using activity.findViewById() instead of ButterKnife [ActivityFindViewById]\n"
         + "    findViewById(0);\n"
         + "    ~~~~~~~~~~~~\n"
         + "0 errors, 1 warnings\n");
