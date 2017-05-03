@@ -7,7 +7,6 @@ import com.android.tools.lint.detector.api.Issue;
 import com.android.tools.lint.detector.api.LayoutDetector;
 import com.android.tools.lint.detector.api.XmlContext;
 import java.util.Collection;
-import java.util.Collections;
 import org.w3c.dom.Attr;
 
 import static com.android.SdkConstants.ATTR_ID;
@@ -15,8 +14,8 @@ import static com.android.resources.ResourceFolderType.MENU;
 import static com.android.tools.lint.detector.api.Category.CORRECTNESS;
 import static com.android.tools.lint.detector.api.Scope.RESOURCE_FILE_SCOPE;
 import static com.android.tools.lint.detector.api.Severity.WARNING;
-import static com.vanniktech.lintrules.android.RawDimenDetector.ISSUE_RAW_DIMEN;
 import static com.vanniktech.lintrules.android.WrongViewIdFormatDetector.isCamelCase;
+import static java.util.Collections.singletonList;
 
 public final class WrongMenuIdFormatDetector extends LayoutDetector {
   static final Issue ISSUE_WRONG_MENU_ID_FORMAT = Issue.create("WrongMenuIdFormat", "Ids should be in lowerCamelCase Format.",
@@ -28,7 +27,7 @@ public final class WrongMenuIdFormatDetector extends LayoutDetector {
   }
 
   @Override public Collection<String> getApplicableAttributes() {
-    return Collections.singletonList(ATTR_ID);
+    return singletonList(ATTR_ID);
   }
 
   @Override public void visitAttribute(@NonNull final XmlContext context, @NonNull final Attr attribute) {
