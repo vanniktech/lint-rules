@@ -16,6 +16,7 @@ import static com.vanniktech.lintrules.android.RawDimenDetector.ISSUE_RAW_DIMEN;
 import static com.vanniktech.lintrules.android.ShouldUseStaticImportDetector.ISSUE_SHOULD_USE_STATIC_IMPORT;
 import static com.vanniktech.lintrules.android.SuperfluousMarginDeclarationDetector.SUPERFLUOUS_MARGIN_DECLARATION;
 import static com.vanniktech.lintrules.android.SuperfluousPaddingDeclarationDetector.SUPERFLUOUS_PADDING_DECLARATION;
+import static com.vanniktech.lintrules.android.InvalidSingleLineCommentDetector.ISSUE_INVALID_SINGLE_LINE_COMMENT;
 import static com.vanniktech.lintrules.android.WrongMenuIdFormatDetector.ISSUE_WRONG_MENU_ID_FORMAT;
 import static com.vanniktech.lintrules.android.WrongViewIdFormatDetector.ISSUE_WRONG_VIEW_ID_FORMAT;
 import static org.fest.assertions.api.Assertions.assertThat;
@@ -38,7 +39,8 @@ public class IssueRegistryTest {
         SUPERFLUOUS_PADDING_DECLARATION,
         ISSUE_SHOULD_USE_STATIC_IMPORT,
         ISSUE_MATCHING_VIEW_ID,
-        ISSUE_MATCHING_MENU_ID
+        ISSUE_MATCHING_MENU_ID,
+        ISSUE_INVALID_SINGLE_LINE_COMMENT
     );
   }
 }
