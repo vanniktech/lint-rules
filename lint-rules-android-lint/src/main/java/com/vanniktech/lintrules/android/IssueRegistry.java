@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static com.vanniktech.lintrules.android.InvalidStringDetector.ISSUE_INVALID_STRING;
 import static com.vanniktech.lintrules.android.MatchingMenuIdDetector.ISSUE_MATCHING_MENU_ID;
 import static com.vanniktech.lintrules.android.MatchingViewIdDetector.ISSUE_MATCHING_VIEW_ID;
 import static com.vanniktech.lintrules.android.RawColorDetector.ISSUE_RAW_COLOR;
@@ -30,6 +31,7 @@ public final class IssueRegistry extends com.android.tools.lint.client.api.Issue
     issues.add(ISSUE_MATCHING_VIEW_ID);
     issues.add(ISSUE_MATCHING_MENU_ID);
     issues.add(ISSUE_INVALID_SINGLE_LINE_COMMENT);
+    issues.add(ISSUE_INVALID_STRING);
     return issues;
   }
 }
