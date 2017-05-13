@@ -8,6 +8,7 @@ import java.util.List;
 import static com.vanniktech.lintrules.android.InvalidStringDetector.ISSUE_INVALID_STRING;
 import static com.vanniktech.lintrules.android.MatchingMenuIdDetector.ISSUE_MATCHING_MENU_ID;
 import static com.vanniktech.lintrules.android.MatchingViewIdDetector.ISSUE_MATCHING_VIEW_ID;
+import static com.vanniktech.lintrules.android.NonFinalClassDetector.ISSUE_NON_FINAL_CLASS;
 import static com.vanniktech.lintrules.android.RawColorDetector.ISSUE_RAW_COLOR;
 import static com.vanniktech.lintrules.android.RawDimenDetector.ISSUE_RAW_DIMEN;
 import static com.vanniktech.lintrules.android.ShouldUseStaticImportDetector.ISSUE_SHOULD_USE_STATIC_IMPORT;
@@ -21,6 +22,7 @@ public final class IssueRegistry extends com.android.tools.lint.client.api.Issue
   @Override public List<Issue> getIssues() {
     final List<Issue> issues = new ArrayList<>();
     Collections.addAll(issues, AndroidDetector.getIssues());
+    issues.add(ISSUE_NON_FINAL_CLASS);
     issues.add(ISSUE_WRONG_VIEW_ID_FORMAT);
     issues.add(ISSUE_WRONG_MENU_ID_FORMAT);
     issues.add(ISSUE_RAW_DIMEN);

@@ -13,6 +13,7 @@ import static com.vanniktech.lintrules.android.InvalidSingleLineCommentDetector.
 import static com.vanniktech.lintrules.android.InvalidStringDetector.ISSUE_INVALID_STRING;
 import static com.vanniktech.lintrules.android.MatchingMenuIdDetector.ISSUE_MATCHING_MENU_ID;
 import static com.vanniktech.lintrules.android.MatchingViewIdDetector.ISSUE_MATCHING_VIEW_ID;
+import static com.vanniktech.lintrules.android.NonFinalClassDetector.ISSUE_NON_FINAL_CLASS;
 import static com.vanniktech.lintrules.android.RawColorDetector.ISSUE_RAW_COLOR;
 import static com.vanniktech.lintrules.android.RawDimenDetector.ISSUE_RAW_DIMEN;
 import static com.vanniktech.lintrules.android.ShouldUseStaticImportDetector.ISSUE_SHOULD_USE_STATIC_IMPORT;
@@ -32,6 +33,7 @@ public class IssueRegistryTest {
         ISSUE_RESOURCES_GET_DRAWABLE,
         ISSUE_RESOURCES_GET_COLOR,
         ISSUE_RESOURCES_GET_COLOR_STATE_LIST,
+        ISSUE_NON_FINAL_CLASS,
         ISSUE_WRONG_VIEW_ID_FORMAT,
         ISSUE_WRONG_MENU_ID_FORMAT,
         ISSUE_RAW_DIMEN,
