@@ -265,6 +265,21 @@ public class RawDimenDetectorTest extends LintDetectorTest {
         + "0 errors, 1 warnings\n");
   }
 
+  public void testIgnoreVector() throws Exception {
+    @Language("XML") final String source = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n"
+        + "<vector xmlns:android=\"http://schemas.android.com/apk/res/android\"\n"
+        + "    android:height=\"24dp\"\n"
+        + "    android:viewportHeight=\"24.0\"\n"
+        + "    android:viewportWidth=\"24.0\"\n"
+        + "    android:width=\"24dp\">\n"
+        + "  <path\n"
+        + "      android:fillColor=\"#000000\"\n"
+        + "      android:pathData=\"M19,13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z\"/>\n"
+        + "</vector>\n";
+
+    assertThat(lintProject(xml("/res/drawable/icon.xml", source))).isEqualTo(NO_WARNINGS);
+  }
+
   @Override protected Detector getDetector() {
     return new RawDimenDetector();
   }

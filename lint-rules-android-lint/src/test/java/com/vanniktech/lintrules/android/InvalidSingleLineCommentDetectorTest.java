@@ -56,6 +56,34 @@ public class InvalidSingleLineCommentDetectorTest extends LintDetectorTest {
         + "0 errors, 1 warnings\n");
   }
 
+  public void testInvalidSingleLineCommentEndingWithPeriod() throws Exception {
+    @Language("JAVA") final String source = ""
+        + "package foo;\n"
+        + "import android.content.res.Resources;\n"
+        + "public class Example {\n"
+        + "  public void foo() {\n"
+        + "    // Something. Do not modify!\n"
+        + "    // Something. Do not modify.\n"
+        + "    // Something. Do not modify?\n"
+        + "  }\n"
+        + "}";
+    assertThat(lintProject(java(source))).isEqualTo(NO_WARNINGS);
+  }
+
+  public void testInvalidSingleLineCommentIgnoresLinks() throws Exception {
+    @Language("JAVA") final String source = ""
+        + "package foo;\n"
+        + "import android.content.res.Resources;\n"
+        + "public class Example {\n"
+        + "  public void foo() {\n"
+        + "    String link1 = \"https://android.com/\";\n"
+        + "    String link2 = \"http://android.com/\";\n"
+        + "    String link3 = \"market://details?id=5\";\n"
+        + "  }\n"
+        + "}";
+    assertThat(lintProject(java(source))).isEqualTo(NO_WARNINGS);
+  }
+
   public void testInvalidSingleLineCommentIgnoresNoPmd() throws Exception {
     @Language("JAVA") final String source = ""
         + "package foo;\n"
@@ -101,7 +129,10 @@ public class InvalidSingleLineCommentDetectorTest extends LintDetectorTest {
         + "    // \n"
         + "  }\n"
         + "}";
-    assertThat(lintProject(java(source))).isEqualTo(NO_WARNINGS);
+    assertThat(lintProject(java(source))).isEqualTo("src/foo/Example.java:5: Warning: Comment contains trailing whitespace. [InvalidSingleLineComment]\n"
+        + "    // \n"
+        + "    ~~~\n"
+        + "0 errors, 1 warnings\n");
   }
 
   public void testInvalidSingleLineCommentTrailingWhitespace() throws Exception {
@@ -113,7 +144,7 @@ public class InvalidSingleLineCommentDetectorTest extends LintDetectorTest {
         + "    // Something. \n"
         + "  }\n"
         + "}";
-    assertThat(lintProject(java(source))).isEqualTo("src/foo/Example.java:5: Warning: Comments contains trailing whitespace. [InvalidSingleLineComment]\n"
+    assertThat(lintProject(java(source))).isEqualTo("src/foo/Example.java:5: Warning: Comment contains trailing whitespace. [InvalidSingleLineComment]\n"
         + "    // Something. \n"
         + "    ~~~~~~~~~~~~~~\n"
         + "0 errors, 1 warnings\n");

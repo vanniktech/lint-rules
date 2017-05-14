@@ -38,22 +38,32 @@ public final class InvalidSingleLineCommentDetector extends Detector implements 
 
     while (matcher.find()) {
       final String group = matcher.group().replace("//", "");
+      final int start = matcher.start();
 
-      if (group.isEmpty() || " ".equals(group) || " NOPMD".equals(group) || group.startsWith("noinspection")) {
+      final Character beforeStart = start > 0 ? source.charAt(start - 1) : null;
+
+      final boolean isEmpty = group.isEmpty();
+      final boolean isNoPmd = " NOPMD".equals(group);
+      final boolean isInspection = group.startsWith("noinspection");
+      final boolean isALink = beforeStart != null && beforeStart == ':';
+
+      if (isEmpty || isNoPmd || isInspection || isALink) {
         continue;
       }
 
+      final int end = matcher.end();
+
       if (group.charAt(0) != ' ') {
-        final Location location = Location.create(context.file, source, matcher.start() + 2, matcher.end() + 3);
+        final Location location = Location.create(context.file, source, start + 2, end + 3);
         context.report(ISSUE_INVALID_SINGLE_LINE_COMMENT, location, "Comment does not contain a space at the beginning.");
+      } else if (" ".equals(group) || group.trim().length() != group.length() - 1) {
+        final Location location = Location.create(context.file, source, start, end);
+        context.report(ISSUE_INVALID_SINGLE_LINE_COMMENT, location, "Comment contains trailing whitespace.");
       } else if (!Character.isUpperCase(group.charAt(1))) {
-        final Location location = Location.create(context.file, source, matcher.start() + 3, matcher.end() + 4);
+        final Location location = Location.create(context.file, source, start + 3, end + 4);
         context.report(ISSUE_INVALID_SINGLE_LINE_COMMENT, location, "Comments first word should be capitalized.");
-      } else if (group.trim().length() != group.length() - 1) {
-        final Location location = Location.create(context.file, source, matcher.start(), matcher.end());
-        context.report(ISSUE_INVALID_SINGLE_LINE_COMMENT, location, "Comments contains trailing whitespace.");
-      } else if (!group.endsWith(".")) {
-        final Location location = Location.create(context.file, source, matcher.start(), matcher.end());
+      } else if (!group.endsWith(".") && !group.endsWith("?") && !group.endsWith("!")) {
+        final Location location = Location.create(context.file, source, start, end);
         context.report(ISSUE_INVALID_SINGLE_LINE_COMMENT, location, "Comment does not end with a period.");
       }
     }
