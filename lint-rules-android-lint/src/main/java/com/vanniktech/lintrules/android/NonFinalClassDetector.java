@@ -48,7 +48,7 @@ public class NonFinalClassDetector extends Detector implements Detector.JavaPsiS
         final boolean isAbstract = modifierList.hasExplicitModifier(ABSTRACT);
 
         if (!isFinal && !isAbstract) {
-          context.report(ISSUE_NON_FINAL_CLASS, context.getLocation(psiClass), "Class is not marked as final.");
+          context.report(ISSUE_NON_FINAL_CLASS, context.getLocation(psiClass.getFirstChild()), "Class is not marked as final.");
         }
       }
     }

@@ -45,8 +45,9 @@ public final class RawDimenDetector extends LayoutDetector {
       final boolean isToolsAttribute = "http://schemas.android.com/tools".equalsIgnoreCase(item.getNamespaceURI());
       final boolean isSuppressed = context.getDriver().isSuppressed(context, ISSUE_RAW_DIMEN, item);
       final boolean is0DpLayoutWithWeight = hasLayoutWeight && value.charAt(0) == '0' && (ATTR_LAYOUT_WIDTH.equals(item.getLocalName()) || ATTR_LAYOUT_HEIGHT.equals(item.getLocalName()));
+      final boolean isVectorGraphic = "vector".equals(element.getLocalName()) || "path".equals(element.getLocalName());
 
-      if (value.matches("[\\d.]+(sp|dp|dip)") && !isToolsAttribute && !isSuppressed && !is0DpLayoutWithWeight) {
+      if (!isToolsAttribute && !isSuppressed && !is0DpLayoutWithWeight && !isVectorGraphic && value.matches("[\\d.]+(sp|dp|dip)")) {
         context.report(ISSUE_RAW_DIMEN, context.getValueLocation((Attr) item), "Should be using dimen instead.");
       }
     }
