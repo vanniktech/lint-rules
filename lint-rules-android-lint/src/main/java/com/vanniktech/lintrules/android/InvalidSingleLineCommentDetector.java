@@ -53,7 +53,10 @@ public final class InvalidSingleLineCommentDetector extends Detector implements 
 
       final int end = matcher.end();
 
-      if (group.charAt(0) != ' ') {
+      if (beforeStart != null && !Character.isWhitespace(beforeStart)) {
+        final Location location = Location.create(context.file, source, start - 1, start);
+        context.report(ISSUE_INVALID_SINGLE_LINE_COMMENT, location, "Comment does not start with a single space..");
+      } else if (group.charAt(0) != ' ') {
         final Location location = Location.create(context.file, source, start + 2, end + 3);
         context.report(ISSUE_INVALID_SINGLE_LINE_COMMENT, location, "Comment does not contain a space at the beginning.");
       } else if (" ".equals(group) || group.trim().length() != group.length() - 1) {
@@ -62,7 +65,7 @@ public final class InvalidSingleLineCommentDetector extends Detector implements 
       } else if (!Character.isUpperCase(group.charAt(1))) {
         final Location location = Location.create(context.file, source, start + 3, end + 4);
         context.report(ISSUE_INVALID_SINGLE_LINE_COMMENT, location, "Comments first word should be capitalized.");
-      } else if (!group.endsWith(".") && !group.endsWith("?") && !group.endsWith("!")) {
+      } else if (!group.endsWith(".") && !group.endsWith("?") && !group.endsWith("!") && !group.endsWith(")")) {
         final Location location = Location.create(context.file, source, start, end);
         context.report(ISSUE_INVALID_SINGLE_LINE_COMMENT, location, "Comment does not end with a period.");
       }

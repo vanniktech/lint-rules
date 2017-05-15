@@ -65,9 +65,25 @@ public class InvalidSingleLineCommentDetectorTest extends LintDetectorTest {
         + "    // Something. Do not modify!\n"
         + "    // Something. Do not modify.\n"
         + "    // Something. Do not modify?\n"
+        + "    // Something. (Do not modify)\n"
         + "  }\n"
         + "}";
     assertThat(lintProject(java(source))).isEqualTo(NO_WARNINGS);
+  }
+
+  public void testInvalidSingleLineCommentNoSpaceBefore() throws Exception {
+    @Language("JAVA") final String source = ""
+        + "package foo;\n"
+        + "import android.content.res.Resources;\n"
+        + "public class Example {\n"
+        + "  public void foo() {\n"
+        + "    int foo = 5 + 5;// Something.\n"
+        + "  }\n"
+        + "}";
+    assertThat(lintProject(java(source))).isEqualTo("src/foo/Example.java:5: Warning: Comment does not start with a single space.. [InvalidSingleLineComment]\n"
+        + "    int foo = 5 + 5;// Something.\n"
+        + "                   ~\n"
+        + "0 errors, 1 warnings\n");
   }
 
   public void testInvalidSingleLineCommentIgnoresLinks() throws Exception {
