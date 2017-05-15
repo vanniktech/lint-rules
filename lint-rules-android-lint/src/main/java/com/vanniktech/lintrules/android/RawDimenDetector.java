@@ -37,6 +37,10 @@ public final class RawDimenDetector extends LayoutDetector {
     final NamedNodeMap attributes = element.getAttributes();
 
     final boolean hasLayoutWeight = attributes.getNamedItem("android:layout_weight") != null;
+    final Node parentNode = element.getParentNode();
+    final String parentName = parentNode != null ? parentNode.getLocalName() : null;
+    final boolean isParentConstraintLayout = "android.support.constraint.ConstraintLayout".equals(parentName);
+    final boolean isVectorGraphic = "vector".equals(element.getLocalName()) || "path".equals(element.getLocalName());
 
     for (int i = 0; i < attributes.getLength(); i++) {
       final Node item = attributes.item(i);
@@ -44,8 +48,8 @@ public final class RawDimenDetector extends LayoutDetector {
 
       final boolean isToolsAttribute = "http://schemas.android.com/tools".equalsIgnoreCase(item.getNamespaceURI());
       final boolean isSuppressed = context.getDriver().isSuppressed(context, ISSUE_RAW_DIMEN, item);
-      final boolean is0DpLayoutWithWeight = hasLayoutWeight && value.charAt(0) == '0' && (ATTR_LAYOUT_WIDTH.equals(item.getLocalName()) || ATTR_LAYOUT_HEIGHT.equals(item.getLocalName()));
-      final boolean isVectorGraphic = "vector".equals(element.getLocalName()) || "path".equals(element.getLocalName());
+      final boolean is0Dp = value.charAt(0) == '0';
+      final boolean is0DpLayoutWithWeight = (hasLayoutWeight || isParentConstraintLayout) && is0Dp && (ATTR_LAYOUT_WIDTH.equals(item.getLocalName()) || ATTR_LAYOUT_HEIGHT.equals(item.getLocalName()));
 
       if (!isToolsAttribute && !isSuppressed && !is0DpLayoutWithWeight && !isVectorGraphic && value.matches("[\\d.]+(sp|dp|dip)")) {
         context.report(ISSUE_RAW_DIMEN, context.getValueLocation((Attr) item), "Should be using dimen instead.");
