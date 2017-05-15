@@ -265,6 +265,25 @@ public class RawDimenDetectorTest extends LintDetectorTest {
         + "0 errors, 1 warnings\n");
   }
 
+  public void test0DpConstraintLayout() throws Exception {
+    @Language("XML") final String source = "<android.support.constraint.ConstraintLayout\n"
+        + "    xmlns:android=\"http://schemas.android.com/apk/res/android\"\n"
+        + "    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\n"
+        + "    android:layout_width=\"match_parent\"\n"
+        + "    android:layout_height=\"wrap_content\"\n"
+        + "    >\n"
+        + "\n"
+        + "  <TextView\n"
+        + "      android:layout_width=\"0dp\"\n"
+        + "      android:layout_height=\"wrap_content\"\n"
+        + "      app:layout_constraintLeft_toLeftOf=\"parent\"\n"
+        + "      app:layout_constraintRight_toRightOf=\"parent\"\n"
+        + "      />\n"
+        + "</android.support.constraint.ConstraintLayout>";
+
+    assertThat(lintProject(xml("/res/layout/ids.xml", source))).isEqualTo(NO_WARNINGS);
+  }
+
   public void testIgnoreVector() throws Exception {
     @Language("XML") final String source = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n"
         + "<vector xmlns:android=\"http://schemas.android.com/apk/res/android\"\n"
