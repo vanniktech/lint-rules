@@ -9,6 +9,7 @@ import static com.vanniktech.lintrules.android.AndroidDetector.ISSUE_RESOURCES_G
 import static com.vanniktech.lintrules.android.AndroidDetector.ISSUE_RESOURCES_GET_DRAWABLE;
 import static com.vanniktech.lintrules.android.AndroidDetector.ISSUE_VIEW_FIND_VIEW_BY_ID;
 import static com.vanniktech.lintrules.android.AndroidDetector.ISSUE_WINDOW_FIND_VIEW_BY_ID;
+import static com.vanniktech.lintrules.android.DefaultLayoutAttributeDetector.ISSUE_DEFAULT_LAYOUT_ATTRIBUTE;
 import static com.vanniktech.lintrules.android.InvalidSingleLineCommentDetector.ISSUE_INVALID_SINGLE_LINE_COMMENT;
 import static com.vanniktech.lintrules.android.InvalidStringDetector.ISSUE_INVALID_STRING;
 import static com.vanniktech.lintrules.android.MatchingMenuIdDetector.ISSUE_MATCHING_MENU_ID;
@@ -44,7 +45,8 @@ public class IssueRegistryTest {
         ISSUE_MATCHING_VIEW_ID,
         ISSUE_MATCHING_MENU_ID,
         ISSUE_INVALID_SINGLE_LINE_COMMENT,
-        ISSUE_INVALID_STRING
+        ISSUE_INVALID_STRING,
+        ISSUE_DEFAULT_LAYOUT_ATTRIBUTE
     );
   }
 }
