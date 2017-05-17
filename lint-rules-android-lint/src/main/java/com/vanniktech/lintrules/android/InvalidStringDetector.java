@@ -44,10 +44,13 @@ public class InvalidStringDetector extends ResourceXmlDetector {
     for (int i = 0; i < childNodesLength; i++) {
       final Node child = childNodes.item(i);
 
-      if (child.getNodeType() == Node.TEXT_NODE) {
+      final short childNodeType = child.getNodeType();
+      final Node parentNode = child.getParentNode();
+
+      if (childNodeType == Node.TEXT_NODE && "item".equals(parentNode.getLocalName()) || "string".equals(parentNode.getLocalName())) {
         final String text = child.getNodeValue();
         checkText(context, element, child, text);
-      } else if (child.getNodeType() == Node.ELEMENT_NODE && (child.getParentNode().getNodeName().equals(TAG_STRING_ARRAY) || child.getParentNode().getNodeName().equals(TAG_PLURALS))) {
+      } else if (childNodeType == Node.ELEMENT_NODE && (parentNode.getNodeName().equals(TAG_STRING_ARRAY) || parentNode.getNodeName().equals(TAG_PLURALS))) {
         // String array or plural item children.
         final NodeList items = child.getChildNodes();
         final int itemsLength = items.getLength();

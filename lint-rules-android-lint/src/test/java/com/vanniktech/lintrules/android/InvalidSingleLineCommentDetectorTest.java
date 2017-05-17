@@ -124,6 +124,18 @@ public class InvalidSingleLineCommentDetectorTest extends LintDetectorTest {
     assertThat(lintProject(java(source))).isEqualTo(NO_WARNINGS);
   }
 
+  public void testInvalidSingleLineCommentLinkInComment() throws Exception {
+    @Language("JAVA") final String source = ""
+        + "package foo;\n"
+        + "import android.content.res.Resources;\n"
+        + "public class Example {\n"
+        + "  public void foo() {\n"
+        + "    // http://stackoverflow.com/a/38480079\n"
+        + "  }\n"
+        + "}";
+    assertThat(lintProject(java(source))).isEqualTo(NO_WARNINGS);
+  }
+
   public void testInvalidSingleLineCommentIgnoresJustComment() throws Exception {
     @Language("JAVA") final String source = ""
         + "package foo;\n"

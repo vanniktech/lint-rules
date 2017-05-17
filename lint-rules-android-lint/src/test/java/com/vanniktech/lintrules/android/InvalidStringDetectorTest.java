@@ -58,6 +58,30 @@ public class InvalidStringDetectorTest extends LintDetectorTest {
         + "0 errors, 1 warnings\n");
   }
 
+  public void testTrailingWhitespacePluralString() throws Exception {
+    @Language("XML") final String source = "<plurals name=\"days\">\n"
+        + "    <item quantity=\"one\">%d Day</item>\n"
+        + "    <item quantity=\"other\">%d Days</item>\n"
+        + "  </plurals>";
+
+    assertThat(lintProject(xml("/res/values/strings.xml", source))).isEqualTo(NO_WARNINGS);
+  }
+
+  public void testTrailingWhitespacePluralStringTrailing() throws Exception {
+    @Language("XML") final String source = "<plurals name=\"days\">\n"
+        + "    <item quantity=\"one\">  %d Day</item>\n"
+        + "    <item quantity=\"other\">%d Days   </item>\n"
+        + "  </plurals>";
+
+    assertThat(lintProject(xml("/res/values/strings.xml", source))).isEqualTo("res/values/strings.xml:2: Warning: Text contains trailing whitespace. [InvalidString]\n"
+        + "    <item quantity=\"one\">  %d Day</item>\n"
+        + "                           ^\n"
+        + "res/values/strings.xml:3: Warning: Text contains trailing whitespace. [InvalidString]\n"
+        + "    <item quantity=\"other\">%d Days   </item>\n"
+        + "                           ^\n"
+        + "0 errors, 2 warnings\n");
+  }
+
   @Override protected Detector getDetector() {
     return new InvalidStringDetector();
   }
