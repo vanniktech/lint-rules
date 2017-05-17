@@ -8,6 +8,8 @@ import com.android.tools.lint.detector.api.JavaContext;
 import com.android.tools.lint.detector.api.Location;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiElement;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Collections;
 import java.util.EnumSet;
 import java.util.List;
@@ -37,7 +39,7 @@ public final class InvalidSingleLineCommentDetector extends Detector implements 
     final Matcher matcher = compile.matcher(source);
 
     while (matcher.find()) {
-      final String group = matcher.group().replace("//", "");
+      final String group = matcher.group().replaceFirst("//", "");
       final int start = matcher.start();
 
       final Character beforeStart = start > 0 ? source.charAt(start - 1) : null;
@@ -46,8 +48,9 @@ public final class InvalidSingleLineCommentDetector extends Detector implements 
       final boolean isNoPmd = " NOPMD".equals(group);
       final boolean isInspection = group.startsWith("noinspection");
       final boolean isALink = beforeStart != null && beforeStart == ':';
+      final boolean isHttpLink = isUrl(group);
 
-      if (isEmpty || isNoPmd || isInspection || isALink) {
+      if (isEmpty || isNoPmd || isInspection || isALink || isHttpLink) {
         continue;
       }
 
@@ -69,6 +72,15 @@ public final class InvalidSingleLineCommentDetector extends Detector implements 
         final Location location = Location.create(context.file, source, start, end);
         context.report(ISSUE_INVALID_SINGLE_LINE_COMMENT, location, "Comment does not end with a period.");
       }
+    }
+  }
+
+  private boolean isUrl(final String string) {
+    try {
+      new URL(string);
+      return true;
+    } catch (final MalformedURLException ignore) {
+      return false;
     }
   }
 }
