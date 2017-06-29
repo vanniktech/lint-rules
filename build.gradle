@@ -17,7 +17,7 @@ codeQualityTools {
     toolVersion = '7.7'
   }
   pmd {
-    toolVersion = '5.6.1'
+    toolVersion = '5.8.0'
   }
 }
 
