@@ -36,17 +36,20 @@ public class WrongConstraintLayoutUsageDetector extends LayoutDetector {
       final Node item = attributes.item(i);
 
       final String localName = item.getLocalName();
-      final String properLocalName = localName.replace("Left", "Start").replace("Right", "End");
 
-      final boolean isSuppressed = context.getDriver().isSuppressed(context, ISSUE_WRONG_CONSTRAINT_LAYOUT_USAGE, item);
-      final boolean isConstraint = localName.contains("layout_constraint");
-      final boolean hasLeft = localName.contains("Left");
-      final boolean hasRight = localName.contains("Right");
+      if (localName != null) {
+        final String properLocalName = localName.replace("Left", "Start").replace("Right", "End");
 
-      final boolean isAnIssue = isConstraint && (hasLeft || hasRight);
+        final boolean isSuppressed = context.getDriver().isSuppressed(context, ISSUE_WRONG_CONSTRAINT_LAYOUT_USAGE, item);
+        final boolean isConstraint = localName.contains("layout_constraint");
+        final boolean hasLeft = localName.contains("Left");
+        final boolean hasRight = localName.contains("Right");
 
-      if (!isSuppressed && isAnIssue) {
-        context.report(ISSUE_WRONG_CONSTRAINT_LAYOUT_USAGE, context.getNameLocation(item), "This attribute won't work with RTL. Please use " + properLocalName + " instead.");
+        final boolean isAnIssue = isConstraint && (hasLeft || hasRight);
+
+        if (!isSuppressed && isAnIssue) {
+          context.report(ISSUE_WRONG_CONSTRAINT_LAYOUT_USAGE, context.getNameLocation(item), "This attribute won't work with RTL. Please use " + properLocalName + " instead.");
+        }
       }
     }
   }
