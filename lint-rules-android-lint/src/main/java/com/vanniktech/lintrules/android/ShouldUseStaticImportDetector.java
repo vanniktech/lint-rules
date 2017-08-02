@@ -37,6 +37,7 @@ public class ShouldUseStaticImportDetector extends Detector implements Detector.
     static final Set<String> IMPORTS = new HashSet<>();
 
     static {
+      // TimeUnit.
       IMPORTS.add("java.util.concurrent.TimeUnit.NANOSECONDS");
       IMPORTS.add("java.util.concurrent.TimeUnit.MICROSECONDS");
       IMPORTS.add("java.util.concurrent.TimeUnit.MILLISECONDS");
@@ -44,6 +45,7 @@ public class ShouldUseStaticImportDetector extends Detector implements Detector.
       IMPORTS.add("java.util.concurrent.TimeUnit.MINUTES");
       IMPORTS.add("java.util.concurrent.TimeUnit.HOURS");
       IMPORTS.add("java.util.concurrent.TimeUnit.DAYS");
+      // Locales.
       IMPORTS.add("java.util.Locale.ENGLISH");
       IMPORTS.add("java.util.Locale.FRENCH");
       IMPORTS.add("java.util.Locale.GERMAN");
@@ -66,10 +68,53 @@ public class ShouldUseStaticImportDetector extends Detector implements Detector.
       IMPORTS.add("java.util.Locale.CANADA");
       IMPORTS.add("java.util.Locale.CANADA_FRENCH");
       IMPORTS.add("java.util.Locale.ROOT");
+      // Android View.
       IMPORTS.add("android.view.View.VISIBLE");
       IMPORTS.add("android.view.View.GONE");
       IMPORTS.add("android.view.View.INVISIBLE");
+      // Arrays.
       IMPORTS.add("java.util.Arrays.asList");
+      // Android Version Codes.
+      IMPORTS.add("android.os.Build.VERSION_CODES.CUR_DEVELOPMENT");
+      IMPORTS.add("android.os.Build.VERSION_CODES.BASE");
+      IMPORTS.add("android.os.Build.VERSION_CODES.BASE_1_1");
+      IMPORTS.add("android.os.Build.VERSION_CODES.CUPCAKE");
+      IMPORTS.add("android.os.Build.VERSION_CODES.DONUT");
+      IMPORTS.add("android.os.Build.VERSION_CODES.ECLAIR");
+      IMPORTS.add("android.os.Build.VERSION_CODES.ECLAIR_0_1");
+      IMPORTS.add("android.os.Build.VERSION_CODES.ECLAIR_MR1");
+      IMPORTS.add("android.os.Build.VERSION_CODES.FROYO");
+      IMPORTS.add("android.os.Build.VERSION_CODES.GINGERBREAD");
+      IMPORTS.add("android.os.Build.VERSION_CODES.GINGERBREAD_MR1");
+      IMPORTS.add("android.os.Build.VERSION_CODES.HONEYCOMB");
+      IMPORTS.add("android.os.Build.VERSION_CODES.HONEYCOMB_MR1");
+      IMPORTS.add("android.os.Build.VERSION_CODES.HONEYCOMB_MR2");
+      IMPORTS.add("android.os.Build.VERSION_CODES.ICE_CREAM_SANDWICH");
+      IMPORTS.add("android.os.Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1");
+      IMPORTS.add("android.os.Build.VERSION_CODES.JELLY_BEAN");
+      IMPORTS.add("android.os.Build.VERSION_CODES.JELLY_BEAN_MR1");
+      IMPORTS.add("android.os.Build.VERSION_CODES.JELLY_BEAN_MR2");
+      IMPORTS.add("android.os.Build.VERSION_CODES.KITKAT");
+      IMPORTS.add("android.os.Build.VERSION_CODES.KITKAT_WATCH");
+      IMPORTS.add("android.os.Build.VERSION_CODES.LOLLIPOP");
+      IMPORTS.add("android.os.Build.VERSION_CODES.LOLLIPOP_MR1");
+      IMPORTS.add("android.os.Build.VERSION_CODES.M");
+      IMPORTS.add("android.os.Build.VERSION_CODES.N");
+      IMPORTS.add("android.os.Build.VERSION_CODES.N_MR1");
+      IMPORTS.add("android.os.Build.VERSION_CODES.O");
+      // Future proof Version Codes.
+      IMPORTS.add("android.os.Build.VERSION_CODES.P");
+      IMPORTS.add("android.os.Build.VERSION_CODES.Q");
+      IMPORTS.add("android.os.Build.VERSION_CODES.R");
+      IMPORTS.add("android.os.Build.VERSION_CODES.S");
+      IMPORTS.add("android.os.Build.VERSION_CODES.T");
+      IMPORTS.add("android.os.Build.VERSION_CODES.U");
+      IMPORTS.add("android.os.Build.VERSION_CODES.V");
+      IMPORTS.add("android.os.Build.VERSION_CODES.W");
+      IMPORTS.add("android.os.Build.VERSION_CODES.X");
+      IMPORTS.add("android.os.Build.VERSION_CODES.Y");
+      IMPORTS.add("android.os.Build.VERSION_CODES.Z");
+      // Collections.
       IMPORTS.add("java.util.Collections.emptyEnumeration");
       IMPORTS.add("java.util.Collections.emptyIterator");
       IMPORTS.add("java.util.Collections.emptyList");
