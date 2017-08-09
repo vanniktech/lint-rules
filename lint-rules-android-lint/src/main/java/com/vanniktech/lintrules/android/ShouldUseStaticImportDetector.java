@@ -134,6 +134,14 @@ public class ShouldUseStaticImportDetector extends Detector implements Detector.
       IMPORTS.add("java.util.Collections.unmodifiableMap");
       IMPORTS.add("java.util.Collections.unmodifiableSortedMap");
       IMPORTS.add("java.util.Collections.unmodifiableNavigableMap");
+      // Retention Policy.
+      IMPORTS.add("java.lang.annotation.RetentionPolicy.SOURCE");
+      IMPORTS.add("java.lang.annotation.RetentionPolicy.CLASS");
+      IMPORTS.add("java.lang.annotation.RetentionPolicy.RUNTIME");
+      // Mockito.
+      IMPORTS.add("org.mockito.quality.Strictness.STRICT_STUBS");
+      IMPORTS.add("org.mockito.quality.Strictness.WARN");
+      IMPORTS.add("org.mockito.quality.Strictness.LENIENT");
     }
 
     final JavaContext context;
