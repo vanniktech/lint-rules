@@ -18,6 +18,7 @@ import static com.vanniktech.lintrules.android.SuperfluousMarginDeclarationDetec
 import static com.vanniktech.lintrules.android.SuperfluousPaddingDeclarationDetector.SUPERFLUOUS_PADDING_DECLARATION;
 import static com.vanniktech.lintrules.android.WrongConstraintLayoutUsageDetector.ISSUE_WRONG_CONSTRAINT_LAYOUT_USAGE;
 import static com.vanniktech.lintrules.android.WrongMenuIdFormatDetector.ISSUE_WRONG_MENU_ID_FORMAT;
+import static com.vanniktech.lintrules.android.WrongTestMethodNameDetectorKt.ISSUE_WRONG_TEST_METHOD_NAME;
 import static com.vanniktech.lintrules.android.WrongViewIdFormatDetector.ISSUE_WRONG_VIEW_ID_FORMAT;
 
 public final class IssueRegistry extends com.android.tools.lint.client.api.IssueRegistry {
@@ -38,6 +39,7 @@ public final class IssueRegistry extends com.android.tools.lint.client.api.Issue
     issues.add(ISSUE_DEFAULT_LAYOUT_ATTRIBUTE);
     issues.add(ISSUE_WRONG_CONSTRAINT_LAYOUT_USAGE);
     issues.add(ISSUE_MISSING_XML_HEADER);
+    issues.add(ISSUE_WRONG_TEST_METHOD_NAME);
     return issues;
   }
 }

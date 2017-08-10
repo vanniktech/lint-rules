@@ -22,6 +22,7 @@ import static com.vanniktech.lintrules.android.SuperfluousMarginDeclarationDetec
 import static com.vanniktech.lintrules.android.SuperfluousPaddingDeclarationDetector.SUPERFLUOUS_PADDING_DECLARATION;
 import static com.vanniktech.lintrules.android.WrongConstraintLayoutUsageDetector.ISSUE_WRONG_CONSTRAINT_LAYOUT_USAGE;
 import static com.vanniktech.lintrules.android.WrongMenuIdFormatDetector.ISSUE_WRONG_MENU_ID_FORMAT;
+import static com.vanniktech.lintrules.android.WrongTestMethodNameDetectorKt.ISSUE_WRONG_TEST_METHOD_NAME;
 import static com.vanniktech.lintrules.android.WrongViewIdFormatDetector.ISSUE_WRONG_VIEW_ID_FORMAT;
 import static org.fest.assertions.api.Assertions.assertThat;
 
@@ -48,7 +49,8 @@ public class IssueRegistryTest {
         ISSUE_INVALID_STRING,
         ISSUE_DEFAULT_LAYOUT_ATTRIBUTE,
         ISSUE_WRONG_CONSTRAINT_LAYOUT_USAGE,
-        ISSUE_MISSING_XML_HEADER
+        ISSUE_MISSING_XML_HEADER,
+        ISSUE_WRONG_TEST_METHOD_NAME
     );
   }
 }
