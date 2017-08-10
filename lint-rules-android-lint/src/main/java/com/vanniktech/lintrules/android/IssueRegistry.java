@@ -10,6 +10,7 @@ import static com.vanniktech.lintrules.android.InvalidSingleLineCommentDetector.
 import static com.vanniktech.lintrules.android.InvalidStringDetector.ISSUE_INVALID_STRING;
 import static com.vanniktech.lintrules.android.MatchingMenuIdDetector.ISSUE_MATCHING_MENU_ID;
 import static com.vanniktech.lintrules.android.MatchingViewIdDetector.ISSUE_MATCHING_VIEW_ID;
+import static com.vanniktech.lintrules.android.MissingXmlHeaderDetectorKt.ISSUE_MISSING_XML_HEADER;
 import static com.vanniktech.lintrules.android.RawColorDetector.ISSUE_RAW_COLOR;
 import static com.vanniktech.lintrules.android.RawDimenDetector.ISSUE_RAW_DIMEN;
 import static com.vanniktech.lintrules.android.ShouldUseStaticImportDetector.ISSUE_SHOULD_USE_STATIC_IMPORT;
@@ -36,6 +37,7 @@ public final class IssueRegistry extends com.android.tools.lint.client.api.Issue
     issues.add(ISSUE_INVALID_STRING);
     issues.add(ISSUE_DEFAULT_LAYOUT_ATTRIBUTE);
     issues.add(ISSUE_WRONG_CONSTRAINT_LAYOUT_USAGE);
+    issues.add(ISSUE_MISSING_XML_HEADER);
     return issues;
   }
 }

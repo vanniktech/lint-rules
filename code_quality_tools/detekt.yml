@@ -1,21 +1,15 @@
 failFast: true
 
-potential-bugs:
-  LateinitUsage:
-    excludeAnnotatedProperties: "javax.inject.*,org.mockito.*,butterknife.*"
-
 style:
   MaxLineLength:
     active: false
-  NamingConventionViolation:
-    classPattern: '[A-Z$][a-zA-Z0-9$]*'
 
 comments:
-  CommentOverPrivateMethod:
-    active: false # We actually like this.
+  UndocumentedPublicClass:
+    active: false
   UndocumentedPublicFunction:
     active: false
-
-complexity:
-  TooManyFunctions:
-    threshold: 30
+  CommentOverPrivateMethod:
+    active: false # We actually like this.
+  CommentOverPrivateProperty:
+    active: false # We actually like this.
