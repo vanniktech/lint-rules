@@ -13,3 +13,7 @@ comments:
     active: false # We actually like this.
   CommentOverPrivateProperty:
     active: false # We actually like this.
+
+complexity:
+  TooManyFunctions:
+    threshold: 30
