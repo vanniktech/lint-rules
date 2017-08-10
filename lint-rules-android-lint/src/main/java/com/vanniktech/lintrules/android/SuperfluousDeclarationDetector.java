@@ -1,7 +1,6 @@
 package com.vanniktech.lintrules.android;
 
 import com.android.annotations.NonNull;
-import com.android.resources.ResourceFolderType;
 import com.android.tools.lint.detector.api.Context;
 import com.android.tools.lint.detector.api.Issue;
 import com.android.tools.lint.detector.api.LayoutDetector;
@@ -15,14 +14,8 @@ import java.util.Set;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Element;
 
-import static com.android.resources.ResourceFolderType.LAYOUT;
-
 public abstract class SuperfluousDeclarationDetector extends LayoutDetector {
   private Map<Element, List<String>> values = new HashMap<>();
-
-  @Override public final boolean appliesTo(@NonNull final ResourceFolderType folderType) {
-    return folderType == LAYOUT;
-  }
 
   @Override public void beforeCheckFile(final Context context) {
     values = new HashMap<>();

@@ -4,7 +4,7 @@ import com.android.annotations.NonNull;
 import com.android.resources.ResourceFolderType;
 import com.android.tools.lint.detector.api.Implementation;
 import com.android.tools.lint.detector.api.Issue;
-import com.android.tools.lint.detector.api.LayoutDetector;
+import com.android.tools.lint.detector.api.ResourceXmlDetector;
 import com.android.tools.lint.detector.api.XmlContext;
 import java.util.Collection;
 import org.w3c.dom.Attr;
@@ -17,7 +17,7 @@ import static com.android.tools.lint.detector.api.Severity.WARNING;
 import static com.vanniktech.lintrules.android.MatchingViewIdDetector.toLowerCamelCase;
 import static java.util.Collections.singletonList;
 
-public final class MatchingMenuIdDetector extends LayoutDetector {
+public final class MatchingMenuIdDetector extends ResourceXmlDetector {
   static final Issue ISSUE_MATCHING_MENU_ID = Issue.create("MatchingMenuId", "Ids should match in regards to the menu file.",
       "Ids should match in regards to the menu file.", CORRECTNESS, 8, WARNING,
       new Implementation(MatchingMenuIdDetector.class, RESOURCE_FILE_SCOPE));

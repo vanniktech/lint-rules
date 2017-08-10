@@ -4,7 +4,7 @@ import com.android.annotations.NonNull;
 import com.android.resources.ResourceFolderType;
 import com.android.tools.lint.detector.api.Implementation;
 import com.android.tools.lint.detector.api.Issue;
-import com.android.tools.lint.detector.api.LayoutDetector;
+import com.android.tools.lint.detector.api.ResourceXmlDetector;
 import com.android.tools.lint.detector.api.XmlContext;
 import java.util.Collection;
 import org.w3c.dom.Attr;
@@ -20,7 +20,7 @@ import static com.android.tools.lint.detector.api.Category.CORRECTNESS;
 import static com.android.tools.lint.detector.api.Scope.RESOURCE_FILE_SCOPE;
 import static com.android.tools.lint.detector.api.Severity.WARNING;
 
-public final class RawDimenDetector extends LayoutDetector {
+public final class RawDimenDetector extends ResourceXmlDetector {
   static final Issue ISSUE_RAW_DIMEN = Issue.create("RawDimen", "This value should be defined as a dimen.",
       "This value should be defined as a dimen.", CORRECTNESS, 8, WARNING,
       new Implementation(RawDimenDetector.class, RESOURCE_FILE_SCOPE));
@@ -30,7 +30,7 @@ public final class RawDimenDetector extends LayoutDetector {
   }
 
   @Override public Collection<String> getApplicableElements() {
-    return XmlScanner.ALL;
+    return ALL;
   }
 
   @Override public void visitElement(final XmlContext context, final Element element) {
