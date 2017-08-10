@@ -35,7 +35,7 @@ public class RxJava2MethodCheckReturnValueDetectorTest extends RxJavaLintDetecto
     assertThat(lintProject(stubObservable, java(source))).isEqualTo("src/foo/Example.java:4: "
         + "Warning: Method should have @CheckReturnValue annotation [MethodMissingCheckReturnValue]\n"
         + "  public Observable<Object> foo() {\n"
-        + "  ^\n"
+        + "                            ~~~\n"
         + "0 errors, 1 warnings\n");
   }
 
@@ -64,7 +64,7 @@ public class RxJava2MethodCheckReturnValueDetectorTest extends RxJavaLintDetecto
     assertThat(lintProject(stubFlowable, java(source))).isEqualTo("src/foo/Example.java:4: "
         + "Warning: Method should have @CheckReturnValue annotation [MethodMissingCheckReturnValue]\n"
         + "  public Flowable<Object> foo() {\n"
-        + "  ^\n"
+        + "                          ~~~\n"
         + "0 errors, 1 warnings\n");
   }
 
@@ -93,7 +93,7 @@ public class RxJava2MethodCheckReturnValueDetectorTest extends RxJavaLintDetecto
     assertThat(lintProject(stubSingle, java(source))).isEqualTo("src/foo/Example.java:4: "
         + "Warning: Method should have @CheckReturnValue annotation [MethodMissingCheckReturnValue]\n"
         + "  public Single<Object> foo() {\n"
-        + "  ^\n"
+        + "                        ~~~\n"
         + "0 errors, 1 warnings\n");
   }
 
@@ -122,7 +122,7 @@ public class RxJava2MethodCheckReturnValueDetectorTest extends RxJavaLintDetecto
     assertThat(lintProject(stubMaybe, java(source))).isEqualTo("src/foo/Example.java:4: "
         + "Warning: Method should have @CheckReturnValue annotation [MethodMissingCheckReturnValue]\n"
         + "  public Maybe<Object> foo() {\n"
-        + "  ^\n"
+        + "                       ~~~\n"
         + "0 errors, 1 warnings\n");
   }
 
@@ -151,7 +151,7 @@ public class RxJava2MethodCheckReturnValueDetectorTest extends RxJavaLintDetecto
     assertThat(lintProject(stubCompletable, java(source))).isEqualTo("src/foo/Example.java:4: "
         + "Warning: Method should have @CheckReturnValue annotation [MethodMissingCheckReturnValue]\n"
         + "  public Completable foo() {\n"
-        + "  ^\n"
+        + "                     ~~~\n"
         + "0 errors, 1 warnings\n");
   }
 
@@ -180,7 +180,7 @@ public class RxJava2MethodCheckReturnValueDetectorTest extends RxJavaLintDetecto
     assertThat(lintProject(stubDisposable, java(source))).isEqualTo("src/foo/Example.java:4: "
         + "Warning: Method should have @CheckReturnValue annotation [MethodMissingCheckReturnValue]\n"
         + "  public Disposable foo() {\n"
-        + "  ^\n"
+        + "                    ~~~\n"
         + "0 errors, 1 warnings\n");
   }
 
@@ -209,7 +209,7 @@ public class RxJava2MethodCheckReturnValueDetectorTest extends RxJavaLintDetecto
     assertThat(lintProject(stubTestObserver, java(source))).isEqualTo("src/foo/Example.java:4: "
         + "Warning: Method should have @CheckReturnValue annotation [MethodMissingCheckReturnValue]\n"
         + "  public TestObserver foo() {\n"
-        + "  ^\n"
+        + "                      ~~~\n"
         + "0 errors, 1 warnings\n");
   }
 
@@ -238,7 +238,7 @@ public class RxJava2MethodCheckReturnValueDetectorTest extends RxJavaLintDetecto
     assertThat(lintProject(stubTestSubscriber, java(source))).isEqualTo("src/foo/Example.java:4: "
         + "Warning: Method should have @CheckReturnValue annotation [MethodMissingCheckReturnValue]\n"
         + "  public TestSubscriber foo() {\n"
-        + "  ^\n"
+        + "                        ~~~\n"
         + "0 errors, 1 warnings\n");
   }
 
