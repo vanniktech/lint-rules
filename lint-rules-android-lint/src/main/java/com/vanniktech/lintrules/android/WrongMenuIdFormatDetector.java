@@ -4,7 +4,7 @@ import com.android.annotations.NonNull;
 import com.android.resources.ResourceFolderType;
 import com.android.tools.lint.detector.api.Implementation;
 import com.android.tools.lint.detector.api.Issue;
-import com.android.tools.lint.detector.api.LayoutDetector;
+import com.android.tools.lint.detector.api.ResourceXmlDetector;
 import com.android.tools.lint.detector.api.XmlContext;
 import java.util.Collection;
 import org.w3c.dom.Attr;
@@ -17,7 +17,7 @@ import static com.android.tools.lint.detector.api.Severity.WARNING;
 import static com.vanniktech.lintrules.android.WrongViewIdFormatDetector.isCamelCase;
 import static java.util.Collections.singletonList;
 
-public final class WrongMenuIdFormatDetector extends LayoutDetector {
+public final class WrongMenuIdFormatDetector extends ResourceXmlDetector {
   static final Issue ISSUE_WRONG_MENU_ID_FORMAT = Issue.create("WrongMenuIdFormat", "Ids should be in lowerCamelCase Format.",
       "Ids should be in lowerCamelCase Format.", CORRECTNESS, 8, WARNING,
       new Implementation(WrongMenuIdFormatDetector.class, RESOURCE_FILE_SCOPE));
