@@ -9,7 +9,7 @@ import com.android.tools.lint.detector.api.Severity.WARNING
 import com.android.tools.lint.detector.api.XmlContext
 import org.w3c.dom.Document
 
-private val ALLOWED_VALUES = arrayListOf("activity_", "view_", "dialog_", "bottom_sheet_", "adapter_item_", "divider_")
+private val ALLOWED_VALUES = arrayListOf("activity_", "view_", "dialog_", "bottom_sheet_", "adapter_item_", "divider_", "space_")
 
 @JvmField val ISSUE_WRONG_LAYOUT_NAME = Issue.create("WrongLayoutName",
     "Layout names should be prefixed accordingly.", "The layout file name should be prefixed with one of the following: ${ALLOWED_VALUES.joinToString()}",

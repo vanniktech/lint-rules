@@ -13,7 +13,7 @@ class WrongLayoutNameDetectorTest : LintDetectorTest() {
 
   fun testRandomFile() {
     @Language("XML") val source = """<?xml version="1.0" encoding="UTF-8"?><merge/>"""
-    assertThat(lintProject(xml("/res/layout/random.xml", source))).startsWith("""res/layout/random.xml: Warning: Layout does not start with one of the following prefixes: activity_, view_, dialog_, bottom_sheet_, adapter_item_, divider_ [WrongLayoutName]
+    assertThat(lintProject(xml("/res/layout/random.xml", source))).startsWith("""res/layout/random.xml: Warning: Layout does not start with one of the following prefixes: activity_, view_, dialog_, bottom_sheet_, adapter_item_, divider_, space_ [WrongLayoutName]
         |0 errors, 1 warnings""".trimMargin())
   }
 
