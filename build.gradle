@@ -3,23 +3,62 @@ apply plugin: 'com.vanniktech.code.quality.tools'
 apply plugin: 'com.vanniktech.android.junit.jacoco'
 
 buildscript {
+  ext.versions = [
+    kotlin: '1.1.3-2',
+    minSdk: 9,
+    targetSdk: 25,
+    compileSdk: 25,
+    buildTools: '25.0.3',
+    lint: '25.3.0',
+  ]
+
+  ext.deps = [
+    'kotlin': [
+      'stdlib': "org.jetbrains.kotlin:kotlin-stdlib-jre7:${versions.kotlin}",
+    ],
+    'test': [
+      'festassert': "org.easytesting:fest-assert-core:2.0M10",
+    ],
+    'lint': [
+      'core': "com.android.tools.lint:lint:${versions.lint}",
+      'api': "com.android.tools.lint:lint-api:${versions.lint}",
+      'checks': "com.android.tools.lint:lint-checks:${versions.lint}",
+      'tests': "com.android.tools.lint:lint-tests:${versions.lint}",
+    ],
+  ]
+
   repositories {
     jcenter()
+    mavenCentral()
+    maven { url 'https://maven.google.com' } // TODO replace with google() once Gradle 4.0 is used
   }
   dependencies {
     classpath 'com.vanniktech:gradle-android-junit-jacoco-plugin:0.7.0'
-    classpath 'com.vanniktech:gradle-code-quality-tools-plugin:0.5.0'
-    classpath 'com.android.tools.build:gradle:2.3.0'
-    classpath 'com.github.ben-manes:gradle-versions-plugin:0.14.0'
+    classpath 'com.vanniktech:gradle-code-quality-tools-plugin:0.7.0'
+    classpath 'com.android.tools.build:gradle:2.3.3'
+    classpath 'com.github.ben-manes:gradle-versions-plugin:0.15.0'
+    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin}"
   }
 }
 
 codeQualityTools {
   checkstyle {
-    toolVersion = '7.8.2'
+    toolVersion = '8.1'
   }
   pmd {
-    toolVersion = '5.8.0'
+    toolVersion = '5.8.1'
+  }
+  ktlint {
+    toolVersion = '0.9.1'
+  }
+  detekt {
+    toolVersion = '1.0.0.M13.2'
+  }
+  errorProne {
+    toolVersion = '2.0.21'
+  }
+  cpd {
+    ignoreFailures = true // Follow up separately.
   }
 }
 
@@ -27,27 +66,9 @@ allprojects {
   repositories {
     mavenCentral()
     jcenter()
+    maven { url 'https://maven.google.com' } // TODO replace with google() once Gradle 4.0 is used
   }
 }
-
-ext {
-  minSdkVersion = 9
-  targetSdkVersion = 25
-  compileSdkVersion = 25
-  buildToolsVersion = '25.0.2'
-  lintVersion = '25.3.0'
-}
-
-ext.deps = [
-    festassert : 'org.easytesting:fest-assert-core:2.0M10',
-    mockitocore: 'org.mockito:mockito-core:2.3.0',
-
-    lintapi    : "com.android.tools.lint:lint-api:${lintVersion}",
-    lintchecks : "com.android.tools.lint:lint-checks:${lintVersion}",
-
-    lint       : "com.android.tools.lint:lint:${lintVersion}",
-    linttests  : "com.android.tools.lint:lint-tests:${lintVersion}",
-]
 
 task wrapper(type: Wrapper) {
   gradleVersion = '3.3'

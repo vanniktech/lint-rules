@@ -1,4 +1,5 @@
 apply plugin: 'java'
+apply plugin: 'kotlin'
 
 targetCompatibility = JavaVersion.VERSION_1_7
 sourceCompatibility = JavaVersion.VERSION_1_7
@@ -8,12 +9,13 @@ configurations {
 }
 
 dependencies {
-  compile deps.lintapi
-  compile deps.lintchecks
+  compile deps.lint.api
+  compile deps.lint.checks
+  compile deps.kotlin.stdlib
 
-  testCompile deps.lint
-  testCompile deps.linttests
-  testCompile deps.festassert
+  testCompile deps.lint.core
+  testCompile deps.lint.tests
+  testCompile deps.test.festassert
 
   lintChecks files(jar)
 }
