@@ -6,6 +6,19 @@ import org.fest.assertions.api.Assertions.assertThat
 import org.intellij.lang.annotations.Language
 
 class AnnotationOrderDetectorTest : LintDetectorTest() {
+  fun testNoAnnotations() {
+    @Language("java") val source = """
+      package foo;
+
+      public class MyTest {
+        void something() {
+          int something;
+        }
+      }""".trimMargin()
+
+    assertThat(lintProject(java(source))).isEqualTo(NO_WARNINGS)
+  }
+
   fun testOverrideComesFirstOnVariables() {
     @Language("java") val source = """
       package foo;
@@ -50,7 +63,7 @@ class AnnotationOrderDetectorTest : LintDetectorTest() {
         |0 errors, 1 warnings""".trimMargin())
   }
 
-  fun testOverrideComesFirst() {
+  fun testOverrideBeforeTest() {
     @Language("java") val source = """
       package foo;
 
@@ -75,6 +88,20 @@ class AnnotationOrderDetectorTest : LintDetectorTest() {
     assertThat(lintProject(java(source))).startsWith("""src/foo/MyTest.java:4: Warning: Annotations are in wrong order. Should be @Nullable @StringRes [WrongAnnotationOrder]
         |        @StringRes @Nullable public void myTest() { }
         |                                         ~~~~~~
+        |0 errors, 1 warnings""".trimMargin())
+  }
+
+  fun testTestBeforeIgnore() {
+    @Language("java") val source = """
+      package foo;
+
+      public class MyTest {
+        @Ignore @Test public void myTest() { }
+      }""".trimMargin()
+
+    assertThat(lintProject(java(source))).startsWith("""src/foo/MyTest.java:4: Warning: Annotations are in wrong order. Should be @Test @Ignore [WrongAnnotationOrder]
+        |        @Ignore @Test public void myTest() { }
+        |                                  ~~~~~~
         |0 errors, 1 warnings""".trimMargin())
   }
 
@@ -162,6 +189,17 @@ class AnnotationOrderDetectorTest : LintDetectorTest() {
         |0 errors, 1 warnings""".trimMargin())
   }
 
+  fun testNullableJsonJsonQualifierNegativeCase() {
+    @Language("java") val source = """
+      package foo;
+
+      public class MyTest {
+        @Nullable @Json @JsonDate public void myTest() { }
+      }""".trimMargin()
+
+    assertThat(lintProject(java(source))).isEqualTo(NO_WARNINGS)
+  }
+
   fun testDocumentedBeforeRetention() {
     @Language("java") val source = """
       package foo;
@@ -244,6 +282,17 @@ class AnnotationOrderDetectorTest : LintDetectorTest() {
         |        @ActivityKey @IntoMap @Binds public void myTest() { }
         |                                                 ~~~~~~
         |0 errors, 1 warnings""".trimMargin())
+  }
+
+  fun testBindsBeforeIntoMapBeforeActivityKeyNegativeCase() {
+    @Language("java") val source = """
+      package foo;
+
+      public class MyTest {
+        @Binds @IntoMap @ActivityKey public void myTest() { }
+      }""".trimMargin()
+
+    assertThat(lintProject(java(source))).isEqualTo(NO_WARNINGS)
   }
 
   fun testSingleCustomAnnotation() {

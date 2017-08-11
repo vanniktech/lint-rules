@@ -20,6 +20,7 @@ import java.util.EnumSet
 val ANNOTATION_ORDER = listOf(
     "Override",
     "Test",
+    "Ignore",
     // Annotations.
     "Documented",
     "Retention",
@@ -151,37 +152,37 @@ class AnnotationOrderDetector : Detector(), JavaPsiScanner {
       processAnnotations(method.nameIdentifier, method.modifierList)
     }
 
-    private fun processAnnotations(identifier: PsiIdentifier?, modifierList: PsiModifierList) {
+    @Suppress("LabeledExpression") private fun processAnnotations(identifier: PsiIdentifier?, modifierList: PsiModifierList) {
       var size = 0
 
-      val methodAnnotations = modifierList.annotations
+      val annotations = modifierList.annotations
           .map { it.qualifiedName?.split(".")?.lastOrNull() }
           .filterNotNull()
 
-      val numberOfRecognizedAnnotations = methodAnnotations.count { ANNOTATION_ORDER.contains(it) }
+      val numberOfRecognizedAnnotations = annotations.count { ANNOTATION_ORDER.contains(it) }
 
-      val isInCorrectOrder = methodAnnotations
+      val isInCorrectOrder = ANNOTATION_ORDER.contains(annotations.firstOrNull()) && annotations
           .all {
-            var found = false
+            if (ANNOTATION_ORDER.contains(it)) {
+              for (i in size until ANNOTATION_ORDER.size) {
+                size++
 
-            for (i in size until ANNOTATION_ORDER.size) {
-              size++
-
-              if (it == ANNOTATION_ORDER[i]) {
-                found = true
-                break
+                if (it == ANNOTATION_ORDER[i]) {
+                  return@all true
+                }
               }
+
+              return@all false
             }
 
-            found
+            return@all true
           }
 
       if (!isInCorrectOrder && numberOfRecognizedAnnotations > 0) {
         val correctOrder = ANNOTATION_ORDER
-            .filter { methodAnnotations.contains(it) }
-            .plus(methodAnnotations.filterNot { ANNOTATION_ORDER.contains(it) })
-            .map { "@$it" }
-            .joinToString(separator = " ")
+            .filter { annotations.contains(it) }
+            .plus(annotations.filterNot { ANNOTATION_ORDER.contains(it) })
+            .joinToString(separator = " ") { "@$it" }
 
         context.report(ISSUE_WRONG_ANNOTATION_ORDER, context.getLocation(identifier), "Annotations are in wrong order. Should be $correctOrder")
       }
