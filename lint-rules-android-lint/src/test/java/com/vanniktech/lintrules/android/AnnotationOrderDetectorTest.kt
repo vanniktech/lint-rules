@@ -1,6 +1,7 @@
 package com.vanniktech.lintrules.android
 
 import com.android.tools.lint.checks.infrastructure.LintDetectorTest
+import com.vanniktech.lintrules.android.AndroidDetectorTest.NO_WARNINGS
 import org.fest.assertions.api.Assertions.assertThat
 import org.intellij.lang.annotations.Language
 
@@ -175,6 +176,20 @@ class AnnotationOrderDetectorTest : LintDetectorTest() {
         |0 errors, 1 warnings""".trimMargin())
   }
 
+  fun testNullableBeforeJson() {
+    @Language("java") val source = """
+      package foo;
+
+      public class MyTest {
+        @Json @Nullable public void myTest() { }
+      }""".trimMargin()
+
+    assertThat(lintProject(java(source))).startsWith("""src/foo/MyTest.java:4: Warning: Annotations are in wrong order. Should be @Nullable @Json [WrongAnnotationOrder]
+        |        @Json @Nullable public void myTest() { }
+        |                                    ~~~~~~
+        |0 errors, 1 warnings""".trimMargin())
+  }
+
   fun testRetentionBeforeIntDef() {
     @Language("java") val source = """
       package foo;
@@ -215,6 +230,42 @@ class AnnotationOrderDetectorTest : LintDetectorTest() {
         |        @TargetApi @RestrictTo @Keep public void myTest() { }
         |                                                 ~~~~~~
         |0 errors, 1 warnings""".trimMargin())
+  }
+
+  fun testBindsBeforeIntoMapBeforeActivityKey() {
+    @Language("java") val source = """
+      package foo;
+
+      public class MyTest {
+        @ActivityKey @IntoMap @Binds public void myTest() { }
+      }""".trimMargin()
+
+    assertThat(lintProject(java(source))).startsWith("""src/foo/MyTest.java:4: Warning: Annotations are in wrong order. Should be @Binds @IntoMap @ActivityKey [WrongAnnotationOrder]
+        |        @ActivityKey @IntoMap @Binds public void myTest() { }
+        |                                                 ~~~~~~
+        |0 errors, 1 warnings""".trimMargin())
+  }
+
+  fun testSingleCustomAnnotation() {
+    @Language("java") val source = """
+      package foo;
+
+      public class MyTest {
+        @Custom public void myTest() { }
+      }""".trimMargin()
+
+    assertThat(lintProject(java(source))).isEqualTo(NO_WARNINGS)
+  }
+
+  fun testTwoCustomsAnnotation() {
+    @Language("java") val source = """
+      package foo;
+
+      public class MyTest {
+        @Custom @MyCustom public void myTest() { }
+      }""".trimMargin()
+
+    assertThat(lintProject(java(source))).isEqualTo(NO_WARNINGS)
   }
 
   override fun getDetector() = AnnotationOrderDetector()

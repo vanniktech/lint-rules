@@ -29,11 +29,15 @@ val ANNOTATION_ORDER = listOf(
     "Module",
     "Inject",
     "Provides",
-    "Singleton",
-    "ActivityScope", // Not part of Dagger / JSR 305 but common.
-    "LoggedInScope", // Not part of Dagger / JSR 305 but common.
-    "OnboardedScope", // Not part of Dagger / JSR 305 but common.
+    "Binds",
+    "BindsInstance",
+    "BindsOptionalOf",
+    "IntoMap",
+    "IntoSet",
     "Qualifier",
+    "Singleton",
+    "Reusable",
+    "MapKey",
     // Nullability.
     "Nullable",
     "NonNull",
@@ -67,9 +71,9 @@ val ANNOTATION_ORDER = listOf(
     "PUSH",
     "PATCH",
     "DELETE",
-    "QUERY",
-    "PATH",
-    "BODY",
+    "Query",
+    "Path",
+    "Body",
     // Threads from support annotations.
     "MainThread",
     "UiThread",
@@ -89,6 +93,9 @@ val ANNOTATION_ORDER = listOf(
     "RequiresPermission.Read",
     "RequiresPermission.Write",
     "VisibleForTesting",
+    // AutoValue + extensions.
+    "AutoValue",
+    "ParcelAdapter",
     // Resources from support annotations.
     "AnimatorRes",
     "AnimRes",
@@ -151,6 +158,8 @@ class AnnotationOrderDetector : Detector(), JavaPsiScanner {
           .map { it.qualifiedName?.split(".")?.lastOrNull() }
           .filterNotNull()
 
+      val numberOfRecognizedAnnotations = methodAnnotations.count { ANNOTATION_ORDER.contains(it) }
+
       val isInCorrectOrder = methodAnnotations
           .all {
             var found = false
@@ -167,7 +176,7 @@ class AnnotationOrderDetector : Detector(), JavaPsiScanner {
             found
           }
 
-      if (!isInCorrectOrder) {
+      if (!isInCorrectOrder && numberOfRecognizedAnnotations > 0) {
         val correctOrder = ANNOTATION_ORDER
             .filter { methodAnnotations.contains(it) }
             .plus(methodAnnotations.filterNot { ANNOTATION_ORDER.contains(it) })
