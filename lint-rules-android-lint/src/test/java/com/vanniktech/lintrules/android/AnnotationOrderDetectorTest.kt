@@ -105,6 +105,20 @@ class AnnotationOrderDetectorTest : LintDetectorTest() {
         |0 errors, 1 warnings""".trimMargin())
   }
 
+  fun testDeprecatedBeforeOverride() {
+    @Language("java") val source = """
+      package foo;
+
+      public class MyTest {
+        @Override @Deprecated public void myTest() { }
+      }""".trimMargin()
+
+    assertThat(lintProject(java(source))).startsWith("""src/foo/MyTest.java:4: Warning: Annotations are in wrong order. Should be @Deprecated @Override [WrongAnnotationOrder]
+        |        @Override @Deprecated public void myTest() { }
+        |                                          ~~~~~~
+        |0 errors, 1 warnings""".trimMargin())
+  }
+
   fun testNullableBeforeNonNull() {
     @Language("java") val source = """
       package foo;

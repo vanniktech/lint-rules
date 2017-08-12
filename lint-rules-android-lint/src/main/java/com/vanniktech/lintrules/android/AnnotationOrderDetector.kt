@@ -18,6 +18,7 @@ import com.intellij.psi.PsiVariable
 import java.util.EnumSet
 
 val ANNOTATION_ORDER = listOf(
+    "Deprecated",
     "Override",
     "Test",
     "Ignore",
