@@ -10,7 +10,7 @@ A set of very opionated lint rules.
 
 ```groovy
 compile 'com.vanniktech:lint-rules-android:0.5.0'
-compile 'com.vanniktech:lint-rules-android:0.5.0-SNAPSHOT'
+compile 'com.vanniktech:lint-rules-android:0.6.0-SNAPSHOT'
 ```
 
 - **WindowFindViewById** - Marks the usage of `findViewById()` on `Window`.
@@ -41,7 +41,7 @@ compile 'com.vanniktech:lint-rules-android:0.5.0-SNAPSHOT'
 
 ```groovy
 compile 'com.vanniktech:lint-rules-rxjava2:0.5.0'
-compile 'com.vanniktech:lint-rules-rxjava2:0.5.0-SNAPSHOT
+compile 'com.vanniktech:lint-rules-rxjava2:0.6.0-SNAPSHOT
 ```
 
 - **SubscribeMissingErrorConsumer** - Marks all usages of `subscribe()` method without an error `Consumer`.
