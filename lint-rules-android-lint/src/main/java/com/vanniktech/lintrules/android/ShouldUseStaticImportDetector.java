@@ -74,6 +74,16 @@ public class ShouldUseStaticImportDetector extends Detector implements Detector.
       IMPORTS.add("android.view.View.INVISIBLE");
       // Arrays.
       IMPORTS.add("java.util.Arrays.asList");
+      // Android Versions.
+      IMPORTS.add("android.os.Build.VERSION.INCREMENTAL");
+      IMPORTS.add("android.os.Build.VERSION.RELEASE");
+      IMPORTS.add("android.os.Build.VERSION.BASE_OS");
+      IMPORTS.add("android.os.Build.VERSION.SECURITY_PATCH");
+      IMPORTS.add("android.os.Build.VERSION.SDK");
+      IMPORTS.add("android.os.Build.VERSION.SDK_INT");
+      IMPORTS.add("android.os.Build.VERSION.PREVIEW_SDK_INT");
+      IMPORTS.add("android.os.Build.VERSION.CODENAME");
+      IMPORTS.add("android.os.Build.VERSION.RESOURCES_SDK_INT");
       // Android Version Codes.
       IMPORTS.add("android.os.Build.VERSION_CODES.CUR_DEVELOPMENT");
       IMPORTS.add("android.os.Build.VERSION_CODES.BASE");
