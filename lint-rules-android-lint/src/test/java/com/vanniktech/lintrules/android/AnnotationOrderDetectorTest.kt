@@ -214,6 +214,17 @@ class AnnotationOrderDetectorTest : LintDetectorTest() {
     assertThat(lintProject(java(source))).isEqualTo(NO_WARNINGS)
   }
 
+  fun testProvidesSingletonNamedNullable() {
+    @Language("java") val source = """
+      package foo;
+
+      public class MyTest {
+        @Provides @Singleton @Named @Nullable public void myTest() { }
+      }""".trimMargin()
+
+    assertThat(lintProject(java(source))).isEqualTo(NO_WARNINGS)
+  }
+
   fun testDocumentedBeforeRetention() {
     @Language("java") val source = """
       package foo;
