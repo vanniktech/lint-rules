@@ -30,11 +30,11 @@ buildscript {
   repositories {
     jcenter()
     mavenCentral()
-    maven { url 'https://maven.google.com' } // TODO replace with google() once Gradle 4.0 is used
+    google()
   }
   dependencies {
     classpath 'com.vanniktech:gradle-android-junit-jacoco-plugin:0.7.0'
-    classpath 'com.vanniktech:gradle-code-quality-tools-plugin:0.7.0'
+    classpath 'com.vanniktech:gradle-code-quality-tools-plugin:0.8.0'
     classpath 'com.android.tools.build:gradle:2.3.3'
     classpath 'com.github.ben-manes:gradle-versions-plugin:0.15.0'
     classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin}"
@@ -66,11 +66,11 @@ allprojects {
   repositories {
     mavenCentral()
     jcenter()
-    maven { url 'https://maven.google.com' } // TODO replace with google() once Gradle 4.0 is used
+    google()
   }
 }
 
 task wrapper(type: Wrapper) {
-  gradleVersion = '3.3'
+  gradleVersion = '4.1'
   distributionType = Wrapper.DistributionType.ALL
 }
