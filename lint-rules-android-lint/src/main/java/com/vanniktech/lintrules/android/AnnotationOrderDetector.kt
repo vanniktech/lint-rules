@@ -39,6 +39,7 @@ val ANNOTATION_ORDER = listOf(
     "Qualifier",
     "Singleton",
     "Reusable",
+    "Named",
     "MapKey",
     // Nullability.
     "Nullable",
