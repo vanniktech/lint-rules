@@ -9,7 +9,7 @@ A set of very opionated lint rules.
 ## Android Lint Rules
 
 ```groovy
-compile 'com.vanniktech:lint-rules-android:0.4.0'
+compile 'com.vanniktech:lint-rules-android:0.5.0'
 compile 'com.vanniktech:lint-rules-android:0.5.0-SNAPSHOT'
 ```
 
@@ -32,11 +32,15 @@ compile 'com.vanniktech:lint-rules-android:0.5.0-SNAPSHOT'
 - **SuperfluousMarginDeclarationDetector** - Marks margin declaration where all the values for start, end, top and bototm are the same.
 - **SuperfluousPaddingDeclarationDetector** - Marks padding declaration where all the values for start, end, top and bototm are the same.
 - **WrongConstraintLayoutUsage** - Marks usages of references to `left`, `right` (e.g. `layout_constraintLeft_toLeftOf`) that do not necessarily support RTL.
+- **MissingXmlHeader** - Marks xml files where the xml header is missing.
+- **WrongTestMethodName** - Marks test methods that are starting with test.
+- **WrongLayoutName** - Marks layout files that are not prefixed with a certain whielisted strings e.g. (activity_, dialog_, bottom_sheet_, divider_, etc.).
+- **AnnotationOrderDetector** - Marks annotations that are not in the correct order. e.g. (@Deprecated comes before @Override and so on).
 
 ## RxJava 2 Lint Rules
 
 ```groovy
-compile 'com.vanniktech:lint-rules-rxjava2:0.4.0'
+compile 'com.vanniktech:lint-rules-rxjava2:0.5.0'
 compile 'com.vanniktech:lint-rules-rxjava2:0.5.0-SNAPSHOT
 ```
 

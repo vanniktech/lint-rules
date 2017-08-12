@@ -1,7 +1,27 @@
 # Change Log
 
-Version 0.5.0 *(In development)*
---------------------------------
+Version 0.5.0 *(2017-08-12)*
+----------------------------
+
+- Add Deprecated to AnnotationOrderDetector. [\#77](https://github.com/vanniktech/lint-rules/pull/77) ([vanniktech](https://github.com/vanniktech))
+- Some more fixes to AnnotationOrderDetector. [\#76](https://github.com/vanniktech/lint-rules/pull/76) ([vanniktech](https://github.com/vanniktech))
+- Adjust AnnotationOrderDetector a bit and fix some false positives. [\#74](https://github.com/vanniktech/lint-rules/pull/74) ([vanniktech](https://github.com/vanniktech))
+- Add AnnotationOrderDetector. [\#73](https://github.com/vanniktech/lint-rules/pull/73) ([vanniktech](https://github.com/vanniktech))
+- WrongLayoutNameDetector: Whitelist space\_ [\#72](https://github.com/vanniktech/lint-rules/pull/72) ([vanniktech](https://github.com/vanniktech))
+- Fix a typo in MissingXmlHeaderDetector. [\#71](https://github.com/vanniktech/lint-rules/pull/71) ([vanniktech](https://github.com/vanniktech))
+- Add WrongLayoutNameDetector. [\#70](https://github.com/vanniktech/lint-rules/pull/70) ([vanniktech](https://github.com/vanniktech))
+- RxJava2MethodCheckReturnValueDetector: Triangulate to method name instead of declaration. [\#69](https://github.com/vanniktech/lint-rules/pull/69) ([vanniktech](https://github.com/vanniktech))
+- Add WrongTestMethodNameDetector. [\#68](https://github.com/vanniktech/lint-rules/pull/68) ([vanniktech](https://github.com/vanniktech))
+- Add MissingXmlHeaderDetector. [\#67](https://github.com/vanniktech/lint-rules/pull/67) ([vanniktech](https://github.com/vanniktech))
+- Clean up LayoutDetector and use ResourceXmlDetector where we don't check in Layouts. [\#66](https://github.com/vanniktech/lint-rules/pull/66) ([vanniktech](https://github.com/vanniktech))
+- ShouldUseStaticImportDetector: Add RetentionPolicy.\* & Mockito Strictness.\* [\#65](https://github.com/vanniktech/lint-rules/pull/65) ([vanniktech](https://github.com/vanniktech))
+- Update Gradle to 4.1 & Code Quality Tools to 0.8.0 [\#64](https://github.com/vanniktech/lint-rules/pull/64) ([vanniktech](https://github.com/vanniktech))
+- Add Jacoco Task. [\#63](https://github.com/vanniktech/lint-rules/pull/63) ([vanniktech](https://github.com/vanniktech))
+- Update all of the things and add Kotlin. [\#62](https://github.com/vanniktech/lint-rules/pull/62) ([vanniktech](https://github.com/vanniktech))
+- ShouldUseStaticImportDetector: Add Android Version Codes to the list. [\#61](https://github.com/vanniktech/lint-rules/pull/61) ([vanniktech](https://github.com/vanniktech))
+- ShouldUseStaticImportDetector: Add empty versions in Collections. [\#60](https://github.com/vanniktech/lint-rules/pull/60) ([vanniktech](https://github.com/vanniktech))
+- Let Gradle install all of the Android dependencies. [\#58](https://github.com/vanniktech/lint-rules/pull/58) ([vanniktech](https://github.com/vanniktech))
+- Fix NPE in WrongConstraintLayoutUsageDetector. [\#57](https://github.com/vanniktech/lint-rules/pull/57) ([vanniktech](https://github.com/vanniktech))
 
 Version 0.4.0 *(2017-07-02)*
 ----------------------------
