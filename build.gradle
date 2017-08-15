@@ -4,7 +4,7 @@ apply plugin: 'com.vanniktech.android.junit.jacoco'
 
 buildscript {
   ext.versions = [
-    kotlin: '1.1.3-2',
+    kotlin: '1.1.4',
     minSdk: 9,
     targetSdk: 25,
     compileSdk: 25,
