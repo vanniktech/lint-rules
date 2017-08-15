@@ -152,6 +152,37 @@ public class ShouldUseStaticImportDetector extends Detector implements Detector.
       IMPORTS.add("org.mockito.quality.Strictness.STRICT_STUBS");
       IMPORTS.add("org.mockito.quality.Strictness.WARN");
       IMPORTS.add("org.mockito.quality.Strictness.LENIENT");
+      IMPORTS.add("org.mockito.Mockito.mock");
+      IMPORTS.add("org.mockito.Mockito.mockingDetails");
+      IMPORTS.add("org.mockito.Mockito.spy");
+      IMPORTS.add("org.mockito.Mockito.verify");
+      IMPORTS.add("org.mockito.Mockito.reset");
+      IMPORTS.add("org.mockito.Mockito.clearInvocations");
+      IMPORTS.add("org.mockito.Mockito.verifyNoMoreInteractions");
+      IMPORTS.add("org.mockito.Mockito.verifyZeroInteractions");
+      IMPORTS.add("org.mockito.Mockito.when");
+      IMPORTS.add("org.mockito.Mockito.doThrow");
+      IMPORTS.add("org.mockito.Mockito.doCallRealMethod");
+      IMPORTS.add("org.mockito.Mockito.doAnswer");
+      IMPORTS.add("org.mockito.Mockito.doNothing");
+      IMPORTS.add("org.mockito.Mockito.doReturn");
+      IMPORTS.add("org.mockito.Mockito.inOrder");
+      IMPORTS.add("org.mockito.Mockito.ignoreStubs");
+      IMPORTS.add("org.mockito.Mockito.never");
+      IMPORTS.add("org.mockito.Mockito.times");
+      IMPORTS.add("org.mockito.Mockito.atLeastOnce");
+      IMPORTS.add("org.mockito.Mockito.atLeast");
+      IMPORTS.add("org.mockito.Mockito.atMost");
+      IMPORTS.add("org.mockito.Mockito.calls");
+      IMPORTS.add("org.mockito.Mockito.only");
+      IMPORTS.add("org.mockito.Mockito.timeout");
+      IMPORTS.add("org.mockito.Mockito.after");
+      IMPORTS.add("org.mockito.Mockito.validateMockitoUsage");
+      IMPORTS.add("org.mockito.Mockito.withSettings");
+      IMPORTS.add("org.mockito.Mockito.description");
+      IMPORTS.add("org.mockito.Mockito.debug");
+      IMPORTS.add("org.mockito.Mockito.framework");
+      IMPORTS.add("org.mockito.Mockito.mockitoSession");
     }
 
     final JavaContext context;
