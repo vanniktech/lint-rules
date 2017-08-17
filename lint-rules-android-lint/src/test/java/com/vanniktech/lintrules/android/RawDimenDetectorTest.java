@@ -7,7 +7,7 @@ import java.util.List;
 import org.intellij.lang.annotations.Language;
 
 import static com.vanniktech.lintrules.android.AndroidDetectorTest.NO_WARNINGS;
-import static com.vanniktech.lintrules.android.RawDimenDetector.ISSUE_RAW_DIMEN;
+import static com.vanniktech.lintrules.android.RawDimenDetectorKt.ISSUE_RAW_DIMEN;
 import static java.util.Collections.singletonList;
 import static org.fest.assertions.api.Assertions.assertThat;
 
@@ -268,7 +268,6 @@ public class RawDimenDetectorTest extends LintDetectorTest {
   public void test0DpConstraintLayout() throws Exception {
     @Language("XML") final String source = "<android.support.constraint.ConstraintLayout\n"
         + "    xmlns:android=\"http://schemas.android.com/apk/res/android\"\n"
-        + "    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\n"
         + "    android:layout_width=\"match_parent\"\n"
         + "    android:layout_height=\"wrap_content\"\n"
         + "    >\n"
@@ -276,10 +275,26 @@ public class RawDimenDetectorTest extends LintDetectorTest {
         + "  <TextView\n"
         + "      android:layout_width=\"0dp\"\n"
         + "      android:layout_height=\"wrap_content\"\n"
-        + "      app:layout_constraintLeft_toLeftOf=\"parent\"\n"
-        + "      app:layout_constraintRight_toRightOf=\"parent\"\n"
         + "      />\n"
         + "</android.support.constraint.ConstraintLayout>";
+
+    assertThat(lintProject(xml("/res/layout/ids.xml", source))).isEqualTo(NO_WARNINGS);
+  }
+
+  public void test0DpMergeConstraintLayout() throws Exception {
+    @Language("XML") final String source = "<merge\n"
+        + "    xmlns:android=\"http://schemas.android.com/apk/res/android\"\n"
+        + "    xmlns:tools=\"http://schemas.android.com/tools\"\n"
+        + "    android:layout_width=\"match_parent\"\n"
+        + "    android:layout_height=\"wrap_content\"\n"
+        + "    tools:parentTag=\"android.support.constraint.ConstraintLayout\"\n"
+        + "    >\n"
+        + "\n"
+        + "  <TextView\n"
+        + "      android:layout_width=\"0dp\"\n"
+        + "      android:layout_height=\"wrap_content\"\n"
+        + "      />\n"
+        + "</merge>";
 
     assertThat(lintProject(xml("/res/layout/ids.xml", source))).isEqualTo(NO_WARNINGS);
   }
