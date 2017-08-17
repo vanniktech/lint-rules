@@ -1,5 +1,9 @@
 failFast: true
 
+potential-bugs:
+  UnsafeCast:
+    active: false // We know what we're doing.
+
 style:
   MaxLineLength:
     active: false
