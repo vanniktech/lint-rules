@@ -10,6 +10,7 @@ import static com.vanniktech.lintrules.android.AndroidDetector.ISSUE_RESOURCES_G
 import static com.vanniktech.lintrules.android.AndroidDetector.ISSUE_VIEW_FIND_VIEW_BY_ID;
 import static com.vanniktech.lintrules.android.AndroidDetector.ISSUE_WINDOW_FIND_VIEW_BY_ID;
 import static com.vanniktech.lintrules.android.AnnotationOrderDetectorKt.ISSUE_WRONG_ANNOTATION_ORDER;
+import static com.vanniktech.lintrules.android.ConstraintLayoutToolsEditorAttributeDetectorKt.ISSUE_CONSTRAINT_LAYOUT_TOOLS_EDITOR_ATTRIBUTE_DETECTOR;
 import static com.vanniktech.lintrules.android.DefaultLayoutAttributeDetector.ISSUE_DEFAULT_LAYOUT_ATTRIBUTE;
 import static com.vanniktech.lintrules.android.InvalidSingleLineCommentDetector.ISSUE_INVALID_SINGLE_LINE_COMMENT;
 import static com.vanniktech.lintrules.android.InvalidStringDetector.ISSUE_INVALID_STRING;
@@ -54,7 +55,8 @@ public class IssueRegistryTest {
         ISSUE_MISSING_XML_HEADER,
         ISSUE_WRONG_TEST_METHOD_NAME,
         ISSUE_WRONG_LAYOUT_NAME,
-        ISSUE_WRONG_ANNOTATION_ORDER
+        ISSUE_WRONG_ANNOTATION_ORDER,
+        ISSUE_CONSTRAINT_LAYOUT_TOOLS_EDITOR_ATTRIBUTE_DETECTOR
     );
   }
 }
