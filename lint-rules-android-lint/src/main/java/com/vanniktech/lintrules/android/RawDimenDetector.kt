@@ -33,7 +33,7 @@ class RawDimenDetector : ResourceXmlDetector() {
 
     (0 until element.attributes.length)
         .map { element.attributes.item(it) }
-        .filterNot { "http://schemas.android.com/tools".equals(it.namespaceURI, ignoreCase = true) }
+        .filterNot { it.hasToolsNamespace() }
         .filterNot { context.driver.isSuppressed(context, ISSUE_RAW_DIMEN, it) }
         .filterNot { isVectorGraphic }
         .filterNot { (hasLayoutWeight || isParentConstraintLayout) && it.nodeValue[0] == '0' && (ATTR_LAYOUT_WIDTH == it.localName || ATTR_LAYOUT_HEIGHT == it.localName) }

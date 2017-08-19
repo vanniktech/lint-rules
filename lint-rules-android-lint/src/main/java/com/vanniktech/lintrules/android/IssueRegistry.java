@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.List;
 
 import static com.vanniktech.lintrules.android.AnnotationOrderDetectorKt.ISSUE_WRONG_ANNOTATION_ORDER;
+import static com.vanniktech.lintrules.android.ConstraintLayoutToolsEditorAttributeDetectorKt.ISSUE_CONSTRAINT_LAYOUT_TOOLS_EDITOR_ATTRIBUTE_DETECTOR;
 import static com.vanniktech.lintrules.android.DefaultLayoutAttributeDetector.ISSUE_DEFAULT_LAYOUT_ATTRIBUTE;
 import static com.vanniktech.lintrules.android.InvalidSingleLineCommentDetector.ISSUE_INVALID_SINGLE_LINE_COMMENT;
 import static com.vanniktech.lintrules.android.InvalidStringDetector.ISSUE_INVALID_STRING;
@@ -44,6 +45,7 @@ public final class IssueRegistry extends com.android.tools.lint.client.api.Issue
     issues.add(ISSUE_WRONG_TEST_METHOD_NAME);
     issues.add(ISSUE_WRONG_LAYOUT_NAME);
     issues.add(ISSUE_WRONG_ANNOTATION_ORDER);
+    issues.add(ISSUE_CONSTRAINT_LAYOUT_TOOLS_EDITOR_ATTRIBUTE_DETECTOR);
     return issues;
   }
 }
