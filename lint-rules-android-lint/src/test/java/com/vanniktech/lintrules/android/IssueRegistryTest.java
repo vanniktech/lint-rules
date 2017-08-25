@@ -21,6 +21,7 @@ import static com.vanniktech.lintrules.android.RawColorDetector.ISSUE_RAW_COLOR;
 import static com.vanniktech.lintrules.android.RawDimenDetectorKt.ISSUE_RAW_DIMEN;
 import static com.vanniktech.lintrules.android.ShouldUseStaticImportDetector.ISSUE_SHOULD_USE_STATIC_IMPORT;
 import static com.vanniktech.lintrules.android.SuperfluousMarginDeclarationDetector.SUPERFLUOUS_MARGIN_DECLARATION;
+import static com.vanniktech.lintrules.android.SuperfluousNameSpaceDetectorKt.ISSUE_SUPERFLUOUS_NAME_SPACE;
 import static com.vanniktech.lintrules.android.SuperfluousPaddingDeclarationDetector.SUPERFLUOUS_PADDING_DECLARATION;
 import static com.vanniktech.lintrules.android.WrongConstraintLayoutUsageDetector.ISSUE_WRONG_CONSTRAINT_LAYOUT_USAGE;
 import static com.vanniktech.lintrules.android.WrongLayoutNameDetectorKt.ISSUE_WRONG_LAYOUT_NAME;
@@ -56,7 +57,8 @@ public class IssueRegistryTest {
         ISSUE_WRONG_TEST_METHOD_NAME,
         ISSUE_WRONG_LAYOUT_NAME,
         ISSUE_WRONG_ANNOTATION_ORDER,
-        ISSUE_CONSTRAINT_LAYOUT_TOOLS_EDITOR_ATTRIBUTE_DETECTOR
+        ISSUE_CONSTRAINT_LAYOUT_TOOLS_EDITOR_ATTRIBUTE_DETECTOR,
+        ISSUE_SUPERFLUOUS_NAME_SPACE
     );
   }
 }
