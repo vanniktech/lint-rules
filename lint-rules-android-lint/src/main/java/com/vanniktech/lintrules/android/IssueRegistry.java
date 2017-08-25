@@ -24,6 +24,7 @@ import static com.vanniktech.lintrules.android.WrongConstraintLayoutUsageDetecto
 import static com.vanniktech.lintrules.android.WrongMenuIdFormatDetector.ISSUE_WRONG_MENU_ID_FORMAT;
 import static com.vanniktech.lintrules.android.WrongTestMethodNameDetectorKt.ISSUE_WRONG_TEST_METHOD_NAME;
 import static com.vanniktech.lintrules.android.WrongViewIdFormatDetector.ISSUE_WRONG_VIEW_ID_FORMAT;
+import static com.vanniktech.lintrules.android.XmlSpacingDetectorKt.ISSUE_XML_SPACING;
 
 public final class IssueRegistry extends com.android.tools.lint.client.api.IssueRegistry {
   @Override public List<Issue> getIssues() {
@@ -48,6 +49,7 @@ public final class IssueRegistry extends com.android.tools.lint.client.api.Issue
     issues.add(ISSUE_WRONG_ANNOTATION_ORDER);
     issues.add(ISSUE_CONSTRAINT_LAYOUT_TOOLS_EDITOR_ATTRIBUTE_DETECTOR);
     issues.add(ISSUE_SUPERFLUOUS_NAME_SPACE);
+    issues.add(ISSUE_XML_SPACING);
     return issues;
   }
 }
