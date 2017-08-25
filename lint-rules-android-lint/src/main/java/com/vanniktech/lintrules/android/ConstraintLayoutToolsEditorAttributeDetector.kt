@@ -16,7 +16,9 @@ import org.w3c.dom.Attr
 
 class ConstraintLayoutToolsEditorAttributeDetector : LayoutDetector() {
   override fun visitAttribute(context: XmlContext, attribute: Attr) {
-    if (attribute.localName.startsWith("layout_editor_") && attribute.hasToolsNamespace()) {
+    val isLayoutEditorAttribute = attribute.localName?.startsWith("layout_editor_") ?: false
+
+    if (isLayoutEditorAttribute && attribute.hasToolsNamespace()) {
       context.report(ISSUE_CONSTRAINT_LAYOUT_TOOLS_EDITOR_ATTRIBUTE_DETECTOR, context.getNameLocation(attribute), "Don't use ${attribute.name}")
     }
   }

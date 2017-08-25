@@ -86,6 +86,14 @@ public class WrongConstraintLayoutUsageDetectorTest extends LintDetectorTest {
         + "1 errors, 0 warnings\n");
   }
 
+  public void testShouldNotCrashWithStyle() throws Exception {
+    @Language("XML") final String source = "<TextView\n"
+        + "      style=\"?android:attr/borderlessButtonStyle\"\n"
+        + "      />";
+
+    assertThat(lintProject(xml("/res/layout/ids.xml", source))).isEqualTo(NO_WARNINGS);
+  }
+
   @Override protected Detector getDetector() {
     return new WrongConstraintLayoutUsageDetector();
   }

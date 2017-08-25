@@ -45,6 +45,14 @@ class ConstraintLayoutToolsEditorAttributeDetectorTest : LintDetectorTest() {
     assertThat(lintProject(xml("/res/layout/layout.xml", source))).isEqualTo(NO_WARNINGS)
   }
 
+  fun testShouldNotCrashWithStyle() {
+    @Language("XML") val source = """<TextView
+        style="?android:attr/borderlessButtonStyle"
+        />"""
+
+    assertThat(lintProject(xml("/res/layout/layout.xml", source))).isEqualTo(NO_WARNINGS)
+  }
+
   override fun getDetector() = ConstraintLayoutToolsEditorAttributeDetector()
 
   override fun getIssues() = listOf(ISSUE_CONSTRAINT_LAYOUT_TOOLS_EDITOR_ATTRIBUTE_DETECTOR)
