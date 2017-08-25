@@ -28,6 +28,7 @@ import static com.vanniktech.lintrules.android.WrongLayoutNameDetectorKt.ISSUE_W
 import static com.vanniktech.lintrules.android.WrongMenuIdFormatDetector.ISSUE_WRONG_MENU_ID_FORMAT;
 import static com.vanniktech.lintrules.android.WrongTestMethodNameDetectorKt.ISSUE_WRONG_TEST_METHOD_NAME;
 import static com.vanniktech.lintrules.android.WrongViewIdFormatDetector.ISSUE_WRONG_VIEW_ID_FORMAT;
+import static com.vanniktech.lintrules.android.XmlSpacingDetectorKt.ISSUE_XML_SPACING;
 import static org.fest.assertions.api.Assertions.assertThat;
 
 public class IssueRegistryTest {
@@ -58,7 +59,8 @@ public class IssueRegistryTest {
         ISSUE_WRONG_LAYOUT_NAME,
         ISSUE_WRONG_ANNOTATION_ORDER,
         ISSUE_CONSTRAINT_LAYOUT_TOOLS_EDITOR_ATTRIBUTE_DETECTOR,
-        ISSUE_SUPERFLUOUS_NAME_SPACE
+        ISSUE_SUPERFLUOUS_NAME_SPACE,
+        ISSUE_XML_SPACING
     );
   }
 }
