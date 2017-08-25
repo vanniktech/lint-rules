@@ -2,6 +2,7 @@ Lint-Rules
 ==========
 
 [![Build Status](https://travis-ci.org/vanniktech/lint-rules.svg?branch=master)](https://travis-ci.org/vanniktech/lint-rules?branch=master)
+[![Codecov](https://codecov.io/github/vanniktech/lint-rules/coverage.svg?branch=master)](https://codecov.io/github/vanniktech/lint-rules?branch=master)
 [![License](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 
 A set of very opionated lint rules.
