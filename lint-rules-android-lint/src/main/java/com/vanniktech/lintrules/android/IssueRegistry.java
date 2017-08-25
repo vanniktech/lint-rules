@@ -11,6 +11,7 @@ import static com.vanniktech.lintrules.android.DefaultLayoutAttributeDetector.IS
 import static com.vanniktech.lintrules.android.InvalidSingleLineCommentDetector.ISSUE_INVALID_SINGLE_LINE_COMMENT;
 import static com.vanniktech.lintrules.android.InvalidStringDetector.ISSUE_INVALID_STRING;
 import static com.vanniktech.lintrules.android.RawDimenDetectorKt.ISSUE_RAW_DIMEN;
+import static com.vanniktech.lintrules.android.SuperfluousNameSpaceDetectorKt.ISSUE_SUPERFLUOUS_NAME_SPACE;
 import static com.vanniktech.lintrules.android.WrongLayoutNameDetectorKt.ISSUE_WRONG_LAYOUT_NAME;
 import static com.vanniktech.lintrules.android.MatchingMenuIdDetector.ISSUE_MATCHING_MENU_ID;
 import static com.vanniktech.lintrules.android.MatchingViewIdDetector.ISSUE_MATCHING_VIEW_ID;
@@ -46,6 +47,7 @@ public final class IssueRegistry extends com.android.tools.lint.client.api.Issue
     issues.add(ISSUE_WRONG_LAYOUT_NAME);
     issues.add(ISSUE_WRONG_ANNOTATION_ORDER);
     issues.add(ISSUE_CONSTRAINT_LAYOUT_TOOLS_EDITOR_ATTRIBUTE_DETECTOR);
+    issues.add(ISSUE_SUPERFLUOUS_NAME_SPACE);
     return issues;
   }
 }
