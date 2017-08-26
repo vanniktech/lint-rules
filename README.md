@@ -50,3 +50,9 @@ compile 'com.vanniktech:lint-rules-rxjava2:0.6.0-SNAPSHOT
 - **CompositeDisposableAddAll** - Marks the usage of `addAll()` on `CompositeDisposable`.
 - **MissingCompositeDisposableClear** - Marks `CompositeDisposable` fields where `clear()` is not called.
 - **MethodMissingCheckReturnValue** - Marks methods that return classes from io.reactivex.* like: `Observable`, `Flowable`, `Maybe`, `Single`, `Completable`, `TestObserver`, `TestSubscriber` or `Disposable` that do not have the `@CheckReturnValue` annotation.
+
+# License
+
+Copyright (C) 2017 Vanniktech - Niklas Baudy
+
+Licensed under the Apache License, Version 2.0
