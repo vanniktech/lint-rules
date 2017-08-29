@@ -37,7 +37,7 @@ class RawDimenDetector : ResourceXmlDetector() {
         .filterNot { context.driver.isSuppressed(context, ISSUE_RAW_DIMEN, it) }
         .filterNot { isVectorGraphic }
         .filterNot { (hasLayoutWeight || isParentConstraintLayout) && it.nodeValue[0] == '0' && (ATTR_LAYOUT_WIDTH == it.localName || ATTR_LAYOUT_HEIGHT == it.localName) }
-        .filter { it.nodeValue.matches("[\\d.]+(sp|dp|dip)".toRegex()) }
+        .filter { it.nodeValue.matches("-?[\\d.]+(sp|dp|dip)".toRegex()) }
         .forEach { context.report(ISSUE_RAW_DIMEN, context.getValueLocation(it as Attr), "Should be using dimen instead.") }
   }
 
