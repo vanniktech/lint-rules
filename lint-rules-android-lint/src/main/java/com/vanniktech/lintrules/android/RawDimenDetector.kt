@@ -6,7 +6,6 @@ import com.android.resources.ResourceFolderType
 import com.android.resources.ResourceFolderType.DRAWABLE
 import com.android.resources.ResourceFolderType.LAYOUT
 import com.android.tools.lint.detector.api.Category.CORRECTNESS
-import com.android.tools.lint.detector.api.Detector
 import com.android.tools.lint.detector.api.Implementation
 import com.android.tools.lint.detector.api.Issue
 import com.android.tools.lint.detector.api.ResourceXmlDetector
@@ -24,11 +23,11 @@ import org.w3c.dom.Element
 class RawDimenDetector : ResourceXmlDetector() {
   override fun appliesTo(folderType: ResourceFolderType) = folderType == LAYOUT || folderType == DRAWABLE
 
-  override fun getApplicableElements() = Detector.XmlScanner.ALL
+  override fun getApplicableElements() = ALL
 
   override fun visitElement(context: XmlContext, element: Element) {
     val hasLayoutWeight = element.attributes.getNamedItem("android:layout_weight") != null
-    val isParentConstraintLayout = CONSTRAINT_LAYOUT == element.parentNode?.localName || CONSTRAINT_LAYOUT == element.parentNode?.attributes?.getNamedItem("tools:parentTag")?.nodeValue
+    val isParentConstraintLayout = element.hasParent(CONSTRAINT_LAYOUT)
     val isVectorGraphic = "vector" == element.localName || "path" == element.localName
 
     (0 until element.attributes.length)

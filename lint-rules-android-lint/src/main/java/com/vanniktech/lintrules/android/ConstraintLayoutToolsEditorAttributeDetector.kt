@@ -15,6 +15,8 @@ import org.w3c.dom.Attr
     Implementation(ConstraintLayoutToolsEditorAttributeDetector::class.java, Scope.RESOURCE_FILE_SCOPE))
 
 class ConstraintLayoutToolsEditorAttributeDetector : LayoutDetector() {
+  override fun getApplicableAttributes() = ALL
+
   override fun visitAttribute(context: XmlContext, attribute: Attr) {
     val isLayoutEditorAttribute = attribute.localName?.startsWith("layout_editor_") ?: false
 
@@ -22,6 +24,4 @@ class ConstraintLayoutToolsEditorAttributeDetector : LayoutDetector() {
       context.report(ISSUE_CONSTRAINT_LAYOUT_TOOLS_EDITOR_ATTRIBUTE_DETECTOR, context.getNameLocation(attribute), "Don't use ${attribute.name}")
     }
   }
-
-  override fun getApplicableAttributes() = XmlScanner.ALL
 }
