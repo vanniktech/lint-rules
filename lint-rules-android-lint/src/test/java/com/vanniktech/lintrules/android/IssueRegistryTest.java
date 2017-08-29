@@ -23,6 +23,7 @@ import static com.vanniktech.lintrules.android.ShouldUseStaticImportDetector.ISS
 import static com.vanniktech.lintrules.android.SuperfluousMarginDeclarationDetector.SUPERFLUOUS_MARGIN_DECLARATION;
 import static com.vanniktech.lintrules.android.SuperfluousNameSpaceDetectorKt.ISSUE_SUPERFLUOUS_NAME_SPACE;
 import static com.vanniktech.lintrules.android.SuperfluousPaddingDeclarationDetector.SUPERFLUOUS_PADDING_DECLARATION;
+import static com.vanniktech.lintrules.android.UnsupportedLayoutAttributeDetectorKt.ISSUE_UNSUPPORTED_LAYOUT_ATTRIBUTE;
 import static com.vanniktech.lintrules.android.WrongConstraintLayoutUsageDetector.ISSUE_WRONG_CONSTRAINT_LAYOUT_USAGE;
 import static com.vanniktech.lintrules.android.WrongLayoutNameDetectorKt.ISSUE_WRONG_LAYOUT_NAME;
 import static com.vanniktech.lintrules.android.WrongMenuIdFormatDetector.ISSUE_WRONG_MENU_ID_FORMAT;
@@ -60,7 +61,8 @@ public class IssueRegistryTest {
         ISSUE_WRONG_ANNOTATION_ORDER,
         ISSUE_CONSTRAINT_LAYOUT_TOOLS_EDITOR_ATTRIBUTE_DETECTOR,
         ISSUE_SUPERFLUOUS_NAME_SPACE,
-        ISSUE_XML_SPACING
+        ISSUE_XML_SPACING,
+        ISSUE_UNSUPPORTED_LAYOUT_ATTRIBUTE
     );
   }
 }
