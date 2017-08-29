@@ -72,6 +72,15 @@ public class ShouldUseStaticImportDetector extends Detector implements Detector.
       IMPORTS.add("android.view.View.VISIBLE");
       IMPORTS.add("android.view.View.GONE");
       IMPORTS.add("android.view.View.INVISIBLE");
+      // Android Service.
+      IMPORTS.add("android.app.Service.START_CONTINUATION_MASK");
+      IMPORTS.add("android.app.Service.START_STICKY_COMPATIBILITY");
+      IMPORTS.add("android.app.Service.START_STICKY");
+      IMPORTS.add("android.app.Service.START_NOT_STICKY");
+      IMPORTS.add("android.app.Service.START_REDELIVER_INTENT");
+      IMPORTS.add("android.app.Service.START_TASK_REMOVED_COMPLETE");
+      IMPORTS.add("android.app.Service.START_FLAG_REDELIVERY");
+      IMPORTS.add("android.app.Service.START_FLAG_RETRY");
       // Arrays.
       IMPORTS.add("java.util.Arrays.asList");
       // Android Versions.
