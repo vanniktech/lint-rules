@@ -255,6 +255,16 @@ public class RawDimenDetectorTest extends LintDetectorTest {
         + "0 errors, 1 warnings\n");
   }
 
+  public void testAndroidMinusPaddingEnd() throws Exception {
+    @Language("XML") final String source = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
+        + "<TextView xmlns:android=\"http://schemas.android.com/apk/res/android\" android:paddingEnd=\"-16dp\"/>\n";
+
+    assertThat(lintProject(xml("/res/layout/ids.xml", source))).isEqualTo("res/layout/ids.xml:2: Warning: Should be using dimen instead. [RawDimen]\n"
+        + "<TextView xmlns:android=\"http://schemas.android.com/apk/res/android\" android:paddingEnd=\"-16dp\"/>\n"
+        + "                                                                                         ~~~~~\n"
+        + "0 errors, 1 warnings\n");
+  }
+
   public void testAndroidTextSize() throws Exception {
     @Language("XML") final String source = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
         + "<TextView xmlns:android=\"http://schemas.android.com/apk/res/android\" android:textSize=\"16dp\"/>\n";
