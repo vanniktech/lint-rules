@@ -1,5 +1,7 @@
 package com.vanniktech.lintrules.rxjava2;
 
+import com.android.tools.lint.client.api.JavaEvaluator;
+import com.android.tools.lint.client.api.LintDriver;
 import com.android.tools.lint.detector.api.Detector;
 import com.android.tools.lint.detector.api.Implementation;
 import com.android.tools.lint.detector.api.Issue;
@@ -8,7 +10,6 @@ import com.intellij.psi.JavaElementVisitor;
 import com.intellij.psi.PsiMethod;
 import com.intellij.psi.PsiMethodCallExpression;
 import com.intellij.psi.PsiReferenceExpression;
-import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.List;
 
@@ -17,47 +18,40 @@ import static com.android.tools.lint.detector.api.Scope.JAVA_FILE;
 import static com.android.tools.lint.detector.api.Scope.TEST_SOURCES;
 import static com.android.tools.lint.detector.api.Severity.ERROR;
 import static com.android.tools.lint.detector.api.Severity.WARNING;
+import static java.util.Arrays.asList;
 
 public final class RxJava2Detector extends Detector implements Detector.JavaPsiScanner {
   @Override public List<String> getApplicableMethodNames() {
-    return Arrays.asList("dispose", "addAll", "subscribe");
+    return asList("dispose", "addAll", "subscribe");
   }
 
-  @Override public void visitMethod(final JavaContext context, final JavaElementVisitor visitor,
-      final PsiMethodCallExpression call, final PsiMethod method) {
+  @Override public void visitMethod(final JavaContext context, final JavaElementVisitor visitor, final PsiMethodCallExpression call, final PsiMethod method) {
+    final LintDriver driver = context.getDriver();
+    final JavaEvaluator evaluator = context.getEvaluator();
     final PsiReferenceExpression methodExpression = call.getMethodExpression();
-    final String fullyQualifiedMethodName = methodExpression.getQualifiedName();
 
-    handleCompositeDisposable(context, call, methodExpression, fullyQualifiedMethodName);
-    handleSubscribeCalls(context, call, methodExpression, fullyQualifiedMethodName);
-  }
+    final boolean isCompositeDisposableDisposeSuppressed = driver.isSuppressed(context, COMPOSITE_DISPOSABLE_DISPOSE, methodExpression);
 
-  private void handleCompositeDisposable(final JavaContext context, final PsiMethodCallExpression call,
-      final PsiReferenceExpression methodExpression, final String fullyQualifiedMethodName) {
-    final boolean isCompositeDisposableDisposeSuppressed = context.getDriver().isSuppressed(context, COMPOSITE_DISPOSABLE_DISPOSE, methodExpression);
-    if ("io.reactivex.disposables.CompositeDisposable.dispose".equals(fullyQualifiedMethodName) && !isCompositeDisposableDisposeSuppressed) {
-      context.report(COMPOSITE_DISPOSABLE_DISPOSE, call, context.getLocation(methodExpression.getReferenceNameElement()),
-          "Using dispose() instead of clear()");
+    if ("dispose".equals(methodExpression.getReferenceName()) && evaluator.isMemberInClass(method, "io.reactivex.disposables.CompositeDisposable") && !isCompositeDisposableDisposeSuppressed) {
+      context.report(COMPOSITE_DISPOSABLE_DISPOSE, call, context.getLocation(methodExpression.getReferenceNameElement()), "Using dispose() instead of clear()");
     }
 
-    final boolean isCompositeDisposableAddAllSuppressed = context.getDriver().isSuppressed(context, COMPOSITE_DISPOSABLE_ADD_ALL, methodExpression);
-    if ("io.reactivex.disposables.CompositeDisposable.addAll".equals(fullyQualifiedMethodName) && !isCompositeDisposableAddAllSuppressed) {
-      context.report(COMPOSITE_DISPOSABLE_ADD_ALL, call, context.getLocation(methodExpression.getReferenceNameElement()),
-          "Using addAll() instead of add() separately");
-    }
-  }
+    final boolean isCompositeDisposableAddAllSuppressed = driver.isSuppressed(context, COMPOSITE_DISPOSABLE_ADD_ALL, methodExpression);
 
-  private void handleSubscribeCalls(final JavaContext context, final PsiMethodCallExpression call,
-      final PsiReferenceExpression methodExpression, final String fullyQualifiedMethodName) {
-    if ("io.reactivex.Observable.subscribe".equals(fullyQualifiedMethodName)
-        || "io.reactivex.Flowable.subscribe".equals(fullyQualifiedMethodName)
-        || "io.reactivex.Single.subscribe".equals(fullyQualifiedMethodName)
-        || "io.reactivex.Completable.subscribe".equals(fullyQualifiedMethodName)
-        || "io.reactivex.Maybe.subscribe".equals(fullyQualifiedMethodName)) {
-      final boolean isSubscribeMissingErrorConsumerSuppressed = context.getDriver().isSuppressed(context, SUBSCRIBE_MISSING_ERROR_CONSUMER, methodExpression);
+    if ("addAll".equals(methodExpression.getReferenceName()) && evaluator.isMemberInClass(method, "io.reactivex.disposables.CompositeDisposable") && !isCompositeDisposableAddAllSuppressed) {
+      context.report(COMPOSITE_DISPOSABLE_ADD_ALL, call, context.getLocation(methodExpression.getReferenceNameElement()), "Using addAll() instead of add() separately");
+    }
+
+    final boolean isInObservable = evaluator.isMemberInClass(method, "io.reactivex.Observable");
+    final boolean isInFlowable = evaluator.isMemberInClass(method, "io.reactivex.Flowable");
+    final boolean isInSingle = evaluator.isMemberInClass(method, "io.reactivex.Single");
+    final boolean isInCompletable = evaluator.isMemberInClass(method, "io.reactivex.Completable");
+    final boolean isInMaybe = evaluator.isMemberInClass(method, "io.reactivex.Maybe");
+
+    if ("subscribe".equals(methodExpression.getReferenceName()) && (isInObservable || isInFlowable || isInSingle || isInCompletable || isInMaybe)) {
+      final boolean isSubscribeMissingErrorConsumerSuppressed = driver.isSuppressed(context, SUBSCRIBE_MISSING_ERROR_CONSUMER, methodExpression);
       if (call.getArgumentList().getExpressions().length < 2 && !isSubscribeMissingErrorConsumerSuppressed) {
-        context.report(SUBSCRIBE_MISSING_ERROR_CONSUMER, call, context.getLocation(methodExpression.getReferenceNameElement()),
-            "Using a version of subscribe() without an error Consumer");
+        context.report(SUBSCRIBE_MISSING_ERROR_CONSUMER, call, context.getLocation(methodExpression.getReferenceNameElement()), "Using a version of subscribe() without an error Consumer");
       }
     }
   }
