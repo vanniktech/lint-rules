@@ -8,7 +8,6 @@ import com.intellij.psi.JavaElementVisitor;
 import com.intellij.psi.PsiMethod;
 import com.intellij.psi.PsiMethodCallExpression;
 import com.intellij.psi.PsiReferenceExpression;
-import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.List;
 
@@ -16,10 +15,11 @@ import static com.android.tools.lint.detector.api.Category.MESSAGES;
 import static com.android.tools.lint.detector.api.Scope.JAVA_FILE;
 import static com.android.tools.lint.detector.api.Scope.TEST_SOURCES;
 import static com.android.tools.lint.detector.api.Severity.WARNING;
+import static java.util.Arrays.asList;
 
 public final class AndroidDetector extends Detector implements Detector.JavaPsiScanner {
   @Override public List<String> getApplicableMethodNames() {
-    return Arrays.asList("findViewById", "getColor", "getDrawable", "getColorStateList");
+    return asList("getColor", "getDrawable", "getColorStateList");
   }
 
   @Override public void visitMethod(final JavaContext context, final JavaElementVisitor visitor,
@@ -27,35 +27,7 @@ public final class AndroidDetector extends Detector implements Detector.JavaPsiS
     final PsiReferenceExpression methodExpression = call.getMethodExpression();
     final String fullyQualifiedMethodName = methodExpression.getQualifiedName();
 
-    handleFindViewById(context, call, methodExpression, fullyQualifiedMethodName);
     handleResourcesCalls(context, call, methodExpression, fullyQualifiedMethodName);
-  }
-
-  private void handleFindViewById(final JavaContext context, final PsiMethodCallExpression call,
-      final PsiReferenceExpression methodExpression, final String fullyQualifiedMethodName) {
-    final boolean isWindowFindViewByIdSuppressed = context.getDriver().isSuppressed(context, ISSUE_WINDOW_FIND_VIEW_BY_ID, methodExpression);
-    if ("android.view.Window.findViewById".equals(fullyQualifiedMethodName) && !isWindowFindViewByIdSuppressed) {
-      context.report(ISSUE_WINDOW_FIND_VIEW_BY_ID, call, context.getLocation(methodExpression.getReferenceNameElement()),
-          "Using window.findViewById() instead of ButterKnife");
-    }
-
-    final boolean isViewFindViewByIdSuppressed = context.getDriver().isSuppressed(context, ISSUE_VIEW_FIND_VIEW_BY_ID, methodExpression);
-    if ("android.view.View.findViewById".equals(fullyQualifiedMethodName) && !isViewFindViewByIdSuppressed) {
-      context.report(ISSUE_VIEW_FIND_VIEW_BY_ID, call, context.getLocation(methodExpression.getReferenceNameElement()),
-          "Using view.findViewById() instead of ButterKnife");
-    }
-
-    final boolean isDialogFindViewByIdSuppressed = context.getDriver().isSuppressed(context, ISSUE_DIALOG_FIND_VIEW_BY_ID, methodExpression);
-    if ("android.app.Dialog.findViewById".equals(fullyQualifiedMethodName) && !isDialogFindViewByIdSuppressed) {
-      context.report(ISSUE_DIALOG_FIND_VIEW_BY_ID, call, context.getLocation(methodExpression.getReferenceNameElement()),
-          "Using dialog.findViewById() instead of ButterKnife");
-    }
-
-    final boolean isActivityFindViewByIdSuppressed = context.getDriver().isSuppressed(context, ISSUE_ACTIVITY_FIND_VIEW_BY_ID, methodExpression);
-    if ("android.app.Activity.findViewById".equals(fullyQualifiedMethodName) && !isActivityFindViewByIdSuppressed) {
-      context.report(ISSUE_ACTIVITY_FIND_VIEW_BY_ID, call, context.getLocation(methodExpression.getReferenceNameElement()),
-          "Using activity.findViewById() instead of ButterKnife");
-    }
   }
 
   private void handleResourcesCalls(final JavaContext context, final PsiMethodCallExpression call,
@@ -81,34 +53,9 @@ public final class AndroidDetector extends Detector implements Detector.JavaPsiS
 
   static Issue[] getIssues() {
     return new Issue[] {
-      ISSUE_WINDOW_FIND_VIEW_BY_ID, ISSUE_VIEW_FIND_VIEW_BY_ID, ISSUE_DIALOG_FIND_VIEW_BY_ID, ISSUE_ACTIVITY_FIND_VIEW_BY_ID,
       ISSUE_RESOURCES_GET_DRAWABLE, ISSUE_RESOURCES_GET_COLOR, ISSUE_RESOURCES_GET_COLOR_STATE_LIST
     };
   }
-
-  static final Issue ISSUE_WINDOW_FIND_VIEW_BY_ID =
-      Issue.create("WindowFindViewById", "Using window.findViewById() instead of ButterKnife.",
-          "Instead of using window.findViewById() ButterKnife should be used.",
-              MESSAGES, 5, WARNING,
-          new Implementation(AndroidDetector.class, EnumSet.of(JAVA_FILE, TEST_SOURCES)));
-
-  static final Issue ISSUE_VIEW_FIND_VIEW_BY_ID =
-      Issue.create("ViewFindViewById", "Using view.findViewById() instead of ButterKnife.",
-          "Instead of using view.findViewById() ButterKnife should be used.",
-              MESSAGES, 5, WARNING,
-          new Implementation(AndroidDetector.class, EnumSet.of(JAVA_FILE, TEST_SOURCES)));
-
-  static final Issue ISSUE_DIALOG_FIND_VIEW_BY_ID =
-      Issue.create("DialogFindViewById", "Using dialog.findViewById() instead of ButterKnife.",
-          "Instead of using dialog.findViewById() ButterKnife should be used.",
-              MESSAGES, 5, WARNING,
-          new Implementation(AndroidDetector.class, EnumSet.of(JAVA_FILE, TEST_SOURCES)));
-
-  static final Issue ISSUE_ACTIVITY_FIND_VIEW_BY_ID =
-      Issue.create("ActivityFindViewById", "Using activity.findViewById() instead of ButterKnife.",
-          "Instead of using activity.findViewById() ButterKnife should be used.",
-              MESSAGES, 5, WARNING,
-          new Implementation(AndroidDetector.class, EnumSet.of(JAVA_FILE, TEST_SOURCES)));
 
   static final Issue ISSUE_RESOURCES_GET_DRAWABLE =
       Issue.create("ResourcesGetDrawable", "Using getDrawable(), which is deprecated.",

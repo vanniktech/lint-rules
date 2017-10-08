@@ -2,13 +2,9 @@ package com.vanniktech.lintrules.android;
 
 import org.junit.Test;
 
-import static com.vanniktech.lintrules.android.AndroidDetector.ISSUE_ACTIVITY_FIND_VIEW_BY_ID;
-import static com.vanniktech.lintrules.android.AndroidDetector.ISSUE_DIALOG_FIND_VIEW_BY_ID;
 import static com.vanniktech.lintrules.android.AndroidDetector.ISSUE_RESOURCES_GET_COLOR;
 import static com.vanniktech.lintrules.android.AndroidDetector.ISSUE_RESOURCES_GET_COLOR_STATE_LIST;
 import static com.vanniktech.lintrules.android.AndroidDetector.ISSUE_RESOURCES_GET_DRAWABLE;
-import static com.vanniktech.lintrules.android.AndroidDetector.ISSUE_VIEW_FIND_VIEW_BY_ID;
-import static com.vanniktech.lintrules.android.AndroidDetector.ISSUE_WINDOW_FIND_VIEW_BY_ID;
 import static com.vanniktech.lintrules.android.AnnotationOrderDetectorKt.ISSUE_WRONG_ANNOTATION_ORDER;
 import static com.vanniktech.lintrules.android.ConstraintLayoutToolsEditorAttributeDetectorKt.ISSUE_CONSTRAINT_LAYOUT_TOOLS_EDITOR_ATTRIBUTE_DETECTOR;
 import static com.vanniktech.lintrules.android.DefaultLayoutAttributeDetector.ISSUE_DEFAULT_LAYOUT_ATTRIBUTE;
@@ -35,10 +31,6 @@ import static org.fest.assertions.api.Assertions.assertThat;
 public class IssueRegistryTest {
   @Test public void getIssues() {
     assertThat(new IssueRegistry().getIssues()).containsExactly(
-        ISSUE_WINDOW_FIND_VIEW_BY_ID,
-        ISSUE_VIEW_FIND_VIEW_BY_ID,
-        ISSUE_DIALOG_FIND_VIEW_BY_ID,
-        ISSUE_ACTIVITY_FIND_VIEW_BY_ID,
         ISSUE_RESOURCES_GET_DRAWABLE,
         ISSUE_RESOURCES_GET_COLOR,
         ISSUE_RESOURCES_GET_COLOR_STATE_LIST,
