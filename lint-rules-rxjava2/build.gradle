@@ -6,31 +6,14 @@ afterEvaluate {
 
 android {
   compileSdkVersion versions.compileSdk
-  buildToolsVersion versions.buildTools
 
   defaultConfig {
     minSdkVersion versions.minSdk
   }
 }
 
-configurations {
-  lintChecks
-}
-
 dependencies {
-  lintChecks project(path: ':lint-rules-rxjava2-lint', configuration: 'lintChecks')
-}
-
-task copyLintJar(type: Copy) {
-  from(configurations.lintChecks) {
-    rename { 'lint.jar' }
-  }
-  into 'build/intermediates/lint/'
-}
-
-project.afterEvaluate {
-  def compileLintTask = project.tasks.find { it.name == 'compileLint' }
-  compileLintTask.dependsOn(copyLintJar)
+  lintChecks project(':lint-rules-rxjava2-lint')
 }
 
 apply from: rootProject.file('gradle/gradle-mvn-push.gradle')

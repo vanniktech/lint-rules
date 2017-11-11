@@ -33,15 +33,14 @@ public class WrongConstraintLayoutUsageDetector extends LayoutDetector {
       if (localName != null) {
         final String properLocalName = localName.replace("Left", "Start").replace("Right", "End");
 
-        final boolean isSuppressed = context.getDriver().isSuppressed(context, ISSUE_WRONG_CONSTRAINT_LAYOUT_USAGE, item);
         final boolean isConstraint = localName.contains("layout_constraint");
         final boolean hasLeft = localName.contains("Left");
         final boolean hasRight = localName.contains("Right");
 
         final boolean isAnIssue = isConstraint && (hasLeft || hasRight);
 
-        if (!isSuppressed && isAnIssue) {
-          context.report(ISSUE_WRONG_CONSTRAINT_LAYOUT_USAGE, context.getNameLocation(item), "This attribute won't work with RTL. Please use " + properLocalName + " instead.");
+        if (isAnIssue) {
+          context.report(ISSUE_WRONG_CONSTRAINT_LAYOUT_USAGE, item, context.getNameLocation(item), "This attribute won't work with RTL. Please use " + properLocalName + " instead.");
         }
       }
     }

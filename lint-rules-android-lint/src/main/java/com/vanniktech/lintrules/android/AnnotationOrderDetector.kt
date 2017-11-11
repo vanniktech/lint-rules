@@ -1,20 +1,19 @@
 package com.vanniktech.lintrules.android
 
+import com.android.tools.lint.client.api.UElementHandler
 import com.android.tools.lint.detector.api.Category
 import com.android.tools.lint.detector.api.Detector
-import com.android.tools.lint.detector.api.Detector.JavaPsiScanner
+import com.android.tools.lint.detector.api.Detector.UastScanner
 import com.android.tools.lint.detector.api.Implementation
 import com.android.tools.lint.detector.api.Issue
 import com.android.tools.lint.detector.api.JavaContext
 import com.android.tools.lint.detector.api.Scope.JAVA_FILE
 import com.android.tools.lint.detector.api.Scope.TEST_SOURCES
 import com.android.tools.lint.detector.api.Severity.WARNING
-import com.intellij.psi.JavaElementVisitor
-import com.intellij.psi.PsiElement
-import com.intellij.psi.PsiIdentifier
-import com.intellij.psi.PsiMethod
 import com.intellij.psi.PsiModifierList
-import com.intellij.psi.PsiVariable
+import org.jetbrains.uast.UElement
+import org.jetbrains.uast.UMethod
+import org.jetbrains.uast.UVariable
 import java.util.EnumSet
 
 val ANNOTATION_ORDER = listOf(
@@ -140,29 +139,25 @@ val ANNOTATION_ORDER = listOf(
     "Annotations should be applied within a specific order.", Category.CORRECTNESS, 6, WARNING,
     Implementation(AnnotationOrderDetector::class.java, EnumSet.of(JAVA_FILE, TEST_SOURCES)))
 
-class AnnotationOrderDetector : Detector(), JavaPsiScanner {
-  override fun getApplicablePsiTypes(): List<Class<out PsiElement>> = listOf(PsiVariable::class.java, PsiMethod::class.java)
+class AnnotationOrderDetector : Detector(), UastScanner {
+  override fun getApplicableUastTypes() = listOf<Class<out UElement>>(UVariable::class.java, UMethod::class.java)
 
-  override fun createPsiVisitor(context: JavaContext) = AnnotationOrderVisitor(context)
+  override fun createUastHandler(context: JavaContext) = AnnotationOrderVisitor(context)
 
-  class AnnotationOrderVisitor(private val context: JavaContext) : JavaElementVisitor() {
-    override fun visitVariable(variable: PsiVariable) {
-      variable.modifierList?.let { processAnnotations(variable.nameIdentifier, it) }
+  class AnnotationOrderVisitor(private val context: JavaContext) : UElementHandler() {
+    override fun visitVariable(variable: UVariable) {
+      variable.modifierList?.let { processAnnotations(variable, it) }
     }
 
-    override fun visitMethod(method: PsiMethod) {
-      processAnnotations(method.nameIdentifier, method.modifierList)
+    override fun visitMethod(method: UMethod) {
+      processAnnotations(method, method.modifierList)
     }
 
-    @Suppress("LabeledExpression") private fun processAnnotations(identifier: PsiIdentifier?, modifierList: PsiModifierList) {
+    @Suppress("Detekt.LabeledExpression", "Detekt.ReturnCount", "Detekt.OptionalReturnKeyword") private fun processAnnotations(identifier: UElement, modifierList: PsiModifierList) {
       var size = 0
 
-      val annotations = modifierList.annotations
-          .map { it.qualifiedName?.split(".")?.lastOrNull() }
-          .filterNotNull()
-
+      val annotations = modifierList.annotations.mapNotNull { it.qualifiedName?.split(".")?.lastOrNull() }
       val numberOfRecognizedAnnotations = annotations.count { ANNOTATION_ORDER.contains(it) }
-
       val isInCorrectOrder = ANNOTATION_ORDER.contains(annotations.firstOrNull()) && annotations
           .all {
             if (ANNOTATION_ORDER.contains(it)) {
@@ -186,7 +181,7 @@ class AnnotationOrderDetector : Detector(), JavaPsiScanner {
             .plus(annotations.filterNot { ANNOTATION_ORDER.contains(it) })
             .joinToString(separator = " ") { "@$it" }
 
-        context.report(ISSUE_WRONG_ANNOTATION_ORDER, context.getLocation(identifier), "Annotations are in wrong order. Should be $correctOrder")
+        context.report(ISSUE_WRONG_ANNOTATION_ORDER, identifier, context.getNameLocation(identifier), "Annotations are in wrong order. Should be $correctOrder")
       }
     }
   }

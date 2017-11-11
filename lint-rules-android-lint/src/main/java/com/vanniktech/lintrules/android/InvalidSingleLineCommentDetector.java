@@ -6,8 +6,6 @@ import com.android.tools.lint.detector.api.Implementation;
 import com.android.tools.lint.detector.api.Issue;
 import com.android.tools.lint.detector.api.JavaContext;
 import com.android.tools.lint.detector.api.Location;
-import com.intellij.psi.PsiClass;
-import com.intellij.psi.PsiElement;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Collections;
@@ -15,19 +13,21 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.jetbrains.uast.UClass;
+import org.jetbrains.uast.UElement;
 
 import static com.android.tools.lint.detector.api.Category.CORRECTNESS;
 import static com.android.tools.lint.detector.api.Scope.JAVA_FILE;
 import static com.android.tools.lint.detector.api.Scope.TEST_SOURCES;
 import static com.android.tools.lint.detector.api.Severity.WARNING;
 
-public final class InvalidSingleLineCommentDetector extends Detector implements Detector.JavaPsiScanner {
+public final class InvalidSingleLineCommentDetector extends Detector implements Detector.UastScanner {
   static final Issue ISSUE_INVALID_SINGLE_LINE_COMMENT = Issue.create("InvalidSingleLineComment", "Single line comment should be a sentence.",
       "Single line comment should be a sentence.", CORRECTNESS, 8, WARNING,
       new Implementation(InvalidSingleLineCommentDetector.class, EnumSet.of(JAVA_FILE, TEST_SOURCES)));
 
-  @Override public List<Class<? extends PsiElement>> getApplicablePsiTypes() {
-    return Collections.<Class<? extends PsiElement>>singletonList(PsiClass.class);
+  @Override public List<Class<? extends UElement>> getApplicableUastTypes() {
+    return Collections.<Class<? extends UElement>>singletonList(UClass.class);
   }
 
   @Override public void afterCheckFile(final Context context) {
@@ -75,7 +75,7 @@ public final class InvalidSingleLineCommentDetector extends Detector implements 
     }
   }
 
-  private boolean isUrl(final String string) {
+  private static boolean isUrl(final String string) {
     try {
       new URL(string);
       return true;

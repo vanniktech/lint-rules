@@ -1,16 +1,12 @@
 package com.vanniktech.lintrules.rxjava2;
 
-import com.android.annotations.NonNull;
+import com.android.tools.lint.client.api.UElementHandler;
 import com.android.tools.lint.detector.api.Detector;
 import com.android.tools.lint.detector.api.Implementation;
 import com.android.tools.lint.detector.api.Issue;
 import com.android.tools.lint.detector.api.JavaContext;
-import com.intellij.psi.JavaElementVisitor;
-import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiCodeBlock;
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiExpressionStatement;
-import com.intellij.psi.PsiField;
 import com.intellij.psi.PsiMethod;
 import com.intellij.psi.PsiStatement;
 import java.util.Collections;
@@ -19,40 +15,43 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import org.jetbrains.uast.UClass;
+import org.jetbrains.uast.UElement;
+import org.jetbrains.uast.UField;
 
 import static com.android.tools.lint.detector.api.Category.MESSAGES;
 import static com.android.tools.lint.detector.api.Scope.JAVA_FILE;
 import static com.android.tools.lint.detector.api.Scope.TEST_SOURCES;
 import static com.android.tools.lint.detector.api.Severity.ERROR;
 
-public final class RxJava2MissingCompositeDisposableClearDetector extends Detector implements Detector.JavaPsiScanner {
+public final class RxJava2MissingCompositeDisposableClearDetector extends Detector implements Detector.UastScanner {
   static final Issue ISSUE_MISSING_COMPOSITE_DISPOSABLE_CLEAR =
       Issue.create("MissingCompositeDisposableClear", "Not calling clear() on CompositeDisposable",
           "A class is using CompositeDisposable and not clearing the List.",
               MESSAGES, 10, ERROR,
           new Implementation(RxJava2MissingCompositeDisposableClearDetector.class, EnumSet.of(JAVA_FILE, TEST_SOURCES)));
 
-  @Override public List<Class<? extends PsiElement>> getApplicablePsiTypes() {
-    return Collections.<Class<? extends PsiElement>>singletonList(PsiClass.class);
+  @Override public List<Class<? extends UElement>> getApplicableUastTypes() {
+    return Collections.<Class<? extends UElement>>singletonList(UClass.class);
   }
 
-  @Override public JavaElementVisitor createPsiVisitor(@NonNull final JavaContext context) {
+  @Override public UElementHandler createUastHandler(final JavaContext context) {
     return new MissingCompositeDisposableClearVisitor(context);
   }
 
-  static class MissingCompositeDisposableClearVisitor extends JavaElementVisitor {
+  static class MissingCompositeDisposableClearVisitor extends UElementHandler {
     private final JavaContext context;
 
     MissingCompositeDisposableClearVisitor(final JavaContext context) {
       this.context = context;
     }
 
-    @Override public void visitClass(final PsiClass clazz) {
-      final PsiField[] fields = clazz.getFields();
+    @Override public void visitClass(final UClass clazz) {
+      final UField[] fields = clazz.getFields();
 
-      final Set<PsiField> compositeDisposables = new HashSet<>();
+      final Set<UField> compositeDisposables = new HashSet<>();
 
-      for (final PsiField field : fields) {
+      for (final UField field : fields) {
         if ("io.reactivex.disposables.CompositeDisposable".equals(field.getType().getCanonicalText())) {
           compositeDisposables.add(field);
         }
@@ -67,15 +66,15 @@ public final class RxJava2MissingCompositeDisposableClearDetector extends Detect
           final PsiStatement[] statements = body.getStatements();
 
           for (final PsiStatement statement : statements) {
-            final Iterator<PsiField> iterator = compositeDisposables.iterator();
+            final Iterator<UField> iterator = compositeDisposables.iterator();
 
             if (statement instanceof PsiExpressionStatement) {
               final PsiExpressionStatement expressionStatement = (PsiExpressionStatement) statement;
 
               while (iterator.hasNext()) {
-                final PsiField psiField = iterator.next();
+                final UField field = iterator.next();
 
-                if (expressionStatement.getExpression().getText().equals(psiField.getName() + ".clear()")) { // NOPMD
+                if (expressionStatement.getExpression().getText().equals(field.getName() + ".clear()")) { // NOPMD
                   iterator.remove();
                 }
               }
@@ -84,12 +83,8 @@ public final class RxJava2MissingCompositeDisposableClearDetector extends Detect
         }
       }
 
-      for (final PsiField compositeDisposable : compositeDisposables) {
-        final boolean isCompositeDisposableClearMissingSuppressed = context.getDriver().isSuppressed(context, ISSUE_MISSING_COMPOSITE_DISPOSABLE_CLEAR, compositeDisposable);
-
-        if (!isCompositeDisposableClearMissingSuppressed) {
-          context.report(ISSUE_MISSING_COMPOSITE_DISPOSABLE_CLEAR, context.getLocation(compositeDisposable), "clear() is not called.");
-        }
+      for (final UField compositeDisposable : compositeDisposables) {
+        context.report(ISSUE_MISSING_COMPOSITE_DISPOSABLE_CLEAR, compositeDisposable, context.getLocation(compositeDisposable), "clear() is not called.");
       }
     }
   }

@@ -7,6 +7,7 @@ import com.android.tools.lint.detector.api.Issue;
 import com.android.tools.lint.detector.api.ResourceXmlDetector;
 import com.android.tools.lint.detector.api.XmlContext;
 import java.util.Collection;
+import java.util.EnumSet;
 import org.w3c.dom.Attr;
 
 import static com.android.SdkConstants.ATTR_ID;
@@ -23,7 +24,7 @@ public final class WrongMenuIdFormatDetector extends ResourceXmlDetector {
       new Implementation(WrongMenuIdFormatDetector.class, RESOURCE_FILE_SCOPE));
 
   @Override public boolean appliesTo(@NonNull final ResourceFolderType folderType) {
-    return folderType == MENU;
+    return EnumSet.of(MENU).contains(folderType);
   }
 
   @Override public Collection<String> getApplicableAttributes() {
@@ -33,10 +34,9 @@ public final class WrongMenuIdFormatDetector extends ResourceXmlDetector {
   @Override public void visitAttribute(@NonNull final XmlContext context, @NonNull final Attr attribute) {
     if (ATTR_ID.equals(attribute.getLocalName())) {
       final String id = attribute.getValue().replace("@+id/", "");
-      final boolean isSuppressed = context.getDriver().isSuppressed(context, ISSUE_WRONG_MENU_ID_FORMAT, attribute);
 
-      if (!isCamelCase(id) && !isSuppressed) {
-        context.report(ISSUE_WRONG_MENU_ID_FORMAT, context.getValueLocation(attribute), "Id is not in lowerCamelCaseFormat");
+      if (!isCamelCase(id)) {
+        context.report(ISSUE_WRONG_MENU_ID_FORMAT, attribute, context.getValueLocation(attribute), "Id is not in lowerCamelCaseFormat");
       }
     }
   }

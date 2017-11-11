@@ -5,6 +5,8 @@ potential-bugs:
     active: false // We know what we're doing.
 
 style:
+  VariableMaxLength:
+    active: false
   MaxLineLength:
     active: false
 

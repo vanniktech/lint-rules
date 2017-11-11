@@ -5,15 +5,16 @@ import com.android.SdkConstants.ATTR_LAYOUT_WIDTH
 import com.android.resources.ResourceFolderType
 import com.android.resources.ResourceFolderType.DRAWABLE
 import com.android.resources.ResourceFolderType.LAYOUT
-import com.android.tools.lint.detector.api.Category.CORRECTNESS
+import com.android.tools.lint.detector.api.Category.Companion.CORRECTNESS
 import com.android.tools.lint.detector.api.Implementation
 import com.android.tools.lint.detector.api.Issue
 import com.android.tools.lint.detector.api.ResourceXmlDetector
-import com.android.tools.lint.detector.api.Scope.RESOURCE_FILE_SCOPE
+import com.android.tools.lint.detector.api.Scope.Companion.RESOURCE_FILE_SCOPE
 import com.android.tools.lint.detector.api.Severity.WARNING
 import com.android.tools.lint.detector.api.XmlContext
 import org.w3c.dom.Attr
 import org.w3c.dom.Element
+import java.util.EnumSet
 
 @JvmField val ISSUE_RAW_DIMEN = Issue.create("RawDimen",
     "This value should be defined as a dimen.",
@@ -21,7 +22,7 @@ import org.w3c.dom.Element
     Implementation(RawDimenDetector::class.java, RESOURCE_FILE_SCOPE))
 
 class RawDimenDetector : ResourceXmlDetector() {
-  override fun appliesTo(folderType: ResourceFolderType) = folderType == LAYOUT || folderType == DRAWABLE
+  override fun appliesTo(folderType: ResourceFolderType) = EnumSet.of(LAYOUT, DRAWABLE).contains(folderType)
 
   override fun getApplicableElements() = ALL
 
@@ -33,11 +34,10 @@ class RawDimenDetector : ResourceXmlDetector() {
     (0 until element.attributes.length)
         .map { element.attributes.item(it) }
         .filterNot { it.hasToolsNamespace() }
-        .filterNot { context.driver.isSuppressed(context, ISSUE_RAW_DIMEN, it) }
         .filterNot { isVectorGraphic }
         .filterNot { (hasLayoutWeight || isParentConstraintLayout) && it.nodeValue[0] == '0' && (ATTR_LAYOUT_WIDTH == it.localName || ATTR_LAYOUT_HEIGHT == it.localName) }
         .filter { it.nodeValue.matches("-?[\\d.]+(sp|dp|dip)".toRegex()) }
-        .forEach { context.report(ISSUE_RAW_DIMEN, context.getValueLocation(it as Attr), "Should be using dimen instead.") }
+        .forEach { context.report(ISSUE_RAW_DIMEN, it, context.getValueLocation(it as Attr), "Should be using dimen instead.") }
   }
 
   companion object {

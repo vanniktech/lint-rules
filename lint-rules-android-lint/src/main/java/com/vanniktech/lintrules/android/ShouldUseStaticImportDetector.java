@@ -1,228 +1,250 @@
 package com.vanniktech.lintrules.android;
 
+import com.android.annotations.NonNull;
 import com.android.annotations.Nullable;
 import com.android.tools.lint.detector.api.Detector;
 import com.android.tools.lint.detector.api.Implementation;
 import com.android.tools.lint.detector.api.Issue;
 import com.android.tools.lint.detector.api.JavaContext;
-import com.intellij.psi.JavaElementVisitor;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiReferenceExpression;
-import java.util.Collections;
+import com.intellij.psi.PsiMethod;
+import java.util.ArrayList;
 import java.util.EnumSet;
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
+import org.jetbrains.uast.UCallExpression;
+import org.jetbrains.uast.UElement;
+import org.jetbrains.uast.UFile;
+import org.jetbrains.uast.UImportStatement;
+import org.jetbrains.uast.UReferenceExpression;
 
 import static com.android.tools.lint.detector.api.Category.CORRECTNESS;
 import static com.android.tools.lint.detector.api.Scope.JAVA_FILE;
 import static com.android.tools.lint.detector.api.Scope.TEST_SOURCES;
 import static com.android.tools.lint.detector.api.Severity.WARNING;
 
-public class ShouldUseStaticImportDetector extends Detector implements Detector.JavaPsiScanner {
+@SuppressWarnings("checkstyle:multiplestringliterals") public class ShouldUseStaticImportDetector extends Detector implements Detector.UastScanner {
+  private static final Map<String, String> METHODS_TO_STATICALLY_IMPORT = new HashMap<>();
+  private static final Map<String, String> REFERENCES_TO_STATICALLY_IMPORT = new HashMap<>();
+
   static final Issue ISSUE_SHOULD_USE_STATIC_IMPORT =
       Issue.create("ShouldUseStaticImport", "Should be using a static import.",
           "Should be using a static import.", CORRECTNESS, 3,
           WARNING, new Implementation(ShouldUseStaticImportDetector.class, EnumSet.of(JAVA_FILE, TEST_SOURCES)));
 
-  @Override public List<Class<? extends PsiElement>> getApplicablePsiTypes() {
-    return Collections.<Class<? extends PsiElement>>singletonList(PsiReferenceExpression.class);
+  static {
+    // Arrays.
+    METHODS_TO_STATICALLY_IMPORT.put("asList", "java.util.Arrays");
+
+    // Collections.
+    METHODS_TO_STATICALLY_IMPORT.put("emptyEnumeration", "java.util.Collections");
+    METHODS_TO_STATICALLY_IMPORT.put("emptyIterator", "java.util.Collections");
+    METHODS_TO_STATICALLY_IMPORT.put("emptyList", "java.util.Collections");
+    METHODS_TO_STATICALLY_IMPORT.put("emptyListIterator", "java.util.Collections");
+    METHODS_TO_STATICALLY_IMPORT.put("emptyMap", "java.util.Collections");
+    METHODS_TO_STATICALLY_IMPORT.put("emptySet", "java.util.Collections");
+    METHODS_TO_STATICALLY_IMPORT.put("singleton", "java.util.Collections");
+    METHODS_TO_STATICALLY_IMPORT.put("singletonList", "java.util.Collections");
+    METHODS_TO_STATICALLY_IMPORT.put("singletonMap", "java.util.Collections");
+    METHODS_TO_STATICALLY_IMPORT.put("singletonIterator", "java.util.Collections");
+    METHODS_TO_STATICALLY_IMPORT.put("singletonSpliterator", "java.util.Collections");
+    METHODS_TO_STATICALLY_IMPORT.put("unmodifiableCollection", "java.util.Collections");
+    METHODS_TO_STATICALLY_IMPORT.put("unmodifiableSet", "java.util.Collections");
+    METHODS_TO_STATICALLY_IMPORT.put("unmodifiableSortedSet", "java.util.Collections");
+    METHODS_TO_STATICALLY_IMPORT.put("unmodifiableNavigableSet", "java.util.Collections");
+    METHODS_TO_STATICALLY_IMPORT.put("unmodifiableList", "java.util.Collections");
+    METHODS_TO_STATICALLY_IMPORT.put("unmodifiableMap", "java.util.Collections");
+    METHODS_TO_STATICALLY_IMPORT.put("unmodifiableSortedMap", "java.util.Collections");
+    METHODS_TO_STATICALLY_IMPORT.put("unmodifiableNavigableMap", "java.util.Collections");
+
+    // Mockito.
+    METHODS_TO_STATICALLY_IMPORT.put("mock", "org.mockito.Mockito.mock");
+    METHODS_TO_STATICALLY_IMPORT.put("mockingDetails", "org.mockito.Mockito.mockingDetails");
+    METHODS_TO_STATICALLY_IMPORT.put("spy", "org.mockito.Mockito.spy");
+    METHODS_TO_STATICALLY_IMPORT.put("verify", "org.mockito.Mockito.verify");
+    METHODS_TO_STATICALLY_IMPORT.put("reset", "org.mockito.Mockito.reset");
+    METHODS_TO_STATICALLY_IMPORT.put("clearInvocations", "org.mockito.Mockito.clearInvocations");
+    METHODS_TO_STATICALLY_IMPORT.put("verifyNoMoreInteractions", "org.mockito.Mockito.verifyNoMoreInteractions");
+    METHODS_TO_STATICALLY_IMPORT.put("verifyZeroInteractions", "org.mockito.Mockito.verifyZeroInteractions");
+    METHODS_TO_STATICALLY_IMPORT.put("when", "org.mockito.Mockito.when");
+    METHODS_TO_STATICALLY_IMPORT.put("doThrow", "org.mockito.Mockito.doThrow");
+    METHODS_TO_STATICALLY_IMPORT.put("doCallRealMethod", "org.mockito.Mockito.doCallRealMethod");
+    METHODS_TO_STATICALLY_IMPORT.put("doAnswer", "org.mockito.Mockito.doAnswer");
+    METHODS_TO_STATICALLY_IMPORT.put("doNothing", "org.mockito.Mockito.doNothing");
+    METHODS_TO_STATICALLY_IMPORT.put("doReturn", "org.mockito.Mockito.doReturn");
+    METHODS_TO_STATICALLY_IMPORT.put("inOrder", "org.mockito.Mockito.inOrder");
+    METHODS_TO_STATICALLY_IMPORT.put("ignoreStubs", "org.mockito.Mockito.ignoreStubs");
+    METHODS_TO_STATICALLY_IMPORT.put("never", "org.mockito.Mockito.never");
+    METHODS_TO_STATICALLY_IMPORT.put("times", "org.mockito.Mockito.times");
+    METHODS_TO_STATICALLY_IMPORT.put("atLeastOnce", "org.mockito.Mockito.atLeastOnce");
+    METHODS_TO_STATICALLY_IMPORT.put("atLeast", "org.mockito.Mockito.atLeast");
+    METHODS_TO_STATICALLY_IMPORT.put("atMost", "org.mockito.Mockito.atMost");
+    METHODS_TO_STATICALLY_IMPORT.put("calls", "org.mockito.Mockito.calls");
+    METHODS_TO_STATICALLY_IMPORT.put("only", "org.mockito.Mockito.only");
+    METHODS_TO_STATICALLY_IMPORT.put("timeout", "org.mockito.Mockito.timeout");
+    METHODS_TO_STATICALLY_IMPORT.put("after", "org.mockito.Mockito.after");
+    METHODS_TO_STATICALLY_IMPORT.put("validateMockitoUsage", "org.mockito.Mockito.validateMockitoUsage");
+    METHODS_TO_STATICALLY_IMPORT.put("withSettings", "org.mockito.Mockito.withSettings");
+    METHODS_TO_STATICALLY_IMPORT.put("description", "org.mockito.Mockito.description");
+    METHODS_TO_STATICALLY_IMPORT.put("debug", "org.mockito.Mockito.debug");
+    METHODS_TO_STATICALLY_IMPORT.put("framework", "org.mockito.Mockito.framework");
+    METHODS_TO_STATICALLY_IMPORT.put("mockitoSession", "org.mockito.Mockito.mockitoSession");
+
+    // TimeUnit.
+    REFERENCES_TO_STATICALLY_IMPORT.put("NANOSECONDS", "java.util.concurrent.TimeUnit");
+    REFERENCES_TO_STATICALLY_IMPORT.put("MICROSECONDS", "java.util.concurrent.TimeUnit");
+    REFERENCES_TO_STATICALLY_IMPORT.put("MILLISECONDS", "java.util.concurrent.TimeUnit");
+    REFERENCES_TO_STATICALLY_IMPORT.put("SECONDS", "java.util.concurrent.TimeUnit");
+    REFERENCES_TO_STATICALLY_IMPORT.put("MINUTES", "java.util.concurrent.TimeUnit");
+    REFERENCES_TO_STATICALLY_IMPORT.put("HOURS", "java.util.concurrent.TimeUnit");
+    REFERENCES_TO_STATICALLY_IMPORT.put("DAYS", "java.util.concurrent.TimeUnit");
+    // Locales.
+    REFERENCES_TO_STATICALLY_IMPORT.put("ENGLISH", "java.util.Locale");
+    REFERENCES_TO_STATICALLY_IMPORT.put("FRENCH", "java.util.Locale");
+    REFERENCES_TO_STATICALLY_IMPORT.put("GERMAN", "java.util.Locale");
+    REFERENCES_TO_STATICALLY_IMPORT.put("ITALIAN", "java.util.Locale");
+    REFERENCES_TO_STATICALLY_IMPORT.put("JAPANESE", "java.util.Locale");
+    REFERENCES_TO_STATICALLY_IMPORT.put("KOREAN", "java.util.Locale");
+    REFERENCES_TO_STATICALLY_IMPORT.put("CHINESE", "java.util.Locale");
+    REFERENCES_TO_STATICALLY_IMPORT.put("SIMPLIFIED_CHINESE", "java.util.Locale");
+    REFERENCES_TO_STATICALLY_IMPORT.put("TRADITIONAL_CHINESE", "java.util.Locale");
+    REFERENCES_TO_STATICALLY_IMPORT.put("FRANCE", "java.util.Locale");
+    REFERENCES_TO_STATICALLY_IMPORT.put("GERMANY", "java.util.Locale");
+    REFERENCES_TO_STATICALLY_IMPORT.put("ITALY", "java.util.Locale");
+    REFERENCES_TO_STATICALLY_IMPORT.put("JAPAN", "java.util.Locale");
+    REFERENCES_TO_STATICALLY_IMPORT.put("KOREA", "java.util.Locale");
+    REFERENCES_TO_STATICALLY_IMPORT.put("CHINA", "java.util.Locale");
+    REFERENCES_TO_STATICALLY_IMPORT.put("PRC", "java.util.Locale");
+    REFERENCES_TO_STATICALLY_IMPORT.put("TAIWAN", "java.util.Locale");
+    REFERENCES_TO_STATICALLY_IMPORT.put("UK", "java.util.Locale");
+    REFERENCES_TO_STATICALLY_IMPORT.put("US", "java.util.Locale");
+    REFERENCES_TO_STATICALLY_IMPORT.put("CANADA", "java.util.Locale");
+    REFERENCES_TO_STATICALLY_IMPORT.put("CANADA_FRENCH", "java.util.Locale");
+    REFERENCES_TO_STATICALLY_IMPORT.put("ROOT", "java.util.Locale");
+    // Android View.
+    REFERENCES_TO_STATICALLY_IMPORT.put("VISIBLE", "android.view.View");
+    REFERENCES_TO_STATICALLY_IMPORT.put("GONE", "android.view.View");
+    REFERENCES_TO_STATICALLY_IMPORT.put("INVISIBLE", "android.view.View");
+    // Android Service.
+    REFERENCES_TO_STATICALLY_IMPORT.put("START_CONTINUATION_MASK", "android.app.Service");
+    REFERENCES_TO_STATICALLY_IMPORT.put("START_STICKY_COMPATIBILITY", "android.app.Service");
+    REFERENCES_TO_STATICALLY_IMPORT.put("START_STICKY", "android.app.Service");
+    REFERENCES_TO_STATICALLY_IMPORT.put("START_NOT_STICKY", "android.app.Service");
+    REFERENCES_TO_STATICALLY_IMPORT.put("START_REDELIVER_INTENT", "android.app.Service");
+    REFERENCES_TO_STATICALLY_IMPORT.put("START_TASK_REMOVED_COMPLETE", "android.app.Service");
+    REFERENCES_TO_STATICALLY_IMPORT.put("START_FLAG_REDELIVERY", "android.app.Service");
+    REFERENCES_TO_STATICALLY_IMPORT.put("START_FLAG_RETRY", "android.app.Service");
+    // Android Versions.
+    REFERENCES_TO_STATICALLY_IMPORT.put("INCREMENTAL", "android.os.Build.VERSION");
+    REFERENCES_TO_STATICALLY_IMPORT.put("RELEASE", "android.os.Build.VERSION");
+    REFERENCES_TO_STATICALLY_IMPORT.put("BASE_OS", "android.os.Build.VERSION");
+    REFERENCES_TO_STATICALLY_IMPORT.put("SECURITY_PATCH", "android.os.Build.VERSION");
+    REFERENCES_TO_STATICALLY_IMPORT.put("SDK", "android.os.Build.VERSION");
+    REFERENCES_TO_STATICALLY_IMPORT.put("SDK_INT", "android.os.Build.VERSION");
+    REFERENCES_TO_STATICALLY_IMPORT.put("PREVIEW_SDK_INT", "android.os.Build.VERSION");
+    REFERENCES_TO_STATICALLY_IMPORT.put("CODENAME", "android.os.Build.VERSION");
+    REFERENCES_TO_STATICALLY_IMPORT.put("RESOURCES_SDK_INT", "android.os.Build.VERSION");
+    // Android Version Codes.
+    REFERENCES_TO_STATICALLY_IMPORT.put("CUR_DEVELOPMENT", "android.os.Build.VERSION_CODES");
+    REFERENCES_TO_STATICALLY_IMPORT.put("BASE", "android.os.Build.VERSION_CODES");
+    REFERENCES_TO_STATICALLY_IMPORT.put("BASE_1_1", "android.os.Build.VERSION_CODES");
+    REFERENCES_TO_STATICALLY_IMPORT.put("CUPCAKE", "android.os.Build.VERSION_CODES");
+    REFERENCES_TO_STATICALLY_IMPORT.put("DONUT", "android.os.Build.VERSION_CODES");
+    REFERENCES_TO_STATICALLY_IMPORT.put("ECLAIR", "android.os.Build.VERSION_CODES");
+    REFERENCES_TO_STATICALLY_IMPORT.put("ECLAIR_0_1", "android.os.Build.VERSION_CODES");
+    REFERENCES_TO_STATICALLY_IMPORT.put("ECLAIR_MR1", "android.os.Build.VERSION_CODES");
+    REFERENCES_TO_STATICALLY_IMPORT.put("FROYO", "android.os.Build.VERSION_CODES");
+    REFERENCES_TO_STATICALLY_IMPORT.put("GINGERBREAD", "android.os.Build.VERSION_CODES");
+    REFERENCES_TO_STATICALLY_IMPORT.put("GINGERBREAD_MR1", "android.os.Build.VERSION_CODES");
+    REFERENCES_TO_STATICALLY_IMPORT.put("HONEYCOMB", "android.os.Build.VERSION_CODES");
+    REFERENCES_TO_STATICALLY_IMPORT.put("HONEYCOMB_MR1", "android.os.Build.VERSION_CODES");
+    REFERENCES_TO_STATICALLY_IMPORT.put("HONEYCOMB_MR2", "android.os.Build.VERSION_CODES");
+    REFERENCES_TO_STATICALLY_IMPORT.put("ICE_CREAM_SANDWICH", "android.os.Build.VERSION_CODES");
+    REFERENCES_TO_STATICALLY_IMPORT.put("ICE_CREAM_SANDWICH_MR1", "android.os.Build.VERSION_CODES");
+    REFERENCES_TO_STATICALLY_IMPORT.put("JELLY_BEAN", "android.os.Build.VERSION_CODES");
+    REFERENCES_TO_STATICALLY_IMPORT.put("JELLY_BEAN_MR1", "android.os.Build.VERSION_CODES");
+    REFERENCES_TO_STATICALLY_IMPORT.put("JELLY_BEAN_MR2", "android.os.Build.VERSION_CODES");
+    REFERENCES_TO_STATICALLY_IMPORT.put("KITKAT", "android.os.Build.VERSION_CODES");
+    REFERENCES_TO_STATICALLY_IMPORT.put("KITKAT_WATCH", "android.os.Build.VERSION_CODES");
+    REFERENCES_TO_STATICALLY_IMPORT.put("LOLLIPOP", "android.os.Build.VERSION_CODES");
+    REFERENCES_TO_STATICALLY_IMPORT.put("LOLLIPOP_MR1", "android.os.Build.VERSION_CODES");
+    REFERENCES_TO_STATICALLY_IMPORT.put("VERSION_CODES.M", "android.os.Build");
+    REFERENCES_TO_STATICALLY_IMPORT.put("VERSION_CODES.N", "android.os.Build");
+    REFERENCES_TO_STATICALLY_IMPORT.put("N_MR1", "android.os.Build.VERSION_CODES");
+    REFERENCES_TO_STATICALLY_IMPORT.put("O", "android.os.Build.VERSION_CODES");
+    // Future proof Version Codes.
+    REFERENCES_TO_STATICALLY_IMPORT.put("P", "android.os.Build.VERSION_CODES");
+    REFERENCES_TO_STATICALLY_IMPORT.put("Q", "android.os.Build.VERSION_CODES");
+    REFERENCES_TO_STATICALLY_IMPORT.put("R", "android.os.Build.VERSION_CODES");
+    REFERENCES_TO_STATICALLY_IMPORT.put("S", "android.os.Build.VERSION_CODES");
+    REFERENCES_TO_STATICALLY_IMPORT.put("T", "android.os.Build.VERSION_CODES");
+    REFERENCES_TO_STATICALLY_IMPORT.put("U", "android.os.Build.VERSION_CODES");
+    REFERENCES_TO_STATICALLY_IMPORT.put("V", "android.os.Build.VERSION_CODES");
+    REFERENCES_TO_STATICALLY_IMPORT.put("W", "android.os.Build.VERSION_CODES");
+    REFERENCES_TO_STATICALLY_IMPORT.put("X", "android.os.Build.VERSION_CODES");
+    REFERENCES_TO_STATICALLY_IMPORT.put("Y", "android.os.Build.VERSION_CODES");
+    REFERENCES_TO_STATICALLY_IMPORT.put("Z", "android.os.Build.VERSION_CODES");
+    // Retention Policy.
+    REFERENCES_TO_STATICALLY_IMPORT.put("SOURCE", "java.lang.annotation.RetentionPolicy");
+    REFERENCES_TO_STATICALLY_IMPORT.put("CLASS", "java.lang.annotation.RetentionPolicy");
+    REFERENCES_TO_STATICALLY_IMPORT.put("RUNTIME", "java.lang.annotation.RetentionPolicy");
+    // Mockito.
+    REFERENCES_TO_STATICALLY_IMPORT.put("STRICT_STUBS", "org.mockito.quality.Strictness");
+    REFERENCES_TO_STATICALLY_IMPORT.put("WARN", "org.mockito.quality.Strictness");
+    REFERENCES_TO_STATICALLY_IMPORT.put("LENIENT", "org.mockito.quality.Strictness");
   }
 
-  @Override public JavaElementVisitor createPsiVisitor(final JavaContext context) {
-    return new ShouldUseStaticImportDetectorVisitor(context);
+  @NonNull private static UFile getUFile(@Nullable final UElement element) {
+    if (element instanceof UFile) {
+      return (UFile) element;
+    }
+
+    if (element != null) {
+      return getUFile(element.getUastParent());
+    }
+
+    throw new IllegalArgumentException("Can't get file from element");
   }
 
-  static class ShouldUseStaticImportDetectorVisitor extends JavaElementVisitor {
-    static final Set<String> IMPORTS = new HashSet<>();
+  @Override public List<String> getApplicableMethodNames() {
+    return new ArrayList<>(METHODS_TO_STATICALLY_IMPORT.keySet());
+  }
 
-    static {
-      // TimeUnit.
-      IMPORTS.add("java.util.concurrent.TimeUnit.NANOSECONDS");
-      IMPORTS.add("java.util.concurrent.TimeUnit.MICROSECONDS");
-      IMPORTS.add("java.util.concurrent.TimeUnit.MILLISECONDS");
-      IMPORTS.add("java.util.concurrent.TimeUnit.SECONDS");
-      IMPORTS.add("java.util.concurrent.TimeUnit.MINUTES");
-      IMPORTS.add("java.util.concurrent.TimeUnit.HOURS");
-      IMPORTS.add("java.util.concurrent.TimeUnit.DAYS");
-      // Locales.
-      IMPORTS.add("java.util.Locale.ENGLISH");
-      IMPORTS.add("java.util.Locale.FRENCH");
-      IMPORTS.add("java.util.Locale.GERMAN");
-      IMPORTS.add("java.util.Locale.ITALIAN");
-      IMPORTS.add("java.util.Locale.JAPANESE");
-      IMPORTS.add("java.util.Locale.KOREAN");
-      IMPORTS.add("java.util.Locale.CHINESE");
-      IMPORTS.add("java.util.Locale.SIMPLIFIED_CHINESE");
-      IMPORTS.add("java.util.Locale.TRADITIONAL_CHINESE");
-      IMPORTS.add("java.util.Locale.FRANCE");
-      IMPORTS.add("java.util.Locale.GERMANY");
-      IMPORTS.add("java.util.Locale.ITALY");
-      IMPORTS.add("java.util.Locale.JAPAN");
-      IMPORTS.add("java.util.Locale.KOREA");
-      IMPORTS.add("java.util.Locale.CHINA");
-      IMPORTS.add("java.util.Locale.PRC");
-      IMPORTS.add("java.util.Locale.TAIWAN");
-      IMPORTS.add("java.util.Locale.UK");
-      IMPORTS.add("java.util.Locale.US");
-      IMPORTS.add("java.util.Locale.CANADA");
-      IMPORTS.add("java.util.Locale.CANADA_FRENCH");
-      IMPORTS.add("java.util.Locale.ROOT");
-      // Android View.
-      IMPORTS.add("android.view.View.VISIBLE");
-      IMPORTS.add("android.view.View.GONE");
-      IMPORTS.add("android.view.View.INVISIBLE");
-      // Android Service.
-      IMPORTS.add("android.app.Service.START_CONTINUATION_MASK");
-      IMPORTS.add("android.app.Service.START_STICKY_COMPATIBILITY");
-      IMPORTS.add("android.app.Service.START_STICKY");
-      IMPORTS.add("android.app.Service.START_NOT_STICKY");
-      IMPORTS.add("android.app.Service.START_REDELIVER_INTENT");
-      IMPORTS.add("android.app.Service.START_TASK_REMOVED_COMPLETE");
-      IMPORTS.add("android.app.Service.START_FLAG_REDELIVERY");
-      IMPORTS.add("android.app.Service.START_FLAG_RETRY");
-      // Arrays.
-      IMPORTS.add("java.util.Arrays.asList");
-      // Android Versions.
-      IMPORTS.add("android.os.Build.VERSION.INCREMENTAL");
-      IMPORTS.add("android.os.Build.VERSION.RELEASE");
-      IMPORTS.add("android.os.Build.VERSION.BASE_OS");
-      IMPORTS.add("android.os.Build.VERSION.SECURITY_PATCH");
-      IMPORTS.add("android.os.Build.VERSION.SDK");
-      IMPORTS.add("android.os.Build.VERSION.SDK_INT");
-      IMPORTS.add("android.os.Build.VERSION.PREVIEW_SDK_INT");
-      IMPORTS.add("android.os.Build.VERSION.CODENAME");
-      IMPORTS.add("android.os.Build.VERSION.RESOURCES_SDK_INT");
-      // Android Version Codes.
-      IMPORTS.add("android.os.Build.VERSION_CODES.CUR_DEVELOPMENT");
-      IMPORTS.add("android.os.Build.VERSION_CODES.BASE");
-      IMPORTS.add("android.os.Build.VERSION_CODES.BASE_1_1");
-      IMPORTS.add("android.os.Build.VERSION_CODES.CUPCAKE");
-      IMPORTS.add("android.os.Build.VERSION_CODES.DONUT");
-      IMPORTS.add("android.os.Build.VERSION_CODES.ECLAIR");
-      IMPORTS.add("android.os.Build.VERSION_CODES.ECLAIR_0_1");
-      IMPORTS.add("android.os.Build.VERSION_CODES.ECLAIR_MR1");
-      IMPORTS.add("android.os.Build.VERSION_CODES.FROYO");
-      IMPORTS.add("android.os.Build.VERSION_CODES.GINGERBREAD");
-      IMPORTS.add("android.os.Build.VERSION_CODES.GINGERBREAD_MR1");
-      IMPORTS.add("android.os.Build.VERSION_CODES.HONEYCOMB");
-      IMPORTS.add("android.os.Build.VERSION_CODES.HONEYCOMB_MR1");
-      IMPORTS.add("android.os.Build.VERSION_CODES.HONEYCOMB_MR2");
-      IMPORTS.add("android.os.Build.VERSION_CODES.ICE_CREAM_SANDWICH");
-      IMPORTS.add("android.os.Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1");
-      IMPORTS.add("android.os.Build.VERSION_CODES.JELLY_BEAN");
-      IMPORTS.add("android.os.Build.VERSION_CODES.JELLY_BEAN_MR1");
-      IMPORTS.add("android.os.Build.VERSION_CODES.JELLY_BEAN_MR2");
-      IMPORTS.add("android.os.Build.VERSION_CODES.KITKAT");
-      IMPORTS.add("android.os.Build.VERSION_CODES.KITKAT_WATCH");
-      IMPORTS.add("android.os.Build.VERSION_CODES.LOLLIPOP");
-      IMPORTS.add("android.os.Build.VERSION_CODES.LOLLIPOP_MR1");
-      IMPORTS.add("android.os.Build.VERSION_CODES.M");
-      IMPORTS.add("android.os.Build.VERSION_CODES.N");
-      IMPORTS.add("android.os.Build.VERSION_CODES.N_MR1");
-      IMPORTS.add("android.os.Build.VERSION_CODES.O");
-      // Future proof Version Codes.
-      IMPORTS.add("android.os.Build.VERSION_CODES.P");
-      IMPORTS.add("android.os.Build.VERSION_CODES.Q");
-      IMPORTS.add("android.os.Build.VERSION_CODES.R");
-      IMPORTS.add("android.os.Build.VERSION_CODES.S");
-      IMPORTS.add("android.os.Build.VERSION_CODES.T");
-      IMPORTS.add("android.os.Build.VERSION_CODES.U");
-      IMPORTS.add("android.os.Build.VERSION_CODES.V");
-      IMPORTS.add("android.os.Build.VERSION_CODES.W");
-      IMPORTS.add("android.os.Build.VERSION_CODES.X");
-      IMPORTS.add("android.os.Build.VERSION_CODES.Y");
-      IMPORTS.add("android.os.Build.VERSION_CODES.Z");
-      // Collections.
-      IMPORTS.add("java.util.Collections.emptyEnumeration");
-      IMPORTS.add("java.util.Collections.emptyIterator");
-      IMPORTS.add("java.util.Collections.emptyList");
-      IMPORTS.add("java.util.Collections.emptyListIterator");
-      IMPORTS.add("java.util.Collections.emptyMap");
-      IMPORTS.add("java.util.Collections.emptySet");
-      IMPORTS.add("java.util.Collections.singleton");
-      IMPORTS.add("java.util.Collections.singletonList");
-      IMPORTS.add("java.util.Collections.singletonMap");
-      IMPORTS.add("java.util.Collections.singletonIterator");
-      IMPORTS.add("java.util.Collections.singletonSpliterator");
-      IMPORTS.add("java.util.Collections.unmodifiableCollection");
-      IMPORTS.add("java.util.Collections.unmodifiableSet");
-      IMPORTS.add("java.util.Collections.unmodifiableSortedSet");
-      IMPORTS.add("java.util.Collections.unmodifiableNavigableSet");
-      IMPORTS.add("java.util.Collections.unmodifiableList");
-      IMPORTS.add("java.util.Collections.unmodifiableMap");
-      IMPORTS.add("java.util.Collections.unmodifiableSortedMap");
-      IMPORTS.add("java.util.Collections.unmodifiableNavigableMap");
-      // Retention Policy.
-      IMPORTS.add("java.lang.annotation.RetentionPolicy.SOURCE");
-      IMPORTS.add("java.lang.annotation.RetentionPolicy.CLASS");
-      IMPORTS.add("java.lang.annotation.RetentionPolicy.RUNTIME");
-      // Mockito.
-      IMPORTS.add("org.mockito.quality.Strictness.STRICT_STUBS");
-      IMPORTS.add("org.mockito.quality.Strictness.WARN");
-      IMPORTS.add("org.mockito.quality.Strictness.LENIENT");
-      IMPORTS.add("org.mockito.Mockito.mock");
-      IMPORTS.add("org.mockito.Mockito.mockingDetails");
-      IMPORTS.add("org.mockito.Mockito.spy");
-      IMPORTS.add("org.mockito.Mockito.verify");
-      IMPORTS.add("org.mockito.Mockito.reset");
-      IMPORTS.add("org.mockito.Mockito.clearInvocations");
-      IMPORTS.add("org.mockito.Mockito.verifyNoMoreInteractions");
-      IMPORTS.add("org.mockito.Mockito.verifyZeroInteractions");
-      IMPORTS.add("org.mockito.Mockito.when");
-      IMPORTS.add("org.mockito.Mockito.doThrow");
-      IMPORTS.add("org.mockito.Mockito.doCallRealMethod");
-      IMPORTS.add("org.mockito.Mockito.doAnswer");
-      IMPORTS.add("org.mockito.Mockito.doNothing");
-      IMPORTS.add("org.mockito.Mockito.doReturn");
-      IMPORTS.add("org.mockito.Mockito.inOrder");
-      IMPORTS.add("org.mockito.Mockito.ignoreStubs");
-      IMPORTS.add("org.mockito.Mockito.never");
-      IMPORTS.add("org.mockito.Mockito.times");
-      IMPORTS.add("org.mockito.Mockito.atLeastOnce");
-      IMPORTS.add("org.mockito.Mockito.atLeast");
-      IMPORTS.add("org.mockito.Mockito.atMost");
-      IMPORTS.add("org.mockito.Mockito.calls");
-      IMPORTS.add("org.mockito.Mockito.only");
-      IMPORTS.add("org.mockito.Mockito.timeout");
-      IMPORTS.add("org.mockito.Mockito.after");
-      IMPORTS.add("org.mockito.Mockito.validateMockitoUsage");
-      IMPORTS.add("org.mockito.Mockito.withSettings");
-      IMPORTS.add("org.mockito.Mockito.description");
-      IMPORTS.add("org.mockito.Mockito.debug");
-      IMPORTS.add("org.mockito.Mockito.framework");
-      IMPORTS.add("org.mockito.Mockito.mockitoSession");
+  @Override public void visitMethod(final JavaContext context, final UCallExpression node, final PsiMethod method) {
+    final String methodName = node.getMethodName();
+    final String className = METHODS_TO_STATICALLY_IMPORT.get(methodName);
+
+    if (methodName != null && className != null) {
+      final PsiElement psi = node.getPsi();
+      final boolean isStaticallyImported = psi != null && psi.getText().startsWith(methodName);
+      final boolean matches = context.getEvaluator().isMemberInClass(method, className);
+
+      if (!isStaticallyImported && matches) {
+        context.report(ISSUE_SHOULD_USE_STATIC_IMPORT, node, context.getNameLocation(node), "Should statically import " + methodName);
+      }
     }
+  }
 
-    final JavaContext context;
+  @Override public List<String> getApplicableReferenceNames() {
+    return new ArrayList<>(REFERENCES_TO_STATICALLY_IMPORT.keySet());
+  }
 
-    ShouldUseStaticImportDetectorVisitor(final JavaContext context) {
-      this.context = context;
-    }
+  @Override public void visitReference(final JavaContext context, final UReferenceExpression expression, final PsiElement referenced) {
+    final String name = expression.asRenderString();
+    final UFile uFile = getUFile(expression);
 
-    @Override public void visitReferenceExpression(final PsiReferenceExpression expression) {
-      final String qualifiedName = getQualifiedName(expression);
+    boolean isStaticallyImported = false;
 
-      final boolean isIgnored = context.getDriver().isSuppressed(context, ISSUE_SHOULD_USE_STATIC_IMPORT, expression);
-      final boolean isNotAStaticImport = expression.getText().contains(".");
-
-      if (!isIgnored && IMPORTS.contains(qualifiedName) && isNotAStaticImport) {
-        context.report(ISSUE_SHOULD_USE_STATIC_IMPORT, context.getLocation(expression), "Should statically import " + getName(qualifiedName));
+    for (final UImportStatement uImportStatement : uFile.getImports()) {
+      if (uImportStatement.asSourceString().contains(name)) {
+        isStaticallyImported = true;
+        break;
       }
     }
 
-    @Nullable private static String getQualifiedName(final PsiReferenceExpression expression) {
-      try {
-        return expression.getQualifiedName();
-      } catch (final Exception ignore) {
-        // UnimplementedLintPsiApiException can be thrown here, for instance for method references.
-        return null;
-      }
-    }
-
-    static String getName(final String name) {
-      final String[] split = name.split("\\.");
-      return split[split.length - 1];
+    if (!isStaticallyImported) {
+      context.report(ISSUE_SHOULD_USE_STATIC_IMPORT, expression, context.getLocation(expression), "Should statically import " + name);
     }
   }
 }

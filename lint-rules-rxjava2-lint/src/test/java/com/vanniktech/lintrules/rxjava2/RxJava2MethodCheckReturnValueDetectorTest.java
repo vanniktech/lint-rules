@@ -10,6 +10,16 @@ import static java.util.Collections.singletonList;
 import static org.fest.assertions.api.Assertions.assertThat;
 
 public class RxJava2MethodCheckReturnValueDetectorTest extends RxJavaLintDetectorTest {
+  public void testMethodNoReturnStatement() throws Exception {
+    @Language("JAVA") final String source = ""
+        + "package foo;\n"
+        + "public class Example {\n"
+        + "  public void foo() {\n"
+        + "  }\n"
+        + "}";
+    assertThat(lintProject(stubSuppressLint, java(source))).isEqualTo(NO_WARNINGS);
+  }
+
   public void testMethodReturningObservableMissingCheckReturnValueSuppressed() throws Exception {
     @Language("JAVA") final String source = ""
         + "package foo;\n"

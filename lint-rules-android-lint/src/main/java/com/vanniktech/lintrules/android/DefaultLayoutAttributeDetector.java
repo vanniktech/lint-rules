@@ -26,10 +26,9 @@ public final class DefaultLayoutAttributeDetector extends LayoutDetector {
   @Override public void visitAttribute(@NonNull final XmlContext context, @NonNull final Attr attribute) {
     if (ATTR_TEXT_STYLE.equals(attribute.getLocalName())) {
       final String value = attribute.getValue();
-      final boolean isSuppressed = context.getDriver().isSuppressed(context, ISSUE_DEFAULT_LAYOUT_ATTRIBUTE, attribute);
 
-      if ("normal".equals(value) && !isSuppressed) {
-        context.report(ISSUE_DEFAULT_LAYOUT_ATTRIBUTE, context.getValueLocation(attribute), "textStyle=\"normal\" is the default and hence you don't need to specify it.");
+      if ("normal".equals(value)) {
+        context.report(ISSUE_DEFAULT_LAYOUT_ATTRIBUTE, attribute, context.getValueLocation(attribute), "textStyle=\"normal\" is the default and hence you don't need to specify it.");
       }
     }
   }

@@ -1,17 +1,14 @@
 package com.vanniktech.lintrules.rxjava2;
 
 import com.android.tools.lint.client.api.JavaEvaluator;
-import com.android.tools.lint.client.api.LintDriver;
 import com.android.tools.lint.detector.api.Detector;
 import com.android.tools.lint.detector.api.Implementation;
 import com.android.tools.lint.detector.api.Issue;
 import com.android.tools.lint.detector.api.JavaContext;
-import com.intellij.psi.JavaElementVisitor;
 import com.intellij.psi.PsiMethod;
-import com.intellij.psi.PsiMethodCallExpression;
-import com.intellij.psi.PsiReferenceExpression;
 import java.util.EnumSet;
 import java.util.List;
+import org.jetbrains.uast.UCallExpression;
 
 import static com.android.tools.lint.detector.api.Category.MESSAGES;
 import static com.android.tools.lint.detector.api.Scope.JAVA_FILE;
@@ -20,26 +17,21 @@ import static com.android.tools.lint.detector.api.Severity.ERROR;
 import static com.android.tools.lint.detector.api.Severity.WARNING;
 import static java.util.Arrays.asList;
 
-public final class RxJava2Detector extends Detector implements Detector.JavaPsiScanner {
+public final class RxJava2Detector extends Detector implements Detector.UastScanner {
   @Override public List<String> getApplicableMethodNames() {
     return asList("dispose", "addAll", "subscribe");
   }
 
-  @Override public void visitMethod(final JavaContext context, final JavaElementVisitor visitor, final PsiMethodCallExpression call, final PsiMethod method) {
-    final LintDriver driver = context.getDriver();
+  @Override public void visitMethod(final JavaContext context, final UCallExpression node, final PsiMethod method) {
+    final String methodName = node.getMethodName();
     final JavaEvaluator evaluator = context.getEvaluator();
-    final PsiReferenceExpression methodExpression = call.getMethodExpression();
 
-    final boolean isCompositeDisposableDisposeSuppressed = driver.isSuppressed(context, COMPOSITE_DISPOSABLE_DISPOSE, methodExpression);
-
-    if ("dispose".equals(methodExpression.getReferenceName()) && evaluator.isMemberInClass(method, "io.reactivex.disposables.CompositeDisposable") && !isCompositeDisposableDisposeSuppressed) {
-      context.report(COMPOSITE_DISPOSABLE_DISPOSE, call, context.getLocation(methodExpression.getReferenceNameElement()), "Using dispose() instead of clear()");
+    if ("dispose".equals(methodName) && evaluator.isMemberInClass(method, "io.reactivex.disposables.CompositeDisposable")) {
+      context.report(COMPOSITE_DISPOSABLE_DISPOSE, node, context.getNameLocation(node), "Using dispose() instead of clear()");
     }
 
-    final boolean isCompositeDisposableAddAllSuppressed = driver.isSuppressed(context, COMPOSITE_DISPOSABLE_ADD_ALL, methodExpression);
-
-    if ("addAll".equals(methodExpression.getReferenceName()) && evaluator.isMemberInClass(method, "io.reactivex.disposables.CompositeDisposable") && !isCompositeDisposableAddAllSuppressed) {
-      context.report(COMPOSITE_DISPOSABLE_ADD_ALL, call, context.getLocation(methodExpression.getReferenceNameElement()), "Using addAll() instead of add() separately");
+    if ("addAll".equals(methodName) && evaluator.isMemberInClass(method, "io.reactivex.disposables.CompositeDisposable")) {
+      context.report(COMPOSITE_DISPOSABLE_ADD_ALL, node, context.getNameLocation(node), "Using addAll() instead of add() separately");
     }
 
     final boolean isInObservable = evaluator.isMemberInClass(method, "io.reactivex.Observable");
@@ -48,11 +40,8 @@ public final class RxJava2Detector extends Detector implements Detector.JavaPsiS
     final boolean isInCompletable = evaluator.isMemberInClass(method, "io.reactivex.Completable");
     final boolean isInMaybe = evaluator.isMemberInClass(method, "io.reactivex.Maybe");
 
-    if ("subscribe".equals(methodExpression.getReferenceName()) && (isInObservable || isInFlowable || isInSingle || isInCompletable || isInMaybe)) {
-      final boolean isSubscribeMissingErrorConsumerSuppressed = driver.isSuppressed(context, SUBSCRIBE_MISSING_ERROR_CONSUMER, methodExpression);
-      if (call.getArgumentList().getExpressions().length < 2 && !isSubscribeMissingErrorConsumerSuppressed) {
-        context.report(SUBSCRIBE_MISSING_ERROR_CONSUMER, call, context.getLocation(methodExpression.getReferenceNameElement()), "Using a version of subscribe() without an error Consumer");
-      }
+    if ("subscribe".equals(methodName) && (isInObservable || isInFlowable || isInSingle || isInCompletable || isInMaybe) && node.getValueArgumentCount() < 2) {
+      context.report(SUBSCRIBE_MISSING_ERROR_CONSUMER, node, context.getNameLocation(node), "Using a version of subscribe() without an error Consumer");
     }
   }
 

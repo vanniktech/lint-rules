@@ -1,16 +1,13 @@
 package com.vanniktech.lintrules.android;
 
-import com.android.tools.lint.client.api.LintDriver;
 import com.android.tools.lint.detector.api.Detector;
 import com.android.tools.lint.detector.api.Implementation;
 import com.android.tools.lint.detector.api.Issue;
 import com.android.tools.lint.detector.api.JavaContext;
-import com.intellij.psi.JavaElementVisitor;
 import com.intellij.psi.PsiMethod;
-import com.intellij.psi.PsiMethodCallExpression;
-import com.intellij.psi.PsiReferenceExpression;
 import java.util.EnumSet;
 import java.util.List;
+import org.jetbrains.uast.UCallExpression;
 
 import static com.android.tools.lint.detector.api.Category.MESSAGES;
 import static com.android.tools.lint.detector.api.Scope.JAVA_FILE;
@@ -18,32 +15,25 @@ import static com.android.tools.lint.detector.api.Scope.TEST_SOURCES;
 import static com.android.tools.lint.detector.api.Severity.WARNING;
 import static java.util.Arrays.asList;
 
-public final class AndroidDetector extends Detector implements Detector.JavaPsiScanner {
+public final class AndroidDetector extends Detector implements Detector.UastScanner {
   @Override public List<String> getApplicableMethodNames() {
     return asList("getColor", "getDrawable", "getColorStateList");
   }
 
-  @Override public void visitMethod(final JavaContext context, final JavaElementVisitor visitor, final PsiMethodCallExpression call, final PsiMethod method) {
-    final LintDriver driver = context.getDriver();
-    final PsiReferenceExpression methodExpression = call.getMethodExpression();
+  @Override public void visitMethod(final JavaContext context, final UCallExpression node, final PsiMethod method) {
     final boolean isInResources = context.getEvaluator().isMemberInClass(method, "android.content.res.Resources");
+    final String methodName = node.getMethodName();
 
-    final boolean isResourcesGetDrawableSuppressed = driver.isSuppressed(context, ISSUE_RESOURCES_GET_DRAWABLE, methodExpression);
-
-    if ("getDrawable".equals(methodExpression.getReferenceName()) && isInResources && !isResourcesGetDrawableSuppressed) {
-      context.report(ISSUE_RESOURCES_GET_DRAWABLE, call, context.getLocation(methodExpression.getReferenceNameElement()), "Using deprecated getDrawable()");
+    if ("getDrawable".equals(methodName) && isInResources) {
+      context.report(ISSUE_RESOURCES_GET_DRAWABLE, node, context.getNameLocation(node), "Using deprecated getDrawable()");
     }
 
-    final boolean isResourcesGetColorSuppressed = driver.isSuppressed(context, ISSUE_RESOURCES_GET_COLOR, methodExpression);
-
-    if ("getColor".equals(methodExpression.getReferenceName()) && isInResources && !isResourcesGetColorSuppressed) {
-      context.report(ISSUE_RESOURCES_GET_COLOR, call, context.getLocation(methodExpression.getReferenceNameElement()), "Using deprecated getColor()");
+    if ("getColor".equals(methodName) && isInResources) {
+      context.report(ISSUE_RESOURCES_GET_COLOR, node, context.getNameLocation(node), "Using deprecated getColor()");
     }
 
-    final boolean isResourcesGetColorStateListSuppressed = driver.isSuppressed(context, ISSUE_RESOURCES_GET_COLOR_STATE_LIST, methodExpression);
-
-    if ("getColorStateList".equals(methodExpression.getReferenceName()) && isInResources && !isResourcesGetColorStateListSuppressed) {
-      context.report(ISSUE_RESOURCES_GET_COLOR_STATE_LIST, call, context.getLocation(methodExpression.getReferenceNameElement()), "Using deprecated getColorStateList()");
+    if ("getColorStateList".equals(methodName) && isInResources) {
+      context.report(ISSUE_RESOURCES_GET_COLOR_STATE_LIST, node, context.getNameLocation(node), "Using deprecated getColorStateList()");
     }
   }
 
