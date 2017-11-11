@@ -21,7 +21,7 @@ class ConstraintLayoutToolsEditorAttributeDetector : LayoutDetector() {
     val isLayoutEditorAttribute = attribute.localName?.startsWith("layout_editor_") ?: false
 
     if (isLayoutEditorAttribute && attribute.hasToolsNamespace()) {
-      context.report(ISSUE_CONSTRAINT_LAYOUT_TOOLS_EDITOR_ATTRIBUTE_DETECTOR, context.getNameLocation(attribute), "Don't use ${attribute.name}")
+      context.report(ISSUE_CONSTRAINT_LAYOUT_TOOLS_EDITOR_ATTRIBUTE_DETECTOR, attribute, context.getNameLocation(attribute), "Don't use ${attribute.name}")
     }
   }
 }

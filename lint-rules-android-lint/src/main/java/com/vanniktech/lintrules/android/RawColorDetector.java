@@ -39,11 +39,10 @@ public final class RawColorDetector extends ResourceXmlDetector {
       final String value = item.getNodeValue();
 
       final boolean isToolsAttribute = "http://schemas.android.com/tools".equalsIgnoreCase(item.getNamespaceURI());
-      final boolean isSuppressed = context.getDriver().isSuppressed(context, ISSUE_RAW_COLOR, item);
       final boolean isVectorGraphic = "vector".equals(element.getLocalName()) || "path".equals(element.getLocalName());
 
-      if (!isToolsAttribute && !isSuppressed && !isVectorGraphic && value.matches("#[a-fA-F\\d]{3,8}")) {
-        context.report(ISSUE_RAW_COLOR, context.getValueLocation((Attr) item), "Should be using color instead.");
+      if (!isToolsAttribute && !isVectorGraphic && value.matches("#[a-fA-F\\d]{3,8}")) {
+        context.report(ISSUE_RAW_COLOR, item, context.getValueLocation((Attr) item), "Should be using color instead.");
       }
     }
   }

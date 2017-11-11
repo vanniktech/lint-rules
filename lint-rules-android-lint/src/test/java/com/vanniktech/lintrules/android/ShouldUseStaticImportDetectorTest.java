@@ -24,7 +24,7 @@ public class ShouldUseStaticImportDetectorTest extends LintDetectorTest {
 
     assertThat(lintProject(java(source))).isEqualTo("src/foo/Example.java:5: Warning: Should statically import SECONDS [ShouldUseStaticImport]\n"
         + "    TimeUnit.SECONDS.toDays(1);\n"
-        + "    ~~~~~~~~~~~~~~~~\n"
+        + "             ~~~~~~~\n"
         + "0 errors, 1 warnings\n");
   }
 
@@ -40,7 +40,7 @@ public class ShouldUseStaticImportDetectorTest extends LintDetectorTest {
 
     assertThat(lintProject(java(source))).isEqualTo("src/foo/Example.java:5: Warning: Should statically import MINUTES [ShouldUseStaticImport]\n"
         + "    TimeUnit.MINUTES.toDays(1);\n"
-        + "    ~~~~~~~~~~~~~~~~\n"
+        + "             ~~~~~~~\n"
         + "0 errors, 1 warnings\n");
   }
 
@@ -56,7 +56,7 @@ public class ShouldUseStaticImportDetectorTest extends LintDetectorTest {
 
     assertThat(lintProject(java(source))).isEqualTo("src/foo/Example.java:5: Warning: Should statically import CANADA [ShouldUseStaticImport]\n"
         + "    Locale.CANADA.getCountry();\n"
-        + "    ~~~~~~~~~~~~~\n"
+        + "           ~~~~~~\n"
         + "0 errors, 1 warnings\n");
   }
 
@@ -72,7 +72,7 @@ public class ShouldUseStaticImportDetectorTest extends LintDetectorTest {
 
     assertThat(lintProject(java(source))).isEqualTo("src/foo/Example.java:5: Warning: Should statically import CANADA [ShouldUseStaticImport]\n"
         + "    Locale.setDefault(Locale.CANADA);\n"
-        + "                      ~~~~~~~~~~~~~\n"
+        + "                             ~~~~~~\n"
         + "0 errors, 1 warnings\n");
   }
 
@@ -128,7 +128,7 @@ public class ShouldUseStaticImportDetectorTest extends LintDetectorTest {
 
     assertThat(lintProject(java(source))).isEqualTo("src/foo/Example.java:4: Warning: Should statically import asList [ShouldUseStaticImport]\n"
         + "    Arrays.asList(1, 2);\n"
-        + "    ~~~~~~~~~~~~~\n"
+        + "           ~~~~~~\n"
         + "0 errors, 1 warnings\n");
   }
 
@@ -144,7 +144,7 @@ public class ShouldUseStaticImportDetectorTest extends LintDetectorTest {
 
     assertThat(lintProject(java(source))).isEqualTo("src/foo/Example.java:4: Warning: Should statically import singletonList [ShouldUseStaticImport]\n"
         + "    Collections.singletonList(1);\n"
-        + "    ~~~~~~~~~~~~~~~~~~~~~~~~~\n"
+        + "                ~~~~~~~~~~~~~\n"
         + "0 errors, 1 warnings\n");
   }
 

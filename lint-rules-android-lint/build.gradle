@@ -1,27 +1,21 @@
-apply plugin: 'java'
+apply plugin: 'java-library'
 apply plugin: 'kotlin'
 
 targetCompatibility = JavaVersion.VERSION_1_7
 sourceCompatibility = JavaVersion.VERSION_1_7
 
-configurations {
-  lintChecks
-}
-
 dependencies {
-  compile deps.lint.api
-  compile deps.lint.checks
-  compile deps.kotlin.stdlib
+  compileOnly deps.lint.api
+  compileOnly deps.lint.checks
+  compileOnly deps.kotlin.stdlib
 
-  testCompile deps.lint.core
-  testCompile deps.lint.tests
-  testCompile deps.test.festassert
-
-  lintChecks files(jar)
+  testImplementation deps.lint.core
+  testImplementation deps.lint.tests
+  testImplementation deps.test.festassert
 }
 
 jar {
   manifest {
-    attributes('Lint-Registry': 'com.vanniktech.lintrules.android.IssueRegistry')
+    attributes('Lint-Registry-v2': 'com.vanniktech.lintrules.android.IssueRegistry')
   }
 }

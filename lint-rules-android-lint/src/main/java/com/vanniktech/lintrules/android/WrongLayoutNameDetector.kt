@@ -19,7 +19,7 @@ private val ALLOWED_VALUES = arrayListOf("activity_", "view_", "dialog_", "botto
 class WrongLayoutNameDetector : LayoutDetector() {
   override fun visitDocument(context: XmlContext, document: Document) {
     if (ALLOWED_VALUES.none { context.file.name.startsWith(it) }) {
-      context.report(ISSUE_WRONG_LAYOUT_NAME, context.getLocation(document), "Layout does not start with one of the following prefixes: ${ALLOWED_VALUES.joinToString()}")
+      context.report(ISSUE_WRONG_LAYOUT_NAME, document, context.getLocation(document), "Layout does not start with one of the following prefixes: ${ALLOWED_VALUES.joinToString()}")
     }
   }
 }

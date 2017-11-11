@@ -24,9 +24,8 @@ public abstract class SuperfluousDeclarationDetector extends LayoutDetector {
   @Override public final void visitAttribute(@NonNull final XmlContext context, @NonNull final Attr attribute) {
     final Element ownerElement = attribute.getOwnerElement();
     final boolean isToolsAttribute = "http://schemas.android.com/tools".equalsIgnoreCase(attribute.getNamespaceURI());
-    final boolean isSuppressed = context.getDriver().isSuppressed(context, issue(), attribute);
 
-    if (!isToolsAttribute && !isSuppressed) {
+    if (!isToolsAttribute) {
       final List<String> valuesForElement = values.get(ownerElement);
 
       if (valuesForElement != null) {
@@ -50,7 +49,8 @@ public abstract class SuperfluousDeclarationDetector extends LayoutDetector {
         final Set<String> distinctValues = new HashSet<>(valuesForElement);
 
         if (distinctValues.size() == 1) {
-          context.report(issue(), xmlContext.getLocation(entry.getKey()), message());
+          final Element element = entry.getKey();
+          xmlContext.report(issue(), element, xmlContext.getLocation(element), message());
         }
       }
     }

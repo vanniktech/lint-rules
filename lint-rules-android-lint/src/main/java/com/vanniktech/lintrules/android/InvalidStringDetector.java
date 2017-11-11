@@ -28,8 +28,7 @@ public class InvalidStringDetector extends ResourceXmlDetector {
     return folderType == ResourceFolderType.VALUES;
   }
 
-  @Override
-  public Collection<String> getApplicableElements() {
+  @Override public Collection<String> getApplicableElements() {
     return asList(
         TAG_STRING,
         TAG_STRING_ARRAY,
