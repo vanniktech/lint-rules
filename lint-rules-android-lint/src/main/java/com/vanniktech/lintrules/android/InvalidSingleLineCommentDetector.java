@@ -65,7 +65,7 @@ public final class InvalidSingleLineCommentDetector extends Detector implements 
       } else if (" ".equals(group) || group.trim().length() != group.length() - 1) {
         final Location location = Location.create(context.file, source, start, end);
         context.report(ISSUE_INVALID_SINGLE_LINE_COMMENT, location, "Comment contains trailing whitespace.");
-      } else if (!Character.isUpperCase(group.charAt(1))) {
+      } else if (Character.isLowerCase(group.charAt(1))) {
         final Location location = Location.create(context.file, source, start + 3, end + 4);
         context.report(ISSUE_INVALID_SINGLE_LINE_COMMENT, location, "Comments first word should be capitalized.");
       } else if (!group.endsWith(".") && !group.endsWith("?") && !group.endsWith("!") && !group.endsWith(")")) {
