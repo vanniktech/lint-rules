@@ -112,6 +112,18 @@ public class InvalidSingleLineCommentDetectorTest extends LintDetectorTest {
     assertThat(lintProject(java(source))).isEqualTo(NO_WARNINGS);
   }
 
+  public void testInvalidSingleLineCommentAllowsStartingDigit() throws Exception {
+    @Language("JAVA") final String source = ""
+        + "package foo;\n"
+        + "import android.content.res.Resources;\n"
+        + "public class Example {\n"
+        + "  public void foo() {\n"
+        + "    // 2 plus 4 equals 6.\n"
+        + "  }\n"
+        + "}";
+    assertThat(lintProject(java(source))).isEqualTo(NO_WARNINGS);
+  }
+
   public void testInvalidSingleLineCommentIgnoresNoInspection() throws Exception {
     @Language("JAVA") final String source = ""
         + "package foo;\n"
