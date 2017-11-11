@@ -23,7 +23,7 @@ class WrongTestMethodNameDetector : Detector(), Detector.UastScanner {
 
   class WrongTestMethodNameVisitor(private val context: JavaContext) : UElementHandler() {
     override fun visitMethod(method: UMethod) {
-      method.modifierList.annotations
+      context.evaluator.getAllAnnotations(method, true)
           .mapNotNull { it.qualifiedName?.split(".")?.lastOrNull() }
           .filter { it == "Test" }
           .filter { method.name.startsWith("test", ignoreCase = true) }

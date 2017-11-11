@@ -10,7 +10,7 @@ import com.android.tools.lint.detector.api.JavaContext
 import com.android.tools.lint.detector.api.Scope.JAVA_FILE
 import com.android.tools.lint.detector.api.Scope.TEST_SOURCES
 import com.android.tools.lint.detector.api.Severity.WARNING
-import com.intellij.psi.PsiModifierList
+import com.intellij.psi.PsiModifierListOwner
 import org.jetbrains.uast.UElement
 import org.jetbrains.uast.UMethod
 import org.jetbrains.uast.UVariable
@@ -146,17 +146,17 @@ class AnnotationOrderDetector : Detector(), UastScanner {
 
   class AnnotationOrderVisitor(private val context: JavaContext) : UElementHandler() {
     override fun visitVariable(variable: UVariable) {
-      variable.modifierList?.let { processAnnotations(variable, it) }
+      processAnnotations(variable, variable)
     }
 
     override fun visitMethod(method: UMethod) {
-      processAnnotations(method, method.modifierList)
+      processAnnotations(method, method)
     }
 
-    @Suppress("Detekt.LabeledExpression", "Detekt.ReturnCount", "Detekt.OptionalReturnKeyword") private fun processAnnotations(identifier: UElement, modifierList: PsiModifierList) {
+    @Suppress("Detekt.LabeledExpression", "Detekt.ReturnCount", "Detekt.OptionalReturnKeyword") private fun processAnnotations(element: UElement, modifierListOwner: PsiModifierListOwner) {
       var size = 0
 
-      val annotations = modifierList.annotations.mapNotNull { it.qualifiedName?.split(".")?.lastOrNull() }
+      val annotations = context.evaluator.getAllAnnotations(modifierListOwner, true).mapNotNull { it.qualifiedName?.split(".")?.lastOrNull() }
       val numberOfRecognizedAnnotations = annotations.count { ANNOTATION_ORDER.contains(it) }
       val isInCorrectOrder = ANNOTATION_ORDER.contains(annotations.firstOrNull()) && annotations
           .all {
@@ -181,7 +181,7 @@ class AnnotationOrderDetector : Detector(), UastScanner {
             .plus(annotations.filterNot { ANNOTATION_ORDER.contains(it) })
             .joinToString(separator = " ") { "@$it" }
 
-        context.report(ISSUE_WRONG_ANNOTATION_ORDER, identifier, context.getNameLocation(identifier), "Annotations are in wrong order. Should be $correctOrder")
+        context.report(ISSUE_WRONG_ANNOTATION_ORDER, element, context.getNameLocation(element), "Annotations are in wrong order. Should be $correctOrder")
       }
     }
   }
