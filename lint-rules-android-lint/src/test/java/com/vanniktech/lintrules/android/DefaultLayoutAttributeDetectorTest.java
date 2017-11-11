@@ -26,6 +26,17 @@ public final class DefaultLayoutAttributeDetectorTest extends LintDetectorTest {
         + "0 errors, 1 warnings\n");
   }
 
+  public void testTextStyleBold() throws Exception {
+    @Language("XML") final String source = "<TextView\n"
+        + "  xmlns:android=\"http://schemas.android.com/apk/res/android\"\n"
+        + "  android:layout_width=\"wrap_content\"\n"
+        + "  android:layout_height=\"wrap_content\"\n"
+        + "  android:textStyle=\"bold\"\n"
+        + "  />";
+
+    assertThat(lintProject(xml("/res/layout/ids.xml", source))).isEqualTo(NO_WARNINGS);
+  }
+
   public void testTextStyleNormalIgnored() throws Exception {
     @Language("XML") final String source = "<TextView\n"
         + "  xmlns:android=\"http://schemas.android.com/apk/res/android\"\n"
@@ -35,6 +46,14 @@ public final class DefaultLayoutAttributeDetectorTest extends LintDetectorTest {
         + "  android:textStyle=\"normal\"\n"
         + "  tools:ignore=\"DefaultLayoutAttribute\"\n"
         + "  />";
+
+    assertThat(lintProject(xml("/res/layout/ids.xml", source))).isEqualTo(NO_WARNINGS);
+  }
+
+  public void testShouldNotCrashWithStyle() throws Exception {
+    @Language("XML") final String source = "<TextView\n"
+        + "      style=\"?android:attr/borderlessButtonStyle\"\n"
+        + "      />";
 
     assertThat(lintProject(xml("/res/layout/ids.xml", source))).isEqualTo(NO_WARNINGS);
   }

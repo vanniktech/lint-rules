@@ -60,6 +60,14 @@ public class MatchingViewIdDetectorTest extends LintDetectorTest {
     assertThat(lintProject(xml("/res/layout/view_custom.xml", source))).isEqualTo(NO_WARNINGS);
   }
 
+  public void testShouldNotCrashWithStyle() throws Exception {
+    @Language("XML") final String source = "<TextView\n"
+        + "      style=\"?android:attr/borderlessButtonStyle\"\n"
+        + "      />";
+
+    assertThat(lintProject(xml("/res/layout/ids.xml", source))).isEqualTo(NO_WARNINGS);
+  }
+
   @Override protected Detector getDetector() {
     return new MatchingViewIdDetector();
   }

@@ -7,6 +7,7 @@ import com.android.tools.lint.detector.api.Issue;
 import com.android.tools.lint.detector.api.ResourceXmlDetector;
 import com.android.tools.lint.detector.api.XmlContext;
 import java.util.Collection;
+import java.util.EnumSet;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -14,6 +15,7 @@ import org.w3c.dom.NodeList;
 import static com.android.SdkConstants.TAG_PLURALS;
 import static com.android.SdkConstants.TAG_STRING;
 import static com.android.SdkConstants.TAG_STRING_ARRAY;
+import static com.android.resources.ResourceFolderType.VALUES;
 import static com.android.tools.lint.detector.api.Category.CORRECTNESS;
 import static com.android.tools.lint.detector.api.Scope.RESOURCE_FILE_SCOPE;
 import static com.android.tools.lint.detector.api.Severity.WARNING;
@@ -25,7 +27,7 @@ public class InvalidStringDetector extends ResourceXmlDetector {
       new Implementation(InvalidStringDetector.class, RESOURCE_FILE_SCOPE));
 
   @Override public boolean appliesTo(@NonNull final ResourceFolderType folderType) {
-    return folderType == ResourceFolderType.VALUES;
+    return EnumSet.of(VALUES).contains(folderType);
   }
 
   @Override public Collection<String> getApplicableElements() {

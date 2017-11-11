@@ -30,7 +30,6 @@ public final class RxJava2Detector extends Detector implements Detector.UastScan
       context.report(COMPOSITE_DISPOSABLE_DISPOSE, node, context.getNameLocation(node), "Using dispose() instead of clear()");
     }
 
-
     if ("addAll".equals(methodName) && evaluator.isMemberInClass(method, "io.reactivex.disposables.CompositeDisposable")) {
       context.report(COMPOSITE_DISPOSABLE_ADD_ALL, node, context.getNameLocation(node), "Using addAll() instead of add() separately");
     }

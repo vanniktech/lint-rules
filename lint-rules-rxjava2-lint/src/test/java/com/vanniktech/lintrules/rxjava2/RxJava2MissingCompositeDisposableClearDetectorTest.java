@@ -43,6 +43,16 @@ public class RxJava2MissingCompositeDisposableClearDetectorTest extends RxJavaLi
         + "1 errors, 0 warnings\n");
   }
 
+  public void testDisposableMissingClearIsIgnored() throws Exception {
+    @Language("JAVA") final String source = ""
+        + "package foo;\n"
+        + "import io.reactivex.disposables.Disposable;\n"
+        + "public class Example {\n"
+        + "  Disposable disposable;\n"
+        + "}";
+    assertThat(lintProject(stubDisposable, java(source))).isEqualTo(NO_WARNINGS);
+  }
+
   public void testMultipleCompositeDisposableMissingClear() throws Exception {
     @Language("JAVA") final String source = ""
         + "package foo;\n"

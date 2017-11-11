@@ -1,5 +1,6 @@
 package com.vanniktech.lintrules.android;
 
+import com.android.annotations.NonNull;
 import com.android.annotations.Nullable;
 import com.android.tools.lint.detector.api.Detector;
 import com.android.tools.lint.detector.api.Implementation;
@@ -194,12 +195,16 @@ import static com.android.tools.lint.detector.api.Severity.WARNING;
     REFERENCES_TO_STATICALLY_IMPORT.put("LENIENT", "org.mockito.quality.Strictness");
   }
 
-  @Nullable private static UFile getUFile(@Nullable final UElement element) {
+  @NonNull private static UFile getUFile(@Nullable final UElement element) {
     if (element instanceof UFile) {
       return (UFile) element;
     }
 
-    return element != null ? getUFile(element.getUastParent()) : null;
+    if (element != null) {
+      return getUFile(element.getUastParent());
+    }
+
+    throw new IllegalArgumentException("Can't get file from element");
   }
 
   @Override public List<String> getApplicableMethodNames() {
@@ -228,14 +233,13 @@ import static com.android.tools.lint.detector.api.Severity.WARNING;
   @Override public void visitReference(final JavaContext context, final UReferenceExpression expression, final PsiElement referenced) {
     final String name = expression.asRenderString();
     final UFile uFile = getUFile(expression);
+
     boolean isStaticallyImported = false;
 
-    if (uFile != null) {
-      for (final UImportStatement uImportStatement : uFile.getImports()) {
-        if (uImportStatement.asSourceString().contains(name)) {
-          isStaticallyImported = true;
-          break;
-        }
+    for (final UImportStatement uImportStatement : uFile.getImports()) {
+      if (uImportStatement.asSourceString().contains(name)) {
+        isStaticallyImported = true;
+        break;
       }
     }
 

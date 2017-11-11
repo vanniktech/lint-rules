@@ -14,6 +14,7 @@ import com.android.tools.lint.detector.api.Severity.WARNING
 import com.android.tools.lint.detector.api.XmlContext
 import org.w3c.dom.Attr
 import org.w3c.dom.Element
+import java.util.EnumSet
 
 @JvmField val ISSUE_RAW_DIMEN = Issue.create("RawDimen",
     "This value should be defined as a dimen.",
@@ -21,7 +22,7 @@ import org.w3c.dom.Element
     Implementation(RawDimenDetector::class.java, RESOURCE_FILE_SCOPE))
 
 class RawDimenDetector : ResourceXmlDetector() {
-  override fun appliesTo(folderType: ResourceFolderType) = folderType == LAYOUT || folderType == DRAWABLE
+  override fun appliesTo(folderType: ResourceFolderType) = EnumSet.of(LAYOUT, DRAWABLE).contains(folderType)
 
   override fun getApplicableElements() = ALL
 

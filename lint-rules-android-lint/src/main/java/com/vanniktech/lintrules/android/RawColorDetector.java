@@ -7,6 +7,7 @@ import com.android.tools.lint.detector.api.Issue;
 import com.android.tools.lint.detector.api.ResourceXmlDetector;
 import com.android.tools.lint.detector.api.XmlContext;
 import java.util.Collection;
+import java.util.EnumSet;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
@@ -24,7 +25,7 @@ public final class RawColorDetector extends ResourceXmlDetector {
       new Implementation(RawColorDetector.class, RESOURCE_FILE_SCOPE));
 
   @Override public boolean appliesTo(@NonNull final ResourceFolderType folderType) {
-    return folderType == LAYOUT || folderType == DRAWABLE;
+    return EnumSet.of(LAYOUT, DRAWABLE).contains(folderType);
   }
 
   @Override public Collection<String> getApplicableElements() {

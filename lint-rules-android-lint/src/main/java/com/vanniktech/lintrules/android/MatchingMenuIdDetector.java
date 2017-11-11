@@ -7,6 +7,7 @@ import com.android.tools.lint.detector.api.Issue;
 import com.android.tools.lint.detector.api.ResourceXmlDetector;
 import com.android.tools.lint.detector.api.XmlContext;
 import java.util.Collection;
+import java.util.EnumSet;
 import org.w3c.dom.Attr;
 
 import static com.android.SdkConstants.ATTR_ID;
@@ -23,7 +24,7 @@ public final class MatchingMenuIdDetector extends ResourceXmlDetector {
       new Implementation(MatchingMenuIdDetector.class, RESOURCE_FILE_SCOPE));
 
   @Override public boolean appliesTo(@NonNull final ResourceFolderType folderType) {
-    return folderType == MENU;
+    return EnumSet.of(MENU).contains(folderType);
   }
 
   @Override public Collection<String> getApplicableAttributes() {
