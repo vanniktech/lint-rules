@@ -6,6 +6,7 @@ import com.android.tools.lint.detector.api.Detector;
 import com.android.tools.lint.detector.api.Implementation;
 import com.android.tools.lint.detector.api.Issue;
 import com.android.tools.lint.detector.api.JavaContext;
+import com.android.tools.lint.detector.api.UastLintUtils;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiMethod;
 import java.util.ArrayList;
@@ -243,7 +244,10 @@ import static com.android.tools.lint.detector.api.Severity.WARNING;
       }
     }
 
-    if (!isStaticallyImported) {
+
+    final boolean matches = UastLintUtils.getQualifiedName(referenced).equals(REFERENCES_TO_STATICALLY_IMPORT.get(name) + "." + name);
+
+    if (!isStaticallyImported && matches) {
       context.report(ISSUE_SHOULD_USE_STATIC_IMPORT, expression, context.getLocation(expression), "Should statically import " + name);
     }
   }
