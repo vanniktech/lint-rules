@@ -18,6 +18,11 @@ import org.jetbrains.uast.UVariable
 import java.util.EnumSet
 
 val ANNOTATION_ORDER = listOf(
+    // Suppressing the suppressed.
+    "Suppress",
+    "SuppressLint",
+    "SuppressWarnings",
+    // Other important things.
     "Deprecated",
     "Override",
     "Test",
@@ -26,18 +31,18 @@ val ANNOTATION_ORDER = listOf(
     "Documented",
     "Retention",
     // Dagger / JSR 305.
+    "Provides",
+    "Singleton",
     "Component",
     "SubComponent",
     "Module",
     "Inject",
-    "Provides",
     "Binds",
     "BindsInstance",
     "BindsOptionalOf",
     "IntoMap",
     "IntoSet",
     "Qualifier",
-    "Singleton",
     "Reusable",
     "Named",
     "MapKey",
@@ -61,10 +66,6 @@ val ANNOTATION_ORDER = listOf(
     "BindString",
     "BindView",
     "BindViews",
-    // Suppressing the suppressed.
-    "Suppress",
-    "SuppressLint",
-    "SuppressWarnings",
     // Json.
     "Json",
     "JsonQualifier",

@@ -188,6 +188,32 @@ class AnnotationOrderDetectorTest : LintDetectorTest() {
         |0 errors, 1 warnings""".trimMargin())
   }
 
+  fun testSingletonBeforeComponent() {
+    @Language("java") val source = """
+      package foo;
+
+      @Component @Singleton public interface MyComponent {
+      }""".trimMargin()
+
+    assertThat(lintProject(java(source))).startsWith("""src/foo/MyComponent.java:3: Warning: Annotations are in wrong order. Should be @Singleton @Component [WrongAnnotationOrder]
+        |      @Component @Singleton public interface MyComponent {
+        |                                             ~~~~~~~~~~~
+        |0 errors, 1 warnings""".trimMargin())
+  }
+
+  fun testSuppressWarningsBeforeModule() {
+    @Language("java") val source = """
+      package foo;
+
+      @Module @SuppressWarnings public interface MyModule {
+      }""".trimMargin()
+
+    assertThat(lintProject(java(source))).startsWith("""src/foo/MyModule.java:3: Warning: Annotations are in wrong order. Should be @SuppressWarnings @Module [WrongAnnotationOrder]
+        |      @Module @SuppressWarnings public interface MyModule {
+        |                                                 ~~~~~~~~
+        |0 errors, 1 warnings""".trimMargin())
+  }
+
   fun testInjectBeforeCustom() {
     @Language("java") val source = """
       package foo;
