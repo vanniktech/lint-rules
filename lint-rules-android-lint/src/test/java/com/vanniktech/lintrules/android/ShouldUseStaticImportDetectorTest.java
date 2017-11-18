@@ -60,6 +60,20 @@ public class ShouldUseStaticImportDetectorTest extends LintDetectorTest {
         + "0 errors, 1 warnings\n");
   }
 
+  public void testSameNameButNoMatch() throws Exception {
+    @Language("JAVA") final String source = ""
+        + "package foo;\n"
+        + "import java.util.Locale;\n"
+        + "public class Example {\n"
+        + "  enum Something { DEBUG, RELEASE } \n"
+        + "  public void foo() {\n"
+        + "    Something ignore = Something.RELEASE;\n"
+        + "  }\n"
+        + "}";
+
+    assertThat(lintProject(java(source))).isEqualTo(NO_WARNINGS);
+  }
+
   public void testSetLocaleCanada() throws Exception {
     @Language("JAVA") final String source = ""
         + "package foo;\n"
