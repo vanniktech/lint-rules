@@ -11,6 +11,7 @@ import com.android.tools.lint.detector.api.Scope.JAVA_FILE
 import com.android.tools.lint.detector.api.Scope.TEST_SOURCES
 import com.android.tools.lint.detector.api.Severity.WARNING
 import com.intellij.psi.PsiModifierListOwner
+import org.jetbrains.uast.UClass
 import org.jetbrains.uast.UElement
 import org.jetbrains.uast.UMethod
 import org.jetbrains.uast.UVariable
@@ -140,7 +141,7 @@ val ANNOTATION_ORDER = listOf(
     Implementation(AnnotationOrderDetector::class.java, EnumSet.of(JAVA_FILE, TEST_SOURCES)))
 
 class AnnotationOrderDetector : Detector(), UastScanner {
-  override fun getApplicableUastTypes() = listOf<Class<out UElement>>(UVariable::class.java, UMethod::class.java)
+  override fun getApplicableUastTypes() = listOf<Class<out UElement>>(UVariable::class.java, UMethod::class.java, UClass::class.java)
 
   override fun createUastHandler(context: JavaContext) = AnnotationOrderVisitor(context)
 
@@ -152,6 +153,10 @@ class AnnotationOrderDetector : Detector(), UastScanner {
 
     override fun visitMethod(method: UMethod) {
       processAnnotations(method, method)
+    }
+
+    override fun visitClass(clazz: UClass) {
+      processAnnotations(clazz, clazz)
     }
 
     @Suppress("Detekt.LabeledExpression", "Detekt.ReturnCount", "Detekt.OptionalReturnKeyword") private fun processAnnotations(element: UElement, modifierListOwner: PsiModifierListOwner) {

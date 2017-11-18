@@ -49,6 +49,19 @@ class AnnotationOrderDetectorTest : LintDetectorTest() {
         |0 errors, 1 warnings""".trimMargin())
   }
 
+  fun testOverrideComesFirstOnClass() {
+    @Language("java") val source = """
+      package foo;
+
+      @Test @Override public class MyTest {
+      }""".trimMargin()
+
+    assertThat(lintProject(java(source))).startsWith("""src/foo/MyTest.java:3: Warning: Annotations are in wrong order. Should be @Override @Test [WrongAnnotationOrder]
+        |      @Test @Override public class MyTest {
+        |                                   ~~~~~~
+        |0 errors, 1 warnings""".trimMargin())
+  }
+
   fun testOverrideComesFirstOnParameters() {
     @Language("java") val source = """
       package foo;
