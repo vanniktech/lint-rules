@@ -22,4 +22,4 @@ comments:
 
 complexity:
   TooManyFunctions:
-    threshold: 30
+    threshold: 50
