@@ -5,7 +5,7 @@ import com.vanniktech.lintrules.android.InvalidSingleLineCommentDetector.ISSUE_I
 import com.vanniktech.lintrules.android.InvalidStringDetector.ISSUE_INVALID_STRING
 import com.vanniktech.lintrules.android.MatchingMenuIdDetector.ISSUE_MATCHING_MENU_ID
 import com.vanniktech.lintrules.android.MatchingViewIdDetector.ISSUE_MATCHING_VIEW_ID
-import com.vanniktech.lintrules.android.RawColorDetector.ISSUE_RAW_COLOR
+import com.vanniktech.lintrules.android.RawColorDetector.Companion.ISSUE_RAW_COLOR
 import com.vanniktech.lintrules.android.ShouldUseStaticImportDetector.ISSUE_SHOULD_USE_STATIC_IMPORT
 import com.vanniktech.lintrules.android.SuperfluousMarginDeclarationDetector.SUPERFLUOUS_MARGIN_DECLARATION
 import com.vanniktech.lintrules.android.SuperfluousPaddingDeclarationDetector.SUPERFLUOUS_PADDING_DECLARATION
