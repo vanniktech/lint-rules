@@ -1,29 +1,40 @@
 package com.vanniktech.lintrules.android
 
-import com.android.tools.lint.checks.infrastructure.LintDetectorTest
-import com.vanniktech.lintrules.android.AndroidDetectorTest.NO_WARNINGS
-import org.fest.assertions.api.Assertions.assertThat
-import org.intellij.lang.annotations.Language
+import com.android.tools.lint.checks.infrastructure.TestFiles.xml
+import com.android.tools.lint.checks.infrastructure.TestLintTask.lint
+import org.junit.Test
 
-class MissingXmlHeaderDetectorTest : LintDetectorTest() {
-  fun testHasXmlHeader() {
-    @Language("XML") val source = """<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-    <resources>"
-    </resources>"""
-
-    assertThat(lintProject(LintDetectorTest.xml("/res/values/strings.xml", source))).isEqualTo(NO_WARNINGS)
+class MissingXmlHeaderDetectorTest {
+  @Test fun hasXmlHeader() {
+    lint()
+      .files(xml("res/values/strings.xml", """
+          |<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+          |<resources/>
+          """.trimMargin())
+      )
+      .issues(ISSUE_MISSING_XML_HEADER)
+      .run()
+      .expectClean()
   }
 
-  fun testMissingHeader() {
-    @Language("XML") val source = "<resources/>"
-
-    assertThat(lintProject(LintDetectorTest.xml("/res/values/strings.xml", source))).startsWith("""res/values/strings.xml: Warning: Missing the xml header. [MissingXmlHeader]
-        |0 errors, 1 warnings""".trimMargin())
+  @Test fun missingHeader() {
+    lint()
+      .files(xml("res/values/strings.xml", """
+          |<resources/>
+          """.trimMargin())
+      )
+      .issues(ISSUE_MISSING_XML_HEADER)
+      .run()
+      .expect("""
+          |res/values/strings.xml:1: Warning: Missing an xml header. [MissingXmlHeader]
+          |<resources/>
+          |~~~~~~~~~~~~
+          |0 errors, 1 warnings
+          """.trimMargin())
+      .expectFixDiffs("""
+          |Fix for res/values/strings.xml line 0: Add xml header:
+          |@@ -1 +1
+          |+ <?xml version="1.0" encoding="utf-8"?>
+          """.trimMargin() + "\n")
   }
-
-  override fun getDetector() = MissingXmlHeaderDetector()
-
-  override fun getIssues() = listOf(ISSUE_MISSING_XML_HEADER)
-
-  override fun allowCompilationErrors() = false
 }
