@@ -4,11 +4,10 @@ apply plugin: 'com.vanniktech.android.junit.jacoco'
 
 buildscript {
   ext.versions = [
-    kotlin: '1.1.51',
+    kotlin: '1.1.60',
     minSdk: 9,
-    targetSdk: 26,
-    compileSdk: 26,
-    lint: '26.0.0',
+    compileSdk: 27,
+    lint: '26.0.1',
   ]
 
   ext.deps = [
@@ -34,7 +33,7 @@ buildscript {
   dependencies {
     classpath 'com.vanniktech:gradle-android-junit-jacoco-plugin:0.10.0'
     classpath 'com.vanniktech:gradle-code-quality-tools-plugin:0.8.0'
-    classpath 'com.android.tools.build:gradle:3.0.0'
+    classpath 'com.android.tools.build:gradle:3.0.1'
     classpath 'com.github.ben-manes:gradle-versions-plugin:0.17.0'
     classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin}"
   }
@@ -48,10 +47,10 @@ codeQualityTools {
     toolVersion = '5.8.1'
   }
   ktlint {
-    toolVersion = '0.12.0'
+    toolVersion = '0.12.1'
   }
   detekt {
-    toolVersion = '1.0.0.RC5-3'
+    toolVersion = '1.0.0.RC5-4'
   }
   errorProne {
     toolVersion = '2.1.2'
@@ -70,6 +69,6 @@ allprojects {
 }
 
 task wrapper(type: Wrapper) {
-  gradleVersion = '4.2.1'
+  gradleVersion = '4.3.1'
   distributionType = Wrapper.DistributionType.ALL
 }
