@@ -1,30 +1,36 @@
 package com.vanniktech.lintrules.android
 
-import com.android.tools.lint.checks.infrastructure.LintDetectorTest
-import com.vanniktech.lintrules.android.AndroidDetectorTest.NO_WARNINGS
-import org.fest.assertions.api.Assertions.assertThat
+import com.android.tools.lint.checks.infrastructure.TestFiles.xml
+import com.android.tools.lint.checks.infrastructure.TestLintTask.lint
 import org.intellij.lang.annotations.Language
+import org.junit.Test
 
-class WrongLayoutNameDetectorTest : LintDetectorTest() {
-  fun testActivityFile() {
-    @Language("XML") val source = """<?xml version="1.0" encoding="UTF-8"?><merge/>"""
-    assertThat(lintProject(xml("/res/layout/activity_home.xml", source))).isEqualTo(NO_WARNINGS)
+class WrongLayoutNameDetectorTest {
+  @Test fun activityFile() {
+    lint()
+      .files(xml("/res/layout/activity_home.xml", "<merge/>"))
+      .issues(ISSUE_WRONG_LAYOUT_NAME)
+      .run()
+      .expectClean()
   }
 
-  fun testRandomFile() {
-    @Language("XML") val source = """<?xml version="1.0" encoding="UTF-8"?><merge/>"""
-    assertThat(lintProject(xml("/res/layout/random.xml", source))).startsWith("""res/layout/random.xml: Warning: Layout does not start with one of the following prefixes: activity_, view_, dialog_, bottom_sheet_, adapter_item_, divider_, space_ [WrongLayoutName]
-        |0 errors, 1 warnings""".trimMargin())
+  @Test fun randomLayoutFile() {
+    @Language("XML") val source = "<merge/>"
+    lint()
+      .files(xml("/res/layout/random.xml", source))
+      .issues(ISSUE_WRONG_LAYOUT_NAME)
+      .run()
+      .expect("""
+          |res/layout/random.xml: Warning: Layout does not start with one of the following prefixes: activity_, view_, fragment_, dialog_, bottom_sheet_, adapter_item_, divider_, space_ [WrongLayoutName]
+          |0 errors, 1 warnings
+          """.trimMargin())
   }
 
-  fun testColorFile() {
-    @Language("XML") val source = """<?xml version="1.0" encoding="UTF-8"?><resources/>"""
-    assertThat(lintProject(xml("/res/values/color.xml", source))).isEqualTo(NO_WARNINGS)
+  @Test fun ignoreColorFile() {
+    lint()
+      .files(xml("/res/values/color.xml", "<resources/>"))
+      .issues(ISSUE_WRONG_LAYOUT_NAME)
+      .run()
+      .expectClean()
   }
-
-  override fun getDetector() = WrongLayoutNameDetector()
-
-  override fun getIssues() = listOf(ISSUE_WRONG_LAYOUT_NAME)
-
-  override fun allowCompilationErrors() = false
 }
