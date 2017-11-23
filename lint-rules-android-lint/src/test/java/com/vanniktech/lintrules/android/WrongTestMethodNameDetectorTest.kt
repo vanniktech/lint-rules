@@ -1,121 +1,118 @@
 package com.vanniktech.lintrules.android
 
-import com.android.tools.lint.checks.infrastructure.LintDetectorTest
-import com.vanniktech.lintrules.android.AndroidDetectorTest.NO_WARNINGS
-import org.fest.assertions.api.Assertions.assertThat
-import org.intellij.lang.annotations.Language
+import com.android.tools.lint.checks.infrastructure.TestFiles.java
+import com.android.tools.lint.checks.infrastructure.TestLintTask.lint
+import org.junit.Test
 
-class WrongTestMethodNameDetectorTest : LintDetectorTest() {
-  private val stubTestJUnit: LintDetectorTest.TestFile = java(""
-      + "package org.junit;\n"
-      + "public @interface Test {\n"
-      + "}")
+class WrongTestMethodNameDetectorTest {
+  private val stubTestJUnit = java("""
+    |package org.junit;
+    |
+    |public @interface Test { }
+    """.trimMargin())
 
-  private val stubTestCustom: LintDetectorTest.TestFile = java(""
-      + "package my.custom;\n"
-      + "public @interface Test {\n"
-      + "}")
+  private val stubTestCustom = java("""
+    |package my.custom;
+    |
+    |public @interface Test { }
+    """.trimMargin())
 
-  private val stubSomething: LintDetectorTest.TestFile = java(""
-      + "package my.custom;\n"
-      + "public @interface Something {\n"
-      + "}")
+  private val stubSomething = java("""
+    |package my.custom;
+    |
+    |public @interface Something { }
+    """.trimMargin())
 
-  fun testMethodNotStartingWithTest() {
-    @Language("java") val source = """
-      package foo;
-
-      public class MyTest {
-        public void myTest() {
-
-        }
-      }""".trimMargin()
-
-    assertThat(lintProject(java(source))).isEqualTo(NO_WARNINGS)
+  @Test fun methodStartingWithTest() {
+    lint()
+      .files(java("""
+          |package foo;
+          |
+          |public class Something {
+          |  public void testThis() { }
+          |}
+          """.trimMargin())
+      )
+      .issues(ISSUE_WRONG_TEST_METHOD_NAME)
+      .run()
+      .expectClean()
   }
 
-  fun testNormalMethodStartingWithTest() {
-    @Language("java") val source = """
-      package foo;
-
-      public class MyTest {
-        public void testSomething() {
-
-        }
-      }""".trimMargin()
-
-    assertThat(lintProject(java(source))).isEqualTo(NO_WARNINGS)
+  @Test fun methodStartingWithTestAndSomethingAnnotation() {
+    lint()
+      .files(stubSomething, java("""
+          |package foo;
+          |
+          |import my.custom.Something;
+          |
+          |public class MyTest {
+          |  @Something public void test() { }
+          |}
+          """.trimMargin())
+      )
+      .issues(ISSUE_WRONG_TEST_METHOD_NAME)
+      .run()
+      .expectClean()
   }
 
-  fun testJUnitMethodStartingWithTest() {
-    @Language("java") val source = """
-      package foo;
-
-      import org.junit.Test;
-
-      public class MyTest {
-        @Test public void testSomething() {
-
-        }
-      }""".trimMargin()
-
-    assertThat(lintProject(stubTestJUnit, java(source))).startsWith("""src/foo/MyTest.java:6: Warning: Test method starts with test. [WrongTestMethodName]
-        |        @Test public void testSomething() {
-        |                          ~~~~~~~~~~~~~
-        |0 errors, 1 warnings""".trimMargin())
+  @Test fun methodNotStartingWithTestAndTestAnnotation() {
+    lint()
+      .files(stubTestJUnit, java("""
+          |package foo;
+          |
+          |import org.junit.Test;
+          |
+          |public class MyTest {
+          |  @Test public void myTest() { }
+          |}
+          """.trimMargin())
+      )
+      .issues(ISSUE_WRONG_TEST_METHOD_NAME)
+      .run()
+      .expectClean()
   }
 
-  fun testJCustomMethodStartingWithTest() {
-    @Language("java") val source = """
-      package foo;
-
-      import my.custom.Test;
-
-      public class MyTest {
-        @Test public void testSomething() {
-
-        }
-      }""".trimMargin()
-
-    assertThat(lintProject(stubTestCustom, java(source))).startsWith("""src/foo/MyTest.java:6: Warning: Test method starts with test. [WrongTestMethodName]
-        |        @Test public void testSomething() {
-        |                          ~~~~~~~~~~~~~
-        |0 errors, 1 warnings""".trimMargin())
+  @Test fun methodStartingWithTestAndJUnitTestAnnotation() {
+    lint()
+      .files(stubTestJUnit, java("""
+          |package foo;
+          |
+          |import org.junit.Test;
+          |
+          |public class MyTest {
+          |  @Test public void test() { }
+          |}
+          """.trimMargin())
+      )
+      .issues(ISSUE_WRONG_TEST_METHOD_NAME)
+      .run()
+      .expect("""
+        |src/foo/MyTest.java:6: Warning: Test method starts with test. [WrongTestMethodName]
+        |  @Test public void test() { }
+        |                    ~~~~
+        |0 errors, 1 warnings
+        """.trimMargin())
   }
 
-  fun testSomethingMethodStartingWithTest() {
-    @Language("java") val source = """
-      package foo;
-
-      import my.custom.Something;
-
-      public class MyTest {
-        @Something public void testSomething() {
-
-        }
-      }""".trimMargin()
-
-    assertThat(lintProject(stubSomething, java(source))).isEqualTo(NO_WARNINGS)
+  @Test fun methodStartingWithTestAndCustomTestAnnotation() {
+    lint()
+      .files(stubTestCustom, java("""
+          |package foo;
+          |
+          |import my.custom.Test;
+          |
+          |public class MyTest {
+          |  @Test public void test() { }
+          |}
+          """.trimMargin())
+      )
+      .issues(ISSUE_WRONG_TEST_METHOD_NAME)
+      .run()
+      .expect("""
+        |src/foo/MyTest.java:6: Warning: Test method starts with test. [WrongTestMethodName]
+        |  @Test public void test() { }
+        |                    ~~~~
+        |0 errors, 1 warnings
+        """.trimMargin())
   }
-
-  fun testJUnitMethodStartingNotWithTest() {
-    @Language("java") val source = """
-      package foo;
-
-      import org.junit.Test;
-
-      public class MyTest {
-        @Test public void something() {
-
-        }
-      }""".trimMargin()
-
-    assertThat(lintProject(stubTestJUnit, java(source))).isEqualTo(NO_WARNINGS)
-  }
-
-  override fun getDetector() = WrongTestMethodNameDetector()
-
-  override fun getIssues() = listOf(ISSUE_WRONG_TEST_METHOD_NAME)
-
-  override fun allowCompilationErrors() = false
 }
