@@ -20,8 +20,7 @@ public class WrongConstraintLayoutUsageDetectorTest extends LintDetectorTest {
         + "      android:layout_width=\"wrap_content\"\n"
         + "      android:layout_height=\"wrap_content\"\n"
         + "      app:layout_constraintLeft_toLeftOf=\"parent\"\n"
-        + "      tools:ignore=\"WrongConstraintLayoutUsage\"\n"
-        + "      />";
+        + "      tools:ignore=\"WrongConstraintLayoutUsage\"/>";
 
     assertThat(lintProject(xml("/res/layout/ids.xml", source))).isEqualTo(NO_WARNINGS);
   }
@@ -32,11 +31,10 @@ public class WrongConstraintLayoutUsageDetectorTest extends LintDetectorTest {
         + "      xmlns:app=\"http://schemas.android.com/apk/res-auto\"\n"
         + "      android:layout_width=\"wrap_content\"\n"
         + "      android:layout_height=\"wrap_content\"\n"
-        + "      app:layout_constraintLeft_toLeftOf=\"parent\"\n"
-        + "      />";
+        + "      app:layout_constraintLeft_toLeftOf=\"parent\"/>";
 
     assertThat(lintProject(xml("/res/layout/ids.xml", source))).isEqualTo("res/layout/ids.xml:6: Error: This attribute won't work with RTL. Please use layout_constraintStart_toStartOf instead. [WrongConstraintLayoutUsage]\n"
-        + "      app:layout_constraintLeft_toLeftOf=\"parent\"\n"
+        + "      app:layout_constraintLeft_toLeftOf=\"parent\"/>\n"
         + "      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n"
         + "1 errors, 0 warnings\n");
   }
@@ -47,11 +45,10 @@ public class WrongConstraintLayoutUsageDetectorTest extends LintDetectorTest {
         + "      xmlns:app=\"http://schemas.android.com/apk/res-auto\"\n"
         + "      android:layout_width=\"wrap_content\"\n"
         + "      android:layout_height=\"wrap_content\"\n"
-        + "      app:layout_constraintLeft_toRightOf=\"parent\"\n"
-        + "      />";
+        + "      app:layout_constraintLeft_toRightOf=\"parent\"/>";
 
     assertThat(lintProject(xml("/res/layout/ids.xml", source))).isEqualTo("res/layout/ids.xml:6: Error: This attribute won't work with RTL. Please use layout_constraintStart_toEndOf instead. [WrongConstraintLayoutUsage]\n"
-        + "      app:layout_constraintLeft_toRightOf=\"parent\"\n"
+        + "      app:layout_constraintLeft_toRightOf=\"parent\"/>\n"
         + "      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n"
         + "1 errors, 0 warnings\n");
   }
@@ -62,11 +59,10 @@ public class WrongConstraintLayoutUsageDetectorTest extends LintDetectorTest {
         + "      xmlns:app=\"http://schemas.android.com/apk/res-auto\"\n"
         + "      android:layout_width=\"wrap_content\"\n"
         + "      android:layout_height=\"wrap_content\"\n"
-        + "      app:layout_constraintRight_toRightOf=\"parent\"\n"
-        + "      />";
+        + "      app:layout_constraintRight_toRightOf=\"parent\"/>";
 
     assertThat(lintProject(xml("/res/layout/ids.xml", source))).isEqualTo("res/layout/ids.xml:6: Error: This attribute won't work with RTL. Please use layout_constraintEnd_toEndOf instead. [WrongConstraintLayoutUsage]\n"
-        + "      app:layout_constraintRight_toRightOf=\"parent\"\n"
+        + "      app:layout_constraintRight_toRightOf=\"parent\"/>\n"
         + "      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n"
         + "1 errors, 0 warnings\n");
   }
@@ -77,19 +73,17 @@ public class WrongConstraintLayoutUsageDetectorTest extends LintDetectorTest {
         + "      xmlns:app=\"http://schemas.android.com/apk/res-auto\"\n"
         + "      android:layout_width=\"wrap_content\"\n"
         + "      android:layout_height=\"wrap_content\"\n"
-        + "      app:layout_constraintRight_toLeftOf=\"parent\"\n"
-        + "      />";
+        + "      app:layout_constraintRight_toLeftOf=\"parent\"/>";
 
     assertThat(lintProject(xml("/res/layout/ids.xml", source))).isEqualTo("res/layout/ids.xml:6: Error: This attribute won't work with RTL. Please use layout_constraintEnd_toStartOf instead. [WrongConstraintLayoutUsage]\n"
-        + "      app:layout_constraintRight_toLeftOf=\"parent\"\n"
+        + "      app:layout_constraintRight_toLeftOf=\"parent\"/>\n"
         + "      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n"
         + "1 errors, 0 warnings\n");
   }
 
   public void testShouldNotCrashWithStyle() throws Exception {
     @Language("XML") final String source = "<TextView\n"
-        + "      style=\"?android:attr/borderlessButtonStyle\"\n"
-        + "      />";
+        + "      style=\"?android:attr/borderlessButtonStyle\"/>";
 
     assertThat(lintProject(xml("/res/layout/ids.xml", source))).isEqualTo(NO_WARNINGS);
   }

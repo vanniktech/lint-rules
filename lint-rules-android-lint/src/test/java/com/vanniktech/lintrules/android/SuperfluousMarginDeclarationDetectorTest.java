@@ -107,15 +107,13 @@ public class SuperfluousMarginDeclarationDetectorTest extends LintDetectorTest {
         + "      android:layout_width=\"match_parent\"\n"
         + "      android:layout_height=\"wrap_content\"\n"
         + "      android:layout_marginStart=\"16dp\"\n"
-        + "      android:layout_marginEnd=\"16dp\"\n"
-        + "      />\n"
+        + "      android:layout_marginEnd=\"16dp\"\n/>"
         + "\n"
         + "  <View\n"
         + "      android:layout_width=\"match_parent\"\n"
         + "      android:layout_height=\"match_parent\"\n"
         + "      android:layout_marginTop=\"16dp\"\n"
-        + "      android:layout_marginBottom=\"16dp\"\n"
-        + "      />\n"
+        + "      android:layout_marginBottom=\"16dp\"\n/>"
         + "\n"
         + "</merge>\n";
 

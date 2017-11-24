@@ -17,11 +17,10 @@ public final class DefaultLayoutAttributeDetectorTest extends LintDetectorTest {
         + "  xmlns:android=\"http://schemas.android.com/apk/res/android\"\n"
         + "  android:layout_width=\"wrap_content\"\n"
         + "  android:layout_height=\"wrap_content\"\n"
-        + "  android:textStyle=\"normal\"\n"
-        + "  />";
+        + "  android:textStyle=\"normal\"/>";
 
     assertThat(lintProject(xml("/res/layout/ids.xml", source))).isEqualTo("res/layout/ids.xml:5: Warning: textStyle=\"normal\" is the default and hence you don't need to specify it. [DefaultLayoutAttribute]\n"
-        + "  android:textStyle=\"normal\"\n"
+        + "  android:textStyle=\"normal\"/>\n"
         + "                     ~~~~~~\n"
         + "0 errors, 1 warnings\n");
   }
@@ -31,8 +30,7 @@ public final class DefaultLayoutAttributeDetectorTest extends LintDetectorTest {
         + "  xmlns:android=\"http://schemas.android.com/apk/res/android\"\n"
         + "  android:layout_width=\"wrap_content\"\n"
         + "  android:layout_height=\"wrap_content\"\n"
-        + "  android:textStyle=\"bold\"\n"
-        + "  />";
+        + "  android:textStyle=\"bold\"/>";
 
     assertThat(lintProject(xml("/res/layout/ids.xml", source))).isEqualTo(NO_WARNINGS);
   }
@@ -44,16 +42,14 @@ public final class DefaultLayoutAttributeDetectorTest extends LintDetectorTest {
         + "  android:layout_width=\"wrap_content\"\n"
         + "  android:layout_height=\"wrap_content\"\n"
         + "  android:textStyle=\"normal\"\n"
-        + "  tools:ignore=\"DefaultLayoutAttribute\"\n"
-        + "  />";
+        + "  tools:ignore=\"DefaultLayoutAttribute\"/>";
 
     assertThat(lintProject(xml("/res/layout/ids.xml", source))).isEqualTo(NO_WARNINGS);
   }
 
   public void testShouldNotCrashWithStyle() throws Exception {
     @Language("XML") final String source = "<TextView\n"
-        + "      style=\"?android:attr/borderlessButtonStyle\"\n"
-        + "      />";
+        + "      style=\"?android:attr/borderlessButtonStyle\"/>";
 
     assertThat(lintProject(xml("/res/layout/ids.xml", source))).isEqualTo(NO_WARNINGS);
   }

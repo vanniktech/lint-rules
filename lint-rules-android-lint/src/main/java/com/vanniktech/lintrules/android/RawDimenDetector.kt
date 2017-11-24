@@ -16,7 +16,7 @@ import org.w3c.dom.Attr
 import org.w3c.dom.Element
 import java.util.EnumSet
 
-@JvmField val ISSUE_RAW_DIMEN = Issue.create("RawDimen",
+val ISSUE_RAW_DIMEN = Issue.create("RawDimen",
     "This value should be defined as a dimen.",
     "This value should be defined as a dimen.", CORRECTNESS, 8, WARNING,
     Implementation(RawDimenDetector::class.java, RESOURCE_FILE_SCOPE))

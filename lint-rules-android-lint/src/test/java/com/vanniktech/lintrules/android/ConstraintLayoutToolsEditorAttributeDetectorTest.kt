@@ -9,8 +9,7 @@ class ConstraintLayoutToolsEditorAttributeDetectorTest : LintDetectorTest() {
   fun testAndroidLayoutEditor() {
     @Language("XML") val source = """<TextView
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_editor_absoluteX="4dp"
-        />"""
+        android:layout_editor_absoluteX="4dp"/>"""
 
     assertThat(lintProject(xml("/res/layout/layout.xml", source))).isEqualTo(NO_WARNINGS)
   }
@@ -18,8 +17,7 @@ class ConstraintLayoutToolsEditorAttributeDetectorTest : LintDetectorTest() {
   fun testAppLayoutEditor() {
     @Language("XML") val source = """<TextView
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        app:layout_editor_absoluteX="4dp"
-        />"""
+        app:layout_editor_absoluteX="4dp"/>"""
 
     assertThat(lintProject(xml("/res/layout/layout.xml", source))).isEqualTo(NO_WARNINGS)
   }
@@ -27,11 +25,10 @@ class ConstraintLayoutToolsEditorAttributeDetectorTest : LintDetectorTest() {
   fun testToolsLayoutEditor() {
     @Language("XML") val source = """<TextView
         xmlns:tools="http://schemas.android.com/tools"
-        tools:layout_editor_absoluteX="4dp"
-        />"""
+        tools:layout_editor_absoluteX="4dp"/>"""
 
     assertThat(lintProject(xml("/res/layout/layout.xml", source))).isEqualTo("res/layout/layout.xml:3: Warning: Don't use tools:layout_editor_absoluteX [ConstraintLayoutToolsEditorAttributeDetector]\n" +
-        "        tools:layout_editor_absoluteX=\"4dp\"\n" +
+        "        tools:layout_editor_absoluteX=\"4dp\"/>\n" +
         "        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" +
         "0 errors, 1 warnings\n")
   }
@@ -39,16 +36,14 @@ class ConstraintLayoutToolsEditorAttributeDetectorTest : LintDetectorTest() {
   fun testToolsWronglySpelledLayoutEditor() {
     @Language("XML") val source = """<TextView
         xmlns:tools="http://schemas.android.com/tools"
-        tools:alayout_editor_absoluteX="4dp"
-        />"""
+        tools:alayout_editor_absoluteX="4dp"/>"""
 
     assertThat(lintProject(xml("/res/layout/layout.xml", source))).isEqualTo(NO_WARNINGS)
   }
 
   fun testShouldNotCrashWithStyle() {
     @Language("XML") val source = """<TextView
-        style="?android:attr/borderlessButtonStyle"
-        />"""
+        style="?android:attr/borderlessButtonStyle"/>"""
 
     assertThat(lintProject(xml("/res/layout/layout.xml", source))).isEqualTo(NO_WARNINGS)
   }

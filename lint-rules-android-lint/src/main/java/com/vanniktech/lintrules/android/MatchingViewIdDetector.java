@@ -48,6 +48,7 @@ public final class MatchingViewIdDetector extends LayoutDetector {
 
     matcher.appendTail(sb);
 
+    sb.setCharAt(0, Character.toLowerCase(sb.charAt(0)));
     return sb.toString();
   }
 }

@@ -10,8 +10,7 @@ class XmlSpacingDetectorTest : LintDetectorTest() {
     @Language("XML") val source = """<?xml version="1.0" encoding="utf-8"?>
         <merge xmlns:android="http://schemas.android.com/apk/res/android">
           <TextView
-              android:layout_width="wrap_content"
-              />
+              android:layout_width="wrap_content"/>
         </merge>"""
 
     assertThat(lintProject(xml("/res/layout/activity_home.xml", source))).isEqualTo(NO_WARNINGS)

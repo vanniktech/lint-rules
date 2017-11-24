@@ -14,6 +14,11 @@ import org.w3c.dom.Attr
 import org.w3c.dom.Element
 import java.util.EnumSet
 
+val ISSUE_RAW_COLOR = Issue.create("RawColor",
+    "This value should be defined as a color resource.",
+    "This value should be defined as a color resource.", CORRECTNESS, 8, WARNING,
+    Implementation(RawColorDetector::class.java, RESOURCE_FILE_SCOPE))
+
 class RawColorDetector : ResourceXmlDetector() {
   override fun appliesTo(folderType: ResourceFolderType) =
     EnumSet.of(LAYOUT, DRAWABLE).contains(folderType)
@@ -27,12 +32,5 @@ class RawColorDetector : ResourceXmlDetector() {
       .filterNot { "http://schemas.android.com/tools".equals(it.namespaceURI, ignoreCase = true) }
       .filter { it.nodeValue.matches("#[a-fA-F\\d]{3,8}".toRegex()) }
       .forEach { context.report(ISSUE_RAW_COLOR, it, context.getValueLocation(it as Attr), "Should be using a color resource instead.") }
-  }
-
-  companion object {
-    @JvmField val ISSUE_RAW_COLOR = Issue.create("RawColor",
-        "This value should be defined as a color resource.",
-        "This value should be defined as a color resource.", CORRECTNESS, 8, WARNING,
-        Implementation(RawColorDetector::class.java, RESOURCE_FILE_SCOPE))
   }
 }

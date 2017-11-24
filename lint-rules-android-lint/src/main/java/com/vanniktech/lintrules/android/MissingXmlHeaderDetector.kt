@@ -10,9 +10,9 @@ import com.android.tools.lint.detector.api.Severity.WARNING
 import com.android.tools.lint.detector.api.XmlContext
 import org.w3c.dom.Document
 
-@JvmField val ISSUE_MISSING_XML_HEADER = Issue.create("MissingXmlHeader",
-  "Missing Xml header.", "The xml file is missing the xml header.", CORRECTNESS, 5, WARNING,
-  Implementation(MissingXmlHeaderDetector::class.java, RESOURCE_FILE_SCOPE))
+val ISSUE_MISSING_XML_HEADER = Issue.create("MissingXmlHeader",
+    "Missing Xml header.", "The xml file is missing the xml header.", CORRECTNESS, 5, WARNING,
+    Implementation(MissingXmlHeaderDetector::class.java, RESOURCE_FILE_SCOPE))
 
 class MissingXmlHeaderDetector : ResourceXmlDetector() {
   override fun visitDocument(context: XmlContext, document: Document) {

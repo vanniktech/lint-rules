@@ -1,5 +1,8 @@
 package com.vanniktech.lintrules.android
 
+import com.vanniktech.lintrules.android.AndroidDetector.ISSUE_RESOURCES_GET_COLOR
+import com.vanniktech.lintrules.android.AndroidDetector.ISSUE_RESOURCES_GET_COLOR_STATE_LIST
+import com.vanniktech.lintrules.android.AndroidDetector.ISSUE_RESOURCES_GET_DRAWABLE
 import com.vanniktech.lintrules.android.DefaultLayoutAttributeDetector.ISSUE_DEFAULT_LAYOUT_ATTRIBUTE
 import com.vanniktech.lintrules.android.InvalidSingleLineCommentDetector.ISSUE_INVALID_SINGLE_LINE_COMMENT
 import com.vanniktech.lintrules.android.InvalidStringDetector.ISSUE_INVALID_STRING
@@ -9,12 +12,15 @@ import com.vanniktech.lintrules.android.ShouldUseStaticImportDetector.ISSUE_SHOU
 import com.vanniktech.lintrules.android.SuperfluousMarginDeclarationDetector.SUPERFLUOUS_MARGIN_DECLARATION
 import com.vanniktech.lintrules.android.SuperfluousPaddingDeclarationDetector.SUPERFLUOUS_PADDING_DECLARATION
 import com.vanniktech.lintrules.android.WrongConstraintLayoutUsageDetector.ISSUE_WRONG_CONSTRAINT_LAYOUT_USAGE
+import org.fest.assertions.api.Assertions.assertThat
+import org.junit.Test
 
-class IssueRegistry : com.android.tools.lint.client.api.IssueRegistry() {
-  override fun getIssues() =
-    AndroidDetector.getIssues()
-      .toList()
-      .plus(listOf(
+class IssueRegistryTest {
+  @Test fun getIssues() {
+    assertThat(IssueRegistry().issues).containsExactly(
+        ISSUE_RESOURCES_GET_DRAWABLE,
+        ISSUE_RESOURCES_GET_COLOR,
+        ISSUE_RESOURCES_GET_COLOR_STATE_LIST,
         ISSUE_WRONG_VIEW_ID_FORMAT,
         ISSUE_WRONG_MENU_ID_FORMAT,
         ISSUE_RAW_DIMEN,
@@ -35,5 +41,7 @@ class IssueRegistry : com.android.tools.lint.client.api.IssueRegistry() {
         ISSUE_CONSTRAINT_LAYOUT_TOOLS_EDITOR_ATTRIBUTE_DETECTOR,
         ISSUE_SUPERFLUOUS_NAME_SPACE,
         ISSUE_XML_SPACING,
-        ISSUE_UNSUPPORTED_LAYOUT_ATTRIBUTE))
+        ISSUE_UNSUPPORTED_LAYOUT_ATTRIBUTE
+    )
+  }
 }

@@ -42,6 +42,18 @@ public class MatchingMenuIdDetectorTest extends LintDetectorTest {
     assertThat(lintProject(xml("/res/menu/menu_custom.xml", source))).isEqualTo(NO_WARNINGS);
   }
 
+  public void testIdAndroidMenuUpperCaseLetter() throws Exception {
+    @Language("XML") final String source = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
+        + "<menu xmlns:android=\"http://schemas.android.com/apk/res/android\">\n"
+        + "  <item android:id=\"@+id/MenuMainTextView\"/>\n"
+        + "</menu>\n";
+
+    assertThat(lintProject(xml("/res/menu/menu_main.xml", source))).isEqualTo("res/menu/menu_main.xml:3: Warning: Id should start with: menuMain [MatchingMenuId]\n"
+        + "  <item android:id=\"@+id/MenuMainTextView\"/>\n"
+        + "                    ~~~~~~~~~~~~~~~~~~~~~\n"
+        + "0 errors, 1 warnings\n");
+  }
+
   public void testIdAndroidViewWrongOrder() throws Exception {
     @Language("XML") final String source = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
         + "<menu xmlns:android=\"http://schemas.android.com/apk/res/android\">\n"
@@ -74,8 +86,7 @@ public class MatchingMenuIdDetectorTest extends LintDetectorTest {
 
   public void testShouldNotCrashWithStyle() throws Exception {
     @Language("XML") final String source = "<TextView\n"
-        + "      style=\"?android:attr/borderlessButtonStyle\"\n"
-        + "      />";
+        + "      style=\"?android:attr/borderlessButtonStyle\"/>\n";
 
     assertThat(lintProject(xml("/res/layout/ids.xml", source))).isEqualTo(NO_WARNINGS);
   }
