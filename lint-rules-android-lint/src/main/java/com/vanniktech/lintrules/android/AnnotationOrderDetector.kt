@@ -136,7 +136,7 @@ val ANNOTATION_ORDER = listOf(
     "FloatRange",
     "Size")
 
-@JvmField val ISSUE_WRONG_ANNOTATION_ORDER = Issue.create("WrongAnnotationOrder",
+val ISSUE_WRONG_ANNOTATION_ORDER = Issue.create("WrongAnnotationOrder",
     "Annotations should be applied within a specific order.",
     "Annotations should be applied within a specific order.", Category.CORRECTNESS, 6, WARNING,
     Implementation(AnnotationOrderDetector::class.java, EnumSet.of(JAVA_FILE, TEST_SOURCES)))

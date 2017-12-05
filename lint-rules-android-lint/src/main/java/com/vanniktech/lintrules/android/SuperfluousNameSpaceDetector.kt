@@ -15,7 +15,7 @@ import org.w3c.dom.Element
 
 private val POSSIBLE_URIS = setOf(ANDROID_URI, TOOLS_URI, AUTO_URI, AAPT_URI)
 
-@JvmField val ISSUE_SUPERFLUOUS_NAME_SPACE = Issue.create("SuperfluousNameSpace", "A namespace was re-declared.",
+val ISSUE_SUPERFLUOUS_NAME_SPACE = Issue.create("SuperfluousNameSpace", "A namespace was re-declared.",
     "A namespace was re-declared.", Category.CORRECTNESS, 6, WARNING,
     Implementation(SuperfluousNameSpaceDetector::class.java, RESOURCE_FILE_SCOPE))
 

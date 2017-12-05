@@ -2,22 +2,20 @@ package com.vanniktech.lintrules.android
 
 import com.android.tools.lint.checks.infrastructure.TestFiles.xml
 import com.android.tools.lint.checks.infrastructure.TestLintTask.lint
-import org.intellij.lang.annotations.Language
 import org.junit.Test
 
 class WrongLayoutNameDetectorTest {
   @Test fun activityFile() {
     lint()
-      .files(xml("/res/layout/activity_home.xml", "<merge/>"))
+      .files(xml("res/layout/activity_home.xml", "<merge/>"))
       .issues(ISSUE_WRONG_LAYOUT_NAME)
       .run()
       .expectClean()
   }
 
   @Test fun randomLayoutFile() {
-    @Language("XML") val source = "<merge/>"
     lint()
-      .files(xml("/res/layout/random.xml", source))
+      .files(xml("res/layout/random.xml", "<merge/>"))
       .issues(ISSUE_WRONG_LAYOUT_NAME)
       .run()
       .expect("""
@@ -28,7 +26,7 @@ class WrongLayoutNameDetectorTest {
 
   @Test fun ignoreColorFile() {
     lint()
-      .files(xml("/res/values/color.xml", "<resources/>"))
+      .files(xml("res/values/color.xml", "<resources/>"))
       .issues(ISSUE_WRONG_LAYOUT_NAME)
       .run()
       .expectClean()

@@ -12,7 +12,7 @@ import com.android.tools.lint.detector.api.Severity.WARNING
 import org.jetbrains.uast.UMethod
 import java.util.EnumSet
 
-@JvmField val ISSUE_WRONG_TEST_METHOD_NAME = Issue.create("WrongTestMethodName", "A test method name should not start with test.",
+val ISSUE_WRONG_TEST_METHOD_NAME = Issue.create("WrongTestMethodName", "A test method name should not start with test.",
     "A test method name should not start with test.", CORRECTNESS, 6, WARNING,
     Implementation(WrongTestMethodNameDetector::class.java, EnumSet.of(JAVA_FILE, TEST_SOURCES)))
 

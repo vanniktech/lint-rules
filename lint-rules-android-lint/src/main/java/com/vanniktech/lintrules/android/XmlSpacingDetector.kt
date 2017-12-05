@@ -10,7 +10,7 @@ import com.android.tools.lint.detector.api.Severity.WARNING
 import com.android.tools.lint.detector.api.XmlContext
 import org.w3c.dom.Document
 
-@JvmField val ISSUE_XML_SPACING = Issue.create("XmlSpacing",
+val ISSUE_XML_SPACING = Issue.create("XmlSpacing",
     "XML files should not contain any new lines",
     "XML files should not contain any new lines", Category.CORRECTNESS, 6, WARNING,
     Implementation(XmlSpacingDetector::class.java, Scope.RESOURCE_FILE_SCOPE))

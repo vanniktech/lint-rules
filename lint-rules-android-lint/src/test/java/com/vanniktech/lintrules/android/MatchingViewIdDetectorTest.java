@@ -36,6 +36,16 @@ public class MatchingViewIdDetectorTest extends LintDetectorTest {
     assertThat(lintProject(xml("/res/layout/view_custom.xml", source))).isEqualTo(NO_WARNINGS);
   }
 
+  public void testIdAndroidUpperCaseLetter() throws Exception {
+    @Language("XML") final String source = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
+        + "<TextView xmlns:android=\"http://schemas.android.com/apk/res/android\" android:id=\"@+id/ViewCustomTextView\"/>\n";
+
+    assertThat(lintProject(xml("/res/layout/view_custom.xml", source))).isEqualTo("res/layout/view_custom.xml:2: Warning: Id should start with: viewCustom [MatchingViewId]\n"
+        + "<TextView xmlns:android=\"http://schemas.android.com/apk/res/android\" android:id=\"@+id/ViewCustomTextView\"/>\n"
+        + "                                                                                 ~~~~~~~~~~~~~~~~~~~~~~~\n"
+        + "0 errors, 1 warnings\n");
+  }
+
   public void testIdAndroidViewWrongOrder() throws Exception {
     @Language("XML") final String source = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
         + "<TextView xmlns:android=\"http://schemas.android.com/apk/res/android\" android:id=\"@+id/mainViewTextView\"/>\n";
@@ -62,8 +72,7 @@ public class MatchingViewIdDetectorTest extends LintDetectorTest {
 
   public void testShouldNotCrashWithStyle() throws Exception {
     @Language("XML") final String source = "<TextView\n"
-        + "      style=\"?android:attr/borderlessButtonStyle\"\n"
-        + "      />";
+        + "      style=\"?android:attr/borderlessButtonStyle\"/>\n";
 
     assertThat(lintProject(xml("/res/layout/ids.xml", source))).isEqualTo(NO_WARNINGS);
   }
