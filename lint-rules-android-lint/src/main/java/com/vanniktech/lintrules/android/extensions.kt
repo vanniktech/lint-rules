@@ -19,3 +19,9 @@ internal fun String.idToSnakeCase(): String {
   val parts = split("/")
   return "${parts[0]}/${toLowerCamelCase(parts[1])}"
 }
+
+internal fun Node.children() = (0 until childNodes.length).map { childNodes.item(it) }
+
+internal fun Node.isTextNode() = nodeType == Node.TEXT_NODE
+
+internal fun Node.isElementNode() = nodeType == Node.ELEMENT_NODE
