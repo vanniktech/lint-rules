@@ -1,10 +1,22 @@
 failFast: true
 
+test-pattern:
+  exclude-rules:
+    - 'SpreadOperator' # https://github.com/arturbosch/detekt/pull/598
+    - 'NamingRules'
+    - 'WildcardImport'
+    - 'MagicNumber'
+    - 'MaxLineLength'
+    - 'LateinitUsage'
+    - 'StringLiteralDuplication'
+
 potential-bugs:
   UnsafeCast:
     active: false // We know what we're doing.
 
 style:
+  TopLevelPropertyNaming:
+    active: false
   VariableMaxLength:
     active: false
   MaxLineLength:
@@ -22,4 +34,4 @@ comments:
 
 complexity:
   TooManyFunctions:
-    threshold: 50
+    active: false // https://github.com/arturbosch/detekt/issues/592

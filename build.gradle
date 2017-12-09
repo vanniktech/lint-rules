@@ -14,9 +14,6 @@ buildscript {
     'kotlin': [
       'stdlib': "org.jetbrains.kotlin:kotlin-stdlib-jre7:${versions.kotlin}",
     ],
-    'test': [
-      'festassert': "org.easytesting:fest-assert-core:2.0M10",
-    ],
     'lint': [
       'core': "com.android.tools.lint:lint:${versions.lint}",
       'api': "com.android.tools.lint:lint-api:${versions.lint}",
@@ -50,7 +47,7 @@ codeQualityTools {
     toolVersion = '0.12.1'
   }
   detekt {
-    toolVersion = '1.0.0.RC5-4'
+    toolVersion = '1.0.0.RC5-6'
   }
   errorProne {
     toolVersion = '2.1.2'

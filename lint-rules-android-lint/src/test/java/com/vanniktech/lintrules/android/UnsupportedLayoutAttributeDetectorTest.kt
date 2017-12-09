@@ -1,65 +1,65 @@
 package com.vanniktech.lintrules.android
 
-import com.android.tools.lint.checks.infrastructure.LintDetectorTest
-import com.vanniktech.lintrules.android.AndroidDetectorTest.NO_WARNINGS
-import org.fest.assertions.api.Assertions.assertThat
-import org.intellij.lang.annotations.Language
+import com.android.tools.lint.checks.infrastructure.TestFiles.xml
+import com.android.tools.lint.checks.infrastructure.TestLintTask.lint
+import org.junit.Test
 
-class UnsupportedLayoutAttributeDetectorTest : LintDetectorTest() {
-  fun testOrientationInRelativeLayout() {
-    @Language("XML") val source = """<?xml version="1.0" encoding="utf-8"?>
-        <RelativeLayout
-          xmlns:android="http://schemas.android.com/apk/res/android"
-          android:orientation="vertical"/>
-        """
-
-    assertThat(lintProject(xml("/res/layout/activity_home.xml", source))).isEqualTo("res/layout/activity_home.xml:4: Error: orientation is not allowed in RelativeLayout [UnsupportedLayoutAttribute]\n" +
-        "          android:orientation=\"vertical\"/>\n" +
-        "          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" +
-        "1 errors, 0 warnings\n")
+class UnsupportedLayoutAttributeDetectorTest {
+  @Test fun orientationInRelativeLayout() {
+    lint()
+      .files(xml("res/layout/activity_home.xml", """
+          |<RelativeLayout
+          |    xmlns:android="http://schemas.android.com/apk/res/android"
+          |    android:orientation="vertical"/>""".trimMargin()))
+      .issues(ISSUE_UNSUPPORTED_LAYOUT_ATTRIBUTE)
+      .run()
+      .expect("""
+          |res/layout/activity_home.xml:3: Error: orientation is not allowed in RelativeLayout [UnsupportedLayoutAttribute]
+          |    android:orientation="vertical"/>
+          |    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+          |1 errors, 0 warnings""".trimMargin())
   }
 
-  fun testOrientationInScrollView() {
-    @Language("XML") val source = """<?xml version="1.0" encoding="utf-8"?>
-        <ScrollView
-          xmlns:android="http://schemas.android.com/apk/res/android"
-          android:orientation="vertical"/>
-        """
-
-    assertThat(lintProject(xml("/res/layout/activity_home.xml", source))).isEqualTo("res/layout/activity_home.xml:4: Error: orientation is not allowed in ScrollView [UnsupportedLayoutAttribute]\n" +
-        "          android:orientation=\"vertical\"/>\n" +
-        "          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" +
-        "1 errors, 0 warnings\n")
+  @Test fun orientationInScrollView() {
+    lint()
+      .files(xml("res/layout/activity_home.xml", """
+          |<ScrollView
+          |    xmlns:android="http://schemas.android.com/apk/res/android"
+          |    android:orientation="vertical"/>""".trimMargin()))
+      .issues(ISSUE_UNSUPPORTED_LAYOUT_ATTRIBUTE)
+      .run()
+      .expect("""
+          |res/layout/activity_home.xml:3: Error: orientation is not allowed in ScrollView [UnsupportedLayoutAttribute]
+          |    android:orientation="vertical"/>
+          |    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+          |1 errors, 0 warnings""".trimMargin())
   }
 
-  fun testOrientationInMergeScrollView() {
-    @Language("XML") val source = """<?xml version="1.0" encoding="utf-8"?>
-        <merge
-          xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools"
-          tools:parentTag="ScrollView"
-          android:orientation="vertical"/>
-        """
-
-    assertThat(lintProject(xml("/res/layout/activity_home.xml", source))).isEqualTo("res/layout/activity_home.xml:6: Error: orientation is not allowed in ScrollView [UnsupportedLayoutAttribute]\n" +
-        "          android:orientation=\"vertical\"/>\n" +
-        "          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" +
-        "1 errors, 0 warnings\n")
+  @Test fun orientationInMergeScrollView() {
+    lint()
+      .files(xml("res/layout/activity_home.xml", """
+          |<merge
+          |    xmlns:android="http://schemas.android.com/apk/res/android"
+          |    xmlns:tools="http://schemas.android.com/tools"
+          |    tools:parentTag="ScrollView"
+          |    android:orientation="vertical"/>""".trimMargin()))
+      .issues(ISSUE_UNSUPPORTED_LAYOUT_ATTRIBUTE)
+      .run()
+      .expect("""
+          |res/layout/activity_home.xml:5: Error: orientation is not allowed in ScrollView [UnsupportedLayoutAttribute]
+          |    android:orientation="vertical"/>
+          |    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+          |1 errors, 0 warnings""".trimMargin())
   }
 
-  fun testOrientationInLinearLayout() {
-    @Language("XML") val source = """<?xml version="1.0" encoding="utf-8"?>
-        <LinearLayout
-          xmlns:android="http://schemas.android.com/apk/res/android"
-          android:orientation="vertical"/>
-        """
-
-    assertThat(lintProject(xml("/res/layout/activity_home.xml", source))).isEqualTo(NO_WARNINGS)
+  @Test fun orientationInLinearLayout() {
+    lint()
+      .files(xml("res/layout/activity_home.xml", """
+          |<LinearLayout
+          |    xmlns:android="http://schemas.android.com/apk/res/android"
+          |    android:orientation="vertical"/>""".trimMargin()))
+      .issues(ISSUE_UNSUPPORTED_LAYOUT_ATTRIBUTE)
+      .run()
+      .expectClean()
   }
-
-  override fun getDetector() = UnsupportedLayoutAttributeDetector()
-
-  override fun getIssues() = listOf(ISSUE_UNSUPPORTED_LAYOUT_ATTRIBUTE)
-
-  override fun allowCompilationErrors() = false
 }

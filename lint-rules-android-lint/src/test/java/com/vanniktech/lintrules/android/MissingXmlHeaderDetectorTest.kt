@@ -9,8 +9,7 @@ class MissingXmlHeaderDetectorTest {
     lint()
       .files(xml("res/values/strings.xml", """
           |<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-          |<resources/>
-          """.trimMargin())
+          |<resources/>""".trimMargin())
       )
       .issues(ISSUE_MISSING_XML_HEADER)
       .run()
@@ -20,8 +19,7 @@ class MissingXmlHeaderDetectorTest {
   @Test fun missingHeader() {
     lint()
       .files(xml("res/values/strings.xml", """
-          |<resources/>
-          """.trimMargin())
+          |<resources/>""".trimMargin())
       )
       .issues(ISSUE_MISSING_XML_HEADER)
       .run()
@@ -29,8 +27,7 @@ class MissingXmlHeaderDetectorTest {
           |res/values/strings.xml:1: Warning: Missing an xml header. [MissingXmlHeader]
           |<resources/>
           |~~~~~~~~~~~~
-          |0 errors, 1 warnings
-          """.trimMargin())
+          |0 errors, 1 warnings""".trimMargin())
       .expectFixDiffs("""
           |Fix for res/values/strings.xml line 0: Add xml header:
           |@@ -1 +1

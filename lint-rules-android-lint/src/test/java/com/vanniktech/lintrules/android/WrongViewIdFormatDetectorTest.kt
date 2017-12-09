@@ -9,8 +9,7 @@ class WrongViewIdFormatDetectorTest {
     lint()
       .files(xml("res/layout/ids.xml", """
           |<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-          |    android:id="@+id/lowerCamelCase"/>
-          """.trimMargin()))
+          |    android:id="@+id/lowerCamelCase"/>""".trimMargin()))
       .issues(ISSUE_WRONG_VIEW_ID_FORMAT)
       .run()
       .expectClean()
@@ -20,8 +19,7 @@ class WrongViewIdFormatDetectorTest {
     lint()
       .files(xml("res/layout/ids.xml", """
           |<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-          |    android:id="@id/lowerCamelCase"/>
-          """.trimMargin()))
+          |    android:id="@id/lowerCamelCase"/>""".trimMargin()))
       .issues(ISSUE_WRONG_VIEW_ID_FORMAT)
       .run()
       .expectClean()
@@ -31,16 +29,14 @@ class WrongViewIdFormatDetectorTest {
     lint()
       .files(xml("res/layout/ids.xml", """
           |<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-          |    android:id="@+id/CamelCase"/>
-          """.trimMargin()))
+          |    android:id="@+id/CamelCase"/>""".trimMargin()))
       .issues(ISSUE_WRONG_VIEW_ID_FORMAT)
       .run()
       .expect("""
           |res/layout/ids.xml:2: Warning: Id is not in lowerCamelCaseFormat [WrongViewIdFormat]
           |    android:id="@+id/CamelCase"/>
           |                ~~~~~~~~~~~~~~
-          |0 errors, 1 warnings
-          """.trimMargin())
+          |0 errors, 1 warnings""".trimMargin())
       .expectFixDiffs("""
           |Fix for res/layout/ids.xml line 1: Convert to lowerCamelCase:
           |@@ -2 +2
@@ -54,16 +50,14 @@ class WrongViewIdFormatDetectorTest {
     lint()
       .files(xml("res/layout/ids.xml", """
           |<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-          |    android:id="@+id/snake_case"/>
-          """.trimMargin()))
+          |    android:id="@+id/snake_case"/>""".trimMargin()))
       .issues(ISSUE_WRONG_VIEW_ID_FORMAT)
       .run()
       .expect("""
           |res/layout/ids.xml:2: Warning: Id is not in lowerCamelCaseFormat [WrongViewIdFormat]
           |    android:id="@+id/snake_case"/>
           |                ~~~~~~~~~~~~~~~
-          |0 errors, 1 warnings
-          """.trimMargin())
+          |0 errors, 1 warnings""".trimMargin())
       .expectFixDiffs("""
           |Fix for res/layout/ids.xml line 1: Convert to lowerCamelCase:
           |@@ -2 +2
