@@ -4,6 +4,7 @@ import com.android.annotations.NonNull;
 import com.android.tools.lint.detector.api.Implementation;
 import com.android.tools.lint.detector.api.Issue;
 import com.android.tools.lint.detector.api.LayoutDetector;
+import com.android.tools.lint.detector.api.LintUtils;
 import com.android.tools.lint.detector.api.XmlContext;
 import java.util.Collection;
 import java.util.regex.Matcher;
@@ -27,13 +28,11 @@ public final class MatchingViewIdDetector extends LayoutDetector {
   }
 
   @Override public void visitAttribute(@NonNull final XmlContext context, @NonNull final Attr attribute) {
-    if (ATTR_ID.equals(attribute.getLocalName())) {
-      final String fileName = toLowerCamelCase(context.file.getName().replace(".xml", ""));
-      final String id = attribute.getValue().replace("@+id/", "");
+    final String fileName = toLowerCamelCase(context.file.getName().replace(".xml", ""));
+    final String id = LintUtils.stripIdPrefix(attribute.getValue());
 
-      if (!id.startsWith(fileName)) {
-        context.report(ISSUE_MATCHING_VIEW_ID, attribute, context.getValueLocation(attribute), "Id should start with: " + fileName);
-      }
+    if (!id.startsWith(fileName)) {
+      context.report(ISSUE_MATCHING_VIEW_ID, attribute, context.getValueLocation(attribute), "Id should start with: " + fileName);
     }
   }
 
