@@ -6,22 +6,19 @@ import org.junit.Test
 
 class WrongTestMethodNameDetectorTest {
   private val stubTestJUnit = java("""
-    |package org.junit;
-    |
-    |public @interface Test { }
-    """.trimMargin())
+      |package org.junit;
+      |
+      |public @interface Test { }""".trimMargin())
 
   private val stubTestCustom = java("""
-    |package my.custom;
-    |
-    |public @interface Test { }
-    """.trimMargin())
+      |package my.custom;
+      |
+      |public @interface Test { }""".trimMargin())
 
   private val stubSomething = java("""
-    |package my.custom;
-    |
-    |public @interface Something { }
-    """.trimMargin())
+      |package my.custom;
+      |
+      |public @interface Something { }""".trimMargin())
 
   @Test fun methodStartingWithTest() {
     lint()
@@ -30,8 +27,7 @@ class WrongTestMethodNameDetectorTest {
           |
           |public class Something {
           |  public void testThis() { }
-          |}
-          """.trimMargin())
+          |}""".trimMargin())
       )
       .issues(ISSUE_WRONG_TEST_METHOD_NAME)
       .run()
@@ -47,8 +43,7 @@ class WrongTestMethodNameDetectorTest {
           |
           |public class MyTest {
           |  @Something public void test() { }
-          |}
-          """.trimMargin())
+          |}""".trimMargin())
       )
       .issues(ISSUE_WRONG_TEST_METHOD_NAME)
       .run()
@@ -64,8 +59,7 @@ class WrongTestMethodNameDetectorTest {
           |
           |public class MyTest {
           |  @Test public void myTest() { }
-          |}
-          """.trimMargin())
+          |}""".trimMargin())
       )
       .issues(ISSUE_WRONG_TEST_METHOD_NAME)
       .run()
@@ -81,17 +75,15 @@ class WrongTestMethodNameDetectorTest {
           |
           |public class MyTest {
           |  @Test public void test() { }
-          |}
-          """.trimMargin())
+          |}""".trimMargin())
       )
       .issues(ISSUE_WRONG_TEST_METHOD_NAME)
       .run()
       .expect("""
-        |src/foo/MyTest.java:6: Warning: Test method starts with test. [WrongTestMethodName]
-        |  @Test public void test() { }
-        |                    ~~~~
-        |0 errors, 1 warnings
-        """.trimMargin())
+          |src/foo/MyTest.java:6: Warning: Test method starts with test. [WrongTestMethodName]
+          |  @Test public void test() { }
+          |                    ~~~~
+          |0 errors, 1 warnings""".trimMargin())
   }
 
   @Test fun methodStartingWithTestAndCustomTestAnnotation() {
@@ -103,16 +95,14 @@ class WrongTestMethodNameDetectorTest {
           |
           |public class MyTest {
           |  @Test public void test() { }
-          |}
-          """.trimMargin())
+          |}""".trimMargin())
       )
       .issues(ISSUE_WRONG_TEST_METHOD_NAME)
       .run()
       .expect("""
-        |src/foo/MyTest.java:6: Warning: Test method starts with test. [WrongTestMethodName]
-        |  @Test public void test() { }
-        |                    ~~~~
-        |0 errors, 1 warnings
-        """.trimMargin())
+          |src/foo/MyTest.java:6: Warning: Test method starts with test. [WrongTestMethodName]
+          |  @Test public void test() { }
+          |                    ~~~~
+          |0 errors, 1 warnings""".trimMargin())
   }
 }

@@ -11,7 +11,6 @@ dependencies {
 
   testImplementation deps.lint.core
   testImplementation deps.lint.tests
-  testImplementation deps.test.festassert
 }
 
 jar {

@@ -10,8 +10,7 @@ class WrongMenuIdFormatDetectorTest {
       .files(xml("res/menu/ids.xml", """
           |<menu xmlns:android="http://schemas.android.com/apk/res/android">
           |  <item android:id="@+id/lowerCamelCase"/>
-          |</menu>
-          """.trimMargin()))
+          |</menu>""".trimMargin()))
       .issues(ISSUE_WRONG_MENU_ID_FORMAT)
       .run()
       .expectClean()
@@ -22,8 +21,7 @@ class WrongMenuIdFormatDetectorTest {
       .files(xml("res/menu/ids.xml", """
           |<menu xmlns:android="http://schemas.android.com/apk/res/android">
           |  <item android:id="@id/lowerCamelCase"/>
-          |</menu>
-          """.trimMargin()))
+          |</menu>""".trimMargin()))
       .issues(ISSUE_WRONG_MENU_ID_FORMAT)
       .run()
       .expectClean()
@@ -34,16 +32,14 @@ class WrongMenuIdFormatDetectorTest {
       .files(xml("res/menu/ids.xml", """
           |<menu xmlns:android="http://schemas.android.com/apk/res/android">
           |  <item android:id="@+id/CamelCase"/>
-          |</menu>
-          """.trimMargin()))
+          |</menu>""".trimMargin()))
       .issues(ISSUE_WRONG_MENU_ID_FORMAT)
       .run()
       .expect("""
           |res/menu/ids.xml:2: Warning: Id is not in lowerCamelCaseFormat [WrongMenuIdFormat]
           |  <item android:id="@+id/CamelCase"/>
           |                    ~~~~~~~~~~~~~~
-          |0 errors, 1 warnings
-          """.trimMargin())
+          |0 errors, 1 warnings""".trimMargin())
       .expectFixDiffs("""
           |Fix for res/menu/ids.xml line 1: Convert to lowerCamelCase:
           |@@ -2 +2
@@ -57,16 +53,14 @@ class WrongMenuIdFormatDetectorTest {
       .files(xml("res/menu/ids.xml", """
           |<menu xmlns:android="http://schemas.android.com/apk/res/android">
           |  <item android:id="@+id/snake_case"/>
-          |</menu>
-          """.trimMargin()))
+          |</menu>""".trimMargin()))
       .issues(ISSUE_WRONG_MENU_ID_FORMAT)
       .run()
       .expect("""
           |res/menu/ids.xml:2: Warning: Id is not in lowerCamelCaseFormat [WrongMenuIdFormat]
           |  <item android:id="@+id/snake_case"/>
           |                    ~~~~~~~~~~~~~~~
-          |0 errors, 1 warnings
-          """.trimMargin())
+          |0 errors, 1 warnings""".trimMargin())
       .expectFixDiffs("""
           |Fix for res/menu/ids.xml line 1: Convert to lowerCamelCase:
           |@@ -2 +2

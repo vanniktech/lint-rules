@@ -1,56 +1,65 @@
 package com.vanniktech.lintrules.android
 
-import com.android.tools.lint.checks.infrastructure.LintDetectorTest
-import com.vanniktech.lintrules.android.AndroidDetectorTest.NO_WARNINGS
-import org.fest.assertions.api.Assertions.assertThat
-import org.intellij.lang.annotations.Language
+import com.android.tools.lint.checks.infrastructure.TestFiles.xml
+import com.android.tools.lint.checks.infrastructure.TestLintTask.lint
+import org.junit.Test
 
-class ConstraintLayoutToolsEditorAttributeDetectorTest : LintDetectorTest() {
-  fun testAndroidLayoutEditor() {
-    @Language("XML") val source = """<TextView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_editor_absoluteX="4dp"/>"""
-
-    assertThat(lintProject(xml("/res/layout/layout.xml", source))).isEqualTo(NO_WARNINGS)
+class ConstraintLayoutToolsEditorAttributeDetectorTest {
+  @Test fun androidLayoutEditor() {
+    lint()
+      .files(xml("res/layout/layout.xml", """
+          |<TextView
+          |    xmlns:android="http://schemas.android.com/apk/res/android"
+          |    android:layout_editor_absoluteX="4dp"/>""".trimMargin()))
+      .issues(ISSUE_CONSTRAINT_LAYOUT_TOOLS_EDITOR_ATTRIBUTE_DETECTOR)
+      .run()
+      .expectClean()
   }
 
-  fun testAppLayoutEditor() {
-    @Language("XML") val source = """<TextView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        app:layout_editor_absoluteX="4dp"/>"""
-
-    assertThat(lintProject(xml("/res/layout/layout.xml", source))).isEqualTo(NO_WARNINGS)
+  @Test fun appLayoutEditor() {
+    lint()
+      .files(xml("res/layout/layout.xml", """
+          |<TextView
+          |    xmlns:app="http://schemas.android.com/apk/res-auto"
+          |    app:layout_editor_absoluteX="4dp"/>""".trimMargin()))
+      .issues(ISSUE_CONSTRAINT_LAYOUT_TOOLS_EDITOR_ATTRIBUTE_DETECTOR)
+      .run()
+      .expectClean()
   }
 
-  fun testToolsLayoutEditor() {
-    @Language("XML") val source = """<TextView
-        xmlns:tools="http://schemas.android.com/tools"
-        tools:layout_editor_absoluteX="4dp"/>"""
-
-    assertThat(lintProject(xml("/res/layout/layout.xml", source))).isEqualTo("res/layout/layout.xml:3: Warning: Don't use tools:layout_editor_absoluteX [ConstraintLayoutToolsEditorAttributeDetector]\n" +
-        "        tools:layout_editor_absoluteX=\"4dp\"/>\n" +
-        "        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" +
-        "0 errors, 1 warnings\n")
+  @Test fun toolsLayoutEditor() {
+    lint()
+      .files(xml("res/layout/layout.xml", """
+          |<TextView
+          |    xmlns:tools="http://schemas.android.com/tools"
+          |    tools:layout_editor_absoluteX="4dp"/>""".trimMargin()))
+      .issues(ISSUE_CONSTRAINT_LAYOUT_TOOLS_EDITOR_ATTRIBUTE_DETECTOR)
+      .run()
+      .expect("""
+          |res/layout/layout.xml:3: Warning: Don't use tools:layout_editor_absoluteX [ConstraintLayoutToolsEditorAttributeDetector]
+          |    tools:layout_editor_absoluteX="4dp"/>
+          |    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+          |0 errors, 1 warnings""".trimMargin())
   }
 
-  fun testToolsWronglySpelledLayoutEditor() {
-    @Language("XML") val source = """<TextView
-        xmlns:tools="http://schemas.android.com/tools"
-        tools:alayout_editor_absoluteX="4dp"/>"""
-
-    assertThat(lintProject(xml("/res/layout/layout.xml", source))).isEqualTo(NO_WARNINGS)
+  @Test fun toolsWronglySpelledLayoutEditor() {
+    lint()
+      .files(xml("res/layout/layout.xml", """
+          |<TextView
+          |    xmlns:tools="http://schemas.android.com/tools"
+          |    tools:alayout_editor_absoluteX="4dp"/>""".trimMargin()))
+      .issues(ISSUE_CONSTRAINT_LAYOUT_TOOLS_EDITOR_ATTRIBUTE_DETECTOR)
+      .run()
+      .expectClean()
   }
 
-  fun testShouldNotCrashWithStyle() {
-    @Language("XML") val source = """<TextView
-        style="?android:attr/borderlessButtonStyle"/>"""
-
-    assertThat(lintProject(xml("/res/layout/layout.xml", source))).isEqualTo(NO_WARNINGS)
+  @Test fun shouldNotCrashWithStyle() {
+    lint()
+      .files(xml("res/layout/layout.xml", """
+          |<TextView
+          |style="?android:attr/borderlessButtonStyle"/>""".trimMargin()))
+      .issues(ISSUE_CONSTRAINT_LAYOUT_TOOLS_EDITOR_ATTRIBUTE_DETECTOR)
+      .run()
+      .expectClean()
   }
-
-  override fun getDetector() = ConstraintLayoutToolsEditorAttributeDetector()
-
-  override fun getIssues() = listOf(ISSUE_CONSTRAINT_LAYOUT_TOOLS_EDITOR_ATTRIBUTE_DETECTOR)
-
-  override fun allowCompilationErrors() = false
 }
