@@ -95,3 +95,48 @@ val stubMaybe = java("""
     |  public void subscribe(Consumer<T> onSuccess) {}
     |  public void subscribe(Consumer<T> onSuccess, Consumer<Throwable> onError) {}
     |}""".trimMargin())
+
+val stubScheduler = java("""
+    |package io.reactivex.schedulers;
+    |public abstract class Scheduler {
+    |}""".trimMargin())
+
+val stubSchedulers = java("""
+    |package io.reactivex.schedulers;
+    |
+    |import java.util.concurrent.Executor;
+    |
+    |public final class Schedulers {
+    |  public static Scheduler computation() {
+    |    return null;
+    |  }
+    |  public static Scheduler io() {
+    |    return null;
+    |  }
+    |  public static Scheduler newThread() {
+    |    return null;
+    |  }
+    |  public static Scheduler single() {
+    |    return null;
+    |  }
+    |  public static Scheduler from(Executor executor) {
+    |    return null;
+    |  }
+    |}""".trimMargin())
+
+val stubAndroidSchedulers = java("""
+    |package io.reactivex.android.schedulers;
+    |
+    |import io.reactivex.schedulers.Scheduler;
+    |
+    |public final class AndroidSchedulers {
+    |  public static Scheduler mainThread() {
+    |    return null;
+    |  }
+    |}""".trimMargin())
+
+val stubProvides = java("""
+    |package dagger;
+    |
+    |public @interface Provides {
+    |}""".trimMargin())
