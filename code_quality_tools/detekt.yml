@@ -12,7 +12,7 @@ test-pattern:
 
 potential-bugs:
   UnsafeCast:
-    active: false // We know what we're doing.
+    active: false # We know what we're doing.
 
 style:
   TopLevelPropertyNaming:
@@ -21,6 +21,8 @@ style:
     active: false
   MaxLineLength:
     active: false
+  ClassNaming:
+    classPattern: '[A-Z$][a-zA-Z0-9$]*' # https://github.com/arturbosch/detekt/issues/169
 
 comments:
   UndocumentedPublicClass:
@@ -34,4 +36,4 @@ comments:
 
 complexity:
   TooManyFunctions:
-    active: false // https://github.com/arturbosch/detekt/issues/592
+    active: false # https://github.com/arturbosch/detekt/issues/592 & https://github.com/arturbosch/detekt/issues/622

@@ -9,6 +9,7 @@ class IssueRegistry : com.android.tools.lint.client.api.IssueRegistry() {
         .toList()
         .plus(listOf(
           ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE,
-          ISSUE_MISSING_COMPOSITE_DISPOSABLE_CLEAR
+          ISSUE_MISSING_COMPOSITE_DISPOSABLE_CLEAR,
+          ISSUE_RAW_SCHEDULER_CALL
         ))
 }
