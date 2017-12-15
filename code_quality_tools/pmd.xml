@@ -42,9 +42,7 @@
     <exclude name="JUnitAssertionsShouldIncludeMessage"/>
     <exclude name="JUnitTestContainsTooManyAsserts"/>
   </rule>
-  <rule ref="rulesets/java/migrating.xml">
-    <exclude name="JUnit4TestShouldUseTestAnnotation"/>
-  </rule>
+  <rule ref="rulesets/java/migrating.xml"/>
   <rule ref="rulesets/java/strictexception.xml">
     <exclude name="AvoidThrowingNullPointerException"/>
     <exclude name="AvoidThrowingRawExceptionTypes"/>
@@ -54,7 +52,6 @@
   <rule ref="rulesets/java/unusedcode.xml"/>
   <rule ref="rulesets/java/optimizations.xml">
     <exclude name="AvoidInstantiatingObjectsInLoops"/>
-    <exclude name="AddEmptyString"/>
   </rule>
   <rule ref="rulesets/java/typeresolution.xml"/>
   <rule ref="rulesets/java/android.xml"/>
