@@ -6,7 +6,6 @@ sourceCompatibility = JavaVersion.VERSION_1_7
 
 dependencies {
   compileOnly deps.lint.api
-  compileOnly deps.lint.checks
   compileOnly deps.kotlin.stdlib
 
   testImplementation deps.lint.core
