@@ -1,0 +1,34 @@
+package com.vanniktech.lintrules.android
+
+import com.android.tools.lint.client.api.UElementHandler
+import com.android.tools.lint.detector.api.Category.Companion.CORRECTNESS
+import com.android.tools.lint.detector.api.Detector
+import com.android.tools.lint.detector.api.Implementation
+import com.android.tools.lint.detector.api.Issue
+import com.android.tools.lint.detector.api.JavaContext
+import com.android.tools.lint.detector.api.Scope.JAVA_FILE
+import com.android.tools.lint.detector.api.Scope.TEST_SOURCES
+import com.android.tools.lint.detector.api.Severity.WARNING
+import org.jetbrains.uast.UImportStatement
+import java.util.EnumSet
+
+val ISSUE_INVALID_IMPORT = Issue.create("InvalidImport",
+    "Flags invalid imports.", "Flags invalid imports.",
+    CORRECTNESS, 5, WARNING,
+    Implementation(InvalidImportDetector::class.java, EnumSet.of(JAVA_FILE, TEST_SOURCES)))
+
+class InvalidImportDetector : Detector(), Detector.UastScanner {
+  override fun getApplicableUastTypes() = listOf(UImportStatement::class.java)
+
+  override fun createUastHandler(context: JavaContext) = InvalidImportHandler(context)
+
+  class InvalidImportHandler(private val context: JavaContext) : UElementHandler() {
+    override fun visitImportStatement(importStatement: UImportStatement) {
+      val importReference = importStatement.importReference
+
+      if (importReference?.asSourceString()?.contains(".R.") == true) {
+        context.report(ISSUE_INVALID_IMPORT, importStatement, context.getLocation(importReference), "Importing a class from R.java")
+      }
+    }
+  }
+}
