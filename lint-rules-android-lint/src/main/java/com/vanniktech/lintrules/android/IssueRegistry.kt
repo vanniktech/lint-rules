@@ -14,6 +14,7 @@ class IssueRegistry : com.android.tools.lint.client.api.IssueRegistry() {
     AndroidDetector.getIssues()
       .toList()
       .plus(listOf(
+        ISSUE_INVALID_IMPORT,
         ISSUE_WRONG_VIEW_ID_FORMAT,
         ISSUE_WRONG_MENU_ID_FORMAT,
         ISSUE_RAW_DIMEN,
