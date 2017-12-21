@@ -12,7 +12,7 @@ import com.android.tools.lint.detector.api.Severity.ERROR
 import com.android.tools.lint.detector.api.XmlContext
 import org.w3c.dom.Attr
 
-val ISSUE_UNSUPPORTED_LAYOUT_ATTRIBUTE = Issue.create("UnsupportedLayoutAttribute",
+@Suppress("Detekt.VariableMaxLength") val ISSUE_UNSUPPORTED_LAYOUT_ATTRIBUTE = Issue.create("UnsupportedLayoutAttribute",
     "Detekts layout attributes which are not supported.",
     "Detekts layout attributes which are not supported.",
     Category.CORRECTNESS, 5, ERROR,
