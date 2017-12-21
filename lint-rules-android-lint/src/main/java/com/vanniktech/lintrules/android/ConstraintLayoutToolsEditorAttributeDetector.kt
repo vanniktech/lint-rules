@@ -9,7 +9,7 @@ import com.android.tools.lint.detector.api.Severity.WARNING
 import com.android.tools.lint.detector.api.XmlContext
 import org.w3c.dom.Attr
 
-val ISSUE_CONSTRAINT_LAYOUT_TOOLS_EDITOR_ATTRIBUTE_DETECTOR = Issue.create("ConstraintLayoutToolsEditorAttributeDetector",
+@Suppress("Detekt.VariableMaxLength") val ISSUE_CONSTRAINT_LAYOUT_TOOLS_EDITOR_ATTRIBUTE_DETECTOR = Issue.create("ConstraintLayoutToolsEditorAttributeDetector",
     "Flags tools:layout_editor properties.", "Flags tools:layout_editor properties.",
     Category.CORRECTNESS, 5, WARNING,
     Implementation(ConstraintLayoutToolsEditorAttributeDetector::class.java, Scope.RESOURCE_FILE_SCOPE))

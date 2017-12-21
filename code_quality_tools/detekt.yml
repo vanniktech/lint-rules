@@ -1,39 +1,19 @@
 failFast: true
 
-test-pattern:
-  exclude-rules:
-    - 'SpreadOperator' # https://github.com/arturbosch/detekt/pull/598
-    - 'NamingRules'
-    - 'WildcardImport'
-    - 'MagicNumber'
-    - 'MaxLineLength'
-    - 'LateinitUsage'
-    - 'StringLiteralDuplication'
-
 potential-bugs:
   UnsafeCast:
+    active: false # We know what we're doing.
+  LateinitUsage:
     active: false # We know what we're doing.
 
 style:
   TopLevelPropertyNaming:
     active: false
-  VariableMaxLength:
-    active: false
   MaxLineLength:
     active: false
-  ClassNaming:
-    classPattern: '[A-Z$][a-zA-Z0-9$]*' # https://github.com/arturbosch/detekt/issues/169
 
 comments:
   UndocumentedPublicClass:
     active: false
   UndocumentedPublicFunction:
     active: false
-  CommentOverPrivateMethod:
-    active: false # We actually like this.
-  CommentOverPrivateProperty:
-    active: false # We actually like this.
-
-complexity:
-  TooManyFunctions:
-    active: false # https://github.com/arturbosch/detekt/issues/592 & https://github.com/arturbosch/detekt/issues/622
