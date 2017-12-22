@@ -35,5 +35,6 @@ class IssueRegistry : com.android.tools.lint.client.api.IssueRegistry() {
         ISSUE_CONSTRAINT_LAYOUT_TOOLS_EDITOR_ATTRIBUTE_DETECTOR,
         ISSUE_SUPERFLUOUS_NAME_SPACE,
         ISSUE_XML_SPACING,
+        ISSUE_NAMING_PATTERN,
         ISSUE_UNSUPPORTED_LAYOUT_ATTRIBUTE))
 }
