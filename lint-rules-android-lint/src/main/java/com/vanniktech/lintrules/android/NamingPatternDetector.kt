@@ -12,6 +12,7 @@ import com.android.tools.lint.detector.api.Severity.WARNING
 import com.intellij.psi.PsiNamedElement
 import org.jetbrains.uast.UClass
 import org.jetbrains.uast.UElement
+import org.jetbrains.uast.UEnumConstant
 import org.jetbrains.uast.UMethod
 import org.jetbrains.uast.UVariable
 import java.util.EnumSet
@@ -29,22 +30,27 @@ class NamingPatternDetector : Detector(), Detector.UastScanner {
 
   override fun createUastHandler(context: JavaContext) = NamingPatternHandler(context)
 
-  class NamingPatternHandler(private val context: JavaContext) : UElementHandler() {
+  inner class NamingPatternHandler(private val context: JavaContext) : UElementHandler() {
     override fun visitVariable(variable: UVariable) {
-      process(variable)
+      val isConstant = variable.isFinal && variable.isStatic
+      val isEnumConstant = variable is UEnumConstant
+
+      if (!isConstant && !isEnumConstant) {
+        process(variable, variable)
+      }
     }
 
     override fun visitMethod(method: UMethod) {
-      process(method)
+      process(method, method)
     }
 
     override fun visitClass(clazz: UClass) {
-      process(clazz)
+      process(clazz, clazz)
     }
 
-    private fun process(declaration: PsiNamedElement) {
+    private fun process(scope: UElement, declaration: PsiNamedElement) {
       if (declaration.name?.isDefinedCamelCase() == false) {
-        context.report(ISSUE_NAMING_PATTERN, declaration, context.getNameLocation(declaration), "Not named in defined camel case.")
+        context.report(ISSUE_NAMING_PATTERN, scope, context.getNameLocation(scope), "Not named in defined camel case.")
       }
     }
   }
@@ -56,4 +62,3 @@ private fun String.isDefinedCamelCase(): Boolean {
     .mapIndexed { index, current -> current to toCharArray.getOrNull(index + 1) }
     .none { it.first.isUpperCase() && it.second?.isUpperCase() ?: false }
 }
-
