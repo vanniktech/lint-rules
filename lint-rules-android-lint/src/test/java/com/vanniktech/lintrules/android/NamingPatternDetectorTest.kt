@@ -20,7 +20,7 @@ class NamingPatternDetectorTest {
       .expect("""
           |src/foo/Foo.java:5: Warning: Not named in defined camel case. [NamingPattern]
           |    String iOSVersion;
-          |    ~~~~~~~~~~~~~~~~~~
+          |           ~~~~~~~~~~
           |0 errors, 1 warnings""".trimMargin())
   }
 
@@ -40,6 +40,32 @@ class NamingPatternDetectorTest {
           |  private void makeHTTPRequest() {
           |               ~~~~~~~~~~~~~~~
           |0 errors, 1 warnings""".trimMargin())
+  }
+
+  @Test fun ignoreEnumConstants() {
+    lint()
+      .files(java("""
+          |package foo;
+          |
+          |public enum Enum {
+          |  FOO
+          |}""".trimMargin()))
+      .issues(ISSUE_NAMING_PATTERN)
+      .run()
+      .expectClean()
+  }
+
+  @Test fun ignoreInterfaceConstants() {
+    lint()
+      .files(java("""
+          |package foo;
+          |
+          |interface Something {
+          |  String FOO = "bar";
+          |}""".trimMargin()))
+      .issues(ISSUE_NAMING_PATTERN)
+      .run()
+      .expectClean()
   }
 
   @Test fun correctClassName() {
