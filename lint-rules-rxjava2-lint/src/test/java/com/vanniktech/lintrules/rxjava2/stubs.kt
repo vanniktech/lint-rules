@@ -4,7 +4,7 @@ import com.android.tools.lint.checks.infrastructure.TestFiles.java
 
 val stubCompositeDisposable = java("""
     |package io.reactivex.disposables;
-    |class CompositeDisposable {
+    |public class CompositeDisposable {
     |  public void dispose() {}
     |  public void addAll() {}
     |  public void clear() {}
@@ -53,7 +53,7 @@ val stubCheckReturnValue = java("""
 val stubObservable = java("""
     |package io.reactivex;
     |import io.reactivex.functions.Consumer;
-    |class Observable<T> {
+    |public class Observable<T> {
     |  public void subscribe() {}
     |  public void subscribe(Consumer<T> onNext) {}
     |  public void subscribe(Consumer<T> onNext, Consumer<Throwable> onError) {}
@@ -62,7 +62,7 @@ val stubObservable = java("""
 val stubFlowable = java("""
     |package io.reactivex;
     |import io.reactivex.functions.Consumer;
-    |class Flowable<T> {
+    |public class Flowable<T> {
     |  public void subscribe() {}
     |  public void subscribe(Consumer<T> onNext) {}
     |  public void subscribe(Consumer<T> onNext, Consumer<Throwable> onError) {}
@@ -71,7 +71,7 @@ val stubFlowable = java("""
 val stubSingle = java("""
     |package io.reactivex;
     |import io.reactivex.functions.Consumer;
-    |class Single<T> {
+    |public class Single<T> {
     |  public void subscribe() {}
     |  public void subscribe(Consumer<T> onSuccess) {}
     |  public void subscribe(Consumer<T> onSuccess, Consumer<Throwable> onError) {}
@@ -81,7 +81,7 @@ val stubCompletable = java("""
     |package io.reactivex;
     |import io.reactivex.functions.Action;
     |import io.reactivex.functions.Consumer;
-    |class Completable {
+    |public class Completable {
     |  public void subscribe() {}
     |  public void subscribe(Action onComplete) {}
     |  public void subscribe(Action onComplete, Consumer<Throwable> onError) {}
@@ -90,7 +90,7 @@ val stubCompletable = java("""
 val stubMaybe = java("""
     |package io.reactivex;
     |import io.reactivex.functions.Consumer;
-    |class Maybe<T> {
+    |public class Maybe<T> {
     |  public void subscribe() {}
     |  public void subscribe(Consumer<T> onSuccess) {}
     |  public void subscribe(Consumer<T> onSuccess, Consumer<Throwable> onError) {}

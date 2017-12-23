@@ -4,12 +4,12 @@ import com.vanniktech.lintrules.rxjava2.RxJava2MethodCheckReturnValueDetector.IS
 import com.vanniktech.lintrules.rxjava2.RxJava2MissingCompositeDisposableClearDetector.ISSUE_MISSING_COMPOSITE_DISPOSABLE_CLEAR
 
 class IssueRegistry : com.android.tools.lint.client.api.IssueRegistry() {
-  override fun getIssues() =
-      RxJava2Detector.getIssues()
-        .toList()
-        .plus(listOf(
-          ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE,
-          ISSUE_MISSING_COMPOSITE_DISPOSABLE_CLEAR,
-          ISSUE_RAW_SCHEDULER_CALL
-        ))
+  override fun getIssues() = listOf(
+      ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE,
+      ISSUE_MISSING_COMPOSITE_DISPOSABLE_CLEAR,
+      CALLING_COMPOSITE_DISPOSABLE_ADD_ALL,
+      CALLING_COMPOSITE_DISPOSABLE_DISPOSE,
+      SUBSCRIBE_MISSING_ON_ERROR,
+      ISSUE_RAW_SCHEDULER_CALL
+  )
 }
