@@ -53,10 +53,31 @@ val stubCheckReturnValue = java("""
 val stubObservable = java("""
     |package io.reactivex;
     |import io.reactivex.functions.Consumer;
+    |import io.reactivex.annotations.SchedulerSupport;
+    |import io.reactivex.annotations.CheckReturnValue;
+    |
     |public class Observable<T> {
     |  public void subscribe() {}
     |  public void subscribe(Consumer<T> onNext) {}
     |  public void subscribe(Consumer<T> onNext, Consumer<Throwable> onError) {}
+    |
+    |  @CheckReturnValue
+    |  @SchedulerSupport(SchedulerSupport.NONE)
+    |  public static <T> Observable<T> just(T item) {
+    |      return null;
+    |  }
+    |
+    |  @CheckReturnValue
+    |  @SchedulerSupport(SchedulerSupport.COMPUTATION)
+    |  public static Observable<Long> interval(long period, TimeUnit unit) {
+    |      return null;
+    |  }
+    |
+    |  @CheckReturnValue
+    |  @SchedulerSupport(SchedulerSupport.CUSTOM)
+    |  public static Observable<Long> interval(long period, TimeUnit unit, Scheduler scheduler) {
+    |      return null;
+    |  }
     |}""".trimMargin())
 
 val stubFlowable = java("""
@@ -133,6 +154,23 @@ val stubAndroidSchedulers = java("""
     |  public static Scheduler mainThread() {
     |    return null;
     |  }
+    |}""".trimMargin())
+
+val stubSchedulerSupport = java("""
+    |package io.reactivex.annotations;
+    |
+    |import io.reactivex.schedulers.Scheduler;
+    |
+    |public @interface SchedulerSupport {
+    |  String NONE = "none";
+    |  String CUSTOM = "custom";
+    |  String COMPUTATION = "io.reactivex:computation";
+    |  String IO = "io.reactivex:io";
+    |  String NEW_THREAD = "io.reactivex:new-thread";
+    |  String TRAMPOLINE = "io.reactivex:trampoline";
+    |  String SINGLE = "io.reactivex:single";
+    |
+    |  String value();
     |}""".trimMargin())
 
 val stubProvides = java("""

@@ -23,7 +23,7 @@ class RxJava2MethodCheckReturnValueDetectorTest {
   @Test fun methodReturningObservableMissingCheckReturnValueSuppressed() {
     lint()
       .allowCompilationErrors()
-      .files(stubSuppressLint, stubObservable, java("""
+      .files(stubSuppressLint, stubCheckReturnValue, stubObservable, java("""
           |package foo;
           |import io.reactivex.Observable;
           |import android.annotation.SuppressLint;
@@ -40,7 +40,7 @@ class RxJava2MethodCheckReturnValueDetectorTest {
   @Test fun methodReturningObservableMissingCheckReturnValue() {
     lint()
       .allowCompilationErrors()
-      .files(stubObservable, java("""
+      .files(stubCheckReturnValue, stubObservable, java("""
           |package foo;
           |import io.reactivex.Observable;
           |class Example {
@@ -60,7 +60,7 @@ class RxJava2MethodCheckReturnValueDetectorTest {
   @Test fun methodReturningObservableHavingCheckReturnValue() {
     lint()
       .allowCompilationErrors()
-      .files(stubObservable, stubCheckReturnValue, java("""
+      .files(stubCheckReturnValue, stubObservable, stubCheckReturnValue, java("""
           |package foo;
           |import io.reactivex.Observable;
           |import io.reactivex.annotations.CheckReturnValue;
