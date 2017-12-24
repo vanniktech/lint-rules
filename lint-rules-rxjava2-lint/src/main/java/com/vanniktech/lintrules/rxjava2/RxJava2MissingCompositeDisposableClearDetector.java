@@ -46,7 +46,7 @@ public final class RxJava2MissingCompositeDisposableClearDetector extends Detect
       this.context = context;
     }
 
-    @Override public void visitClass(final UClass clazz) {
+    @Override @SuppressWarnings("PMD.CyclomaticComplexity") public void visitClass(final UClass clazz) {
       final UField[] fields = clazz.getFields();
 
       final Set<UField> compositeDisposables = new HashSet<>();

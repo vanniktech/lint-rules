@@ -30,7 +30,7 @@ public final class InvalidSingleLineCommentDetector extends Detector implements 
     return Collections.<Class<? extends UElement>>singletonList(UClass.class);
   }
 
-  @Override public void afterCheckFile(final Context context) {
+  @Override @SuppressWarnings("PMD.CyclomaticComplexity") public void afterCheckFile(final Context context) {
     final JavaContext javaContext = (JavaContext) context;
 
     final String source = String.valueOf(javaContext.getContents());
