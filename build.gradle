@@ -40,7 +40,7 @@ codeQualityTools {
     toolVersion = '8.5'
   }
   pmd {
-    toolVersion = '5.8.1'
+    toolVersion = '6.0.0'
   }
   ktlint {
     toolVersion = '0.12.1'
