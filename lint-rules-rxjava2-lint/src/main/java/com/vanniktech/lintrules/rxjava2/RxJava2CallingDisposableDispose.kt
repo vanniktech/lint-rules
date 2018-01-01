@@ -12,7 +12,7 @@ import com.intellij.psi.PsiMethod
 import org.jetbrains.uast.UCallExpression
 import java.util.EnumSet
 
-@Suppress("Detekt.VariableMaxLength") val CALLING_COMPOSITE_DISPOSABLE_DISPOSE = Issue.create("CallingCompositeDisposableDispose",
+@Suppress("Detekt.VariableMaxLength") val ISSUE_CALLING_COMPOSITE_DISPOSABLE_DISPOSE = Issue.create("CallingCompositeDisposableDispose",
     "Using dispose() instead of clear()",
     "Instead of using dispose(), clear() should be used.",
     MESSAGES, 8, WARNING,
@@ -23,7 +23,7 @@ class RxJava2CallingDisposableDispose : Detector(), Detector.UastScanner {
 
   override fun visitMethod(context: JavaContext, node: UCallExpression, method: PsiMethod) {
     if (context.evaluator.isMemberInClass(method, "io.reactivex.disposables.CompositeDisposable")) {
-      context.report(CALLING_COMPOSITE_DISPOSABLE_DISPOSE, node, context.getNameLocation(node), "Using dispose() instead of clear()")
+      context.report(ISSUE_CALLING_COMPOSITE_DISPOSABLE_DISPOSE, node, context.getNameLocation(node), "Using dispose() instead of clear()")
     }
   }
 }

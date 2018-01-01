@@ -19,8 +19,8 @@ val ISSUE_RAW_SCHEDULER_CALL = Issue.create("RawRxJava2SchedulerCall", "Instead 
   "Instead of calling the Schedulers directly inject them.", CORRECTNESS, 8, WARNING,
     Implementation(RxJava2SchedulerCallDetector::class.java, EnumSet.of(JAVA_FILE, TEST_SOURCES)))
 
-val SCHEDULERS_METHODS = listOf("io", "computation", "newThread", "single", "from")
-val ANDROID_SCHEDULERS_METHODS = listOf("mainThread")
+private val SCHEDULERS_METHODS = listOf("io", "computation", "newThread", "single", "from")
+private val ANDROID_SCHEDULERS_METHODS = listOf("mainThread")
 
 class RxJava2SchedulerCallDetector : Detector(), UastScanner {
   override fun getApplicableMethodNames() = SCHEDULERS_METHODS + ANDROID_SCHEDULERS_METHODS

@@ -98,23 +98,6 @@ class ShouldUseStaticImportDetectorTest {
           |0 errors, 1 warnings""".trimMargin())
   }
 
-  @Test fun localeCanadaIgnored() {
-    val source = """
-          |package foo;
-          |import java.util.Locale;
-          |class Example {
-          |  public void foo() {
-          |    //noinspection AndroidLintShouldUseStaticImport
-          |    Locale.CANADA.getCountry();
-          |  }
-          |}""".trimMargin()
-    lint()
-      .files(java(source))
-      .issues(ISSUE_SHOULD_USE_STATIC_IMPORT)
-      .run()
-      .expectClean()
-  }
-
   @Test fun localeCanadaStaticallyImported() {
     lint()
       .files(java("""

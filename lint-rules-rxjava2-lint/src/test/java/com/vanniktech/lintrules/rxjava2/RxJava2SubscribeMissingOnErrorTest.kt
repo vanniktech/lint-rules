@@ -5,25 +5,6 @@ import com.android.tools.lint.checks.infrastructure.TestLintTask.lint
 import org.junit.Test
 
 class RxJava2SubscribeMissingOnErrorTest {
-  @Test fun callingObservableSubscribeSuppressed() {
-    lint()
-      .files(rxJava2(), java("""
-          |package foo;
-          |
-          |import io.reactivex.Observable;
-          |
-          |class Example {
-          |  public void foo() {
-          |    Observable<Object> o = null;
-          |    //noinspection AndroidLintSubscribeMissingOnError
-          |    o.subscribe();
-          |  }
-          |}""".trimMargin()))
-      .issues(SUBSCRIBE_MISSING_ON_ERROR)
-      .run()
-      .expectClean()
-  }
-
   @Test fun callingObservableSubscribe() {
     lint()
       .files(rxJava2(), java("""
@@ -37,7 +18,7 @@ class RxJava2SubscribeMissingOnErrorTest {
           |    o.subscribe();
           |  }
           |}""".trimMargin()))
-      .issues(SUBSCRIBE_MISSING_ON_ERROR)
+      .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
       .run()
       .expect("""
           |src/foo/Example.java:8: Error: Using a version of subscribe() without an error Consumer [SubscribeMissingOnError]
@@ -61,7 +42,7 @@ class RxJava2SubscribeMissingOnErrorTest {
           |    o.subscribe(c);
           |  }
           |}""".trimMargin()))
-      .issues(SUBSCRIBE_MISSING_ON_ERROR)
+      .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
       .run()
       .expect("""
           |src/foo/Example.java:10: Error: Using a version of subscribe() without an error Consumer [SubscribeMissingOnError]
@@ -85,7 +66,7 @@ class RxJava2SubscribeMissingOnErrorTest {
           |    o.subscribe(c, c);
           |  }
           |}""".trimMargin()))
-      .issues(SUBSCRIBE_MISSING_ON_ERROR)
+      .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
       .run()
       .expectClean()
   }
@@ -103,7 +84,7 @@ class RxJava2SubscribeMissingOnErrorTest {
           |    f.subscribe();
           |  }
           |}""".trimMargin()))
-      .issues(SUBSCRIBE_MISSING_ON_ERROR)
+      .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
       .run()
       .expect("""
           |src/foo/Example.java:8: Error: Using a version of subscribe() without an error Consumer [SubscribeMissingOnError]
@@ -127,7 +108,7 @@ class RxJava2SubscribeMissingOnErrorTest {
           |    f.subscribe(c);
           |  }
           |}""".trimMargin()))
-      .issues(SUBSCRIBE_MISSING_ON_ERROR)
+      .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
       .run()
       .expect("""
           |src/foo/Example.java:10: Error: Using a version of subscribe() without an error Consumer [SubscribeMissingOnError]
@@ -151,7 +132,7 @@ class RxJava2SubscribeMissingOnErrorTest {
           |    f.subscribe(c, c);
           |  }
           |}""".trimMargin()))
-      .issues(SUBSCRIBE_MISSING_ON_ERROR)
+      .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
       .run()
       .expectClean()
   }
@@ -169,7 +150,7 @@ class RxJava2SubscribeMissingOnErrorTest {
           |    s.subscribe();
           |  }
           |}""".trimMargin()))
-      .issues(SUBSCRIBE_MISSING_ON_ERROR)
+      .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
       .run()
       .expect("""
           |src/foo/Example.java:8: Error: Using a version of subscribe() without an error Consumer [SubscribeMissingOnError]
@@ -193,7 +174,7 @@ class RxJava2SubscribeMissingOnErrorTest {
           |    s.subscribe(c);
           |  }
           |}""".trimMargin()))
-      .issues(SUBSCRIBE_MISSING_ON_ERROR)
+      .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
       .run()
       .expect("""
           |src/foo/Example.java:10: Error: Using a version of subscribe() without an error Consumer [SubscribeMissingOnError]
@@ -217,7 +198,7 @@ class RxJava2SubscribeMissingOnErrorTest {
           |    s.subscribe(c, c);
           |  }
           |}""".trimMargin()))
-      .issues(SUBSCRIBE_MISSING_ON_ERROR)
+      .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
       .run()
       .expectClean()
   }
@@ -235,7 +216,7 @@ class RxJava2SubscribeMissingOnErrorTest {
           |    cp.subscribe();
           |  }
           |}""".trimMargin()))
-      .issues(SUBSCRIBE_MISSING_ON_ERROR)
+      .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
       .run()
       .expect("""
           |src/foo/Example.java:8: Error: Using a version of subscribe() without an error Consumer [SubscribeMissingOnError]
@@ -259,7 +240,7 @@ class RxJava2SubscribeMissingOnErrorTest {
           |    cp.subscribe(a);
           |  }
           |}""".trimMargin()))
-      .issues(SUBSCRIBE_MISSING_ON_ERROR)
+      .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
       .run()
       .expect("""
           |src/foo/Example.java:10: Error: Using a version of subscribe() without an error Consumer [SubscribeMissingOnError]
@@ -285,7 +266,7 @@ class RxJava2SubscribeMissingOnErrorTest {
           |    cp.subscribe(a, c);
           |  }
           |}""".trimMargin()))
-      .issues(SUBSCRIBE_MISSING_ON_ERROR)
+      .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
       .run()
       .expectClean()
   }
@@ -303,7 +284,7 @@ class RxJava2SubscribeMissingOnErrorTest {
           |    m.subscribe();
           |  }
           |}""".trimMargin()))
-      .issues(SUBSCRIBE_MISSING_ON_ERROR)
+      .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
       .run()
       .expect("""
           |src/foo/Example.java:8: Error: Using a version of subscribe() without an error Consumer [SubscribeMissingOnError]
@@ -327,7 +308,7 @@ class RxJava2SubscribeMissingOnErrorTest {
           |    m.subscribe(c);
           |  }
           |}""".trimMargin()))
-      .issues(SUBSCRIBE_MISSING_ON_ERROR)
+      .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
       .run()
       .expect("""
           |src/foo/Example.java:10: Error: Using a version of subscribe() without an error Consumer [SubscribeMissingOnError]
@@ -351,7 +332,7 @@ class RxJava2SubscribeMissingOnErrorTest {
           |    m.subscribe(c, c);
           |  }
           |}""".trimMargin()))
-      .issues(SUBSCRIBE_MISSING_ON_ERROR)
+      .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
       .run()
       .expectClean()
   }

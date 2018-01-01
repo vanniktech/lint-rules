@@ -17,7 +17,7 @@ class RxJava2DefaultSchedulerDetectorTest {
           |    Observable.just(5);
           |  }
           |}""".trimMargin()))
-      .issues(DEFAULT_SCHEDULER)
+      .issues(ISSUE_DEFAULT_SCHEDULER)
       .run()
       .expectClean()
   }
@@ -35,7 +35,7 @@ class RxJava2DefaultSchedulerDetectorTest {
           |    Observable.interval(5, TimeUnit.SECONDS);
           |  }
           |}""".trimMargin()))
-      .issues(DEFAULT_SCHEDULER)
+      .issues(ISSUE_DEFAULT_SCHEDULER)
       .run()
       .expect("""
           |src/foo/Example.java:8: Warning: interval() is using its default scheduler [DefaultScheduler]
@@ -58,7 +58,7 @@ class RxJava2DefaultSchedulerDetectorTest {
           |    Observable.interval(5, TimeUnit.SECONDS, Schedulers.computation());
           |  }
           |}""".trimMargin()))
-      .issues(DEFAULT_SCHEDULER)
+      .issues(ISSUE_DEFAULT_SCHEDULER)
       .run()
       .expectClean()
   }

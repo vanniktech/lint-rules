@@ -17,7 +17,7 @@ import org.jetbrains.uast.UMethod
 import org.jetbrains.uast.UVariable
 import java.util.EnumSet
 
-val ANNOTATION_ORDER = listOf(
+private val ANNOTATION_ORDER = listOf(
     // Suppressing the suppressed.
     "Suppress",
     "SuppressLint",
