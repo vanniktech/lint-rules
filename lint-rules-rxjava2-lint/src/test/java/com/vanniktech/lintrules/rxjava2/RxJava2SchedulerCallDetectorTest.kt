@@ -7,10 +7,10 @@ import org.junit.Test
 class RxJava2SchedulerCallDetectorTest {
   @Test fun ioCallInsideDaggerProvidesMethod() {
     lint()
-      .files(stubProvides, stubScheduler, stubSchedulers, java("""
+      .files(dagger2(), rxJava2(), java("""
           |package foo;
           |
-          |import io.reactivex.schedulers.Scheduler;
+          |import io.reactivex.Scheduler;
           |import io.reactivex.schedulers.Schedulers;
           |import dagger.Provides;
           |
@@ -26,11 +26,11 @@ class RxJava2SchedulerCallDetectorTest {
 
   @Test fun ioCallInsideCheckReturnValueMethod() {
     lint()
-      .files(stubCheckReturnValue, stubScheduler, stubSchedulers, java("""
+      .files(rxJava2(), java("""
           |package foo;
           |
           |import io.reactivex.annotations.CheckReturnValue;
-          |import io.reactivex.schedulers.Scheduler;
+          |import io.reactivex.Scheduler;
           |import io.reactivex.schedulers.Schedulers;
           |
           |class Example {
@@ -50,7 +50,7 @@ class RxJava2SchedulerCallDetectorTest {
 
   @Test fun ioCall() {
     lint()
-      .files(stubScheduler, stubSchedulers, java("""
+      .files(rxJava2(), java("""
           |package foo;
           |
           |import io.reactivex.schedulers.Schedulers;
@@ -72,7 +72,7 @@ class RxJava2SchedulerCallDetectorTest {
 
   @Test fun computationCall() {
     lint()
-      .files(stubScheduler, stubSchedulers, java("""
+      .files(rxJava2(), java("""
           |package foo;
           |
           |import io.reactivex.schedulers.Schedulers;
@@ -94,7 +94,7 @@ class RxJava2SchedulerCallDetectorTest {
 
   @Test fun newThreadCall() {
     lint()
-      .files(stubScheduler, stubSchedulers, java("""
+      .files(rxJava2(), java("""
           |package foo;
           |
           |import io.reactivex.schedulers.Schedulers;
@@ -116,7 +116,7 @@ class RxJava2SchedulerCallDetectorTest {
 
   @Test fun singleCall() {
     lint()
-      .files(stubScheduler, stubSchedulers, java("""
+      .files(rxJava2(), java("""
           |package foo;
           |
           |import io.reactivex.schedulers.Schedulers;
@@ -138,7 +138,7 @@ class RxJava2SchedulerCallDetectorTest {
 
   @Test fun fromCall() {
     lint()
-      .files(stubScheduler, stubSchedulers, java("""
+      .files(rxJava2(), java("""
           |package foo;
           |
           |import io.reactivex.schedulers.Schedulers;
@@ -160,7 +160,7 @@ class RxJava2SchedulerCallDetectorTest {
 
   @Test fun mainThreadCall() {
     lint()
-      .files(stubScheduler, stubAndroidSchedulers, java("""
+      .files(rxJava2(), rxAndroid2(), java("""
           |package foo;
           |
           |import io.reactivex.android.schedulers.AndroidSchedulers;

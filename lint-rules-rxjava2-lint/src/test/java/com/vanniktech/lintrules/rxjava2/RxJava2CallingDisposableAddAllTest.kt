@@ -7,8 +7,7 @@ import org.junit.Test
 class RxJava2CallingDisposableAddAllTest {
   @Test fun callingCompositeDisposableAddAll() {
     lint()
-      .allowCompilationErrors()
-      .files(stubCompositeDisposable, java("""
+      .files(rxJava2(), java("""
           |package foo;
           |import io.reactivex.disposables.CompositeDisposable;
           |class Example {
@@ -28,8 +27,7 @@ class RxJava2CallingDisposableAddAllTest {
 
   @Test fun callingCompositeDisposableSuppressed() {
     lint()
-      .allowCompilationErrors()
-      .files(stubCompositeDisposable, java("""
+      .files(rxJava2(), java("""
           |package foo;
           |import io.reactivex.disposables.CompositeDisposable;
           |class Example {

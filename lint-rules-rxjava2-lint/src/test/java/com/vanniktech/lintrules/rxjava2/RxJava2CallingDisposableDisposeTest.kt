@@ -7,7 +7,7 @@ import org.junit.Test
 class RxJava2CallingDisposableDisposeTest {
   @Test fun callingCompositeDisposableDispose() {
     lint()
-      .files(stubCompositeDisposable, java("""
+      .files(rxJava2(), java("""
           |package foo;
           |import io.reactivex.disposables.CompositeDisposable;
           |class Example {
@@ -27,7 +27,7 @@ class RxJava2CallingDisposableDisposeTest {
 
   @Test fun callingCompositeDisposableDisposeSuppressed() {
     lint()
-      .files(stubCompositeDisposable, java("""
+      .files(rxJava2(), java("""
           |package foo;
           |import io.reactivex.disposables.CompositeDisposable;
           |class Example {

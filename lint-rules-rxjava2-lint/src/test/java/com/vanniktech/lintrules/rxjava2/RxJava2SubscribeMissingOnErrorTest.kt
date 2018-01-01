@@ -7,13 +7,14 @@ import org.junit.Test
 class RxJava2SubscribeMissingOnErrorTest {
   @Test fun callingObservableSubscribeSuppressed() {
     lint()
-      .allowCompilationErrors()
-      .files(stubConsumer, stubObservable, java("""
+      .files(rxJava2(), java("""
           |package foo;
+          |
           |import io.reactivex.Observable;
+          |
           |class Example {
           |  public void foo() {
-          |    Observable o = null;
+          |    Observable<Object> o = null;
           |    //noinspection AndroidLintSubscribeMissingOnError
           |    o.subscribe();
           |  }
@@ -25,20 +26,21 @@ class RxJava2SubscribeMissingOnErrorTest {
 
   @Test fun callingObservableSubscribe() {
     lint()
-      .allowCompilationErrors()
-      .files(stubConsumer, stubObservable, java("""
+      .files(rxJava2(), java("""
           |package foo;
+          |
           |import io.reactivex.Observable;
+          |
           |class Example {
           |  public void foo() {
-          |    Observable o = null;
+          |    Observable<Object> o = null;
           |    o.subscribe();
           |  }
           |}""".trimMargin()))
       .issues(SUBSCRIBE_MISSING_ON_ERROR)
       .run()
       .expect("""
-          |src/foo/Example.java:6: Error: Using a version of subscribe() without an error Consumer [SubscribeMissingOnError]
+          |src/foo/Example.java:8: Error: Using a version of subscribe() without an error Consumer [SubscribeMissingOnError]
           |    o.subscribe();
           |      ~~~~~~~~~
           |1 errors, 0 warnings""".trimMargin())
@@ -46,21 +48,23 @@ class RxJava2SubscribeMissingOnErrorTest {
 
   @Test fun callingObservableSubscribeOnSuccess() {
     lint()
-      .allowCompilationErrors()
-      .files(stubConsumer, stubObservable, java("""
+      .files(rxJava2(), java("""
           |package foo;
+          |
           |import io.reactivex.Observable;
+          |import io.reactivex.functions.Consumer;
+          |
           |class Example {
           |  public void foo() {
-          |    Observable o = null;
-          |    Consumer c = new Consumer() { @Override public void accept(Object o) throws Exception { } };
+          |    Observable<Object> o = null;
+          |    Consumer<Object> c = new Consumer() { @Override public void accept(Object o) throws Exception { } };
           |    o.subscribe(c);
           |  }
           |}""".trimMargin()))
       .issues(SUBSCRIBE_MISSING_ON_ERROR)
       .run()
       .expect("""
-          |src/foo/Example.java:7: Error: Using a version of subscribe() without an error Consumer [SubscribeMissingOnError]
+          |src/foo/Example.java:10: Error: Using a version of subscribe() without an error Consumer [SubscribeMissingOnError]
           |    o.subscribe(c);
           |      ~~~~~~~~~
           |1 errors, 0 warnings""".trimMargin())
@@ -68,15 +72,17 @@ class RxJava2SubscribeMissingOnErrorTest {
 
   @Test fun callingObservableSubscribeOnSuccessWithError() {
     lint()
-      .allowCompilationErrors()
-      .files(stubConsumer, stubObservable, java("""
+      .files(rxJava2(), java("""
           |package foo;
+          |
           |import io.reactivex.Observable;
+          |import io.reactivex.functions.Consumer;
+          |
           |class Example {
           |  public void foo() {
-          |    Observable o = null;
-          |    Consumer c = new Consumer() { @Override public void accept(Object o) throws Exception { } };
-          |    osubscribe(c, c);
+          |    Observable<Object> o = null;
+          |    Consumer<Object> c = new Consumer() { @Override public void accept(Object o) throws Exception { } };
+          |    o.subscribe(c, c);
           |  }
           |}""".trimMargin()))
       .issues(SUBSCRIBE_MISSING_ON_ERROR)
@@ -86,20 +92,21 @@ class RxJava2SubscribeMissingOnErrorTest {
 
   @Test fun callingFlowableSubscribe() {
     lint()
-      .allowCompilationErrors()
-      .files(stubConsumer, stubFlowable, java("""
+      .files(reactiveStreams(), rxJava2(), java("""
           |package foo;
+          |
           |import io.reactivex.Flowable;
+          |
           |class Example {
           |  public void foo() {
-          |    Flowable f = null;
+          |    Flowable<Object> f = null;
           |    f.subscribe();
           |  }
           |}""".trimMargin()))
       .issues(SUBSCRIBE_MISSING_ON_ERROR)
       .run()
       .expect("""
-          |src/foo/Example.java:6: Error: Using a version of subscribe() without an error Consumer [SubscribeMissingOnError]
+          |src/foo/Example.java:8: Error: Using a version of subscribe() without an error Consumer [SubscribeMissingOnError]
           |    f.subscribe();
           |      ~~~~~~~~~
           |1 errors, 0 warnings""".trimMargin())
@@ -107,21 +114,23 @@ class RxJava2SubscribeMissingOnErrorTest {
 
   @Test fun callingFlowableSubscribeOnSuccess() {
     lint()
-      .allowCompilationErrors()
-      .files(stubConsumer, stubFlowable, java("""
+      .files(reactiveStreams(), rxJava2(), java("""
           |package foo;
+          |
           |import io.reactivex.Flowable;
+          |import io.reactivex.functions.Consumer;
+          |
           |class Example {
           |  public void foo() {
-          |    Flowable f = null;
-          |    Consumer c = new Consumer() { @Override public void accept(Object o) throws Exception { } };
+          |    Flowable<Object> f = null;
+          |    Consumer<Object> c = new Consumer() { @Override public void accept(Object o) throws Exception { } };
           |    f.subscribe(c);
           |  }
           |}""".trimMargin()))
       .issues(SUBSCRIBE_MISSING_ON_ERROR)
       .run()
       .expect("""
-          |src/foo/Example.java:7: Error: Using a version of subscribe() without an error Consumer [SubscribeMissingOnError]
+          |src/foo/Example.java:10: Error: Using a version of subscribe() without an error Consumer [SubscribeMissingOnError]
           |    f.subscribe(c);
           |      ~~~~~~~~~
           |1 errors, 0 warnings""".trimMargin())
@@ -129,14 +138,16 @@ class RxJava2SubscribeMissingOnErrorTest {
 
   @Test fun callingFlowableSubscribeOnSuccessWithError() {
     lint()
-      .allowCompilationErrors()
-      .files(stubConsumer, stubFlowable, java("""
+      .files(reactiveStreams(), rxJava2(), java("""
           |package foo;
+          |
           |import io.reactivex.Flowable;
+          |import io.reactivex.functions.Consumer;
+          |
           |class Example {
           |  public void foo() {
-          |    Flowable f = null;
-          |    Consumer c = new Consumer() { @Override public void accept(Object o) throws Exception { } };
+          |    Flowable<Object> f = null;
+          |    Consumer<Object> c = new Consumer() { @Override public void accept(Object o) throws Exception { } };
           |    f.subscribe(c, c);
           |  }
           |}""".trimMargin()))
@@ -147,20 +158,21 @@ class RxJava2SubscribeMissingOnErrorTest {
 
   @Test fun callingSingleSubscribe() {
     lint()
-      .allowCompilationErrors()
-      .files(stubConsumer, stubSingle, java("""
+      .files(rxJava2(), java("""
           |package foo;
+          |
           |import io.reactivex.Single;
+          |
           |class Example {
           |  public void foo() {
-          |    Single s = null;
+          |    Single<Object> s = null;
           |    s.subscribe();
           |  }
           |}""".trimMargin()))
       .issues(SUBSCRIBE_MISSING_ON_ERROR)
       .run()
       .expect("""
-          |src/foo/Example.java:6: Error: Using a version of subscribe() without an error Consumer [SubscribeMissingOnError]
+          |src/foo/Example.java:8: Error: Using a version of subscribe() without an error Consumer [SubscribeMissingOnError]
           |    s.subscribe();
           |      ~~~~~~~~~
           |1 errors, 0 warnings""".trimMargin())
@@ -168,21 +180,23 @@ class RxJava2SubscribeMissingOnErrorTest {
 
   @Test fun callingSingleSubscribeOnSuccess() {
     lint()
-      .allowCompilationErrors()
-      .files(stubConsumer, stubSingle, java("""
+      .files(rxJava2(), java("""
           |package foo;
+          |
           |import io.reactivex.Single;
+          |import io.reactivex.functions.Consumer;
+          |
           |class Example {
           |  public void foo() {
-          |    Single s = null;
-          |    Consumer c = new Consumer() { @Override public void accept(Object o) throws Exception { } };
+          |    Single<Object> s = null;
+          |    Consumer<Object> c = new Consumer() { @Override public void accept(Object o) throws Exception { } };
           |    s.subscribe(c);
           |  }
           |}""".trimMargin()))
       .issues(SUBSCRIBE_MISSING_ON_ERROR)
       .run()
       .expect("""
-          |src/foo/Example.java:7: Error: Using a version of subscribe() without an error Consumer [SubscribeMissingOnError]
+          |src/foo/Example.java:10: Error: Using a version of subscribe() without an error Consumer [SubscribeMissingOnError]
           |    s.subscribe(c);
           |      ~~~~~~~~~
           |1 errors, 0 warnings""".trimMargin())
@@ -190,14 +204,16 @@ class RxJava2SubscribeMissingOnErrorTest {
 
   @Test fun callingSingleSubscribeOnSuccessWithError() {
     lint()
-      .allowCompilationErrors()
-      .files(stubConsumer, stubSingle, java("""
+      .files(rxJava2(), java("""
           |package foo;
+          |
           |import io.reactivex.Single;
+          |import io.reactivex.functions.Consumer;
+          |
           |class Example {
           |  public void foo() {
-          |    Single s = null;
-          |    Consumer c = new Consumer() { @Override public void accept(Object o) throws Exception { } };
+          |    Single<Object> s = null;
+          |    Consumer<Object> c = new Consumer() { @Override public void accept(Object o) throws Exception { } };
           |    s.subscribe(c, c);
           |  }
           |}""".trimMargin()))
@@ -208,10 +224,11 @@ class RxJava2SubscribeMissingOnErrorTest {
 
   @Test fun callingCompletableSubscribe() {
     lint()
-      .allowCompilationErrors()
-      .files(stubAction, stubCompletable, java("""
+      .files(rxJava2(), java("""
           |package foo;
+          |
           |import io.reactivex.Completable;
+          |
           |class Example {
           |  public void foo() {
           |    Completable cp = null;
@@ -221,7 +238,7 @@ class RxJava2SubscribeMissingOnErrorTest {
       .issues(SUBSCRIBE_MISSING_ON_ERROR)
       .run()
       .expect("""
-          |src/foo/Example.java:6: Error: Using a version of subscribe() without an error Consumer [SubscribeMissingOnError]
+          |src/foo/Example.java:8: Error: Using a version of subscribe() without an error Consumer [SubscribeMissingOnError]
           |    cp.subscribe();
           |       ~~~~~~~~~
           |1 errors, 0 warnings""".trimMargin())
@@ -229,10 +246,12 @@ class RxJava2SubscribeMissingOnErrorTest {
 
   @Test fun callingCompletableSubscribeOnSuccess() {
     lint()
-      .allowCompilationErrors()
-      .files(stubAction, stubCompletable, java("""
+      .files(rxJava2(), java("""
           |package foo;
+          |
           |import io.reactivex.Completable;
+          |import io.reactivex.functions.Action;
+          |
           |class Example {
           |  public void foo() {
           |    Completable cp = null;
@@ -243,7 +262,7 @@ class RxJava2SubscribeMissingOnErrorTest {
       .issues(SUBSCRIBE_MISSING_ON_ERROR)
       .run()
       .expect("""
-          |src/foo/Example.java:7: Error: Using a version of subscribe() without an error Consumer [SubscribeMissingOnError]
+          |src/foo/Example.java:10: Error: Using a version of subscribe() without an error Consumer [SubscribeMissingOnError]
           |    cp.subscribe(a);
           |       ~~~~~~~~~
           |1 errors, 0 warnings""".trimMargin())
@@ -251,15 +270,18 @@ class RxJava2SubscribeMissingOnErrorTest {
 
   @Test fun callingCompletableSubscribeOnSuccessWithError() {
     lint()
-      .allowCompilationErrors()
-      .files(stubAction, stubConsumer, stubCompletable, java("""
+      .files(rxJava2(), java("""
           |package foo;
+          |
           |import io.reactivex.Completable;
+          |import io.reactivex.functions.Action;
+          |import io.reactivex.functions.Consumer;
+          |
           |class Example {
           |  public void foo() {
           |    Completable cp = null;
           |    Action a = new Action() { @Override public void run() { } };
-          |    Consumer c = new Consumer() { @Override public void accept(Object o) throws Exception { } };
+          |    Consumer<Throwable> c = new Consumer() { @Override public void accept(Object o) throws Exception { } };
           |    cp.subscribe(a, c);
           |  }
           |}""".trimMargin()))
@@ -270,20 +292,21 @@ class RxJava2SubscribeMissingOnErrorTest {
 
   @Test fun callingMaybeSubscribe() {
     lint()
-      .allowCompilationErrors()
-      .files(stubConsumer, stubMaybe, java("""
+      .files(rxJava2(), java("""
           |package foo;
+          |
           |import io.reactivex.Maybe;
+          |
           |class Example {
           |  public void foo() {
-          |    Maybe m = null;
+          |    Maybe<Object> m = null;
           |    m.subscribe();
           |  }
           |}""".trimMargin()))
       .issues(SUBSCRIBE_MISSING_ON_ERROR)
       .run()
       .expect("""
-          |src/foo/Example.java:6: Error: Using a version of subscribe() without an error Consumer [SubscribeMissingOnError]
+          |src/foo/Example.java:8: Error: Using a version of subscribe() without an error Consumer [SubscribeMissingOnError]
           |    m.subscribe();
           |      ~~~~~~~~~
           |1 errors, 0 warnings""".trimMargin())
@@ -291,21 +314,23 @@ class RxJava2SubscribeMissingOnErrorTest {
 
   @Test fun callingMaybeSubscribeOnSuccess() {
     lint()
-      .allowCompilationErrors()
-      .files(stubConsumer, stubMaybe, java("""
+      .files(rxJava2(), java("""
           |package foo;
+          |
           |import io.reactivex.Maybe;
+          |import io.reactivex.functions.Consumer;
+          |
           |class Example {
           |  public void foo() {
-          |    Maybe m = null;
-          |    Consumer c = new Consumer() { @Override public void accept(Object o) throws Exception { } };
+          |    Maybe<Object> m = null;
+          |    Consumer<Object> c = new Consumer() { @Override public void accept(Object o) throws Exception { } };
           |    m.subscribe(c);
           |  }
           |}""".trimMargin()))
       .issues(SUBSCRIBE_MISSING_ON_ERROR)
       .run()
       .expect("""
-          |src/foo/Example.java:7: Error: Using a version of subscribe() without an error Consumer [SubscribeMissingOnError]
+          |src/foo/Example.java:10: Error: Using a version of subscribe() without an error Consumer [SubscribeMissingOnError]
           |    m.subscribe(c);
           |      ~~~~~~~~~
           |1 errors, 0 warnings""".trimMargin())
@@ -313,14 +338,16 @@ class RxJava2SubscribeMissingOnErrorTest {
 
   @Test fun callingMaybeSubscribeOnSuccessWithError() {
     lint()
-      .allowCompilationErrors()
-      .files(stubConsumer, stubMaybe, java("""
+      .files(rxJava2(), java("""
           |package foo;
+          |
           |import io.reactivex.Maybe;
+          |import io.reactivex.functions.Consumer;
+          |
           |class Example {
           |  public void foo() {
-          |    Maybe m = null;
-          |    Consumer c = new Consumer() { @Override public void accept(Object o) throws Exception { } };
+          |    Maybe<Object> m = null;
+          |    Consumer<Object> c = new Consumer() { @Override public void accept(Object o) throws Exception { } };
           |    m.subscribe(c, c);
           |  }
           |}""".trimMargin()))
