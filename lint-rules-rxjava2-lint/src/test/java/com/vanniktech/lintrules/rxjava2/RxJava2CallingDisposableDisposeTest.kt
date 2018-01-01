@@ -16,29 +16,12 @@ class RxJava2CallingDisposableDisposeTest {
           |    cd.dispose();
           |  }
           |}""".trimMargin()))
-      .issues(CALLING_COMPOSITE_DISPOSABLE_DISPOSE)
+      .issues(ISSUE_CALLING_COMPOSITE_DISPOSABLE_DISPOSE)
       .run()
       .expect("""
           |src/foo/Example.java:6: Warning: Using dispose() instead of clear() [CallingCompositeDisposableDispose]
           |    cd.dispose();
           |       ~~~~~~~
           |0 errors, 1 warnings""".trimMargin())
-  }
-
-  @Test fun callingCompositeDisposableDisposeSuppressed() {
-    lint()
-      .files(rxJava2(), java("""
-          |package foo;
-          |import io.reactivex.disposables.CompositeDisposable;
-          |class Example {
-          |  public void foo() {
-          |    CompositeDisposable cd = null;
-          |    //noinspection AndroidLintCallingCompositeDisposableDispose
-          |    cd.dispose();
-          |  }
-          |}""".trimMargin()))
-      .issues(CALLING_COMPOSITE_DISPOSABLE_DISPOSE)
-      .run()
-      .expectClean()
   }
 }

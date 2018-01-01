@@ -2,7 +2,7 @@ package com.vanniktech.lintrules.android
 
 import com.android.tools.lint.checks.infrastructure.TestFiles.xml
 import com.android.tools.lint.checks.infrastructure.TestLintTask.lint
-import com.vanniktech.lintrules.android.SuperfluousMarginDeclarationDetector.SUPERFLUOUS_MARGIN_DECLARATION
+import com.vanniktech.lintrules.android.SuperfluousMarginDeclarationDetector.ISSUE_SUPERFLUOUS_MARGIN_DECLARATION
 import org.junit.Test
 
 class SuperfluousMarginDeclarationDetectorTest {
@@ -15,7 +15,7 @@ class SuperfluousMarginDeclarationDetectorTest {
           |  android:layout_marginBottom="16dp"
           |  android:layout_marginStart="16dp"
           |  android:layout_marginEnd="16dp"/>""".trimMargin()))
-      .issues(SUPERFLUOUS_MARGIN_DECLARATION)
+      .issues(ISSUE_SUPERFLUOUS_MARGIN_DECLARATION)
       .run()
       .expect("""
           |res/layout/ids.xml:1: Warning: Should be using layout_margin instead. [SuperfluousMarginDeclaration]
@@ -33,7 +33,7 @@ class SuperfluousMarginDeclarationDetectorTest {
           |  android:layout_marginBottom="16dp"
           |  android:layout_marginStart="16dp"
           |  android:layout_marginEnd="16dp"/>""".trimMargin()))
-      .issues(SUPERFLUOUS_MARGIN_DECLARATION)
+      .issues(ISSUE_SUPERFLUOUS_MARGIN_DECLARATION)
       .run()
       .expectClean()
   }
@@ -49,7 +49,7 @@ class SuperfluousMarginDeclarationDetectorTest {
           |  android:layout_marginBottom="16dp"
           |  android:layout_marginStart="16dp"
           |  android:layout_marginEnd="16dp"/>""".trimMargin()))
-      .issues(SUPERFLUOUS_MARGIN_DECLARATION)
+      .issues(ISSUE_SUPERFLUOUS_MARGIN_DECLARATION)
       .run()
       .expectClean()
   }
@@ -62,7 +62,7 @@ class SuperfluousMarginDeclarationDetectorTest {
           |  android:layout_marginTop="16dp"
           |  android:layout_marginBottom="16dp"
           |  android:layout_marginEnd="16dp"/>""".trimMargin()))
-      .issues(SUPERFLUOUS_MARGIN_DECLARATION)
+      .issues(ISSUE_SUPERFLUOUS_MARGIN_DECLARATION)
       .run()
       .expectClean()
   }
@@ -75,7 +75,7 @@ class SuperfluousMarginDeclarationDetectorTest {
           |  android:layout_marginTop="16dp"
           |  android:layout_marginBottom="16dp"
           |  android:layout_marginStart="16dp"/>""".trimMargin()))
-      .issues(SUPERFLUOUS_MARGIN_DECLARATION)
+      .issues(ISSUE_SUPERFLUOUS_MARGIN_DECLARATION)
       .run()
       .expectClean()
   }
@@ -88,7 +88,7 @@ class SuperfluousMarginDeclarationDetectorTest {
           |  android:layout_marginTop="16dp"
           |  android:layout_marginStart="16dp"
           |  android:layout_marginEnd="16dp"/>""".trimMargin()))
-      .issues(SUPERFLUOUS_MARGIN_DECLARATION)
+      .issues(ISSUE_SUPERFLUOUS_MARGIN_DECLARATION)
       .run()
       .expectClean()
   }
@@ -101,7 +101,7 @@ class SuperfluousMarginDeclarationDetectorTest {
           |  android:layout_marginBottom="16dp"
           |  android:layout_marginStart="16dp"
           |  android:layout_marginEnd="16dp"/>""".trimMargin()))
-      .issues(SUPERFLUOUS_MARGIN_DECLARATION)
+      .issues(ISSUE_SUPERFLUOUS_MARGIN_DECLARATION)
       .run()
       .expectClean()
   }
@@ -126,7 +126,7 @@ class SuperfluousMarginDeclarationDetectorTest {
           |      android:layout_marginBottom="16dp"/>
           |
           |</merge>""".trimMargin()))
-      .issues(SUPERFLUOUS_MARGIN_DECLARATION)
+      .issues(ISSUE_SUPERFLUOUS_MARGIN_DECLARATION)
       .run()
       .expectClean()
   }
@@ -140,7 +140,7 @@ class SuperfluousMarginDeclarationDetectorTest {
           |  tools:layout_marginBottom="16dp"
           |  tools:layout_marginStart="16dp"
           |  tools:layout_marginEnd="16dp"/>""".trimMargin()))
-      .issues(SUPERFLUOUS_MARGIN_DECLARATION)
+      .issues(ISSUE_SUPERFLUOUS_MARGIN_DECLARATION)
       .run()
       .expectClean()
   }

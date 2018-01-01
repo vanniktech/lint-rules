@@ -12,7 +12,7 @@ import com.intellij.psi.PsiMethod
 import org.jetbrains.uast.UCallExpression
 import java.util.EnumSet
 
-@Suppress("Detekt.VariableMaxLength") val CALLING_COMPOSITE_DISPOSABLE_ADD_ALL = Issue.create("CallingCompositeDisposableAddAll",
+@Suppress("Detekt.VariableMaxLength") val ISSUE_CALLING_COMPOSITE_DISPOSABLE_ADD_ALL = Issue.create("CallingCompositeDisposableAddAll",
     "Using addAll() instead of add() separately",
     "Instead of using addAll(), add() should be used separately.",
     MESSAGES, 5, WARNING,
@@ -23,7 +23,7 @@ class RxJava2CallingDisposableAddAll : Detector(), Detector.UastScanner {
 
   override fun visitMethod(context: JavaContext, node: UCallExpression, method: PsiMethod) {
     if (context.evaluator.isMemberInClass(method, "io.reactivex.disposables.CompositeDisposable")) {
-      context.report(CALLING_COMPOSITE_DISPOSABLE_ADD_ALL, node, context.getNameLocation(node), "Using addAll() instead of add() separately")
+      context.report(ISSUE_CALLING_COMPOSITE_DISPOSABLE_ADD_ALL, node, context.getNameLocation(node), "Using addAll() instead of add() separately")
     }
   }
 }

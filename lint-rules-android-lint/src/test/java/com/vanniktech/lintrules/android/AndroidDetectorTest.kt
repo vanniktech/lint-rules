@@ -2,6 +2,9 @@ package com.vanniktech.lintrules.android
 
 import com.android.tools.lint.checks.infrastructure.TestFiles.java
 import com.android.tools.lint.checks.infrastructure.TestLintTask.lint
+import com.vanniktech.lintrules.android.AndroidDetector.ISSUE_RESOURCES_GET_COLOR
+import com.vanniktech.lintrules.android.AndroidDetector.ISSUE_RESOURCES_GET_COLOR_STATE_LIST
+import com.vanniktech.lintrules.android.AndroidDetector.ISSUE_RESOURCES_GET_DRAWABLE
 import org.junit.Test
 
 class AndroidDetectorTest {
@@ -24,30 +27,13 @@ class AndroidDetectorTest {
           |    resources.getDrawable(0);
           |  }
           |}""".trimMargin()))
-      .issues(*AndroidDetector.getIssues())
+      .issues(ISSUE_RESOURCES_GET_DRAWABLE)
       .run()
       .expect("""
           |src/foo/Example.java:6: Warning: Using deprecated getDrawable() [ResourcesGetDrawable]
           |    resources.getDrawable(0);
           |              ~~~~~~~~~~~
           |0 errors, 1 warnings""".trimMargin())
-  }
-
-  @Test fun callingGetDrawableSuppressed() {
-    lint()
-      .files(resourcesStub, java("""
-          |package foo;
-          |import android.content.res.Resources;
-          |class Example {
-          |  public void foo() {
-          |    Resources resources = null;
-          |    //noinspection AndroidLintResourcesGetDrawable
-          |    resources.getDrawable(0);
-          |  }
-          |}""".trimMargin()))
-      .issues(*AndroidDetector.getIssues())
-      .run()
-      .expectClean()
   }
 
   @Test fun callingGetColor() {
@@ -61,30 +47,13 @@ class AndroidDetectorTest {
           |    resources.getColor(0);
           |  }
           |}""".trimMargin()))
-      .issues(*AndroidDetector.getIssues())
+      .issues(ISSUE_RESOURCES_GET_COLOR)
       .run()
       .expect("""
           |src/foo/Example.java:6: Warning: Using deprecated getColor() [ResourcesGetColor]
           |    resources.getColor(0);
           |              ~~~~~~~~
           |0 errors, 1 warnings""".trimMargin())
-  }
-
-  @Test fun callingGetColorSuppressed() {
-    lint()
-      .files(resourcesStub, java("""
-          |package foo;
-          |import android.content.res.Resources;
-          |class Example {
-          |  public void foo() {
-          |    Resources resources = null;
-          |    //noinspection AndroidLintResourcesGetColor
-          |    resources.getColor(0);
-          |  }
-          |}""".trimMargin()))
-      .issues(*AndroidDetector.getIssues())
-      .run()
-      .expectClean()
   }
 
   @Test fun callingGetColorStateList() {
@@ -98,29 +67,12 @@ class AndroidDetectorTest {
           |    resources.getColorStateList(0);
           |  }
           |}""".trimMargin()))
-      .issues(*AndroidDetector.getIssues())
+      .issues(ISSUE_RESOURCES_GET_COLOR_STATE_LIST)
       .run()
       .expect("""
           |src/foo/Example.java:6: Warning: Using deprecated getColorStateList() [ResourcesGetColorStateList]
           |    resources.getColorStateList(0);
           |              ~~~~~~~~~~~~~~~~~
           |0 errors, 1 warnings""".trimMargin())
-  }
-
-  @Test fun callingGetColorStateListSuppressed() {
-    lint()
-      .files(resourcesStub, java("""
-          |package foo;
-          |import android.content.res.Resources;
-          |class Example {
-          |  public void foo() {
-          |    Resources resources = null;
-          |    //noinspection AndroidLintResourcesGetColorStateList
-          |    resources.getColorStateList(0);
-          |  }
-          |}""".trimMargin()))
-      .issues(*AndroidDetector.getIssues())
-      .run()
-      .expectClean()
   }
 }

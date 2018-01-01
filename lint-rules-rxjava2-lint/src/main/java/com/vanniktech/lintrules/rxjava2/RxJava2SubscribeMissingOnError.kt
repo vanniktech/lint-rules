@@ -12,7 +12,7 @@ import com.intellij.psi.PsiMethod
 import org.jetbrains.uast.UCallExpression
 import java.util.EnumSet
 
-val SUBSCRIBE_MISSING_ON_ERROR = Issue.create("SubscribeMissingOnError",
+@Suppress("Detekt.VariableMaxLength") val ISSUE_SUBSCRIBE_MISSING_ON_ERROR = Issue.create("SubscribeMissingOnError",
     "Using a version of subscribe() without an error Consumer",
     "When calling subscribe() an error Consumer should always be used.",
     MESSAGES, 10, ERROR,
@@ -33,7 +33,7 @@ class RxJava2SubscribeMissingOnError : Detector(), Detector.UastScanner {
     val isReactiveType = listOf(isInObservable, isInFlowable, isInSingle, isInCompletable, isInMaybe).any { true }
 
     if (isReactiveType && node.valueArgumentCount < 2) {
-      context.report(SUBSCRIBE_MISSING_ON_ERROR, node, context.getNameLocation(node), "Using a version of subscribe() without an error Consumer")
+      context.report(ISSUE_SUBSCRIBE_MISSING_ON_ERROR, node, context.getNameLocation(node), "Using a version of subscribe() without an error Consumer")
     }
   }
 }

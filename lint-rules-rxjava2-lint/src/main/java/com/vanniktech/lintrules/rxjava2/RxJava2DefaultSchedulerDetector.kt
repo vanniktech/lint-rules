@@ -17,7 +17,7 @@ import org.jetbrains.uast.tryResolve
 import org.jetbrains.uast.visitor.AbstractUastVisitor
 import java.util.EnumSet
 
-val DEFAULT_SCHEDULER = Issue.create("DefaultScheduler",
+val ISSUE_DEFAULT_SCHEDULER = Issue.create("DefaultScheduler",
     "Pass a scheduler instead of relying on the default one.",
     "Calling this method will rely on a default scheduler. This is not necessary the best default. Being explicit and taking the overload for passing one is preferred.",
     MESSAGES, 5, WARNING,
@@ -46,7 +46,7 @@ class RxJava2DefaultSchedulerDetector : Detector(), Detector.UastScanner {
           val value = AnnotationUtil.getStringAttributeValue(annotation, null)
 
           if (!("none" == value || "custom" == value)) {
-            context.report(DEFAULT_SCHEDULER, context.getNameLocation(node), "${identifier.name}() is using its default scheduler")
+            context.report(ISSUE_DEFAULT_SCHEDULER, context.getNameLocation(node), "${identifier.name}() is using its default scheduler")
           }
         }
       }
