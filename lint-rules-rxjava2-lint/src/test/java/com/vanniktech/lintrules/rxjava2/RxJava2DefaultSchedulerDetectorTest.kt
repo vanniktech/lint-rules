@@ -7,15 +7,14 @@ import org.junit.Test
 class RxJava2DefaultSchedulerDetectorTest {
   @Test fun schedulerSupportNone() {
     lint()
-      .allowCompilationErrors()
-      .files(stubSchedulerSupport, stubConsumer, stubScheduler, stubObservable, java("""
+      .files(rxJava2(), java("""
           |package foo;
           |
           |import io.reactivex.Observable;
           |
           |class Example {
           |  public void foo() {
-          |    Observable.just(5)
+          |    Observable.just(5);
           |  }
           |}""".trimMargin()))
       .issues(DEFAULT_SCHEDULER)
@@ -25,8 +24,7 @@ class RxJava2DefaultSchedulerDetectorTest {
 
   @Test fun schedulerSupportComputation() {
     lint()
-      .allowCompilationErrors()
-      .files(stubSchedulerSupport, stubConsumer, stubScheduler, stubObservable, java("""
+      .files(rxJava2(), java("""
           |package foo;
           |
           |import java.util.concurrent.TimeUnit;
@@ -34,30 +32,30 @@ class RxJava2DefaultSchedulerDetectorTest {
           |
           |class Example {
           |  public void foo() {
-          |    Observable.interval(5, TimeUnit.SECONDS)
+          |    Observable.interval(5, TimeUnit.SECONDS);
           |  }
           |}""".trimMargin()))
       .issues(DEFAULT_SCHEDULER)
       .run()
       .expect("""
           |src/foo/Example.java:8: Warning: interval() is using its default scheduler [DefaultScheduler]
-          |    Observable.interval(5, TimeUnit.SECONDS)
+          |    Observable.interval(5, TimeUnit.SECONDS);
           |               ~~~~~~~~
           |0 errors, 1 warnings""".trimMargin())
   }
 
   @Test fun schedulerSupportCustom() {
     lint()
-      .allowCompilationErrors()
-      .files(stubSchedulerSupport, stubConsumer, stubScheduler, stubSchedulers, stubObservable, java("""
+      .files(rxJava2(), java("""
           |package foo;
           |
+          |import java.util.concurrent.TimeUnit;
           |import io.reactivex.Observable;
           |import io.reactivex.schedulers.Schedulers;
           |
           |class Example {
           |  public void foo() {
-          |    Observable.interval(5, TimeUnit.SECONDS, Schedulers.computation())
+          |    Observable.interval(5, TimeUnit.SECONDS, Schedulers.computation());
           |  }
           |}""".trimMargin()))
       .issues(DEFAULT_SCHEDULER)

@@ -8,26 +8,12 @@ import org.junit.Test
 class RxJava2MissingCompositeDisposableClearDetectorTest {
   @Test fun noCompositeDisposable() {
     lint()
-      .allowCompilationErrors()
-      .files(stubCompositeDisposable, java("""
+      .files(rxJava2(), java("""
           |package foo;
+          |
           |import io.reactivex.disposables.CompositeDisposable;
+          |
           |class Example {
-          |}""".trimMargin()))
-      .issues(ISSUE_MISSING_COMPOSITE_DISPOSABLE_CLEAR)
-      .run()
-      .expectClean()
-  }
-
-  @Test fun compositeDisposableMissingClearSuppressed() {
-    lint()
-      .allowCompilationErrors()
-      .files(stubSuppressLint, stubCompositeDisposable, java("""
-          |package foo;
-          |import io.reactivex.disposables.CompositeDisposable;
-          |import android.annotation.SuppressLint;
-          |class Example {
-          |  @SuppressLint("MissingCompositeDisposableClear") CompositeDisposable cd;
           |}""".trimMargin()))
       .issues(ISSUE_MISSING_COMPOSITE_DISPOSABLE_CLEAR)
       .run()
@@ -36,17 +22,18 @@ class RxJava2MissingCompositeDisposableClearDetectorTest {
 
   @Test fun compositeDisposableMissingClear() {
     lint()
-      .allowCompilationErrors()
-      .files(stubCompositeDisposable, java("""
+      .files(rxJava2(), java("""
           |package foo;
+          |
           |import io.reactivex.disposables.CompositeDisposable;
+          |
           |class Example {
           |  CompositeDisposable cd;
           |}""".trimMargin()))
       .issues(ISSUE_MISSING_COMPOSITE_DISPOSABLE_CLEAR)
       .run()
       .expect("""
-          |src/foo/Example.java:4: Error: clear() is not called. [MissingCompositeDisposableClear]
+          |src/foo/Example.java:6: Error: clear() is not called. [MissingCompositeDisposableClear]
           |  CompositeDisposable cd;
           |  ~~~~~~~~~~~~~~~~~~~~~~~
           |1 errors, 0 warnings""".trimMargin())
@@ -54,10 +41,11 @@ class RxJava2MissingCompositeDisposableClearDetectorTest {
 
   @Test fun disposableMissingClearIsIgnored() {
     lint()
-      .allowCompilationErrors()
-      .files(stubDisposable, java("""
+      .files(rxJava2(), java("""
           |package foo;
+          |
           |import io.reactivex.disposables.Disposable;
+          |
           |class Example {
           |  Disposable disposable;
           |}""".trimMargin()))
@@ -68,10 +56,11 @@ class RxJava2MissingCompositeDisposableClearDetectorTest {
 
   @Test fun multipleCompositeDisposableMissingClear() {
     lint()
-      .allowCompilationErrors()
-      .files(stubCompositeDisposable, java("""
+      .files(rxJava2(), java("""
           |package foo;
+          |
           |import io.reactivex.disposables.CompositeDisposable;
+          |
           |class Example {
           |  CompositeDisposable cd1;
           |  CompositeDisposable cd2;
@@ -80,13 +69,13 @@ class RxJava2MissingCompositeDisposableClearDetectorTest {
       .issues(ISSUE_MISSING_COMPOSITE_DISPOSABLE_CLEAR)
       .run()
       .expect("""
-          |src/foo/Example.java:4: Error: clear() is not called. [MissingCompositeDisposableClear]
+          |src/foo/Example.java:6: Error: clear() is not called. [MissingCompositeDisposableClear]
           |  CompositeDisposable cd1;
           |  ~~~~~~~~~~~~~~~~~~~~~~~~
-          |src/foo/Example.java:5: Error: clear() is not called. [MissingCompositeDisposableClear]
+          |src/foo/Example.java:7: Error: clear() is not called. [MissingCompositeDisposableClear]
           |  CompositeDisposable cd2;
           |  ~~~~~~~~~~~~~~~~~~~~~~~~
-          |src/foo/Example.java:6: Error: clear() is not called. [MissingCompositeDisposableClear]
+          |src/foo/Example.java:8: Error: clear() is not called. [MissingCompositeDisposableClear]
           |  CompositeDisposable cd3;
           |  ~~~~~~~~~~~~~~~~~~~~~~~~
           |3 errors, 0 warnings
@@ -95,10 +84,11 @@ class RxJava2MissingCompositeDisposableClearDetectorTest {
 
   @Test fun compositeDisposableHavingClear() {
     lint()
-      .allowCompilationErrors()
-      .files(stubCompositeDisposable, java("""
+      .files(rxJava2(), java("""
           |package foo;
+          |
           |import io.reactivex.disposables.CompositeDisposable;
+          |
           |class Example {
           |  CompositeDisposable cd;
           |  public void foo() {
@@ -112,10 +102,11 @@ class RxJava2MissingCompositeDisposableClearDetectorTest {
 
   @Test fun multipleCompositeDisposableClear() {
     lint()
-      .allowCompilationErrors()
-      .files(stubCompositeDisposable, java("""
+      .files(rxJava2(), java("""
           |package foo;
+          |
           |import io.reactivex.disposables.CompositeDisposable;
+          |
           |class Example {
           |  CompositeDisposable cd1;
           |  CompositeDisposable cd2;
@@ -130,7 +121,7 @@ class RxJava2MissingCompositeDisposableClearDetectorTest {
       .issues(ISSUE_MISSING_COMPOSITE_DISPOSABLE_CLEAR)
       .run()
       .expect("""
-          |src/foo/Example.java:6: Error: clear() is not called. [MissingCompositeDisposableClear]
+          |src/foo/Example.java:8: Error: clear() is not called. [MissingCompositeDisposableClear]
           |  CompositeDisposable cd3;
           |  ~~~~~~~~~~~~~~~~~~~~~~~~
           |1 errors, 0 warnings""".trimMargin())
