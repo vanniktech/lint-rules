@@ -166,6 +166,24 @@ class AnnotationOrderDetectorTest {
           |0 errors, 1 warnings""".trimMargin())
   }
 
+  @Test fun overrideBeforeSuppressWarnings() {
+    lint()
+      .allowCompilationErrors()
+      .files(java("""
+          |package foo;
+          |
+          |public class MyTest {
+          |  @SuppressWarnings @Override public void myTest() { }
+          |}""".trimMargin()))
+      .issues(ISSUE_WRONG_ANNOTATION_ORDER)
+      .run()
+      .expect("""
+          |src/foo/MyTest.java:4: Warning: Annotations are in wrong order. Should be @Override @SuppressWarnings [WrongAnnotationOrder]
+          |  @SuppressWarnings @Override public void myTest() { }
+          |                                          ~~~~~~
+          |0 errors, 1 warnings""".trimMargin())
+  }
+
   @Test fun nullableBeforeNonNull() {
     lint()
       .allowCompilationErrors()

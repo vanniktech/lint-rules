@@ -18,15 +18,15 @@ import org.jetbrains.uast.UVariable
 import java.util.EnumSet
 
 private val ANNOTATION_ORDER = listOf(
-    // Suppressing the suppressed.
-    "Suppress",
-    "SuppressLint",
-    "SuppressWarnings",
-    // Other important things.
+    // Important ones.
     "Deprecated",
     "Override",
     "Test",
     "Ignore",
+    // Suppressing the suppressed.
+    "Suppress",
+    "SuppressLint",
+    "SuppressWarnings",
     // Annotations.
     "Documented",
     "Retention",
