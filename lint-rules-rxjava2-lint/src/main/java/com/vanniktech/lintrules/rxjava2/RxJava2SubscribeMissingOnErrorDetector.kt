@@ -30,7 +30,7 @@ class RxJava2SubscribeMissingOnError : Detector(), Detector.UastScanner {
     val isInCompletable = evaluator.isMemberInClass(method, "io.reactivex.Completable")
     val isInMaybe = evaluator.isMemberInClass(method, "io.reactivex.Maybe")
 
-    val isReactiveType = listOf(isInObservable, isInFlowable, isInSingle, isInCompletable, isInMaybe).any { true }
+    val isReactiveType = listOf(isInObservable, isInFlowable, isInSingle, isInCompletable, isInMaybe).any { it }
 
     if (isReactiveType && node.valueArgumentCount < 2) {
       context.report(ISSUE_SUBSCRIBE_MISSING_ON_ERROR, node, context.getNameLocation(node), "Using a version of subscribe() without an error Consumer.")
