@@ -31,7 +31,8 @@ class UnsupportedLayoutAttributeDetector : LayoutDetector() {
         .filter { attribute.hasOwner(it.key) }
         .filter { attribute.localName == it.value }
         .forEach { (value, key) ->
-          context.report(ISSUE_UNSUPPORTED_LAYOUT_ATTRIBUTE, context.getLocation(attribute), "$key is not allowed in $value")
+          val fix = fix().name("Remove unnecessary attribute").unset(attribute.namespaceURI, key).build()
+          context.report(ISSUE_UNSUPPORTED_LAYOUT_ATTRIBUTE, context.getLocation(attribute), "$key is not allowed in $value", fix)
         }
   }
 }
