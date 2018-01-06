@@ -20,17 +20,13 @@ class DefaultLayoutAttributeDetector : LayoutDetector() {
   override fun getApplicableAttributes() = listOf(ATTR_TEXT_STYLE)
 
   override fun visitAttribute(context: XmlContext, attribute: Attr) {
-    if (ATTR_TEXT_STYLE == attribute.localName) {
-      val value = attribute.value
+    if ("normal" == attribute.value) {
+      val fix = fix()
+        .unset(attribute.namespaceURI, attribute.localName)
+        .name("Remove")
+        .build()
 
-      if ("normal" == value) {
-        val fix = fix()
-          .unset(attribute.namespaceURI, attribute.localName)
-          .name("Remove")
-          .build()
-
-        context.report(ISSUE_DEFAULT_LAYOUT_ATTRIBUTE, attribute, context.getValueLocation(attribute), "This is the default and hence you don't need to specify it.", fix)
-      }
+      context.report(ISSUE_DEFAULT_LAYOUT_ATTRIBUTE, attribute, context.getValueLocation(attribute), "This is the default and hence you don't need to specify it.", fix)
     }
   }
 }
