@@ -2,7 +2,6 @@ package com.vanniktech.lintrules.android
 
 import com.android.tools.lint.checks.infrastructure.TestFiles.xml
 import com.android.tools.lint.checks.infrastructure.TestLintTask.lint
-import com.vanniktech.lintrules.android.DefaultLayoutAttributeDetector.ISSUE_DEFAULT_LAYOUT_ATTRIBUTE
 import org.junit.Test
 
 class DefaultLayoutAttributeDetectorTest {
@@ -21,6 +20,14 @@ class DefaultLayoutAttributeDetectorTest {
           |    android:textStyle="normal"/>
           |                       ~~~~~~
           |0 errors, 1 warnings""".trimMargin())
+      .expectFixDiffs("""
+          |Fix for res/layout/ids.xml line 4: Remove:
+          |@@ -4 +4
+          |-     android:layout_height="wrap_content"
+          |-     android:textStyle="normal" />
+          |@@ -6 +4
+          |+     android:layout_height="wrap_content" />
+          |""".trimMargin())
   }
 
   @Test fun textStyleBold() {
