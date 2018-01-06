@@ -14,8 +14,9 @@ import static com.android.tools.lint.detector.api.Scope.RESOURCE_FILE_SCOPE;
 import static com.android.tools.lint.detector.api.Severity.ERROR;
 
 public class WrongConstraintLayoutUsageDetector extends LayoutDetector {
-  static final Issue ISSUE_WRONG_CONSTRAINT_LAYOUT_USAGE = Issue.create("WrongConstraintLayoutUsage", "Wrong usage of the Constraint Layout.",
-      "Wrong usage of the Constraint Layout.", CORRECTNESS, 8, ERROR,
+  static final Issue ISSUE_WRONG_CONSTRAINT_LAYOUT_USAGE = Issue.create("WrongConstraintLayoutUsage",
+      "Marks a wrong usage of the Constraint Layout.",
+      "Instead of using left & right constraints start & right should be used.", CORRECTNESS, 8, ERROR,
       new Implementation(WrongConstraintLayoutUsageDetector.class, RESOURCE_FILE_SCOPE));
 
   @Override public Collection<String> getApplicableElements() {

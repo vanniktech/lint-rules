@@ -5,7 +5,7 @@ import com.android.tools.lint.checks.infrastructure.TestLintTask.lint
 import com.vanniktech.lintrules.rxjava2.RxJava2MissingCompositeDisposableClearDetector.ISSUE_MISSING_COMPOSITE_DISPOSABLE_CLEAR
 import org.junit.Test
 
-class RxJava2MissingCompositeDisposableClearDetectorTest {
+class RxJava2RxJava2MissingCompositeDisposableClearDetectorTest {
   @Test fun noCompositeDisposable() {
     lint()
       .files(rxJava2(), java("""
@@ -33,7 +33,7 @@ class RxJava2MissingCompositeDisposableClearDetectorTest {
       .issues(ISSUE_MISSING_COMPOSITE_DISPOSABLE_CLEAR)
       .run()
       .expect("""
-          |src/foo/Example.java:6: Error: clear() is not called. [MissingCompositeDisposableClear]
+          |src/foo/Example.java:6: Error: clear() is not called. [RxJava2MissingCompositeDisposableClear]
           |  CompositeDisposable cd;
           |  ~~~~~~~~~~~~~~~~~~~~~~~
           |1 errors, 0 warnings""".trimMargin())
@@ -69,13 +69,13 @@ class RxJava2MissingCompositeDisposableClearDetectorTest {
       .issues(ISSUE_MISSING_COMPOSITE_DISPOSABLE_CLEAR)
       .run()
       .expect("""
-          |src/foo/Example.java:6: Error: clear() is not called. [MissingCompositeDisposableClear]
+          |src/foo/Example.java:6: Error: clear() is not called. [RxJava2MissingCompositeDisposableClear]
           |  CompositeDisposable cd1;
           |  ~~~~~~~~~~~~~~~~~~~~~~~~
-          |src/foo/Example.java:7: Error: clear() is not called. [MissingCompositeDisposableClear]
+          |src/foo/Example.java:7: Error: clear() is not called. [RxJava2MissingCompositeDisposableClear]
           |  CompositeDisposable cd2;
           |  ~~~~~~~~~~~~~~~~~~~~~~~~
-          |src/foo/Example.java:8: Error: clear() is not called. [MissingCompositeDisposableClear]
+          |src/foo/Example.java:8: Error: clear() is not called. [RxJava2MissingCompositeDisposableClear]
           |  CompositeDisposable cd3;
           |  ~~~~~~~~~~~~~~~~~~~~~~~~
           |3 errors, 0 warnings
@@ -121,7 +121,7 @@ class RxJava2MissingCompositeDisposableClearDetectorTest {
       .issues(ISSUE_MISSING_COMPOSITE_DISPOSABLE_CLEAR)
       .run()
       .expect("""
-          |src/foo/Example.java:8: Error: clear() is not called. [MissingCompositeDisposableClear]
+          |src/foo/Example.java:8: Error: clear() is not called. [RxJava2MissingCompositeDisposableClear]
           |  CompositeDisposable cd3;
           |  ~~~~~~~~~~~~~~~~~~~~~~~~
           |1 errors, 0 warnings""".trimMargin())

@@ -21,7 +21,7 @@ class RawDimenDetectorTest {
       .issues(ISSUE_RAW_DIMEN)
       .run()
       .expect("""
-          |res/layout/ids.xml:1: Warning: Should be using dimen instead. [RawDimen]
+          |res/layout/ids.xml:1: Warning: Should be using a dimension resource instead. [RawDimen]
           |<TextView xmlns:app="http://schemas.android.com/apk/res-auto" app:someCustomAttribute="16dp"/>
           |                                                                                       ~~~~
           |0 errors, 1 warnings""".trimMargin())
@@ -51,7 +51,7 @@ class RawDimenDetectorTest {
       .issues(ISSUE_RAW_DIMEN)
       .run()
       .expect("""
-          |res/drawable/drawable.xml:5: Warning: Should be using dimen instead. [RawDimen]
+          |res/drawable/drawable.xml:5: Warning: Should be using a dimension resource instead. [RawDimen]
           |  <size android:height="4dp"/>
           |                        ~~~
           |0 errors, 1 warnings""".trimMargin())
@@ -64,7 +64,7 @@ class RawDimenDetectorTest {
       .issues(ISSUE_RAW_DIMEN)
       .run()
       .expect("""
-          |res/layout/ids.xml:1: Warning: Should be using dimen instead. [RawDimen]
+          |res/layout/ids.xml:1: Warning: Should be using a dimension resource instead. [RawDimen]
           |<TextView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="0dp"/>
           |                                                                                           ~~~
           |0 errors, 1 warnings""".trimMargin())
@@ -86,7 +86,7 @@ class RawDimenDetectorTest {
       .issues(ISSUE_RAW_DIMEN)
       .run()
       .expect("""
-          |res/layout/ids.xml:1: Warning: Should be using dimen instead. [RawDimen]
+          |res/layout/ids.xml:1: Warning: Should be using a dimension resource instead. [RawDimen]
           |<TextView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_height="0dp"/>
           |                                                                                            ~~~
           |0 errors, 1 warnings""".trimMargin())
@@ -108,7 +108,7 @@ class RawDimenDetectorTest {
       .issues(ISSUE_RAW_DIMEN)
       .run()
       .expect("""
-          |res/layout/ids.xml:1: Warning: Should be using dimen instead. [RawDimen]
+          |res/layout/ids.xml:1: Warning: Should be using a dimension resource instead. [RawDimen]
           |<TextView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="16dp"/>
           |                                                                                           ~~~~
           |0 errors, 1 warnings""".trimMargin())
@@ -121,7 +121,7 @@ class RawDimenDetectorTest {
       .issues(ISSUE_RAW_DIMEN)
       .run()
       .expect("""
-          |res/layout/ids.xml:1: Warning: Should be using dimen instead. [RawDimen]
+          |res/layout/ids.xml:1: Warning: Should be using a dimension resource instead. [RawDimen]
           |<TextView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_height="16dp"/>
           |                                                                                            ~~~~
           |0 errors, 1 warnings""".trimMargin())
@@ -134,7 +134,7 @@ class RawDimenDetectorTest {
       .issues(ISSUE_RAW_DIMEN)
       .run()
       .expect("""
-          |res/layout/ids.xml:1: Warning: Should be using dimen instead. [RawDimen]
+          |res/layout/ids.xml:1: Warning: Should be using a dimension resource instead. [RawDimen]
           |<TextView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_margin="16dp"/>
           |                                                                                            ~~~~
           |0 errors, 1 warnings""".trimMargin())
@@ -147,7 +147,7 @@ class RawDimenDetectorTest {
       .issues(ISSUE_RAW_DIMEN)
       .run()
       .expect("""
-          |res/layout/ids.xml:1: Warning: Should be using dimen instead. [RawDimen]
+          |res/layout/ids.xml:1: Warning: Should be using a dimension resource instead. [RawDimen]
           |<TextView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_margin="0.5dp"/>
           |                                                                                            ~~~~~
           |0 errors, 1 warnings""".trimMargin())
@@ -160,7 +160,7 @@ class RawDimenDetectorTest {
       .issues(ISSUE_RAW_DIMEN)
       .run()
       .expect("""
-          |res/layout/ids.xml:1: Warning: Should be using dimen instead. [RawDimen]
+          |res/layout/ids.xml:1: Warning: Should be using a dimension resource instead. [RawDimen]
           |<TextView xmlns:android="http://schemas.android.com/apk/res/android" android:paddingEnd="-16dp"/>
           |                                                                                         ~~~~~
           |0 errors, 1 warnings""".trimMargin())
@@ -173,7 +173,7 @@ class RawDimenDetectorTest {
       .issues(ISSUE_RAW_DIMEN)
       .run()
       .expect("""
-          |res/layout/ids.xml:1: Warning: Should be using dimen instead. [RawDimen]
+          |res/layout/ids.xml:1: Warning: Should be using a dimension resource instead. [RawDimen]
           |<TextView xmlns:android="http://schemas.android.com/apk/res/android" android:textSize="16dp"/>
           |                                                                                       ~~~~
           |0 errors, 1 warnings""".trimMargin())

@@ -4,7 +4,7 @@ import com.android.tools.lint.checks.infrastructure.TestFiles.java
 import com.android.tools.lint.checks.infrastructure.TestLintTask.lint
 import org.junit.Test
 
-class RxJava2CallingDisposableAddAllTest {
+class RxJava2CallingDisposableAddAllDetectorTest {
   @Test fun callingCompositeDisposableAddAll() {
     lint()
       .files(rxJava2(), java("""
@@ -19,7 +19,7 @@ class RxJava2CallingDisposableAddAllTest {
       .issues(ISSUE_CALLING_COMPOSITE_DISPOSABLE_ADD_ALL)
       .run()
       .expect("""
-          |src/foo/Example.java:6: Warning: Using addAll() instead of add() separately [CallingCompositeDisposableAddAll]
+          |src/foo/Example.java:6: Warning: Calling addAll instead of add separately. [RxJava2DisposableAddAllCallDetector]
           |    cd.addAll();
           |       ~~~~~~
           |0 errors, 1 warnings""".trimMargin())

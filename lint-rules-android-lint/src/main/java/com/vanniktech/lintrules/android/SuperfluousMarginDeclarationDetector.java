@@ -14,8 +14,10 @@ import static com.android.tools.lint.detector.api.Severity.WARNING;
 import static java.util.Arrays.asList;
 
 public final class SuperfluousMarginDeclarationDetector extends SuperfluousDeclarationDetector {
-  static final Issue ISSUE_SUPERFLUOUS_MARGIN_DECLARATION = Issue.create("SuperfluousMarginDeclaration", "Instead of using start, end, bottom and top layout_margin can be used.",
-      "Instead of using start, end, bottom and top layout_margin can be used.", CORRECTNESS, 8, WARNING,
+  static final Issue ISSUE_SUPERFLUOUS_MARGIN_DECLARATION = Issue.create("SuperfluousMarginDeclaration",
+      "Flags margin declarations that can be simplified.",
+      "Instead of using start-, end-, bottom- and top margins, layout_margin can be used.",
+      CORRECTNESS, 8, WARNING,
       new Implementation(SuperfluousMarginDeclarationDetector.class, RESOURCE_FILE_SCOPE));
 
   @Override public Collection<String> getApplicableAttributes() {

@@ -14,8 +14,10 @@ import static com.android.tools.lint.detector.api.Severity.WARNING;
 import static java.util.Arrays.asList;
 
 public final class SuperfluousPaddingDeclarationDetector extends SuperfluousDeclarationDetector {
-  static final Issue ISSUE_SUPERFLUOUS_PADDING_DECLARATION = Issue.create("SuperfluousPaddingDeclaration", "Instead of using start, end, bottom and top padding can be used.",
-      "Instead of using start, end, bottom and top padding can be used.", CORRECTNESS, 8, WARNING,
+  static final Issue ISSUE_SUPERFLUOUS_PADDING_DECLARATION = Issue.create("SuperfluousPaddingDeclaration",
+      "Flags padding declarations that can be simplified.",
+      "Instead of using start-, end-, bottom- and top paddings, padding can be used.",
+      CORRECTNESS, 8, WARNING,
       new Implementation(SuperfluousPaddingDeclarationDetector.class, RESOURCE_FILE_SCOPE));
 
   @Override public Collection<String> getApplicableAttributes() {

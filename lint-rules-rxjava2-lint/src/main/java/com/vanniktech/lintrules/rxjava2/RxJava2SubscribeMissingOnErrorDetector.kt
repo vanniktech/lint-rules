@@ -1,6 +1,6 @@
 package com.vanniktech.lintrules.rxjava2
 
-import com.android.tools.lint.detector.api.Category.Companion.MESSAGES
+import com.android.tools.lint.detector.api.Category.Companion.CORRECTNESS
 import com.android.tools.lint.detector.api.Detector
 import com.android.tools.lint.detector.api.Implementation
 import com.android.tools.lint.detector.api.Issue
@@ -12,10 +12,10 @@ import com.intellij.psi.PsiMethod
 import org.jetbrains.uast.UCallExpression
 import java.util.EnumSet
 
-@Suppress("Detekt.VariableMaxLength") val ISSUE_SUBSCRIBE_MISSING_ON_ERROR = Issue.create("SubscribeMissingOnError",
-    "Using a version of subscribe() without an error Consumer",
-    "When calling subscribe() an error Consumer should always be used.",
-    MESSAGES, 10, ERROR,
+@Suppress("Detekt.VariableMaxLength") val ISSUE_SUBSCRIBE_MISSING_ON_ERROR = Issue.create("RxJava2SubscribeMissingOnError",
+    "Flags a version of the subscribe() method without an error Consumer.",
+    "When calling the subscribe() method an error Consumer should always be used. Otherwise errors might be thrown and may crash the application or get forwarded to the Plugin Error handler.",
+    CORRECTNESS, 10, ERROR,
     Implementation(RxJava2SubscribeMissingOnError::class.java, EnumSet.of(JAVA_FILE, TEST_SOURCES)))
 
 class RxJava2SubscribeMissingOnError : Detector(), Detector.UastScanner {
@@ -33,7 +33,7 @@ class RxJava2SubscribeMissingOnError : Detector(), Detector.UastScanner {
     val isReactiveType = listOf(isInObservable, isInFlowable, isInSingle, isInCompletable, isInMaybe).any { true }
 
     if (isReactiveType && node.valueArgumentCount < 2) {
-      context.report(ISSUE_SUBSCRIBE_MISSING_ON_ERROR, node, context.getNameLocation(node), "Using a version of subscribe() without an error Consumer")
+      context.report(ISSUE_SUBSCRIBE_MISSING_ON_ERROR, node, context.getNameLocation(node), "Using a version of subscribe() without an error Consumer.")
     }
   }
 }

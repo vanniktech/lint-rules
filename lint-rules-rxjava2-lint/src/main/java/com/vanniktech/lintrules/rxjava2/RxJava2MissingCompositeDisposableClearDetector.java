@@ -19,17 +19,17 @@ import org.jetbrains.uast.UClass;
 import org.jetbrains.uast.UElement;
 import org.jetbrains.uast.UField;
 
-import static com.android.tools.lint.detector.api.Category.MESSAGES;
+import static com.android.tools.lint.detector.api.Category.CORRECTNESS;
 import static com.android.tools.lint.detector.api.Scope.JAVA_FILE;
 import static com.android.tools.lint.detector.api.Scope.TEST_SOURCES;
 import static com.android.tools.lint.detector.api.Severity.ERROR;
 
 public final class RxJava2MissingCompositeDisposableClearDetector extends Detector implements Detector.UastScanner {
-  static final Issue ISSUE_MISSING_COMPOSITE_DISPOSABLE_CLEAR =
-      Issue.create("MissingCompositeDisposableClear", "Not calling clear() on CompositeDisposable",
-          "A class is using CompositeDisposable and not clearing the List.",
-              MESSAGES, 10, ERROR,
-          new Implementation(RxJava2MissingCompositeDisposableClearDetector.class, EnumSet.of(JAVA_FILE, TEST_SOURCES)));
+  static final Issue ISSUE_MISSING_COMPOSITE_DISPOSABLE_CLEAR = Issue.create("RxJava2MissingCompositeDisposableClear",
+      "Marks CompositeDisposables that are not being cleared.",
+      "A class is using CompositeDisposable and not calling clear(). This can leave operations running and even cause memory leaks. It's best to always call clear() once you're done. e.g. in onDestroy() for Activitys.",
+      CORRECTNESS, 10, ERROR,
+      new Implementation(RxJava2MissingCompositeDisposableClearDetector.class, EnumSet.of(JAVA_FILE, TEST_SOURCES)));
 
   @Override public List<Class<? extends UElement>> getApplicableUastTypes() {
     return Collections.<Class<? extends UElement>>singletonList(UClass.class);

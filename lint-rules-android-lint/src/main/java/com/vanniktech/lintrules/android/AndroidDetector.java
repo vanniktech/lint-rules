@@ -25,15 +25,15 @@ public final class AndroidDetector extends Detector implements Detector.UastScan
     final String methodName = node.getMethodName();
 
     if ("getDrawable".equals(methodName) && isInResources) {
-      context.report(ISSUE_RESOURCES_GET_DRAWABLE, node, context.getNameLocation(node), "Using deprecated getDrawable()");
+      context.report(ISSUE_RESOURCES_GET_DRAWABLE, node, context.getNameLocation(node), "Calling deprecated getDrawable.");
     }
 
     if ("getColor".equals(methodName) && isInResources) {
-      context.report(ISSUE_RESOURCES_GET_COLOR, node, context.getNameLocation(node), "Using deprecated getColor()");
+      context.report(ISSUE_RESOURCES_GET_COLOR, node, context.getNameLocation(node), "Calling deprecated getColor.");
     }
 
     if ("getColorStateList".equals(methodName) && isInResources) {
-      context.report(ISSUE_RESOURCES_GET_COLOR_STATE_LIST, node, context.getNameLocation(node), "Using deprecated getColorStateList()");
+      context.report(ISSUE_RESOURCES_GET_COLOR_STATE_LIST, node, context.getNameLocation(node), "Calling deprecated getColorStateList.");
     }
   }
 
@@ -44,20 +44,20 @@ public final class AndroidDetector extends Detector implements Detector.UastScan
   }
 
   static final Issue ISSUE_RESOURCES_GET_DRAWABLE =
-      Issue.create("ResourcesGetDrawable", "Using getDrawable(), which is deprecated.",
+      Issue.create("ResourcesGetDrawableCall", "Marks usage of deprecated getDrawable() on Resources.",
           "Instead of getDrawable(), ContextCompat or the method with the Theme Overload should be used instead.",
-              MESSAGES, 5, WARNING,
+          MESSAGES, 5, WARNING,
           new Implementation(AndroidDetector.class, EnumSet.of(JAVA_FILE, TEST_SOURCES)));
 
   static final Issue ISSUE_RESOURCES_GET_COLOR =
-      Issue.create("ResourcesGetColor", "Using getColor(), which is deprecated.",
+      Issue.create("ResourcesGetColorCall", "Marks usage of deprecated getColor() on Resources.",
           "Instead of getColor(), ContextCompat or the method with the Theme Overload should be used instead.",
-              MESSAGES, 5, WARNING,
+          MESSAGES, 5, WARNING,
           new Implementation(AndroidDetector.class, EnumSet.of(JAVA_FILE, TEST_SOURCES)));
 
   static final Issue ISSUE_RESOURCES_GET_COLOR_STATE_LIST =
-      Issue.create("ResourcesGetColorStateList", "Using getColorStateList(), which is deprecated.",
+      Issue.create("ResourcesGetColorStateListCall", "Marks usage of deprecated getColorStateList() on Resources.",
           "Instead of getColorStateList(), ContextCompat or the method with the Theme Overload should be used instead.",
-              MESSAGES, 5, WARNING,
+          MESSAGES, 5, WARNING,
           new Implementation(AndroidDetector.class, EnumSet.of(JAVA_FILE, TEST_SOURCES)));
 }

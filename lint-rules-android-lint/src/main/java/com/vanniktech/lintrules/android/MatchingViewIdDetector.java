@@ -19,8 +19,10 @@ import static java.util.Collections.singletonList;
 import static java.util.Locale.US;
 
 public final class MatchingViewIdDetector extends LayoutDetector {
-  static final Issue ISSUE_MATCHING_VIEW_ID = Issue.create("MatchingViewId", "Ids should match in regards to the layout file.",
-      "Ids should match in regards to the layout file.", CORRECTNESS, 8, WARNING,
+  static final Issue ISSUE_MATCHING_VIEW_ID = Issue.create("MatchingViewId",
+      "Flags view ids that don't match with the file name.",
+      "When the layout file is named activity_home all of the containing ids should be prefixed with activityHome to avoid ambiguity between different layout files across different views.",
+      CORRECTNESS, 8, WARNING,
       new Implementation(MatchingViewIdDetector.class, RESOURCE_FILE_SCOPE));
 
   @Override public Collection<String> getApplicableAttributes() {

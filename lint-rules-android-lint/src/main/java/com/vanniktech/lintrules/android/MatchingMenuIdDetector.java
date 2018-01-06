@@ -20,8 +20,10 @@ import static com.vanniktech.lintrules.android.MatchingViewIdDetector.toLowerCam
 import static java.util.Collections.singletonList;
 
 public final class MatchingMenuIdDetector extends ResourceXmlDetector {
-  static final Issue ISSUE_MATCHING_MENU_ID = Issue.create("MatchingMenuId", "Ids should match in regards to the menu file.",
-      "Ids should match in regards to the menu file.", CORRECTNESS, 8, WARNING,
+  static final Issue ISSUE_MATCHING_MENU_ID = Issue.create("MatchingMenuId",
+      "Flags menu ids that don't match with the file name.",
+      "When the layout file is named menu_home all of the containing ids should be prefixed with menuHome to avoid ambiguity between different menu files across different menu items.",
+      CORRECTNESS, 8, WARNING,
       new Implementation(MatchingMenuIdDetector.class, RESOURCE_FILE_SCOPE));
 
   @Override public boolean appliesTo(@NonNull final ResourceFolderType folderType) {

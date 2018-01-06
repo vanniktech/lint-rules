@@ -30,8 +30,9 @@ import static com.android.tools.lint.detector.api.Severity.WARNING;
   private static final Map<String, String> REFERENCES_TO_STATICALLY_IMPORT = new HashMap<>();
 
   static final Issue ISSUE_SHOULD_USE_STATIC_IMPORT =
-      Issue.create("ShouldUseStaticImport", "Should be using a static import.",
-          "Should be using a static import.", CORRECTNESS, 3,
+      Issue.create("ShouldUseStaticImport",
+          "Flags declarations that should be statically imported.",
+          "Certain declarations like TimeUnit.SECONDS should be statically imported to increase the readability.", CORRECTNESS, 3,
           WARNING, new Implementation(ShouldUseStaticImportDetector.class, EnumSet.of(JAVA_FILE, TEST_SOURCES)));
 
   static {

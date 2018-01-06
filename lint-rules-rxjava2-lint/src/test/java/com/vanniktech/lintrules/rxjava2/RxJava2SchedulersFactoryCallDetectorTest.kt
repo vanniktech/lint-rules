@@ -4,7 +4,7 @@ import com.android.tools.lint.checks.infrastructure.TestFiles.java
 import com.android.tools.lint.checks.infrastructure.TestLintTask.lint
 import org.junit.Test
 
-class RxJava2SchedulerCallDetectorTest {
+class RxJava2SchedulersFactoryCallDetectorTest {
   @Test fun ioCallInsideDaggerProvidesMethod() {
     lint()
       .files(dagger2(), rxJava2(), java("""
@@ -41,7 +41,7 @@ class RxJava2SchedulerCallDetectorTest {
       .issues(ISSUE_RAW_SCHEDULER_CALL)
       .run()
       .expect("""
-          |src/foo/Example.java:9: Warning: Inject this Scheduler instead of calling it directly. [RawRxJava2SchedulerCall]
+          |src/foo/Example.java:9: Warning: Inject this Scheduler instead of calling it directly. [RxJava2SchedulersFactoryCall]
           |    return Schedulers.io();
           |                      ~~
           |0 errors, 1 warnings
@@ -63,7 +63,7 @@ class RxJava2SchedulerCallDetectorTest {
       .issues(ISSUE_RAW_SCHEDULER_CALL)
       .run()
       .expect("""
-          |src/foo/Example.java:7: Warning: Inject this Scheduler instead of calling it directly. [RawRxJava2SchedulerCall]
+          |src/foo/Example.java:7: Warning: Inject this Scheduler instead of calling it directly. [RxJava2SchedulersFactoryCall]
           |    Schedulers.io();
           |               ~~
           |0 errors, 1 warnings
@@ -85,7 +85,7 @@ class RxJava2SchedulerCallDetectorTest {
       .issues(ISSUE_RAW_SCHEDULER_CALL)
       .run()
       .expect("""
-          |src/foo/Example.java:7: Warning: Inject this Scheduler instead of calling it directly. [RawRxJava2SchedulerCall]
+          |src/foo/Example.java:7: Warning: Inject this Scheduler instead of calling it directly. [RxJava2SchedulersFactoryCall]
           |    Schedulers.computation();
           |               ~~~~~~~~~~~
           |0 errors, 1 warnings
@@ -107,7 +107,7 @@ class RxJava2SchedulerCallDetectorTest {
       .issues(ISSUE_RAW_SCHEDULER_CALL)
       .run()
       .expect("""
-          |src/foo/Example.java:7: Warning: Inject this Scheduler instead of calling it directly. [RawRxJava2SchedulerCall]
+          |src/foo/Example.java:7: Warning: Inject this Scheduler instead of calling it directly. [RxJava2SchedulersFactoryCall]
           |    Schedulers.newThread();
           |               ~~~~~~~~~
           |0 errors, 1 warnings
@@ -129,7 +129,7 @@ class RxJava2SchedulerCallDetectorTest {
       .issues(ISSUE_RAW_SCHEDULER_CALL)
       .run()
       .expect("""
-          |src/foo/Example.java:7: Warning: Inject this Scheduler instead of calling it directly. [RawRxJava2SchedulerCall]
+          |src/foo/Example.java:7: Warning: Inject this Scheduler instead of calling it directly. [RxJava2SchedulersFactoryCall]
           |    Schedulers.single();
           |               ~~~~~~
           |0 errors, 1 warnings
@@ -151,7 +151,7 @@ class RxJava2SchedulerCallDetectorTest {
       .issues(ISSUE_RAW_SCHEDULER_CALL)
       .run()
       .expect("""
-          |src/foo/Example.java:7: Warning: Inject this Scheduler instead of calling it directly. [RawRxJava2SchedulerCall]
+          |src/foo/Example.java:7: Warning: Inject this Scheduler instead of calling it directly. [RxJava2SchedulersFactoryCall]
           |    Schedulers.from(null);
           |               ~~~~
           |0 errors, 1 warnings
@@ -173,7 +173,7 @@ class RxJava2SchedulerCallDetectorTest {
       .issues(ISSUE_RAW_SCHEDULER_CALL)
       .run()
       .expect("""
-          |src/foo/Example.java:7: Warning: Inject this Scheduler instead of calling it directly. [RawRxJava2SchedulerCall]
+          |src/foo/Example.java:7: Warning: Inject this Scheduler instead of calling it directly. [RxJava2SchedulersFactoryCall]
           |    AndroidSchedulers.mainThread();
           |                      ~~~~~~~~~~
           |0 errors, 1 warnings

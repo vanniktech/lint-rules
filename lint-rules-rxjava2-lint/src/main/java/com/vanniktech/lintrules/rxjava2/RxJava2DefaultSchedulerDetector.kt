@@ -1,7 +1,7 @@
 package com.vanniktech.lintrules.rxjava2
 
 import com.android.tools.lint.client.api.UElementHandler
-import com.android.tools.lint.detector.api.Category.Companion.MESSAGES
+import com.android.tools.lint.detector.api.Category.Companion.CORRECTNESS
 import com.android.tools.lint.detector.api.Detector
 import com.android.tools.lint.detector.api.Implementation
 import com.android.tools.lint.detector.api.Issue
@@ -17,10 +17,10 @@ import org.jetbrains.uast.tryResolve
 import org.jetbrains.uast.visitor.AbstractUastVisitor
 import java.util.EnumSet
 
-val ISSUE_DEFAULT_SCHEDULER = Issue.create("DefaultScheduler",
-    "Pass a scheduler instead of relying on the default one.",
+val ISSUE_DEFAULT_SCHEDULER = Issue.create("RxJava2DefaultScheduler",
+    "Pass a scheduler instead of relying on the default Scheduler.",
     "Calling this method will rely on a default scheduler. This is not necessary the best default. Being explicit and taking the overload for passing one is preferred.",
-    MESSAGES, 5, WARNING,
+    CORRECTNESS, 8, WARNING,
     Implementation(RxJava2DefaultSchedulerDetector::class.java, EnumSet.of(JAVA_FILE, TEST_SOURCES)))
 
 class RxJava2DefaultSchedulerDetector : Detector(), Detector.UastScanner {
@@ -46,7 +46,7 @@ class RxJava2DefaultSchedulerDetector : Detector(), Detector.UastScanner {
           val value = AnnotationUtil.getStringAttributeValue(annotation, null)
 
           if (!("none" == value || "custom" == value)) {
-            context.report(ISSUE_DEFAULT_SCHEDULER, context.getNameLocation(node), "${identifier.name}() is using its default scheduler")
+            context.report(ISSUE_DEFAULT_SCHEDULER, context.getNameLocation(node), "${identifier.name}() is using its default scheduler.")
           }
         }
       }

@@ -18,8 +18,9 @@ import java.util.Arrays.asList
 import java.util.EnumSet
 
 val ISSUE_INVALID_STRING = Issue.create("InvalidString",
-    "Strings should not contain new lines or trailing whitespace.",
-    "Strings should not contain new lines or trailing whitespace.", CORRECTNESS, 8, WARNING,
+    "Marks invalid translation strings.",
+    "A translation string is invalid if it contains new lines instead of the escaped \\\n or if it contains trailing whitespace.",
+    CORRECTNESS, 8, WARNING,
     Implementation(InvalidStringDetector::class.java, RESOURCE_FILE_SCOPE))
 
 class InvalidStringDetector : ResourceXmlDetector() {
