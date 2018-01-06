@@ -21,8 +21,14 @@ class InvalidSingleLineCommentDetectorTest {
       .expect("""
           |src/foo/Example.java:5: Warning: Comment does not contain a space at the beginning. [InvalidSingleLineComment]
           |    //Something.
-          |      ^
+          |    ~~~
           |0 errors, 1 warnings""".trimMargin())
+      .expectFixDiffs("""
+          |Fix for src/foo/Example.java line 4: Add space:
+          |@@ -5 +5
+          |-     //Something.
+          |+     // Something.
+          |""".trimMargin())
   }
 
   @Test fun invalidSingleLineCommentNotStartingCapitalLetter() {
@@ -42,6 +48,12 @@ class InvalidSingleLineCommentDetectorTest {
           |    // something.
           |       ^
           |0 errors, 1 warnings""".trimMargin())
+      .expectFixDiffs("""
+          |Fix for src/foo/Example.java line 4: Capitalized first word:
+          |@@ -5 +5
+          |-     // something.
+          |+     // Something.
+          |""".trimMargin())
   }
 
   @Test fun invalidSingleLineCommentNoPeriodAtEnd() {
@@ -61,9 +73,15 @@ class InvalidSingleLineCommentDetectorTest {
           |    // Something
           |    ~~~~~~~~~~~~
           |0 errors, 1 warnings""".trimMargin())
+      .expectFixDiffs("""
+          |Fix for src/foo/Example.java line 4: Add period:
+          |@@ -5 +5
+          |-     // Something
+          |+     // Something.
+          |""".trimMargin())
   }
 
-  @Test fun invalidSingleLineCommentEndingWithPeriod() {
+  @Test fun validSingleLineCommentEndingWithPeriod() {
     lint()
       .files(java("""
           |package foo;
@@ -94,10 +112,16 @@ class InvalidSingleLineCommentDetectorTest {
       .issues(ISSUE_INVALID_SINGLE_LINE_COMMENT)
       .run()
       .expect("""
-          |src/foo/Example.java:5: Warning: Comment does not start with a single space.. [InvalidSingleLineComment]
+          |src/foo/Example.java:5: Warning: Comment declaration is not preceded by a single space. [InvalidSingleLineComment]
           |    int foo = 5 + 5;// Something.
-          |                   ~
+          |                   ~~~
           |0 errors, 1 warnings""".trimMargin())
+      .expectFixDiffs("""
+          |Fix for src/foo/Example.java line 4: Add space:
+          |@@ -5 +5
+          |-     int foo = 5 + 5;// Something.
+          |+     int foo = 5 + 5; // Something.
+          |""".trimMargin())
   }
 
   @Test fun invalidSingleLineCommentIgnoresLinks() {
@@ -209,6 +233,12 @@ class InvalidSingleLineCommentDetectorTest {
           |    //
           |    ~~~
           |0 errors, 1 warnings""".trimMargin().replace("//", "// "))
+      .expectFixDiffs("""
+          |Fix for src/foo/Example.java line 4: Remove trailing whitespace:
+          |@@ -5 +5
+          |-     //
+          |+     //
+          |""".trimMargin().replace("-     //", "-     // "))
   }
 
   @Test fun invalidSingleLineCommentTrailingWhitespace() {
@@ -228,5 +258,11 @@ class InvalidSingleLineCommentDetectorTest {
           |    // Something.
           |    ~~~~~~~~~~~~~~
           |0 errors, 1 warnings""".trimMargin().replace("// Something.", "// Something. "))
+      .expectFixDiffs("""
+          |Fix for src/foo/Example.java line 4: Remove trailing whitespace:
+          |@@ -5 +5
+          |-     // Something.
+          |+     // Something.
+          |""".trimMargin().replace("-     // Something.", "-     // Something. "))
   }
 }
