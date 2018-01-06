@@ -16,9 +16,9 @@ import java.util.EnumSet
     "Marks usage of dispose() on CompositeDisposable.",
     "Instead of using dispose(), clear() should be used. Calling clear will result in a CompositeDisposable that can be used further to add more Disposables. When using dispose() this is not the case.",
     CORRECTNESS, 8, WARNING,
-    Implementation(RxJava2CallingDisposableDispose::class.java, EnumSet.of(JAVA_FILE, TEST_SOURCES)))
+    Implementation(RxJava2CallingDisposableDisposeDetector::class.java, EnumSet.of(JAVA_FILE, TEST_SOURCES)))
 
-class RxJava2CallingDisposableDispose : Detector(), Detector.UastScanner {
+class RxJava2CallingDisposableDisposeDetector : Detector(), Detector.UastScanner {
   override fun getApplicableMethodNames() = listOf("dispose")
 
   override fun visitMethod(context: JavaContext, node: UCallExpression, method: PsiMethod) {
