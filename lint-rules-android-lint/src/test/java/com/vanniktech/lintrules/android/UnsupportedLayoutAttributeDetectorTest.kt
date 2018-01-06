@@ -18,6 +18,14 @@ class UnsupportedLayoutAttributeDetectorTest {
           |    android:orientation="vertical"/>
           |    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
           |1 errors, 0 warnings""".trimMargin())
+      .expectFixDiffs("""
+          |Fix for res/layout/activity_home.xml line 2: Remove unnecessary attribute:
+          |@@ -2 +2
+          |- <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+          |-     android:orientation="vertical" />
+          |@@ -4 +2
+          |+ <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" />
+          |""".trimMargin())
   }
 
   @Test fun orientationInScrollView() {
@@ -33,6 +41,14 @@ class UnsupportedLayoutAttributeDetectorTest {
           |    android:orientation="vertical"/>
           |    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
           |1 errors, 0 warnings""".trimMargin())
+      .expectFixDiffs("""
+          |Fix for res/layout/activity_home.xml line 2: Remove unnecessary attribute:
+          |@@ -2 +2
+          |- <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+          |-     android:orientation="vertical" />
+          |@@ -4 +2
+          |+ <ScrollView xmlns:android="http://schemas.android.com/apk/res/android" />
+          |""".trimMargin())
   }
 
   @Test fun orientationInMergeScrollView() {
