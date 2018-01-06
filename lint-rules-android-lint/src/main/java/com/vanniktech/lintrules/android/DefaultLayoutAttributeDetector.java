@@ -15,8 +15,10 @@ import static com.android.tools.lint.detector.api.Severity.WARNING;
 import static java.util.Collections.singletonList;
 
 public final class DefaultLayoutAttributeDetector extends LayoutDetector {
-  static final Issue ISSUE_DEFAULT_LAYOUT_ATTRIBUTE = Issue.create("DefaultLayoutAttribute", "Specifying a default value which is not needed.",
-      "Specifying a default value which is not needed.", CORRECTNESS, 8, WARNING,
+  static final Issue ISSUE_DEFAULT_LAYOUT_ATTRIBUTE = Issue.create("DefaultLayoutAttribute",
+      "Flags default layout values.",
+      "Flags default layout values that are not needed. One for instance is the textStyle=\"normal\" that can be just removed.",
+      CORRECTNESS, 8, WARNING,
       new Implementation(DefaultLayoutAttributeDetector.class, RESOURCE_FILE_SCOPE));
 
   @Override public Collection<String> getApplicableAttributes() {

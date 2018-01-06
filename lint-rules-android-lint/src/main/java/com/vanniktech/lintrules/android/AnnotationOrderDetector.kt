@@ -1,7 +1,7 @@
 package com.vanniktech.lintrules.android
 
 import com.android.tools.lint.client.api.UElementHandler
-import com.android.tools.lint.detector.api.Category
+import com.android.tools.lint.detector.api.Category.Companion.CORRECTNESS
 import com.android.tools.lint.detector.api.Detector
 import com.android.tools.lint.detector.api.Detector.UastScanner
 import com.android.tools.lint.detector.api.Implementation
@@ -137,8 +137,9 @@ private val ANNOTATION_ORDER = listOf(
     "Size")
 
 val ISSUE_WRONG_ANNOTATION_ORDER = Issue.create("WrongAnnotationOrder",
-    "Annotations should be applied within a specific order.",
-    "Annotations should be applied within a specific order.", Category.CORRECTNESS, 6, WARNING,
+    "Checks that Annotations comply with a certain order.",
+    "Annotations should always be applied with the same order to have consistency across the code base.",
+    CORRECTNESS, 6, WARNING,
     Implementation(AnnotationOrderDetector::class.java, EnumSet.of(JAVA_FILE, TEST_SOURCES)))
 
 class AnnotationOrderDetector : Detector(), UastScanner {

@@ -12,7 +12,8 @@ import org.w3c.dom.Document
 private val ALLOWED_PREFIXES = listOf("activity_", "view_", "fragment_", "dialog_", "bottom_sheet_", "adapter_item_", "divider_", "space_")
 
 val ISSUE_WRONG_LAYOUT_NAME = Issue.create("WrongLayoutName",
-    "Layout names should be prefixed accordingly.", "The layout file name should be prefixed with one of the following: ${ALLOWED_PREFIXES.joinToString()}",
+    "Layout names should be prefixed accordingly.",
+  "The layout file name should be prefixed with one of the following: ${ALLOWED_PREFIXES.joinToString()}. This will improve consistency in your code base as well as enforce a certain structure.",
     CORRECTNESS, 5, WARNING,
     Implementation(WrongLayoutNameDetector::class.java, RESOURCE_FILE_SCOPE))
 

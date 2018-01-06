@@ -17,8 +17,9 @@ import org.w3c.dom.Element
 import java.util.EnumSet
 
 val ISSUE_RAW_DIMEN = Issue.create("RawDimen",
-    "This value should be defined as a dimen.",
-    "This value should be defined as a dimen.", CORRECTNESS, 8, WARNING,
+    "Flags dimensions that are not defined as resource.",
+    "Dimensions should all be defined as dimension resources. This has the benefit that you can easily see all of your dimensions in one file. One benefit is that when designers change the outline across the entire app you only have to adjust it in one place. This check will run on layouts as well as xml drawables.",
+    CORRECTNESS, 8, WARNING,
     Implementation(RawDimenDetector::class.java, RESOURCE_FILE_SCOPE))
 
 class RawDimenDetector : ResourceXmlDetector() {
@@ -37,7 +38,7 @@ class RawDimenDetector : ResourceXmlDetector() {
         .filterNot { isVectorGraphic }
         .filterNot { (hasLayoutWeight || isParentConstraintLayout) && it.nodeValue[0] == '0' && (ATTR_LAYOUT_WIDTH == it.localName || ATTR_LAYOUT_HEIGHT == it.localName) }
         .filter { it.nodeValue.matches("-?[\\d.]+(sp|dp|dip)".toRegex()) }
-        .forEach { context.report(ISSUE_RAW_DIMEN, it, context.getValueLocation(it as Attr), "Should be using dimen instead.") }
+        .forEach { context.report(ISSUE_RAW_DIMEN, it, context.getValueLocation(it as Attr), "Should be using a dimension resource instead.") }
   }
 
   companion object {

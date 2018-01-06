@@ -30,7 +30,7 @@ class AndroidDetectorTest {
       .issues(ISSUE_RESOURCES_GET_DRAWABLE)
       .run()
       .expect("""
-          |src/foo/Example.java:6: Warning: Using deprecated getDrawable() [ResourcesGetDrawable]
+          |src/foo/Example.java:6: Warning: Calling deprecated getDrawable. [ResourcesGetDrawableCall]
           |    resources.getDrawable(0);
           |              ~~~~~~~~~~~
           |0 errors, 1 warnings""".trimMargin())
@@ -50,7 +50,7 @@ class AndroidDetectorTest {
       .issues(ISSUE_RESOURCES_GET_COLOR)
       .run()
       .expect("""
-          |src/foo/Example.java:6: Warning: Using deprecated getColor() [ResourcesGetColor]
+          |src/foo/Example.java:6: Warning: Calling deprecated getColor. [ResourcesGetColorCall]
           |    resources.getColor(0);
           |              ~~~~~~~~
           |0 errors, 1 warnings""".trimMargin())
@@ -70,7 +70,7 @@ class AndroidDetectorTest {
       .issues(ISSUE_RESOURCES_GET_COLOR_STATE_LIST)
       .run()
       .expect("""
-          |src/foo/Example.java:6: Warning: Using deprecated getColorStateList() [ResourcesGetColorStateList]
+          |src/foo/Example.java:6: Warning: Calling deprecated getColorStateList. [ResourcesGetColorStateListCall]
           |    resources.getColorStateList(0);
           |              ~~~~~~~~~~~~~~~~~
           |0 errors, 1 warnings""".trimMargin())

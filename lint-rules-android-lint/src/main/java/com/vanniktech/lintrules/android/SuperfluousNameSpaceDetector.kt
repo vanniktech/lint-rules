@@ -4,7 +4,7 @@ import com.android.SdkConstants.AAPT_URI
 import com.android.SdkConstants.ANDROID_URI
 import com.android.SdkConstants.AUTO_URI
 import com.android.SdkConstants.TOOLS_URI
-import com.android.tools.lint.detector.api.Category
+import com.android.tools.lint.detector.api.Category.Companion.CORRECTNESS
 import com.android.tools.lint.detector.api.Implementation
 import com.android.tools.lint.detector.api.Issue
 import com.android.tools.lint.detector.api.LayoutDetector
@@ -15,8 +15,10 @@ import org.w3c.dom.Element
 
 private val POSSIBLE_URIS = setOf(ANDROID_URI, TOOLS_URI, AUTO_URI, AAPT_URI)
 
-val ISSUE_SUPERFLUOUS_NAME_SPACE = Issue.create("SuperfluousNameSpace", "A namespace was re-declared.",
-    "A namespace was re-declared.", Category.CORRECTNESS, 6, WARNING,
+val ISSUE_SUPERFLUOUS_NAME_SPACE = Issue.create("SuperfluousNameSpace",
+    "Flags namespaces that are already declared.",
+    "Re-declaring a namespace is unnecessary and hence can be just removed.",
+    CORRECTNESS, 6, WARNING,
     Implementation(SuperfluousNameSpaceDetector::class.java, RESOURCE_FILE_SCOPE))
 
 class SuperfluousNameSpaceDetector : LayoutDetector() {

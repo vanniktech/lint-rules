@@ -36,7 +36,7 @@ class ConstraintLayoutToolsEditorAttributeDetectorTest {
       .issues(ISSUE_CONSTRAINT_LAYOUT_TOOLS_EDITOR_ATTRIBUTE_DETECTOR)
       .run()
       .expect("""
-          |res/layout/layout.xml:3: Warning: Don't use tools:layout_editor_absoluteX [ConstraintLayoutToolsEditorAttributeDetector]
+          |res/layout/layout.xml:3: Warning: Don't use tools:layout_editor_absoluteX [ConstraintLayoutToolsEditorAttribute]
           |    tools:layout_editor_absoluteX="4dp"/>
           |    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
           |0 errors, 1 warnings""".trimMargin())

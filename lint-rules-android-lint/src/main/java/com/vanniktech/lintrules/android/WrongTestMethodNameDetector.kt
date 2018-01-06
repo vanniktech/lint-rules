@@ -12,8 +12,9 @@ import com.android.tools.lint.detector.api.Severity.WARNING
 import org.jetbrains.uast.UMethod
 import java.util.EnumSet
 
-val ISSUE_WRONG_TEST_METHOD_NAME = Issue.create("WrongTestMethodName", "A test method name should not start with test.",
-    "A test method name should not start with test.", CORRECTNESS, 6, WARNING,
+val ISSUE_WRONG_TEST_METHOD_NAME = Issue.create("WrongTestMethodName",
+    "Flags test methods that start with test.",
+    "The @Test annotation already states that this ia test hence the test prefix is not necessary.", CORRECTNESS, 6, WARNING,
     Implementation(WrongTestMethodNameDetector::class.java, EnumSet.of(JAVA_FILE, TEST_SOURCES)))
 
 class WrongTestMethodNameDetector : Detector(), Detector.UastScanner {

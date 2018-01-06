@@ -22,8 +22,10 @@ import static com.android.tools.lint.detector.api.Scope.TEST_SOURCES;
 import static com.android.tools.lint.detector.api.Severity.WARNING;
 
 public final class InvalidSingleLineCommentDetector extends Detector implements Detector.UastScanner {
-  static final Issue ISSUE_INVALID_SINGLE_LINE_COMMENT = Issue.create("InvalidSingleLineComment", "Single line comment should be a sentence.",
-      "Single line comment should be a sentence.", CORRECTNESS, 8, WARNING,
+  static final Issue ISSUE_INVALID_SINGLE_LINE_COMMENT = Issue.create("InvalidSingleLineComment",
+      "Marks single line comments that are not sentences.",
+      "Single line comments should always be sentences. They're part of the code and hence they deserve as much detail and respect as code.",
+      CORRECTNESS, 8, WARNING,
       new Implementation(InvalidSingleLineCommentDetector.class, EnumSet.of(JAVA_FILE, TEST_SOURCES)));
 
   @Override public List<Class<? extends UElement>> getApplicableUastTypes() {

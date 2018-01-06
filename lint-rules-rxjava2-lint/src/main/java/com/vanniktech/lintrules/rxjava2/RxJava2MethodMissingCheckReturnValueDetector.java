@@ -18,12 +18,12 @@ import static com.android.tools.lint.detector.api.Scope.JAVA_FILE;
 import static com.android.tools.lint.detector.api.Scope.TEST_SOURCES;
 import static com.android.tools.lint.detector.api.Severity.WARNING;
 
-public final class RxJava2MethodCheckReturnValueDetector extends Detector implements Detector.UastScanner {
-  static final Issue ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE =
-      Issue.create("MethodMissingCheckReturnValue", "Method is missing the @CheckReturnValue annotation",
-          "Methods returning RxJava Reactive Types should be annotated with the @CheckReturnValue annotation.",
-              MESSAGES, 8, WARNING,
-          new Implementation(RxJava2MethodCheckReturnValueDetector.class, EnumSet.of(JAVA_FILE, TEST_SOURCES)));
+public final class RxJava2MethodMissingCheckReturnValueDetector extends Detector implements Detector.UastScanner {
+  static final Issue ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE = Issue.create("RxJava2MethodMissingCheckReturnValue",
+      "Method is missing the @CheckReturnValue annotation.",
+      "Methods returning RxJava Reactive Types should be annotated with the @CheckReturnValue annotation. Static analyze tools such as Lint or ErrorProne can detect when the return value of a method is not used. This is usually an indication of a bug. If this is done on purpose (e.g. fire & forget) it should be stated explicitly.",
+      MESSAGES, 8, WARNING,
+      new Implementation(RxJava2MethodMissingCheckReturnValueDetector.class, EnumSet.of(JAVA_FILE, TEST_SOURCES)));
 
   @Override public List<Class<? extends UElement>> getApplicableUastTypes() {
     return Collections.<Class<? extends UElement>>singletonList(UMethod.class);
@@ -61,7 +61,7 @@ public final class RxJava2MethodCheckReturnValueDetector extends Detector implem
           }
         }
 
-        context.report(ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE, method, context.getNameLocation(method), "Method should have @CheckReturnValue annotation");
+        context.report(ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE, method, context.getNameLocation(method), "Method should have @CheckReturnValue annotation.");
       }
     }
   }

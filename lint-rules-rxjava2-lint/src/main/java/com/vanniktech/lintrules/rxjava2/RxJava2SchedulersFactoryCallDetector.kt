@@ -15,14 +15,16 @@ import org.jetbrains.uast.UElement
 import org.jetbrains.uast.UMethod
 import java.util.EnumSet
 
-val ISSUE_RAW_SCHEDULER_CALL = Issue.create("RawRxJava2SchedulerCall", "Instead of calling the Schedulers directly inject them.",
-  "Instead of calling the Schedulers directly inject them.", CORRECTNESS, 8, WARNING,
-    Implementation(RxJava2SchedulerCallDetector::class.java, EnumSet.of(JAVA_FILE, TEST_SOURCES)))
+val ISSUE_RAW_SCHEDULER_CALL = Issue.create("RxJava2SchedulersFactoryCall",
+    "Instead of calling the Schedulers factory methods directly inject the Schedulers.",
+    "Injecting the Schedulers instead of accessing them via the factory methods has the benefit that unit testing is way easier. Instead of overriding them via the Plugin mechanism we can just pass a custom Scheduler.",
+    CORRECTNESS, 8, WARNING,
+    Implementation(RxJava2SchedulersFactoryCallDetector::class.java, EnumSet.of(JAVA_FILE, TEST_SOURCES)))
 
 private val SCHEDULERS_METHODS = listOf("io", "computation", "newThread", "single", "from")
 private val ANDROID_SCHEDULERS_METHODS = listOf("mainThread")
 
-class RxJava2SchedulerCallDetector : Detector(), UastScanner {
+class RxJava2SchedulersFactoryCallDetector : Detector(), UastScanner {
   override fun getApplicableMethodNames() = SCHEDULERS_METHODS + ANDROID_SCHEDULERS_METHODS
 
   override fun visitMethod(context: JavaContext, node: UCallExpression, method: PsiMethod) {

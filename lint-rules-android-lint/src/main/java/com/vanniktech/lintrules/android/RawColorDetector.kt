@@ -15,8 +15,9 @@ import org.w3c.dom.Element
 import java.util.EnumSet
 
 val ISSUE_RAW_COLOR = Issue.create("RawColor",
-    "This value should be defined as a color resource.",
-    "This value should be defined as a color resource.", CORRECTNESS, 8, WARNING,
+    "Flags color that are not defined as resource.",
+    "Color value should all be defined as color resources. This has the benefit that you can easily see all of your colors in one file. One benefit is an easier addition to Dark Theme for instance. This check will run on layouts as well as xml drawables.",
+    CORRECTNESS, 8, WARNING,
     Implementation(RawColorDetector::class.java, RESOURCE_FILE_SCOPE))
 
 class RawColorDetector : ResourceXmlDetector() {
