@@ -18,7 +18,9 @@ val ISSUE_XML_SPACING = Issue.create("XmlSpacing",
 
 class XmlSpacingDetector : ResourceXmlDetector() {
   override fun visitDocument(context: XmlContext, document: Document) {
-    context.file.readLines()
+    val content = context.client.readFile(context.file).toString()
+
+    content.split("\n")
         .withIndex()
         .filter { it.value.isBlank() }
         .forEach {
