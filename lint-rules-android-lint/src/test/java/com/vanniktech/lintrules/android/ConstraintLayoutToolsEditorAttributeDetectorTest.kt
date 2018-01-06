@@ -40,6 +40,14 @@ class ConstraintLayoutToolsEditorAttributeDetectorTest {
           |    tools:layout_editor_absoluteX="4dp"/>
           |    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
           |0 errors, 1 warnings""".trimMargin())
+      .expectFixDiffs("""
+          |Fix for res/layout/layout.xml line 2: Remove:
+          |@@ -2 +2
+          |- <TextView xmlns:tools="http://schemas.android.com/tools"
+          |-     tools:layout_editor_absoluteX="4dp" />
+          |@@ -4 +2
+          |+ <TextView xmlns:tools="http://schemas.android.com/tools" />
+          |""".trimMargin())
   }
 
   @Test fun toolsWronglySpelledLayoutEditor() {
