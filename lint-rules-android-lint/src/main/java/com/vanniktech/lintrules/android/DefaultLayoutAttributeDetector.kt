@@ -29,7 +29,7 @@ class DefaultLayoutAttributeDetector : LayoutDetector() {
           .name("Remove")
           .build()
 
-        context.report(ISSUE_DEFAULT_LAYOUT_ATTRIBUTE, attribute, context.getValueLocation(attribute), "textStyle=\"normal\" is the default and hence you don't need to specify it.", fix)
+        context.report(ISSUE_DEFAULT_LAYOUT_ATTRIBUTE, attribute, context.getValueLocation(attribute), "This is the default and hence you don't need to specify it.", fix)
       }
     }
   }
