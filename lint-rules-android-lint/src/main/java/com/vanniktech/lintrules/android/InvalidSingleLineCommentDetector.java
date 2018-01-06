@@ -24,6 +24,8 @@ import static com.android.tools.lint.detector.api.Scope.TEST_SOURCES;
 import static com.android.tools.lint.detector.api.Severity.WARNING;
 
 public final class InvalidSingleLineCommentDetector extends Detector implements Detector.UastScanner {
+  private static final String COMMENT = "//";
+
   static final Issue ISSUE_INVALID_SINGLE_LINE_COMMENT = Issue.create("InvalidSingleLineComment",
       "Marks single line comments that are not sentences.",
       "Single line comments should always be sentences. They're part of the code and hence they deserve as much detail and respect as code.",
@@ -39,11 +41,11 @@ public final class InvalidSingleLineCommentDetector extends Detector implements 
 
     final String source = String.valueOf(javaContext.getContents());
 
-    final Pattern compile = Pattern.compile("[\\t]*//.*");
+    final Pattern compile = Pattern.compile("[\\t]*" + COMMENT + ".*");
     final Matcher matcher = compile.matcher(source);
 
     while (matcher.find()) {
-      final String group = matcher.group().replaceFirst("//", "");
+      final String group = matcher.group().replaceFirst(COMMENT, "");
       final int start = matcher.start();
 
       final Character beforeStart = start > 0 ? source.charAt(start - 1) : null;
@@ -65,7 +67,7 @@ public final class InvalidSingleLineCommentDetector extends Detector implements 
         final LintFix fix = fix()
             .name("Add space")
             .replace()
-            .text("//")
+            .text(COMMENT)
             .with(" //")
             .build();
 
@@ -75,7 +77,7 @@ public final class InvalidSingleLineCommentDetector extends Detector implements 
         final LintFix fix = fix()
             .name("Add space")
             .replace()
-            .text("//")
+            .text(COMMENT)
             .with("// ")
             .build();
 
