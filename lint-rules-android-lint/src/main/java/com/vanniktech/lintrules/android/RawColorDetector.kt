@@ -21,8 +21,7 @@ val ISSUE_RAW_COLOR = Issue.create("RawColor",
     Implementation(RawColorDetector::class.java, RESOURCE_FILE_SCOPE))
 
 class RawColorDetector : ResourceXmlDetector() {
-  override fun appliesTo(folderType: ResourceFolderType) =
-    EnumSet.of(LAYOUT, DRAWABLE).contains(folderType)
+  override fun appliesTo(folderType: ResourceFolderType) = EnumSet.of(LAYOUT, DRAWABLE).contains(folderType)
 
   override fun getApplicableElements() = ALL
 

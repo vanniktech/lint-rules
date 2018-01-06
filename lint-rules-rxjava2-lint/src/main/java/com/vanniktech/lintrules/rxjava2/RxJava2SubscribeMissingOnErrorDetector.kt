@@ -16,9 +16,9 @@ import java.util.EnumSet
     "Flags a version of the subscribe() method without an error Consumer.",
     "When calling the subscribe() method an error Consumer should always be used. Otherwise errors might be thrown and may crash the application or get forwarded to the Plugin Error handler.",
     CORRECTNESS, 10, ERROR,
-    Implementation(RxJava2SubscribeMissingOnError::class.java, EnumSet.of(JAVA_FILE, TEST_SOURCES)))
+    Implementation(RxJava2SubscribeMissingOnErrorDetector::class.java, EnumSet.of(JAVA_FILE, TEST_SOURCES)))
 
-class RxJava2SubscribeMissingOnError : Detector(), Detector.UastScanner {
+class RxJava2SubscribeMissingOnErrorDetector : Detector(), Detector.UastScanner {
   override fun getApplicableMethodNames() = listOf("subscribe")
 
   override fun visitMethod(context: JavaContext, node: UCallExpression, method: PsiMethod) {

@@ -2,6 +2,7 @@ package com.vanniktech.lintrules.android
 
 import com.android.SdkConstants.ATTR_LAYOUT_HEIGHT
 import com.android.SdkConstants.ATTR_LAYOUT_WIDTH
+import com.android.SdkConstants.CLASS_CONSTRAINT_LAYOUT
 import com.android.resources.ResourceFolderType
 import com.android.resources.ResourceFolderType.DRAWABLE
 import com.android.resources.ResourceFolderType.LAYOUT
@@ -29,7 +30,7 @@ class RawDimenDetector : ResourceXmlDetector() {
 
   override fun visitElement(context: XmlContext, element: Element) {
     val hasLayoutWeight = element.attributes.getNamedItem("android:layout_weight") != null
-    val isParentConstraintLayout = element.hasParent(CONSTRAINT_LAYOUT)
+    val isParentConstraintLayout = element.hasParent(CLASS_CONSTRAINT_LAYOUT)
     val isVectorGraphic = "vector" == element.localName || "path" == element.localName
 
     (0 until element.attributes.length)
@@ -39,9 +40,5 @@ class RawDimenDetector : ResourceXmlDetector() {
         .filterNot { (hasLayoutWeight || isParentConstraintLayout) && it.nodeValue[0] == '0' && (ATTR_LAYOUT_WIDTH == it.localName || ATTR_LAYOUT_HEIGHT == it.localName) }
         .filter { it.nodeValue.matches("-?[\\d.]+(sp|dp|dip)".toRegex()) }
         .forEach { context.report(ISSUE_RAW_DIMEN, it, context.getValueLocation(it as Attr), "Should be using a dimension resource instead.") }
-  }
-
-  companion object {
-    const val CONSTRAINT_LAYOUT = "android.support.constraint.ConstraintLayout"
   }
 }
