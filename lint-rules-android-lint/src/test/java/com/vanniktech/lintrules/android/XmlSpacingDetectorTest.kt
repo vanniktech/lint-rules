@@ -33,13 +33,10 @@ class XmlSpacingDetectorTest {
       .issues(ISSUE_XML_SPACING)
       .run()
       .expect("""
+          |res/layout/activity_home.xml: Warning: Unnecessary new line at line 1. [XmlSpacing]
           |res/layout/activity_home.xml: Warning: Unnecessary new line at line 3. [XmlSpacing]
           |res/layout/activity_home.xml: Warning: Unnecessary new line at line 7. [XmlSpacing]
           |res/layout/activity_home.xml: Warning: Unnecessary new line at line 9. [XmlSpacing]
-          |res/layout/activity_home.xml:1: Warning: Unnecessary new line at line 1. [XmlSpacing]
-          |
-          |^
-          |0 errors, 4 warnings
-          |""".trimMargin())
+          |0 errors, 4 warnings""".trimMargin())
   }
 }
