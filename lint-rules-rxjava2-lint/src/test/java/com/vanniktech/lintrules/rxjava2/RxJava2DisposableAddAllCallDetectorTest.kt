@@ -4,8 +4,8 @@ import com.android.tools.lint.checks.infrastructure.TestFiles.java
 import com.android.tools.lint.checks.infrastructure.TestLintTask.lint
 import org.junit.Test
 
-class RxJava2CallingDisposableDisposeDetectorTest {
-  @Test fun callingCompositeDisposableDispose() {
+class RxJava2DisposableAddAllCallDetectorTest {
+  @Test fun callingCompositeDisposableAddAll() {
     lint()
       .files(rxJava2(), java("""
           |package foo;
@@ -13,15 +13,15 @@ class RxJava2CallingDisposableDisposeDetectorTest {
           |class Example {
           |  public void foo() {
           |    CompositeDisposable cd = null;
-          |    cd.dispose();
+          |    cd.addAll();
           |  }
           |}""".trimMargin()))
-      .issues(ISSUE_CALLING_COMPOSITE_DISPOSABLE_DISPOSE)
+      .issues(ISSUE_DISPOSABLE_ADD_ALL_CALL)
       .run()
       .expect("""
-          |src/foo/Example.java:6: Warning: Calling dispose instead of clear. [RxJava2DisposableDisposeCall]
-          |    cd.dispose();
-          |       ~~~~~~~
+          |src/foo/Example.java:6: Warning: Calling addAll instead of add separately. [RxJava2DisposableAddAllCall]
+          |    cd.addAll();
+          |       ~~~~~~
           |0 errors, 1 warnings""".trimMargin())
   }
 }

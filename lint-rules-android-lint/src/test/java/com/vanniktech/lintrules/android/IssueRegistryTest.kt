@@ -18,6 +18,12 @@ class IssueRegistryTest {
         .forEach { assertTrue("$it is not a sentence", it.first().isUpperCase() && it.last() == '.' && it == it.trim()) }
   }
 
+  @Test fun idsDoNotHaveDetector() {
+    IssueRegistry().issues
+        .map { it.id }
+        .forEach { assertTrue("$it is containing Detector", !it.contains("Detector")) }
+  }
+
   @Test fun readmeContent() {
     val output = IssueRegistry().issues
         .sortedBy { it.id }
