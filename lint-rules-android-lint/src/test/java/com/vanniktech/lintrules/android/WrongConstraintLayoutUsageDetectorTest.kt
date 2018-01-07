@@ -38,6 +38,13 @@ class WrongConstraintLayoutUsageDetectorTest {
           |    app:layout_constraintLeft_toLeftOf="parent"/>
           |    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
           |1 errors, 0 warnings""".trimMargin())
+      .expectFixDiffs("""
+          |Fix for res/layout/ids.xml line 5: Fix it:
+          |@@ -6 +6
+          |-     app:layout_constraintLeft_toLeftOf="parent"/>
+          |@@ -7 +6
+          |+     app:layout_constraintStart_toStartOf="parent"/>
+          |""".trimMargin())
   }
 
   @Test fun constraintLeftToRightOf() {
@@ -56,6 +63,13 @@ class WrongConstraintLayoutUsageDetectorTest {
           |    app:layout_constraintLeft_toRightOf="parent"/>
           |    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
           |1 errors, 0 warnings""".trimMargin())
+      .expectFixDiffs("""
+          |Fix for res/layout/ids.xml line 5: Fix it:
+          |@@ -6 +6
+          |-     app:layout_constraintLeft_toRightOf="parent"/>
+          |@@ -7 +6
+          |+     app:layout_constraintStart_toEndOf="parent"/>
+          |""".trimMargin())
   }
 
   @Test fun constraintRightToRightOf() {
@@ -74,6 +88,13 @@ class WrongConstraintLayoutUsageDetectorTest {
           |    app:layout_constraintRight_toRightOf="parent"/>
           |    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
           |1 errors, 0 warnings""".trimMargin())
+      .expectFixDiffs("""
+          |Fix for res/layout/ids.xml line 5: Fix it:
+          |@@ -6 +6
+          |-     app:layout_constraintRight_toRightOf="parent"/>
+          |@@ -7 +6
+          |+     app:layout_constraintEnd_toEndOf="parent"/>
+          |""".trimMargin())
   }
 
   @Test fun constraintRightToLeftOf() {
@@ -92,6 +113,13 @@ class WrongConstraintLayoutUsageDetectorTest {
           |    app:layout_constraintRight_toLeftOf="parent"/>
           |    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
           |1 errors, 0 warnings""".trimMargin())
+      .expectFixDiffs("""
+          |Fix for res/layout/ids.xml line 5: Fix it:
+          |@@ -6 +6
+          |-     app:layout_constraintRight_toLeftOf="parent"/>
+          |@@ -7 +6
+          |+     app:layout_constraintEnd_toStartOf="parent"/>
+          |""".trimMargin())
   }
 
   @Test fun shouldNotCrashWithStyle() {

@@ -3,6 +3,7 @@ package com.vanniktech.lintrules.android;
 import com.android.tools.lint.detector.api.Implementation;
 import com.android.tools.lint.detector.api.Issue;
 import com.android.tools.lint.detector.api.LayoutDetector;
+import com.android.tools.lint.detector.api.LintFix;
 import com.android.tools.lint.detector.api.XmlContext;
 import java.util.Collection;
 import org.w3c.dom.Element;
@@ -13,7 +14,7 @@ import static com.android.tools.lint.detector.api.Category.CORRECTNESS;
 import static com.android.tools.lint.detector.api.Scope.RESOURCE_FILE_SCOPE;
 import static com.android.tools.lint.detector.api.Severity.ERROR;
 
-public class WrongConstraintLayoutUsageDetector extends LayoutDetector {
+public final class WrongConstraintLayoutUsageDetector extends LayoutDetector {
   static final Issue ISSUE_WRONG_CONSTRAINT_LAYOUT_USAGE = Issue.create("WrongConstraintLayoutUsage",
       "Marks a wrong usage of the Constraint Layout.",
       "Instead of using left & right constraints start & right should be used.", CORRECTNESS, 8, ERROR,
@@ -28,7 +29,6 @@ public class WrongConstraintLayoutUsageDetector extends LayoutDetector {
 
     for (int i = 0; i < attributes.getLength(); i++) {
       final Node item = attributes.item(i);
-
       final String localName = item.getLocalName();
 
       if (localName != null) {
@@ -41,7 +41,14 @@ public class WrongConstraintLayoutUsageDetector extends LayoutDetector {
         final boolean isAnIssue = isConstraint && (hasLeft || hasRight);
 
         if (isAnIssue) {
-          context.report(ISSUE_WRONG_CONSTRAINT_LAYOUT_USAGE, item, context.getNameLocation(item), "This attribute won't work with RTL. Please use " + properLocalName + " instead.");
+          final LintFix fix = fix()
+              .name("Fix it")
+              .replace()
+              .text(localName)
+              .with(properLocalName)
+              .build();
+
+          context.report(ISSUE_WRONG_CONSTRAINT_LAYOUT_USAGE, item, context.getNameLocation(item), "This attribute won't work with RTL. Please use " + properLocalName + " instead.", fix);
         }
       }
     }
