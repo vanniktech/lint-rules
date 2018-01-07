@@ -24,7 +24,7 @@ class XmlSpacingDetector : ResourceXmlDetector() {
         .withIndex()
         .filter { it.value.isBlank() }
         .forEach {
-          val location = Location.create(context.file, it.value, it.index)
+          val location = Location.create(context.file, it.value, it.index - 1)
           context.report(ISSUE_XML_SPACING, location, "Unnecessary new line at line ${it.index + 1}.")
         }
   }
