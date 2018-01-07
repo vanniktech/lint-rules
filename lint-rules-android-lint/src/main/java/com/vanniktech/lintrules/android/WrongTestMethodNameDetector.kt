@@ -28,7 +28,15 @@ class WrongTestMethodNameDetector : Detector(), Detector.UastScanner {
           .mapNotNull { it.qualifiedName?.split(".")?.lastOrNull() }
           .filter { it == "Test" }
           .filter { method.name.startsWith("test", ignoreCase = true) }
-          .forEach { context.report(ISSUE_WRONG_TEST_METHOD_NAME, method, context.getNameLocation(method), "Test method starts with test.") }
+          .forEach {
+            val fix = fix()
+                .name("Remove test prefix")
+                .replace()
+                .text(method.name)
+                .with(method.name.replace("test", "", ignoreCase = true).decapitalize())
+                .build()
+            context.report(ISSUE_WRONG_TEST_METHOD_NAME, method, context.getNameLocation(method), "Test method starts with test.", fix)
+          }
     }
   }
 }
