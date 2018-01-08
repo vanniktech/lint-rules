@@ -1,5 +1,6 @@
 package com.vanniktech.lintrules.android
 
+import com.android.tools.lint.checks.infrastructure.TestFiles.gradle
 import com.android.tools.lint.checks.infrastructure.TestFiles.java
 import com.android.tools.lint.checks.infrastructure.TestLintTask.lint
 import com.vanniktech.lintrules.android.InvalidSingleLineCommentDetector.ISSUE_INVALID_SINGLE_LINE_COMMENT
@@ -264,5 +265,28 @@ class InvalidSingleLineCommentDetectorTest {
           |-     // Something.
           |+     // Something.
           |""".trimMargin().replace("-     // Something.", "-     // Something. "))
+  }
+
+  @Test fun worksOnGradleFiles() {
+    lint()
+      .files(gradle("""
+          |buildscript {
+          |  repositories {
+          |    mavenCentral() // we need this.
+          |  }
+          |}""".trimMargin()))
+      .issues(ISSUE_INVALID_SINGLE_LINE_COMMENT)
+      .run()
+      .expect("""
+          |build.gradle:3: Warning: Comments first word should be capitalized. [InvalidSingleLineComment]
+          |    mavenCentral() // we need this.
+          |                      ^
+          |0 errors, 1 warnings""".trimMargin())
+      .expectFixDiffs("""
+          |Fix for build.gradle line 2: Capitalized first word:
+          |@@ -3 +3
+          |-     mavenCentral() // we need this.
+          |+     mavenCentral() // We need this.
+          |""".trimMargin())
   }
 }
