@@ -14,17 +14,18 @@ import org.w3c.dom.Document
 
 val ISSUE_XML_SPACING = Issue.create("XmlSpacing",
     "XML files should not contain any new lines.",
-    "Having newlines in xml files just adds noise and should be avoided.",
+    "Having newlines in xml files just adds noise and should be avoided. The only exception is the new lint at the end of the file.",
     CORRECTNESS, 6, WARNING,
     Implementation(XmlSpacingDetector::class.java, Scope.RESOURCE_FILE_SCOPE))
 
 class XmlSpacingDetector : ResourceXmlDetector() {
   override fun visitDocument(context: XmlContext, document: Document) {
-    val content = context.client.readFile(context.file).toString()
+    val contents = context.client.readFile(context.file).toString().split("\n")
 
-    content.split("\n")
+    contents
         .withIndex()
         .filter { it.value.isBlank() }
+        .filterNot { it.index == contents.size - 1 }
         .forEach {
           val location = Location.create(context.file, SourcePosition(it.index, 0, it.value.length))
           val fix = LayoutDetector.fix()
