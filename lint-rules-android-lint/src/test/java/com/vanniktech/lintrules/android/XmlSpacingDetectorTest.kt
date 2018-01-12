@@ -33,10 +33,32 @@ class XmlSpacingDetectorTest {
       .issues(ISSUE_XML_SPACING)
       .run()
       .expect("""
-          |res/layout/activity_home.xml: Warning: Unnecessary new line at line 1. [XmlSpacing]
-          |res/layout/activity_home.xml: Warning: Unnecessary new line at line 3. [XmlSpacing]
-          |res/layout/activity_home.xml: Warning: Unnecessary new line at line 7. [XmlSpacing]
-          |res/layout/activity_home.xml: Warning: Unnecessary new line at line 9. [XmlSpacing]
+          |res/layout/activity_home.xml:1: Warning: Unnecessary new line at line 1. [XmlSpacing]
+          |
+          |^
+          |res/layout/activity_home.xml:3: Warning: Unnecessary new line at line 3. [XmlSpacing]
+          |
+          |^
+          |res/layout/activity_home.xml:7: Warning: Unnecessary new line at line 7. [XmlSpacing]
+          |
+          |^
+          |res/layout/activity_home.xml:9: Warning: Unnecessary new line at line 9. [XmlSpacing]
+          |
+          |^
           |0 errors, 4 warnings""".trimMargin())
+      .expectFixDiffs("""
+          |Fix for res/layout/activity_home.xml line 0: Remove new line:
+          |@@ -1 +1
+          |-
+          |Fix for res/layout/activity_home.xml line 2: Remove new line:
+          |@@ -1 +1
+          |-
+          |Fix for res/layout/activity_home.xml line 6: Remove new line:
+          |@@ -1 +1
+          |-
+          |Fix for res/layout/activity_home.xml line 8: Remove new line:
+          |@@ -1 +1
+          |-
+          |""".trimMargin())
   }
 }
