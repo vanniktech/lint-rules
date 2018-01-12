@@ -81,7 +81,7 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
       .expect("""
           |src/foo/Example.java:6: Warning: Method should have @CheckReturnValue annotation. [RxJava2MethodMissingCheckReturnValue]
           |  protected Flowable<Object> foo() {
-          |                             ~~~~
+          |                             ~~~
           |0 errors, 1 warnings""".trimMargin())
       .expectFixDiffs("""
           |Fix for src/foo/Example.java line 5: Add @CheckReturnValue:
