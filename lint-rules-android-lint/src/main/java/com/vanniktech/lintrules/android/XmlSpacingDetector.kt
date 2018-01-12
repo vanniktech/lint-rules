@@ -1,8 +1,10 @@
 package com.vanniktech.lintrules.android
 
+import com.android.ide.common.blame.SourcePosition
 import com.android.tools.lint.detector.api.Category.Companion.CORRECTNESS
 import com.android.tools.lint.detector.api.Implementation
 import com.android.tools.lint.detector.api.Issue
+import com.android.tools.lint.detector.api.LayoutDetector
 import com.android.tools.lint.detector.api.Location
 import com.android.tools.lint.detector.api.ResourceXmlDetector
 import com.android.tools.lint.detector.api.Scope
@@ -24,8 +26,15 @@ class XmlSpacingDetector : ResourceXmlDetector() {
         .withIndex()
         .filter { it.value.isBlank() }
         .forEach {
-          val location = Location.create(context.file, it.value, it.index - 1)
-          context.report(ISSUE_XML_SPACING, location, "Unnecessary new line at line ${it.index + 1}.")
+          val location = Location.create(context.file, SourcePosition(it.index, 0, it.value.length))
+          val fix = LayoutDetector.fix()
+            .name("Remove new line")
+            .replace()
+            .range(location)
+            .all()
+            .build()
+
+          context.report(ISSUE_XML_SPACING, location, "Unnecessary new line at line ${it.index + 1}.", fix)
         }
   }
 }
