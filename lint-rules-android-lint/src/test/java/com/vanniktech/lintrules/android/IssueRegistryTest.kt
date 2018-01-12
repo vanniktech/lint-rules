@@ -56,7 +56,7 @@ class IssueRegistryTest {
         |- **WrongMenuIdFormat** - Menu ids should be in lowerCamelCase format. This has the benefit of saving an unnecessary underscore and also just looks nicer.
         |- **WrongTestMethodName** - The @Test annotation already states that this ia test hence the test prefix is not necessary.
         |- **WrongViewIdFormat** - View ids should be in lowerCamelCase format. This has the benefit of saving an unnecessary underscore and also just looks nicer.
-        |- **XmlSpacing** - Having newlines in xml files just adds noise and should be avoided.
+        |- **XmlSpacing** - Having newlines in xml files just adds noise and should be avoided. The only exception is the new lint at the end of the file.
         """.trimMargin(), output)
   }
 }
