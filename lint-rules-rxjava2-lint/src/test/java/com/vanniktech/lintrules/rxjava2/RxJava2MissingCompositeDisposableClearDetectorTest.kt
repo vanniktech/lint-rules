@@ -145,9 +145,9 @@ class RxJava2RxJava2MissingCompositeDisposableClearDetectorTest {
         |  }
         |
         |  public void foo2(){
-        |    if(false){
+        |    if (false) {
         |
-        |    }else{
+        |    } else {
         |      cd2.clear();
         |    }
         |  }
