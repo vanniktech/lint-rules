@@ -126,4 +126,34 @@ class RxJava2RxJava2MissingCompositeDisposableClearDetectorTest {
           |  ~~~~~~~~~~~~~~~~~~~~~~~~
           |1 errors, 0 warnings""".trimMargin())
   }
+
+  @Test fun clearInIfStatement() {
+    lint()
+      .files(rxJava2(), java("""
+        |package foo;
+        |
+        |import io.reactivex.disposables.CompositeDisposable;
+        |
+        |class Example {
+        |  CompositeDisposable cd;
+        |  CompositeDisposable cd2;
+        |
+        |  public void foo() {
+        |    if (true) {
+        |      cd.clear();
+        |    }
+        |  }
+        |
+        |  public void foo2(){
+        |    if (false) {
+        |
+        |    } else {
+        |      cd2.clear();
+        |    }
+        |  }
+        |}""".trimMargin()))
+      .issues(ISSUE_MISSING_COMPOSITE_DISPOSABLE_CLEAR)
+      .run()
+      .expectClean()
+  }
 }

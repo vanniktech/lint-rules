@@ -5,10 +5,10 @@ import com.android.tools.lint.detector.api.Detector;
 import com.android.tools.lint.detector.api.Implementation;
 import com.android.tools.lint.detector.api.Issue;
 import com.android.tools.lint.detector.api.JavaContext;
-import com.intellij.psi.PsiCodeBlock;
-import com.intellij.psi.PsiExpressionStatement;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiExpression;
 import com.intellij.psi.PsiMethod;
-import com.intellij.psi.PsiStatement;
+import com.intellij.psi.PsiRecursiveElementVisitor;
 import java.util.Collections;
 import java.util.EnumSet;
 import java.util.HashSet;
@@ -47,44 +47,52 @@ public final class RxJava2MissingCompositeDisposableClearDetector extends Detect
     }
 
     @Override @SuppressWarnings("PMD.CyclomaticComplexity") public void visitClass(final UClass clazz) {
-      final UField[] fields = clazz.getFields();
+      Set<UField> compositeDisposables = new HashSet<>();
 
-      final Set<UField> compositeDisposables = new HashSet<>();
-
-      for (final UField field : fields) {
+      for (final UField field : clazz.getFields()) {
         if ("io.reactivex.disposables.CompositeDisposable".equals(field.getType().getCanonicalText())) {
           compositeDisposables.add(field);
         }
       }
 
-      final PsiMethod[] allMethods = clazz.getAllMethods();
+      for (final PsiMethod method : clazz.getAllMethods()) {
+        final SearchFieldsWithoutClearCallVisitor visitor = new SearchFieldsWithoutClearCallVisitor(compositeDisposables);
+        method.accept(visitor);
 
-      for (final PsiMethod allMethod : allMethods) {
-        final PsiCodeBlock body = allMethod.getBody();
-
-        if (body != null) {
-          final PsiStatement[] statements = body.getStatements();
-
-          for (final PsiStatement statement : statements) {
-            final Iterator<UField> iterator = compositeDisposables.iterator();
-
-            if (statement instanceof PsiExpressionStatement) {
-              final PsiExpressionStatement expressionStatement = (PsiExpressionStatement) statement;
-
-              while (iterator.hasNext()) {
-                final UField field = iterator.next();
-
-                if (expressionStatement.getExpression().getText().equals(field.getName() + ".clear()")) { // NOPMD
-                  iterator.remove();
-                }
-              }
-            }
-          }
-        }
+        compositeDisposables = visitor.compositeDisposables;
       }
 
       for (final UField compositeDisposable : compositeDisposables) {
         context.report(ISSUE_MISSING_COMPOSITE_DISPOSABLE_CLEAR, compositeDisposable, context.getLocation(compositeDisposable), "clear() is not called.");
+      }
+    }
+  }
+
+  static class SearchFieldsWithoutClearCallVisitor extends PsiRecursiveElementVisitor {
+    Set<UField> compositeDisposables;
+
+    SearchFieldsWithoutClearCallVisitor(final Set<UField> compositeDisposables) {
+      this.compositeDisposables = compositeDisposables;
+    }
+
+    @Override public void visitElement(final PsiElement element) {
+      if (element instanceof PsiExpression) {
+        final PsiExpression expression = (PsiExpression) element;
+        removeFieldsThatCallsClear(expression);
+      } else {
+        super.visitElement(element);
+      }
+    }
+
+    private void removeFieldsThatCallsClear(final PsiExpression expression) {
+      final Iterator<UField> iterator = compositeDisposables.iterator();
+
+      while (iterator.hasNext()) {
+        final UField field = iterator.next();
+
+        if (expression.getText().equals(field.getName() + ".clear()")) {
+          iterator.remove();
+        }
       }
     }
   }
