@@ -136,10 +136,19 @@ class RxJava2RxJava2MissingCompositeDisposableClearDetectorTest {
         |
         |class Example {
         |  CompositeDisposable cd;
+        |  CompositeDisposable cd2;
         |
         |  public void foo() {
         |    if (true) {
         |      cd.clear();
+        |    }
+        |  }
+        |
+        |  public void foo2(){
+        |    if(false){
+        |
+        |    }else{
+        |      cd2.clear();
         |    }
         |  }
         |}""".trimMargin()))
