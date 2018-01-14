@@ -27,6 +27,31 @@ class RawDimenDetectorTest {
           |0 errors, 1 warnings""".trimMargin())
   }
 
+  @Test fun androidMarginSuggestion() {
+    lint()
+      .files(xml("res/layout/ids.xml", """
+          |<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+          |   android:layout_margin="16dp"/>""".trimMargin()),
+            xml("res/values/dimens.xml", """
+          |<resources>
+          | <dimen name="content_margin">16dp</dimen>
+          |</resources>""".trimMargin()))
+      .issues(ISSUE_RAW_DIMEN)
+      .run()
+      .expect("""
+          |res/layout/ids.xml:2: Warning: Should be using a dimension resource instead. [RawDimen]
+          |   android:layout_margin="16dp"/>
+          |                          ~~~~
+          |0 errors, 1 warnings""".trimMargin())
+      .expectFixDiffs("""
+          |Fix for res/layout/ids.xml line 1: Replace with @dimen/content_margin:
+          |@@ -2 +2
+          |-    android:layout_margin="16dp"/>
+          |@@ -3 +2
+          |+    android:layout_margin="@dimen/content_margin"/>
+          |""".trimMargin())
+  }
+
   @Test fun androidMarginIgnored() {
     lint()
       .files(xml("res/layout/ids.xml", """

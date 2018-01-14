@@ -46,6 +46,32 @@ class RawColorDetectorTest {
           |0 errors, 1 warnings""".trimMargin())
   }
 
+  @Test fun textColorSuggestion() {
+    lint()
+      .files(xml("res/layout/layout.xml", """
+          |<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+          |    android:textColor="#fff"/>""".trimMargin()),
+            xml("res/values/dimens.xml", """
+          |<resources>
+          |  <color name="white">#fff</color>
+          |</resources>""".trimMargin())
+      )
+      .issues(ISSUE_RAW_COLOR)
+      .run()
+      .expect("""
+          |res/layout/layout.xml:2: Warning: Should be using a color resource instead. [RawColor]
+          |    android:textColor="#fff"/>
+          |                       ~~~~
+          |0 errors, 1 warnings""".trimMargin())
+      .expectFixDiffs("""
+          |Fix for res/layout/layout.xml line 1: Replace with @color/white:
+          |@@ -2 +2
+          |-     android:textColor="#fff"/>
+          |@@ -3 +2
+          |+     android:textColor="@color/white"/>
+          |""".trimMargin())
+  }
+
   @Test fun ignoreText() {
     lint()
       .files(xml("res/layout/layout.xml", """
