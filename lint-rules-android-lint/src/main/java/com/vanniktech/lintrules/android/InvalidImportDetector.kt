@@ -14,9 +14,11 @@ import java.util.EnumSet
 
 val ISSUE_INVALID_IMPORT = Issue.create("InvalidImport",
     "Flags invalid imports.",
-    "Flags invalid imports. One example is com.foo.bar.R.drawable. Instead just the generated class R should be imported and not R.drawable.",
+    "Flags invalid imports. One example is com.foo.bar.R.drawable. Instead just the generated class R should be imported and not R.drawable. Also you should never import anything that's in an internal package.",
     CORRECTNESS, 5, WARNING,
     Implementation(InvalidImportDetector::class.java, EnumSet.of(JAVA_FILE, TEST_SOURCES)))
+
+private val DISALLOWED_IMPORTS = listOf(".R.", "internal.", "internaI.")
 
 class InvalidImportDetector : Detector(), Detector.UastScanner {
   override fun getApplicableUastTypes() = listOf(UImportStatement::class.java)
@@ -25,10 +27,10 @@ class InvalidImportDetector : Detector(), Detector.UastScanner {
 
   class InvalidImportHandler(private val context: JavaContext) : UElementHandler() {
     override fun visitImportStatement(importStatement: UImportStatement) {
-      val importReference = importStatement.importReference
-
-      if (importReference?.asSourceString()?.contains(".R.") == true) {
-        context.report(ISSUE_INVALID_IMPORT, importStatement, context.getLocation(importReference), "Importing a class from R.java")
+      importStatement.importReference?.let { importReference ->
+        if (DISALLOWED_IMPORTS.any { importReference.asSourceString().contains(it) }) {
+          context.report(ISSUE_INVALID_IMPORT, importStatement, context.getLocation(importReference), "Forbidden import")
+        }
       }
     }
   }
