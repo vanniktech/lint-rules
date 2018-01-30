@@ -15,7 +15,7 @@ import java.util.EnumSet
 val ISSUE_DISPOSABLE_ADD_ALL_CALL = Issue.create("RxJava2DisposableAddAllCall",
     "Marks usage of addAll() on CompositeDisposable.",
     "Instead of using addAll(), add() should be used separately for each Disposable.",
-    CORRECTNESS, 5, WARNING,
+    CORRECTNESS, PRIORITY, WARNING,
     Implementation(RxJava2DisposableAddAllCallDetector::class.java, EnumSet.of(JAVA_FILE, TEST_SOURCES)))
 
 class RxJava2DisposableAddAllCallDetector : Detector(), Detector.UastScanner {

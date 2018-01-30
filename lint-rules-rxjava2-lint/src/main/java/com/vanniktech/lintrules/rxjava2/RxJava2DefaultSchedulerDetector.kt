@@ -20,7 +20,7 @@ import java.util.EnumSet
 val ISSUE_DEFAULT_SCHEDULER = Issue.create("RxJava2DefaultScheduler",
     "Pass a scheduler instead of relying on the default Scheduler.",
     "Calling this method will rely on a default scheduler. This is not necessary the best default. Being explicit and taking the overload for passing one is preferred.",
-    CORRECTNESS, 8, WARNING,
+    CORRECTNESS, PRIORITY, WARNING,
     Implementation(RxJava2DefaultSchedulerDetector::class.java, EnumSet.of(JAVA_FILE, TEST_SOURCES)))
 
 class RxJava2DefaultSchedulerDetector : Detector(), Detector.UastScanner {

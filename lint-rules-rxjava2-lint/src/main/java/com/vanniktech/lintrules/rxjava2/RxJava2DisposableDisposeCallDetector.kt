@@ -15,7 +15,7 @@ import java.util.EnumSet
 val ISSUE_DISPOSABLE_DISPOSE_CALL = Issue.create("RxJava2DisposableDisposeCall",
     "Marks usage of dispose() on CompositeDisposable.",
     "Instead of using dispose(), clear() should be used. Calling clear will result in a CompositeDisposable that can be used further to add more Disposables. When using dispose() this is not the case.",
-    CORRECTNESS, 8, WARNING,
+    CORRECTNESS, PRIORITY, WARNING,
     Implementation(RxJava2DisposableDisposeCallDetector::class.java, EnumSet.of(JAVA_FILE, TEST_SOURCES)))
 
 class RxJava2DisposableDisposeCallDetector : Detector(), Detector.UastScanner {

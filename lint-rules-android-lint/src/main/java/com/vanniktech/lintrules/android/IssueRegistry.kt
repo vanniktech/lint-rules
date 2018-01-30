@@ -8,6 +8,8 @@ import com.vanniktech.lintrules.android.SuperfluousMarginDeclarationDetector.ISS
 import com.vanniktech.lintrules.android.SuperfluousPaddingDeclarationDetector.ISSUE_SUPERFLUOUS_PADDING_DECLARATION
 import com.vanniktech.lintrules.android.WrongConstraintLayoutUsageDetector.ISSUE_WRONG_CONSTRAINT_LAYOUT_USAGE
 
+internal const val PRIORITY = 10 // Does not matter anyways within Lint.
+
 class IssueRegistry : com.android.tools.lint.client.api.IssueRegistry() {
   override fun getIssues() =
     AndroidDetector.getIssues()
