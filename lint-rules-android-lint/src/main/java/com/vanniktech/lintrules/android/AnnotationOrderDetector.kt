@@ -139,7 +139,7 @@ private val ANNOTATION_ORDER = listOf(
 val ISSUE_WRONG_ANNOTATION_ORDER = Issue.create("WrongAnnotationOrder",
     "Checks that Annotations comply with a certain order.",
     "Annotations should always be applied with the same order to have consistency across the code base.",
-    CORRECTNESS, 6, WARNING,
+    CORRECTNESS, PRIORITY, WARNING,
     Implementation(AnnotationOrderDetector::class.java, EnumSet.of(JAVA_FILE, TEST_SOURCES)))
 
 class AnnotationOrderDetector : Detector(), UastScanner {

@@ -2,6 +2,8 @@ package com.vanniktech.lintrules.rxjava2
 
 import com.vanniktech.lintrules.rxjava2.RxJava2MissingCompositeDisposableClearDetector.ISSUE_MISSING_COMPOSITE_DISPOSABLE_CLEAR
 
+internal const val PRIORITY = 10 // Does not matter anyways within Lint.
+
 class IssueRegistry : com.android.tools.lint.client.api.IssueRegistry() {
   override fun getIssues() = listOf(
       ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE,

@@ -5,7 +5,7 @@ import com.android.tools.lint.checks.infrastructure.TestLintTask.lint
 import com.vanniktech.lintrules.rxjava2.RxJava2MissingCompositeDisposableClearDetector.ISSUE_MISSING_COMPOSITE_DISPOSABLE_CLEAR
 import org.junit.Test
 
-class RxJava2RxJava2MissingCompositeDisposableClearDetectorTest {
+class RxJava2MissingCompositeDisposableClearDetectorTest {
   @Test fun noCompositeDisposable() {
     lint()
       .files(rxJava2(), java("""

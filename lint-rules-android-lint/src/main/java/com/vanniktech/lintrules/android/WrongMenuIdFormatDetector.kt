@@ -17,7 +17,7 @@ import java.util.EnumSet
 val ISSUE_WRONG_MENU_ID_FORMAT = Issue.create("WrongMenuIdFormat",
     "Flag menu ids that are not in lowerCamelCase Format.",
     "Menu ids should be in lowerCamelCase format. This has the benefit of saving an unnecessary underscore and also just looks nicer.",
-    CORRECTNESS, 8, WARNING,
+    CORRECTNESS, PRIORITY, WARNING,
     Implementation(WrongMenuIdFormatDetector::class.java, RESOURCE_FILE_SCOPE))
 
 class WrongMenuIdFormatDetector : ResourceXmlDetector() {

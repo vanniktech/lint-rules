@@ -4,7 +4,7 @@ import com.android.tools.lint.checks.infrastructure.TestFiles.java
 import com.android.tools.lint.checks.infrastructure.TestLintTask.lint
 import org.junit.Test
 
-class RxJava2RxJava2SubscribeMissingOnErrorDetectorTest {
+class RxJava2SubscribeMissingOnErrorDetectorTest {
   @Test fun callingObservableSubscribe() {
     lint()
       .files(rxJava2(), java("""

@@ -15,7 +15,7 @@ import org.w3c.dom.Document
 val ISSUE_XML_SPACING = Issue.create("XmlSpacing",
     "XML files should not contain any new lines.",
     "Having newlines in xml files just adds noise and should be avoided. The only exception is the new lint at the end of the file.",
-    CORRECTNESS, 6, WARNING,
+    CORRECTNESS, PRIORITY, WARNING,
     Implementation(XmlSpacingDetector::class.java, Scope.RESOURCE_FILE_SCOPE))
 
 class XmlSpacingDetector : ResourceXmlDetector() {

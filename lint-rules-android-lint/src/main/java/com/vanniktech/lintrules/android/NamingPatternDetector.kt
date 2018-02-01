@@ -20,7 +20,7 @@ import java.util.EnumSet
 val ISSUE_NAMING_PATTERN = Issue.create("NamingPattern",
     "Names should be well named.",
     """Sometimes there is more than one reasonable way to convert an English phrase into camel case, such as when acronyms or unusual constructs like "IPv6" or "iOS" are present. XML HTTP request becomes XmlHttpRequest. XMLHTTPRequest would be incorrect.""",
-    CORRECTNESS, 5, WARNING,
+    CORRECTNESS, PRIORITY, WARNING,
     Implementation(NamingPatternDetector::class.java, EnumSet.of(JAVA_FILE, TEST_SOURCES)))
 
 class NamingPatternDetector : Detector(), Detector.UastScanner {
