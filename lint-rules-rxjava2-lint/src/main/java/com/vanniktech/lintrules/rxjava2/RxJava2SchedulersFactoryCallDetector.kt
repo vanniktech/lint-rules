@@ -46,7 +46,7 @@ class RxJava2SchedulersFactoryCallDetector : Detector(), UastScanner {
   private fun UElement.isCalledFromProvidesMethod(context: JavaContext): Boolean {
     if (this is UMethod) {
       return context.evaluator.getAllAnnotations(psi, false)
-        .any { "dagger.Provides" == it.qualifiedName }
+          .any { "dagger.Provides" == it.qualifiedName }
     }
 
     return uastParent?.isCalledFromProvidesMethod(context) ?: false

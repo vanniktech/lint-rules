@@ -44,7 +44,7 @@ codeQualityTools {
     toolVersion = '6.0.1'
   }
   ktlint {
-    toolVersion = '0.12.1'
+    toolVersion = '0.15.0'
   }
   detekt {
     toolVersion = '1.0.0.RC6-2'

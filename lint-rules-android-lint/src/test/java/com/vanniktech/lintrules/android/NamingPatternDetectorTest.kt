@@ -7,7 +7,7 @@ import org.junit.Test
 class NamingPatternDetectorTest {
   @Test fun incorrectVariableName() {
     lint()
-      .files(java("""
+        .files(java("""
           |package foo;
           |
           |class Foo {
@@ -15,9 +15,9 @@ class NamingPatternDetectorTest {
           |    String iOSVersion;
           |  }
           |}""".trimMargin()))
-      .issues(ISSUE_NAMING_PATTERN)
-      .run()
-      .expect("""
+        .issues(ISSUE_NAMING_PATTERN)
+        .run()
+        .expect("""
           |src/foo/Foo.java:5: Warning: Not named in defined camel case. [NamingPattern]
           |    String iOSVersion;
           |           ~~~~~~~~~~
@@ -26,16 +26,16 @@ class NamingPatternDetectorTest {
 
   @Test fun incorrectMethodName() {
     lint()
-      .files(java("""
+        .files(java("""
           |package foo;
           |
           |class Foo {
           |  private void makeHTTPRequest() {
           |  }
           |}""".trimMargin()))
-      .issues(ISSUE_NAMING_PATTERN)
-      .run()
-      .expect("""
+        .issues(ISSUE_NAMING_PATTERN)
+        .run()
+        .expect("""
           |src/foo/Foo.java:4: Warning: Not named in defined camel case. [NamingPattern]
           |  private void makeHTTPRequest() {
           |               ~~~~~~~~~~~~~~~
@@ -44,52 +44,52 @@ class NamingPatternDetectorTest {
 
   @Test fun ignoreEnumConstants() {
     lint()
-      .files(java("""
+        .files(java("""
           |package foo;
           |
           |public enum Enum {
           |  FOO
           |}""".trimMargin()))
-      .issues(ISSUE_NAMING_PATTERN)
-      .run()
-      .expectClean()
+        .issues(ISSUE_NAMING_PATTERN)
+        .run()
+        .expectClean()
   }
 
   @Test fun ignoreInterfaceConstants() {
     lint()
-      .files(java("""
+        .files(java("""
           |package foo;
           |
           |interface Something {
           |  String FOO = "bar";
           |}""".trimMargin()))
-      .issues(ISSUE_NAMING_PATTERN)
-      .run()
-      .expectClean()
+        .issues(ISSUE_NAMING_PATTERN)
+        .run()
+        .expectClean()
   }
 
   @Test fun correctClassName() {
     lint()
-      .files(java("""
+        .files(java("""
           |package foo;
           |
           |class XmlHttpRequest {
           |}""".trimMargin()))
-      .issues(ISSUE_NAMING_PATTERN)
-      .run()
-      .expectClean()
+        .issues(ISSUE_NAMING_PATTERN)
+        .run()
+        .expectClean()
   }
 
   @Test fun incorrectClassName() {
     lint()
-      .files(java("""
+        .files(java("""
           |package foo;
           |
           |class XMLHTTPRequest {
           |}""".trimMargin()))
-      .issues(ISSUE_NAMING_PATTERN)
-      .run()
-      .expect("""
+        .issues(ISSUE_NAMING_PATTERN)
+        .run()
+        .expect("""
           |src/foo/XMLHTTPRequest.java:3: Warning: Not named in defined camel case. [NamingPattern]
           |class XMLHTTPRequest {
           |      ~~~~~~~~~~~~~~

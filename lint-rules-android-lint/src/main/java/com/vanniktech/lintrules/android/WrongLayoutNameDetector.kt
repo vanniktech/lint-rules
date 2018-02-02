@@ -15,7 +15,7 @@ private val ALLOWED_PREFIXES = listOf("activity_", "view_", "fragment_", "dialog
 
 val ISSUE_WRONG_LAYOUT_NAME = Issue.create("WrongLayoutName",
     "Layout names should be prefixed accordingly.",
-  "The layout file name should be prefixed with one of the following: ${ALLOWED_PREFIXES.joinToString()}. This will improve consistency in your code base as well as enforce a certain structure.",
+    "The layout file name should be prefixed with one of the following: ${ALLOWED_PREFIXES.joinToString()}. This will improve consistency in your code base as well as enforce a certain structure.",
     CORRECTNESS, PRIORITY, WARNING,
     Implementation(WrongLayoutNameDetector::class.java, RESOURCE_FILE_SCOPE))
 

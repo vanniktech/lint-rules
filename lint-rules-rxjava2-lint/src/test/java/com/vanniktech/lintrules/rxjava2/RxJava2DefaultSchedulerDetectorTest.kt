@@ -7,7 +7,7 @@ import org.junit.Test
 class RxJava2DefaultSchedulerDetectorTest {
   @Test fun schedulerSupportNone() {
     lint()
-      .files(rxJava2(), java("""
+        .files(rxJava2(), java("""
           |package foo;
           |
           |import io.reactivex.Observable;
@@ -17,14 +17,14 @@ class RxJava2DefaultSchedulerDetectorTest {
           |    Observable.just(5);
           |  }
           |}""".trimMargin()))
-      .issues(ISSUE_DEFAULT_SCHEDULER)
-      .run()
-      .expectClean()
+        .issues(ISSUE_DEFAULT_SCHEDULER)
+        .run()
+        .expectClean()
   }
 
   @Test fun schedulerSupportComputation() {
     lint()
-      .files(rxJava2(), java("""
+        .files(rxJava2(), java("""
           |package foo;
           |
           |import java.util.concurrent.TimeUnit;
@@ -35,9 +35,9 @@ class RxJava2DefaultSchedulerDetectorTest {
           |    Observable.interval(5, TimeUnit.SECONDS);
           |  }
           |}""".trimMargin()))
-      .issues(ISSUE_DEFAULT_SCHEDULER)
-      .run()
-      .expect("""
+        .issues(ISSUE_DEFAULT_SCHEDULER)
+        .run()
+        .expect("""
           |src/foo/Example.java:8: Warning: interval() is using its default scheduler. [RxJava2DefaultScheduler]
           |    Observable.interval(5, TimeUnit.SECONDS);
           |               ~~~~~~~~
@@ -46,7 +46,7 @@ class RxJava2DefaultSchedulerDetectorTest {
 
   @Test fun schedulerSupportCustom() {
     lint()
-      .files(rxJava2(), java("""
+        .files(rxJava2(), java("""
           |package foo;
           |
           |import java.util.concurrent.TimeUnit;
@@ -58,8 +58,8 @@ class RxJava2DefaultSchedulerDetectorTest {
           |    Observable.interval(5, TimeUnit.SECONDS, Schedulers.computation());
           |  }
           |}""".trimMargin()))
-      .issues(ISSUE_DEFAULT_SCHEDULER)
-      .run()
-      .expectClean()
+        .issues(ISSUE_DEFAULT_SCHEDULER)
+        .run()
+        .expectClean()
   }
 }

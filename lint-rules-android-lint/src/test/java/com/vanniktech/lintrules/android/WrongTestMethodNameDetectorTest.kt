@@ -22,21 +22,21 @@ class WrongTestMethodNameDetectorTest {
 
   @Test fun methodStartingWithTest() {
     lint()
-      .files(java("""
+        .files(java("""
           |package foo;
           |
           |public class Something {
           |  public void testThis() { }
           |}""".trimMargin())
-      )
-      .issues(ISSUE_WRONG_TEST_METHOD_NAME)
-      .run()
-      .expectClean()
+            )
+        .issues(ISSUE_WRONG_TEST_METHOD_NAME)
+        .run()
+        .expectClean()
   }
 
   @Test fun methodStartingWithTestAndSomethingAnnotation() {
     lint()
-      .files(stubSomething, java("""
+        .files(stubSomething, java("""
           |package foo;
           |
           |import my.custom.Something;
@@ -44,15 +44,15 @@ class WrongTestMethodNameDetectorTest {
           |public class MyTest {
           |  @Something public void test() { }
           |}""".trimMargin())
-      )
-      .issues(ISSUE_WRONG_TEST_METHOD_NAME)
-      .run()
-      .expectClean()
+            )
+        .issues(ISSUE_WRONG_TEST_METHOD_NAME)
+        .run()
+        .expectClean()
   }
 
   @Test fun methodNotStartingWithTestAndTestAnnotation() {
     lint()
-      .files(stubTestJUnit, java("""
+        .files(stubTestJUnit, java("""
           |package foo;
           |
           |import org.junit.Test;
@@ -60,15 +60,15 @@ class WrongTestMethodNameDetectorTest {
           |public class MyTest {
           |  @Test public void myTest() { }
           |}""".trimMargin())
-      )
-      .issues(ISSUE_WRONG_TEST_METHOD_NAME)
-      .run()
-      .expectClean()
+            )
+        .issues(ISSUE_WRONG_TEST_METHOD_NAME)
+        .run()
+        .expectClean()
   }
 
   @Test fun methodStartingWithTestAndJUnitTestAnnotation() {
     lint()
-      .files(stubTestJUnit, java("""
+        .files(stubTestJUnit, java("""
           |package foo;
           |
           |import org.junit.Test;
@@ -76,15 +76,15 @@ class WrongTestMethodNameDetectorTest {
           |public class MyTest {
           |  @Test public void testSomething() { }
           |}""".trimMargin())
-      )
-      .issues(ISSUE_WRONG_TEST_METHOD_NAME)
-      .run()
-      .expect("""
+            )
+        .issues(ISSUE_WRONG_TEST_METHOD_NAME)
+        .run()
+        .expect("""
           |src/foo/MyTest.java:6: Warning: Test method starts with test. [WrongTestMethodName]
           |  @Test public void testSomething() { }
           |                    ~~~~~~~~~~~~~
           |0 errors, 1 warnings""".trimMargin())
-      .expectFixDiffs("""
+        .expectFixDiffs("""
           |Fix for src/foo/MyTest.java line 5: Remove test prefix:
           |@@ -6 +6
           |-   @Test public void testSomething() { }
@@ -94,7 +94,7 @@ class WrongTestMethodNameDetectorTest {
 
   @Test fun methodStartingWithTestAndCustomTestAnnotation() {
     lint()
-      .files(stubTestCustom, java("""
+        .files(stubTestCustom, java("""
           |package foo;
           |
           |import my.custom.Test;
@@ -102,15 +102,15 @@ class WrongTestMethodNameDetectorTest {
           |public class MyTest {
           |  @Test public void testSomething() { }
           |}""".trimMargin())
-      )
-      .issues(ISSUE_WRONG_TEST_METHOD_NAME)
-      .run()
-      .expect("""
+            )
+        .issues(ISSUE_WRONG_TEST_METHOD_NAME)
+        .run()
+        .expect("""
           |src/foo/MyTest.java:6: Warning: Test method starts with test. [WrongTestMethodName]
           |  @Test public void testSomething() { }
           |                    ~~~~~~~~~~~~~
           |0 errors, 1 warnings""".trimMargin())
-      .expectFixDiffs("""
+        .expectFixDiffs("""
           |Fix for src/foo/MyTest.java line 5: Remove test prefix:
           |@@ -6 +6
           |-   @Test public void testSomething() { }

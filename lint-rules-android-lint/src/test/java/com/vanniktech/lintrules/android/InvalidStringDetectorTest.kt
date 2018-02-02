@@ -7,30 +7,30 @@ import org.junit.Test
 class InvalidStringDetectorTest {
   @Test fun validString() {
     lint()
-      .files(xml("res/values/strings.xml", """
+        .files(xml("res/values/strings.xml", """
           |<resources>
           |  <string name="my_string">My string</string>
           |</resources>""".trimMargin()))
-      .issues(ISSUE_INVALID_STRING)
-      .run()
-      .expectClean()
+        .issues(ISSUE_INVALID_STRING)
+        .run()
+        .expectClean()
   }
 
   @Test fun stringContainingNewLine() {
     lint()
-      .files(xml("res/values/strings.xml", """
+        .files(xml("res/values/strings.xml", """
           |<resources>
           |  <string name="my_string">My string"
           |</string>
           |</resources>""".trimMargin()))
-      .issues(ISSUE_INVALID_STRING)
-      .run()
-      .expect("""
+        .issues(ISSUE_INVALID_STRING)
+        .run()
+        .expect("""
           |res/values/strings.xml:2: Warning: Text contains new line. [InvalidString]
           |  <string name="my_string">My string"
           |  ^
           |0 errors, 1 warnings""".trimMargin())
-      .expectFixDiffs("""
+        .expectFixDiffs("""
           |Fix for res/values/strings.xml line 1: Fix it:
           |@@ -2 +2
           |-   <string name="my_string">My string"
@@ -41,18 +41,18 @@ class InvalidStringDetectorTest {
 
   @Test fun trailingWhitespaceAtEndString() {
     lint()
-      .files(xml("res/values/strings.xml", """
+        .files(xml("res/values/strings.xml", """
           |<resources>
           |  <string name="my_string">My string   </string>
           |</resources>""".trimMargin()))
-      .issues(ISSUE_INVALID_STRING)
-      .run()
-      .expect("""
+        .issues(ISSUE_INVALID_STRING)
+        .run()
+        .expect("""
           |res/values/strings.xml:2: Warning: Text contains trailing whitespace. [InvalidString]
           |  <string name="my_string">My string   </string>
           |  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
           |0 errors, 1 warnings""".trimMargin())
-      .expectFixDiffs("""
+        .expectFixDiffs("""
           |Fix for res/values/strings.xml line 1: Fix it:
           |@@ -2 +2
           |-   <string name="my_string">My string   </string>
@@ -62,18 +62,18 @@ class InvalidStringDetectorTest {
 
   @Test fun trailingWhitespaceAtBeginningOfString() {
     lint()
-      .files(xml("res/values/strings.xml", """
+        .files(xml("res/values/strings.xml", """
           |<resources>
           |  <string name="my_string">  My string</string>
           |</resources>""".trimMargin()))
-      .issues(ISSUE_INVALID_STRING)
-      .run()
-      .expect("""
+        .issues(ISSUE_INVALID_STRING)
+        .run()
+        .expect("""
           |res/values/strings.xml:2: Warning: Text contains trailing whitespace. [InvalidString]
           |  <string name="my_string">  My string</string>
           |  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
           |0 errors, 1 warnings""".trimMargin())
-      .expectFixDiffs("""
+        .expectFixDiffs("""
           |Fix for res/values/strings.xml line 1: Fix it:
           |@@ -2 +2
           |-   <string name="my_string">  My string</string>
@@ -83,26 +83,26 @@ class InvalidStringDetectorTest {
 
   @Test fun validPluralString() {
     lint()
-      .files(xml("res/values/strings.xml", """
+        .files(xml("res/values/strings.xml", """
           |<plurals name="days">
           |  <item quantity="one">%d Day</item>
           |  <item quantity="other">%d Days</item>
           |</plurals>""".trimMargin()))
-      .issues(ISSUE_INVALID_STRING)
-      .run()
-      .expectClean()
+        .issues(ISSUE_INVALID_STRING)
+        .run()
+        .expectClean()
   }
 
   @Test fun trailingWhitespaceAtPluralStrings() {
     lint()
-      .files(xml("res/values/strings.xml", """
+        .files(xml("res/values/strings.xml", """
           |<plurals name="days">
           |  <item quantity="one">  %d Day</item>
           |  <item quantity="other">%d Days   </item>
           |</plurals>""".trimMargin()))
-      .issues(ISSUE_INVALID_STRING)
-      .run()
-      .expect("""
+        .issues(ISSUE_INVALID_STRING)
+        .run()
+        .expect("""
           |res/values/strings.xml:2: Warning: Text contains trailing whitespace. [InvalidString]
           |  <item quantity="one">  %d Day</item>
           |  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -110,7 +110,7 @@ class InvalidStringDetectorTest {
           |  <item quantity="other">%d Days   </item>
           |  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
           |0 errors, 2 warnings""".trimMargin())
-      .expectFixDiffs("""
+        .expectFixDiffs("""
           |Fix for res/values/strings.xml line 1: Fix it:
           |@@ -2 +2
           |-   <item quantity="one">  %d Day</item>
@@ -124,26 +124,26 @@ class InvalidStringDetectorTest {
 
   @Test fun validStringArrayString() {
     lint()
-      .files(xml("res/values/strings.xml", """
+        .files(xml("res/values/strings.xml", """
           |<string-array name="foo">
           |  <item>1</item>
           |  <item>2</item>
           |</string-array>""".trimMargin()))
-      .issues(ISSUE_INVALID_STRING)
-      .run()
-      .expectClean()
+        .issues(ISSUE_INVALID_STRING)
+        .run()
+        .expectClean()
   }
 
   @Test fun trailingWhitespaceAtStringArrayStrings() {
     lint()
-      .files(xml("res/values/strings.xml", """
+        .files(xml("res/values/strings.xml", """
           |<string-array name="bar">
           |  <item>   1</item>
           |  <item>2   </item>
           |</string-array>""".trimMargin()))
-      .issues(ISSUE_INVALID_STRING)
-      .run()
-      .expect("""
+        .issues(ISSUE_INVALID_STRING)
+        .run()
+        .expect("""
           |res/values/strings.xml:2: Warning: Text contains trailing whitespace. [InvalidString]
           |  <item>   1</item>
           |  ~~~~~~~~~~~~~~~~~
@@ -151,7 +151,7 @@ class InvalidStringDetectorTest {
           |  <item>2   </item>
           |  ~~~~~~~~~~~~~~~~~
           |0 errors, 2 warnings""".trimMargin())
-      .expectFixDiffs("""
+        .expectFixDiffs("""
           |Fix for res/values/strings.xml line 1: Fix it:
           |@@ -2 +2
           |-   <item>   1</item>

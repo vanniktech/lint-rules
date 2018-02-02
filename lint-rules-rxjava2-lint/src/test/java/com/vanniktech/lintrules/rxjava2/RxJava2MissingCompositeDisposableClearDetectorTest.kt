@@ -8,21 +8,21 @@ import org.junit.Test
 class RxJava2MissingCompositeDisposableClearDetectorTest {
   @Test fun noCompositeDisposable() {
     lint()
-      .files(rxJava2(), java("""
+        .files(rxJava2(), java("""
           |package foo;
           |
           |import io.reactivex.disposables.CompositeDisposable;
           |
           |class Example {
           |}""".trimMargin()))
-      .issues(ISSUE_MISSING_COMPOSITE_DISPOSABLE_CLEAR)
-      .run()
-      .expectClean()
+        .issues(ISSUE_MISSING_COMPOSITE_DISPOSABLE_CLEAR)
+        .run()
+        .expectClean()
   }
 
   @Test fun compositeDisposableMissingClear() {
     lint()
-      .files(rxJava2(), java("""
+        .files(rxJava2(), java("""
           |package foo;
           |
           |import io.reactivex.disposables.CompositeDisposable;
@@ -30,9 +30,9 @@ class RxJava2MissingCompositeDisposableClearDetectorTest {
           |class Example {
           |  CompositeDisposable cd;
           |}""".trimMargin()))
-      .issues(ISSUE_MISSING_COMPOSITE_DISPOSABLE_CLEAR)
-      .run()
-      .expect("""
+        .issues(ISSUE_MISSING_COMPOSITE_DISPOSABLE_CLEAR)
+        .run()
+        .expect("""
           |src/foo/Example.java:6: Error: clear() is not called. [RxJava2MissingCompositeDisposableClear]
           |  CompositeDisposable cd;
           |  ~~~~~~~~~~~~~~~~~~~~~~~
@@ -41,7 +41,7 @@ class RxJava2MissingCompositeDisposableClearDetectorTest {
 
   @Test fun disposableMissingClearIsIgnored() {
     lint()
-      .files(rxJava2(), java("""
+        .files(rxJava2(), java("""
           |package foo;
           |
           |import io.reactivex.disposables.Disposable;
@@ -49,14 +49,14 @@ class RxJava2MissingCompositeDisposableClearDetectorTest {
           |class Example {
           |  Disposable disposable;
           |}""".trimMargin()))
-      .issues(ISSUE_MISSING_COMPOSITE_DISPOSABLE_CLEAR)
-      .run()
-      .expectClean()
+        .issues(ISSUE_MISSING_COMPOSITE_DISPOSABLE_CLEAR)
+        .run()
+        .expectClean()
   }
 
   @Test fun multipleCompositeDisposableMissingClear() {
     lint()
-      .files(rxJava2(), java("""
+        .files(rxJava2(), java("""
           |package foo;
           |
           |import io.reactivex.disposables.CompositeDisposable;
@@ -66,9 +66,9 @@ class RxJava2MissingCompositeDisposableClearDetectorTest {
           |  CompositeDisposable cd2;
           |  CompositeDisposable cd3;
           |}""".trimMargin()))
-      .issues(ISSUE_MISSING_COMPOSITE_DISPOSABLE_CLEAR)
-      .run()
-      .expect("""
+        .issues(ISSUE_MISSING_COMPOSITE_DISPOSABLE_CLEAR)
+        .run()
+        .expect("""
           |src/foo/Example.java:6: Error: clear() is not called. [RxJava2MissingCompositeDisposableClear]
           |  CompositeDisposable cd1;
           |  ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -84,7 +84,7 @@ class RxJava2MissingCompositeDisposableClearDetectorTest {
 
   @Test fun compositeDisposableHavingClear() {
     lint()
-      .files(rxJava2(), java("""
+        .files(rxJava2(), java("""
           |package foo;
           |
           |import io.reactivex.disposables.CompositeDisposable;
@@ -95,14 +95,14 @@ class RxJava2MissingCompositeDisposableClearDetectorTest {
           |   cd.clear();
           |  }
           |}""".trimMargin()))
-      .issues(ISSUE_MISSING_COMPOSITE_DISPOSABLE_CLEAR)
-      .run()
-      .expectClean()
+        .issues(ISSUE_MISSING_COMPOSITE_DISPOSABLE_CLEAR)
+        .run()
+        .expectClean()
   }
 
   @Test fun multipleCompositeDisposableClear() {
     lint()
-      .files(rxJava2(), java("""
+        .files(rxJava2(), java("""
           |package foo;
           |
           |import io.reactivex.disposables.CompositeDisposable;
@@ -118,9 +118,9 @@ class RxJava2MissingCompositeDisposableClearDetectorTest {
           |   cd2.clear();
           |  }
           |}""".trimMargin()))
-      .issues(ISSUE_MISSING_COMPOSITE_DISPOSABLE_CLEAR)
-      .run()
-      .expect("""
+        .issues(ISSUE_MISSING_COMPOSITE_DISPOSABLE_CLEAR)
+        .run()
+        .expect("""
           |src/foo/Example.java:8: Error: clear() is not called. [RxJava2MissingCompositeDisposableClear]
           |  CompositeDisposable cd3;
           |  ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -129,7 +129,7 @@ class RxJava2MissingCompositeDisposableClearDetectorTest {
 
   @Test fun clearInIfStatement() {
     lint()
-      .files(rxJava2(), java("""
+        .files(rxJava2(), java("""
         |package foo;
         |
         |import io.reactivex.disposables.CompositeDisposable;
@@ -152,8 +152,8 @@ class RxJava2MissingCompositeDisposableClearDetectorTest {
         |    }
         |  }
         |}""".trimMargin()))
-      .issues(ISSUE_MISSING_COMPOSITE_DISPOSABLE_CLEAR)
-      .run()
-      .expectClean()
+        .issues(ISSUE_MISSING_COMPOSITE_DISPOSABLE_CLEAR)
+        .run()
+        .expectClean()
   }
 }

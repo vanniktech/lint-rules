@@ -29,11 +29,11 @@ class XmlSpacingDetector : ResourceXmlDetector() {
         .forEach {
           val location = Location.create(context.file, SourcePosition(it.index, 0, it.value.length))
           val fix = LayoutDetector.fix()
-            .name("Remove new line")
-            .replace()
-            .range(location)
-            .all()
-            .build()
+              .name("Remove new line")
+              .replace()
+              .range(location)
+              .all()
+              .build()
 
           context.report(ISSUE_XML_SPACING, location, "Unnecessary new line at line ${it.index + 1}.", fix)
         }

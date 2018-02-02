@@ -28,10 +28,10 @@ class WrongMenuIdFormatDetector : ResourceXmlDetector() {
   override fun visitAttribute(context: XmlContext, attribute: Attr) {
     if (!LintUtils.stripIdPrefix(attribute.value).isLowerCamelCase()) {
       val fix = fix().replace()
-        .name("Convert to lowerCamelCase")
-        .text(attribute.value)
-        .with(attribute.value.idToSnakeCase())
-        .build()
+          .name("Convert to lowerCamelCase")
+          .text(attribute.value)
+          .with(attribute.value.idToSnakeCase())
+          .build()
 
       context.report(ISSUE_WRONG_MENU_ID_FORMAT, attribute, context.getValueLocation(attribute), "Id is not in lowerCamelCaseFormat", fix)
     }

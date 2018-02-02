@@ -7,40 +7,40 @@ import org.junit.Test
 class XmlSpacingDetectorTest {
   @Test fun layoutXmlFileWithoutAnyNewLines() {
     lint()
-      .files(xml("res/layout/activity_home.xml", """
+        .files(xml("res/layout/activity_home.xml", """
           |<merge xmlns:android="http://schemas.android.com/apk/res/android">
           |  <TextView
           |      android:layout_width="wrap_content"/>
           |</merge>""".trimMargin()))
-      .issues(ISSUE_XML_SPACING)
-      .run()
-      .expectClean()
+        .issues(ISSUE_XML_SPACING)
+        .run()
+        .expectClean()
   }
 
   @Test fun emptyFile() {
     lint()
-      .files(xml("res/layout/activity_home.xml", ""))
-      .issues(ISSUE_XML_SPACING)
-      .run()
-      .expectClean()
+        .files(xml("res/layout/activity_home.xml", ""))
+        .issues(ISSUE_XML_SPACING)
+        .run()
+        .expectClean()
   }
 
   @Test fun ignoresNewLineAtEndOfFile() {
     lint()
-      .files(xml("res/layout/activity_home.xml", """
+        .files(xml("res/layout/activity_home.xml", """
           |<merge xmlns:android="http://schemas.android.com/apk/res/android">
           |  <TextView
           |      android:layout_width="wrap_content"/>
           |</merge>
           |""".trimMargin()))
-      .issues(ISSUE_XML_SPACING)
-      .run()
-      .expectClean()
+        .issues(ISSUE_XML_SPACING)
+        .run()
+        .expectClean()
   }
 
   @Test fun layoutXmlFileWithNewLines() {
     lint()
-      .files(xml("res/layout/activity_home.xml", """
+        .files(xml("res/layout/activity_home.xml", """
           |
           |<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android">
           |
@@ -51,9 +51,9 @@ class XmlSpacingDetectorTest {
           |      />
           |
           |</LinearLayout>""".trimMargin()))
-      .issues(ISSUE_XML_SPACING)
-      .run()
-      .expect("""
+        .issues(ISSUE_XML_SPACING)
+        .run()
+        .expect("""
           |res/layout/activity_home.xml:1: Warning: Unnecessary new line at line 1. [XmlSpacing]
           |
           |^
@@ -67,7 +67,7 @@ class XmlSpacingDetectorTest {
           |
           |^
           |0 errors, 4 warnings""".trimMargin())
-      .expectFixDiffs("""
+        .expectFixDiffs("""
           |Fix for res/layout/activity_home.xml line 0: Remove new line:
           |@@ -1 +1
           |-

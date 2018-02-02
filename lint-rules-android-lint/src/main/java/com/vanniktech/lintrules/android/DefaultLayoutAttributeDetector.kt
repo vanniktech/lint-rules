@@ -22,9 +22,9 @@ class DefaultLayoutAttributeDetector : LayoutDetector() {
   override fun visitAttribute(context: XmlContext, attribute: Attr) {
     if ("normal" == attribute.value) {
       val fix = fix()
-        .unset(attribute.namespaceURI, attribute.localName)
-        .name("Remove")
-        .build()
+          .unset(attribute.namespaceURI, attribute.localName)
+          .name("Remove")
+          .build()
 
       context.report(ISSUE_DEFAULT_LAYOUT_ATTRIBUTE, attribute, context.getValueLocation(attribute), "This is the default and hence you don't need to specify it.", fix)
     }
