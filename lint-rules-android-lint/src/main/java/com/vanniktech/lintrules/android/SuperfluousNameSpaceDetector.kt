@@ -31,11 +31,11 @@ class SuperfluousNameSpaceDetector : LayoutDetector() {
           .filter { attribute -> POSSIBLE_URIS.any { attribute.toString().contains(it) } }
           .forEach {
             val fix = fix()
-              .name("Remove namespace")
-              .replace()
-              .range(context.getLocation(it))
-              .all()
-              .build()
+                .name("Remove namespace")
+                .replace()
+                .range(context.getLocation(it))
+                .all()
+                .build()
 
             context.report(ISSUE_SUPERFLUOUS_NAME_SPACE, it, context.getLocation(it), "This name space is already declared and hence not needed.", fix)
           }

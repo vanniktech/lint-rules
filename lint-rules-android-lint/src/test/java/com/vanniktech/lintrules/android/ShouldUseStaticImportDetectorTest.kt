@@ -8,7 +8,7 @@ import org.junit.Test
 class ShouldUseStaticImportDetectorTest {
   @Test fun timeUnitSeconds() {
     lint()
-      .files(java("""
+        .files(java("""
           |package foo;
           |import java.util.concurrent.TimeUnit;
           |class Example {
@@ -16,9 +16,9 @@ class ShouldUseStaticImportDetectorTest {
           |    TimeUnit.SECONDS.toDays(1);
           |  }
           |}""".trimMargin()))
-      .issues(ISSUE_SHOULD_USE_STATIC_IMPORT)
-      .run()
-      .expect("""
+        .issues(ISSUE_SHOULD_USE_STATIC_IMPORT)
+        .run()
+        .expect("""
           |src/foo/Example.java:5: Warning: Should statically import SECONDS [ShouldUseStaticImport]
           |    TimeUnit.SECONDS.toDays(1);
           |             ~~~~~~~
@@ -27,7 +27,7 @@ class ShouldUseStaticImportDetectorTest {
 
   @Test fun timeUnitMinutes() {
     lint()
-      .files(java("""
+        .files(java("""
           |package foo;
           |import java.util.concurrent.TimeUnit;
           |class Example {
@@ -35,9 +35,9 @@ class ShouldUseStaticImportDetectorTest {
           |    TimeUnit.MINUTES.toDays(1);
           |  }
           |}""".trimMargin()))
-      .issues(ISSUE_SHOULD_USE_STATIC_IMPORT)
-      .run()
-      .expect("""
+        .issues(ISSUE_SHOULD_USE_STATIC_IMPORT)
+        .run()
+        .expect("""
           |src/foo/Example.java:5: Warning: Should statically import MINUTES [ShouldUseStaticImport]
           |    TimeUnit.MINUTES.toDays(1);
           |             ~~~~~~~
@@ -46,7 +46,7 @@ class ShouldUseStaticImportDetectorTest {
 
   @Test fun localeCanada() {
     lint()
-      .files(java("""
+        .files(java("""
           |package foo;
           |import java.util.Locale;
           |class Example {
@@ -54,9 +54,9 @@ class ShouldUseStaticImportDetectorTest {
           |    Locale.CANADA.getCountry();
           |  }
           |}""".trimMargin()))
-      .issues(ISSUE_SHOULD_USE_STATIC_IMPORT)
-      .run()
-      .expect("""
+        .issues(ISSUE_SHOULD_USE_STATIC_IMPORT)
+        .run()
+        .expect("""
           |src/foo/Example.java:5: Warning: Should statically import CANADA [ShouldUseStaticImport]
           |    Locale.CANADA.getCountry();
           |           ~~~~~~
@@ -65,7 +65,7 @@ class ShouldUseStaticImportDetectorTest {
 
   @Test fun sameNameButNoMatch() {
     lint()
-      .files(java("""
+        .files(java("""
           |package foo;
           |import java.util.Locale;
           |class Example {
@@ -74,14 +74,14 @@ class ShouldUseStaticImportDetectorTest {
           |    Something ignore = Something.RELEASE;
           |  }
           |}""".trimMargin()))
-      .issues(ISSUE_SHOULD_USE_STATIC_IMPORT)
-      .run()
-      .expectClean()
+        .issues(ISSUE_SHOULD_USE_STATIC_IMPORT)
+        .run()
+        .expectClean()
   }
 
   @Test fun setLocaleCanada() {
     lint()
-      .files(java("""
+        .files(java("""
           |package foo;
           |import java.util.Locale;
           |class Example {
@@ -89,9 +89,9 @@ class ShouldUseStaticImportDetectorTest {
           |    Locale.setDefault(Locale.CANADA);
           |  }
           |}""".trimMargin()))
-      .issues(ISSUE_SHOULD_USE_STATIC_IMPORT)
-      .run()
-      .expect("""
+        .issues(ISSUE_SHOULD_USE_STATIC_IMPORT)
+        .run()
+        .expect("""
           |src/foo/Example.java:5: Warning: Should statically import CANADA [ShouldUseStaticImport]
           |    Locale.setDefault(Locale.CANADA);
           |                             ~~~~~~
@@ -100,7 +100,7 @@ class ShouldUseStaticImportDetectorTest {
 
   @Test fun localeCanadaStaticallyImported() {
     lint()
-      .files(java("""
+        .files(java("""
           |package foo;
           |import static java.util.Locale.CANADA;
           |class Example {
@@ -108,14 +108,14 @@ class ShouldUseStaticImportDetectorTest {
           |    CANADA.getCountry();
           |  }
           |}""".trimMargin()))
-      .issues(ISSUE_SHOULD_USE_STATIC_IMPORT)
-      .run()
-      .expectClean()
+        .issues(ISSUE_SHOULD_USE_STATIC_IMPORT)
+        .run()
+        .expectClean()
   }
 
   @Test fun methodReference() {
     lint()
-      .files(java("""
+        .files(java("""
           |package foo;
           |import static java.util.Arrays.asList;
           |class Example {
@@ -123,14 +123,14 @@ class ShouldUseStaticImportDetectorTest {
           |    asList(1, 2).sort(Integer::compare);
           |  }
           |}""".trimMargin()))
-      .issues(ISSUE_SHOULD_USE_STATIC_IMPORT)
-      .run()
-      .expectClean()
+        .issues(ISSUE_SHOULD_USE_STATIC_IMPORT)
+        .run()
+        .expectClean()
   }
 
   @Test fun arraysAsList() {
     lint()
-      .files(java("""
+        .files(java("""
           |package foo;
           |import java.util.Arrays;
           |class Example {
@@ -138,9 +138,9 @@ class ShouldUseStaticImportDetectorTest {
           |    Arrays.asList(1, 2);
           |  }
           |}""".trimMargin()))
-      .issues(ISSUE_SHOULD_USE_STATIC_IMPORT)
-      .run()
-      .expect("""
+        .issues(ISSUE_SHOULD_USE_STATIC_IMPORT)
+        .run()
+        .expect("""
           |src/foo/Example.java:5: Warning: Should statically import asList [ShouldUseStaticImport]
           |    Arrays.asList(1, 2);
           |           ~~~~~~
@@ -149,7 +149,7 @@ class ShouldUseStaticImportDetectorTest {
 
   @Test fun collectionsSingletonList() {
     lint()
-      .files(java("""
+        .files(java("""
           |package foo;
           |import java.util.Collections;
           |class Example {
@@ -157,9 +157,9 @@ class ShouldUseStaticImportDetectorTest {
           |    Collections.singletonList(1);
           |  }
           |}""".trimMargin()))
-      .issues(ISSUE_SHOULD_USE_STATIC_IMPORT)
-      .run()
-      .expect("""
+        .issues(ISSUE_SHOULD_USE_STATIC_IMPORT)
+        .run()
+        .expect("""
           |src/foo/Example.java:5: Warning: Should statically import singletonList [ShouldUseStaticImport]
           |    Collections.singletonList(1);
           |                ~~~~~~~~~~~~~

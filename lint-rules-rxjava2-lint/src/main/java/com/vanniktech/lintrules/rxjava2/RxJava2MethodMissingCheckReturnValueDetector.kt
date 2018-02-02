@@ -14,11 +14,11 @@ import org.jetbrains.uast.UMethod
 import java.util.EnumSet
 
 @Suppress("Detekt.VariableMaxLength") val ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE = Issue.create(
-  "RxJava2MethodMissingCheckReturnValue",
-  "Method is missing the @CheckReturnValue annotation.",
-  "Methods returning RxJava Reactive Types should be annotated with the @CheckReturnValue annotation. Static analyze tools such as Lint or ErrorProne can detect when the return value of a method is not used. This is usually an indication of a bug. If this is done on purpose (e.g. fire & forget) it should be stated explicitly.",
-  MESSAGES, PRIORITY, WARNING,
-  Implementation(RxJava2MethodMissingCheckReturnValueDetector::class.java, EnumSet.of(JAVA_FILE, TEST_SOURCES)))
+    "RxJava2MethodMissingCheckReturnValue",
+    "Method is missing the @CheckReturnValue annotation.",
+    "Methods returning RxJava Reactive Types should be annotated with the @CheckReturnValue annotation. Static analyze tools such as Lint or ErrorProne can detect when the return value of a method is not used. This is usually an indication of a bug. If this is done on purpose (e.g. fire & forget) it should be stated explicitly.",
+    MESSAGES, PRIORITY, WARNING,
+    Implementation(RxJava2MethodMissingCheckReturnValueDetector::class.java, EnumSet.of(JAVA_FILE, TEST_SOURCES)))
 
 class RxJava2MethodMissingCheckReturnValueDetector : Detector(), Detector.UastScanner {
   override fun getApplicableUastTypes() = listOf(UMethod::class.java)
@@ -31,8 +31,8 @@ class RxJava2MethodMissingCheckReturnValueDetector : Detector(), Detector.UastSc
 
       if (returnType != null && isTypeThatRequiresAnnotation(returnType)) {
         context.evaluator.getAllAnnotations(method, true)
-          .filter { "io.reactivex.annotations.CheckReturnValue" == it.qualifiedName }
-          .forEach { return }
+            .filter { "io.reactivex.annotations.CheckReturnValue" == it.qualifiedName }
+            .forEach { return }
 
         val modifier = method.modifierList.children.joinToString(separator = " ") { it.text }
 

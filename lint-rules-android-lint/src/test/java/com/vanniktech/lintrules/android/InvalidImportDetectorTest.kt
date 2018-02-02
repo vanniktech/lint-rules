@@ -21,30 +21,30 @@ class InvalidImportDetectorTest {
 
   @Test fun normalRImport() {
     lint()
-      .files(r, java("""
+        .files(r, java("""
           |package foo;
           |
           |import foo.R;
           |
           |class Example {
           |}""".trimMargin()))
-      .issues(ISSUE_INVALID_IMPORT)
-      .run()
-      .expectClean()
+        .issues(ISSUE_INVALID_IMPORT)
+        .run()
+        .expectClean()
   }
 
   @Test fun rDrawableImport() {
     lint()
-      .files(r, java("""
+        .files(r, java("""
           |package foo;
           |
           |import foo.R.drawable;
           |
           |class Example {
           |}""".trimMargin()))
-      .issues(ISSUE_INVALID_IMPORT)
-      .run()
-      .expect("""
+        .issues(ISSUE_INVALID_IMPORT)
+        .run()
+        .expect("""
           |src/foo/Example.java:3: Warning: Forbidden import [InvalidImport]
           |import foo.R.drawable;
           |       ~~~~~~~~~~~~~~
@@ -53,16 +53,16 @@ class InvalidImportDetectorTest {
 
   @Test fun internalImport() {
     lint()
-      .files(internal, java("""
+        .files(internal, java("""
           |package foo;
           |
           |import com.foo.internal.Foo;
           |
           |class Example {
           |}""".trimMargin()))
-      .issues(ISSUE_INVALID_IMPORT)
-      .run()
-      .expect("""
+        .issues(ISSUE_INVALID_IMPORT)
+        .run()
+        .expect("""
           |src/foo/Example.java:3: Warning: Forbidden import [InvalidImport]
           |import com.foo.internal.Foo;
           |       ~~~~~~~~~~~~~~~~~~~~

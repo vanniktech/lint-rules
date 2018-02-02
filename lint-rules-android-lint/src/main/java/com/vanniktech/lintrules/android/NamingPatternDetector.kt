@@ -57,6 +57,6 @@ class NamingPatternDetector : Detector(), Detector.UastScanner {
 private fun String.isDefinedCamelCase(): Boolean {
   val toCharArray = toCharArray()
   return toCharArray
-    .mapIndexed { index, current -> current to toCharArray.getOrNull(index + 1) }
-    .none { it.first.isUpperCase() && it.second?.isUpperCase() ?: false }
+      .mapIndexed { index, current -> current to toCharArray.getOrNull(index + 1) }
+      .none { it.first.isUpperCase() && it.second?.isUpperCase() ?: false }
 }

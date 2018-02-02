@@ -7,7 +7,7 @@ import org.junit.Test
 class RxJava2SubscribeMissingOnErrorDetectorTest {
   @Test fun callingObservableSubscribe() {
     lint()
-      .files(rxJava2(), java("""
+        .files(rxJava2(), java("""
           |package foo;
           |
           |import io.reactivex.Observable;
@@ -18,9 +18,9 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
           |    o.subscribe();
           |  }
           |}""".trimMargin()))
-      .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
-      .run()
-      .expect("""
+        .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
+        .run()
+        .expect("""
           |src/foo/Example.java:8: Error: Using a version of subscribe() without an error Consumer. [RxJava2SubscribeMissingOnError]
           |    o.subscribe();
           |      ~~~~~~~~~
@@ -29,7 +29,7 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
 
   @Test fun callingObservableSubscribeOnSuccess() {
     lint()
-      .files(rxJava2(), java("""
+        .files(rxJava2(), java("""
           |package foo;
           |
           |import io.reactivex.Observable;
@@ -42,9 +42,9 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
           |    o.subscribe(c);
           |  }
           |}""".trimMargin()))
-      .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
-      .run()
-      .expect("""
+        .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
+        .run()
+        .expect("""
           |src/foo/Example.java:10: Error: Using a version of subscribe() without an error Consumer. [RxJava2SubscribeMissingOnError]
           |    o.subscribe(c);
           |      ~~~~~~~~~
@@ -53,7 +53,7 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
 
   @Test fun callingObservableSubscribeOnSuccessWithError() {
     lint()
-      .files(rxJava2(), java("""
+        .files(rxJava2(), java("""
           |package foo;
           |
           |import io.reactivex.Observable;
@@ -66,14 +66,14 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
           |    o.subscribe(c, c);
           |  }
           |}""".trimMargin()))
-      .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
-      .run()
-      .expectClean()
+        .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
+        .run()
+        .expectClean()
   }
 
   @Test fun callingFlowableSubscribe() {
     lint()
-      .files(reactiveStreams(), rxJava2(), java("""
+        .files(reactiveStreams(), rxJava2(), java("""
           |package foo;
           |
           |import io.reactivex.Flowable;
@@ -84,9 +84,9 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
           |    f.subscribe();
           |  }
           |}""".trimMargin()))
-      .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
-      .run()
-      .expect("""
+        .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
+        .run()
+        .expect("""
           |src/foo/Example.java:8: Error: Using a version of subscribe() without an error Consumer. [RxJava2SubscribeMissingOnError]
           |    f.subscribe();
           |      ~~~~~~~~~
@@ -95,7 +95,7 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
 
   @Test fun callingFlowableSubscribeOnSuccess() {
     lint()
-      .files(reactiveStreams(), rxJava2(), java("""
+        .files(reactiveStreams(), rxJava2(), java("""
           |package foo;
           |
           |import io.reactivex.Flowable;
@@ -108,9 +108,9 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
           |    f.subscribe(c);
           |  }
           |}""".trimMargin()))
-      .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
-      .run()
-      .expect("""
+        .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
+        .run()
+        .expect("""
           |src/foo/Example.java:10: Error: Using a version of subscribe() without an error Consumer. [RxJava2SubscribeMissingOnError]
           |    f.subscribe(c);
           |      ~~~~~~~~~
@@ -119,7 +119,7 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
 
   @Test fun callingFlowableSubscribeOnSuccessWithError() {
     lint()
-      .files(reactiveStreams(), rxJava2(), java("""
+        .files(reactiveStreams(), rxJava2(), java("""
           |package foo;
           |
           |import io.reactivex.Flowable;
@@ -132,14 +132,14 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
           |    f.subscribe(c, c);
           |  }
           |}""".trimMargin()))
-      .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
-      .run()
-      .expectClean()
+        .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
+        .run()
+        .expectClean()
   }
 
   @Test fun callingSingleSubscribe() {
     lint()
-      .files(rxJava2(), java("""
+        .files(rxJava2(), java("""
           |package foo;
           |
           |import io.reactivex.Single;
@@ -150,9 +150,9 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
           |    s.subscribe();
           |  }
           |}""".trimMargin()))
-      .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
-      .run()
-      .expect("""
+        .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
+        .run()
+        .expect("""
           |src/foo/Example.java:8: Error: Using a version of subscribe() without an error Consumer. [RxJava2SubscribeMissingOnError]
           |    s.subscribe();
           |      ~~~~~~~~~
@@ -161,7 +161,7 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
 
   @Test fun callingSingleSubscribeOnSuccess() {
     lint()
-      .files(rxJava2(), java("""
+        .files(rxJava2(), java("""
           |package foo;
           |
           |import io.reactivex.Single;
@@ -174,9 +174,9 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
           |    s.subscribe(c);
           |  }
           |}""".trimMargin()))
-      .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
-      .run()
-      .expect("""
+        .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
+        .run()
+        .expect("""
           |src/foo/Example.java:10: Error: Using a version of subscribe() without an error Consumer. [RxJava2SubscribeMissingOnError]
           |    s.subscribe(c);
           |      ~~~~~~~~~
@@ -185,7 +185,7 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
 
   @Test fun callingSingleSubscribeOnSuccessWithError() {
     lint()
-      .files(rxJava2(), java("""
+        .files(rxJava2(), java("""
           |package foo;
           |
           |import io.reactivex.Single;
@@ -198,14 +198,14 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
           |    s.subscribe(c, c);
           |  }
           |}""".trimMargin()))
-      .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
-      .run()
-      .expectClean()
+        .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
+        .run()
+        .expectClean()
   }
 
   @Test fun callingCompletableSubscribe() {
     lint()
-      .files(rxJava2(), java("""
+        .files(rxJava2(), java("""
           |package foo;
           |
           |import io.reactivex.Completable;
@@ -216,9 +216,9 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
           |    cp.subscribe();
           |  }
           |}""".trimMargin()))
-      .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
-      .run()
-      .expect("""
+        .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
+        .run()
+        .expect("""
           |src/foo/Example.java:8: Error: Using a version of subscribe() without an error Consumer. [RxJava2SubscribeMissingOnError]
           |    cp.subscribe();
           |       ~~~~~~~~~
@@ -227,7 +227,7 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
 
   @Test fun callingCompletableSubscribeOnSuccess() {
     lint()
-      .files(rxJava2(), java("""
+        .files(rxJava2(), java("""
           |package foo;
           |
           |import io.reactivex.Completable;
@@ -240,9 +240,9 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
           |    cp.subscribe(a);
           |  }
           |}""".trimMargin()))
-      .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
-      .run()
-      .expect("""
+        .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
+        .run()
+        .expect("""
           |src/foo/Example.java:10: Error: Using a version of subscribe() without an error Consumer. [RxJava2SubscribeMissingOnError]
           |    cp.subscribe(a);
           |       ~~~~~~~~~
@@ -251,7 +251,7 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
 
   @Test fun callingCompletableSubscribeOnSuccessWithError() {
     lint()
-      .files(rxJava2(), java("""
+        .files(rxJava2(), java("""
           |package foo;
           |
           |import io.reactivex.Completable;
@@ -266,14 +266,14 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
           |    cp.subscribe(a, c);
           |  }
           |}""".trimMargin()))
-      .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
-      .run()
-      .expectClean()
+        .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
+        .run()
+        .expectClean()
   }
 
   @Test fun callingMaybeSubscribe() {
     lint()
-      .files(rxJava2(), java("""
+        .files(rxJava2(), java("""
           |package foo;
           |
           |import io.reactivex.Maybe;
@@ -284,9 +284,9 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
           |    m.subscribe();
           |  }
           |}""".trimMargin()))
-      .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
-      .run()
-      .expect("""
+        .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
+        .run()
+        .expect("""
           |src/foo/Example.java:8: Error: Using a version of subscribe() without an error Consumer. [RxJava2SubscribeMissingOnError]
           |    m.subscribe();
           |      ~~~~~~~~~
@@ -295,7 +295,7 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
 
   @Test fun callingMaybeSubscribeOnSuccess() {
     lint()
-      .files(rxJava2(), java("""
+        .files(rxJava2(), java("""
           |package foo;
           |
           |import io.reactivex.Maybe;
@@ -308,9 +308,9 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
           |    m.subscribe(c);
           |  }
           |}""".trimMargin()))
-      .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
-      .run()
-      .expect("""
+        .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
+        .run()
+        .expect("""
           |src/foo/Example.java:10: Error: Using a version of subscribe() without an error Consumer. [RxJava2SubscribeMissingOnError]
           |    m.subscribe(c);
           |      ~~~~~~~~~
@@ -319,7 +319,7 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
 
   @Test fun callingMaybeSubscribeOnSuccessWithError() {
     lint()
-      .files(rxJava2(), java("""
+        .files(rxJava2(), java("""
           |package foo;
           |
           |import io.reactivex.Maybe;
@@ -332,8 +332,8 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
           |    m.subscribe(c, c);
           |  }
           |}""".trimMargin()))
-      .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
-      .run()
-      .expectClean()
+        .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
+        .run()
+        .expectClean()
   }
 }

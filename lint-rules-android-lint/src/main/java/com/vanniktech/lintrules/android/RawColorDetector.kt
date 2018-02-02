@@ -42,13 +42,13 @@ class RawColorDetector : ResourceXmlDetector() {
     collector.collect(element)
 
     (0 until element.attributes.length)
-      .map { element.attributes.item(it) }
-      .filterNot { TAG_VECTOR == element.localName || ATTR_PATH == element.localName }
-      .filterNot { it.hasToolsNamespace() }
-      .filter { it.nodeValue.matches("#[a-fA-F\\d]{3,8}".toRegex()) }
-      .filterNot { context.driver.isSuppressed(context, ISSUE_RAW_COLOR, it) }
-      .map { it to context.getValueLocation(it as Attr) }
-      .toCollection(collector)
+        .map { element.attributes.item(it) }
+        .filterNot { TAG_VECTOR == element.localName || ATTR_PATH == element.localName }
+        .filterNot { it.hasToolsNamespace() }
+        .filter { it.nodeValue.matches("#[a-fA-F\\d]{3,8}".toRegex()) }
+        .filterNot { context.driver.isSuppressed(context, ISSUE_RAW_COLOR, it) }
+        .map { it to context.getValueLocation(it as Attr) }
+        .toCollection(collector)
   }
 
   override fun afterCheckProject(context: Context) = afterCheckLibraryProject(context)

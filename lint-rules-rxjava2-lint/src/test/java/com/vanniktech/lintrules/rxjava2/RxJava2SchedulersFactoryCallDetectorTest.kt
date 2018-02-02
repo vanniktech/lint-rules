@@ -7,7 +7,7 @@ import org.junit.Test
 class RxJava2SchedulersFactoryCallDetectorTest {
   @Test fun ioCallInsideDaggerProvidesMethod() {
     lint()
-      .files(dagger2(), rxJava2(), java("""
+        .files(dagger2(), rxJava2(), java("""
           |package foo;
           |
           |import io.reactivex.Scheduler;
@@ -19,14 +19,14 @@ class RxJava2SchedulersFactoryCallDetectorTest {
           |    return Schedulers.io();
           |  }
           |}""".trimMargin()))
-      .issues(ISSUE_RAW_SCHEDULER_CALL)
-      .run()
-      .expectClean()
+        .issues(ISSUE_RAW_SCHEDULER_CALL)
+        .run()
+        .expectClean()
   }
 
   @Test fun ioCallInsideCheckReturnValueMethod() {
     lint()
-      .files(rxJava2(), java("""
+        .files(rxJava2(), java("""
           |package foo;
           |
           |import io.reactivex.annotations.CheckReturnValue;
@@ -38,9 +38,9 @@ class RxJava2SchedulersFactoryCallDetectorTest {
           |    return Schedulers.io();
           |  }
           |}""".trimMargin()))
-      .issues(ISSUE_RAW_SCHEDULER_CALL)
-      .run()
-      .expect("""
+        .issues(ISSUE_RAW_SCHEDULER_CALL)
+        .run()
+        .expect("""
           |src/foo/Example.java:9: Warning: Inject this Scheduler instead of calling it directly. [RxJava2SchedulersFactoryCall]
           |    return Schedulers.io();
           |                      ~~
@@ -50,7 +50,7 @@ class RxJava2SchedulersFactoryCallDetectorTest {
 
   @Test fun ioCall() {
     lint()
-      .files(rxJava2(), java("""
+        .files(rxJava2(), java("""
           |package foo;
           |
           |import io.reactivex.schedulers.Schedulers;
@@ -60,9 +60,9 @@ class RxJava2SchedulersFactoryCallDetectorTest {
           |    Schedulers.io();
           |  }
           |}""".trimMargin()))
-      .issues(ISSUE_RAW_SCHEDULER_CALL)
-      .run()
-      .expect("""
+        .issues(ISSUE_RAW_SCHEDULER_CALL)
+        .run()
+        .expect("""
           |src/foo/Example.java:7: Warning: Inject this Scheduler instead of calling it directly. [RxJava2SchedulersFactoryCall]
           |    Schedulers.io();
           |               ~~
@@ -72,7 +72,7 @@ class RxJava2SchedulersFactoryCallDetectorTest {
 
   @Test fun computationCall() {
     lint()
-      .files(rxJava2(), java("""
+        .files(rxJava2(), java("""
           |package foo;
           |
           |import io.reactivex.schedulers.Schedulers;
@@ -82,9 +82,9 @@ class RxJava2SchedulersFactoryCallDetectorTest {
           |    Schedulers.computation();
           |  }
           |}""".trimMargin()))
-      .issues(ISSUE_RAW_SCHEDULER_CALL)
-      .run()
-      .expect("""
+        .issues(ISSUE_RAW_SCHEDULER_CALL)
+        .run()
+        .expect("""
           |src/foo/Example.java:7: Warning: Inject this Scheduler instead of calling it directly. [RxJava2SchedulersFactoryCall]
           |    Schedulers.computation();
           |               ~~~~~~~~~~~
@@ -94,7 +94,7 @@ class RxJava2SchedulersFactoryCallDetectorTest {
 
   @Test fun newThreadCall() {
     lint()
-      .files(rxJava2(), java("""
+        .files(rxJava2(), java("""
           |package foo;
           |
           |import io.reactivex.schedulers.Schedulers;
@@ -104,9 +104,9 @@ class RxJava2SchedulersFactoryCallDetectorTest {
           |    Schedulers.newThread();
           |  }
           |}""".trimMargin()))
-      .issues(ISSUE_RAW_SCHEDULER_CALL)
-      .run()
-      .expect("""
+        .issues(ISSUE_RAW_SCHEDULER_CALL)
+        .run()
+        .expect("""
           |src/foo/Example.java:7: Warning: Inject this Scheduler instead of calling it directly. [RxJava2SchedulersFactoryCall]
           |    Schedulers.newThread();
           |               ~~~~~~~~~
@@ -116,7 +116,7 @@ class RxJava2SchedulersFactoryCallDetectorTest {
 
   @Test fun singleCall() {
     lint()
-      .files(rxJava2(), java("""
+        .files(rxJava2(), java("""
           |package foo;
           |
           |import io.reactivex.schedulers.Schedulers;
@@ -126,9 +126,9 @@ class RxJava2SchedulersFactoryCallDetectorTest {
           |    Schedulers.single();
           |  }
           |}""".trimMargin()))
-      .issues(ISSUE_RAW_SCHEDULER_CALL)
-      .run()
-      .expect("""
+        .issues(ISSUE_RAW_SCHEDULER_CALL)
+        .run()
+        .expect("""
           |src/foo/Example.java:7: Warning: Inject this Scheduler instead of calling it directly. [RxJava2SchedulersFactoryCall]
           |    Schedulers.single();
           |               ~~~~~~
@@ -138,7 +138,7 @@ class RxJava2SchedulersFactoryCallDetectorTest {
 
   @Test fun fromCall() {
     lint()
-      .files(rxJava2(), java("""
+        .files(rxJava2(), java("""
           |package foo;
           |
           |import io.reactivex.schedulers.Schedulers;
@@ -148,9 +148,9 @@ class RxJava2SchedulersFactoryCallDetectorTest {
           |    Schedulers.from(null);
           |  }
           |}""".trimMargin()))
-      .issues(ISSUE_RAW_SCHEDULER_CALL)
-      .run()
-      .expect("""
+        .issues(ISSUE_RAW_SCHEDULER_CALL)
+        .run()
+        .expect("""
           |src/foo/Example.java:7: Warning: Inject this Scheduler instead of calling it directly. [RxJava2SchedulersFactoryCall]
           |    Schedulers.from(null);
           |               ~~~~
@@ -160,7 +160,7 @@ class RxJava2SchedulersFactoryCallDetectorTest {
 
   @Test fun mainThreadCall() {
     lint()
-      .files(rxJava2(), rxAndroid2(), java("""
+        .files(rxJava2(), rxAndroid2(), java("""
           |package foo;
           |
           |import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -170,9 +170,9 @@ class RxJava2SchedulersFactoryCallDetectorTest {
           |    AndroidSchedulers.mainThread();
           |  }
           |}""".trimMargin()))
-      .issues(ISSUE_RAW_SCHEDULER_CALL)
-      .run()
-      .expect("""
+        .issues(ISSUE_RAW_SCHEDULER_CALL)
+        .run()
+        .expect("""
           |src/foo/Example.java:7: Warning: Inject this Scheduler instead of calling it directly. [RxJava2SchedulersFactoryCall]
           |    AndroidSchedulers.mainThread();
           |                      ~~~~~~~~~~

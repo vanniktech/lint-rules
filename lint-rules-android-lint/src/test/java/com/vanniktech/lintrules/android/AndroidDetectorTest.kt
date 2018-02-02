@@ -18,7 +18,7 @@ class AndroidDetectorTest {
 
   @Test fun callingGetDrawable() {
     lint()
-      .files(resourcesStub, java("""
+        .files(resourcesStub, java("""
           |package foo;
           |import android.content.res.Resources;
           |class Example {
@@ -27,9 +27,9 @@ class AndroidDetectorTest {
           |    resources.getDrawable(0);
           |  }
           |}""".trimMargin()))
-      .issues(ISSUE_RESOURCES_GET_DRAWABLE)
-      .run()
-      .expect("""
+        .issues(ISSUE_RESOURCES_GET_DRAWABLE)
+        .run()
+        .expect("""
           |src/foo/Example.java:6: Warning: Calling deprecated getDrawable. [ResourcesGetDrawableCall]
           |    resources.getDrawable(0);
           |              ~~~~~~~~~~~
@@ -38,7 +38,7 @@ class AndroidDetectorTest {
 
   @Test fun callingGetColor() {
     lint()
-      .files(resourcesStub, java("""
+        .files(resourcesStub, java("""
           |package foo;
           |import android.content.res.Resources;
           |class Example {
@@ -47,9 +47,9 @@ class AndroidDetectorTest {
           |    resources.getColor(0);
           |  }
           |}""".trimMargin()))
-      .issues(ISSUE_RESOURCES_GET_COLOR)
-      .run()
-      .expect("""
+        .issues(ISSUE_RESOURCES_GET_COLOR)
+        .run()
+        .expect("""
           |src/foo/Example.java:6: Warning: Calling deprecated getColor. [ResourcesGetColorCall]
           |    resources.getColor(0);
           |              ~~~~~~~~
@@ -58,7 +58,7 @@ class AndroidDetectorTest {
 
   @Test fun callingGetColorStateList() {
     lint()
-      .files(resourcesStub, java("""
+        .files(resourcesStub, java("""
           |package foo;
           |import android.content.res.Resources;
           |class Example {
@@ -67,9 +67,9 @@ class AndroidDetectorTest {
           |    resources.getColorStateList(0);
           |  }
           |}""".trimMargin()))
-      .issues(ISSUE_RESOURCES_GET_COLOR_STATE_LIST)
-      .run()
-      .expect("""
+        .issues(ISSUE_RESOURCES_GET_COLOR_STATE_LIST)
+        .run()
+        .expect("""
           |src/foo/Example.java:6: Warning: Calling deprecated getColorStateList. [ResourcesGetColorStateListCall]
           |    resources.getColorStateList(0);
           |              ~~~~~~~~~~~~~~~~~
