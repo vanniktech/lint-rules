@@ -148,17 +148,17 @@ class AnnotationOrderDetector : Detector(), UastScanner {
   override fun createUastHandler(context: JavaContext) = AnnotationOrderVisitor(context)
 
   class AnnotationOrderVisitor(private val context: JavaContext) : UElementHandler() {
-    override fun visitVariable(variable: UVariable) {
+    override fun visitVariable(node: UVariable) {
       // Workaround https://groups.google.com/forum/#!topic/lint-dev/BaRimyf40tI
-      processAnnotations(variable, variable.psi)
+      processAnnotations(node, node.psi)
     }
 
-    override fun visitMethod(method: UMethod) {
-      processAnnotations(method, method)
+    override fun visitMethod(node: UMethod) {
+      processAnnotations(node, node)
     }
 
-    override fun visitClass(clazz: UClass) {
-      processAnnotations(clazz, clazz)
+    override fun visitClass(node: UClass) {
+      processAnnotations(node, node)
     }
 
     @Suppress("Detekt.LabeledExpression", "Detekt.ReturnCount", "Detekt.OptionalReturnKeyword") private fun processAnnotations(element: UElement, modifierListOwner: PsiModifierListOwner) {
