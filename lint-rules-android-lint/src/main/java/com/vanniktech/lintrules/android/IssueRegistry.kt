@@ -11,7 +11,7 @@ import com.vanniktech.lintrules.android.WrongConstraintLayoutUsageDetector.ISSUE
 internal const val PRIORITY = 10 // Does not matter anyways within Lint.
 
 class IssueRegistry : com.android.tools.lint.client.api.IssueRegistry() {
-  override fun getIssues() =
+  override val issues get() =
       AndroidDetector.getIssues()
       .toList()
       .plus(listOf(

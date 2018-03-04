@@ -6,6 +6,7 @@ import com.android.tools.lint.detector.api.Detector
 import com.android.tools.lint.detector.api.Implementation
 import com.android.tools.lint.detector.api.Issue
 import com.android.tools.lint.detector.api.JavaContext
+import com.android.tools.lint.detector.api.LintFix
 import com.android.tools.lint.detector.api.Scope.JAVA_FILE
 import com.android.tools.lint.detector.api.Scope.TEST_SOURCES
 import com.android.tools.lint.detector.api.Severity.WARNING
@@ -26,26 +27,26 @@ class RxJava2MethodMissingCheckReturnValueDetector : Detector(), Detector.UastSc
   override fun createUastHandler(context: JavaContext) = CheckReturnValueVisitor(context)
 
   class CheckReturnValueVisitor(private val context: JavaContext) : UElementHandler() {
-    override fun visitMethod(method: UMethod) {
-      val returnType = method.returnType
+    override fun visitMethod(node: UMethod) {
+      val returnType = node.returnType
 
       if (returnType != null && isTypeThatRequiresAnnotation(returnType)) {
-        context.evaluator.getAllAnnotations(method, true)
+        context.evaluator.getAllAnnotations(node, true)
             .filter { "io.reactivex.annotations.CheckReturnValue" == it.qualifiedName }
             .forEach { return }
 
-        val modifier = method.modifierList.children.joinToString(separator = " ") { it.text }
+        val modifier = node.modifierList.children.joinToString(separator = " ") { it.text }
 
-        val fix = fix()
+        val fix = LintFix.create()
             .replace()
             .name("Add @CheckReturnValue")
-            .range(context.getLocation(method))
+            .range(context.getLocation(node))
             .shortenNames()
             .text(modifier)
             .with("io.reactivex.annotations.CheckReturnValue " + modifier)
             .build()
 
-        context.report(ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE, method, context.getNameLocation(method), "Method should have @CheckReturnValue annotation.", fix)
+        context.report(ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE, node, context.getNameLocation(node), "Method should have @CheckReturnValue annotation.", fix)
       }
     }
 

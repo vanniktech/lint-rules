@@ -6,6 +6,7 @@ import com.android.tools.lint.detector.api.Detector
 import com.android.tools.lint.detector.api.Implementation
 import com.android.tools.lint.detector.api.Issue
 import com.android.tools.lint.detector.api.JavaContext
+import com.android.tools.lint.detector.api.LintFix
 import com.android.tools.lint.detector.api.Scope.JAVA_FILE
 import com.android.tools.lint.detector.api.Scope.TEST_SOURCES
 import com.android.tools.lint.detector.api.Severity.WARNING
@@ -24,19 +25,19 @@ class WrongTestMethodNameDetector : Detector(), Detector.UastScanner {
   override fun createUastHandler(context: JavaContext) = WrongTestMethodNameVisitor(context)
 
   class WrongTestMethodNameVisitor(private val context: JavaContext) : UElementHandler() {
-    override fun visitMethod(method: UMethod) {
-      context.evaluator.getAllAnnotations(method, true)
+    override fun visitMethod(node: UMethod) {
+      context.evaluator.getAllAnnotations(node, true)
           .mapNotNull { it.qualifiedName?.split(".")?.lastOrNull() }
           .filter { it == "Test" }
-          .filter { method.name.startsWith("test", ignoreCase = true) }
+          .filter { node.name.startsWith("test", ignoreCase = true) }
           .forEach {
-            val fix = fix()
+            val fix = LintFix.create()
                 .name("Remove test prefix")
                 .replace()
-                .text(method.name)
-                .with(method.name.replace("test", "", ignoreCase = true).decapitalize())
+                .text(node.name)
+                .with(node.name.replace("test", "", ignoreCase = true).decapitalize())
                 .build()
-            context.report(ISSUE_WRONG_TEST_METHOD_NAME, method, context.getNameLocation(method), "Test method starts with test.", fix)
+            context.report(ISSUE_WRONG_TEST_METHOD_NAME, node, context.getNameLocation(node), "Test method starts with test.", fix)
           }
     }
   }

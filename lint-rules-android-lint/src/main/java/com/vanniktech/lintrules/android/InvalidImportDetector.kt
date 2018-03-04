@@ -26,10 +26,10 @@ class InvalidImportDetector : Detector(), Detector.UastScanner {
   override fun createUastHandler(context: JavaContext) = InvalidImportHandler(context)
 
   class InvalidImportHandler(private val context: JavaContext) : UElementHandler() {
-    override fun visitImportStatement(importStatement: UImportStatement) {
-      importStatement.importReference?.let { importReference ->
+    override fun visitImportStatement(node: UImportStatement) {
+      node.importReference?.let { importReference ->
         if (DISALLOWED_IMPORTS.any { importReference.asSourceString().contains(it) }) {
-          context.report(ISSUE_INVALID_IMPORT, importStatement, context.getLocation(importReference), "Forbidden import")
+          context.report(ISSUE_INVALID_IMPORT, node, context.getLocation(importReference), "Forbidden import")
         }
       }
     }
