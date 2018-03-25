@@ -25,3 +25,5 @@ internal fun Node.children() = (0 until childNodes.length).map { childNodes.item
 internal fun Node.isTextNode() = nodeType == Node.TEXT_NODE
 
 internal fun Node.isElementNode() = nodeType == Node.ELEMENT_NODE
+
+internal fun Node.attributes() = (0 until attributes.length).map { attributes.item(it) }

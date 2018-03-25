@@ -46,8 +46,7 @@ class RawDimenDetector : ResourceXmlDetector() {
     val isParentConstraintLayout = element.hasParent(CLASS_CONSTRAINT_LAYOUT)
     val isVectorGraphic = "vector" == element.localName || "path" == element.localName
 
-    (0 until element.attributes.length)
-        .map { element.attributes.item(it) }
+    element.attributes()
         .filterNot { it.hasToolsNamespace() }
         .filterNot { isVectorGraphic }
         .filterNot { (hasLayoutWeight || isParentConstraintLayout) && it.nodeValue[0] == '0' && (ATTR_LAYOUT_WIDTH == it.localName || ATTR_LAYOUT_HEIGHT == it.localName) }

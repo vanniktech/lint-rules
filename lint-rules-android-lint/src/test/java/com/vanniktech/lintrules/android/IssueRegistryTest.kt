@@ -50,6 +50,7 @@ class IssueRegistryTest {
         |- **SuperfluousNameSpace** - Re-declaring a namespace is unnecessary and hence can be just removed.
         |- **SuperfluousPaddingDeclaration** - Instead of using start-, end-, bottom- and top paddings, padding can be used.
         |- **UnsupportedLayoutAttribute** - Some layout attributes are not supported. Your app will still compile but it makes no sense to have them around. This can happen when refactoring a LinearLayout to a ScrollView. The orientation is no longer needed and can be removed.
+        |- **UnusedMergeAttributes** - Adding android, app and other attributes to <merge> won't be used by the system for custom views and hence can lead to errors.
         |- **WrongAnnotationOrder** - Annotations should always be applied with the same order to have consistency across the code base.
         |- **WrongConstraintLayoutUsage** - Instead of using left & right constraints start & right should be used.
         |- **WrongLayoutName** - The layout file name should be prefixed with one of the following: activity_, view_, fragment_, dialog_, bottom_sheet_, adapter_item_, divider_, space_. This will improve consistency in your code base as well as enforce a certain structure.

@@ -41,8 +41,7 @@ class RawColorDetector : ResourceXmlDetector() {
   override fun visitElement(context: XmlContext, element: Element) {
     collector.collect(element)
 
-    (0 until element.attributes.length)
-        .map { element.attributes.item(it) }
+    element.attributes()
         .filterNot { TAG_VECTOR == element.localName || ATTR_PATH == element.localName }
         .filterNot { it.hasToolsNamespace() }
         .filter { it.nodeValue.matches("#[a-fA-F\\d]{3,8}".toRegex()) }

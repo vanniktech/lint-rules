@@ -26,8 +26,7 @@ class SuperfluousNameSpaceDetector : LayoutDetector() {
 
   override fun visitElement(context: XmlContext, element: Element) {
     if (element.parentNode.parentNode != null) {
-      (0 until element.attributes.length)
-          .map { element.attributes.item(it) }
+      element.attributes()
           .filter { attribute -> POSSIBLE_URIS.any { attribute.toString().contains(it) } }
           .forEach {
             val fix = fix()
