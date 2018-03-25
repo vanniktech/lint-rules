@@ -54,6 +54,9 @@ codeQualityTools {
   cpd {
     ignoreFailures = true // Follow up separately.
   }
+  findbugs {
+    enabled = false // https://github.com/vanniktech/gradle-code-quality-tools-plugin/pull/126
+  }
 }
 
 allprojects {
