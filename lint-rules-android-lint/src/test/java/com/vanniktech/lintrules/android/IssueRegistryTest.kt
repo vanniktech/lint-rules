@@ -49,6 +49,7 @@ class IssueRegistryTest {
         |- **SuperfluousMarginDeclaration** - Instead of using start-, end-, bottom- and top margins, layout_margin can be used.
         |- **SuperfluousNameSpace** - Re-declaring a namespace is unnecessary and hence can be just removed.
         |- **SuperfluousPaddingDeclaration** - Instead of using start-, end-, bottom- and top paddings, padding can be used.
+        |- **Todo** - Marks todo in any given file since they should be resolved.
         |- **UnsupportedLayoutAttribute** - Some layout attributes are not supported. Your app will still compile but it makes no sense to have them around. This can happen when refactoring a LinearLayout to a ScrollView. The orientation is no longer needed and can be removed.
         |- **UnusedMergeAttributes** - Adding android, app and other attributes to <merge> won't be used by the system for custom views and hence can lead to errors.
         |- **WrongAnnotationOrder** - Annotations should always be applied with the same order to have consistency across the code base.

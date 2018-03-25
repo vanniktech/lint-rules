@@ -9,8 +9,7 @@ class RawColorDetectorTest {
     lint()
         .files(xml("res/layout/layout.xml", """
           |<TextView xmlns:tools="http://schemas.android.com/tools"
-          |    tools:textColor="#fff"/>""".trimMargin())
-            )
+          |    tools:textColor="#fff"/>""".trimMargin()))
         .issues(ISSUE_RAW_COLOR)
         .run()
         .expectClean()
@@ -20,8 +19,7 @@ class RawColorDetectorTest {
     lint()
         .files(xml("res/layout/layout.xml", """
           |<TextView xmlns:app="http://schemas.android.com/apk/res-auto"
-          |    app:someCustomColor="#fff"/>""".trimMargin())
-            )
+          |    app:someCustomColor="#fff"/>""".trimMargin()))
         .issues(ISSUE_RAW_COLOR)
         .run()
         .expect("""
@@ -35,8 +33,7 @@ class RawColorDetectorTest {
     lint()
         .files(xml("res/layout/layout.xml", """
           |<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-          |    android:textColor="#fff"/>""".trimMargin())
-            )
+          |    android:textColor="#fff"/>""".trimMargin()))
         .issues(ISSUE_RAW_COLOR)
         .run()
         .expect("""
@@ -54,8 +51,7 @@ class RawColorDetectorTest {
             xml("res/values/dimens.xml", """
           |<resources>
           |  <color name="white">#fff</color>
-          |</resources>""".trimMargin())
-            )
+          |</resources>""".trimMargin()))
         .issues(ISSUE_RAW_COLOR)
         .run()
         .expect("""
@@ -76,8 +72,7 @@ class RawColorDetectorTest {
     lint()
         .files(xml("res/layout/layout.xml", """
           |<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-          |    android:text="Blub!"/>""".trimMargin())
-            )
+          |    android:text="Blub!"/>""".trimMargin()))
         .issues(ISSUE_RAW_COLOR)
         .run()
         .expectClean()
@@ -89,8 +84,7 @@ class RawColorDetectorTest {
           |<TextView xmlns:android="http://schemas.android.com/apk/res/android"
           |    xmlns:tools="http://schemas.android.com/tools"
           |    android:textColor="#fff"
-          |    tools:ignore="RawColor"/>""".trimMargin())
-            )
+          |    tools:ignore="RawColor"/>""".trimMargin()))
         .issues(ISSUE_RAW_COLOR)
         .run()
         .expectClean()
@@ -104,8 +98,7 @@ class RawColorDetectorTest {
           |    android:shape="rectangle">
           |  <solid android:color="#1aeebf"/>
           |  <size android:height="4dp"/>
-          |</shape>""".trimMargin())
-            )
+          |</shape>""".trimMargin()))
         .issues(ISSUE_RAW_COLOR)
         .run()
         .expect("""
@@ -127,8 +120,7 @@ class RawColorDetectorTest {
           |  <path
           |      android:fillColor="#000000"
           |      android:pathData="M19,13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
-          |</vector>""".trimMargin())
-            )
+          |</vector>""".trimMargin()))
         .issues(ISSUE_RAW_COLOR)
         .run()
         .expectClean()
@@ -143,8 +135,7 @@ class RawColorDetectorTest {
           |    android:viewportHeight="24.0"
           |    android:viewportWidth="24.0"
           |    android:fillColor="#000000"
-          |    android:width="24dp"/>""".trimMargin())
-            )
+          |    android:width="24dp"/>""".trimMargin()))
         .issues(ISSUE_RAW_COLOR)
         .run()
         .expectClean()

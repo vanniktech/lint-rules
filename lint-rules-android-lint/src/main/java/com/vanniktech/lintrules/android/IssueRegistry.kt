@@ -27,6 +27,7 @@ class IssueRegistry : com.android.tools.lint.client.api.IssueRegistry() {
           ISSUE_INVALID_SINGLE_LINE_COMMENT,
           ISSUE_INVALID_STRING,
           ISSUE_DEFAULT_LAYOUT_ATTRIBUTE,
+          ISSUE_TODO,
           ISSUE_WRONG_CONSTRAINT_LAYOUT_USAGE,
           ISSUE_MISSING_XML_HEADER,
           ISSUE_WRONG_TEST_METHOD_NAME,
