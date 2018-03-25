@@ -340,14 +340,14 @@ class AnnotationOrderDetectorTest {
         .expectClean()
   }
 
-  @Test fun providesSingletonNamedNullable() {
+  @Test fun jvmStaticProvidesSingletonNamedNullable() {
     lint()
         .allowCompilationErrors()
         .files(java("""
           |package foo;
           |
           |public class MyTest {
-          |  @Provides @Singleton @Named @Nullable public void myTest() { }
+          |  @JvmStatic @Provides @Singleton @Named @Nullable public void myTest() { }
           |}""".trimMargin()))
         .issues(ISSUE_WRONG_ANNOTATION_ORDER)
         .run()
