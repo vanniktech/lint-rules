@@ -30,6 +30,7 @@ private val ANNOTATION_ORDER = listOf(
     // Annotations.
     "Documented",
     "Retention",
+    "JvmStatic",
     // Dagger / JSR 305.
     "Provides",
     "Singleton",
