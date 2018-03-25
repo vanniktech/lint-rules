@@ -3,7 +3,6 @@ package com.vanniktech.lintrules.android
 import com.android.tools.lint.checks.infrastructure.TestFiles.gradle
 import com.android.tools.lint.checks.infrastructure.TestFiles.java
 import com.android.tools.lint.checks.infrastructure.TestLintTask.lint
-import com.vanniktech.lintrules.android.InvalidSingleLineCommentDetector.ISSUE_INVALID_SINGLE_LINE_COMMENT
 import org.junit.Test
 
 class InvalidSingleLineCommentDetectorTest {
@@ -11,7 +10,7 @@ class InvalidSingleLineCommentDetectorTest {
     lint()
         .files(java("""
           |package foo;
-          |import android.content.res.Resources;
+          |
           |class Example {
           |  public void foo() {
           |    //Something.
@@ -36,7 +35,7 @@ class InvalidSingleLineCommentDetectorTest {
     lint()
         .files(java("""
           |package foo;
-          |import android.content.res.Resources;
+          |
           |class Example {
           |  public void foo() {
           |    // something.
@@ -61,7 +60,7 @@ class InvalidSingleLineCommentDetectorTest {
     lint()
         .files(java("""
           |package foo;
-          |import android.content.res.Resources;
+          |
           |class Example {
           |  public void foo() {
           |    // Something
@@ -86,7 +85,7 @@ class InvalidSingleLineCommentDetectorTest {
     lint()
         .files(java("""
           |package foo;
-          |import android.content.res.Resources;
+          |
           |class Example {
           |  public void foo() {
           |    // Something. Do not modify!
@@ -104,7 +103,7 @@ class InvalidSingleLineCommentDetectorTest {
     lint()
         .files(java("""
           |package foo;
-          |import android.content.res.Resources;
+          |
           |class Example {
           |  public void foo() {
           |    int foo = 5 + 5;// Something.
@@ -129,7 +128,7 @@ class InvalidSingleLineCommentDetectorTest {
     lint()
         .files(java("""
           |package foo;
-          |import android.content.res.Resources;
+          |
           |class Example {
           |  public void foo() {
           |    String link1 = "https://android.com/";
@@ -146,7 +145,7 @@ class InvalidSingleLineCommentDetectorTest {
     lint()
         .files(java("""
           |package foo;
-          |import android.content.res.Resources;
+          |
           |class Example {
           |  public void foo() {
           |    // NOPMD
@@ -161,7 +160,7 @@ class InvalidSingleLineCommentDetectorTest {
     lint()
         .files(java("""
           |package foo;
-          |import android.content.res.Resources;
+          |
           |class Example {
           |  public void foo() {
           |    // 2 plus 4 equals 6.
@@ -176,7 +175,7 @@ class InvalidSingleLineCommentDetectorTest {
     lint()
         .files(java("""
           |package foo;
-          |import android.content.res.Resources;
+          |
           |class Example {
           |  public void foo() {
           |    //noinspection
@@ -191,10 +190,11 @@ class InvalidSingleLineCommentDetectorTest {
     lint()
         .files(java("""
           |package foo;
-          |import android.content.res.Resources;
+          |
           |class Example {
           |  public void foo() {
           |    // http://stackoverflow.com/a/38480079
+          |    // This is expected. http://stackoverflow.com/a/38480079
           |  }
           |}""".trimMargin()))
         .issues(ISSUE_INVALID_SINGLE_LINE_COMMENT)
@@ -206,7 +206,7 @@ class InvalidSingleLineCommentDetectorTest {
     lint()
         .files(java("""
           |package foo;
-          |import android.content.res.Resources;
+          |
           |class Example {
           |  public void foo() {
           |    //
@@ -221,7 +221,7 @@ class InvalidSingleLineCommentDetectorTest {
     lint()
         .files(java("""
           |package foo;
-          |import android.content.res.Resources;
+          |
           |class Example {
           |  public void foo() {
           |    //
@@ -246,7 +246,7 @@ class InvalidSingleLineCommentDetectorTest {
     lint()
         .files(java("""
           |package foo;
-          |import android.content.res.Resources;
+          |
           |class Example {
           |  public void foo() {
           |    // Something.
