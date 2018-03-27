@@ -1,5 +1,6 @@
 package com.vanniktech.lintrules.android
 
+import com.android.tools.lint.detector.api.CURRENT_API
 import com.vanniktech.lintrules.android.MatchingMenuIdDetector.ISSUE_MATCHING_MENU_ID
 import com.vanniktech.lintrules.android.MatchingViewIdDetector.ISSUE_MATCHING_VIEW_ID
 import com.vanniktech.lintrules.android.ShouldUseStaticImportDetector.ISSUE_SHOULD_USE_STATIC_IMPORT
@@ -10,6 +11,8 @@ import com.vanniktech.lintrules.android.WrongConstraintLayoutUsageDetector.ISSUE
 internal const val PRIORITY = 10 // Does not matter anyways within Lint.
 
 class IssueRegistry : com.android.tools.lint.client.api.IssueRegistry() {
+  override val api = CURRENT_API
+
   override val issues get() =
       AndroidDetector.getIssues()
       .toList()
