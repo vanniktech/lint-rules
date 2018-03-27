@@ -50,14 +50,15 @@ class RxJava2MethodMissingCheckReturnValueDetector : Detector(), Detector.UastSc
       }
     }
 
+    @Suppress("Detekt.UnnecessaryParentheses") // https://github.com/arturbosch/detekt/issues/836
     private fun isTypeThatRequiresAnnotation(psiType: PsiType): Boolean {
       val canonicalText = psiType.canonicalText
           .replace("<[\\w.]*>".toRegex(), "") // We need to remove the generics.
 
-      return (canonicalText.matches("io\\.reactivex\\.[\\w]+".toRegex())
-          || "io.reactivex.disposables.Disposable" == canonicalText
-          || "io.reactivex.observers.TestObserver" == canonicalText
-          || "io.reactivex.subscribers.TestSubscriber" == canonicalText)
+      return (canonicalText.matches("io\\.reactivex\\.[\\w]+".toRegex()) ||
+          "io.reactivex.disposables.Disposable" == canonicalText ||
+          "io.reactivex.observers.TestObserver" == canonicalText ||
+          "io.reactivex.subscribers.TestSubscriber" == canonicalText)
     }
   }
 }
