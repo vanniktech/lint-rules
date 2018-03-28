@@ -1,6 +1,7 @@
 package com.vanniktech.lintrules.android
 
 import com.android.tools.lint.checks.infrastructure.TestFiles.java
+import com.android.tools.lint.checks.infrastructure.TestFiles.kt
 import com.android.tools.lint.checks.infrastructure.TestLintTask.lint
 import org.junit.Test
 
@@ -94,5 +95,20 @@ class NamingPatternDetectorTest {
           |class XMLHTTPRequest {
           |      ~~~~~~~~~~~~~~
           |0 errors, 1 warnings""".trimMargin())
+  }
+
+  @Test fun ignoreKotlinCreator() {
+    lint()
+        .files(kt("""
+          |package foo;
+          |
+          |class Test {
+          |  companion object {
+          |    val CREATOR = Runnable { }
+          |  }
+          |}""".trimMargin()))
+        .issues(ISSUE_NAMING_PATTERN)
+        .run()
+        .expectClean()
   }
 }
