@@ -1,6 +1,7 @@
 package com.vanniktech.lintrules.android
 
 import com.android.tools.lint.checks.infrastructure.TestFiles.java
+import com.android.tools.lint.checks.infrastructure.TestFiles.kt
 import com.android.tools.lint.checks.infrastructure.TestLintTask.lint
 import org.junit.Test
 
@@ -306,6 +307,20 @@ class AnnotationOrderDetectorTest {
           |  @Custom @Inject public void myTest() { }
           |                              ~~~~~~
           |0 errors, 1 warnings""".trimMargin())
+  }
+
+  @Test fun checkReturnValueBeforeAuthenticatedBeforePost() {
+    lint()
+        .allowCompilationErrors()
+        .files(kt("""
+          |package foo
+          |
+          |interface MyTest {
+          |  @CheckReturnValue @Authenticated @Post fun myTest()
+          |}""".trimMargin()))
+        .issues(ISSUE_WRONG_ANNOTATION_ORDER)
+        .run()
+        .expectClean()
   }
 
   @Test fun jsonBeforeJsonQualifier() {
