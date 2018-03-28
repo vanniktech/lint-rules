@@ -47,7 +47,7 @@ class NamingPatternDetector : Detector(), Detector.UastScanner {
     }
 
     private fun process(scope: UElement, declaration: PsiNamedElement) {
-      if (declaration.name?.isDefinedCamelCase() == false) {
+      if (declaration.name?.isDefinedCamelCase() == false && "getCREATOR" != declaration.name) {
         context.report(ISSUE_NAMING_PATTERN, scope, context.getNameLocation(scope), "Not named in defined camel case.")
       }
     }
