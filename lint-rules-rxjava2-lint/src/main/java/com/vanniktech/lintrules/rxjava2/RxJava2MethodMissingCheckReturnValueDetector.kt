@@ -11,7 +11,9 @@ import com.android.tools.lint.detector.api.Scope.JAVA_FILE
 import com.android.tools.lint.detector.api.Scope.TEST_SOURCES
 import com.android.tools.lint.detector.api.Severity.WARNING
 import com.intellij.psi.PsiType
+import org.jetbrains.kotlin.psi.KtProperty
 import org.jetbrains.uast.UMethod
+import org.jetbrains.uast.kotlin.declarations.KotlinUMethod
 import java.util.EnumSet
 
 @Suppress("Detekt.VariableMaxLength") val ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE = Issue.create(
@@ -29,8 +31,9 @@ class RxJava2MethodMissingCheckReturnValueDetector : Detector(), Detector.UastSc
   class CheckReturnValueVisitor(private val context: JavaContext) : UElementHandler() {
     override fun visitMethod(node: UMethod) {
       val returnType = node.returnType
+      val isPropertyFunction = node is KotlinUMethod && node.sourcePsi is KtProperty
 
-      if (returnType != null && isTypeThatRequiresAnnotation(returnType)) {
+      if (returnType != null && isTypeThatRequiresAnnotation(returnType) && !isPropertyFunction) {
         context.evaluator.getAllAnnotations(node, true)
             .filter { "io.reactivex.annotations.CheckReturnValue" == it.qualifiedName }
             .forEach { return }

@@ -1,6 +1,7 @@
 package com.vanniktech.lintrules.rxjava2
 
 import com.android.tools.lint.checks.infrastructure.TestFiles.java
+import com.android.tools.lint.checks.infrastructure.TestFiles.kt
 import com.android.tools.lint.checks.infrastructure.TestLintTask.lint
 import org.junit.Test
 
@@ -359,6 +360,33 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
           |""".trimMargin())
   }
 
+  @Test fun kotlinMethodReturningTestSubscriberMissingCheckReturnValue() {
+    lint()
+        .files(rxJava2(), kt("""
+            |package foo
+            |
+            |import io.reactivex.Scheduler
+            |
+            |class Example {
+            |  fun foo(): Scheduler? {
+            |    return null
+            |  }
+            |}""".trimMargin()))
+        .issues(ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE)
+        .run()
+        .expect("""
+            |src/foo/Example.kt:6: Warning: Method should have @CheckReturnValue annotation. [RxJava2MethodMissingCheckReturnValue]
+            |  fun foo(): Scheduler? {
+            |      ~~~
+            |0 errors, 1 warnings""".trimMargin())
+        .expectFixDiffs("""
+            |Fix for src/foo/Example.kt line 5: Add @CheckReturnValue:
+            |@@ -6 +6
+            |-   fun foo(): Scheduler? {
+            |+   io.reactivex.annotations.CheckReturnValue fun foo(): Scheduler? {
+            |""".trimMargin())
+  }
+
   @Test fun methodReturningTestSubscriberHavingCheckReturnValue() {
     lint()
         .files(rxJava2(), java("""
@@ -371,6 +399,21 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
           |  @CheckReturnValue public TestSubscriber foo() {
           |    return null;
           |  }
+          |}""".trimMargin()))
+        .issues(ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE)
+        .run()
+        .expectClean()
+  }
+
+  @Test fun lateInitKotlinSchedulerVariableIsIgnored() {
+    lint()
+        .files(rxJava2(), kt("""
+          |package foo
+          |
+          |import io.reactivex.Scheduler
+          |
+          |class Example {
+          |  lateinit var scheduler: Scheduler
           |}""".trimMargin()))
         .issues(ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE)
         .run()
