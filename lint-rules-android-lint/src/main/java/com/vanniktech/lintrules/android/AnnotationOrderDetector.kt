@@ -70,6 +70,8 @@ private val ANNOTATION_ORDER = listOf(
     // Json.
     "Json",
     "JsonQualifier",
+    // Retroauth.
+    "Authenticated",
     // Retrofit 2.
     "GET",
     "POST",
