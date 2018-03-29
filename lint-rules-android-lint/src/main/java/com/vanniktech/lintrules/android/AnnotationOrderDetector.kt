@@ -88,9 +88,9 @@ private val ANNOTATION_ORDER = listOf(
     "BinderThread",
     "AnyThread",
     // Other things from support annotations.
+    "RestrictTo",
     "Keep",
     "CallSuper",
-    "RestrictTo",
     "TargetApi",
     "SdkConstant",
     "IntDef",
@@ -167,7 +167,10 @@ class AnnotationOrderDetector : Detector(), UastScanner {
     @Suppress("Detekt.LabeledExpression", "Detekt.ReturnCount", "Detekt.OptionalReturnKeyword") private fun processAnnotations(element: UElement, modifierListOwner: PsiModifierListOwner) {
       var size = 0
 
-      val annotations = context.evaluator.getAllAnnotations(modifierListOwner, false).mapNotNull { it.qualifiedName?.split(".")?.lastOrNull() }
+      val annotations = context.evaluator.getAllAnnotations(modifierListOwner, false)
+          .mapNotNull { it.qualifiedName?.split(".")?.lastOrNull() }
+          .distinct()
+
       val numberOfRecognizedAnnotations = annotations.count { ANNOTATION_ORDER.contains(it) }
       val isInCorrectOrder = ANNOTATION_ORDER.contains(annotations.firstOrNull()) && annotations
           .all {
