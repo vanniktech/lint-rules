@@ -1,8 +1,8 @@
 package com.vanniktech.lintrules.android
 
 import com.android.tools.lint.checks.infrastructure.TestFiles.java
+import com.android.tools.lint.checks.infrastructure.TestFiles.kt
 import com.android.tools.lint.checks.infrastructure.TestLintTask.lint
-import com.vanniktech.lintrules.android.ShouldUseStaticImportDetector.ISSUE_SHOULD_USE_STATIC_IMPORT
 import org.junit.Test
 
 class ShouldUseStaticImportDetectorTest {
@@ -106,6 +106,21 @@ class ShouldUseStaticImportDetectorTest {
           |class Example {
           |  public void foo() {
           |    CANADA.getCountry();
+          |  }
+          |}""".trimMargin()))
+        .issues(ISSUE_SHOULD_USE_STATIC_IMPORT)
+        .run()
+        .expectClean()
+  }
+
+  @Test fun localeCanadaStaticallyImportedInKotlin() {
+    lint()
+        .files(kt("""
+          |package foo
+          |import java.util.Locale.CANADA
+          |class Example {
+          |  fun foo() {
+          |    CANADA.country
           |  }
           |}""".trimMargin()))
         .issues(ISSUE_SHOULD_USE_STATIC_IMPORT)
