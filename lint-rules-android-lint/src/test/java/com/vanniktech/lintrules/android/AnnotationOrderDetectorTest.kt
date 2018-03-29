@@ -441,7 +441,7 @@ class AnnotationOrderDetectorTest {
           |0 errors, 1 warnings""".trimMargin())
   }
 
-  @Test fun keepBeforeRestrictToBeforeTargetApi() {
+  @Test fun restrictToBeforeKeepBeforeTargetApi() {
     lint()
         .allowCompilationErrors()
         .files(java("""
@@ -453,7 +453,7 @@ class AnnotationOrderDetectorTest {
         .issues(ISSUE_WRONG_ANNOTATION_ORDER)
         .run()
         .expect("""
-          |src/foo/MyTest.java:4: Warning: Annotations are in wrong order. Should be @Keep @RestrictTo @TargetApi [WrongAnnotationOrder]
+          |src/foo/MyTest.java:4: Warning: Annotations are in wrong order. Should be @RestrictTo @Keep @TargetApi [WrongAnnotationOrder]
           |  @TargetApi @RestrictTo @Keep public void myTest() { }
           |                                           ~~~~~~
           |0 errors, 1 warnings""".trimMargin())
@@ -477,6 +477,32 @@ class AnnotationOrderDetectorTest {
           |0 errors, 1 warnings""".trimMargin())
   }
 
+  @Test fun kotlinAnnotationClass() {
+    lint()
+        .allowCompilationErrors()
+        .files(kt("""
+          |package foo
+          |
+          |annotation class Foo""".trimMargin()))
+        .issues(ISSUE_WRONG_ANNOTATION_ORDER)
+        .run()
+        .expectClean()
+  }
+
+  @Test fun kotlinAnnotationClassWithRetention() {
+    lint()
+        .allowCompilationErrors()
+        .files(kt("""
+          |package foo
+          |
+          |import kotlin.annotation.AnnotationRetention.RUNTIME
+          |
+          |@Retention(RUNTIME) annotation class Foo""".trimMargin()))
+        .issues(ISSUE_WRONG_ANNOTATION_ORDER)
+        .run()
+        .expectClean()
+  }
+
   @Test fun bindsBeforeIntoMapBeforeActivityKeyNegativeCase() {
     lint()
         .allowCompilationErrors()
@@ -485,6 +511,20 @@ class AnnotationOrderDetectorTest {
           |
           |public class MyTest {
           |  @Binds @IntoMap @ActivityKey public void myTest() { }
+          |}""".trimMargin()))
+        .issues(ISSUE_WRONG_ANNOTATION_ORDER)
+        .run()
+        .expectClean()
+  }
+
+  @Test fun restrictToBeforeKeepNegativeCase() {
+    lint()
+        .allowCompilationErrors()
+        .files(java("""
+          |package foo;
+          |
+          |public class MyTest {
+          |  @RestrictTo @Keep public void myTest() { }
           |}""".trimMargin()))
         .issues(ISSUE_WRONG_ANNOTATION_ORDER)
         .run()
