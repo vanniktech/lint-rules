@@ -30,4 +30,4 @@ class WrongLayoutNameDetector : LayoutDetector() {
   }
 }
 
-fun Project.resourcePrefix() = if (isGradleProject) LintUtils.computeResourcePrefix(gradleProjectModel) else ""
+fun Project.resourcePrefix() = if (isGradleProject) LintUtils.computeResourcePrefix(gradleProjectModel).orEmpty() else ""
