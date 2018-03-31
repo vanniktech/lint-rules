@@ -36,6 +36,7 @@ class IssueRegistryTest {
         |- **InvalidSingleLineComment** - Single line comments should always be sentences. They're part of the code and hence they deserve as much detail and respect as code.
         |- **InvalidString** - A translation string is invalid if it contains new lines instead of the escaped \
         | or if it contains trailing whitespace.
+        |- **LayoutFileNameMatchesClass** - Layout file names should always match the name of the class. FooActivity should have a layout file named activity_foo hence.
         |- **MatchingMenuId** - When the layout file is named menu_home all of the containing ids should be prefixed with menuHome to avoid ambiguity between different menu files across different menu items.
         |- **MatchingViewId** - When the layout file is named activity_home all of the containing ids should be prefixed with activityHome to avoid ambiguity between different layout files across different views.
         |- **MissingXmlHeader** - An xml file should always have the xml header to declare that it is an xml file despite the file ending.

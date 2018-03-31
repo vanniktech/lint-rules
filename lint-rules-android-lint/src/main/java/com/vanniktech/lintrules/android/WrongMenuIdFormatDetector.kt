@@ -30,7 +30,7 @@ class WrongMenuIdFormatDetector : ResourceXmlDetector() {
       val fix = fix().replace()
           .name("Convert to lowerCamelCase")
           .text(attribute.value)
-          .with(attribute.value.idToSnakeCase())
+          .with(attribute.value.idToLowerCamelCase())
           .build()
 
       context.report(ISSUE_WRONG_MENU_ID_FORMAT, attribute, context.getValueLocation(attribute), "Id is not in lowerCamelCaseFormat", fix)

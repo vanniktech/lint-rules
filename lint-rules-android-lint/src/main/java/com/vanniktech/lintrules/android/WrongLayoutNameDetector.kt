@@ -22,12 +22,12 @@ val ISSUE_WRONG_LAYOUT_NAME = Issue.create("WrongLayoutName",
 class WrongLayoutNameDetector : LayoutDetector() {
   override fun visitDocument(context: XmlContext, document: Document) {
     // TODO also find a way to test the resource prefixes here.
-    val modified = ALLOWED_PREFIXES.map { context.project.resourcePrefix().orEmpty() + it }
+    val modified = ALLOWED_PREFIXES.map { context.project.resourcePrefix() + it }
 
     if (modified.none { context.file.name.startsWith(it) }) {
       context.report(ISSUE_WRONG_LAYOUT_NAME, document, context.getLocation(document), "Layout does not start with one of the following prefixes: ${modified.joinToString()}")
     }
   }
-
-  private fun Project.resourcePrefix() = if (isGradleProject) LintUtils.computeResourcePrefix(gradleProjectModel) else null
 }
+
+fun Project.resourcePrefix() = if (isGradleProject) LintUtils.computeResourcePrefix(gradleProjectModel) else ""
