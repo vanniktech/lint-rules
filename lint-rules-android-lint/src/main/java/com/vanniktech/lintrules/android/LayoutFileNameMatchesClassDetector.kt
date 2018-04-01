@@ -27,17 +27,21 @@ class LayoutFileNameMatchesClassDetector : Detector(), UastScanner {
     super.visitMethod(context, node, method)
 
     val resourcePrefix = context.project.resourcePrefix()
+    val firstParameter = node.valueArguments.getOrNull(0)
 
-    val layoutFileName = node.valueArguments
-        .getOrNull(0)
+    val isNoLayoutReference = firstParameter?.asSourceString()?.startsWith("R.layout") == false
+
+    val layoutFileName = firstParameter
         ?.tryResolveNamed()
         ?.name
         ?.replace(resourcePrefix, "")
-        ?: return
 
     val className = node.getContainingUClass()
         ?.name
-        ?: return
+
+    if (isNoLayoutReference || layoutFileName == null || className == null) {
+      return
+    }
 
     val expectedLayoutFileName = className.toSnakeCase()
         .run {
