@@ -24,6 +24,21 @@ class LayoutFileNameMatchesClassDetectorTest {
       |  public void setContentView(int viewId) { }
       |}""".trimMargin())
 
+  @Test fun nonRUsage() {
+    lint()
+        .files(r, activity, java("""
+          |package foo;
+          |
+          |class FooActivity extends Activity {
+          |  void foo(int id) {
+          |    setContentView(id);
+          |  }
+          |}""".trimMargin()))
+        .issues(ISSUE_LAYOUT_FILE_NAME_MATCHES_CLASS)
+        .run()
+        .expectClean()
+  }
+
   @Test fun fooActivityUsesActivityFoo() {
     lint()
         .files(r, activity, java("""
