@@ -34,7 +34,6 @@ class LayoutFileNameMatchesClassDetector : Detector(), UastScanner {
     val layoutFileName = firstParameter
         ?.tryResolveNamed()
         ?.name
-        ?.replace(resourcePrefix, "")
 
     val className = node.getContainingUClass()
         ?.name
