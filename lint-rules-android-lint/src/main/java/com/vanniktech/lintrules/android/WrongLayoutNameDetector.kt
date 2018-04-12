@@ -21,7 +21,6 @@ val ISSUE_WRONG_LAYOUT_NAME = Issue.create("WrongLayoutName",
 
 class WrongLayoutNameDetector : LayoutDetector() {
   override fun visitDocument(context: XmlContext, document: Document) {
-    // TODO also find a way to test the resource prefixes here.
     val modified = ALLOWED_PREFIXES.map { context.project.resourcePrefix() + it }
 
     if (modified.none { context.file.name.startsWith(it) }) {
