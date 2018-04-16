@@ -15,6 +15,7 @@ class LayoutFileNameMatchesClassDetectorTest {
           public static final int activity_foo = 2;
           public static final int activity_game_times = 3;
           public static final int unit_test_activity_foo = 3;
+          public static final int foo2bar_activity_rider = 4;
         }
       }""").indented()
 
@@ -55,6 +56,21 @@ class LayoutFileNameMatchesClassDetectorTest {
         .expectClean()
   }
 
+  @Test fun foo2BarRiderActivityUsesActivitySomethingWithResourcePrefix() {
+    lint()
+        .files(r, activity, kt("""
+          package foo
+
+          class Foo2BarRiderActivity : Activity() {
+            fun foo() {
+              setContentView(R.layout.foo2bar_activity_rider)
+            }
+          }""").indented(), resourcePrefix("foo2bar_"))
+        .issues(ISSUE_LAYOUT_FILE_NAME_MATCHES_CLASS)
+        .run()
+        .expectClean()
+  }
+
   @Test fun fooActivityUsesActivityFooWithResourcePrefix() {
     lint()
         .files(r, activity, java("""
@@ -73,7 +89,7 @@ class LayoutFileNameMatchesClassDetectorTest {
   @Test fun gameTimesActivityUsesActivityGameTimes() {
     lint()
         .files(r, activity, kt("""
-          package foo;
+          package foo
 
           class GameTimesActivity : Activity() {
             fun foo() {
