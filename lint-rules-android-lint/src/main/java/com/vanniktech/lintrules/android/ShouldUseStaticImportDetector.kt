@@ -1,6 +1,7 @@
 package com.vanniktech.lintrules.android
 
 import com.android.tools.lint.detector.api.Category.Companion.CORRECTNESS
+import com.android.tools.lint.detector.api.Context
 import com.android.tools.lint.detector.api.Detector
 import com.android.tools.lint.detector.api.Implementation
 import com.android.tools.lint.detector.api.Issue
@@ -12,6 +13,7 @@ import com.android.tools.lint.detector.api.UastLintUtils
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiMethod
 import org.jetbrains.uast.UCallExpression
+import org.jetbrains.uast.UQualifiedReferenceExpression
 import org.jetbrains.uast.UReferenceExpression
 import org.jetbrains.uast.getContainingUFile
 import java.util.EnumSet
@@ -203,22 +205,33 @@ class ShouldUseStaticImportDetector : Detector(), Detector.UastScanner {
     }
   }
 
+  // For some reason visitReference may be called multiple times with the same parameters.
+  private val processed = mutableSetOf<UReferenceExpression>()
+
   override fun getApplicableReferenceNames() = referencesToStaticallyImport.keys.toList()
 
   override fun visitReference(context: JavaContext, reference: UReferenceExpression, referenced: PsiElement) {
-    val name = reference.asRenderString()
-    val uFile = reference.getContainingUFile() ?: return
+    if (processed.add(reference)) {
+      val name = reference.asRenderString()
+      val uFile = reference.getContainingUFile() ?: return
 
-    for (uImportStatement in uFile.imports) {
-      if (uImportStatement.asSourceString().contains(name)) {
-        return // Static import and we don't need to look further.
+      for (uImportStatement in uFile.imports) {
+        if (uImportStatement.asSourceString().contains(name)) {
+          return // Static import and we don't need to look further.
+        }
+      }
+
+      val isQualified = reference.uastParent is UQualifiedReferenceExpression
+      val matches = UastLintUtils.getQualifiedName(referenced) == referencesToStaticallyImport[name] + "." + name
+
+      if (matches && isQualified) {
+        context.report(ISSUE_SHOULD_USE_STATIC_IMPORT, reference, context.getLocation(reference), "Should statically import $name")
       }
     }
+  }
 
-    val matches = UastLintUtils.getQualifiedName(referenced) == referencesToStaticallyImport[name] + "." + name
-
-    if (matches) {
-      context.report(ISSUE_SHOULD_USE_STATIC_IMPORT, reference, context.getLocation(reference), "Should statically import $name")
-    }
+  override fun afterCheckFile(context: Context) {
+    super.afterCheckFile(context)
+    processed.clear()
   }
 }
