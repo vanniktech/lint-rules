@@ -7,7 +7,7 @@ A set of very opinionated lint rules.
 
 ```groovy
 compile 'com.vanniktech:lint-rules-android:0.7.1'
-compile 'com.vanniktech:lint-rules-android:0.7.0-SNAPSHOT'
+compile 'com.vanniktech:lint-rules-android:0.8.0-SNAPSHOT'
 ```
 
 - **ConstraintLayoutToolsEditorAttribute** - The tools:layout_editor xml properties are only used for previewing and won't be used in your APK hence they're unnecessary and just add overhead.
@@ -44,7 +44,7 @@ compile 'com.vanniktech:lint-rules-android:0.7.0-SNAPSHOT'
 
 ```groovy
 compile 'com.vanniktech:lint-rules-rxjava2:0.7.1'
-compile 'com.vanniktech:lint-rules-rxjava2:0.7.0-SNAPSHOT
+compile 'com.vanniktech:lint-rules-rxjava2:0.8.0-SNAPSHOT
 ```
 
 - **RxJava2DefaultScheduler** - Calling this method will rely on a default scheduler. This is not necessary the best default. Being explicit and taking the overload for passing one is preferred.
