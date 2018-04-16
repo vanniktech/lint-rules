@@ -1,7 +1,35 @@
 # Change Log
 
-Version 0.7.0 *(In development)*
---------------------------------
+Version 0.7.1 *(2018-04-16)*
+----------------------------
+
+This release is matching with Android Studio Gradle Plugin 3.1.1 & Lint 26.1.1.
+
+- LayoutFileNameMatchesClassDetector: Better handle resource prefixes with numbers. [\#197](https://github.com/vanniktech/lint-rules/pull/197) ([vanniktech](https://github.com/vanniktech))
+- Update Lint to 26.1.1 [\#196](https://github.com/vanniktech/lint-rules/pull/196) ([vanniktech](https://github.com/vanniktech))
+- ShouldUseStaticImportDetector: Fix false positive when using constants from super class. [\#195](https://github.com/vanniktech/lint-rules/pull/195) ([vanniktech](https://github.com/vanniktech))
+- LayoutFileNameMatchesClassDetector: Fix bug with resource prefix and add tests. [\#194](https://github.com/vanniktech/lint-rules/pull/194) ([vanniktech](https://github.com/vanniktech))
+- WrongLayoutNameDetector: Test resource prefix. [\#193](https://github.com/vanniktech/lint-rules/pull/193) ([vanniktech](https://github.com/vanniktech))
+- LayoutFileNameMatchesClassDetector: Only consider R.layout.\* parameters. [\#191](https://github.com/vanniktech/lint-rules/pull/191) ([vanniktech](https://github.com/vanniktech))
+- Fix regression in resourcePrefix extension function. [\#190](https://github.com/vanniktech/lint-rules/pull/190) ([vanniktech](https://github.com/vanniktech))
+- Add LayoutFileNameMatchesClassDetector. [\#189](https://github.com/vanniktech/lint-rules/pull/189) ([vanniktech](https://github.com/vanniktech))
+- Remove unnecessary parentheses. [\#187](https://github.com/vanniktech/lint-rules/pull/187) ([vanniktech](https://github.com/vanniktech))
+- Nuke badges in README. [\#186](https://github.com/vanniktech/lint-rules/pull/186) ([vanniktech](https://github.com/vanniktech))
+- ShouldUseStaticImportDetector: Rewrite in Kotlin and verify simple test case works in Kotlin too. [\#185](https://github.com/vanniktech/lint-rules/pull/185) ([vanniktech](https://github.com/vanniktech))
+- AnnotationOrderDetector: Change order of RestrictTo and fix Kotlin's annotation class. [\#184](https://github.com/vanniktech/lint-rules/pull/184) ([vanniktech](https://github.com/vanniktech))
+- RxJava2MissingCompositeDisposableClearDetector: Fix false positive with Kotlin. [\#183](https://github.com/vanniktech/lint-rules/pull/183) ([vanniktech](https://github.com/vanniktech))
+- RxJava2MethodMissingCheckReturnValueDetector: Don't check on Kotlin properties. [\#182](https://github.com/vanniktech/lint-rules/pull/182) ([vanniktech](https://github.com/vanniktech))
+- AnnotationOrderDetector: Place @Authenticated from Retroauth. [\#181](https://github.com/vanniktech/lint-rules/pull/181) ([vanniktech](https://github.com/vanniktech))
+- NamingPattern: Exclude CREATOR since it's required by the Android Framework. [\#180](https://github.com/vanniktech/lint-rules/pull/180) ([vanniktech](https://github.com/vanniktech))
+- Update everything to latest. [\#179](https://github.com/vanniktech/lint-rules/pull/179) ([vanniktech](https://github.com/vanniktech))
+- AnnotationOrderDetector: Add proper order for @JvmStatic. [\#178](https://github.com/vanniktech/lint-rules/pull/178) ([vanniktech](https://github.com/vanniktech))
+- Add TodoDetector. [\#177](https://github.com/vanniktech/lint-rules/pull/177) ([vanniktech](https://github.com/vanniktech))
+- InvalidSingleLineCommentDetector: Also handle Links at the end of a comment properly. [\#176](https://github.com/vanniktech/lint-rules/pull/176) ([vanniktech](https://github.com/vanniktech))
+- Add UnusedMergeAttributesDetector. [\#175](https://github.com/vanniktech/lint-rules/pull/175) ([vanniktech](https://github.com/vanniktech))
+- Update ktlint to 0.19.0 [\#171](https://github.com/vanniktech/lint-rules/pull/171) ([vanniktech](https://github.com/vanniktech))
+- Tweak Travis configuration. [\#170](https://github.com/vanniktech/lint-rules/pull/170) ([vanniktech](https://github.com/vanniktech))
+- Update Android Gradle Plugin to 3.1.0-rc01 [\#169](https://github.com/vanniktech/lint-rules/pull/169) ([vanniktech](https://github.com/vanniktech))
+- Update Lint checks for 26.1.0-beta4 [\#168](https://github.com/vanniktech/lint-rules/pull/168) ([vanniktech](https://github.com/vanniktech))
 
 Version 0.6.0 *(2018-02-04)*
 ---------------------------
