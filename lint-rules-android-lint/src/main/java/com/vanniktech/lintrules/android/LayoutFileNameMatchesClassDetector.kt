@@ -43,6 +43,7 @@ class LayoutFileNameMatchesClassDetector : Detector(), UastScanner {
     }
 
     val expectedLayoutFileName = className.toSnakeCase()
+        .replace(resourcePrefix, "")
         .run {
           val array = split("_")
           resourcePrefix + array.last() + "_" + array.subList(0, array.size - 1).joinToString(separator = "_")

@@ -3,7 +3,6 @@
 package com.vanniktech.lintrules.android
 
 import com.android.SdkConstants.TOOLS_URI
-import com.google.common.base.CaseFormat
 import com.vanniktech.lintrules.android.MatchingViewIdDetector.toLowerCamelCase
 import org.w3c.dom.Attr
 import org.w3c.dom.Node
@@ -23,8 +22,14 @@ internal fun String.idToLowerCamelCase(): String {
   return "${parts[0]}/${toLowerCamelCase(parts[1])}"
 }
 
-internal fun String.toSnakeCase(): String =
-    CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, this)
+internal fun String.toSnakeCase() = toCharArray().fold("", { accumulator, current ->
+  val prefix = when {
+    current.isUpperCase() && accumulator.lastOrNull()?.isDigit() == false -> "_"
+    else -> ""
+  }
+
+  accumulator + prefix + current.toLowerCase()
+})
 
 internal fun Node.children() = (0 until childNodes.length).map { childNodes.item(it) }
 
