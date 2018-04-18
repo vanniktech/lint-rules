@@ -10,6 +10,7 @@ import com.android.tools.lint.detector.api.LintFix
 import com.android.tools.lint.detector.api.Scope.JAVA_FILE
 import com.android.tools.lint.detector.api.Scope.TEST_SOURCES
 import com.android.tools.lint.detector.api.Severity.WARNING
+import org.jetbrains.uast.UAnnotated
 import org.jetbrains.uast.UMethod
 import java.util.EnumSet
 
@@ -26,7 +27,7 @@ class WrongTestMethodNameDetector : Detector(), Detector.UastScanner {
 
   class WrongTestMethodNameVisitor(private val context: JavaContext) : UElementHandler() {
     override fun visitMethod(node: UMethod) {
-      context.evaluator.getAllAnnotations(node, true)
+      context.evaluator.getAllAnnotations(node as UAnnotated, true)
           .mapNotNull { it.qualifiedName?.split(".")?.lastOrNull() }
           .filter { it == "Test" }
           .filter { node.name.startsWith("test", ignoreCase = true) }

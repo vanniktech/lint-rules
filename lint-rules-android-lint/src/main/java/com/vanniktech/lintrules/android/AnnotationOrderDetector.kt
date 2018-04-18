@@ -153,7 +153,7 @@ class AnnotationOrderDetector : Detector(), UastScanner {
   class AnnotationOrderVisitor(private val context: JavaContext) : UElementHandler() {
     override fun visitVariable(node: UVariable) {
       // Workaround https://groups.google.com/forum/#!topic/lint-dev/BaRimyf40tI
-      processAnnotations(node, node.psi)
+      processAnnotations(node, node)
     }
 
     override fun visitMethod(node: UMethod) {

@@ -10,6 +10,7 @@ import com.android.tools.lint.detector.api.Scope.JAVA_FILE
 import com.android.tools.lint.detector.api.Scope.TEST_SOURCES
 import com.android.tools.lint.detector.api.Severity.WARNING
 import com.intellij.psi.PsiMethod
+import org.jetbrains.uast.UAnnotated
 import org.jetbrains.uast.UCallExpression
 import org.jetbrains.uast.UElement
 import org.jetbrains.uast.UMethod
@@ -45,7 +46,7 @@ class RxJava2SchedulersFactoryCallDetector : Detector(), UastScanner {
 
   private fun UElement.isCalledFromProvidesMethod(context: JavaContext): Boolean {
     if (this is UMethod) {
-      return context.evaluator.getAllAnnotations(psi, false)
+      return context.evaluator.getAllAnnotations(this as UAnnotated, false)
           .any { "dagger.Provides" == it.qualifiedName }
     }
 
