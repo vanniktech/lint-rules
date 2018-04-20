@@ -12,6 +12,7 @@ import com.android.tools.lint.detector.api.Scope.TEST_SOURCES
 import com.android.tools.lint.detector.api.Severity.WARNING
 import com.intellij.psi.PsiType
 import org.jetbrains.kotlin.psi.KtProperty
+import org.jetbrains.uast.UAnnotated
 import org.jetbrains.uast.UMethod
 import org.jetbrains.uast.kotlin.declarations.KotlinUMethod
 import java.util.EnumSet
@@ -34,7 +35,7 @@ class RxJava2MethodMissingCheckReturnValueDetector : Detector(), Detector.UastSc
       val isPropertyFunction = node is KotlinUMethod && node.sourcePsi is KtProperty
 
       if (returnType != null && isTypeThatRequiresAnnotation(returnType) && !isPropertyFunction) {
-        context.evaluator.getAllAnnotations(node, true)
+        context.evaluator.getAllAnnotations(node as UAnnotated, true)
             .filter { "io.reactivex.annotations.CheckReturnValue" == it.qualifiedName }
             .forEach { return }
 
@@ -46,7 +47,7 @@ class RxJava2MethodMissingCheckReturnValueDetector : Detector(), Detector.UastSc
             .range(context.getLocation(node))
             .shortenNames()
             .text(modifier)
-            .with("io.reactivex.annotations.CheckReturnValue " + modifier)
+            .with("io.reactivex.annotations.CheckReturnValue $modifier")
             .build()
 
         context.report(ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE, node, context.getNameLocation(node), "Method should have @CheckReturnValue annotation.", fix)

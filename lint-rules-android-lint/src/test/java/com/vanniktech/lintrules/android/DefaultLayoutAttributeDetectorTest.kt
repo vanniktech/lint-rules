@@ -48,7 +48,7 @@ class DefaultLayoutAttributeDetectorTest {
         .files(xml("res/layout/ids.xml", """
           |<TextView
           |    xmlns:android="http://schemas.android.com/apk/res/android"
-          |    xmlns:tools="http://schemas.android.com/tools
+          |    xmlns:tools="http://schemas.android.com/tools"
           |    android:layout_width="wrap_content"
           |    android:layout_height="wrap_content"
           |    android:textStyle="normal"

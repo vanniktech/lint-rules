@@ -43,7 +43,7 @@ class RawDimenDetector : ResourceXmlDetector() {
     collector.collect(element)
 
     val hasLayoutWeight = element.attributes.getNamedItem("android:layout_weight") != null
-    val isParentConstraintLayout = element.hasParent(CLASS_CONSTRAINT_LAYOUT)
+    val isParentConstraintLayout = element.hasParent(CLASS_CONSTRAINT_LAYOUT.oldName())
     val isVectorGraphic = "vector" == element.localName || "path" == element.localName
 
     element.attributes()

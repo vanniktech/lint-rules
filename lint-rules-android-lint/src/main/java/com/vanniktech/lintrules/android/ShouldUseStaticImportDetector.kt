@@ -196,7 +196,7 @@ class ShouldUseStaticImportDetector : Detector(), Detector.UastScanner {
     val className = methodsToStaticallyImport[methodName]
 
     if (methodName != null && className != null) {
-      val isStaticallyImported = node.psi?.text?.startsWith(methodName) ?: false
+      val isStaticallyImported = node.sourcePsi?.text?.startsWith(methodName) ?: false
       val matches = context.evaluator.isMemberInClass(method, className)
 
       if (!isStaticallyImported && matches) {
