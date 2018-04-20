@@ -4,7 +4,7 @@ apply plugin: 'com.vanniktech.android.junit.jacoco'
 
 buildscript {
   ext.versions = [
-    kotlin: '1.2.31',
+    kotlin: '1.2.40',
     minSdk: 9,
     compileSdk: 27,
     lint: '26.1.1',
@@ -12,7 +12,7 @@ buildscript {
 
   ext.deps = [
     'kotlin': [
-      'stdlib': "org.jetbrains.kotlin:kotlin-stdlib-jre7:${versions.kotlin}",
+      'stdlib': "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions.kotlin}",
     ],
     'lint': [
       'core': "com.android.tools.lint:lint:${versions.lint}",
