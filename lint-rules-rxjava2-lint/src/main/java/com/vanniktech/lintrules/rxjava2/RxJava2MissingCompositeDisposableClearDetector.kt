@@ -33,25 +33,23 @@ class RxJava2MissingCompositeDisposableClearDetector : Detector(), Detector.Uast
           .filter { "io.reactivex.disposables.CompositeDisposable" == it.type.canonicalText }
           .toMutableSet()
 
-      for (method in node.methods) {
-        node.accept(object : AbstractUastVisitor() {
-          override fun visitCallExpression(node: UCallExpression): Boolean {
-            return if ("clear" == node.methodName) {
-              val iterator = compositeDisposables.iterator()
+      node.accept(object : AbstractUastVisitor() {
+        override fun visitCallExpression(node: UCallExpression): Boolean {
+          return if ("clear" == node.methodName) {
+            val iterator = compositeDisposables.iterator()
 
-              while (iterator.hasNext()) {
-                if (node.receiver?.asRenderString() == iterator.next().name) {
-                  iterator.remove()
-                }
+            while (iterator.hasNext()) {
+              if (node.receiver?.asRenderString() == iterator.next().name) {
+                iterator.remove()
               }
-
-              true
-            } else {
-              super.visitCallExpression(node)
             }
+
+            true
+          } else {
+            super.visitCallExpression(node)
           }
-        })
-      }
+        }
+      })
 
       compositeDisposables.forEach {
         context.report(ISSUE_MISSING_COMPOSITE_DISPOSABLE_CLEAR, it, context.getLocation(it), "clear() is not called.")
