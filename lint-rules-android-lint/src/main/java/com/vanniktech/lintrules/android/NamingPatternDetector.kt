@@ -28,7 +28,7 @@ class NamingPatternDetector : Detector(), Detector.UastScanner {
 
   override fun createUastHandler(context: JavaContext) = NamingPatternHandler(context)
 
-  inner class NamingPatternHandler(private val context: JavaContext) : UElementHandler() {
+  class NamingPatternHandler(private val context: JavaContext) : UElementHandler() {
     override fun visitVariable(node: UVariable) {
       val isConstant = node.isFinal && node.isStatic
       val isEnumConstant = node is UEnumConstant
