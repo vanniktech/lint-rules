@@ -28,13 +28,13 @@ class RxJava2DefaultSchedulerDetector : Detector(), Detector.UastScanner {
 
   override fun createUastHandler(context: JavaContext) = RxJava2DefaultSchedulerHandler(context)
 
-  inner class RxJava2DefaultSchedulerHandler(private val context: JavaContext) : UElementHandler() {
+  class RxJava2DefaultSchedulerHandler(private val context: JavaContext) : UElementHandler() {
     override fun visitMethod(node: UMethod) {
       node.accept(RxJava2DefaultSchedulerVisitor(context))
     }
   }
 
-  inner class RxJava2DefaultSchedulerVisitor(private val context: JavaContext) : AbstractUastVisitor() {
+  class RxJava2DefaultSchedulerVisitor(private val context: JavaContext) : AbstractUastVisitor() {
     override fun visitCallExpression(node: UCallExpression): Boolean {
       val identifier = node.methodIdentifier
 
