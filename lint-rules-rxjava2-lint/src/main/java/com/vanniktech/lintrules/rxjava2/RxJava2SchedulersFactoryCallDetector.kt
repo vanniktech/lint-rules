@@ -12,8 +12,7 @@ import com.android.tools.lint.detector.api.Severity.WARNING
 import com.intellij.psi.PsiMethod
 import org.jetbrains.uast.UAnnotated
 import org.jetbrains.uast.UCallExpression
-import org.jetbrains.uast.UElement
-import org.jetbrains.uast.UMethod
+import org.jetbrains.uast.getContainingUMethod
 import java.util.EnumSet
 
 val ISSUE_RAW_SCHEDULER_CALL = Issue.create("RxJava2SchedulersFactoryCall",
@@ -37,19 +36,11 @@ class RxJava2SchedulersFactoryCallDetector : Detector(), UastScanner {
     val isSchedulersMatch = SCHEDULERS_METHODS.contains(node.methodName) && isInSchedulers
     val isAndroidSchedulersMatch = ANDROID_SCHEDULERS_METHODS.contains(node.methodName) && isInAndroidSchedulers
 
-    val shouldIgnore = node.isCalledFromProvidesMethod(context)
+    val shouldIgnore = context.evaluator.getAllAnnotations(node.getContainingUMethod() as UAnnotated, false)
+        .any { annotation -> listOf("dagger.Provides", "io.reactivex.annotations.SchedulerSupport").any { it == annotation.qualifiedName } }
 
     if ((isSchedulersMatch || isAndroidSchedulersMatch) && !shouldIgnore) {
       context.report(ISSUE_RAW_SCHEDULER_CALL, node, context.getNameLocation(node), "Inject this Scheduler instead of calling it directly.")
     }
-  }
-
-  private fun UElement.isCalledFromProvidesMethod(context: JavaContext): Boolean {
-    if (this is UMethod) {
-      return context.evaluator.getAllAnnotations(this as UAnnotated, false)
-          .any { "dagger.Provides" == it.qualifiedName }
-    }
-
-    return uastParent?.isCalledFromProvidesMethod(context) ?: false
   }
 }
