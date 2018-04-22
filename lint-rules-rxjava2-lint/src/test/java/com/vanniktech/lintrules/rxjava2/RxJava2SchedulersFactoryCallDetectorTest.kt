@@ -8,17 +8,36 @@ class RxJava2SchedulersFactoryCallDetectorTest {
   @Test fun ioCallInsideDaggerProvidesMethod() {
     lint()
         .files(dagger2(), rxJava2(), java("""
-          |package foo;
-          |
-          |import io.reactivex.Scheduler;
-          |import io.reactivex.schedulers.Schedulers;
-          |import dagger.Provides;
-          |
-          |class Example {
-          |  @Provides Scheduler provideSchedulerIo() {
-          |    return Schedulers.io();
-          |  }
-          |}""".trimMargin()))
+          package foo;
+
+          import io.reactivex.Scheduler;
+          import io.reactivex.schedulers.Schedulers;
+          import dagger.Provides;
+
+          class Example {
+            @Provides Scheduler provideSchedulerIo() {
+              return Schedulers.io();
+            }
+          }""").indented())
+        .issues(ISSUE_RAW_SCHEDULER_CALL)
+        .run()
+        .expectClean()
+  }
+
+  @Test fun ioCallWithSchedulerSupport() {
+    lint()
+        .files(rxJava2(), java("""
+          package foo;
+
+          import io.reactivex.Scheduler;
+          import io.reactivex.schedulers.Schedulers;
+          import io.reactivex.annotations.SchedulerSupport;
+
+          class Example {
+            @SchedulerSupport("io") Scheduler provideSchedulerIo() {
+              return Schedulers.io();
+            }
+          }""").indented())
         .issues(ISSUE_RAW_SCHEDULER_CALL)
         .run()
         .expectClean()
@@ -27,17 +46,17 @@ class RxJava2SchedulersFactoryCallDetectorTest {
   @Test fun ioCallInsideCheckReturnValueMethod() {
     lint()
         .files(rxJava2(), java("""
-          |package foo;
-          |
-          |import io.reactivex.annotations.CheckReturnValue;
-          |import io.reactivex.Scheduler;
-          |import io.reactivex.schedulers.Schedulers;
-          |
-          |class Example {
-          |  @CheckReturnValue Scheduler provideSchedulerIo() {
-          |    return Schedulers.io();
-          |  }
-          |}""".trimMargin()))
+          package foo;
+
+          import io.reactivex.annotations.CheckReturnValue;
+          import io.reactivex.Scheduler;
+          import io.reactivex.schedulers.Schedulers;
+
+          class Example {
+            @CheckReturnValue Scheduler provideSchedulerIo() {
+              return Schedulers.io();
+            }
+          }""").indented())
         .issues(ISSUE_RAW_SCHEDULER_CALL)
         .run()
         .expect("""
@@ -51,15 +70,15 @@ class RxJava2SchedulersFactoryCallDetectorTest {
   @Test fun ioCall() {
     lint()
         .files(rxJava2(), java("""
-          |package foo;
-          |
-          |import io.reactivex.schedulers.Schedulers;
-          |
-          |class Example {
-          |  void test() {
-          |    Schedulers.io();
-          |  }
-          |}""".trimMargin()))
+          package foo;
+
+          import io.reactivex.schedulers.Schedulers;
+
+          class Example {
+            void test() {
+              Schedulers.io();
+            }
+          }""").indented())
         .issues(ISSUE_RAW_SCHEDULER_CALL)
         .run()
         .expect("""
@@ -73,15 +92,15 @@ class RxJava2SchedulersFactoryCallDetectorTest {
   @Test fun computationCall() {
     lint()
         .files(rxJava2(), java("""
-          |package foo;
-          |
-          |import io.reactivex.schedulers.Schedulers;
-          |
-          |class Example {
-          |  void test() {
-          |    Schedulers.computation();
-          |  }
-          |}""".trimMargin()))
+          package foo;
+
+          import io.reactivex.schedulers.Schedulers;
+
+          class Example {
+            void test() {
+              Schedulers.computation();
+            }
+          }""").indented())
         .issues(ISSUE_RAW_SCHEDULER_CALL)
         .run()
         .expect("""
@@ -95,15 +114,15 @@ class RxJava2SchedulersFactoryCallDetectorTest {
   @Test fun newThreadCall() {
     lint()
         .files(rxJava2(), java("""
-          |package foo;
-          |
-          |import io.reactivex.schedulers.Schedulers;
-          |
-          |class Example {
-          |  void test() {
-          |    Schedulers.newThread();
-          |  }
-          |}""".trimMargin()))
+          package foo;
+
+          import io.reactivex.schedulers.Schedulers;
+
+          class Example {
+            void test() {
+              Schedulers.newThread();
+            }
+          }""").indented())
         .issues(ISSUE_RAW_SCHEDULER_CALL)
         .run()
         .expect("""
@@ -117,15 +136,15 @@ class RxJava2SchedulersFactoryCallDetectorTest {
   @Test fun singleCall() {
     lint()
         .files(rxJava2(), java("""
-          |package foo;
-          |
-          |import io.reactivex.schedulers.Schedulers;
-          |
-          |class Example {
-          |  void test() {
-          |    Schedulers.single();
-          |  }
-          |}""".trimMargin()))
+          package foo;
+
+          import io.reactivex.schedulers.Schedulers;
+
+          class Example {
+            void test() {
+              Schedulers.single();
+            }
+          }""").indented())
         .issues(ISSUE_RAW_SCHEDULER_CALL)
         .run()
         .expect("""
@@ -139,15 +158,15 @@ class RxJava2SchedulersFactoryCallDetectorTest {
   @Test fun fromCall() {
     lint()
         .files(rxJava2(), java("""
-          |package foo;
-          |
-          |import io.reactivex.schedulers.Schedulers;
-          |
-          |class Example {
-          |  void test() {
-          |    Schedulers.from(null);
-          |  }
-          |}""".trimMargin()))
+          package foo;
+
+          import io.reactivex.schedulers.Schedulers;
+
+          class Example {
+            void test() {
+              Schedulers.from(null);
+            }
+          }""").indented())
         .issues(ISSUE_RAW_SCHEDULER_CALL)
         .run()
         .expect("""
@@ -161,15 +180,15 @@ class RxJava2SchedulersFactoryCallDetectorTest {
   @Test fun mainThreadCall() {
     lint()
         .files(rxJava2(), rxAndroid2(), java("""
-          |package foo;
-          |
-          |import io.reactivex.android.schedulers.AndroidSchedulers;
-          |
-          |class Example {
-          |  void test() {
-          |    AndroidSchedulers.mainThread();
-          |  }
-          |}""".trimMargin()))
+          package foo;
+
+          import io.reactivex.android.schedulers.AndroidSchedulers;
+
+          class Example {
+            void test() {
+              AndroidSchedulers.mainThread();
+            }
+          }""").indented())
         .issues(ISSUE_RAW_SCHEDULER_CALL)
         .run()
         .expect("""
