@@ -1,6 +1,7 @@
 package com.vanniktech.lintrules.rxjava2
 
 import com.android.tools.lint.checks.infrastructure.TestFiles.java
+import com.android.tools.lint.checks.infrastructure.TestFiles.kt
 import com.android.tools.lint.checks.infrastructure.TestLintTask.lint
 import org.junit.Test
 
@@ -69,21 +70,21 @@ class RxJava2SchedulersFactoryCallDetectorTest {
 
   @Test fun ioCall() {
     lint()
-        .files(rxJava2(), java("""
-          package foo;
+        .files(rxJava2(), kt("""
+          package foo
 
-          import io.reactivex.schedulers.Schedulers;
+          import io.reactivex.schedulers.Schedulers
 
           class Example {
-            void test() {
-              Schedulers.io();
+            fun test() {
+              Schedulers.io()
             }
           }""").indented())
         .issues(ISSUE_RAW_SCHEDULER_CALL)
         .run()
         .expect("""
-          |src/foo/Example.java:7: Warning: Inject this Scheduler instead of calling it directly. [RxJava2SchedulersFactoryCall]
-          |    Schedulers.io();
+          |src/foo/Example.kt:7: Warning: Inject this Scheduler instead of calling it directly. [RxJava2SchedulersFactoryCall]
+          |    Schedulers.io()
           |               ~~
           |0 errors, 1 warnings
           """.trimMargin())
@@ -197,5 +198,20 @@ class RxJava2SchedulersFactoryCallDetectorTest {
           |                      ~~~~~~~~~~
           |0 errors, 1 warnings
           """.trimMargin())
+  }
+
+  @Test fun fromWithinLazyDoesNotCrash() {
+    lint()
+      .files(rxJava2(), kt("""
+          package foo
+
+          class Example {
+            private val something by lazy { from() }
+
+            fun from() = 5
+          }""").indented())
+      .issues(ISSUE_RAW_SCHEDULER_CALL)
+      .run()
+      .expectClean()
   }
 }
