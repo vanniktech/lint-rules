@@ -36,7 +36,8 @@ class RxJava2SchedulersFactoryCallDetector : Detector(), UastScanner {
     val isSchedulersMatch = SCHEDULERS_METHODS.contains(node.methodName) && isInSchedulers
     val isAndroidSchedulersMatch = ANDROID_SCHEDULERS_METHODS.contains(node.methodName) && isInAndroidSchedulers
 
-    val shouldIgnore = context.evaluator.getAllAnnotations(node.getContainingUMethod() as UAnnotated, false)
+    val containingMethod = node.getContainingUMethod()
+    val shouldIgnore = containingMethod != null && context.evaluator.getAllAnnotations(containingMethod as UAnnotated, false)
         .any { annotation -> listOf("dagger.Provides", "io.reactivex.annotations.SchedulerSupport").any { it == annotation.qualifiedName } }
 
     if ((isSchedulersMatch || isAndroidSchedulersMatch) && !shouldIgnore) {
