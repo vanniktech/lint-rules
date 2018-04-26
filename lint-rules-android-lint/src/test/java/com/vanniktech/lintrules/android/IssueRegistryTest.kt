@@ -35,6 +35,7 @@ class IssueRegistryTest {
         - **InvalidImport** - Flags invalid imports. One example is com.foo.bar.R.drawable. Instead just the generated class R should be imported and not R.drawable. Also you should never import anything that's in an internal package.
         - **InvalidSingleLineComment** - Single line comments should always be sentences. They're part of the code and hence they deserve as much detail and respect as code.
         - **InvalidString** - A translation string is invalid if it contains new lines instead of the escaped \n or if it contains trailing whitespace.
+        - **JCenter** - JCenter has gotten less and less reliable and it's best to avoid if possible. This check will flag usages of jcenter() in your gradle files.
         - **LayoutFileNameMatchesClass** - Layout file names should always match the name of the class. FooActivity should have a layout file named activity_foo hence.
         - **MatchingMenuId** - When the layout file is named menu_home all of the containing ids should be prefixed with menuHome to avoid ambiguity between different menu files across different menu items.
         - **MatchingViewId** - When the layout file is named activity_home all of the containing ids should be prefixed with activityHome to avoid ambiguity between different layout files across different views.
