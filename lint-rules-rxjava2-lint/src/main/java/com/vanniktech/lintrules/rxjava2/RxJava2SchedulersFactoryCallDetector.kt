@@ -21,11 +21,11 @@ val ISSUE_RAW_SCHEDULER_CALL = Issue.create("RxJava2SchedulersFactoryCall",
     CORRECTNESS, PRIORITY, WARNING,
     Implementation(RxJava2SchedulersFactoryCallDetector::class.java, EnumSet.of(JAVA_FILE, TEST_SOURCES)))
 
-private val SCHEDULERS_METHODS = listOf("io", "computation", "newThread", "single", "from")
-private val ANDROID_SCHEDULERS_METHODS = listOf("mainThread")
+private val schedulersMethods = listOf("io", "computation", "newThread", "single", "from")
+private val androidSchedulersMethods = listOf("mainThread")
 
 class RxJava2SchedulersFactoryCallDetector : Detector(), UastScanner {
-  override fun getApplicableMethodNames() = SCHEDULERS_METHODS + ANDROID_SCHEDULERS_METHODS
+  override fun getApplicableMethodNames() = schedulersMethods + androidSchedulersMethods
 
   override fun visitMethod(context: JavaContext, node: UCallExpression, method: PsiMethod) {
     val evaluator = context.evaluator
@@ -33,8 +33,8 @@ class RxJava2SchedulersFactoryCallDetector : Detector(), UastScanner {
     val isInSchedulers = evaluator.isMemberInClass(method, "io.reactivex.schedulers.Schedulers")
     val isInAndroidSchedulers = evaluator.isMemberInClass(method, "io.reactivex.android.schedulers.AndroidSchedulers")
 
-    val isSchedulersMatch = SCHEDULERS_METHODS.contains(node.methodName) && isInSchedulers
-    val isAndroidSchedulersMatch = ANDROID_SCHEDULERS_METHODS.contains(node.methodName) && isInAndroidSchedulers
+    val isSchedulersMatch = schedulersMethods.contains(node.methodName) && isInSchedulers
+    val isAndroidSchedulersMatch = androidSchedulersMethods.contains(node.methodName) && isInAndroidSchedulers
 
     val containingMethod = node.getContainingUMethod()
     val shouldIgnore = containingMethod != null && context.evaluator.getAllAnnotations(containingMethod as UAnnotated, false)

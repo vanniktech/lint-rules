@@ -18,7 +18,7 @@ val ISSUE_INVALID_IMPORT = Issue.create("InvalidImport",
     CORRECTNESS, PRIORITY, WARNING,
     Implementation(InvalidImportDetector::class.java, EnumSet.of(JAVA_FILE, TEST_SOURCES)))
 
-private val DISALLOWED_IMPORTS = listOf(".R.", "internal.", "internaI.")
+private val disallowedImports = listOf(".R.", "internal.", "internaI.")
 
 class InvalidImportDetector : Detector(), Detector.UastScanner {
   override fun getApplicableUastTypes() = listOf(UImportStatement::class.java)
@@ -28,7 +28,7 @@ class InvalidImportDetector : Detector(), Detector.UastScanner {
   class InvalidImportHandler(private val context: JavaContext) : UElementHandler() {
     override fun visitImportStatement(node: UImportStatement) {
       node.importReference?.let { importReference ->
-        if (DISALLOWED_IMPORTS.any { importReference.asSourceString().contains(it) }) {
+        if (disallowedImports.any { importReference.asSourceString().contains(it) }) {
           context.report(ISSUE_INVALID_IMPORT, node, context.getLocation(importReference), "Forbidden import")
         }
       }

@@ -18,7 +18,7 @@ import org.w3c.dom.Attr
     Category.CORRECTNESS, PRIORITY, ERROR,
     Implementation(UnsupportedLayoutAttributeDetector::class.java, Scope.RESOURCE_FILE_SCOPE))
 
-private val UNSUPPORTED_ATTRIBUTES = mapOf(
+private val unsupportedAttributes = mapOf(
     RELATIVE_LAYOUT to ATTR_ORIENTATION,
     SCROLL_VIEW to ATTR_ORIENTATION
 )
@@ -27,7 +27,7 @@ class UnsupportedLayoutAttributeDetector : LayoutDetector() {
   override fun getApplicableAttributes() = ALL
 
   override fun visitAttribute(context: XmlContext, attribute: Attr) {
-    UNSUPPORTED_ATTRIBUTES
+    unsupportedAttributes
         .filter { attribute.hasOwner(it.key) }
         .filter { attribute.localName == it.value }
         .forEach { (value, key) ->
