@@ -154,7 +154,7 @@ class LayoutFileNameMatchesClassDetectorTest {
   @Test fun themesActivityUsesActivityBarInKotlin() {
     lint()
         .files(r, activity, kt("""
-          package foo;
+          package foo
 
           class ThemesActivity : Activity() {
             fun foo() {

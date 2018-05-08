@@ -4,7 +4,6 @@ import com.android.annotations.NonNull;
 import com.android.resources.ResourceFolderType;
 import com.android.tools.lint.detector.api.Implementation;
 import com.android.tools.lint.detector.api.Issue;
-import com.android.tools.lint.detector.api.LintUtils;
 import com.android.tools.lint.detector.api.ResourceXmlDetector;
 import com.android.tools.lint.detector.api.XmlContext;
 import java.util.Collection;
@@ -14,6 +13,7 @@ import org.w3c.dom.Attr;
 import static com.android.SdkConstants.ATTR_ID;
 import static com.android.resources.ResourceFolderType.MENU;
 import static com.android.tools.lint.detector.api.Category.CORRECTNESS;
+import static com.android.tools.lint.detector.api.Lint.stripIdPrefix;
 import static com.android.tools.lint.detector.api.Scope.RESOURCE_FILE_SCOPE;
 import static com.android.tools.lint.detector.api.Severity.WARNING;
 import static com.vanniktech.lintrules.android.MatchingViewIdDetector.toLowerCamelCase;
@@ -36,7 +36,7 @@ public final class MatchingMenuIdDetector extends ResourceXmlDetector {
 
   @Override public void visitAttribute(@NonNull final XmlContext context, @NonNull final Attr attribute) {
     final String fileName = toLowerCamelCase(context.file.getName().replace(".xml", ""));
-    final String id = LintUtils.stripIdPrefix(attribute.getValue());
+    final String id = stripIdPrefix(attribute.getValue());
 
     if (!id.startsWith(fileName)) {
       context.report(ISSUE_MATCHING_MENU_ID, attribute, context.getValueLocation(attribute), "Id should start with: " + fileName);

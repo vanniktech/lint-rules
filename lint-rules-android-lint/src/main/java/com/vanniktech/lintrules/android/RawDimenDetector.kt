@@ -33,9 +33,7 @@ class RawDimenDetector : ResourceXmlDetector() {
 
   override fun getApplicableElements() = ALL
 
-  override fun beforeCheckProject(context: Context) = beforeCheckLibraryProject(context)
-
-  override fun beforeCheckLibraryProject(context: Context) {
+  override fun beforeCheckEachProject(context: Context) {
     collector = ElementCollectReporter(TAG_DIMEN)
   }
 
@@ -56,9 +54,7 @@ class RawDimenDetector : ResourceXmlDetector() {
         .toCollection(collector)
   }
 
-  override fun afterCheckProject(context: Context) = afterCheckLibraryProject(context)
-
-  override fun afterCheckLibraryProject(context: Context) {
+  override fun afterCheckEachProject(context: Context) {
     collector.report(ISSUE_RAW_DIMEN, context, "Should be using a dimension resource instead.")
   }
 }
