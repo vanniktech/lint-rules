@@ -11,17 +11,17 @@ import com.android.tools.lint.detector.api.XmlContext
 import com.android.tools.lint.detector.api.computeResourcePrefix
 import org.w3c.dom.Document
 
-private val ALLOWED_PREFIXES = listOf("activity_", "view_", "fragment_", "dialog_", "bottom_sheet_", "adapter_item_", "divider_", "space_")
+private val allowedPrefixes = listOf("activity_", "view_", "fragment_", "dialog_", "bottom_sheet_", "adapter_item_", "divider_", "space_")
 
 val ISSUE_WRONG_LAYOUT_NAME = Issue.create("WrongLayoutName",
     "Layout names should be prefixed accordingly.",
-    "The layout file name should be prefixed with one of the following: ${ALLOWED_PREFIXES.joinToString()}. This will improve consistency in your code base as well as enforce a certain structure.",
+    "The layout file name should be prefixed with one of the following: ${allowedPrefixes.joinToString()}. This will improve consistency in your code base as well as enforce a certain structure.",
     CORRECTNESS, PRIORITY, WARNING,
     Implementation(WrongLayoutNameDetector::class.java, RESOURCE_FILE_SCOPE))
 
 class WrongLayoutNameDetector : LayoutDetector() {
   override fun visitDocument(context: XmlContext, document: Document) {
-    val modified = ALLOWED_PREFIXES.map { context.project.resourcePrefix() + it }
+    val modified = allowedPrefixes.map { context.project.resourcePrefix() + it }
 
     if (modified.none { context.file.name.startsWith(it) }) {
       context.report(ISSUE_WRONG_LAYOUT_NAME, document, context.getLocation(document), "Layout does not start with one of the following prefixes: ${modified.joinToString()}")

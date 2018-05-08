@@ -13,7 +13,7 @@ import com.android.tools.lint.detector.api.Severity.WARNING
 import com.android.tools.lint.detector.api.XmlContext
 import org.w3c.dom.Element
 
-private val POSSIBLE_URIS = setOf(ANDROID_URI, TOOLS_URI, AUTO_URI, AAPT_URI)
+private val possibleUris = setOf(ANDROID_URI, TOOLS_URI, AUTO_URI, AAPT_URI)
 
 val ISSUE_SUPERFLUOUS_NAME_SPACE = Issue.create("SuperfluousNameSpace",
     "Flags namespaces that are already declared.",
@@ -27,7 +27,7 @@ class SuperfluousNameSpaceDetector : LayoutDetector() {
   override fun visitElement(context: XmlContext, element: Element) {
     if (element.parentNode.parentNode != null) {
       element.attributes()
-          .filter { attribute -> POSSIBLE_URIS.any { attribute.toString().contains(it) } }
+          .filter { attribute -> possibleUris.any { attribute.toString().contains(it) } }
           .forEach {
             val fix = fix()
                 .name("Remove namespace")
