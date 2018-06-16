@@ -3,8 +3,6 @@ package com.vanniktech.lintrules.android
 import com.android.tools.lint.detector.api.CURRENT_API
 import com.vanniktech.lintrules.android.MatchingMenuIdDetector.ISSUE_MATCHING_MENU_ID
 import com.vanniktech.lintrules.android.MatchingViewIdDetector.ISSUE_MATCHING_VIEW_ID
-import com.vanniktech.lintrules.android.SuperfluousMarginDeclarationDetector.ISSUE_SUPERFLUOUS_MARGIN_DECLARATION
-import com.vanniktech.lintrules.android.SuperfluousPaddingDeclarationDetector.ISSUE_SUPERFLUOUS_PADDING_DECLARATION
 import com.vanniktech.lintrules.android.WrongConstraintLayoutUsageDetector.ISSUE_WRONG_CONSTRAINT_LAYOUT_USAGE
 
 internal const val PRIORITY = 10 // Does not matter anyways within Lint.
