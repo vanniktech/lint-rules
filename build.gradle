@@ -38,23 +38,11 @@ buildscript {
 }
 
 codeQualityTools {
-  checkstyle {
-    toolVersion = '8.7'
-  }
-  pmd {
-    toolVersion = '6.0.1'
-  }
   ktlint {
     toolVersion = '0.23.1'
   }
   detekt {
     toolVersion = '1.0.0.RC7'
-  }
-  errorProne {
-    toolVersion = '2.1.2'
-  }
-  cpd {
-    ignoreFailures = true // Follow up separately.
   }
   findbugs {
     enabled = false // https://github.com/vanniktech/gradle-code-quality-tools-plugin/pull/126
