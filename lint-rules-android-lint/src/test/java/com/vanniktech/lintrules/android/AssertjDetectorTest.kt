@@ -3,7 +3,6 @@ package com.vanniktech.lintrules.android
 import com.android.tools.lint.checks.infrastructure.TestFiles.java
 import com.android.tools.lint.checks.infrastructure.TestFiles.kt
 import com.android.tools.lint.checks.infrastructure.TestLintTask.lint
-import org.junit.Ignore
 import org.junit.Test
 
 class AssertjDetectorTest {
@@ -53,7 +52,7 @@ class AssertjDetectorTest {
             |""".trimMargin())
   }
 
-  @Test @Ignore("https://issuetracker.google.com/issues/80491636") fun kotlinAssertionsImport() {
+  @Test fun kotlinAssertionsImport() {
     lint()
         .allowCompilationErrors()
         .files(kt("import org.assertj.core.api.Assertions"))
@@ -65,10 +64,15 @@ class AssertjDetectorTest {
             |       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
             |0 errors, 1 warnings""".trimMargin())
         .expectFixDiffs("""
+            |Fix for src/test.kt line 1: Replace with org.assertj.core.api.Java6Assertions:
+            |@@ -1 +1
+            |- import org.assertj.core.api.Assertions
+            |@@ -2 +1
+            |+ import org.assertj.core.api.Java6Assertions
             |""".trimMargin())
   }
 
-  @Test @Ignore("https://issuetracker.google.com/issues/80491636") fun kotlinStaticAssertionsThatImport() {
+  @Test fun kotlinStaticAssertionsThatImport() {
     lint()
         .allowCompilationErrors()
         .files(kt("import org.assertj.core.api.Assertions.assertThat"))
@@ -80,6 +84,11 @@ class AssertjDetectorTest {
             |       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
             |0 errors, 1 warnings""".trimMargin())
         .expectFixDiffs("""
+            |Fix for src/test.kt line 1: Replace with org.assertj.core.api.Java6Assertions.assertThat:
+            |@@ -1 +1
+            |- import org.assertj.core.api.Assertions.assertThat
+            |@@ -2 +1
+            |+ import org.assertj.core.api.Java6Assertions.assertThat
             |""".trimMargin())
   }
 }
