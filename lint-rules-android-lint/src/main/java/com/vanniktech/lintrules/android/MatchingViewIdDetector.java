@@ -12,7 +12,7 @@ import org.w3c.dom.Attr;
 
 import static com.android.SdkConstants.ATTR_ID;
 import static com.android.tools.lint.detector.api.Category.CORRECTNESS;
-import static com.android.tools.lint.detector.api.Lint.stripIdPrefix;
+import static com.android.tools.lint.detector.api.LintUtils.stripIdPrefix;
 import static com.android.tools.lint.detector.api.Scope.RESOURCE_FILE_SCOPE;
 import static com.android.tools.lint.detector.api.Severity.WARNING;
 import static java.util.Collections.singletonList;

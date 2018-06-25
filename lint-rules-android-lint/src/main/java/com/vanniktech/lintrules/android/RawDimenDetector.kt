@@ -33,15 +33,12 @@ class RawDimenDetector : ResourceXmlDetector() {
 
   override fun getApplicableElements() = ALL
 
-  override fun beforeCheckEachProject(context: Context) {
-    collector = ElementCollectReporter(TAG_DIMEN)
-  }
 
   override fun visitElement(context: XmlContext, element: Element) {
     collector.collect(element)
 
     val hasLayoutWeight = element.attributes.getNamedItem("android:layout_weight") != null
-    val isParentConstraintLayout = element.hasParent(CLASS_CONSTRAINT_LAYOUT.oldName())
+    val isParentConstraintLayout = element.hasParent(CLASS_CONSTRAINT_LAYOUT)
     val isVectorGraphic = "vector" == element.localName || "path" == element.localName
 
     element.attributes()
@@ -54,7 +51,4 @@ class RawDimenDetector : ResourceXmlDetector() {
         .toCollection(collector)
   }
 
-  override fun afterCheckEachProject(context: Context) {
-    collector.report(ISSUE_RAW_DIMEN, context, "Should be using a dimension resource instead.")
-  }
 }

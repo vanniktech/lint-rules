@@ -89,7 +89,7 @@ class InvalidSingleLineCommentDetectorTest {
           |class Example {
           |  public void foo() {
           |    // Something. Do not modify!
-          |    // Something. Do not modify.
+          |    // Something. Do not modify
           |    // Something. Do not modify?
           |    // Something. (Do not modify)
           |  }

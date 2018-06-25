@@ -12,10 +12,7 @@ import com.android.tools.lint.detector.api.Severity.WARNING
 import com.android.tools.lint.detector.api.UastLintUtils
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiMethod
-import org.jetbrains.uast.UCallExpression
-import org.jetbrains.uast.UQualifiedReferenceExpression
-import org.jetbrains.uast.UReferenceExpression
-import org.jetbrains.uast.getContainingUFile
+import org.jetbrains.uast.*
 import java.util.EnumSet
 
 val ISSUE_SHOULD_USE_STATIC_IMPORT = Issue.create("ShouldUseStaticImport",
@@ -210,7 +207,7 @@ class ShouldUseStaticImportDetector : Detector(), Detector.UastScanner {
     val className = methodsToStaticallyImport[methodName]
 
     if (methodName != null && className != null) {
-      val isStaticallyImported = node.sourcePsi?.text?.startsWith(methodName) ?: false
+      val isStaticallyImported = node.sourcePsiElement?.text?.startsWith(methodName) ?: false
       val matches = context.evaluator.isMemberInClass(method, className)
 
       if (!isStaticallyImported && matches) {

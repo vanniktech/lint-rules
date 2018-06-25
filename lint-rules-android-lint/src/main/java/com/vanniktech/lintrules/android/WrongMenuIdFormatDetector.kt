@@ -6,11 +6,11 @@ import com.android.resources.ResourceFolderType.MENU
 import com.android.tools.lint.detector.api.Category.Companion.CORRECTNESS
 import com.android.tools.lint.detector.api.Implementation
 import com.android.tools.lint.detector.api.Issue
+import com.android.tools.lint.detector.api.LintUtils.stripIdPrefix
 import com.android.tools.lint.detector.api.ResourceXmlDetector
 import com.android.tools.lint.detector.api.Scope.Companion.RESOURCE_FILE_SCOPE
 import com.android.tools.lint.detector.api.Severity.WARNING
 import com.android.tools.lint.detector.api.XmlContext
-import com.android.tools.lint.detector.api.stripIdPrefix
 import org.w3c.dom.Attr
 import java.util.EnumSet
 

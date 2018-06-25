@@ -32,9 +32,6 @@ class RawColorDetector : ResourceXmlDetector() {
 
   override fun getApplicableElements() = ALL
 
-  override fun beforeCheckEachProject(context: Context) {
-    collector = ElementCollectReporter(ATTR_COLOR)
-  }
 
   override fun visitElement(context: XmlContext, element: Element) {
     collector.collect(element)
@@ -48,7 +45,4 @@ class RawColorDetector : ResourceXmlDetector() {
         .toCollection(collector)
   }
 
-  override fun afterCheckEachProject(context: Context) {
-    collector.report(ISSUE_RAW_COLOR, context, "Should be using a color resource instead.")
-  }
 }

@@ -26,7 +26,6 @@ class IssueRegistry : com.android.tools.lint.client.api.IssueRegistry() {
           ISSUE_SHOULD_USE_STATIC_IMPORT,
           ISSUE_MATCHING_VIEW_ID,
           ISSUE_MATCHING_MENU_ID,
-          ISSUE_JCENTER,
           ISSUE_INVALID_SINGLE_LINE_COMMENT,
           ISSUE_INVALID_STRING,
           ISSUE_DEFAULT_LAYOUT_ATTRIBUTE,

@@ -23,7 +23,7 @@ val ISSUE_WRONG_TEST_METHOD_NAME = Issue.create("WrongTestMethodName",
 class WrongTestMethodNameDetector : Detector(), Detector.UastScanner {
   override fun getApplicableUastTypes() = listOf(UMethod::class.java)
 
-  override fun createUastHandler(context: JavaContext) = WrongTestMethodNameVisitor(context)
+ /* override fun createUastHandler(context: JavaContext) = WrongTestMethodNameVisitor(context)
 
   class WrongTestMethodNameVisitor(private val context: JavaContext) : UElementHandler() {
     override fun visitMethod(node: UMethod) {
@@ -41,5 +41,5 @@ class WrongTestMethodNameDetector : Detector(), Detector.UastScanner {
             context.report(ISSUE_WRONG_TEST_METHOD_NAME, node, context.getNameLocation(node), "Test method starts with test.", fix)
           }
     }
-  }
+  }*/
 }

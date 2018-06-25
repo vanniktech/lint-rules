@@ -34,7 +34,7 @@ class RxJava2MethodMissingCheckReturnValueDetector : Detector(), Detector.UastSc
       val returnType = node.returnType
       val isPropertyFunction = node is KotlinUMethod && node.sourcePsi is KtProperty
 
-      if (returnType != null && isTypeThatRequiresAnnotation(returnType) && !isPropertyFunction) {
+      /*if (returnType != null && isTypeThatRequiresAnnotation(returnType) && !isPropertyFunction) {
         context.evaluator.getAllAnnotations(node as UAnnotated, true)
             .filter { "io.reactivex.annotations.CheckReturnValue" == it.qualifiedName }
             .forEach { return }
@@ -51,7 +51,7 @@ class RxJava2MethodMissingCheckReturnValueDetector : Detector(), Detector.UastSc
             .build()
 
         context.report(ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE, node, context.getNameLocation(node), "Method should have @CheckReturnValue annotation.", fix)
-      }
+      }*/
     }
 
     private fun isTypeThatRequiresAnnotation(psiType: PsiType): Boolean {
