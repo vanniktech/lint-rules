@@ -7,7 +7,7 @@ buildscript {
     kotlin: '1.2.41',
     minSdk: 9,
     compileSdk: 27,
-    lint: '26.2.0-beta01',
+    lint: '26.2.0-beta02',
   ]
 
   ext.deps = [
