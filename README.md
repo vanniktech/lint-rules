@@ -12,6 +12,7 @@ compile 'com.vanniktech:lint-rules-android:0.8.0-SNAPSHOT'
 
 - **ConstraintLayoutToolsEditorAttribute** - The tools:layout_editor xml properties are only used for previewing and won't be used in your APK hence they're unnecessary and just add overhead.
 - **DefaultLayoutAttribute** - Flags default layout values that are not needed. One for instance is the textStyle="normal" that can be just removed.
+- **IgnoreWithoutReason** - Ignoring a test without reason makes it difficult to figure out the problem later. Please define an explicit reason why it is ignored, and when it can be resolved.
 - **InvalidImport** - Flags invalid imports. One example is com.foo.bar.R.drawable. Instead just the generated class R should be imported and not R.drawable. Also you should never import anything that's in an internal package.
 - **InvalidSingleLineComment** - Single line comments should always be sentences. They're part of the code and hence they deserve as much detail and respect as code.
 - **InvalidString** - A translation string is invalid if it contains new lines instead of the escaped \n or if it contains trailing whitespace.

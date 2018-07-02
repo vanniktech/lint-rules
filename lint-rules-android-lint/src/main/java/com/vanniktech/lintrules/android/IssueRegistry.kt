@@ -38,6 +38,7 @@ class IssueRegistry : com.android.tools.lint.client.api.IssueRegistry() {
       ISSUE_UNUSED_MERGE_ATTRIBUTES,
       ISSUE_LAYOUT_FILE_NAME_MATCHES_CLASS,
       ISSUE_UNSUPPORTED_LAYOUT_ATTRIBUTE,
-      ISSUE_ASSERTJ_IMPORT
+      ISSUE_ASSERTJ_IMPORT,
+      ISSUE_IGNORE_WITHOUT_REASON
   )
 }
