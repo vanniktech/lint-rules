@@ -5,21 +5,6 @@ import com.android.tools.lint.checks.infrastructure.TestLintTask.lint
 import org.junit.Test
 
 class WrongTestMethodNameDetectorTest {
-  private val stubTestJUnit = java("""
-      |package org.junit;
-      |
-      |public @interface Test { }""".trimMargin())
-
-  private val stubTestCustom = java("""
-      |package my.custom;
-      |
-      |public @interface Test { }""".trimMargin())
-
-  private val stubSomething = java("""
-      |package my.custom;
-      |
-      |public @interface Something { }""".trimMargin())
-
   @Test fun methodStartingWithTest() {
     lint()
         .files(java("""
@@ -36,7 +21,7 @@ class WrongTestMethodNameDetectorTest {
 
   @Test fun methodStartingWithTestAndSomethingAnnotation() {
     lint()
-        .files(stubSomething, java("""
+        .files(stubAnnotationSomething, java("""
           |package foo;
           |
           |import my.custom.Something;
@@ -52,7 +37,7 @@ class WrongTestMethodNameDetectorTest {
 
   @Test fun methodNotStartingWithTestAndTestAnnotation() {
     lint()
-        .files(stubTestJUnit, java("""
+        .files(stubJUnitTest, java("""
           |package foo;
           |
           |import org.junit.Test;
@@ -68,7 +53,7 @@ class WrongTestMethodNameDetectorTest {
 
   @Test fun methodStartingWithTestAndJUnitTestAnnotation() {
     lint()
-        .files(stubTestJUnit, java("""
+        .files(stubJUnitTest, java("""
           |package foo;
           |
           |import org.junit.Test;
@@ -94,7 +79,7 @@ class WrongTestMethodNameDetectorTest {
 
   @Test fun methodStartingWithTestAndCustomTestAnnotation() {
     lint()
-        .files(stubTestCustom, java("""
+        .files(stubAnnotationTest, java("""
           |package foo;
           |
           |import my.custom.Test;
