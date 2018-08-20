@@ -31,6 +31,7 @@ class IssueRegistryTest {
 
     assertEquals("""
         - **AssertjImport** - Importing org.assertj.core.api.Assertions is not ideal. Since it can require Java 8. It's simple as instead org.assertj.core.api.Java6Assertions can be imported and provides guarantee to run on Java 6 as well.
+        - **ColorCasing** - Colors should have lowercase letters. #ff0099 is valid while #FF0099 isn't since the FF should be written in lower case.
         - **ConstraintLayoutToolsEditorAttribute** - The tools:layout_editor xml properties are only used for previewing and won't be used in your APK hence they're unnecessary and just add overhead.
         - **DefaultLayoutAttribute** - Flags default layout values that are not needed. One for instance is the textStyle="normal" that can be just removed.
         - **IgnoreWithoutReason** - Ignoring a test without reason makes it difficult to figure out the problem later. Please define an explicit reason why it is ignored, and when it can be resolved.
