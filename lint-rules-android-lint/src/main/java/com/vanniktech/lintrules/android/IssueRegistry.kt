@@ -39,6 +39,7 @@ class IssueRegistry : com.android.tools.lint.client.api.IssueRegistry() {
       ISSUE_LAYOUT_FILE_NAME_MATCHES_CLASS,
       ISSUE_UNSUPPORTED_LAYOUT_ATTRIBUTE,
       ISSUE_ASSERTJ_IMPORT,
+      ISSUE_COLOR_CASING,
       ISSUE_IGNORE_WITHOUT_REASON
   )
 }
