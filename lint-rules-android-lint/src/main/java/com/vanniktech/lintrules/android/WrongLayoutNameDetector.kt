@@ -22,8 +22,10 @@ val ISSUE_WRONG_LAYOUT_NAME = Issue.create("WrongLayoutName",
 class WrongLayoutNameDetector : LayoutDetector() {
   override fun visitDocument(context: XmlContext, document: Document) {
     val modified = allowedPrefixes.map { context.project.resourcePrefix() + it }
+    val doesNotStartWithPrefix = modified.none { context.file.name.startsWith(it) }
+    val notEquals = modified.map { it.dropLast(1) }.none { context.file.name == "$it.xml" }
 
-    if (modified.none { context.file.name.startsWith(it) }) {
+    if (doesNotStartWithPrefix && notEquals) {
       context.report(ISSUE_WRONG_LAYOUT_NAME, document, context.getLocation(document), "Layout does not start with one of the following prefixes: ${modified.joinToString()}")
     }
   }

@@ -22,6 +22,14 @@ class WrongLayoutNameDetectorTest {
         .expectClean()
   }
 
+  @Test fun layoutMatchesExactly() {
+    lint()
+        .files(xml("res/layout/calculator_view.xml", "<merge/>"), resourcePrefix("calculator_"))
+        .issues(ISSUE_WRONG_LAYOUT_NAME)
+        .run()
+        .expectClean()
+  }
+
   @Test fun randomLayoutFile() {
     lint()
         .files(xml("res/layout/random.xml", "<merge/>"))
