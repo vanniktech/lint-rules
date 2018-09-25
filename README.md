@@ -7,7 +7,7 @@ A set of very opinionated lint rules.
 
 ```groovy
 compile 'com.vanniktech:lint-rules-android:0.8.0'
-compile 'com.vanniktech:lint-rules-android:0.8.0-SNAPSHOT'
+compile 'com.vanniktech:lint-rules-android:0.9.0-SNAPSHOT'
 ```
 
 - **AssertjImport** - Importing org.assertj.core.api.Assertions is not ideal. Since it can require Java 8. It's simple as instead org.assertj.core.api.Java6Assertions can be imported and provides guarantee to run on Java 6 as well.
@@ -48,7 +48,7 @@ compile 'com.vanniktech:lint-rules-android:0.8.0-SNAPSHOT'
 
 ```groovy
 compile 'com.vanniktech:lint-rules-rxjava2:0.8.0'
-compile 'com.vanniktech:lint-rules-rxjava2:0.8.0-SNAPSHOT
+compile 'com.vanniktech:lint-rules-rxjava2:0.9.0-SNAPSHOT
 ```
 
 - **RxJava2DefaultScheduler** - Calling this method will rely on a default scheduler. This is not necessary the best default. Being explicit and taking the overload for passing one is preferred.
