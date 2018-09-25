@@ -1,7 +1,48 @@
 # Change Log
 
-Version 0.8.0 *(In development)*
---------------------------------
+Version 0.8.0 *(2018-09-25)*
+----------------------------
+
+- Update Android Gradle Plugin to 3.2.0 and others. [\#240](https://github.com/vanniktech/lint-rules/pull/240) ([vanniktech](https://github.com/vanniktech))
+- WrongLayoutNameDetector: Allow layout file to be named exactly without trailing underscore. [\#239](https://github.com/vanniktech/lint-rules/pull/239) ([vanniktech](https://github.com/vanniktech))
+- Update Lint to 26.2.0-rc02 [\#237](https://github.com/vanniktech/lint-rules/pull/237) ([vanniktech](https://github.com/vanniktech))
+- Update Lint to 26.2.0-rc01 [\#236](https://github.com/vanniktech/lint-rules/pull/236) ([vanniktech](https://github.com/vanniktech))
+- Add ColorCasingDetector. [\#235](https://github.com/vanniktech/lint-rules/pull/235) ([vanniktech](https://github.com/vanniktech))
+- Update Maven Publish Plugin to 0.5.0 [\#233](https://github.com/vanniktech/lint-rules/pull/233) ([vanniktech](https://github.com/vanniktech))
+- Update various dependencies. [\#232](https://github.com/vanniktech/lint-rules/pull/232) ([vanniktech](https://github.com/vanniktech))
+- Update Gradle Wrapper to 4.9 [\#231](https://github.com/vanniktech/lint-rules/pull/231) ([vanniktech](https://github.com/vanniktech))
+- Update Lint to 26.2.0-beta04 [\#230](https://github.com/vanniktech/lint-rules/pull/230) ([vanniktech](https://github.com/vanniktech))
+- Update Lint to 26.2.0-beta03 [\#229](https://github.com/vanniktech/lint-rules/pull/229) ([vanniktech](https://github.com/vanniktech))
+- Reformat IgnoreWithoutReasonDetector. [\#228](https://github.com/vanniktech/lint-rules/pull/228) ([vanniktech](https://github.com/vanniktech))
+- Add IgnoreWithoutReason check for Tests [\#227](https://github.com/vanniktech/lint-rules/pull/227) ([yayaa](https://github.com/yayaa))
+- Update Lint to 26.2.0-beta02 [\#226](https://github.com/vanniktech/lint-rules/pull/226) ([vanniktech](https://github.com/vanniktech))
+- Update ktlint to 0.24.0 [\#224](https://github.com/vanniktech/lint-rules/pull/224) ([vanniktech](https://github.com/vanniktech))
+- NamingPattern: Handle Kotlin baked methods. [\#223](https://github.com/vanniktech/lint-rules/pull/223) ([vanniktech](https://github.com/vanniktech))
+- Update Lint to 26.2.0-beta01 [\#222](https://github.com/vanniktech/lint-rules/pull/222) ([vanniktech](https://github.com/vanniktech))
+- Convert the remaining classes from Java to Kotlin. [\#221](https://github.com/vanniktech/lint-rules/pull/221) ([vanniktech](https://github.com/vanniktech))
+- Update to 26.2.0-alpha18 [\#220](https://github.com/vanniktech/lint-rules/pull/220) ([vanniktech](https://github.com/vanniktech))
+- Update Gradle wrapper to 4.8 [\#218](https://github.com/vanniktech/lint-rules/pull/218) ([vanniktech](https://github.com/vanniktech))
+- Update lint to 26.2.0-alpha17. [\#217](https://github.com/vanniktech/lint-rules/pull/217) ([vanniktech](https://github.com/vanniktech))
+- Add AssertjDetector. [\#216](https://github.com/vanniktech/lint-rules/pull/216) ([vanniktech](https://github.com/vanniktech))
+- Update to 26.2.0-alpha16. [\#215](https://github.com/vanniktech/lint-rules/pull/215) ([vanniktech](https://github.com/vanniktech))
+- Use Gradle Maven Publish Plugin for publishing. [\#213](https://github.com/vanniktech/lint-rules/pull/213) ([vanniktech](https://github.com/vanniktech))
+- Update to 26.2.0-alpha15 [\#212](https://github.com/vanniktech/lint-rules/pull/212) ([vanniktech](https://github.com/vanniktech))
+- ShouldUseStaticImportDetector: Also add android.os.Build constants. [\#211](https://github.com/vanniktech/lint-rules/pull/211) ([vanniktech](https://github.com/vanniktech))
+- Update ktlint to 0.23.1 [\#210](https://github.com/vanniktech/lint-rules/pull/210) ([vanniktech](https://github.com/vanniktech))
+- Update Detekt to 1.0.0.RC7 [\#209](https://github.com/vanniktech/lint-rules/pull/209) ([vanniktech](https://github.com/vanniktech))
+- Update to 26.2.0-alpha14 [\#208](https://github.com/vanniktech/lint-rules/pull/208) ([vanniktech](https://github.com/vanniktech))
+- Update Lint versions to 26.2.0-alpha13 [\#207](https://github.com/vanniktech/lint-rules/pull/207) ([vanniktech](https://github.com/vanniktech))
+- Add JcenterDetector. [\#206](https://github.com/vanniktech/lint-rules/pull/206) ([vanniktech](https://github.com/vanniktech))
+- Update to 26.2.0-alpha12. [\#205](https://github.com/vanniktech/lint-rules/pull/205) ([vanniktech](https://github.com/vanniktech))
+- RxJava2SchedulersFactoryCallDetector: Fix crash when containing method was null. [\#204](https://github.com/vanniktech/lint-rules/pull/204) ([vanniktech](https://github.com/vanniktech))
+- RxJava2SchedulersFactoryCallDetector: Allow Factory calls in methods annotated with @SchedulerSupport. [\#203](https://github.com/vanniktech/lint-rules/pull/203) ([vanniktech](https://github.com/vanniktech))
+- RxJava2DefaultSchedulerDetector: No need for inner keyword on RxJava2DefaultSchedulerHandler & RxJava2DefaultSchedulerVisitor. [\#202](https://github.com/vanniktech/lint-rules/pull/202) ([vanniktech](https://github.com/vanniktech))
+- NamingPatternDetector: No Need for inner keyword in NamingPatternHandler. [\#201](https://github.com/vanniktech/lint-rules/pull/201) ([vanniktech](https://github.com/vanniktech))
+- RxJava2MissingCompositeDisposableClearDetector: No need to loop over methods. [\#200](https://github.com/vanniktech/lint-rules/pull/200) ([vanniktech](https://github.com/vanniktech))
+- Update Kotlin to 1.2.40 and use jdk7 instead of jre7. [\#199](https://github.com/vanniktech/lint-rules/pull/199) ([vanniktech](https://github.com/vanniktech))
+- Optimize readmeContent test. [\#198](https://github.com/vanniktech/lint-rules/pull/198) ([vanniktech](https://github.com/vanniktech))
+- Prepare Lint checks for 3.2.0 [\#192](https://github.com/vanniktech/lint-rules/pull/192) ([vanniktech](https://github.com/vanniktech))
+- SuperfluousDeclarationDetector: Refactor mechanism. [\#140](https://github.com/vanniktech/lint-rules/pull/140) ([vanniktech](https://github.com/vanniktech))
 
 Version 0.7.1 *(2018-04-16)*
 ----------------------------
