@@ -23,8 +23,8 @@ val ISSUE_LAYOUT_FILE_NAME_MATCHES_CLASS = Issue.create("LayoutFileNameMatchesCl
 class LayoutFileNameMatchesClassDetector : Detector(), UastScanner {
   override fun getApplicableMethodNames() = listOf("setContentView")
 
-  override fun visitMethod(context: JavaContext, node: UCallExpression, method: PsiMethod) {
-    super.visitMethod(context, node, method)
+  override fun visitMethodCall(context: JavaContext, node: UCallExpression, method: PsiMethod) {
+    super.visitMethodCall(context, node, method)
 
     val resourcePrefix = context.project.resourcePrefix()
     val firstParameter = node.valueArguments.getOrNull(0)
