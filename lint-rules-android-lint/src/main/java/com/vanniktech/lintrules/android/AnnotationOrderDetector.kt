@@ -10,7 +10,7 @@ import com.android.tools.lint.detector.api.JavaContext
 import com.android.tools.lint.detector.api.Scope.JAVA_FILE
 import com.android.tools.lint.detector.api.Scope.TEST_SOURCES
 import com.android.tools.lint.detector.api.Severity.WARNING
-import com.intellij.psi.PsiModifierListOwner
+import org.jetbrains.uast.UAnnotated
 import org.jetbrains.uast.UClass
 import org.jetbrains.uast.UElement
 import org.jetbrains.uast.UMethod
@@ -164,7 +164,7 @@ class AnnotationOrderDetector : Detector(), UastScanner {
       processAnnotations(node, node)
     }
 
-    @Suppress("Detekt.LabeledExpression", "Detekt.ReturnCount") private fun processAnnotations(element: UElement, modifierListOwner: PsiModifierListOwner) {
+    @Suppress("Detekt.LabeledExpression", "Detekt.ReturnCount") private fun processAnnotations(element: UElement, modifierListOwner: UAnnotated) {
       var size = 0
 
       val annotations = context.evaluator.getAllAnnotations(modifierListOwner, false)
