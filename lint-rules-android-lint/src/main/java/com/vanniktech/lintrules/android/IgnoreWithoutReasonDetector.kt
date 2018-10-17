@@ -8,10 +8,11 @@ import com.android.tools.lint.detector.api.Issue
 import com.android.tools.lint.detector.api.JavaContext
 import com.android.tools.lint.detector.api.Scope
 import com.android.tools.lint.detector.api.Severity.WARNING
-import com.intellij.psi.PsiModifierListOwner
+import org.jetbrains.uast.UAnnotated
 import org.jetbrains.uast.UClass
 import org.jetbrains.uast.UElement
 import org.jetbrains.uast.UMethod
+import org.jetbrains.uast.getValueIfStringLiteral
 import java.util.EnumSet
 
 val ISSUE_IGNORE_WITHOUT_REASON = Issue.create("IgnoreWithoutReason",
@@ -30,12 +31,12 @@ class IgnoreWithoutReasonDetector : Detector(), Detector.UastScanner {
 
     override fun visitClass(node: UClass) = processAnnotations(node, node)
 
-    private fun processAnnotations(element: UElement, modifierListOwner: PsiModifierListOwner) {
+    private fun processAnnotations(element: UElement, modifierListOwner: UAnnotated) {
       val annotations = context.evaluator.getAllAnnotations(modifierListOwner, false)
 
       // Do the verification if only we have "Ignore" annotation
       annotations.firstOrNull { it.qualifiedName?.split(".")?.lastOrNull() == "Ignore" }?.let {
-        if (it.findDeclaredAttributeValue("value")?.text.isNullOrBlank()) {
+        if (it.findDeclaredAttributeValue("value")?.getValueIfStringLiteral().isNullOrBlank()) {
           context.report(ISSUE_IGNORE_WITHOUT_REASON, element, context.getLocation(it), "Test is ignored without given any explanation.")
         }
       }
