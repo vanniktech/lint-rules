@@ -8,9 +8,8 @@ class MissingXmlHeaderDetectorTest {
   @Test fun hasXmlHeader() {
     lint()
         .files(xml("res/values/strings.xml", """
-          |<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-          |<resources/>""".trimMargin())
-            )
+          <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+          <resources/>""").indented())
         .issues(ISSUE_MISSING_XML_HEADER)
         .run()
         .expectClean()
@@ -19,8 +18,7 @@ class MissingXmlHeaderDetectorTest {
   @Test fun missingHeader() {
     lint()
         .files(xml("res/values/strings.xml", """
-          |<resources/>""".trimMargin())
-            )
+          <resources/>""").indented())
         .issues(ISSUE_MISSING_XML_HEADER)
         .run()
         .expect("""

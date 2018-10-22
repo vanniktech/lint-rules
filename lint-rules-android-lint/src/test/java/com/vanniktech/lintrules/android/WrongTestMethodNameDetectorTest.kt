@@ -8,12 +8,11 @@ class WrongTestMethodNameDetectorTest {
   @Test fun methodStartingWithTest() {
     lint()
         .files(java("""
-          |package foo;
-          |
-          |public class Something {
-          |  public void testThis() { }
-          |}""".trimMargin())
-            )
+          package foo;
+
+          public class Something {
+            public void testThis() { }
+          }""").indented())
         .issues(ISSUE_WRONG_TEST_METHOD_NAME)
         .run()
         .expectClean()
@@ -22,14 +21,13 @@ class WrongTestMethodNameDetectorTest {
   @Test fun methodStartingWithTestAndSomethingAnnotation() {
     lint()
         .files(stubAnnotationSomething, java("""
-          |package foo;
-          |
-          |import my.custom.Something;
-          |
-          |public class MyTest {
-          |  @Something public void test() { }
-          |}""".trimMargin())
-            )
+          package foo;
+
+          import my.custom.Something;
+
+          public class MyTest {
+            @Something public void test() { }
+          }""").indented())
         .issues(ISSUE_WRONG_TEST_METHOD_NAME)
         .run()
         .expectClean()
@@ -38,14 +36,13 @@ class WrongTestMethodNameDetectorTest {
   @Test fun methodNotStartingWithTestAndTestAnnotation() {
     lint()
         .files(stubJUnitTest, java("""
-          |package foo;
-          |
-          |import org.junit.Test;
-          |
-          |public class MyTest {
-          |  @Test public void myTest() { }
-          |}""".trimMargin())
-            )
+          package foo;
+
+          import org.junit.Test;
+
+          public class MyTest {
+            @Test public void myTest() { }
+          }""").indented())
         .issues(ISSUE_WRONG_TEST_METHOD_NAME)
         .run()
         .expectClean()
@@ -54,14 +51,13 @@ class WrongTestMethodNameDetectorTest {
   @Test fun methodStartingWithTestAndJUnitTestAnnotation() {
     lint()
         .files(stubJUnitTest, java("""
-          |package foo;
-          |
-          |import org.junit.Test;
-          |
-          |public class MyTest {
-          |  @Test public void testSomething() { }
-          |}""".trimMargin())
-            )
+          package foo;
+
+          import org.junit.Test;
+
+          public class MyTest {
+            @Test public void testSomething() { }
+          }""").indented())
         .issues(ISSUE_WRONG_TEST_METHOD_NAME)
         .run()
         .expect("""
@@ -80,14 +76,13 @@ class WrongTestMethodNameDetectorTest {
   @Test fun methodStartingWithTestAndCustomTestAnnotation() {
     lint()
         .files(stubAnnotationTest, java("""
-          |package foo;
-          |
-          |import my.custom.Test;
-          |
-          |public class MyTest {
-          |  @Test public void testSomething() { }
-          |}""".trimMargin())
-            )
+          package foo;
+
+          import my.custom.Test;
+
+          public class MyTest {
+            @Test public void testSomething() { }
+          }""").indented())
         .issues(ISSUE_WRONG_TEST_METHOD_NAME)
         .run()
         .expect("""

@@ -8,8 +8,8 @@ class RawColorDetectorTest {
   @Test fun ignoreToolsColor() {
     lint()
         .files(xml("res/layout/layout.xml", """
-          |<TextView xmlns:tools="http://schemas.android.com/tools"
-          |    tools:textColor="#fff"/>""".trimMargin()))
+          <TextView xmlns:tools="http://schemas.android.com/tools"
+              tools:textColor="#fff"/>""").indented())
         .issues(ISSUE_RAW_COLOR)
         .run()
         .expectClean()
@@ -18,8 +18,8 @@ class RawColorDetectorTest {
   @Test fun appCustomColor() {
     lint()
         .files(xml("res/layout/layout.xml", """
-          |<TextView xmlns:app="http://schemas.android.com/apk/res-auto"
-          |    app:someCustomColor="#fff"/>""".trimMargin()))
+          <TextView xmlns:app="http://schemas.android.com/apk/res-auto"
+              app:someCustomColor="#fff"/>""").indented())
         .issues(ISSUE_RAW_COLOR)
         .run()
         .expect("""
@@ -32,8 +32,8 @@ class RawColorDetectorTest {
   @Test fun textColor() {
     lint()
         .files(xml("res/layout/layout.xml", """
-          |<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-          |    android:textColor="#fff"/>""".trimMargin()))
+          <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:textColor="#fff"/>""").indented())
         .issues(ISSUE_RAW_COLOR)
         .run()
         .expect("""
@@ -46,12 +46,12 @@ class RawColorDetectorTest {
   @Test fun textColorSuggestion() {
     lint()
         .files(xml("res/layout/layout.xml", """
-          |<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-          |    android:textColor="#fff"/>""".trimMargin()),
+          <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:textColor="#fff"/>""").indented(),
             xml("res/values/dimens.xml", """
-          |<resources>
-          |  <color name="white">#fff</color>
-          |</resources>""".trimMargin()))
+          <resources>
+            <color name="white">#fff</color>
+          </resources>""").indented())
         .issues(ISSUE_RAW_COLOR)
         .run()
         .expect("""
@@ -71,8 +71,8 @@ class RawColorDetectorTest {
   @Test fun ignoreText() {
     lint()
         .files(xml("res/layout/layout.xml", """
-          |<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-          |    android:text="Blub!"/>""".trimMargin()))
+          <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:text="Blub!"/>""").indented())
         .issues(ISSUE_RAW_COLOR)
         .run()
         .expectClean()
@@ -81,10 +81,10 @@ class RawColorDetectorTest {
   @Test fun textColorIgnored() {
     lint()
         .files(xml("res/layout/layout.xml", """
-          |<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-          |    xmlns:tools="http://schemas.android.com/tools"
-          |    android:textColor="#fff"
-          |    tools:ignore="RawColor"/>""".trimMargin()))
+          <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:textColor="#fff"
+              tools:ignore="RawColor"/>""").indented())
         .issues(ISSUE_RAW_COLOR)
         .run()
         .expectClean()
@@ -93,12 +93,12 @@ class RawColorDetectorTest {
   @Test fun androidDrawable() {
     lint()
         .files(xml("res/drawable/drawable.xml", """
-          |<shape
-          |    xmlns:android="http://schemas.android.com/apk/res/android"
-          |    android:shape="rectangle">
-          |  <solid android:color="#1aeebf"/>
-          |  <size android:height="4dp"/>
-          |</shape>""".trimMargin()))
+          <shape
+              xmlns:android="http://schemas.android.com/apk/res/android"
+              android:shape="rectangle">
+            <solid android:color="#1aeebf"/>
+            <size android:height="4dp"/>
+          </shape>""").indented())
         .issues(ISSUE_RAW_COLOR)
         .run()
         .expect("""
@@ -112,15 +112,15 @@ class RawColorDetectorTest {
     lint()
         .files(
         xml("res/drawable/drawable.xml", """
-          |<vector xmlns:android="http://schemas.android.com/apk/res/android"
-          |    android:height="24dp"
-          |    android:viewportHeight="24.0"
-          |    android:viewportWidth="24.0"
-          |    android:width="24dp">
-          |  <path
-          |      android:fillColor="#000000"
-          |      android:pathData="M19,13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
-          |</vector>""".trimMargin()))
+          <vector xmlns:android="http://schemas.android.com/apk/res/android"
+              android:height="24dp"
+              android:viewportHeight="24.0"
+              android:viewportWidth="24.0"
+              android:width="24dp">
+            <path
+                android:fillColor="#000000"
+                android:pathData="M19,13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+          </vector>""").indented())
         .issues(ISSUE_RAW_COLOR)
         .run()
         .expectClean()
@@ -130,12 +130,12 @@ class RawColorDetectorTest {
     lint()
         .files(
         xml("res/drawable/drawable.xml", """
-          |<vector xmlns:android="http://schemas.android.com/apk/res/android"
-          |    android:height="24dp"
-          |    android:viewportHeight="24.0"
-          |    android:viewportWidth="24.0"
-          |    android:fillColor="#000000"
-          |    android:width="24dp"/>""".trimMargin()))
+          <vector xmlns:android="http://schemas.android.com/apk/res/android"
+              android:height="24dp"
+              android:viewportHeight="24.0"
+              android:viewportWidth="24.0"
+              android:fillColor="#000000"
+              android:width="24dp"/>""").indented())
         .issues(ISSUE_RAW_COLOR)
         .run()
         .expectClean()

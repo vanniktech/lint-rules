@@ -11,11 +11,11 @@ class TodoDetectorTest {
   @Test fun javaFile() {
     lint()
         .files(java("""
-            |package foo;
-            |
-            |class Example {
-            |  // TODO: something
-            |}""".trimMargin()))
+            package foo;
+
+            class Example {
+              // TODO: something
+            }""").indented())
         .issues(ISSUE_TODO)
         .run()
         .expect("""
@@ -28,9 +28,9 @@ class TodoDetectorTest {
   @Test fun layoutFile() {
     lint()
         .files(xml("res/layout/layout.xml", """
-            |<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-            |    android:text="Blub!"/>
-            |<!-- TODO: Fix blub. -->""".trimMargin()))
+            <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+                android:text="Blub!"/>
+            <!-- TODO: Fix blub. -->""").indented())
         .issues(ISSUE_TODO)
         .run()
         .expect("""
@@ -43,11 +43,11 @@ class TodoDetectorTest {
   @Test fun gradleFile() {
     lint()
         .files(gradle("""
-            |buildscript {
-            |  repositories {
-            |    mavenCentral() // TODO: we should remove it.
-            |  }
-            |}""".trimMargin()))
+            buildscript {
+              repositories {
+                mavenCentral() // TODO: we should remove it.
+              }
+            }""").indented())
         .issues(ISSUE_TODO)
         .run()
         .expect("""
@@ -60,8 +60,8 @@ class TodoDetectorTest {
   @Test fun manifestFile() {
     lint()
         .files(manifest().withSource("""
-            |<!-- TODO: Something. -->
-            |<manifest package="com.vanniktech.lintrulesandroid"/>""".trimMargin()))
+            <!-- TODO: Something. -->
+            <manifest package="com.vanniktech.lintrulesandroid"/>""").indented())
         .issues(ISSUE_TODO)
         .run()
         .expect("""

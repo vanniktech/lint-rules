@@ -8,10 +8,10 @@ class XmlSpacingDetectorTest {
   @Test fun layoutXmlFileWithoutAnyNewLines() {
     lint()
         .files(xml("res/layout/activity_home.xml", """
-          |<merge xmlns:android="http://schemas.android.com/apk/res/android">
-          |  <TextView
-          |      android:layout_width="wrap_content"/>
-          |</merge>""".trimMargin()))
+          <merge xmlns:android="http://schemas.android.com/apk/res/android">
+            <TextView
+                android:layout_width="wrap_content"/>
+          </merge>""").indented())
         .issues(ISSUE_XML_SPACING)
         .run()
         .expectClean()
@@ -28,11 +28,11 @@ class XmlSpacingDetectorTest {
   @Test fun ignoresNewLineAtEndOfFile() {
     lint()
         .files(xml("res/layout/activity_home.xml", """
-          |<merge xmlns:android="http://schemas.android.com/apk/res/android">
-          |  <TextView
-          |      android:layout_width="wrap_content"/>
-          |</merge>
-          |""".trimMargin()))
+          <merge xmlns:android="http://schemas.android.com/apk/res/android">
+            <TextView
+                android:layout_width="wrap_content"/>
+          </merge>
+          """).indented())
         .issues(ISSUE_XML_SPACING)
         .run()
         .expectClean()
@@ -41,16 +41,16 @@ class XmlSpacingDetectorTest {
   @Test fun layoutXmlFileWithNewLines() {
     lint()
         .files(xml("res/layout/activity_home.xml", """
-          |
-          |<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android">
-          |
-          |  <TextView
-          |      xmlns:android="http://schemas.android.com/apk/res/android"
-          |      android:layout_width="wrap_content"
-          |
-          |      />
-          |
-          |</LinearLayout>""".trimMargin()))
+
+          <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android">
+
+            <TextView
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="wrap_content"
+
+                />
+
+          </LinearLayout>""").indented())
         .issues(ISSUE_XML_SPACING)
         .run()
         .expect("""
