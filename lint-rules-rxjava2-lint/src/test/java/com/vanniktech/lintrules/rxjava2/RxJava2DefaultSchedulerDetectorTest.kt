@@ -8,15 +8,15 @@ class RxJava2DefaultSchedulerDetectorTest {
   @Test fun schedulerSupportNone() {
     lint()
         .files(rxJava2(), java("""
-          |package foo;
-          |
-          |import io.reactivex.Observable;
-          |
-          |class Example {
-          |  public void foo() {
-          |    Observable.just(5);
-          |  }
-          |}""".trimMargin()))
+          package foo;
+
+          import io.reactivex.Observable;
+
+          class Example {
+            public void foo() {
+              Observable.just(5);
+            }
+          }""").indented())
         .issues(ISSUE_DEFAULT_SCHEDULER)
         .run()
         .expectClean()
@@ -25,16 +25,16 @@ class RxJava2DefaultSchedulerDetectorTest {
   @Test fun schedulerSupportComputation() {
     lint()
         .files(rxJava2(), java("""
-          |package foo;
-          |
-          |import java.util.concurrent.TimeUnit;
-          |import io.reactivex.Observable;
-          |
-          |class Example {
-          |  public void foo() {
-          |    Observable.interval(5, TimeUnit.SECONDS);
-          |  }
-          |}""".trimMargin()))
+          package foo;
+
+          import java.util.concurrent.TimeUnit;
+          import io.reactivex.Observable;
+
+          class Example {
+            public void foo() {
+              Observable.interval(5, TimeUnit.SECONDS);
+            }
+          }""").indented())
         .issues(ISSUE_DEFAULT_SCHEDULER)
         .run()
         .expect("""
@@ -47,17 +47,17 @@ class RxJava2DefaultSchedulerDetectorTest {
   @Test fun schedulerSupportCustom() {
     lint()
         .files(rxJava2(), java("""
-          |package foo;
-          |
-          |import java.util.concurrent.TimeUnit;
-          |import io.reactivex.Observable;
-          |import io.reactivex.schedulers.Schedulers;
-          |
-          |class Example {
-          |  public void foo() {
-          |    Observable.interval(5, TimeUnit.SECONDS, Schedulers.computation());
-          |  }
-          |}""".trimMargin()))
+          package foo;
+
+          import java.util.concurrent.TimeUnit;
+          import io.reactivex.Observable;
+          import io.reactivex.schedulers.Schedulers;
+
+          class Example {
+            public void foo() {
+              Observable.interval(5, TimeUnit.SECONDS, Schedulers.computation());
+            }
+          }""").indented())
         .issues(ISSUE_DEFAULT_SCHEDULER)
         .run()
         .expectClean()

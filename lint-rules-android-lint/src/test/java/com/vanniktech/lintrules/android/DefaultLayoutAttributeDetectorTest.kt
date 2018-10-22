@@ -8,11 +8,11 @@ class DefaultLayoutAttributeDetectorTest {
   @Test fun textStyleNormal() {
     lint()
         .files(xml("res/layout/ids.xml", """
-          |<TextView
-          |    xmlns:android="http://schemas.android.com/apk/res/android"
-          |    android:layout_width="wrap_content"
-          |    android:layout_height="wrap_content"
-          |    android:textStyle="normal"/>""".trimMargin()))
+          <TextView
+              xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:textStyle="normal"/>""").indented())
         .issues(ISSUE_DEFAULT_LAYOUT_ATTRIBUTE)
         .run()
         .expect("""
@@ -33,11 +33,11 @@ class DefaultLayoutAttributeDetectorTest {
   @Test fun textStyleBold() {
     lint()
         .files(xml("res/layout/ids.xml", """
-          |<TextView
-          |    xmlns:android="http://schemas.android.com/apk/res/android"
-          |    android:layout_width="wrap_content"
-          |    android:layout_height="wrap_content"
-          |    android:textStyle="bold"/>""".trimMargin()))
+          <TextView
+              xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:textStyle="bold"/>""").indented())
         .issues(ISSUE_DEFAULT_LAYOUT_ATTRIBUTE)
         .run()
         .expectClean()
@@ -46,13 +46,13 @@ class DefaultLayoutAttributeDetectorTest {
   @Test fun textStyleNormalIgnored() {
     lint()
         .files(xml("res/layout/ids.xml", """
-          |<TextView
-          |    xmlns:android="http://schemas.android.com/apk/res/android"
-          |    xmlns:tools="http://schemas.android.com/tools"
-          |    android:layout_width="wrap_content"
-          |    android:layout_height="wrap_content"
-          |    android:textStyle="normal"
-          |    tools:ignore="DefaultLayoutAttribute"/>""".trimMargin()))
+          <TextView
+              xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:textStyle="normal"
+              tools:ignore="DefaultLayoutAttribute"/>""").indented())
         .issues(ISSUE_DEFAULT_LAYOUT_ATTRIBUTE)
         .run()
         .expectClean()
@@ -61,8 +61,8 @@ class DefaultLayoutAttributeDetectorTest {
   @Test fun shouldNotCrashWithStyle() {
     lint()
         .files(xml("res/layout/ids.xml", """
-          |<TextView
-          |    style="?android:attr/borderlessButtonStyle"/>""".trimMargin()))
+          <TextView
+              style="?android:attr/borderlessButtonStyle"/>""").indented())
         .issues(ISSUE_DEFAULT_LAYOUT_ATTRIBUTE)
         .run()
         .expectClean()

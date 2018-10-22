@@ -8,9 +8,9 @@ class MatchingMenuIdDetectorTest {
   @Test fun idAndroidMainPasses() {
     lint()
         .files(xml("res/menu/menu_main.xml", """
-          |<menu xmlns:android="http://schemas.android.com/apk/res/android">
-          |  <item android:id="@+id/menuMainSomething"/>
-          |</menu>""".trimMargin()))
+          <menu xmlns:android="http://schemas.android.com/apk/res/android">
+            <item android:id="@+id/menuMainSomething"/>
+          </menu>""").indented())
         .issues(ISSUE_MATCHING_MENU_ID)
         .run()
         .expectClean()
@@ -19,9 +19,9 @@ class MatchingMenuIdDetectorTest {
   @Test fun idAndroidMainWrongOrder() {
     lint()
         .files(xml("res/menu/menu_main.xml", """
-          |<menu xmlns:android="http://schemas.android.com/apk/res/android">
-          |  <item android:id="@+id/mainMenuSomething"/>
-          |</menu>""".trimMargin()))
+          <menu xmlns:android="http://schemas.android.com/apk/res/android">
+            <item android:id="@+id/mainMenuSomething"/>
+          </menu>""").indented())
         .issues(ISSUE_MATCHING_MENU_ID)
         .run()
         .expect("""
@@ -34,9 +34,9 @@ class MatchingMenuIdDetectorTest {
   @Test fun idAndroidMenuPasses() {
     lint()
         .files(xml("res/menu/menu_custom.xml", """
-          |<menu xmlns:android="http://schemas.android.com/apk/res/android">
-          |  <item android:id="@+id/menuCustomTextView"/>
-          |</menu>""".trimMargin()))
+          <menu xmlns:android="http://schemas.android.com/apk/res/android">
+            <item android:id="@+id/menuCustomTextView"/>
+          </menu>""").indented())
         .issues(ISSUE_MATCHING_MENU_ID)
         .run()
         .expectClean()
@@ -45,9 +45,9 @@ class MatchingMenuIdDetectorTest {
   @Test fun idAndroidMenuUpperCaseLetter() {
     lint()
         .files(xml("res/menu/menu_main.xml", """
-          |<menu xmlns:android="http://schemas.android.com/apk/res/android">
-          |  <item android:id="@+id/MenuMainTextView"/>
-          |</menu>""".trimMargin()))
+          <menu xmlns:android="http://schemas.android.com/apk/res/android">
+            <item android:id="@+id/MenuMainTextView"/>
+          </menu>""").indented())
         .issues(ISSUE_MATCHING_MENU_ID)
         .run()
         .expect("""
@@ -60,9 +60,9 @@ class MatchingMenuIdDetectorTest {
   @Test fun idAndroidViewWrongOrder() {
     lint()
         .files(xml("res/menu/view_custom.xml", """
-          |<menu xmlns:android="http://schemas.android.com/apk/res/android">
-          |  <item android:id="@+id/mainViewTextView"/>
-          |</menu>""".trimMargin()))
+          <menu xmlns:android="http://schemas.android.com/apk/res/android">
+            <item android:id="@+id/mainViewTextView"/>
+          </menu>""").indented())
         .issues(ISSUE_MATCHING_MENU_ID)
         .run()
         .expect("""
@@ -75,9 +75,9 @@ class MatchingMenuIdDetectorTest {
   @Test fun idAndroidLongId() {
     lint()
         .files(xml("res/menu/view_profile_attribute_display.xml", """
-          |<menu xmlns:android="http://schemas.android.com/apk/res/android">
-          |  <item android:id="@+id/viewProfileAttributeDisplayHeader"/>
-          |</menu>""".trimMargin()))
+          <menu xmlns:android="http://schemas.android.com/apk/res/android">
+            <item android:id="@+id/viewProfileAttributeDisplayHeader"/>
+          </menu>""").indented())
         .issues(ISSUE_MATCHING_MENU_ID)
         .run()
         .expectClean()
@@ -86,9 +86,9 @@ class MatchingMenuIdDetectorTest {
   @Test fun idAndroidViewWrongOrderIgnored() {
     lint()
         .files(xml("res/menu/view_custom.xml", """
-          |<menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools" tools:ignore="MatchingMenuId" >
-          |  <item android:id="@+id/mainViewTextView"/>
-          |</menu>""".trimMargin()))
+          <menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools" tools:ignore="MatchingMenuId" >
+            <item android:id="@+id/mainViewTextView"/>
+          </menu>""").indented())
         .issues(ISSUE_MATCHING_MENU_ID)
         .run()
         .expectClean()
@@ -97,8 +97,8 @@ class MatchingMenuIdDetectorTest {
   @Test fun shouldNotCrashWithStyle() {
     lint()
         .files(xml("res/layout/ids.xml", """
-          |<TextView
-          |    style="?android:attr/borderlessButtonStyle"/>""".trimMargin()))
+          <TextView
+              style="?android:attr/borderlessButtonStyle"/>""").indented())
         .issues(ISSUE_MATCHING_MENU_ID)
         .run()
         .expectClean()

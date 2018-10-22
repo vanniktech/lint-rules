@@ -8,8 +8,8 @@ class WrongViewIdFormatDetectorTest {
   @Test fun idLowerCamelCase() {
     lint()
         .files(xml("res/layout/ids.xml", """
-          |<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-          |    android:id="@+id/lowerCamelCase"/>""".trimMargin()))
+          <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/lowerCamelCase"/>""").indented())
         .issues(ISSUE_WRONG_VIEW_ID_FORMAT)
         .run()
         .expectClean()
@@ -18,8 +18,8 @@ class WrongViewIdFormatDetectorTest {
   @Test fun idDefinedLowerCamelCase() {
     lint()
         .files(xml("res/layout/ids.xml", """
-          |<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-          |    android:id="@id/lowerCamelCase"/>""".trimMargin()))
+          <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@id/lowerCamelCase"/>""").indented())
         .issues(ISSUE_WRONG_VIEW_ID_FORMAT)
         .run()
         .expectClean()
@@ -28,8 +28,8 @@ class WrongViewIdFormatDetectorTest {
   @Test fun idCamelCase() {
     lint()
         .files(xml("res/layout/ids.xml", """
-          |<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-          |    android:id="@+id/CamelCase"/>""".trimMargin()))
+          <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/CamelCase"/>""").indented())
         .issues(ISSUE_WRONG_VIEW_ID_FORMAT)
         .run()
         .expect("""
@@ -49,8 +49,8 @@ class WrongViewIdFormatDetectorTest {
   @Test fun idSnakeCase() {
     lint()
         .files(xml("res/layout/ids.xml", """
-          |<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-          |    android:id="@+id/snake_case"/>""".trimMargin()))
+          <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/snake_case"/>""").indented())
         .issues(ISSUE_WRONG_VIEW_ID_FORMAT)
         .run()
         .expect("""

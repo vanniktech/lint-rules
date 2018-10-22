@@ -9,12 +9,12 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
   @Test fun methodNoReturnStatement() {
     lint()
         .files(java("""
-          |package foo;
-          |
-          |class Example {
-          |  public void foo() {
-          |  }
-          |}""".trimMargin()))
+          package foo;
+
+          class Example {
+            public void foo() {
+            }
+          }""").indented())
         .issues(ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE)
         .run()
         .expectClean()
@@ -23,15 +23,15 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
   @Test fun methodReturningObservableMissingCheckReturnValue() {
     lint()
         .files(rxJava2(), java("""
-          |package foo;
-          |
-          |import io.reactivex.Observable;
-          |
-          |class Example {
-          |  private Observable<Object> foo() {
-          |    return null;
-          |  }
-          |}""".trimMargin()))
+          package foo;
+
+          import io.reactivex.Observable;
+
+          class Example {
+            private Observable<Object> foo() {
+              return null;
+            }
+          }""").indented())
         .issues(ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE)
         .run()
         .expect("""
@@ -50,16 +50,16 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
   @Test fun methodReturningObservableHavingCheckReturnValue() {
     lint()
         .files(rxJava2(), java("""
-          |package foo;
-          |
-          |import io.reactivex.Observable;
-          |import io.reactivex.annotations.CheckReturnValue;
-          |
-          |class Example {
-          |  @CheckReturnValue public Observable<Object> foo() {
-          |    return null;
-          |  }
-          |}""".trimMargin()))
+          package foo;
+
+          import io.reactivex.Observable;
+          import io.reactivex.annotations.CheckReturnValue;
+
+          class Example {
+            @CheckReturnValue public Observable<Object> foo() {
+              return null;
+            }
+          }""").indented())
         .issues(ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE)
         .run()
         .expectClean()
@@ -68,15 +68,15 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
   @Test fun methodReturningFlowableMissingCheckReturnValue() {
     lint()
         .files(rxJava2(), java("""
-          |package foo;
-          |
-          |import io.reactivex.Flowable;
-          |
-          |class Example {
-          |  protected Flowable<Object> foo() {
-          |    return null;
-          |  }
-          |}""".trimMargin()))
+          package foo;
+
+          import io.reactivex.Flowable;
+
+          class Example {
+            protected Flowable<Object> foo() {
+              return null;
+            }
+          }""").indented())
         .issues(ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE)
         .run()
         .expect("""
@@ -95,16 +95,16 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
   @Test fun methodReturningFlowableHavingCheckReturnValue() {
     lint()
         .files(rxJava2(), java("""
-          |package foo;
-          |
-          |import io.reactivex.Flowable;
-          |import io.reactivex.annotations.CheckReturnValue;
-          |
-          |class Example {
-          |  @CheckReturnValue public Flowable<Object> foo() {
-          |    return null;
-          |  }
-          |}""".trimMargin()))
+          package foo;
+
+          import io.reactivex.Flowable;
+          import io.reactivex.annotations.CheckReturnValue;
+
+          class Example {
+            @CheckReturnValue public Flowable<Object> foo() {
+              return null;
+            }
+          }""").indented())
         .issues(ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE)
         .run()
         .expectClean()
@@ -113,15 +113,15 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
   @Test fun methodReturningSingleMissingCheckReturnValue() {
     lint()
         .files(rxJava2(), java("""
-          |package foo;
-          |
-          |import io.reactivex.Single;
-          |
-          |class Example {
-          |  public Single<Object> foo() {
-          |    return null;
-          |  }
-          |}""".trimMargin()))
+          package foo;
+
+          import io.reactivex.Single;
+
+          class Example {
+            public Single<Object> foo() {
+              return null;
+            }
+          }""").indented())
         .issues(ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE)
         .run()
         .expect("""
@@ -140,14 +140,14 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
   @Test fun methodReturningSingleHavingCheckReturnValue() {
     lint()
         .files(rxJava2(), java("""
-          |package foo;
-          |import io.reactivex.Single;
-          |import io.reactivex.annotations.CheckReturnValue;
-          |class Example {
-          |  @CheckReturnValue public Single<Object> foo() {
-          |    return null;
-          |  }
-          |}""".trimMargin()))
+          package foo;
+          import io.reactivex.Single;
+          import io.reactivex.annotations.CheckReturnValue;
+          class Example {
+            @CheckReturnValue public Single<Object> foo() {
+              return null;
+            }
+          }""").indented())
         .issues(ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE)
         .run()
         .expectClean()
@@ -156,15 +156,15 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
   @Test fun methodReturningMaybeMissingCheckReturnValue() {
     lint()
         .files(rxJava2(), java("""
-          |package foo;
-          |
-          |import io.reactivex.Maybe;
-          |
-          |class Example {
-          |  public Maybe<Object> foo() {
-          |    return null;
-          |  }
-          |}""".trimMargin()))
+          package foo;
+
+          import io.reactivex.Maybe;
+
+          class Example {
+            public Maybe<Object> foo() {
+              return null;
+            }
+          }""").indented())
         .issues(ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE)
         .run()
         .expect("""
@@ -183,16 +183,16 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
   @Test fun methodReturningMaybeHavingCheckReturnValue() {
     lint()
         .files(rxJava2(), java("""
-          |package foo;
-          |
-          |import io.reactivex.Maybe;
-          |import io.reactivex.annotations.CheckReturnValue;
-          |
-          |class Example {
-          |  @CheckReturnValue public Maybe<Object> foo() {
-          |    return null;
-          |  }
-          |}""".trimMargin()))
+          package foo;
+
+          import io.reactivex.Maybe;
+          import io.reactivex.annotations.CheckReturnValue;
+
+          class Example {
+            @CheckReturnValue public Maybe<Object> foo() {
+              return null;
+            }
+          }""").indented())
         .issues(ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE)
         .run()
         .expectClean()
@@ -201,15 +201,15 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
   @Test fun methodReturningCompletableMissingCheckReturnValue() {
     lint()
         .files(rxJava2(), java("""
-          |package foo;
-          |
-          |import io.reactivex.Completable;
-          |
-          |class Example {
-          |  public Completable foo() {
-          |    return null;
-          |  }
-          |}""".trimMargin()))
+          package foo;
+
+          import io.reactivex.Completable;
+
+          class Example {
+            public Completable foo() {
+              return null;
+            }
+          }""").indented())
         .issues(ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE)
         .run()
         .expect("""
@@ -228,16 +228,16 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
   @Test fun methodReturningCompletableHavingCheckReturnValue() {
     lint()
         .files(rxJava2(), java("""
-          |package foo;
-          |
-          |import io.reactivex.Completable;
-          |import io.reactivex.annotations.CheckReturnValue;
-          |
-          |class Example {
-          |  @CheckReturnValue public Completable foo() {
-          |    return null;
-          |  }
-          |}""".trimMargin()))
+          package foo;
+
+          import io.reactivex.Completable;
+          import io.reactivex.annotations.CheckReturnValue;
+
+          class Example {
+            @CheckReturnValue public Completable foo() {
+              return null;
+            }
+          }""").indented())
         .issues(ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE)
         .run()
         .expectClean()
@@ -246,15 +246,15 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
   @Test fun methodReturningDisposableMissingCheckReturnValue() {
     lint()
         .files(rxJava2(), java("""
-          |package foo;
-          |
-          |import io.reactivex.disposables.Disposable;
-          |
-          |class Example {
-          |  public Disposable foo() {
-          |    return null;
-          |  }
-          |}""".trimMargin()))
+          package foo;
+
+          import io.reactivex.disposables.Disposable;
+
+          class Example {
+            public Disposable foo() {
+              return null;
+            }
+          }""").indented())
         .issues(ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE)
         .run()
         .expect("""
@@ -273,16 +273,16 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
   @Test fun methodReturningDisposableHavingCheckReturnValue() {
     lint()
         .files(rxJava2(), java("""
-          |package foo;
-          |
-          |import io.reactivex.disposables.Disposable;
-          |import io.reactivex.annotations.CheckReturnValue;
-          |
-          |class Example {
-          |  @CheckReturnValue public Disposable foo() {
-          |    return null;
-          |  }
-          |}""".trimMargin()))
+          package foo;
+
+          import io.reactivex.disposables.Disposable;
+          import io.reactivex.annotations.CheckReturnValue;
+
+          class Example {
+            @CheckReturnValue public Disposable foo() {
+              return null;
+            }
+          }""").indented())
         .issues(ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE)
         .run()
         .expectClean()
@@ -291,15 +291,15 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
   @Test fun methodReturningTestObserverMissingCheckReturnValue() {
     lint()
         .files(rxJava2(), java("""
-          |package foo;
-          |
-          |import io.reactivex.observers.TestObserver;
-          |
-          |class Example {
-          |  public TestObserver foo() {
-          |    return null;
-          |  }
-          |}""".trimMargin()))
+          package foo;
+
+          import io.reactivex.observers.TestObserver;
+
+          class Example {
+            public TestObserver foo() {
+              return null;
+            }
+          }""").indented())
         .issues(ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE)
         .run()
         .expect("""
@@ -318,16 +318,16 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
   @Test fun methodReturningTestObserverHavingCheckReturnValue() {
     lint()
         .files(rxJava2(), java("""
-          |package foo;
-          |
-          |import io.reactivex.observers.TestObserver;
-          |import io.reactivex.annotations.CheckReturnValue;
-          |
-          |class Example {
-          |  @CheckReturnValue public TestObserver foo() {
-          |    return null;
-          |  }
-          |}""".trimMargin()))
+          package foo;
+
+          import io.reactivex.observers.TestObserver;
+          import io.reactivex.annotations.CheckReturnValue;
+
+          class Example {
+            @CheckReturnValue public TestObserver foo() {
+              return null;
+            }
+          }""").indented())
         .issues(ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE)
         .run()
         .expectClean()
@@ -336,15 +336,15 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
   @Test fun methodReturningTestSubscriberMissingCheckReturnValue() {
     lint()
         .files(rxJava2(), java("""
-          |package foo;
-          |
-          |import io.reactivex.subscribers.TestSubscriber;
-          |
-          |class Example {
-          |  public TestSubscriber foo() {
-          |    return null;
-          |  }
-          |}""".trimMargin()))
+          package foo;
+
+          import io.reactivex.subscribers.TestSubscriber;
+
+          class Example {
+            public TestSubscriber foo() {
+              return null;
+            }
+          }""").indented())
         .issues(ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE)
         .run()
         .expect("""
@@ -363,15 +363,15 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
   @Test fun kotlinMethodReturningTestSubscriberMissingCheckReturnValue() {
     lint()
         .files(rxJava2(), kt("""
-            |package foo
-            |
-            |import io.reactivex.Scheduler
-            |
-            |class Example {
-            |  fun foo(): Scheduler? {
-            |    return null
-            |  }
-            |}""".trimMargin()))
+            package foo
+
+            import io.reactivex.Scheduler
+
+            class Example {
+              fun foo(): Scheduler? {
+                return null
+              }
+            }""").indented())
         .issues(ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE)
         .run()
         .expect("""
@@ -390,16 +390,16 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
   @Test fun methodReturningTestSubscriberHavingCheckReturnValue() {
     lint()
         .files(rxJava2(), java("""
-          |package foo;
-          |
-          |import io.reactivex.subscribers.TestSubscriber;
-          |import io.reactivex.annotations.CheckReturnValue;
-          |
-          |class Example {
-          |  @CheckReturnValue public TestSubscriber foo() {
-          |    return null;
-          |  }
-          |}""".trimMargin()))
+          package foo;
+
+          import io.reactivex.subscribers.TestSubscriber;
+          import io.reactivex.annotations.CheckReturnValue;
+
+          class Example {
+            @CheckReturnValue public TestSubscriber foo() {
+              return null;
+            }
+          }""").indented())
         .issues(ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE)
         .run()
         .expectClean()
@@ -408,13 +408,13 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
   @Test fun lateInitKotlinSchedulerVariableIsIgnored() {
     lint()
         .files(rxJava2(), kt("""
-          |package foo
-          |
-          |import io.reactivex.Scheduler
-          |
-          |class Example {
-          |  lateinit var scheduler: Scheduler
-          |}""".trimMargin()))
+          package foo
+
+          import io.reactivex.Scheduler
+
+          class Example {
+            lateinit var scheduler: Scheduler
+          }""").indented())
         .issues(ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE)
         .run()
         .expectClean()

@@ -8,7 +8,7 @@ class MatchingViewIdDetectorTest {
   @Test fun idAndroidActivityPasses() {
     lint()
         .files(xml("res/layout/activity_main.xml", """
-          |<TextView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/activityMainTextView"/>""".trimMargin()))
+          <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/activityMainTextView"/>""").indented())
         .issues(ISSUE_MATCHING_VIEW_ID)
         .run()
         .expectClean()
@@ -17,7 +17,7 @@ class MatchingViewIdDetectorTest {
   @Test fun idAndroidActivityWrongOrder() {
     lint()
         .files(xml("res/layout/activity_main.xml", """
-          |<TextView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/mainActivityTextView"/>""".trimMargin()))
+          <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/mainActivityTextView"/>""").indented())
         .issues(ISSUE_MATCHING_VIEW_ID)
         .run()
         .expect("""
@@ -30,7 +30,7 @@ class MatchingViewIdDetectorTest {
   @Test fun idAndroidViewPasses() {
     lint()
         .files(xml("res/layout/view_custom.xml", """
-          |<TextView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/viewCustomTextView"/>""".trimMargin()))
+          <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/viewCustomTextView"/>""").indented())
         .issues(ISSUE_MATCHING_VIEW_ID)
         .run()
         .expectClean()
@@ -39,7 +39,7 @@ class MatchingViewIdDetectorTest {
   @Test fun idAndroidUpperCaseLetter() {
     lint()
         .files(xml("res/layout/view_custom.xml", """
-          |<TextView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/ViewCustomTextView"/>""".trimMargin()))
+          <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/ViewCustomTextView"/>""").indented())
         .issues(ISSUE_MATCHING_VIEW_ID)
         .run()
         .expect("""
@@ -52,7 +52,7 @@ class MatchingViewIdDetectorTest {
   @Test fun idAndroidViewWrongOrder() {
     lint()
         .files(xml("res/layout/view_custom.xml", """
-          |<TextView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/mainViewTextView"/>""".trimMargin()))
+          <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/mainViewTextView"/>""").indented())
         .issues(ISSUE_MATCHING_VIEW_ID)
         .run()
         .expect("""
@@ -65,7 +65,7 @@ class MatchingViewIdDetectorTest {
   @Test fun idAndroidLongId() {
     lint()
         .files(xml("res/layout/view_profile_attribute_display.xml", """
-          |<TextView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/viewProfileAttributeDisplayHeader"/>""".trimMargin()))
+          <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/viewProfileAttributeDisplayHeader"/>""").indented())
         .issues(ISSUE_MATCHING_VIEW_ID)
         .run()
         .expectClean()
@@ -74,7 +74,7 @@ class MatchingViewIdDetectorTest {
   @Test fun idAndroidViewWrongOrderIgnored() {
     lint()
         .files(xml("res/layout/view_custom.xml", """
-          |<TextView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools" tools:ignore="MatchingViewId" android:id="@+id/mainViewTextView"/>""".trimMargin()))
+          <TextView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools" tools:ignore="MatchingViewId" android:id="@+id/mainViewTextView"/>""").indented())
         .issues(ISSUE_MATCHING_VIEW_ID)
         .run()
         .expectClean()
@@ -83,8 +83,8 @@ class MatchingViewIdDetectorTest {
   @Test fun shouldNotCrashWithStyle() {
     lint()
         .files(xml("res/layout/ids.xml", """
-          |<TextView
-          |    style="?android:attr/borderlessButtonStyle"/>""".trimMargin()))
+          <TextView
+              style="?android:attr/borderlessButtonStyle"/>""").indented())
         .issues(ISSUE_MATCHING_VIEW_ID)
         .run()
         .expectClean()

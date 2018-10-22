@@ -8,9 +8,9 @@ class UnsupportedLayoutAttributeDetectorTest {
   @Test fun orientationInRelativeLayout() {
     lint()
         .files(xml("res/layout/activity_home.xml", """
-          |<RelativeLayout
-          |    xmlns:android="http://schemas.android.com/apk/res/android"
-          |    android:orientation="vertical"/>""".trimMargin()))
+          <RelativeLayout
+              xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"/>""").indented())
         .issues(ISSUE_UNSUPPORTED_LAYOUT_ATTRIBUTE)
         .run()
         .expect("""
@@ -31,9 +31,9 @@ class UnsupportedLayoutAttributeDetectorTest {
   @Test fun orientationInScrollView() {
     lint()
         .files(xml("res/layout/activity_home.xml", """
-          |<ScrollView
-          |    xmlns:android="http://schemas.android.com/apk/res/android"
-          |    android:orientation="vertical"/>""".trimMargin()))
+          <ScrollView
+              xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"/>""").indented())
         .issues(ISSUE_UNSUPPORTED_LAYOUT_ATTRIBUTE)
         .run()
         .expect("""
@@ -54,11 +54,11 @@ class UnsupportedLayoutAttributeDetectorTest {
   @Test fun orientationInMergeScrollView() {
     lint()
         .files(xml("res/layout/activity_home.xml", """
-          |<merge
-          |    xmlns:android="http://schemas.android.com/apk/res/android"
-          |    xmlns:tools="http://schemas.android.com/tools"
-          |    tools:parentTag="ScrollView"
-          |    android:orientation="vertical"/>""".trimMargin()))
+          <merge
+              xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              tools:parentTag="ScrollView"
+              android:orientation="vertical"/>""").indented())
         .issues(ISSUE_UNSUPPORTED_LAYOUT_ATTRIBUTE)
         .run()
         .expect("""
@@ -71,9 +71,9 @@ class UnsupportedLayoutAttributeDetectorTest {
   @Test fun orientationInLinearLayout() {
     lint()
         .files(xml("res/layout/activity_home.xml", """
-          |<LinearLayout
-          |    xmlns:android="http://schemas.android.com/apk/res/android"
-          |    android:orientation="vertical"/>""".trimMargin()))
+          <LinearLayout
+              xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"/>""").indented())
         .issues(ISSUE_UNSUPPORTED_LAYOUT_ATTRIBUTE)
         .run()
         .expectClean()

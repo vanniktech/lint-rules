@@ -6,24 +6,24 @@ import org.junit.Test
 
 class AndroidDetectorTest {
   private val resourcesStub = java("""
-      |package android.content.res;
-      |public class Resources {
-      |  public void getDrawable(int id) {}
-      |  public void getColor(int id) {}
-      |  public void getColorStateList(int id) {}
-      |}""".trimMargin())
+      package android.content.res;
+      public class Resources {
+        public void getDrawable(int id) {}
+        public void getColor(int id) {}
+        public void getColorStateList(int id) {}
+      }""").indented()
 
   @Test fun callingGetDrawable() {
     lint()
         .files(resourcesStub, java("""
-          |package foo;
-          |import android.content.res.Resources;
-          |class Example {
-          |  public void foo() {
-          |    Resources resources = null;
-          |    resources.getDrawable(0);
-          |  }
-          |}""".trimMargin()))
+          package foo;
+          import android.content.res.Resources;
+          class Example {
+            public void foo() {
+              Resources resources = null;
+              resources.getDrawable(0);
+            }
+          }""").indented())
         .issues(ISSUE_RESOURCES_GET_DRAWABLE)
         .run()
         .expect("""
@@ -36,14 +36,14 @@ class AndroidDetectorTest {
   @Test fun callingGetColor() {
     lint()
         .files(resourcesStub, java("""
-          |package foo;
-          |import android.content.res.Resources;
-          |class Example {
-          |  public void foo() {
-          |    Resources resources = null;
-          |    resources.getColor(0);
-          |  }
-          |}""".trimMargin()))
+          package foo;
+          import android.content.res.Resources;
+          class Example {
+            public void foo() {
+              Resources resources = null;
+              resources.getColor(0);
+            }
+          }""").indented())
         .issues(ISSUE_RESOURCES_GET_COLOR)
         .run()
         .expect("""
@@ -56,14 +56,14 @@ class AndroidDetectorTest {
   @Test fun callingGetColorStateList() {
     lint()
         .files(resourcesStub, java("""
-          |package foo;
-          |import android.content.res.Resources;
-          |class Example {
-          |  public void foo() {
-          |    Resources resources = null;
-          |    resources.getColorStateList(0);
-          |  }
-          |}""".trimMargin()))
+          package foo;
+          import android.content.res.Resources;
+          class Example {
+            public void foo() {
+              Resources resources = null;
+              resources.getColorStateList(0);
+            }
+          }""").indented())
         .issues(ISSUE_RESOURCES_GET_COLOR_STATE_LIST)
         .run()
         .expect("""

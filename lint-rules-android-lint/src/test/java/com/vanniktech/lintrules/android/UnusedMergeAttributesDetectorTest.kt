@@ -8,12 +8,12 @@ class UnusedMergeAttributesDetectorTest {
   @Test fun androidAttribute() {
     lint()
         .files(xml("res/layout/view_custom.xml", """
-            |<merge
-            |    xmlns:android="http://schemas.android.com/apk/res/android"
-            |    xmlns:tools="http://schemas.android.com/tools"
-            |    android:layout_marginTop="64dp"
-            |    tools:parentTag="android.support.constraint.ConstraintLayout"
-            |    />""".trimMargin()))
+            <merge
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_marginTop="64dp"
+                tools:parentTag="android.support.constraint.ConstraintLayout"
+                />""").indented())
         .issues(ISSUE_UNUSED_MERGE_ATTRIBUTES)
         .run()
         .expect("""
@@ -32,12 +32,12 @@ class UnusedMergeAttributesDetectorTest {
   @Test fun appAttribute() {
     lint()
         .files(xml("res/layout/view_custom.xml", """
-            |<merge
-            |    xmlns:app="http://schemas.android.com/apk/res/android"
-            |    xmlns:tools="http://schemas.android.com/tools"
-            |    app:layout_marginTop="64dp"
-            |    tools:parentTag="android.support.constraint.ConstraintLayout"
-            |    />""".trimMargin()))
+            <merge
+                xmlns:app="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                app:layout_marginTop="64dp"
+                tools:parentTag="android.support.constraint.ConstraintLayout"
+                />""").indented())
         .issues(ISSUE_UNUSED_MERGE_ATTRIBUTES)
         .run()
         .expect("""
@@ -56,10 +56,10 @@ class UnusedMergeAttributesDetectorTest {
   @Test fun ignoreMergeWithoutParentTag() {
     lint()
         .files(xml("res/layout/view_custom.xml", """
-            |<merge
-            |    xmlns:app="http://schemas.android.com/apk/res/android"
-            |    app:layout_marginTop="64dp"
-            |    />""".trimMargin()))
+            <merge
+                xmlns:app="http://schemas.android.com/apk/res/android"
+                app:layout_marginTop="64dp"
+                />""").indented())
         .issues(ISSUE_UNUSED_MERGE_ATTRIBUTES)
         .run()
         .expectClean()

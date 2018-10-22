@@ -8,14 +8,14 @@ class RxJava2DisposableDisposeCallDetectorTest {
   @Test fun callingCompositeDisposableDispose() {
     lint()
         .files(rxJava2(), java("""
-          |package foo;
-          |import io.reactivex.disposables.CompositeDisposable;
-          |class Example {
-          |  public void foo() {
-          |    CompositeDisposable cd = null;
-          |    cd.dispose();
-          |  }
-          |}""".trimMargin()))
+          package foo;
+          import io.reactivex.disposables.CompositeDisposable;
+          class Example {
+            public void foo() {
+              CompositeDisposable cd = null;
+              cd.dispose();
+            }
+          }""").indented())
         .issues(ISSUE_DISPOSABLE_DISPOSE_CALL)
         .run()
         .expect("""

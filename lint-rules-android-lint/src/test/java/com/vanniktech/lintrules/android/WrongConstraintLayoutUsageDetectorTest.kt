@@ -8,14 +8,14 @@ class WrongConstraintLayoutUsageDetectorTest {
   @Test fun constraintLeftToLeftOfIgnored() {
     lint()
         .files(xml("res/layout/ids.xml", """
-          |<TextView
-          |    xmlns:android="http://schemas.android.com/apk/res/android"
-          |    xmlns:app="http://schemas.android.com/apk/res-auto"
-          |    xmlns:tools="http://schemas.android.com/tools"
-          |    android:layout_width="wrap_content"
-          |    android:layout_height="wrap_content"
-          |    app:layout_constraintLeft_toLeftOf="parent"
-          |    tools:ignore="WrongConstraintLayoutUsage"/>""".trimMargin()))
+          <TextView
+              xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              app:layout_constraintLeft_toLeftOf="parent"
+              tools:ignore="WrongConstraintLayoutUsage"/>""").indented())
         .issues(ISSUE_WRONG_CONSTRAINT_LAYOUT_USAGE)
         .run()
         .expectClean()
@@ -24,12 +24,12 @@ class WrongConstraintLayoutUsageDetectorTest {
   @Test fun constraintLeftToLeftOf() {
     lint()
         .files(xml("res/layout/ids.xml", """
-          |<TextView
-          |    xmlns:android="http://schemas.android.com/apk/res/android"
-          |    xmlns:app="http://schemas.android.com/apk/res-auto"
-          |    android:layout_width="wrap_content"
-          |    android:layout_height="wrap_content"
-          |    app:layout_constraintLeft_toLeftOf="parent"/>""".trimMargin()))
+          <TextView
+              xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              app:layout_constraintLeft_toLeftOf="parent"/>""").indented())
         .issues(ISSUE_WRONG_CONSTRAINT_LAYOUT_USAGE)
         .run()
         .expect("""
@@ -49,12 +49,12 @@ class WrongConstraintLayoutUsageDetectorTest {
   @Test fun constraintLeftToRightOf() {
     lint()
         .files(xml("res/layout/ids.xml", """
-          |<TextView
-          |    xmlns:android="http://schemas.android.com/apk/res/android"
-          |    xmlns:app="http://schemas.android.com/apk/res-auto"
-          |    android:layout_width="wrap_content"
-          |    android:layout_height="wrap_content"
-          |    app:layout_constraintLeft_toRightOf="parent"/>""".trimMargin()))
+          <TextView
+              xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              app:layout_constraintLeft_toRightOf="parent"/>""").indented())
         .issues(ISSUE_WRONG_CONSTRAINT_LAYOUT_USAGE)
         .run()
         .expect("""
@@ -74,12 +74,12 @@ class WrongConstraintLayoutUsageDetectorTest {
   @Test fun constraintRightToRightOf() {
     lint()
         .files(xml("res/layout/ids.xml", """
-          |<TextView
-          |    xmlns:android="http://schemas.android.com/apk/res/android"
-          |    xmlns:app="http://schemas.android.com/apk/res-auto"
-          |    android:layout_width="wrap_content"
-          |    android:layout_height="wrap_content"
-          |    app:layout_constraintRight_toRightOf="parent"/>""".trimMargin()))
+          <TextView
+              xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              app:layout_constraintRight_toRightOf="parent"/>""").indented())
         .issues(ISSUE_WRONG_CONSTRAINT_LAYOUT_USAGE)
         .run()
         .expect("""
@@ -99,12 +99,12 @@ class WrongConstraintLayoutUsageDetectorTest {
   @Test fun constraintRightToLeftOf() {
     lint()
         .files(xml("res/layout/ids.xml", """
-          |<TextView
-          |    xmlns:android="http://schemas.android.com/apk/res/android"
-          |    xmlns:app="http://schemas.android.com/apk/res-auto"
-          |    android:layout_width="wrap_content"
-          |    android:layout_height="wrap_content"
-          |    app:layout_constraintRight_toLeftOf="parent"/>""".trimMargin()))
+          <TextView
+              xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              app:layout_constraintRight_toLeftOf="parent"/>""").indented())
         .issues(ISSUE_WRONG_CONSTRAINT_LAYOUT_USAGE)
         .run()
         .expect("""
@@ -124,8 +124,8 @@ class WrongConstraintLayoutUsageDetectorTest {
   @Test fun shouldNotCrashWithStyle() {
     lint()
         .files(xml("res/layout/ids.xml", """
-          |<TextView
-          |    style="?android:attr/borderlessButtonStyle"/>""".trimMargin()))
+          <TextView
+              style="?android:attr/borderlessButtonStyle"/>""").indented())
         .issues(ISSUE_WRONG_CONSTRAINT_LAYOUT_USAGE)
         .run()
         .expectClean()

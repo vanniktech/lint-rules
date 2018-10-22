@@ -10,13 +10,13 @@ class AnnotationOrderDetectorTest {
     lint()
         .allowCompilationErrors()
         .files(java("""
-          |package foo;
-          |
-          |public class MyTest {
-          |  void something() {
-          |    int something;
-          |  }
-          |}""".trimMargin()))
+          package foo;
+
+          public class MyTest {
+            void something() {
+              int something;
+            }
+          }""").indented())
         .issues(ISSUE_WRONG_ANNOTATION_ORDER)
         .run()
         .expectClean()
@@ -26,13 +26,13 @@ class AnnotationOrderDetectorTest {
     lint()
         .allowCompilationErrors()
         .files(java("""
-          |package foo;
-          |
-          |public class MyTest {
-          |  void something() {
-          |    @Test @Override int something;
-          |  }
-          |}""".trimMargin()))
+          package foo;
+
+          public class MyTest {
+            void something() {
+              @Test @Override int something;
+            }
+          }""").indented())
         .issues(ISSUE_WRONG_ANNOTATION_ORDER)
         .run()
         .expect("""
@@ -46,11 +46,11 @@ class AnnotationOrderDetectorTest {
     lint()
         .allowCompilationErrors()
         .files(java("""
-          |package foo;
-          |
-          |public class MyTest {
-          |  @Test @Override int something;
-          |}""".trimMargin()))
+          package foo;
+
+          public class MyTest {
+            @Test @Override int something;
+          }""").indented())
         .issues(ISSUE_WRONG_ANNOTATION_ORDER)
         .run()
         .expect("""
@@ -64,10 +64,10 @@ class AnnotationOrderDetectorTest {
     lint()
         .allowCompilationErrors()
         .files(java("""
-          |package foo;
-          |
-          |@Test @Override public class MyTest {
-          |}""".trimMargin()))
+          package foo;
+
+          @Test @Override public class MyTest {
+          }""").indented())
         .issues(ISSUE_WRONG_ANNOTATION_ORDER)
         .run()
         .expect("""
@@ -81,11 +81,11 @@ class AnnotationOrderDetectorTest {
     lint()
         .allowCompilationErrors()
         .files(java("""
-          |package foo;
-          |
-          |public class MyTest {
-          |  public void myTest(@Test @Override int something) { }
-          |}""".trimMargin()))
+          package foo;
+
+          public class MyTest {
+            public void myTest(@Test @Override int something) { }
+          }""").indented())
         .issues(ISSUE_WRONG_ANNOTATION_ORDER)
         .run()
         .expect("""
@@ -99,11 +99,11 @@ class AnnotationOrderDetectorTest {
     lint()
         .allowCompilationErrors()
         .files(java("""
-          |package foo;
-          |
-          |public class MyTest {
-          |  @Test @Override public void myTest() { }
-          |}""".trimMargin()))
+          package foo;
+
+          public class MyTest {
+            @Test @Override public void myTest() { }
+          }""").indented())
         .issues(ISSUE_WRONG_ANNOTATION_ORDER)
         .run()
         .expect("""
@@ -117,11 +117,11 @@ class AnnotationOrderDetectorTest {
     lint()
         .allowCompilationErrors()
         .files(java("""
-          |package foo;
-          |
-          |public class MyTest {
-          |  @StringRes @Nullable public void myTest() { }
-          |}""".trimMargin()))
+          package foo;
+
+          public class MyTest {
+            @StringRes @Nullable public void myTest() { }
+          }""").indented())
         .issues(ISSUE_WRONG_ANNOTATION_ORDER)
         .run()
         .expect("""
@@ -135,11 +135,11 @@ class AnnotationOrderDetectorTest {
     lint()
         .allowCompilationErrors()
         .files(java("""
-          |package foo;
-          |
-          |public class MyTest {
-          |  @Ignore @Test public void myTest() { }
-          |}""".trimMargin()))
+          package foo;
+
+          public class MyTest {
+            @Ignore @Test public void myTest() { }
+          }""").indented())
         .issues(ISSUE_WRONG_ANNOTATION_ORDER)
         .run()
         .expect("""
@@ -153,11 +153,11 @@ class AnnotationOrderDetectorTest {
     lint()
         .allowCompilationErrors()
         .files(java("""
-          |package foo;
-          |
-          |public class MyTest {
-          |  @Override @Deprecated public void myTest() { }
-          |}""".trimMargin()))
+          package foo;
+
+          public class MyTest {
+            @Override @Deprecated public void myTest() { }
+          }""").indented())
         .issues(ISSUE_WRONG_ANNOTATION_ORDER)
         .run()
         .expect("""
@@ -171,11 +171,11 @@ class AnnotationOrderDetectorTest {
     lint()
         .allowCompilationErrors()
         .files(java("""
-          |package foo;
-          |
-          |public class MyTest {
-          |  @SuppressWarnings @Override public void myTest() { }
-          |}""".trimMargin()))
+          package foo;
+
+          public class MyTest {
+            @SuppressWarnings @Override public void myTest() { }
+          }""").indented())
         .issues(ISSUE_WRONG_ANNOTATION_ORDER)
         .run()
         .expect("""
@@ -189,11 +189,11 @@ class AnnotationOrderDetectorTest {
     lint()
         .allowCompilationErrors()
         .files(java("""
-          |package foo;
-          |
-          |public class MyTest {
-          |  @NonNull @Nullable public void myTest() { }
-          |}""".trimMargin()))
+          package foo;
+
+          public class MyTest {
+            @NonNull @Nullable public void myTest() { }
+          }""").indented())
         .issues(ISSUE_WRONG_ANNOTATION_ORDER)
         .run()
         .expect("""
@@ -207,11 +207,11 @@ class AnnotationOrderDetectorTest {
     lint()
         .allowCompilationErrors()
         .files(java("""
-          |package foo;
-          |
-          |public class MyTest {
-          |  @CheckReturnValue @CheckResult public void myTest() { }
-          |}""".trimMargin()))
+          package foo;
+
+          public class MyTest {
+            @CheckReturnValue @CheckResult public void myTest() { }
+          }""").indented())
         .issues(ISSUE_WRONG_ANNOTATION_ORDER)
         .run()
         .expect("""
@@ -225,11 +225,11 @@ class AnnotationOrderDetectorTest {
     lint()
         .allowCompilationErrors()
         .files(java("""
-          |package foo;
-          |
-          |public class MyTest {
-          |  @Nullable @Inject public void myTest() { }
-          |}""".trimMargin()))
+          package foo;
+
+          public class MyTest {
+            @Nullable @Inject public void myTest() { }
+          }""").indented())
         .issues(ISSUE_WRONG_ANNOTATION_ORDER)
         .run()
         .expect("""
@@ -243,11 +243,11 @@ class AnnotationOrderDetectorTest {
     lint()
         .allowCompilationErrors()
         .files(java("""
-          |package foo;
-          |
-          |public class MyTest {
-          |  @NonNull @Inject public void myTest() { }
-          |}""".trimMargin()))
+          package foo;
+
+          public class MyTest {
+            @NonNull @Inject public void myTest() { }
+          }""").indented())
         .issues(ISSUE_WRONG_ANNOTATION_ORDER)
         .run()
         .expect("""
@@ -261,10 +261,10 @@ class AnnotationOrderDetectorTest {
     lint()
         .allowCompilationErrors()
         .files(java("""
-          |package foo;
-          |
-          |@Component @Singleton public interface MyComponent {
-          |}""".trimMargin()))
+          package foo;
+
+          @Component @Singleton public interface MyComponent {
+          }""").indented())
         .issues(ISSUE_WRONG_ANNOTATION_ORDER)
         .run()
         .expect("""
@@ -278,10 +278,10 @@ class AnnotationOrderDetectorTest {
     lint()
         .allowCompilationErrors()
         .files(java("""
-          |package foo;
-          |
-          |@Module @SuppressWarnings public interface MyModule {
-          |}""".trimMargin()))
+          package foo;
+
+          @Module @SuppressWarnings public interface MyModule {
+          }""").indented())
         .issues(ISSUE_WRONG_ANNOTATION_ORDER)
         .run()
         .expect("""
@@ -295,11 +295,11 @@ class AnnotationOrderDetectorTest {
     lint()
         .allowCompilationErrors()
         .files(java("""
-          |package foo;
-          |
-          |public class MyTest {
-          |  @Custom @Inject public void myTest() { }
-          |}""".trimMargin()))
+          package foo;
+
+          public class MyTest {
+            @Custom @Inject public void myTest() { }
+          }""").indented())
         .issues(ISSUE_WRONG_ANNOTATION_ORDER)
         .run()
         .expect("""
@@ -313,11 +313,11 @@ class AnnotationOrderDetectorTest {
     lint()
         .allowCompilationErrors()
         .files(kt("""
-          |package foo
-          |
-          |interface MyTest {
-          |  @CheckReturnValue @Authenticated @Post fun myTest()
-          |}""".trimMargin()))
+          package foo
+
+          interface MyTest {
+            @CheckReturnValue @Authenticated @Post fun myTest()
+          }""").indented())
         .issues(ISSUE_WRONG_ANNOTATION_ORDER)
         .run()
         .expectClean()
@@ -327,11 +327,11 @@ class AnnotationOrderDetectorTest {
     lint()
         .allowCompilationErrors()
         .files(java("""
-          |package foo;
-          |
-          |public class MyTest {
-          |  @JsonQualifier @Json public void myTest() { }
-          |}""".trimMargin()))
+          package foo;
+
+          public class MyTest {
+            @JsonQualifier @Json public void myTest() { }
+          }""").indented())
         .issues(ISSUE_WRONG_ANNOTATION_ORDER)
         .run()
         .expect("""
@@ -345,11 +345,11 @@ class AnnotationOrderDetectorTest {
     lint()
         .allowCompilationErrors()
         .files(java("""
-          |package foo;
-          |
-          |public class MyTest {
-          |  @Nullable @Json @JsonDate public void myTest() { }
-          |}""".trimMargin()))
+          package foo;
+
+          public class MyTest {
+            @Nullable @Json @JsonDate public void myTest() { }
+          }""").indented())
         .issues(ISSUE_WRONG_ANNOTATION_ORDER)
         .run()
         .expectClean()
@@ -359,11 +359,11 @@ class AnnotationOrderDetectorTest {
     lint()
         .allowCompilationErrors()
         .files(java("""
-          |package foo;
-          |
-          |public class MyTest {
-          |  @JvmStatic @Provides @Singleton @Named @Nullable public void myTest() { }
-          |}""".trimMargin()))
+          package foo;
+
+          public class MyTest {
+            @JvmStatic @Provides @Singleton @Named @Nullable public void myTest() { }
+          }""").indented())
         .issues(ISSUE_WRONG_ANNOTATION_ORDER)
         .run()
         .expectClean()
@@ -373,11 +373,11 @@ class AnnotationOrderDetectorTest {
     lint()
         .allowCompilationErrors()
         .files(java("""
-          |package foo;
-          |
-          |public class MyTest {
-          |  @Retention @Documented public void myTest() { }
-          |}""".trimMargin()))
+          package foo;
+
+          public class MyTest {
+            @Retention @Documented public void myTest() { }
+          }""").indented())
         .issues(ISSUE_WRONG_ANNOTATION_ORDER)
         .run()
         .expect("""
@@ -391,11 +391,11 @@ class AnnotationOrderDetectorTest {
     lint()
         .allowCompilationErrors()
         .files(java("""
-          |package foo;
-          |
-          |public class MyTest {
-          |  @Json @Nullable public void myTest() { }
-          |}""".trimMargin()))
+          package foo;
+
+          public class MyTest {
+            @Json @Nullable public void myTest() { }
+          }""").indented())
         .issues(ISSUE_WRONG_ANNOTATION_ORDER)
         .run()
         .expect("""
@@ -409,11 +409,11 @@ class AnnotationOrderDetectorTest {
     lint()
         .allowCompilationErrors()
         .files(java("""
-          |package foo;
-          |
-          |public class MyTest {
-          |  @IntDef @Retention public void myTest() { }
-          |}""".trimMargin()))
+          package foo;
+
+          public class MyTest {
+            @IntDef @Retention public void myTest() { }
+          }""").indented())
         .issues(ISSUE_WRONG_ANNOTATION_ORDER)
         .run()
         .expect("""
@@ -427,11 +427,11 @@ class AnnotationOrderDetectorTest {
     lint()
         .allowCompilationErrors()
         .files(java("""
-          |package foo;
-          |
-          |public class MyTest {
-          |  @SuppressWarnings @SuppressLint @Suppress public void myTest() { }
-          |}""".trimMargin()))
+          package foo;
+
+          public class MyTest {
+            @SuppressWarnings @SuppressLint @Suppress public void myTest() { }
+          }""").indented())
         .issues(ISSUE_WRONG_ANNOTATION_ORDER)
         .run()
         .expect("""
@@ -445,11 +445,11 @@ class AnnotationOrderDetectorTest {
     lint()
         .allowCompilationErrors()
         .files(java("""
-          |package foo;
-          |
-          |public class MyTest {
-          |  @TargetApi @RestrictTo @Keep public void myTest() { }
-          |}""".trimMargin()))
+          package foo;
+
+          public class MyTest {
+            @TargetApi @RestrictTo @Keep public void myTest() { }
+          }""").indented())
         .issues(ISSUE_WRONG_ANNOTATION_ORDER)
         .run()
         .expect("""
@@ -463,11 +463,11 @@ class AnnotationOrderDetectorTest {
     lint()
         .allowCompilationErrors()
         .files(java("""
-          |package foo;
-          |
-          |public class MyTest {
-          |  @ActivityKey @IntoMap @Binds public void myTest() { }
-          |}""".trimMargin()))
+          package foo;
+
+          public class MyTest {
+            @ActivityKey @IntoMap @Binds public void myTest() { }
+          }""").indented())
         .issues(ISSUE_WRONG_ANNOTATION_ORDER)
         .run()
         .expect("""
@@ -481,9 +481,9 @@ class AnnotationOrderDetectorTest {
     lint()
         .allowCompilationErrors()
         .files(kt("""
-          |package foo
-          |
-          |annotation class Foo""".trimMargin()))
+          package foo
+
+          annotation class Foo""").indented())
         .issues(ISSUE_WRONG_ANNOTATION_ORDER)
         .run()
         .expectClean()
@@ -493,11 +493,11 @@ class AnnotationOrderDetectorTest {
     lint()
         .allowCompilationErrors()
         .files(kt("""
-          |package foo
-          |
-          |import kotlin.annotation.AnnotationRetention.RUNTIME
-          |
-          |@Retention(RUNTIME) annotation class Foo""".trimMargin()))
+          package foo
+
+          import kotlin.annotation.AnnotationRetention.RUNTIME
+
+          @Retention(RUNTIME) annotation class Foo""").indented())
         .issues(ISSUE_WRONG_ANNOTATION_ORDER)
         .run()
         .expectClean()
@@ -507,11 +507,11 @@ class AnnotationOrderDetectorTest {
     lint()
         .allowCompilationErrors()
         .files(java("""
-          |package foo;
-          |
-          |public class MyTest {
-          |  @Binds @IntoMap @ActivityKey public void myTest() { }
-          |}""".trimMargin()))
+          package foo;
+
+          public class MyTest {
+            @Binds @IntoMap @ActivityKey public void myTest() { }
+          }""").indented())
         .issues(ISSUE_WRONG_ANNOTATION_ORDER)
         .run()
         .expectClean()
@@ -521,11 +521,11 @@ class AnnotationOrderDetectorTest {
     lint()
         .allowCompilationErrors()
         .files(java("""
-          |package foo;
-          |
-          |public class MyTest {
-          |  @RestrictTo @Keep public void myTest() { }
-          |}""".trimMargin()))
+          package foo;
+
+          public class MyTest {
+            @RestrictTo @Keep public void myTest() { }
+          }""").indented())
         .issues(ISSUE_WRONG_ANNOTATION_ORDER)
         .run()
         .expectClean()
@@ -535,11 +535,11 @@ class AnnotationOrderDetectorTest {
     lint()
         .allowCompilationErrors()
         .files(java("""
-          |package foo;
-          |
-          |public class MyTest {
-          |  @Custom public void myTest() { }
-          |}""".trimMargin()))
+          package foo;
+
+          public class MyTest {
+            @Custom public void myTest() { }
+          }""").indented())
         .issues(ISSUE_WRONG_ANNOTATION_ORDER)
         .run()
         .expectClean()
@@ -549,11 +549,11 @@ class AnnotationOrderDetectorTest {
     lint()
         .allowCompilationErrors()
         .files(java("""
-          |package foo;
-          |
-          |public class MyTest {
-          |  @Custom @MyCustom public void myTest() { }
-          |}""".trimMargin()))
+          package foo;
+
+          public class MyTest {
+            @Custom @MyCustom public void myTest() { }
+          }""").indented())
         .issues(ISSUE_WRONG_ANNOTATION_ORDER)
         .run()
         .expectClean()

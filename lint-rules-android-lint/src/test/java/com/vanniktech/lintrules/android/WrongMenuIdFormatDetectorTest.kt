@@ -8,9 +8,9 @@ class WrongMenuIdFormatDetectorTest {
   @Test fun idLowerCamelCase() {
     lint()
         .files(xml("res/menu/ids.xml", """
-          |<menu xmlns:android="http://schemas.android.com/apk/res/android">
-          |  <item android:id="@+id/lowerCamelCase"/>
-          |</menu>""".trimMargin()))
+          <menu xmlns:android="http://schemas.android.com/apk/res/android">
+            <item android:id="@+id/lowerCamelCase"/>
+          </menu>""").indented())
         .issues(ISSUE_WRONG_MENU_ID_FORMAT)
         .run()
         .expectClean()
@@ -19,9 +19,9 @@ class WrongMenuIdFormatDetectorTest {
   @Test fun idDefinedLowerCamelCase() {
     lint()
         .files(xml("res/menu/ids.xml", """
-          |<menu xmlns:android="http://schemas.android.com/apk/res/android">
-          |  <item android:id="@id/lowerCamelCase"/>
-          |</menu>""".trimMargin()))
+          <menu xmlns:android="http://schemas.android.com/apk/res/android">
+            <item android:id="@id/lowerCamelCase"/>
+          </menu>""").indented())
         .issues(ISSUE_WRONG_MENU_ID_FORMAT)
         .run()
         .expectClean()
@@ -30,9 +30,9 @@ class WrongMenuIdFormatDetectorTest {
   @Test fun idCamelCase() {
     lint()
         .files(xml("res/menu/ids.xml", """
-          |<menu xmlns:android="http://schemas.android.com/apk/res/android">
-          |  <item android:id="@+id/CamelCase"/>
-          |</menu>""".trimMargin()))
+          <menu xmlns:android="http://schemas.android.com/apk/res/android">
+            <item android:id="@+id/CamelCase"/>
+          </menu>""").indented())
         .issues(ISSUE_WRONG_MENU_ID_FORMAT)
         .run()
         .expect("""
@@ -51,9 +51,9 @@ class WrongMenuIdFormatDetectorTest {
   @Test fun idSnakeCase() {
     lint()
         .files(xml("res/menu/ids.xml", """
-          |<menu xmlns:android="http://schemas.android.com/apk/res/android">
-          |  <item android:id="@+id/snake_case"/>
-          |</menu>""".trimMargin()))
+          <menu xmlns:android="http://schemas.android.com/apk/res/android">
+            <item android:id="@+id/snake_case"/>
+          </menu>""").indented())
         .issues(ISSUE_WRONG_MENU_ID_FORMAT)
         .run()
         .expect("""

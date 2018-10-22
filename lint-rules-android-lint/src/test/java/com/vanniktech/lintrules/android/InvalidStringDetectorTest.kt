@@ -8,9 +8,9 @@ class InvalidStringDetectorTest {
   @Test fun validString() {
     lint()
         .files(xml("res/values/strings.xml", """
-          |<resources>
-          |  <string name="my_string">My string</string>
-          |</resources>""".trimMargin()))
+          <resources>
+            <string name="my_string">My string</string>
+          </resources>""").indented())
         .issues(ISSUE_INVALID_STRING)
         .run()
         .expectClean()
@@ -19,10 +19,10 @@ class InvalidStringDetectorTest {
   @Test fun stringContainingNewLine() {
     lint()
         .files(xml("res/values/strings.xml", """
-          |<resources>
-          |  <string name="my_string">My string"
-          |</string>
-          |</resources>""".trimMargin()))
+          <resources>
+            <string name="my_string">My string"
+          </string>
+          </resources>""").indented())
         .issues(ISSUE_INVALID_STRING)
         .run()
         .expect("""
@@ -42,9 +42,9 @@ class InvalidStringDetectorTest {
   @Test fun trailingWhitespaceAtEndString() {
     lint()
         .files(xml("res/values/strings.xml", """
-          |<resources>
-          |  <string name="my_string">My string   </string>
-          |</resources>""".trimMargin()))
+          <resources>
+            <string name="my_string">My string   </string>
+          </resources>""").indented())
         .issues(ISSUE_INVALID_STRING)
         .run()
         .expect("""
@@ -63,9 +63,9 @@ class InvalidStringDetectorTest {
   @Test fun trailingWhitespaceAtBeginningOfString() {
     lint()
         .files(xml("res/values/strings.xml", """
-          |<resources>
-          |  <string name="my_string">  My string</string>
-          |</resources>""".trimMargin()))
+          <resources>
+            <string name="my_string">  My string</string>
+          </resources>""").indented())
         .issues(ISSUE_INVALID_STRING)
         .run()
         .expect("""
@@ -84,10 +84,10 @@ class InvalidStringDetectorTest {
   @Test fun validPluralString() {
     lint()
         .files(xml("res/values/strings.xml", """
-          |<plurals name="days">
-          |  <item quantity="one">%d Day</item>
-          |  <item quantity="other">%d Days</item>
-          |</plurals>""".trimMargin()))
+          <plurals name="days">
+            <item quantity="one">%d Day</item>
+            <item quantity="other">%d Days</item>
+          </plurals>""").indented())
         .issues(ISSUE_INVALID_STRING)
         .run()
         .expectClean()
@@ -96,10 +96,10 @@ class InvalidStringDetectorTest {
   @Test fun trailingWhitespaceAtPluralStrings() {
     lint()
         .files(xml("res/values/strings.xml", """
-          |<plurals name="days">
-          |  <item quantity="one">  %d Day</item>
-          |  <item quantity="other">%d Days   </item>
-          |</plurals>""".trimMargin()))
+          <plurals name="days">
+            <item quantity="one">  %d Day</item>
+            <item quantity="other">%d Days   </item>
+          </plurals>""").indented())
         .issues(ISSUE_INVALID_STRING)
         .run()
         .expect("""
@@ -125,10 +125,10 @@ class InvalidStringDetectorTest {
   @Test fun validStringArrayString() {
     lint()
         .files(xml("res/values/strings.xml", """
-          |<string-array name="foo">
-          |  <item>1</item>
-          |  <item>2</item>
-          |</string-array>""".trimMargin()))
+          <string-array name="foo">
+            <item>1</item>
+            <item>2</item>
+          </string-array>""").indented())
         .issues(ISSUE_INVALID_STRING)
         .run()
         .expectClean()
@@ -137,10 +137,10 @@ class InvalidStringDetectorTest {
   @Test fun trailingWhitespaceAtStringArrayStrings() {
     lint()
         .files(xml("res/values/strings.xml", """
-          |<string-array name="bar">
-          |  <item>   1</item>
-          |  <item>2   </item>
-          |</string-array>""".trimMargin()))
+          <string-array name="bar">
+            <item>   1</item>
+            <item>2   </item>
+          </string-array>""").indented())
         .issues(ISSUE_INVALID_STRING)
         .run()
         .expect("""

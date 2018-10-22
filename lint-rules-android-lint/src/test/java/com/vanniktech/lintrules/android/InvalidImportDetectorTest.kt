@@ -6,28 +6,28 @@ import org.junit.Test
 
 class InvalidImportDetectorTest {
   private val r = java("""
-      |package foo;
-      |
-      |public final class R {
-      |  public static final class drawable {
-      |  }
-      |}""".trimMargin())
+      package foo;
+
+      public final class R {
+        public static final class drawable {
+        }
+      }""").indented()
 
   private val internal = java("""
-      |package com.foo.internal;
-      |
-      |public final class Foo {
-      |}""".trimMargin())
+      package com.foo.internal;
+
+      public final class Foo {
+      }""").indented()
 
   @Test fun normalRImport() {
     lint()
         .files(r, java("""
-          |package foo;
-          |
-          |import foo.R;
-          |
-          |class Example {
-          |}""".trimMargin()))
+          package foo;
+
+          import foo.R;
+
+          class Example {
+          }""").indented())
         .issues(ISSUE_INVALID_IMPORT)
         .run()
         .expectClean()
@@ -36,12 +36,12 @@ class InvalidImportDetectorTest {
   @Test fun rDrawableImport() {
     lint()
         .files(r, java("""
-          |package foo;
-          |
-          |import foo.R.drawable;
-          |
-          |class Example {
-          |}""".trimMargin()))
+          package foo;
+
+          import foo.R.drawable;
+
+          class Example {
+          }""").indented())
         .issues(ISSUE_INVALID_IMPORT)
         .run()
         .expect("""
@@ -54,12 +54,12 @@ class InvalidImportDetectorTest {
   @Test fun internalImport() {
     lint()
         .files(internal, java("""
-          |package foo;
-          |
-          |import com.foo.internal.Foo;
-          |
-          |class Example {
-          |}""".trimMargin()))
+          package foo;
+
+          import com.foo.internal.Foo;
+
+          class Example {
+          }""").indented())
         .issues(ISSUE_INVALID_IMPORT)
         .run()
         .expect("""

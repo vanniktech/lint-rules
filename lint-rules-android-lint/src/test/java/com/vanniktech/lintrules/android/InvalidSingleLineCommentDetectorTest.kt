@@ -9,13 +9,13 @@ class InvalidSingleLineCommentDetectorTest {
   @Test fun invalidSingleLineCommentNoSpace() {
     lint()
         .files(java("""
-          |package foo;
-          |
-          |class Example {
-          |  public void foo() {
-          |    //Something.
-          |  }
-          |}""".trimMargin()))
+          package foo;
+
+          class Example {
+            public void foo() {
+              //Something.
+            }
+          }""").indented())
         .issues(ISSUE_INVALID_SINGLE_LINE_COMMENT)
         .run()
         .expect("""
@@ -34,13 +34,13 @@ class InvalidSingleLineCommentDetectorTest {
   @Test fun invalidSingleLineCommentNotStartingCapitalLetter() {
     lint()
         .files(java("""
-          |package foo;
-          |
-          |class Example {
-          |  public void foo() {
-          |    // something.
-          |  }
-          |}""".trimMargin()))
+          package foo;
+
+          class Example {
+            public void foo() {
+              // something.
+            }
+          }""").indented())
         .issues(ISSUE_INVALID_SINGLE_LINE_COMMENT)
         .run()
         .expect("""
@@ -59,13 +59,13 @@ class InvalidSingleLineCommentDetectorTest {
   @Test fun invalidSingleLineCommentNoPeriodAtEnd() {
     lint()
         .files(java("""
-          |package foo;
-          |
-          |class Example {
-          |  public void foo() {
-          |    // Something
-          |  }
-          |}""".trimMargin()))
+          package foo;
+
+          class Example {
+            public void foo() {
+              // Something
+            }
+          }""").indented())
         .issues(ISSUE_INVALID_SINGLE_LINE_COMMENT)
         .run()
         .expect("""
@@ -84,16 +84,16 @@ class InvalidSingleLineCommentDetectorTest {
   @Test fun validSingleLineCommentEndingWithPeriod() {
     lint()
         .files(java("""
-          |package foo;
-          |
-          |class Example {
-          |  public void foo() {
-          |    // Something. Do not modify!
-          |    // Something. Do not modify.
-          |    // Something. Do not modify?
-          |    // Something. (Do not modify)
-          |  }
-          |}""".trimMargin()))
+          package foo;
+
+          class Example {
+            public void foo() {
+              // Something. Do not modify!
+              // Something. Do not modify.
+              // Something. Do not modify?
+              // Something. (Do not modify)
+            }
+          }""").indented())
         .issues(ISSUE_INVALID_SINGLE_LINE_COMMENT)
         .run()
         .expectClean()
@@ -102,13 +102,13 @@ class InvalidSingleLineCommentDetectorTest {
   @Test fun invalidSingleLineCommentNoSpaceBefore() {
     lint()
         .files(java("""
-          |package foo;
-          |
-          |class Example {
-          |  public void foo() {
-          |    int foo = 5 + 5;// Something.
-          |  }
-          |}""".trimMargin()))
+          package foo;
+
+          class Example {
+            public void foo() {
+              int foo = 5 + 5;// Something.
+            }
+          }""").indented())
         .issues(ISSUE_INVALID_SINGLE_LINE_COMMENT)
         .run()
         .expect("""
@@ -127,15 +127,15 @@ class InvalidSingleLineCommentDetectorTest {
   @Test fun invalidSingleLineCommentIgnoresLinks() {
     lint()
         .files(java("""
-          |package foo;
-          |
-          |class Example {
-          |  public void foo() {
-          |    String link1 = "https://android.com/";
-          |    String link2 = "http://android.com/";
-          |    String link3 = "market://details?id=5";
-          |  }
-          |}""".trimMargin()))
+          package foo;
+
+          class Example {
+            public void foo() {
+              String link1 = "https://android.com/";
+              String link2 = "http://android.com/";
+              String link3 = "market://details?id=5";
+            }
+          }""").indented())
         .issues(ISSUE_INVALID_SINGLE_LINE_COMMENT)
         .run()
         .expectClean()
@@ -144,13 +144,13 @@ class InvalidSingleLineCommentDetectorTest {
   @Test fun invalidSingleLineCommentIgnoresNoPmd() {
     lint()
         .files(java("""
-          |package foo;
-          |
-          |class Example {
-          |  public void foo() {
-          |    // NOPMD
-          |  }
-          |}""".trimMargin()))
+          package foo;
+
+          class Example {
+            public void foo() {
+              // NOPMD
+            }
+          }""").indented())
         .issues(ISSUE_INVALID_SINGLE_LINE_COMMENT)
         .run()
         .expectClean()
@@ -159,13 +159,13 @@ class InvalidSingleLineCommentDetectorTest {
   @Test fun invalidSingleLineCommentAllowsStartingDigit() {
     lint()
         .files(java("""
-          |package foo;
-          |
-          |class Example {
-          |  public void foo() {
-          |    // 2 plus 4 equals 6.
-          |  }
-          |}""".trimMargin()))
+          package foo;
+
+          class Example {
+            public void foo() {
+              // 2 plus 4 equals 6.
+            }
+          }""").indented())
         .issues(ISSUE_INVALID_SINGLE_LINE_COMMENT)
         .run()
         .expectClean()
@@ -174,13 +174,13 @@ class InvalidSingleLineCommentDetectorTest {
   @Test fun invalidSingleLineCommentIgnoresNoInspection() {
     lint()
         .files(java("""
-          |package foo;
-          |
-          |class Example {
-          |  public void foo() {
-          |    //noinspection
-          |  }
-          |}""".trimMargin()))
+          package foo;
+
+          class Example {
+            public void foo() {
+              //noinspection
+            }
+          }""").indented())
         .issues(ISSUE_INVALID_SINGLE_LINE_COMMENT)
         .run()
         .expectClean()
@@ -189,14 +189,14 @@ class InvalidSingleLineCommentDetectorTest {
   @Test fun invalidSingleLineCommentLinkInComment() {
     lint()
         .files(java("""
-          |package foo;
-          |
-          |class Example {
-          |  public void foo() {
-          |    // http://stackoverflow.com/a/38480079
-          |    // This is expected. http://stackoverflow.com/a/38480079
-          |  }
-          |}""".trimMargin()))
+          package foo;
+
+          class Example {
+            public void foo() {
+              // http://stackoverflow.com/a/38480079
+              // This is expected. http://stackoverflow.com/a/38480079
+            }
+          }""").indented())
         .issues(ISSUE_INVALID_SINGLE_LINE_COMMENT)
         .run()
         .expectClean()
@@ -205,13 +205,13 @@ class InvalidSingleLineCommentDetectorTest {
   @Test fun invalidSingleLineCommentIgnoresJustComment() {
     lint()
         .files(java("""
-          |package foo;
-          |
-          |class Example {
-          |  public void foo() {
-          |    //
-          |  }
-          |}""".trimMargin()))
+          package foo;
+
+          class Example {
+            public void foo() {
+              //
+            }
+          }""").indented())
         .issues(ISSUE_INVALID_SINGLE_LINE_COMMENT)
         .run()
         .expectClean()
@@ -219,14 +219,14 @@ class InvalidSingleLineCommentDetectorTest {
 
   @Test fun invalidSingleLineCommentIgnoresJustCommentWithTrailingWhitespace() {
     lint()
-        .files(java("""
-          |package foo;
-          |
-          |class Example {
-          |  public void foo() {
-          |    //
-          |  }
-          |}""".trimMargin().replace("//", "// ")))
+        .files(java(java("""
+          package foo;
+
+          class Example {
+            public void foo() {
+              //
+            }
+          }""").indented().contents.replace("//", "// ")))
         .issues(ISSUE_INVALID_SINGLE_LINE_COMMENT)
         .run()
         .expect("""
@@ -244,14 +244,14 @@ class InvalidSingleLineCommentDetectorTest {
 
   @Test fun invalidSingleLineCommentTrailingWhitespace() {
     lint()
-        .files(java("""
-          |package foo;
-          |
-          |class Example {
-          |  public void foo() {
-          |    // Something.
-          |  }
-          |}""".trimMargin().replace("// Something.", "// Something. ")))
+        .files(java(java("""
+          package foo;
+
+          class Example {
+            public void foo() {
+              // Something.
+            }
+          }""").indented().contents.replace("// Something.", "// Something. ")))
         .issues(ISSUE_INVALID_SINGLE_LINE_COMMENT)
         .run()
         .expect("""
@@ -270,11 +270,11 @@ class InvalidSingleLineCommentDetectorTest {
   @Test fun worksOnGradleFiles() {
     lint()
         .files(gradle("""
-          |buildscript {
-          |  repositories {
-          |    mavenCentral() // we need this.
-          |  }
-          |}""".trimMargin()))
+          buildscript {
+            repositories {
+              mavenCentral() // we need this.
+            }
+          }""").indented())
         .issues(ISSUE_INVALID_SINGLE_LINE_COMMENT)
         .run()
         .expect("""
