@@ -49,7 +49,9 @@ class LayoutFileNameMatchesClassDetector : Detector(), UastScanner {
           resourcePrefix + array.last() + "_" + array.subList(0, array.size - 1).joinToString(separator = "_")
         }
 
-    if (layoutFileName != expectedLayoutFileName) {
+    val isExactMatch = layoutFileName + "_" == expectedLayoutFileName
+
+    if (layoutFileName != expectedLayoutFileName && !isExactMatch) {
       val fix = fix()
           .replace()
           .text(layoutFileName)
