@@ -27,11 +27,13 @@ class AssertjDetector : Detector(), Detector.UastScanner {
   class AssertjDetectorHandler(private val context: JavaContext) : UElementHandler() {
     override fun visitImportStatement(node: UImportStatement) {
       node.importReference?.let { importReference ->
-        if (importReference.asSourceString().startsWith("org.assertj.core.api.Assertions")) {
+        val import = importReference.asSourceString()
+
+        if (import.startsWith("org.assertj.core.api.Assertions")) {
           val fix = LintFix.create()
               .replace()
-              .text(importReference.asSourceString())
-              .with(importReference.asSourceString().replace("org.assertj.core.api.Assertions", "org.assertj.core.api.Java6Assertions"))
+              .text(import)
+              .with(import.replace("org.assertj.core.api.Assertions", "org.assertj.core.api.Java6Assertions"))
               .build()
 
           context.report(ISSUE_ASSERTJ_IMPORT, node, context.getLocation(importReference), "Should use Java6Assertions instead", fix)
