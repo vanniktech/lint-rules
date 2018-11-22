@@ -67,6 +67,7 @@ class InvalidSingleLineCommentDetector : Detector(), Detector.UastScanner, Detec
         .replace()
         .text(group)
         .with("$group.")
+        .autoFix(true, false)
         .build()
 
     context.report(ISSUE_INVALID_SINGLE_LINE_COMMENT, location, "Comment does not end with a period.", fix)
@@ -79,6 +80,7 @@ class InvalidSingleLineCommentDetector : Detector(), Detector.UastScanner, Detec
         .replace()
         .text(group.substring(1))
         .with(Character.toUpperCase(group[1]) + group.substring(2))
+        .autoFix(true, false)
         .build()
 
     context.report(ISSUE_INVALID_SINGLE_LINE_COMMENT, location, "Comments first word should be capitalized.", fix)
@@ -91,6 +93,7 @@ class InvalidSingleLineCommentDetector : Detector(), Detector.UastScanner, Detec
         .replace()
         .text(group)
         .with(group.trimEnd())
+        .autoFix(true, false)
         .build()
 
     context.report(ISSUE_INVALID_SINGLE_LINE_COMMENT, location, "Comment contains trailing whitespace.", fix)
@@ -103,6 +106,7 @@ class InvalidSingleLineCommentDetector : Detector(), Detector.UastScanner, Detec
         .replace()
         .text(COMMENT)
         .with("// ")
+        .autoFix(true, false)
         .build()
 
     context.report(ISSUE_INVALID_SINGLE_LINE_COMMENT, location, "Comment does not contain a space at the beginning.", fix)
@@ -115,6 +119,7 @@ class InvalidSingleLineCommentDetector : Detector(), Detector.UastScanner, Detec
         .replace()
         .text(COMMENT)
         .with(" //")
+        .autoFix(true, false)
         .build()
 
     context.report(ISSUE_INVALID_SINGLE_LINE_COMMENT, location, "Comment declaration is not preceded by a single space.", fix)

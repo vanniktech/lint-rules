@@ -32,7 +32,9 @@ class ColorCasingDetector : ResourceXmlDetector() {
               .replace()
               .text(it.nodeValue)
               .with(it.nodeValue.toLowerCase())
+              .autoFix()
               .build()
+
           context.report(ISSUE_COLOR_CASING, it, context.getValueLocation(it as Attr), "Should be using lowercase letters", fix)
       }
   }

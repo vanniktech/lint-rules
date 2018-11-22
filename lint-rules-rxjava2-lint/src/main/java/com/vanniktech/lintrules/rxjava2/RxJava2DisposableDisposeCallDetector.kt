@@ -28,6 +28,7 @@ class RxJava2DisposableDisposeCallDetector : Detector(), Detector.UastScanner {
           .replace()
           .text("dispose")
           .with("clear")
+          .autoFix()
           .build()
 
       context.report(ISSUE_DISPOSABLE_DISPOSE_CALL, node, context.getNameLocation(node), "Calling dispose instead of clear.", fix)
