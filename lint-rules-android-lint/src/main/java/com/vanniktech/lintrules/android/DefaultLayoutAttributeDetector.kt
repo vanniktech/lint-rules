@@ -14,7 +14,8 @@ val ISSUE_DEFAULT_LAYOUT_ATTRIBUTE = Issue.create("DefaultLayoutAttribute",
     "Flags default layout values.",
     "Flags default layout values that are not needed. One for instance is the textStyle=\"normal\" that can be just removed.",
     CORRECTNESS, PRIORITY, WARNING,
-    Implementation(DefaultLayoutAttributeDetector::class.java, RESOURCE_FILE_SCOPE))
+    Implementation(DefaultLayoutAttributeDetector::class.java, RESOURCE_FILE_SCOPE)
+)
 
 class DefaultLayoutAttributeDetector : LayoutDetector() {
   override fun getApplicableAttributes() = listOf(ATTR_TEXT_STYLE)
@@ -24,6 +25,7 @@ class DefaultLayoutAttributeDetector : LayoutDetector() {
       val fix = fix()
           .unset(attribute.namespaceURI, attribute.localName)
           .name("Remove")
+          .autoFix()
           .build()
 
       context.report(ISSUE_DEFAULT_LAYOUT_ATTRIBUTE, attribute, context.getValueLocation(attribute), "This is the default and hence you don't need to specify it.", fix)

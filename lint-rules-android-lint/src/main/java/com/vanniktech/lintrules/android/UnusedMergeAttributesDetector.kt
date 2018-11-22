@@ -32,7 +32,7 @@ class UnusedMergeAttributesDetector : LayoutDetector() {
             val fix = fix().name("Change to tools").composite(
                 fix().set(TOOLS_URI, it.localName, it.nodeValue).build(),
                 fix().unset(it.namespaceURI, it.localName).build()
-            )
+            ).autoFix()
 
             context.report(ISSUE_UNUSED_MERGE_ATTRIBUTES, it, context.getLocation(it), "Attribute won't be used", fix)
           }

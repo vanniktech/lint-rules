@@ -26,6 +26,7 @@ class WrongViewIdFormatDetector : LayoutDetector() {
           .name("Convert to lowerCamelCase")
           .text(attribute.value)
           .with(attribute.value.idToLowerCamelCase())
+          .autoFix()
           .build()
 
       context.report(ISSUE_WRONG_VIEW_ID_FORMAT, attribute, context.getValueLocation(attribute), "Id is not in lowerCamelCaseFormat", fix)

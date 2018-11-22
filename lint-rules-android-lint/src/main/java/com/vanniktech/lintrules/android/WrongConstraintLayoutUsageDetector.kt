@@ -40,6 +40,7 @@ class WrongConstraintLayoutUsageDetector : LayoutDetector() {
             .replace()
             .text(localName)
             .with(properLocalName)
+            .autoFix()
             .build()
 
           context.report(ISSUE_WRONG_CONSTRAINT_LAYOUT_USAGE, item, context.getNameLocation(item), "This attribute won't work with RTL. Please use $properLocalName instead.", fix)

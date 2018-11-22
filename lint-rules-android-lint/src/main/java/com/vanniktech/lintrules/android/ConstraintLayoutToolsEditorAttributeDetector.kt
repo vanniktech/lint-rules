@@ -25,6 +25,7 @@ class ConstraintLayoutToolsEditorAttributeDetector : LayoutDetector() {
       val fix = fix()
           .unset(attribute.namespaceURI, attribute.localName)
           .name("Remove")
+          .autoFix()
           .build()
 
       context.report(ISSUE_CONSTRAINT_LAYOUT_TOOLS_EDITOR_ATTRIBUTE_DETECTOR, attribute, context.getNameLocation(attribute), "Don't use ${attribute.name}", fix)

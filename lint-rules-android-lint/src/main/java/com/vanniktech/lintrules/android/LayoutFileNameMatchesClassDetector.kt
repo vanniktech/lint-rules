@@ -56,6 +56,7 @@ class LayoutFileNameMatchesClassDetector : Detector(), UastScanner {
           .replace()
           .text(layoutFileName)
           .with(expectedLayoutFileName)
+          .autoFix()
           .build()
 
       context.report(ISSUE_LAYOUT_FILE_NAME_MATCHES_CLASS, node, context.getLocation(node.valueArguments.first()), "Parameter should be named R.layout.$expectedLayoutFileName", fix)

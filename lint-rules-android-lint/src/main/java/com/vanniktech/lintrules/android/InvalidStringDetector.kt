@@ -52,7 +52,7 @@ class InvalidStringDetector : ResourceXmlDetector() {
     }
 
     message?.let {
-      val fix = fix().replace().name("Fix it").text(text).with(text.trim()).build()
+      val fix = fix().replace().name("Fix it").text(text).with(text.trim()).autoFix().build()
       context.report(ISSUE_INVALID_STRING, element, context.getLocation(element), it, fix)
     }
   }

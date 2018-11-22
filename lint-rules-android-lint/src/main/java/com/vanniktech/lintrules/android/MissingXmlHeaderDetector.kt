@@ -26,6 +26,7 @@ class MissingXmlHeaderDetector : ResourceXmlDetector() {
           .name("Add xml header")
           .text(content.toString())
           .with("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n$content")
+          .autoFix()
           .build()
 
       context.report(ISSUE_MISSING_XML_HEADER, document, Location.create(context.file, content, 0, content.length), "Missing an xml header.", fix)
