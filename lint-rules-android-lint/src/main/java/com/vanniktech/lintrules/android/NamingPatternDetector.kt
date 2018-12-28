@@ -52,7 +52,7 @@ class NamingPatternDetector : Detector(), Detector.UastScanner {
       val isPropertyBakedMethod = scope is KotlinUMethod && (scope.sourcePsi as? KtProperty)?.isMember == true
 
       if (declaration.name?.isDefinedCamelCase() == false && !isPropertyBakedMethod) {
-        context.report(ISSUE_NAMING_PATTERN, scope, context.getNameLocation(scope), "Not named in defined camel case.")
+        context.report(ISSUE_NAMING_PATTERN, scope, context.getNameLocation(scope), "${declaration.name} is not named in defined camel case.")
       }
     }
   }
