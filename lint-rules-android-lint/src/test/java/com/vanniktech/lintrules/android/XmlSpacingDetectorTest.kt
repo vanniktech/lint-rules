@@ -38,6 +38,20 @@ class XmlSpacingDetectorTest {
         .expectClean()
   }
 
+  @Test fun allowNewLineBeforeComment() {
+    lint()
+        .files(xml("res/values/themes.xml", """
+          <resources>
+            <style name="Theme.YourApp.Light" parent="Theme.MaterialComponents.Light"/>
+
+            <!-- Comment. -->
+          </resources>
+          """).indented())
+        .issues(ISSUE_XML_SPACING)
+        .run()
+        .expectClean()
+  }
+
   @Test fun layoutXmlFileWithNewLines() {
     lint()
         .files(xml("res/layout/activity_home.xml", """

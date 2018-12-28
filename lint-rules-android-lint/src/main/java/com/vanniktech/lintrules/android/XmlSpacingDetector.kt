@@ -23,7 +23,9 @@ class XmlSpacingDetector : ResourceXmlDetector() {
 
     contents
         .withIndex()
-        .filter { it.value.isBlank() }
+        .windowed(2)
+        .filter { it[0].value.isBlank() && it.getOrNull(1)?.value?.trim()?.startsWith("<!--") == false }
+        .map { it[0] }
         .filterNot { it.index == contents.size - 1 }
         .forEach {
           val location = Location.create(context.file, SourcePosition(it.index, 0, it.value.length))
