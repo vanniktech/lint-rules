@@ -22,8 +22,9 @@ class MatchingViewIdDetector : LayoutDetector() {
   override fun visitAttribute(context: XmlContext, attribute: Attr) {
     val fileName = context.file.name.replace(".xml", "").toLowerCamelCase()
     val id = stripIdPrefix(attribute.value)
+    val isAndroidId = attribute.value.startsWith("@android:id/")
 
-    if (!id.startsWith(fileName)) {
+    if (!id.startsWith(fileName) && !isAndroidId) {
       context.report(ISSUE_MATCHING_VIEW_ID, attribute, context.getValueLocation(attribute), "Id should start with: $fileName")
     }
   }
