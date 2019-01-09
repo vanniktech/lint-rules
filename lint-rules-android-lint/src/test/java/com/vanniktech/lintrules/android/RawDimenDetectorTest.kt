@@ -221,6 +221,23 @@ class RawDimenDetectorTest {
         .expectClean()
   }
 
+  @Test fun ignore0DpConstraintLayoutAndroidX() {
+    lint()
+        .files(xml("res/layout/ids.xml", """
+          <androidx.constraintlayout.widget.ConstraintLayout
+              xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+          </androidx.constraintlayout.widget.ConstraintLayout>""").indented())
+        .issues(ISSUE_RAW_DIMEN)
+        .run()
+        .expectClean()
+  }
+
   @Test fun ignore0DpMergeConstraintLayout() {
     lint()
         .files(xml("res/layout/ids.xml", """
@@ -230,6 +247,25 @@ class RawDimenDetectorTest {
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               tools:parentTag="android.support.constraint.ConstraintLayout">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+          </merge>""").indented())
+        .issues(ISSUE_RAW_DIMEN)
+        .run()
+        .expectClean()
+  }
+
+  @Test fun ignore0DpMergeConstraintLayoutAndroidX() {
+    lint()
+        .files(xml("res/layout/ids.xml", """
+          <merge
+              xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
 
             <TextView
                 android:layout_width="0dp"
