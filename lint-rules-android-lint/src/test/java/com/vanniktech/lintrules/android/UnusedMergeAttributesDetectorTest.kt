@@ -12,7 +12,7 @@ class UnusedMergeAttributesDetectorTest {
                 xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_marginTop="64dp"
-                tools:parentTag="android.support.constraint.ConstraintLayout"
+                tools:parentTag="LinearLayout"
                 />""").indented())
         .issues(ISSUE_UNUSED_MERGE_ATTRIBUTES)
         .run()
@@ -36,7 +36,7 @@ class UnusedMergeAttributesDetectorTest {
                 xmlns:app="http://schemas.android.com/apk/res/android"
                 xmlns:tools="http://schemas.android.com/tools"
                 app:layout_marginTop="64dp"
-                tools:parentTag="android.support.constraint.ConstraintLayout"
+                tools:parentTag="LinearLayout"
                 />""").indented())
         .issues(ISSUE_UNUSED_MERGE_ATTRIBUTES)
         .run()
