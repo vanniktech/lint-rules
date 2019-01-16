@@ -110,6 +110,18 @@ class NamingPatternDetectorTest {
         .expectClean()
   }
 
+  @Test fun kotlinTopLevelValIgnored() {
+    lint()
+        .files(kt("""
+            package foo
+
+            val MY_CONST = 0
+            """).indented())
+        .issues(ISSUE_NAMING_PATTERN)
+        .run()
+        .expectClean()
+  }
+
   @Test fun kotlinValInvalidName() {
     lint()
         .files(kt("""
