@@ -18,7 +18,7 @@ val ISSUE_WRONG_TEST_METHOD_NAME = Issue.create("WrongTestMethodName",
     "Flags test methods that start with test.",
     "The @Test annotation already states that this is a test hence the test prefix is not necessary.",
     CORRECTNESS, PRIORITY, WARNING,
-    Implementation(WrongTestMethodNameDetector::class.java, EnumSet.of(JAVA_FILE, TEST_SOURCES)))
+    Implementation(WrongTestMethodNameDetector::class.java, EnumSet.of(JAVA_FILE, TEST_SOURCES), EnumSet.of(JAVA_FILE, TEST_SOURCES)))
 
 class WrongTestMethodNameDetector : Detector(), Detector.UastScanner {
   override fun getApplicableUastTypes() = listOf(UMethod::class.java)
