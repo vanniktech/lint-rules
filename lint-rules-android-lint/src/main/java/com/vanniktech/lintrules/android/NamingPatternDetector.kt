@@ -11,6 +11,7 @@ import com.android.tools.lint.detector.api.Scope.TEST_SOURCES
 import com.android.tools.lint.detector.api.Severity.WARNING
 import com.intellij.psi.PsiNamedElement
 import org.jetbrains.kotlin.psi.KtProperty
+import org.jetbrains.kotlin.psi.psiUtil.isTopLevelKtOrJavaMember
 import org.jetbrains.uast.UClass
 import org.jetbrains.uast.UElement
 import org.jetbrains.uast.UEnumConstant
@@ -49,9 +50,9 @@ class NamingPatternDetector : Detector(), Detector.UastScanner {
     }
 
     private fun process(scope: UElement, declaration: PsiNamedElement) {
-      val isPropertyBakedMethod = scope is KotlinUMethod && (scope.sourcePsi as? KtProperty)?.isMember == true
+      val isKotlinTopLevelOrMember = scope is KotlinUMethod && ((scope.sourcePsi as? KtProperty)?.isMember == true || scope.sourcePsi?.isTopLevelKtOrJavaMember() == true)
 
-      if (declaration.name?.isDefinedCamelCase() == false && !isPropertyBakedMethod) {
+      if (declaration.name?.isDefinedCamelCase() == false && !isKotlinTopLevelOrMember) {
         context.report(ISSUE_NAMING_PATTERN, scope, context.getNameLocation(scope), "${declaration.name} is not named in defined camel case.")
       }
     }
