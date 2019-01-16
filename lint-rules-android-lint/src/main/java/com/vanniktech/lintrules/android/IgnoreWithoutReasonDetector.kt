@@ -34,7 +34,7 @@ class IgnoreWithoutReasonDetector : Detector(), Detector.UastScanner {
     private fun processAnnotations(element: UElement, modifierListOwner: UAnnotated) {
       val annotations = context.evaluator.getAllAnnotations(modifierListOwner, false)
 
-      // Do the verification if only we have "Ignore" annotation
+      // Do the verification if only we have "Ignore" annotation.
       annotations.firstOrNull { it.qualifiedName?.split(".")?.lastOrNull() == "Ignore" }?.let {
         if (it.findDeclaredAttributeValue("value")?.getValueIfStringLiteral().isNullOrBlank()) {
           context.report(ISSUE_IGNORE_WITHOUT_REASON, element, context.getLocation(it), "Test is ignored without given any explanation.")

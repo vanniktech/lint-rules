@@ -2,6 +2,7 @@ package com.vanniktech.lintrules.android
 
 import com.android.tools.lint.checks.infrastructure.TestFiles.gradle
 import com.android.tools.lint.checks.infrastructure.TestFiles.java
+import com.android.tools.lint.checks.infrastructure.TestFiles.kt
 import com.android.tools.lint.checks.infrastructure.TestLintTask.lint
 import org.junit.Test
 
@@ -181,6 +182,16 @@ class InvalidSingleLineCommentDetectorTest {
               //noinspection
             }
           }""").indented())
+        .issues(ISSUE_INVALID_SINGLE_LINE_COMMENT)
+        .run()
+        .expectClean()
+  }
+
+  @Test fun invalidSingleLineCommentIgnoresCommentConstant() {
+    lint()
+        .files(kt("""
+           private const val COMMENT = "//"
+           """).indented())
         .issues(ISSUE_INVALID_SINGLE_LINE_COMMENT)
         .run()
         .expectClean()
