@@ -11,7 +11,7 @@ import com.android.tools.lint.detector.api.XmlContext
 import com.android.tools.lint.detector.api.computeResourcePrefix
 import org.w3c.dom.Document
 
-private val allowedPrefixes = listOf("activity_", "view_", "fragment_", "dialog_", "bottom_sheet_", "adapter_item_", "divider_", "space_")
+private val allowedPrefixes = listOf("activity_", "view_", "fragment_", "dialog_", "bottom_sheet_", "adapter_item_", "divider_", "space_", "popup_window_")
 
 val ISSUE_WRONG_LAYOUT_NAME = Issue.create("WrongLayoutName",
     "Layout names should be prefixed accordingly.",
