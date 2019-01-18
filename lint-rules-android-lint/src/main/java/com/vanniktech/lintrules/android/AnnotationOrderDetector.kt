@@ -36,6 +36,7 @@ private val annotationOrder = listOf(
     "Singleton",
     "Component",
     "SubComponent",
+    "AssistedModule",
     "Module",
     "Inject",
     "Binds",
