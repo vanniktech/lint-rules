@@ -6,10 +6,11 @@ A set of very opinionated lint rules.
 ## Android Lint Rules
 
 ```groovy
-compile 'com.vanniktech:lint-rules-android:0.8.0'
+compile 'com.vanniktech:lint-rules-android:0.9.0'
 compile 'com.vanniktech:lint-rules-android:0.9.0-SNAPSHOT'
 ```
 
+- **AlertDialogUsage** - Support library AlertDialog is much more powerful and plays better together with the new theming / styling than the AlertDialog built into the framework.
 - **AssertjImport** - Importing org.assertj.core.api.Assertions is not ideal. Since it can require Java 8. It's simple as instead org.assertj.core.api.Java6Assertions can be imported and provides guarantee to run on Java 6 as well.
 - **ColorCasing** - Colors should have lowercase letters. #ff0099 is valid while #FF0099 isn't since the FF should be written in lower case.
 - **ConstraintLayoutToolsEditorAttribute** - The tools:layout_editor xml properties are only used for previewing and won't be used in your APK hence they're unnecessary and just add overhead.
@@ -38,7 +39,7 @@ compile 'com.vanniktech:lint-rules-android:0.9.0-SNAPSHOT'
 - **UnusedMergeAttributes** - Adding android, app and other attributes to <merge> won't be used by the system for custom views and hence can lead to errors.
 - **WrongAnnotationOrder** - Annotations should always be applied with the same order to have consistency across the code base.
 - **WrongConstraintLayoutUsage** - Instead of using left & right constraints start & right should be used.
-- **WrongLayoutName** - The layout file name should be prefixed with one of the following: activity_, view_, fragment_, dialog_, bottom_sheet_, adapter_item_, divider_, space_. This will improve consistency in your code base as well as enforce a certain structure.
+- **WrongLayoutName** - The layout file name should be prefixed with one of the following: activity_, view_, fragment_, dialog_, bottom_sheet_, adapter_item_, divider_, space_, popup_window_. This will improve consistency in your code base as well as enforce a certain structure.
 - **WrongMenuIdFormat** - Menu ids should be in lowerCamelCase format. This has the benefit of saving an unnecessary underscore and also just looks nicer.
 - **WrongTestMethodName** - The @Test annotation already states that this is a test hence the test prefix is not necessary.
 - **WrongViewIdFormat** - View ids should be in lowerCamelCase format. This has the benefit of saving an unnecessary underscore and also just looks nicer.
@@ -47,7 +48,7 @@ compile 'com.vanniktech:lint-rules-android:0.9.0-SNAPSHOT'
 ## RxJava 2 Lint Rules
 
 ```groovy
-compile 'com.vanniktech:lint-rules-rxjava2:0.8.0'
+compile 'com.vanniktech:lint-rules-rxjava2:0.9.0'
 compile 'com.vanniktech:lint-rules-rxjava2:0.9.0-SNAPSHOT
 ```
 

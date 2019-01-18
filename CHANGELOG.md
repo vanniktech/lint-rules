@@ -1,7 +1,24 @@
 # Change Log
 
-Version 0.9.0 *(In development)*
---------------------------------
+Version 0.9.0 *(2019-01-18)*
+----------------------------
+
+- Update Android Gradle Plugin to 3.3.0 and Gradle to 5.1.1 [\#264](https://github.com/vanniktech/lint-rules/pull/264) ([vanniktech](https://github.com/vanniktech))
+- NamingPatternDetector: Don't flag top level properties. [\#263](https://github.com/vanniktech/lint-rules/pull/263) ([vanniktech](https://github.com/vanniktech))
+- InvalidSingleLineCommentDetector: Don't flag comment string. [\#262](https://github.com/vanniktech/lint-rules/pull/262) ([vanniktech](https://github.com/vanniktech))
+- WrongLayoutNameDetector: Allow popup\_window\_ prefix. [\#261](https://github.com/vanniktech/lint-rules/pull/261) ([vanniktech](https://github.com/vanniktech))
+- Support AndroidX. [\#260](https://github.com/vanniktech/lint-rules/pull/260) ([vanniktech](https://github.com/vanniktech))
+- NamingPattern: Print out which name is incorrect in the message. [\#258](https://github.com/vanniktech/lint-rules/pull/258) ([vanniktech](https://github.com/vanniktech))
+- MatchingViewId: Don't complain about Android ids. [\#257](https://github.com/vanniktech/lint-rules/pull/257) ([vanniktech](https://github.com/vanniktech))
+- XmlSpacing: Allow new line before comment. [\#256](https://github.com/vanniktech/lint-rules/pull/256) ([vanniktech](https://github.com/vanniktech))
+- Remove sudo: false from travis config. [\#254](https://github.com/vanniktech/lint-rules/pull/254) ([vanniktech](https://github.com/vanniktech))
+- Mark applicable quickFixes as auto fixable. [\#253](https://github.com/vanniktech/lint-rules/pull/253) ([vanniktech](https://github.com/vanniktech))
+- AssertJDetector: Extract variable. [\#249](https://github.com/vanniktech/lint-rules/pull/249) ([vanniktech](https://github.com/vanniktech))
+- LayoutFileNameMatchesClassDetector: Allow layout file to be named exactly without trailing underscore. Similiar to \#239 [\#247](https://github.com/vanniktech/lint-rules/pull/247) ([vanniktech](https://github.com/vanniktech))
+- Leverage indented on files to get syntax highlighting. [\#246](https://github.com/vanniktech/lint-rules/pull/246) ([vanniktech](https://github.com/vanniktech))
+- Use UAnnotated instead of deprecated PsiModifierListOwner. [\#244](https://github.com/vanniktech/lint-rules/pull/244) ([vanniktech](https://github.com/vanniktech))
+- Add AlertDialogUsageDetector. [\#243](https://github.com/vanniktech/lint-rules/pull/243) ([vanniktech](https://github.com/vanniktech))
+- Fix typo in WrongTestMethodName description. [\#241](https://github.com/vanniktech/lint-rules/pull/241) ([tasomaniac](https://github.com/tasomaniac))
 
 Version 0.8.0 *(2018-09-25)*
 ----------------------------
