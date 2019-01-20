@@ -291,6 +291,19 @@ class AnnotationOrderDetectorTest {
           |0 errors, 1 warnings""".trimMargin())
   }
 
+  @Test fun assistedModuleBeforeModule() {
+    lint()
+        .allowCompilationErrors()
+        .files(java("""
+          package foo;
+
+          @AssistedModule @Module(includes = AssistedInject_SearchModule.class) public interface MyModule {
+          }""").indented())
+        .issues(ISSUE_WRONG_ANNOTATION_ORDER)
+        .run()
+        .expectClean()
+  }
+
   @Test fun injectBeforeCustom() {
     lint()
         .allowCompilationErrors()
