@@ -21,6 +21,8 @@ val ISSUE_IGNORE_WITHOUT_REASON = Issue.create("IgnoreWithoutReason",
     CORRECTNESS, PRIORITY, WARNING,
     Implementation(IgnoreWithoutReasonDetector::class.java, EnumSet.of(Scope.JAVA_FILE, Scope.TEST_SOURCES)))
 
+val ANNOTATIONS = listOf("Ignore", "Disabled")
+
 class IgnoreWithoutReasonDetector : Detector(), Detector.UastScanner {
   override fun getApplicableUastTypes(): List<Class<out UElement>> = listOf(UMethod::class.java, UClass::class.java)
 
@@ -34,8 +36,8 @@ class IgnoreWithoutReasonDetector : Detector(), Detector.UastScanner {
     private fun processAnnotations(element: UElement, modifierListOwner: UAnnotated) {
       val annotations = context.evaluator.getAllAnnotations(modifierListOwner, false)
 
-      // Do the verification if only we have "Ignore" annotation.
-      annotations.firstOrNull { it.qualifiedName?.split(".")?.lastOrNull() == "Ignore" }?.let {
+      // Do the verification if only we have "Ignore" or "Disabled" annotation.
+      annotations.firstOrNull { it.qualifiedName?.split(".")?.lastOrNull() in ANNOTATIONS }?.let {
         if (it.findDeclaredAttributeValue("value")?.getValueIfStringLiteral().isNullOrBlank()) {
           context.report(ISSUE_IGNORE_WITHOUT_REASON, element, context.getLocation(it), "Test is ignored without given any explanation.")
         }
