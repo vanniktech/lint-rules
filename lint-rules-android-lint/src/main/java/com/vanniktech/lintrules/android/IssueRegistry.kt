@@ -40,7 +40,6 @@ class IssueRegistry : com.android.tools.lint.client.api.IssueRegistry() {
       ISSUE_UNSUPPORTED_LAYOUT_ATTRIBUTE,
       ISSUE_ASSERTJ_IMPORT,
       ISSUE_COLOR_CASING,
-      ISSUE_ALERT_DIALOG_USAGE,
-      ISSUE_IGNORE_WITHOUT_REASON
+      ISSUE_ALERT_DIALOG_USAGE
   )
 }
