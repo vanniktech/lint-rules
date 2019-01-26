@@ -10,8 +10,10 @@ import com.android.tools.lint.detector.api.LintFix
 import com.android.tools.lint.detector.api.Scope.JAVA_FILE
 import com.android.tools.lint.detector.api.Scope.TEST_SOURCES
 import com.android.tools.lint.detector.api.Severity.WARNING
+import com.intellij.lang.jvm.JvmModifier
 import com.intellij.psi.PsiType
 import org.jetbrains.kotlin.psi.KtProperty
+import org.jetbrains.kotlin.util.capitalizeDecapitalize.toUpperCaseAsciiOnly
 import org.jetbrains.uast.UAnnotated
 import org.jetbrains.uast.UMethod
 import org.jetbrains.uast.kotlin.declarations.KotlinUMethod
@@ -35,9 +37,12 @@ class RxJava2MethodMissingCheckReturnValueDetector : Detector(), Detector.UastSc
       val isPropertyFunction = node is KotlinUMethod && node.sourcePsi is KtProperty
 
       if (returnType != null && isTypeThatRequiresAnnotation(returnType) && !isPropertyFunction) {
-        context.evaluator.getAllAnnotations(node as UAnnotated, true)
-            .filter { "io.reactivex.annotations.CheckReturnValue" == it.qualifiedName }
-            .forEach { return }
+        val hasAnnotatedMethod = context.evaluator.getAllAnnotations(node as UAnnotated, true)
+          .any { "io.reactivex.annotations.CheckReturnValue" == it.qualifiedName }
+        if (hasAnnotatedMethod) return
+
+        val hasIgnoredModifier = ignoredModifiers().any { node.hasModifier(it) }
+        if (hasIgnoredModifier) return
 
         val modifier = node.modifierList.children.joinToString(separator = " ") { it.text }
 
@@ -63,6 +68,17 @@ class RxJava2MethodMissingCheckReturnValueDetector : Detector(), Detector.UastSc
           "io.reactivex.disposables.Disposable" == canonicalText ||
           "io.reactivex.observers.TestObserver" == canonicalText ||
           "io.reactivex.subscribers.TestSubscriber" == canonicalText
+    }
+
+    companion object {
+      private const val IGNORE_MODIFIERS_PROP = "com.vanniktech.lintrules.rxjava2.RxJava2MethodMissingCheckReturnValueDetector.ignoreMethodAccessModifiers"
+
+      private fun ignoredModifiers(): List<JvmModifier> {
+        return System.getProperty(IGNORE_MODIFIERS_PROP)
+            ?.split(",")
+            ?.map { JvmModifier.valueOf(it.toUpperCaseAsciiOnly()) }
+            .orEmpty()
+      }
     }
   }
 }
