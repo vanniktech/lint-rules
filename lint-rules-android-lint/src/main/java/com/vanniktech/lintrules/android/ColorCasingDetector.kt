@@ -10,10 +10,11 @@ import com.android.tools.lint.detector.api.Severity.WARNING
 import com.android.tools.lint.detector.api.XmlContext
 import org.w3c.dom.Attr
 import org.w3c.dom.Element
+import java.util.Locale.US
 
 val ISSUE_COLOR_CASING = Issue.create("ColorCasing",
-    "Raw colors should be defined with lowercase letters.",
-    "Colors should have lowercase letters. #ff0099 is valid while #FF0099 isn't since the FF should be written in lower case.",
+    "Raw colors should be defined with uppercase letters.",
+    "Colors should have uppercase letters. #FF0099 is valid while #ff0099 isn't since the ff should be written in uppercase.",
     CORRECTNESS, PRIORITY, WARNING,
     Implementation(ColorCasingDetector::class.java, RESOURCE_FILE_SCOPE))
 
@@ -24,18 +25,22 @@ class ColorCasingDetector : ResourceXmlDetector() {
 
   override fun visitElement(context: XmlContext, element: Element) {
     element.attributes()
-        .filter { it.nodeValue.matches(Regex("#[a-fA-F\\d]{3,8}")) }
-        .filter { it.nodeValue.any { it.isUpperCase() } }
+        .filter { it.nodeValue.matches(COLOR_REGEX) }
+        .filter { it.nodeValue.any { it.isLowerCase() } }
         .forEach {
           val fix = fix()
-              .name("Convert to lowercase")
+              .name("Convert to uppercase")
               .replace()
               .text(it.nodeValue)
-              .with(it.nodeValue.toLowerCase())
+              .with(it.nodeValue.toUpperCase(US))
               .autoFix()
               .build()
 
-          context.report(ISSUE_COLOR_CASING, it, context.getValueLocation(it as Attr), "Should be using lowercase letters", fix)
+          context.report(ISSUE_COLOR_CASING, it, context.getValueLocation(it as Attr), "Should be using uppercase letters", fix)
       }
+  }
+
+  companion object {
+    val COLOR_REGEX = Regex("#[a-fA-F\\d]{3,8}")
   }
 }
