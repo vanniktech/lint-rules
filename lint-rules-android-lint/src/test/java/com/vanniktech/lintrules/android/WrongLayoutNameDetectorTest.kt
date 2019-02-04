@@ -22,6 +22,14 @@ class WrongLayoutNameDetectorTest {
         .expectClean()
   }
 
+  @Test fun activityFileWithResourcePrefixWithNoEndingUnderscore() {
+    lint()
+      .files(xml("res/layout/unit_test_prefix_activity_home.xml", "<merge/>"), resourcePrefix("unit_test_prefix"))
+      .issues(ISSUE_WRONG_LAYOUT_NAME)
+      .run()
+      .expectClean()
+  }
+
   @Test fun layoutMatchesExactly() {
     lint()
         .files(xml("res/layout/calculator_view.xml", "<merge/>"), resourcePrefix("calculator_"))
@@ -46,6 +54,16 @@ class WrongLayoutNameDetectorTest {
         .issues(ISSUE_WRONG_LAYOUT_NAME)
         .run()
         .expect("""
+          |res/layout/random.xml: Warning: Layout does not start with one of the following prefixes: unit_test_prefix_activity_, unit_test_prefix_view_, unit_test_prefix_fragment_, unit_test_prefix_dialog_, unit_test_prefix_bottom_sheet_, unit_test_prefix_adapter_item_, unit_test_prefix_divider_, unit_test_prefix_space_, unit_test_prefix_popup_window_ [WrongLayoutName]
+          |0 errors, 1 warnings""".trimMargin())
+  }
+
+  @Test fun randomLayoutFileWithResourcePrefixWithNoEndingUnderscore() {
+    lint()
+      .files(xml("res/layout/random.xml", "<merge/>"), resourcePrefix("unit_test_prefix"))
+      .issues(ISSUE_WRONG_LAYOUT_NAME)
+      .run()
+      .expect("""
           |res/layout/random.xml: Warning: Layout does not start with one of the following prefixes: unit_test_prefix_activity_, unit_test_prefix_view_, unit_test_prefix_fragment_, unit_test_prefix_dialog_, unit_test_prefix_bottom_sheet_, unit_test_prefix_adapter_item_, unit_test_prefix_divider_, unit_test_prefix_space_, unit_test_prefix_popup_window_ [WrongLayoutName]
           |0 errors, 1 warnings""".trimMargin())
   }
