@@ -23,14 +23,14 @@ internal fun String.idToLowerCamelCase(): String {
   return "${parts[0]}/${parts[1].toLowerCamelCase()}"
 }
 
-internal fun String.toSnakeCase() = toCharArray().fold("", { accumulator, current ->
+internal fun String.toSnakeCase() = toCharArray().fold("") { accumulator, current ->
   val prefix = when {
     current.isUpperCase() && accumulator.lastOrNull()?.isDigit() == false -> "_"
     else -> ""
   }
 
   accumulator + prefix + current.toLowerCase()
-})
+}
 
 internal fun Node.children() = (0 until childNodes.length).map { childNodes.item(it) }
 

@@ -51,8 +51,9 @@ class RxJava2MethodMissingCheckReturnValueDetector : Detector(), Detector.UastSc
             .name("Add @CheckReturnValue")
             .range(context.getLocation(node))
             .shortenNames()
+            .reformat(true)
             .text(modifier)
-            .with("io.reactivex.annotations.CheckReturnValue $modifier")
+            .with("@io.reactivex.annotations.CheckReturnValue $modifier")
             .autoFix()
             .build()
 
