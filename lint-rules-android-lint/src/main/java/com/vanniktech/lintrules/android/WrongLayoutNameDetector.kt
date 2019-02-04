@@ -21,7 +21,7 @@ val ISSUE_WRONG_LAYOUT_NAME = Issue.create("WrongLayoutName",
 
 class WrongLayoutNameDetector : LayoutDetector() {
   override fun visitDocument(context: XmlContext, document: Document) {
-    val modified = allowedPrefixes.map { context.project.resourcePrefix() + it }
+    val modified = allowedPrefixes.map { context.project.resourcePrefix().forceUnderscoreIfNeeded() + it }
     val doesNotStartWithPrefix = modified.none { context.file.name.startsWith(it) }
     val notEquals = modified.map { it.dropLast(1) }.none { context.file.name == "$it.xml" }
 
@@ -30,5 +30,7 @@ class WrongLayoutNameDetector : LayoutDetector() {
     }
   }
 }
+
+private fun String.forceUnderscoreIfNeeded() = if (isNotEmpty() && !endsWith("_")) plus("_") else this
 
 fun Project.resourcePrefix() = if (isGradleProject) computeResourcePrefix(gradleProjectModel).orEmpty() else ""
