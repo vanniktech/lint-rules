@@ -31,6 +31,7 @@ class ColorCasingDetector : ResourceXmlDetector() {
           val fix = fix()
               .name("Convert to uppercase")
               .replace()
+              // .range(context.getValueLocation(it as Attr)) I thought this will help but it does not.
               .text(it.nodeValue)
               .with(it.nodeValue.toUpperCase(US))
               .autoFix()
