@@ -5,16 +5,6 @@ import com.android.tools.lint.checks.infrastructure.TestLintTask.lint
 import org.junit.Test
 
 class ColorCasingDetectorTest {
-  @Test fun lowercaseColor() {
-    lint()
-        .files(xml("res/layout/layout.xml", """
-          <TextView xmlns:tools="http://schemas.android.com/tools"
-              tools:textColor="#fff"/>""").indented())
-        .issues(ISSUE_COLOR_CASING)
-        .run()
-        .expectClean()
-  }
-
   @Test fun uppercaseColor() {
     lint()
         .files(xml("res/layout/layout.xml", """
@@ -22,17 +12,27 @@ class ColorCasingDetectorTest {
               tools:textColor="#FFF"/>""").indented())
         .issues(ISSUE_COLOR_CASING)
         .run()
+        .expectClean()
+  }
+
+  @Test fun lowercaseColor() {
+    lint()
+        .files(xml("res/layout/layout.xml", """
+          <TextView xmlns:tools="http://schemas.android.com/tools"
+              tools:textColor="#fff"/>""").indented())
+        .issues(ISSUE_COLOR_CASING)
+        .run()
         .expect("""
-            |res/layout/layout.xml:2: Warning: Should be using lowercase letters [ColorCasing]
-            |    tools:textColor="#FFF"/>
+            |res/layout/layout.xml:2: Warning: Should be using uppercase letters [ColorCasing]
+            |    tools:textColor="#fff"/>
             |                     ~~~~
             |0 errors, 1 warnings""".trimMargin())
         .expectFixDiffs("""
-            |Fix for res/layout/layout.xml line 2: Convert to lowercase:
+            |Fix for res/layout/layout.xml line 2: Convert to uppercase:
             |@@ -2 +2
-            |-     tools:textColor="#FFF"/>
+            |-     tools:textColor="#fff"/>
             |@@ -3 +2
-            |+     tools:textColor="#fff"/>
+            |+     tools:textColor="#FFF"/>
             |""".trimMargin())
   }
 
@@ -48,15 +48,15 @@ class ColorCasingDetectorTest {
         .issues(ISSUE_COLOR_CASING)
         .run()
         .expect("""
-            |res/drawable/drawable.xml:4: Warning: Should be using lowercase letters [ColorCasing]
+            |res/drawable/drawable.xml:4: Warning: Should be using uppercase letters [ColorCasing]
             |  <solid android:color="#1Aeebf"/>
             |                        ~~~~~~~
             |0 errors, 1 warnings""".trimMargin())
         .expectFixDiffs("""
-            |Fix for res/drawable/drawable.xml line 4: Convert to lowercase:
+            |Fix for res/drawable/drawable.xml line 4: Convert to uppercase:
             |@@ -4 +4
             |-   <solid android:color="#1Aeebf"/>
-            |+   <solid android:color="#1aeebf"/>
+            |+   <solid android:color="#1AEEBF"/>
             |""".trimMargin())
   }
 }

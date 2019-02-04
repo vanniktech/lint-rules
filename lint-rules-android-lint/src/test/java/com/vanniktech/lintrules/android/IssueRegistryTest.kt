@@ -32,7 +32,7 @@ class IssueRegistryTest {
     assertEquals("""
         - **AlertDialogUsage** - Support library AlertDialog is much more powerful and plays better together with the new theming / styling than the AlertDialog built into the framework.
         - **AssertjImport** - Importing org.assertj.core.api.Assertions is not ideal. Since it can require Java 8. It's simple as instead org.assertj.core.api.Java6Assertions can be imported and provides guarantee to run on Java 6 as well.
-        - **ColorCasing** - Colors should have lowercase letters. #ff0099 is valid while #FF0099 isn't since the FF should be written in lower case.
+        - **ColorCasing** - Colors should have uppercase letters. #FF0099 is valid while #ff0099 isn't since the ff should be written in uppercase.
         - **ConstraintLayoutToolsEditorAttribute** - The tools:layout_editor xml properties are only used for previewing and won't be used in your APK hence they're unnecessary and just add overhead.
         - **DefaultLayoutAttribute** - Flags default layout values that are not needed. One for instance is the textStyle="normal" that can be just removed.
         - **InvalidImport** - Flags invalid imports. One example is com.foo.bar.R.drawable. Instead just the generated class R should be imported and not R.drawable. Also you should never import anything that's in an internal package.
