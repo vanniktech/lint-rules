@@ -6,7 +6,7 @@ import com.android.tools.lint.detector.api.Implementation
 import com.android.tools.lint.detector.api.Issue
 import com.android.tools.lint.detector.api.Location
 import com.android.tools.lint.detector.api.ResourceXmlDetector
-import com.android.tools.lint.detector.api.Scope
+import com.android.tools.lint.detector.api.Scope.Companion.RESOURCE_FILE_SCOPE
 import com.android.tools.lint.detector.api.Severity.WARNING
 import com.android.tools.lint.detector.api.XmlContext
 import org.w3c.dom.Document
@@ -15,7 +15,7 @@ val ISSUE_XML_SPACING = Issue.create("XmlSpacing",
     "XML files should not contain any new lines.",
     "Having newlines in xml files just adds noise and should be avoided. The only exception is the new lint at the end of the file.",
     CORRECTNESS, PRIORITY, WARNING,
-    Implementation(XmlSpacingDetector::class.java, Scope.RESOURCE_FILE_SCOPE))
+    Implementation(XmlSpacingDetector::class.java, RESOURCE_FILE_SCOPE))
 
 class XmlSpacingDetector : ResourceXmlDetector() {
   override fun visitDocument(context: XmlContext, document: Document) {

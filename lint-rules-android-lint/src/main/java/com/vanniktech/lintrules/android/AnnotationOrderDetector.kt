@@ -8,7 +8,6 @@ import com.android.tools.lint.detector.api.Implementation
 import com.android.tools.lint.detector.api.Issue
 import com.android.tools.lint.detector.api.JavaContext
 import com.android.tools.lint.detector.api.Scope.JAVA_FILE
-import com.android.tools.lint.detector.api.Scope.TEST_SOURCES
 import com.android.tools.lint.detector.api.Severity.WARNING
 import org.jetbrains.uast.UAnnotated
 import org.jetbrains.uast.UClass
@@ -144,7 +143,7 @@ val ISSUE_WRONG_ANNOTATION_ORDER = Issue.create("WrongAnnotationOrder",
     "Checks that Annotations comply with a certain order.",
     "Annotations should always be applied with the same order to have consistency across the code base.",
     CORRECTNESS, PRIORITY, WARNING,
-    Implementation(AnnotationOrderDetector::class.java, EnumSet.of(JAVA_FILE, TEST_SOURCES)))
+    Implementation(AnnotationOrderDetector::class.java, EnumSet.of(JAVA_FILE)))
 
 class AnnotationOrderDetector : Detector(), UastScanner {
   override fun getApplicableUastTypes() = listOf<Class<out UElement>>(UVariable::class.java, UMethod::class.java, UClass::class.java)

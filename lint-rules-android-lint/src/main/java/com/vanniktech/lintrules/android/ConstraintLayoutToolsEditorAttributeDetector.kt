@@ -4,7 +4,7 @@ import com.android.tools.lint.detector.api.Category.Companion.CORRECTNESS
 import com.android.tools.lint.detector.api.Implementation
 import com.android.tools.lint.detector.api.Issue
 import com.android.tools.lint.detector.api.LayoutDetector
-import com.android.tools.lint.detector.api.Scope
+import com.android.tools.lint.detector.api.Scope.Companion.RESOURCE_FILE_SCOPE
 import com.android.tools.lint.detector.api.Severity.WARNING
 import com.android.tools.lint.detector.api.XmlContext
 import org.w3c.dom.Attr
@@ -13,7 +13,7 @@ val ISSUE_CONSTRAINT_LAYOUT_TOOLS_EDITOR_ATTRIBUTE_DETECTOR = Issue.create("Cons
     "Flags tools:layout_editor xml properties.",
     "The tools:layout_editor xml properties are only used for previewing and won't be used in your APK hence they're unnecessary and just add overhead.",
     CORRECTNESS, PRIORITY, WARNING,
-    Implementation(ConstraintLayoutToolsEditorAttributeDetector::class.java, Scope.RESOURCE_FILE_SCOPE))
+    Implementation(ConstraintLayoutToolsEditorAttributeDetector::class.java, RESOURCE_FILE_SCOPE))
 
 class ConstraintLayoutToolsEditorAttributeDetector : LayoutDetector() {
   override fun getApplicableAttributes() = ALL

@@ -7,7 +7,6 @@ import com.android.tools.lint.detector.api.Implementation
 import com.android.tools.lint.detector.api.Issue
 import com.android.tools.lint.detector.api.JavaContext
 import com.android.tools.lint.detector.api.Scope.JAVA_FILE
-import com.android.tools.lint.detector.api.Scope.TEST_SOURCES
 import com.android.tools.lint.detector.api.Severity.WARNING
 import org.jetbrains.uast.UImportStatement
 import java.util.EnumSet
@@ -16,7 +15,7 @@ val ISSUE_INVALID_IMPORT = Issue.create("InvalidImport",
     "Flags invalid imports.",
     "Flags invalid imports. One example is com.foo.bar.R.drawable. Instead just the generated class R should be imported and not R.drawable. Also you should never import anything that's in an internal package.",
     CORRECTNESS, PRIORITY, WARNING,
-    Implementation(InvalidImportDetector::class.java, EnumSet.of(JAVA_FILE, TEST_SOURCES)))
+    Implementation(InvalidImportDetector::class.java, EnumSet.of(JAVA_FILE)))
 
 private val disallowedImports = listOf(".R.", "internal.", "internaI.")
 

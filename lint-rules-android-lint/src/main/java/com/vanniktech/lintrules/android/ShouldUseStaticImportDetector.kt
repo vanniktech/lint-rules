@@ -7,7 +7,6 @@ import com.android.tools.lint.detector.api.Implementation
 import com.android.tools.lint.detector.api.Issue
 import com.android.tools.lint.detector.api.JavaContext
 import com.android.tools.lint.detector.api.Scope.JAVA_FILE
-import com.android.tools.lint.detector.api.Scope.TEST_SOURCES
 import com.android.tools.lint.detector.api.Severity.WARNING
 import com.android.tools.lint.detector.api.UastLintUtils
 import com.intellij.psi.PsiElement
@@ -22,7 +21,7 @@ val ISSUE_SHOULD_USE_STATIC_IMPORT = Issue.create("ShouldUseStaticImport",
     "Flags declarations that should be statically imported.",
     "Certain declarations like TimeUnit.SECONDS should be statically imported to increase the readability.",
     CORRECTNESS, PRIORITY, WARNING,
-    Implementation(ShouldUseStaticImportDetector::class.java, EnumSet.of(JAVA_FILE, TEST_SOURCES)))
+    Implementation(ShouldUseStaticImportDetector::class.java, EnumSet.of(JAVA_FILE)))
 
 @Suppress("Detekt.StringLiteralDuplication")
 private val methodsToStaticallyImport = mapOf(
@@ -205,7 +204,7 @@ private val referencesToStaticallyImport = mapOf(
 class ShouldUseStaticImportDetector : Detector(), Detector.UastScanner {
   override fun getApplicableMethodNames() = methodsToStaticallyImport.keys.toList()
 
-  override fun visitMethod(context: JavaContext, node: UCallExpression, method: PsiMethod) {
+  override fun visitMethodCall(context: JavaContext, node: UCallExpression, method: PsiMethod) {
     val methodName = node.methodName
     val className = methodsToStaticallyImport[methodName]
 

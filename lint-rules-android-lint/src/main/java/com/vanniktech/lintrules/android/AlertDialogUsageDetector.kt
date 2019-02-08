@@ -7,7 +7,6 @@ import com.android.tools.lint.detector.api.Implementation
 import com.android.tools.lint.detector.api.Issue
 import com.android.tools.lint.detector.api.JavaContext
 import com.android.tools.lint.detector.api.Scope.JAVA_FILE
-import com.android.tools.lint.detector.api.Scope.TEST_SOURCES
 import com.android.tools.lint.detector.api.Severity.WARNING
 import com.intellij.psi.PsiType
 import org.jetbrains.uast.UClass
@@ -19,7 +18,7 @@ val ISSUE_ALERT_DIALOG_USAGE = Issue.create("AlertDialogUsage",
     "Use the support library AlertDialog instead of android.app.AlertDialog.",
     "Support library AlertDialog is much more powerful and plays better together with the new theming / styling than the AlertDialog built into the framework.",
     CORRECTNESS, PRIORITY, WARNING,
-    Implementation(AlertDialogUsageDetector::class.java, EnumSet.of(JAVA_FILE, TEST_SOURCES)))
+    Implementation(AlertDialogUsageDetector::class.java, EnumSet.of(JAVA_FILE)))
 
 private const val FQDN_ANDROID_ALERT_DIALOG = "android.app.AlertDialog"
 

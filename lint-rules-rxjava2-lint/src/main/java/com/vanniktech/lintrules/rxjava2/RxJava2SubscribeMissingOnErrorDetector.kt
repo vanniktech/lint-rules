@@ -6,7 +6,6 @@ import com.android.tools.lint.detector.api.Implementation
 import com.android.tools.lint.detector.api.Issue
 import com.android.tools.lint.detector.api.JavaContext
 import com.android.tools.lint.detector.api.Scope.JAVA_FILE
-import com.android.tools.lint.detector.api.Scope.TEST_SOURCES
 import com.android.tools.lint.detector.api.Severity.ERROR
 import com.intellij.psi.PsiMethod
 import org.jetbrains.uast.UCallExpression
@@ -16,12 +15,12 @@ import java.util.EnumSet
     "Flags a version of the subscribe() method without an error Consumer.",
     "When calling the subscribe() method an error Consumer should always be used. Otherwise errors might be thrown and may crash the application or get forwarded to the Plugin Error handler.",
     CORRECTNESS, PRIORITY, ERROR,
-    Implementation(RxJava2SubscribeMissingOnErrorDetector::class.java, EnumSet.of(JAVA_FILE, TEST_SOURCES)))
+    Implementation(RxJava2SubscribeMissingOnErrorDetector::class.java, EnumSet.of(JAVA_FILE)))
 
 class RxJava2SubscribeMissingOnErrorDetector : Detector(), Detector.UastScanner {
   override fun getApplicableMethodNames() = listOf("subscribe")
 
-  override fun visitMethod(context: JavaContext, node: UCallExpression, method: PsiMethod) {
+  override fun visitMethodCall(context: JavaContext, node: UCallExpression, method: PsiMethod) {
     val evaluator = context.evaluator
 
     val isInObservable = evaluator.isMemberInClass(method, "io.reactivex.Observable")
