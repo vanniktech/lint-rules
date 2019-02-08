@@ -29,7 +29,14 @@ class MatchingMenuIdDetector : ResourceXmlDetector() {
     val id = stripIdPrefix(attribute.value)
 
     if (!id.startsWith(fileName)) {
-      context.report(ISSUE_MATCHING_MENU_ID, attribute, context.getValueLocation(attribute), "Id should start with: $fileName")
+      val fix = fix()
+          .replace()
+          .text(id)
+          .with(fileName)
+          .autoFix()
+          .build()
+
+      context.report(ISSUE_MATCHING_MENU_ID, attribute, context.getValueLocation(attribute), "Id should start with: $fileName", fix)
     }
   }
 }
