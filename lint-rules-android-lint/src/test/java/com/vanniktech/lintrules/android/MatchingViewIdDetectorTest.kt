@@ -25,6 +25,13 @@ class MatchingViewIdDetectorTest {
             |<TextView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/mainActivityTextView"/>
             |                                                                                 ~~~~~~~~~~~~~~~~~~~~~~~~~
             |0 errors, 1 warnings""".trimMargin())
+        .expectFixDiffs("""
+            |Fix for res/layout/activity_main.xml line 1: Replace with activityMain:
+            |@@ -1 +1
+            |- <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/mainActivityTextView"/>
+            |@@ -2 +1
+            |+ <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/activityMain"/>
+            |""".trimMargin())
   }
 
   @Test fun idAndroidViewPasses() {
@@ -47,6 +54,13 @@ class MatchingViewIdDetectorTest {
             |<TextView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/ViewCustomTextView"/>
             |                                                                                 ~~~~~~~~~~~~~~~~~~~~~~~
             |0 errors, 1 warnings""".trimMargin())
+        .expectFixDiffs("""
+            |Fix for res/layout/view_custom.xml line 1: Replace with viewCustom:
+            |@@ -1 +1
+            |- <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/ViewCustomTextView"/>
+            |@@ -2 +1
+            |+ <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/viewCustom"/>
+            |""".trimMargin())
   }
 
   @Test fun idAndroidViewWrongOrder() {
@@ -60,6 +74,13 @@ class MatchingViewIdDetectorTest {
             |<TextView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/mainViewTextView"/>
             |                                                                                 ~~~~~~~~~~~~~~~~~~~~~
             |0 errors, 1 warnings""".trimMargin())
+        .expectFixDiffs("""
+            |Fix for res/layout/view_custom.xml line 1: Replace with viewCustom:
+            |@@ -1 +1
+            |- <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/mainViewTextView"/>
+            |@@ -2 +1
+            |+ <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/viewCustom"/>
+            |""".trimMargin())
   }
 
   @Test fun usingAndroidIdShouldBeIgnored() {
