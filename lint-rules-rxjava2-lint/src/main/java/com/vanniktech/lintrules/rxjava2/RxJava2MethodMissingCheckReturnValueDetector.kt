@@ -8,7 +8,6 @@ import com.android.tools.lint.detector.api.Issue
 import com.android.tools.lint.detector.api.JavaContext
 import com.android.tools.lint.detector.api.LintFix
 import com.android.tools.lint.detector.api.Scope.JAVA_FILE
-import com.android.tools.lint.detector.api.Scope.TEST_SOURCES
 import com.android.tools.lint.detector.api.Severity.WARNING
 import com.intellij.lang.jvm.JvmModifier
 import com.intellij.psi.PsiType
@@ -24,7 +23,7 @@ import java.util.EnumSet
     "Method is missing the @CheckReturnValue annotation.",
     "Methods returning RxJava Reactive Types should be annotated with the @CheckReturnValue annotation. Static analyze tools such as Lint or ErrorProne can detect when the return value of a method is not used. This is usually an indication of a bug. If this is done on purpose (e.g. fire & forget) it should be stated explicitly.",
     CORRECTNESS, PRIORITY, WARNING,
-    Implementation(RxJava2MethodMissingCheckReturnValueDetector::class.java, EnumSet.of(JAVA_FILE, TEST_SOURCES)))
+    Implementation(RxJava2MethodMissingCheckReturnValueDetector::class.java, EnumSet.of(JAVA_FILE)))
 
 class RxJava2MethodMissingCheckReturnValueDetector : Detector(), Detector.UastScanner {
   override fun getApplicableUastTypes() = listOf(UMethod::class.java)

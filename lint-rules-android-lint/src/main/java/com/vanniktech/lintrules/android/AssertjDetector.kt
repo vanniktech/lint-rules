@@ -17,7 +17,7 @@ val ISSUE_ASSERTJ_IMPORT = Issue.create("AssertjImport",
     "Flags Java 6 incompatible imports.",
     "Importing org.assertj.core.api.Assertions is not ideal. Since it can require Java 8. It's simple as instead org.assertj.core.api.Java6Assertions can be imported and provides guarantee to run on Java 6 as well.",
     CORRECTNESS, PRIORITY, WARNING,
-    Implementation(AssertjDetector::class.java, EnumSet.of(JAVA_FILE, TEST_SOURCES))
+    Implementation(AssertjDetector::class.java, EnumSet.of(JAVA_FILE, TEST_SOURCES), EnumSet.of(JAVA_FILE, TEST_SOURCES))
 )
 
 class AssertjDetector : Detector(), Detector.UastScanner {

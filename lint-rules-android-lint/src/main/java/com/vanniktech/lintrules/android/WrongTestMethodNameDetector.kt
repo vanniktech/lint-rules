@@ -31,7 +31,7 @@ class WrongTestMethodNameDetector : Detector(), Detector.UastScanner {
           .mapNotNull { it.qualifiedName?.split(".")?.lastOrNull() }
           .filter { it == "Test" }
           .filter { node.name.startsWith("test", ignoreCase = true) }
-          .forEach {
+          .forEach { _ ->
             val fix = LintFix.create()
                 .name("Remove test prefix")
                 .replace()

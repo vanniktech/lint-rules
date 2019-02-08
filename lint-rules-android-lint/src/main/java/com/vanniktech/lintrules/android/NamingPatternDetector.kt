@@ -7,7 +7,6 @@ import com.android.tools.lint.detector.api.Implementation
 import com.android.tools.lint.detector.api.Issue
 import com.android.tools.lint.detector.api.JavaContext
 import com.android.tools.lint.detector.api.Scope.JAVA_FILE
-import com.android.tools.lint.detector.api.Scope.TEST_SOURCES
 import com.android.tools.lint.detector.api.Severity.WARNING
 import com.intellij.psi.PsiNamedElement
 import org.jetbrains.kotlin.psi.KtProperty
@@ -24,7 +23,7 @@ val ISSUE_NAMING_PATTERN = Issue.create("NamingPattern",
     "Names should be well named.",
     """Sometimes there is more than one reasonable way to convert an English phrase into camel case, such as when acronyms or unusual constructs like "IPv6" or "iOS" are present. XML HTTP request becomes XmlHttpRequest. XMLHTTPRequest would be incorrect.""",
     CORRECTNESS, PRIORITY, WARNING,
-    Implementation(NamingPatternDetector::class.java, EnumSet.of(JAVA_FILE, TEST_SOURCES)))
+    Implementation(NamingPatternDetector::class.java, EnumSet.of(JAVA_FILE)))
 
 class NamingPatternDetector : Detector(), Detector.UastScanner {
   override fun getApplicableUastTypes() = listOf<Class<out UElement>>(UVariable::class.java, UMethod::class.java, UClass::class.java)

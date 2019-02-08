@@ -11,7 +11,6 @@ import com.android.tools.lint.detector.api.Scope.JAVA_FILE
 import com.android.tools.lint.detector.api.Scope.MANIFEST
 import com.android.tools.lint.detector.api.Scope.PROGUARD_FILE
 import com.android.tools.lint.detector.api.Scope.RESOURCE_FILE
-import com.android.tools.lint.detector.api.Scope.TEST_SOURCES
 import com.android.tools.lint.detector.api.Severity.FATAL
 import com.android.tools.lint.detector.api.XmlContext
 import org.jetbrains.uast.UClass
@@ -26,7 +25,7 @@ val ISSUE_TODO = Issue.create("Todo",
     "Marks todos in any given file.",
     "Marks todo in any given file since they should be resolved.",
     CORRECTNESS, PRIORITY, FATAL,
-    Implementation(TodoDetector::class.java, EnumSet.of(JAVA_FILE, TEST_SOURCES, GRADLE_FILE, PROGUARD_FILE, MANIFEST, RESOURCE_FILE)))
+    Implementation(TodoDetector::class.java, EnumSet.of(JAVA_FILE, GRADLE_FILE, PROGUARD_FILE, MANIFEST, RESOURCE_FILE), EnumSet.of(JAVA_FILE, GRADLE_FILE, PROGUARD_FILE, MANIFEST, RESOURCE_FILE)))
 
 class TodoDetector : Detector(), Detector.UastScanner, Detector.GradleScanner, Detector.OtherFileScanner, Detector.XmlScanner {
   override fun getApplicableUastTypes() = listOf(UClass::class.java)

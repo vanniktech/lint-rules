@@ -8,7 +8,6 @@ import com.android.tools.lint.detector.api.Issue
 import com.android.tools.lint.detector.api.Location
 import com.android.tools.lint.detector.api.Scope.GRADLE_FILE
 import com.android.tools.lint.detector.api.Scope.JAVA_FILE
-import com.android.tools.lint.detector.api.Scope.TEST_SOURCES
 import com.android.tools.lint.detector.api.Severity.WARNING
 import org.jetbrains.uast.UClass
 import java.net.MalformedURLException
@@ -25,7 +24,7 @@ val ISSUE_INVALID_SINGLE_LINE_COMMENT = Issue.create("InvalidSingleLineComment",
     "Marks single line comments that are not sentences.",
     "Single line comments should always be sentences. They're part of the code and hence they deserve as much detail and respect as code.",
     CORRECTNESS, PRIORITY, WARNING,
-    Implementation(InvalidSingleLineCommentDetector::class.java, EnumSet.of(JAVA_FILE, TEST_SOURCES, GRADLE_FILE)))
+    Implementation(InvalidSingleLineCommentDetector::class.java, EnumSet.of(JAVA_FILE, GRADLE_FILE), EnumSet.of(JAVA_FILE, GRADLE_FILE)))
 
 class InvalidSingleLineCommentDetector : Detector(), Detector.UastScanner, Detector.GradleScanner {
   override fun getApplicableUastTypes() = listOf(UClass::class.java)
