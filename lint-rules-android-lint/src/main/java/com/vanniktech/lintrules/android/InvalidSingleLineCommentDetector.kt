@@ -128,10 +128,10 @@ class InvalidSingleLineCommentDetector : Detector(), Detector.UastScanner, Detec
     val isEmpty = group.isEmpty()
     val isNoPmd = " NOPMD" == group
     val isInspection = group.startsWith("noinspection")
-    val isALink = beforeStart != null && beforeStart == ':'
+    val isLink = beforeStart != null && beforeStart == ':'
     val isHttpLink = isUrl(group)
     val startsWithQuote = group == "\""
-    return isEmpty || isNoPmd || isInspection || isALink || isHttpLink || startsWithQuote
+    return isEmpty || isNoPmd || isInspection || isLink || isHttpLink || startsWithQuote
   }
 
   private fun isUrl(string: String) = listOfNotNull(string, string.split(" ").lastOrNull())

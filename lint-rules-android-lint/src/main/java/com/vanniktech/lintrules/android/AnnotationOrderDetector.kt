@@ -7,6 +7,7 @@ import com.android.tools.lint.detector.api.Detector.UastScanner
 import com.android.tools.lint.detector.api.Implementation
 import com.android.tools.lint.detector.api.Issue
 import com.android.tools.lint.detector.api.JavaContext
+import com.android.tools.lint.detector.api.LintFix
 import com.android.tools.lint.detector.api.Scope.JAVA_FILE
 import com.android.tools.lint.detector.api.Severity.WARNING
 import org.jetbrains.uast.UAnnotated
@@ -195,7 +196,16 @@ class AnnotationOrderDetector : Detector(), UastScanner {
             .plus(annotations.filterNot { annotationOrder.contains(it) })
             .joinToString(separator = " ") { "@$it" }
 
-        context.report(ISSUE_WRONG_ANNOTATION_ORDER, element, context.getNameLocation(element), "Annotations are in wrong order. Should be $correctOrder")
+        val fix = LintFix.create()
+            .replace()
+            .text(annotations.joinToString(separator = " ") { "@$it" })
+            .with(correctOrder)
+            .range(context.getLocation(element))
+            .name("Fix order")
+            .autoFix()
+            .build()
+
+        context.report(ISSUE_WRONG_ANNOTATION_ORDER, element, context.getNameLocation(element), "Annotations are in wrong order. Should be $correctOrder", fix)
       }
     }
   }
