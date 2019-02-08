@@ -23,7 +23,7 @@ class RxJava2DisposableDisposeCallDetector : Detector(), Detector.UastScanner {
   override fun visitMethodCall(context: JavaContext, node: UCallExpression, method: PsiMethod) {
     if (context.evaluator.isMemberInClass(method, "io.reactivex.disposables.CompositeDisposable")) {
       val fix = fix()
-          .name("fix it")
+          .name("Fix it")
           .replace()
           .text("dispose")
           .with("clear")
