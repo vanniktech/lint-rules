@@ -25,7 +25,14 @@ class MatchingViewIdDetector : LayoutDetector() {
     val isAndroidId = attribute.value.startsWith("@android:id/")
 
     if (!id.startsWith(fileName) && !isAndroidId) {
-      context.report(ISSUE_MATCHING_VIEW_ID, attribute, context.getValueLocation(attribute), "Id should start with: $fileName")
+      val fix = fix()
+          .replace()
+          .text(id)
+          .with(fileName)
+          .autoFix()
+          .build()
+
+      context.report(ISSUE_MATCHING_VIEW_ID, attribute, context.getValueLocation(attribute), "Id should start with: $fileName", fix)
     }
   }
 }
