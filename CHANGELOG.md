@@ -1,7 +1,22 @@
 # Change Log
 
-Version 0.10.0 *(In development)*
---------------------------------
+Version 0.10.0 *(2019-02-19)*
+-----------------------------
+
+- Update dependencies to latest and greatest. [\#282](https://github.com/vanniktech/lint-rules/pull/282) ([vanniktech](https://github.com/vanniktech))
+- AnnotationOrderDetector: Provide quickfix. [\#281](https://github.com/vanniktech/lint-rules/pull/281) ([vanniktech](https://github.com/vanniktech))
+- MatchingMenuIdDetector: Add quickfix. [\#280](https://github.com/vanniktech/lint-rules/pull/280) ([vanniktech](https://github.com/vanniktech))
+- MatchingViewIdDetector: Add quickfix. [\#279](https://github.com/vanniktech/lint-rules/pull/279) ([vanniktech](https://github.com/vanniktech))
+- RxJava2DisposableDisposeCallDetector: Fix typo. [\#278](https://github.com/vanniktech/lint-rules/pull/278) ([vanniktech](https://github.com/vanniktech))
+- Adjust the scope of all Detectors. [\#277](https://github.com/vanniktech/lint-rules/pull/277) ([vanniktech](https://github.com/vanniktech))
+- Always expect underscored resourcePrefix by forcing it if needed. [\#276](https://github.com/vanniktech/lint-rules/pull/276) ([dlleixap](https://github.com/dlleixap))
+- RxJava2MethodMissingCheckReturnValueDetector: Fix quickfix. [\#275](https://github.com/vanniktech/lint-rules/pull/275) ([vanniktech](https://github.com/vanniktech))
+- ColorCasingDetector: Use uppercase instead of lowercase letters. [\#273](https://github.com/vanniktech/lint-rules/pull/273) ([vanniktech](https://github.com/vanniktech))
+- Support for ignoring visibility modifiers for RxJava2MethodMissingCheckReturnValue [\#272](https://github.com/vanniktech/lint-rules/pull/272) ([tasomaniac](https://github.com/tasomaniac))
+- Remove IgnoreWithoutReasonDetector as it was upstreamed into the default Lint checks. [\#271](https://github.com/vanniktech/lint-rules/pull/271) ([vanniktech](https://github.com/vanniktech))
+- Fix the category of RxJava2MethodMissingCheckReturnValueDetector [\#270](https://github.com/vanniktech/lint-rules/pull/270) ([tasomaniac](https://github.com/tasomaniac))
+- Update Android SDK license [\#266](https://github.com/vanniktech/lint-rules/pull/266) ([tasomaniac](https://github.com/tasomaniac))
+- WrongAnnotationOrder: @AssistedModule before @Module [\#265](https://github.com/vanniktech/lint-rules/pull/265) ([tasomaniac](https://github.com/tasomaniac))
 
 Version 0.9.0 *(2019-01-18)*
 ----------------------------
