@@ -203,6 +203,30 @@ class AnnotationOrderDetectorTest {
             |""".trimMargin())
   }
 
+  @Test fun bindsBeforeSingletonBeforeNonNull() {
+    lint()
+        .allowCompilationErrors()
+        .files(java("""
+            package foo;
+
+            class MyTest {
+              @Binds @NonNull @Singleton void test() { }
+            }""").indented())
+        .issues(ISSUE_WRONG_ANNOTATION_ORDER)
+        .run()
+        .expect("""
+            |src/foo/MyTest.java:4: Warning: Annotations are in wrong order. Should be @Binds @Singleton @NonNull [WrongAnnotationOrder]
+            |  @Binds @NonNull @Singleton void test() { }
+            |                                  ~~~~
+            |0 errors, 1 warnings""".trimMargin())
+        .expectFixDiffs("""
+            |Fix for src/foo/MyTest.java line 4: Fix order:
+            |@@ -4 +4
+            |-   @Binds @NonNull @Singleton void test() { }
+            |+   @Binds @Singleton @NonNull void test() { }
+            |""".trimMargin())
+  }
+
   @Test fun nullableBeforeNonNull() {
     lint()
         .allowCompilationErrors()
