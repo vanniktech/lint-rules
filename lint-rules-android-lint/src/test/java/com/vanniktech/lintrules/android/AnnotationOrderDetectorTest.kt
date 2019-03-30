@@ -227,6 +227,30 @@ class AnnotationOrderDetectorTest {
             |""".trimMargin())
   }
 
+  @Test fun singletonBeforeNonNullBeforeCustom() {
+    lint()
+        .allowCompilationErrors()
+        .files(java("""
+            package foo;
+
+            class MyTest {
+              @Custom @NonNull @Singleton void test() { }
+            }""").indented())
+        .issues(ISSUE_WRONG_ANNOTATION_ORDER)
+        .run()
+        .expect("""
+            |src/foo/MyTest.java:4: Warning: Annotations are in wrong order. Should be @Singleton @NonNull @Custom [WrongAnnotationOrder]
+            |  @Custom @NonNull @Singleton void test() { }
+            |                                   ~~~~
+            |0 errors, 1 warnings""".trimMargin())
+        .expectFixDiffs("""
+            |Fix for src/foo/MyTest.java line 4: Fix order:
+            |@@ -4 +4
+            |-   @Custom @NonNull @Singleton void test() { }
+            |+   @Singleton @NonNull @Custom void test() { }
+            |""".trimMargin())
+  }
+
   @Test fun nullableBeforeNonNull() {
     lint()
         .allowCompilationErrors()
@@ -608,6 +632,23 @@ class AnnotationOrderDetectorTest {
 
             public class MyTest {
               @Custom @MyCustom public void myTest() { }
+            }""").indented())
+        .issues(ISSUE_WRONG_ANNOTATION_ORDER)
+        .run()
+        .expectClean()
+  }
+
+  @Test fun kotlinCustomAnnotationOnNullableReturn() {
+    lint()
+        .files(kt("""
+            package foo
+
+            annotation class Custom
+
+            class MyTest {
+              @Custom fun myTest(): String? {
+                return null
+              }
             }""").indented())
         .issues(ISSUE_WRONG_ANNOTATION_ORDER)
         .run()
