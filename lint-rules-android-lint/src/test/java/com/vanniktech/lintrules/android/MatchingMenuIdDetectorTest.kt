@@ -16,6 +16,28 @@ class MatchingMenuIdDetectorTest {
         .expectClean()
   }
 
+  @Test
+  fun idWithoutPrefix() {
+    lint()
+      .files(xml("res/menu/menu_main.xml", """
+            <menu xmlns:android="http://schemas.android.com/apk/res/android">
+              <item android:id="@+id/something"/>
+            </menu>""").indented())
+      .issues(ISSUE_MATCHING_MENU_ID)
+      .run()
+      .expect("""
+            |res/menu/menu_main.xml:2: Warning: Id should start with: menuMain [MatchingMenuId]
+            |  <item android:id="@+id/something"/>
+            |                    ~~~~~~~~~~~~~~
+            |0 errors, 1 warnings""".trimMargin())
+      .expectFixDiffs("""
+            |Fix for res/menu/menu_main.xml line 2: Replace with menuMainSomething:
+            |@@ -2 +2
+            |-   <item android:id="@+id/something"/>
+            |+   <item android:id="@+id/menuMainSomething"/>
+            |""".trimMargin())
+  }
+
   @Test fun idAndroidMainWrongOrder() {
     lint()
         .files(xml("res/menu/menu_main.xml", """
@@ -30,10 +52,10 @@ class MatchingMenuIdDetectorTest {
             |                    ~~~~~~~~~~~~~~~~~~~~~~
             |0 errors, 1 warnings""".trimMargin())
         .expectFixDiffs("""
-            |Fix for res/menu/menu_main.xml line 2: Replace with menuMain:
+            |Fix for res/menu/menu_main.xml line 2: Replace with menuMainMainMenuSomething:
             |@@ -2 +2
             |-   <item android:id="@+id/mainMenuSomething"/>
-            |+   <item android:id="@+id/menuMain"/>
+            |+   <item android:id="@+id/menuMainMainMenuSomething"/>
             |""".trimMargin())
   }
 
@@ -62,10 +84,10 @@ class MatchingMenuIdDetectorTest {
             |                    ~~~~~~~~~~~~~~~~~~~~~
             |0 errors, 1 warnings""".trimMargin())
         .expectFixDiffs("""
-            |Fix for res/menu/menu_main.xml line 2: Replace with menuMain:
+            |Fix for res/menu/menu_main.xml line 2: Replace with menuMainTextView:
             |@@ -2 +2
             |-   <item android:id="@+id/MenuMainTextView"/>
-            |+   <item android:id="@+id/menuMain"/>
+            |+   <item android:id="@+id/menuMainTextView"/>
             |""".trimMargin())
   }
 
@@ -83,10 +105,10 @@ class MatchingMenuIdDetectorTest {
             |                    ~~~~~~~~~~~~~~~~~~~~~
             |0 errors, 1 warnings""".trimMargin())
         .expectFixDiffs("""
-            |Fix for res/menu/view_custom.xml line 2: Replace with viewCustom:
+            |Fix for res/menu/view_custom.xml line 2: Replace with viewCustomMainViewTextView:
             |@@ -2 +2
             |-   <item android:id="@+id/mainViewTextView"/>
-            |+   <item android:id="@+id/viewCustom"/>
+            |+   <item android:id="@+id/viewCustomMainViewTextView"/>
             |""".trimMargin())
   }
 

@@ -25,18 +25,18 @@ class MatchingMenuIdDetector : ResourceXmlDetector() {
   override fun getApplicableAttributes() = listOf(ATTR_ID)
 
   override fun visitAttribute(context: XmlContext, attribute: Attr) {
-    val fileName = context.file.name.replace(".xml", "").toLowerCamelCase()
     val id = stripIdPrefix(attribute.value)
+    val fixer = MatchingIdFixer(context, id)
 
-    if (!id.startsWith(fileName)) {
+    if (fixer.needsFix()) {
       val fix = fix()
           .replace()
           .text(id)
-          .with(fileName)
+          .with(fixer.fixedId())
           .autoFix()
           .build()
 
-      context.report(ISSUE_MATCHING_MENU_ID, attribute, context.getValueLocation(attribute), "Id should start with: $fileName", fix)
+      context.report(ISSUE_MATCHING_MENU_ID, attribute, context.getValueLocation(attribute), "Id should start with: ${fixer.expectedPrefix}", fix)
     }
   }
 }

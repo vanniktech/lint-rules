@@ -14,6 +14,27 @@ class MatchingViewIdDetectorTest {
         .expectClean()
   }
 
+  @Test
+  fun idWithoutPrefix() {
+    lint()
+      .files(xml("res/layout/activity_main.xml", """
+            <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/text"/>""").indented())
+      .issues(ISSUE_MATCHING_VIEW_ID)
+      .run()
+      .expect("""
+            |res/layout/activity_main.xml:1: Warning: Id should start with: activityMain [MatchingViewId]
+            |<TextView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/text"/>
+            |                                                                                 ~~~~~~~~~
+            |0 errors, 1 warnings""".trimMargin())
+      .expectFixDiffs("""
+            |Fix for res/layout/activity_main.xml line 1: Replace with activityMainText:
+            |@@ -1 +1
+            |- <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/text"/>
+            |@@ -2 +1
+            |+ <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/activityMainText"/>
+            |""".trimMargin())
+  }
+
   @Test fun idAndroidActivityWrongOrder() {
     lint()
         .files(xml("res/layout/activity_main.xml", """
@@ -26,11 +47,11 @@ class MatchingViewIdDetectorTest {
             |                                                                                 ~~~~~~~~~~~~~~~~~~~~~~~~~
             |0 errors, 1 warnings""".trimMargin())
         .expectFixDiffs("""
-            |Fix for res/layout/activity_main.xml line 1: Replace with activityMain:
+            |Fix for res/layout/activity_main.xml line 1: Replace with activityMainMainActivityTextView:
             |@@ -1 +1
             |- <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/mainActivityTextView"/>
             |@@ -2 +1
-            |+ <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/activityMain"/>
+            |+ <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/activityMainMainActivityTextView"/>
             |""".trimMargin())
   }
 
@@ -55,11 +76,11 @@ class MatchingViewIdDetectorTest {
             |                                                                                 ~~~~~~~~~~~~~~~~~~~~~~~
             |0 errors, 1 warnings""".trimMargin())
         .expectFixDiffs("""
-            |Fix for res/layout/view_custom.xml line 1: Replace with viewCustom:
+            |Fix for res/layout/view_custom.xml line 1: Replace with viewCustomTextView:
             |@@ -1 +1
             |- <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/ViewCustomTextView"/>
             |@@ -2 +1
-            |+ <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/viewCustom"/>
+            |+ <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/viewCustomTextView"/>
             |""".trimMargin())
   }
 
@@ -75,11 +96,11 @@ class MatchingViewIdDetectorTest {
             |                                                                                 ~~~~~~~~~~~~~~~~~~~~~
             |0 errors, 1 warnings""".trimMargin())
         .expectFixDiffs("""
-            |Fix for res/layout/view_custom.xml line 1: Replace with viewCustom:
+            |Fix for res/layout/view_custom.xml line 1: Replace with viewCustomMainViewTextView:
             |@@ -1 +1
             |- <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/mainViewTextView"/>
             |@@ -2 +1
-            |+ <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/viewCustom"/>
+            |+ <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/viewCustomMainViewTextView"/>
             |""".trimMargin())
   }
 
