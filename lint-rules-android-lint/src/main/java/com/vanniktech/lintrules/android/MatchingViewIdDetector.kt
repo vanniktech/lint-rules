@@ -20,27 +20,19 @@ class MatchingViewIdDetector : LayoutDetector() {
   override fun getApplicableAttributes() = listOf(ATTR_ID)
 
   override fun visitAttribute(context: XmlContext, attribute: Attr) {
-    val fileName = context.file.name.replace(".xml", "").toLowerCamelCase()
     val id = stripIdPrefix(attribute.value)
+    val fixer = MatchingIdFixer(context, id)
     val isAndroidId = attribute.value.startsWith("@android:id/")
 
-    if (!id.startsWith(fileName) && !isAndroidId) {
+    if (fixer.needsFix() && !isAndroidId) {
       val fix = fix()
           .replace()
           .text(id)
-          .with(toBeReplaced(fileName, id))
+          .with(fixer.fixedId())
           .autoFix()
           .build()
 
-      context.report(ISSUE_MATCHING_VIEW_ID, attribute, context.getValueLocation(attribute), "Id should start with: $fileName", fix)
-    }
-  }
-
-  private fun toBeReplaced(fileName: String, id: String): String {
-    return if (id.startsWith(fileName, ignoreCase = true)) {
-      fileName + id.substring(fileName.length)
-    } else {
-      fileName + id.capitalize()
+      context.report(ISSUE_MATCHING_VIEW_ID, attribute, context.getValueLocation(attribute), "Id should start with: ${fixer.expectedPrefix}", fix)
     }
   }
 }
