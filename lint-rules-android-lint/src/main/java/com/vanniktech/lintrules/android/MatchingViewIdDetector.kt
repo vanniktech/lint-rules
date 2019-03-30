@@ -1,14 +1,10 @@
 package com.vanniktech.lintrules.android
 
 import com.android.SdkConstants.ATTR_ID
+import com.android.tools.lint.detector.api.*
 import com.android.tools.lint.detector.api.Category.Companion.CORRECTNESS
-import com.android.tools.lint.detector.api.Implementation
-import com.android.tools.lint.detector.api.Issue
-import com.android.tools.lint.detector.api.LayoutDetector
 import com.android.tools.lint.detector.api.Scope.Companion.RESOURCE_FILE_SCOPE
 import com.android.tools.lint.detector.api.Severity.WARNING
-import com.android.tools.lint.detector.api.XmlContext
-import com.android.tools.lint.detector.api.stripIdPrefix
 import org.w3c.dom.Attr
 
 val ISSUE_MATCHING_VIEW_ID = Issue.create("MatchingViewId", "Flags view ids that don't match with the file name.",
@@ -28,11 +24,19 @@ class MatchingViewIdDetector : LayoutDetector() {
       val fix = fix()
           .replace()
           .text(id)
-          .with(fileName)
+          .with(toBeReplaced(fileName, id))
           .autoFix()
           .build()
 
       context.report(ISSUE_MATCHING_VIEW_ID, attribute, context.getValueLocation(attribute), "Id should start with: $fileName", fix)
+    }
+  }
+
+  private fun toBeReplaced(fileName: String, id: String): String {
+    return if (id.startsWith(fileName, ignoreCase = true)) {
+      fileName + id.substring(fileName.length)
+    } else {
+      fileName + id.capitalize()
     }
   }
 }
