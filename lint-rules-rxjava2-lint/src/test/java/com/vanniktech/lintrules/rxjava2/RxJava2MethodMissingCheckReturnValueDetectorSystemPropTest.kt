@@ -6,7 +6,7 @@ import com.android.tools.lint.checks.infrastructure.TestLintTask.lint
 import org.junit.After
 import org.junit.Test
 
-class RxJava2MethodMissingCheckReturnValueDetectorSytemPropTest {
+class RxJava2MethodMissingCheckReturnValueDetectorSystemPropTest {
   @After fun tearDown() {
     System.clearProperty(IGNORE_MODIFIERS_PROP)
   }
