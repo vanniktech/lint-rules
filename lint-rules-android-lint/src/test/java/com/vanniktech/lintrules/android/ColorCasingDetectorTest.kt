@@ -61,7 +61,8 @@ class ColorCasingDetectorTest {
             |""".trimMargin())
   }
 
-  @Test @Ignore("https://issuetracker.google.com/issues/123835101") fun vectorDrawableWithSameColor() {
+  // @Ignore("https://issuetracker.google.com/issues/123835101")
+  @Test fun vectorDrawableWithSameColor() {
     lint()
         .files(xml("res/drawable/drawable.xml", """
             <?xml version="1.0" encoding="utf-8"?>
