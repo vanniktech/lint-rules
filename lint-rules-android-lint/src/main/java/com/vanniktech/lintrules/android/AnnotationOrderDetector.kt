@@ -51,6 +51,7 @@ private val annotationOrder = listOf(
     // Nullability.
     "Nullable",
     "NonNull",
+    "NotNull",
     // Checking the things.
     "CheckResult",
     "CheckReturnValue",
@@ -140,6 +141,11 @@ private val annotationOrder = listOf(
     "FloatRange",
     "Size")
 
+private val jetbrainsNullityAnnotations = listOf(
+    "org.jetbrains.annotations.Nullable",
+    "org.jetbrains.annotations.NotNull"
+)
+
 val ISSUE_WRONG_ANNOTATION_ORDER = Issue.create("WrongAnnotationOrder",
     "Checks that Annotations comply with a certain order.",
     "Annotations should always be applied with the same order to have consistency across the code base.",
@@ -165,35 +171,20 @@ class AnnotationOrderDetector : Detector(), UastScanner {
       processAnnotations(node, node)
     }
 
-    @Suppress("Detekt.LabeledExpression", "Detekt.ReturnCount") private fun processAnnotations(element: UElement, modifierListOwner: UAnnotated) {
-      var size = 0
+    private fun processAnnotations(element: UElement, modifierListOwner: UAnnotated) {
 
       val annotations = context.evaluator.getAllAnnotations(modifierListOwner, false)
+          .filter { it.qualifiedName !in jetbrainsNullityAnnotations }
           .mapNotNull { it.qualifiedName?.split(".")?.lastOrNull() }
           .distinct()
 
-      val numberOfRecognizedAnnotations = annotations.count { annotationOrder.contains(it) }
-      val isInCorrectOrder = annotationOrder.contains(annotations.firstOrNull()) && annotations
-          .all {
-            if (annotationOrder.contains(it)) {
-              for (i in size until annotationOrder.size) {
-                size++
+      val (recognizedAnnotations, unrecognizedAnnotations) = annotations.partition { annotationOrder.contains(it) }
+      val isInCorrectOrder = isInCorrectOrder(annotations)
 
-                if (it == annotationOrder[i]) {
-                  return@all true
-                }
-              }
-
-              return@all false
-            }
-
-            return@all true
-          }
-
-      if (!isInCorrectOrder && numberOfRecognizedAnnotations > 0) {
+      if (!isInCorrectOrder && recognizedAnnotations.isNotEmpty()) {
         val correctOrder = annotationOrder
-            .filter { annotations.contains(it) }
-            .plus(annotations.filterNot { annotationOrder.contains(it) })
+            .filter { recognizedAnnotations.contains(it) }
+            .plus(unrecognizedAnnotations)
             .joinToString(separator = " ") { "@$it" }
 
         val fix = LintFix.create()
@@ -207,6 +198,25 @@ class AnnotationOrderDetector : Detector(), UastScanner {
 
         context.report(ISSUE_WRONG_ANNOTATION_ORDER, element, context.getNameLocation(element), "Annotations are in wrong order. Should be $correctOrder", fix)
       }
+    }
+
+    @Suppress("Detekt.LabeledExpression") private fun isInCorrectOrder(annotations: List<String>): Boolean {
+      var size = 0
+      return annotationOrder.contains(annotations.firstOrNull()) && annotations.all {
+          if (annotationOrder.contains(it)) {
+            for (i in size until annotationOrder.size) {
+              size++
+
+              if (it == annotationOrder[i]) {
+                return@all true
+              }
+            }
+
+            return@all false
+          }
+
+          return@all true
+        }
     }
   }
 }
