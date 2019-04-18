@@ -1,9 +1,5 @@
 apply plugin: 'com.android.library'
 
-afterEvaluate {
-  generateReleaseBuildConfig.enabled = false
-}
-
 android {
   compileSdkVersion versions.compileSdk
 
@@ -13,7 +9,7 @@ android {
 }
 
 dependencies {
-  lintChecks project(':lint-rules-android-lint')
+  lintPublish project(':lint-rules-android-lint')
 }
 
 apply plugin: "com.vanniktech.maven.publish"
