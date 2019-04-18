@@ -5,7 +5,7 @@ import com.android.tools.lint.checks.infrastructure.TestFiles.kt
 import com.android.tools.lint.checks.infrastructure.TestLintTask.lint
 import org.junit.Test
 
-class AnnotationOrderDetectorTest {
+@Suppress("Detekt.LargeClass") class AnnotationOrderDetectorTest {
   @Test fun noAnnotations() {
     lint()
         .allowCompilationErrors()

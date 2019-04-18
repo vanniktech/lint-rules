@@ -29,7 +29,7 @@ val ISSUE_INVALID_SINGLE_LINE_COMMENT = Issue.create("InvalidSingleLineComment",
 class InvalidSingleLineCommentDetector : Detector(), Detector.UastScanner, Detector.GradleScanner {
   override fun getApplicableUastTypes() = listOf(UClass::class.java)
 
-  @Suppress("Detekt.ComplexMethod") override fun afterCheckFile(context: Context) {
+  override fun afterCheckFile(context: Context) {
     val source = context.getContents().toString()
     val matcher = pattern.matcher(source)
 
@@ -45,16 +45,12 @@ class InvalidSingleLineCommentDetector : Detector(), Detector.UastScanner, Detec
 
       val end = matcher.end()
 
-      if (beforeStart != null && !Character.isWhitespace(beforeStart)) {
-        handlePrecedingSpace(context, source, start)
-      } else if (group[0] != ' ') {
-        handleRecedingSpace(context, source, start)
-      } else if (" " == group || group.trim { it <= ' ' }.length != group.length - 1) {
-        handleTrailingWhiteSpace(context, source, start, end, group)
-      } else if (Character.isLowerCase(group[1])) {
-        handleFirstWordCapitalization(context, source, start, end, group)
-      } else if (allowedEndings.none { group.endsWith(it) }) {
-        handlePeriod(context, source, start, end, group)
+      when {
+        beforeStart != null && !Character.isWhitespace(beforeStart) -> handlePrecedingSpace(context, source, start)
+        group[0] != ' ' -> handleRecedingSpace(context, source, start)
+        " " == group || group.trim { it <= ' ' }.length != group.length - 1 -> handleTrailingWhiteSpace(context, source, start, end, group)
+        Character.isLowerCase(group[1]) -> handleFirstWordCapitalization(context, source, start, end, group)
+        allowedEndings.none { group.endsWith(it) } -> handlePeriod(context, source, start, end, group)
       }
     }
   }
