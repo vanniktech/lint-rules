@@ -11,7 +11,7 @@ import com.intellij.psi.PsiMethod
 import org.jetbrains.uast.UCallExpression
 import java.util.EnumSet
 
-@Suppress("Detekt.VariableMaxLength") val ISSUE_SUBSCRIBE_MISSING_ON_ERROR = Issue.create("RxJava2SubscribeMissingOnError",
+val ISSUE_SUBSCRIBE_MISSING_ON_ERROR = Issue.create("RxJava2SubscribeMissingOnError",
     "Flags a version of the subscribe() method without an error Consumer.",
     "When calling the subscribe() method an error Consumer should always be used. Otherwise errors might be thrown and may crash the application or get forwarded to the Plugin Error handler.",
     CORRECTNESS, PRIORITY, ERROR,
