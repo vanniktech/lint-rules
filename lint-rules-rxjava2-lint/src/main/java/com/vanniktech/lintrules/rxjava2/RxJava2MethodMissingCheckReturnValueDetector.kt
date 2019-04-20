@@ -18,7 +18,7 @@ import org.jetbrains.uast.UMethod
 import org.jetbrains.uast.kotlin.declarations.KotlinUMethod
 import java.util.EnumSet
 
-@Suppress("Detekt.VariableMaxLength") val ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE = Issue.create(
+val ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE = Issue.create(
     "RxJava2MethodMissingCheckReturnValue",
     "Method is missing the @CheckReturnValue annotation.",
     "Methods returning RxJava Reactive Types should be annotated with the @CheckReturnValue annotation. Static analyze tools such as Lint or ErrorProne can detect when the return value of a method is not used. This is usually an indication of a bug. If this is done on purpose (e.g. fire & forget) it should be stated explicitly.",
