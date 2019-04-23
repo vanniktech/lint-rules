@@ -38,6 +38,14 @@ class WrongLayoutNameDetectorTest {
         .expectClean()
   }
 
+  @Test fun resourcePrefixMatchesLayoutPrefix() {
+    lint()
+        .files(xml("res/layout/dialog_test.xml", "<merge/>"), resourcePrefix("dialog_"))
+        .issues(ISSUE_WRONG_LAYOUT_NAME)
+        .run()
+        .expectClean()
+  }
+
   @Test fun randomLayoutFile() {
     lint()
         .files(xml("res/layout/random.xml", "<merge/>"))
