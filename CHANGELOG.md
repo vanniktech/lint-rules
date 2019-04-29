@@ -1,7 +1,17 @@
 # Change Log
 
-Version 0.11.0 *(In development)*
----------------------------------
+Version 0.11.0 *(2019-04-29)*
+-----------------------------
+
+- WrongLayoutNameDetector: Don't concatenate resource prefix with allowed prefixes if they are equal. [\#296](https://github.com/vanniktech/lint-rules/pull/296) ([vanniktech](https://github.com/vanniktech))
+- WrongConstraintLayoutUsage end instead of right [\#295](https://github.com/vanniktech/lint-rules/pull/295) ([okarakose](https://github.com/okarakose))
+- Update Code Quality Tools Plugin to 0.18.0 [\#294](https://github.com/vanniktech/lint-rules/pull/294) ([vanniktech](https://github.com/vanniktech))
+- Update Android Gradle Plugin to 3.4.0 & Lint to 26.4.0 [\#292](https://github.com/vanniktech/lint-rules/pull/292) ([vanniktech](https://github.com/vanniktech))
+- Update Gradle to 5.3.1 [\#291](https://github.com/vanniktech/lint-rules/pull/291) ([vanniktech](https://github.com/vanniktech))
+- Fix on Annotation order and custom annotations [\#290](https://github.com/vanniktech/lint-rules/pull/290) ([tasomaniac](https://github.com/tasomaniac))
+- Make id detector lintFix more intelligent [\#288](https://github.com/vanniktech/lint-rules/pull/288) ([tasomaniac](https://github.com/tasomaniac))
+- Fix typo on test class name [\#287](https://github.com/vanniktech/lint-rules/pull/287) ([tasomaniac](https://github.com/tasomaniac))
+- AnnotationOrderDetector: @Binds + @BindsInstance + @BindsOptionalOf before @Singleton. [\#285](https://github.com/vanniktech/lint-rules/pull/285) ([vanniktech](https://github.com/vanniktech))
 
 Version 0.10.0 *(2019-02-19)*
 -----------------------------
