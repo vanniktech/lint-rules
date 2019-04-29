@@ -1,6 +1,9 @@
 # Change Log
 
-Version 0.11.0 *(2019-04-29)*
+Version 0.13.0 *(In development)*
+---------------------------------
+
+Version 0.12.0 *(2019-04-29)*
 -----------------------------
 
 - WrongLayoutNameDetector: Don't concatenate resource prefix with allowed prefixes if they are equal. [\#296](https://github.com/vanniktech/lint-rules/pull/296) ([vanniktech](https://github.com/vanniktech))
