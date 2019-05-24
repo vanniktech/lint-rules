@@ -12,6 +12,7 @@ class MatchingIdFixer(context: XmlContext, private val id: String) {
     return if (id.startsWith(expectedPrefix, ignoreCase = true)) {
       expectedPrefix + id.substring(expectedPrefix.length)
     } else {
+      //noinspection AndroidLintDefaultLocale - https://issuetracker.google.com/issues/133465551
       expectedPrefix + id.capitalize()
     }
   }
