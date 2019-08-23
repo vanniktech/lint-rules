@@ -36,6 +36,7 @@ class WrongTestMethodNameDetector : Detector(), Detector.UastScanner {
                 .name("Remove test prefix")
                 .replace()
                 .text(node.name)
+                //noinspection AndroidLintDefaultLocale - https://issuetracker.google.com/issues/133465551
                 .with(node.name.replace("test", "", ignoreCase = true).decapitalize())
                 .autoFix()
                 .build()
