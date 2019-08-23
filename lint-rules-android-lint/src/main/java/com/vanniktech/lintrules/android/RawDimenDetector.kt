@@ -1,7 +1,11 @@
 package com.vanniktech.lintrules.android
 
 import com.android.SdkConstants.ATTR_LAYOUT_HEIGHT
+import com.android.SdkConstants.ATTR_LAYOUT_MIN_HEIGHT
+import com.android.SdkConstants.ATTR_LAYOUT_MIN_WIDTH
 import com.android.SdkConstants.ATTR_LAYOUT_WIDTH
+import com.android.SdkConstants.ATTR_MIN_HEIGHT
+import com.android.SdkConstants.ATTR_MIN_WIDTH
 import com.android.SdkConstants.CLASS_CONSTRAINT_LAYOUT
 import com.android.SdkConstants.TAG_DIMEN
 import com.android.resources.ResourceFolderType
@@ -48,6 +52,7 @@ class RawDimenDetector : ResourceXmlDetector() {
         .filterNot { it.hasToolsNamespace() }
         .filterNot { isVectorGraphic }
         .filterNot { (hasLayoutWeight || isParentConstraintLayout) && it.nodeValue[0] == '0' && (ATTR_LAYOUT_WIDTH == it.localName || ATTR_LAYOUT_HEIGHT == it.localName) }
+        .filterNot { it.nodeValue == "0dp" && listOf(ATTR_MIN_HEIGHT, ATTR_LAYOUT_MIN_HEIGHT, ATTR_MIN_WIDTH, ATTR_LAYOUT_MIN_WIDTH).any { ignorable -> it.localName == ignorable } }
         .filter { it.nodeValue.matches("-?[\\d.]+(sp|dp|dip)".toRegex()) }
         .filterNot { context.driver.isSuppressed(context, ISSUE_RAW_DIMEN, it) }
         .map { it to context.getValueLocation(it as Attr) }

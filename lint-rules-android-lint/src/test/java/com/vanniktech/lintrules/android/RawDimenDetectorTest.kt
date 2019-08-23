@@ -126,6 +126,24 @@ class RawDimenDetectorTest {
         .expectClean()
   }
 
+  @Test fun androidLayoutMinHeight0Ignored() {
+    lint()
+        .files(xml("res/layout/ids.xml", """
+          <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:minHeight="0dp"/>""").indented())
+        .issues(ISSUE_RAW_DIMEN)
+        .run()
+        .expectClean()
+  }
+
+  @Test fun androidLayoutMinWidth0Ignored() {
+    lint()
+        .files(xml("res/layout/ids.xml", """
+          <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:minWidth="0dp"/>""").indented())
+        .issues(ISSUE_RAW_DIMEN)
+        .run()
+        .expectClean()
+  }
+
   @Test fun androidLayoutWidth() {
     lint()
         .files(xml("res/layout/ids.xml", """
