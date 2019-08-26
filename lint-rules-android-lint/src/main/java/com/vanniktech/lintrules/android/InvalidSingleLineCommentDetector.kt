@@ -9,11 +9,11 @@ import com.android.tools.lint.detector.api.Location
 import com.android.tools.lint.detector.api.Scope.GRADLE_FILE
 import com.android.tools.lint.detector.api.Scope.JAVA_FILE
 import com.android.tools.lint.detector.api.Severity.WARNING
-import org.jetbrains.uast.UClass
 import java.net.MalformedURLException
 import java.net.URL
 import java.util.EnumSet
 import java.util.regex.Pattern
+import org.jetbrains.uast.UClass
 
 private const val COMMENT = "//"
 private const val COMMENT_BEGINNING_INDEX = 3

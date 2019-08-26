@@ -9,10 +9,10 @@ import com.android.tools.lint.detector.api.JavaContext
 import com.android.tools.lint.detector.api.Scope.JAVA_FILE
 import com.android.tools.lint.detector.api.Severity.WARNING
 import com.intellij.psi.PsiMethod
+import java.util.EnumSet
 import org.jetbrains.uast.UAnnotated
 import org.jetbrains.uast.UCallExpression
 import org.jetbrains.uast.getContainingUMethod
-import java.util.EnumSet
 
 val ISSUE_RAW_SCHEDULER_CALL = Issue.create("RxJava2SchedulersFactoryCall",
     "Instead of calling the Schedulers factory methods directly inject the Schedulers.",

@@ -8,8 +8,8 @@ import com.android.tools.lint.detector.api.JavaContext
 import com.android.tools.lint.detector.api.Scope.JAVA_FILE
 import com.android.tools.lint.detector.api.Severity.WARNING
 import com.intellij.psi.PsiMethod
-import org.jetbrains.uast.UCallExpression
 import java.util.EnumSet
+import org.jetbrains.uast.UCallExpression
 
 val ISSUE_DISPOSABLE_DISPOSE_CALL = Issue.create("RxJava2DisposableDisposeCall",
     "Marks usage of dispose() on CompositeDisposable.",

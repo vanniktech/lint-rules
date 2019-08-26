@@ -8,9 +8,9 @@ import com.android.tools.lint.detector.api.JavaContext
 import com.android.tools.lint.detector.api.Scope.JAVA_FILE
 import com.android.tools.lint.detector.api.Severity.WARNING
 import com.intellij.psi.PsiMethod
-import org.jetbrains.uast.UCallExpression
 import java.util.Arrays.asList
 import java.util.EnumSet
+import org.jetbrains.uast.UCallExpression
 
 val ISSUE_RESOURCES_GET_DRAWABLE = Issue.create("ResourcesGetDrawableCall", "Marks usage of deprecated getDrawable() on Resources.",
     "Instead of getDrawable(), ContextCompat or the method with the Theme Overload should be used instead.",

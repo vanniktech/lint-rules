@@ -8,8 +8,8 @@ import com.android.tools.lint.detector.api.JavaContext
 import com.android.tools.lint.detector.api.Scope.JAVA_FILE
 import com.android.tools.lint.detector.api.Severity.ERROR
 import com.intellij.psi.PsiMethod
-import org.jetbrains.uast.UCallExpression
 import java.util.EnumSet
+import org.jetbrains.uast.UCallExpression
 
 val ISSUE_SUBSCRIBE_MISSING_ON_ERROR = Issue.create("RxJava2SubscribeMissingOnError",
     "Flags a version of the subscribe() method without an error Consumer.",

@@ -11,12 +11,12 @@ import com.android.tools.lint.detector.api.Scope.JAVA_FILE
 import com.android.tools.lint.detector.api.Severity.WARNING
 import com.intellij.lang.jvm.JvmModifier
 import com.intellij.psi.PsiType
+import java.util.EnumSet
 import org.jetbrains.kotlin.psi.KtProperty
 import org.jetbrains.kotlin.util.capitalizeDecapitalize.toUpperCaseAsciiOnly
 import org.jetbrains.uast.UAnnotated
 import org.jetbrains.uast.UMethod
 import org.jetbrains.uast.kotlin.declarations.KotlinUMethod
-import java.util.EnumSet
 
 val ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE = Issue.create(
     "RxJava2MethodMissingCheckReturnValue",
