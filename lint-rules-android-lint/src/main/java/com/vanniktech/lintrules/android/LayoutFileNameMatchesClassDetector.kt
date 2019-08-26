@@ -9,10 +9,10 @@ import com.android.tools.lint.detector.api.JavaContext
 import com.android.tools.lint.detector.api.Scope.JAVA_FILE
 import com.android.tools.lint.detector.api.Severity.WARNING
 import com.intellij.psi.PsiMethod
+import java.util.EnumSet
 import org.jetbrains.uast.UCallExpression
 import org.jetbrains.uast.getContainingUClass
 import org.jetbrains.uast.tryResolveNamed
-import java.util.EnumSet
 
 val ISSUE_LAYOUT_FILE_NAME_MATCHES_CLASS = Issue.create("LayoutFileNameMatchesClass",
     "Checks that the layout file matches the class name.",

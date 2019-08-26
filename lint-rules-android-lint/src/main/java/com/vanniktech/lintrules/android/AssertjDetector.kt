@@ -10,8 +10,8 @@ import com.android.tools.lint.detector.api.LintFix
 import com.android.tools.lint.detector.api.Scope.JAVA_FILE
 import com.android.tools.lint.detector.api.Scope.TEST_SOURCES
 import com.android.tools.lint.detector.api.Severity.WARNING
-import org.jetbrains.uast.UImportStatement
 import java.util.EnumSet
+import org.jetbrains.uast.UImportStatement
 
 val ISSUE_ASSERTJ_IMPORT = Issue.create("AssertjImport",
     "Flags Java 6 incompatible imports.",

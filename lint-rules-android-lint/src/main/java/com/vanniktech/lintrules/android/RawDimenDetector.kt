@@ -20,9 +20,9 @@ import com.android.tools.lint.detector.api.ResourceXmlDetector
 import com.android.tools.lint.detector.api.Scope.Companion.RESOURCE_FILE_SCOPE
 import com.android.tools.lint.detector.api.Severity.WARNING
 import com.android.tools.lint.detector.api.XmlContext
+import java.util.EnumSet
 import org.w3c.dom.Attr
 import org.w3c.dom.Element
-import java.util.EnumSet
 
 val ISSUE_RAW_DIMEN = Issue.create("RawDimen",
     "Flags dimensions that are not defined as resource.",

@@ -12,10 +12,10 @@ import com.android.tools.lint.detector.api.ResourceXmlDetector
 import com.android.tools.lint.detector.api.Scope.Companion.RESOURCE_FILE_SCOPE
 import com.android.tools.lint.detector.api.Severity.WARNING
 import com.android.tools.lint.detector.api.XmlContext
-import org.w3c.dom.Element
-import org.w3c.dom.Node
 import java.util.Arrays.asList
 import java.util.EnumSet
+import org.w3c.dom.Element
+import org.w3c.dom.Node
 
 val ISSUE_INVALID_STRING = Issue.create("InvalidString",
     "Marks invalid translation strings.",

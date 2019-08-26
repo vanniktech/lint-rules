@@ -10,9 +10,9 @@ import com.android.tools.lint.detector.api.LintFix
 import com.android.tools.lint.detector.api.Scope.JAVA_FILE
 import com.android.tools.lint.detector.api.Scope.TEST_SOURCES
 import com.android.tools.lint.detector.api.Severity.WARNING
+import java.util.EnumSet
 import org.jetbrains.uast.UAnnotated
 import org.jetbrains.uast.UMethod
-import java.util.EnumSet
 
 val ISSUE_WRONG_TEST_METHOD_NAME = Issue.create("WrongTestMethodName",
     "Flags test methods that start with test.",

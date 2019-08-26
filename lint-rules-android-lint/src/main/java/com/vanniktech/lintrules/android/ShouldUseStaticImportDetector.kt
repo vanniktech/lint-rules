@@ -11,11 +11,11 @@ import com.android.tools.lint.detector.api.Severity.WARNING
 import com.android.tools.lint.detector.api.UastLintUtils
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiMethod
+import java.util.EnumSet
 import org.jetbrains.uast.UCallExpression
 import org.jetbrains.uast.UQualifiedReferenceExpression
 import org.jetbrains.uast.UReferenceExpression
 import org.jetbrains.uast.getContainingUFile
-import java.util.EnumSet
 
 val ISSUE_SHOULD_USE_STATIC_IMPORT = Issue.create("ShouldUseStaticImport",
     "Flags declarations that should be statically imported.",

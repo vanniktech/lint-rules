@@ -3,8 +3,8 @@ package com.vanniktech.lintrules.android
 import com.android.tools.lint.detector.api.Issue
 import com.android.tools.lint.detector.api.LayoutDetector
 import com.android.tools.lint.detector.api.XmlContext
-import org.w3c.dom.Element
 import java.util.HashSet
+import org.w3c.dom.Element
 
 abstract class SuperfluousDeclarationDetector(
   private val issue: Issue,

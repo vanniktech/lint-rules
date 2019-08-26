@@ -10,11 +10,11 @@ import com.android.tools.lint.detector.api.Scope.JAVA_FILE
 import com.android.tools.lint.detector.api.Severity.WARNING
 import com.intellij.codeInsight.AnnotationUtil
 import com.intellij.psi.PsiMethod
+import java.util.EnumSet
 import org.jetbrains.uast.UCallExpression
 import org.jetbrains.uast.UMethod
 import org.jetbrains.uast.tryResolve
 import org.jetbrains.uast.visitor.AbstractUastVisitor
-import java.util.EnumSet
 
 val ISSUE_DEFAULT_SCHEDULER = Issue.create("RxJava2DefaultScheduler",
     "Pass a scheduler instead of relying on the default Scheduler.",

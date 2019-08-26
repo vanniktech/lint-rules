@@ -8,9 +8,9 @@ import com.android.tools.lint.detector.api.ResourceXmlDetector
 import com.android.tools.lint.detector.api.Scope.Companion.RESOURCE_FILE_SCOPE
 import com.android.tools.lint.detector.api.Severity.WARNING
 import com.android.tools.lint.detector.api.XmlContext
+import java.util.Locale.US
 import org.w3c.dom.Attr
 import org.w3c.dom.Element
-import java.util.Locale.US
 
 val ISSUE_COLOR_CASING = Issue.create("ColorCasing",
     "Raw colors should be defined with uppercase letters.",

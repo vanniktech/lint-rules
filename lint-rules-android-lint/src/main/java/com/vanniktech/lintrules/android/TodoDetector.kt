@@ -13,10 +13,10 @@ import com.android.tools.lint.detector.api.Scope.PROGUARD_FILE
 import com.android.tools.lint.detector.api.Scope.RESOURCE_FILE
 import com.android.tools.lint.detector.api.Severity.FATAL
 import com.android.tools.lint.detector.api.XmlContext
-import org.jetbrains.uast.UClass
-import org.w3c.dom.Document
 import java.util.EnumSet
 import java.util.regex.Pattern
+import org.jetbrains.uast.UClass
+import org.w3c.dom.Document
 
 private const val COMMENT = "TODO:"
 private val pattern = Pattern.compile("[\\t]*$COMMENT.*")

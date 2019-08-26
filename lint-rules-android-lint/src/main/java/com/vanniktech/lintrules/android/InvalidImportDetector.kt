@@ -8,8 +8,8 @@ import com.android.tools.lint.detector.api.Issue
 import com.android.tools.lint.detector.api.JavaContext
 import com.android.tools.lint.detector.api.Scope.JAVA_FILE
 import com.android.tools.lint.detector.api.Severity.WARNING
-import org.jetbrains.uast.UImportStatement
 import java.util.EnumSet
+import org.jetbrains.uast.UImportStatement
 
 val ISSUE_INVALID_IMPORT = Issue.create("InvalidImport",
     "Flags invalid imports.",
