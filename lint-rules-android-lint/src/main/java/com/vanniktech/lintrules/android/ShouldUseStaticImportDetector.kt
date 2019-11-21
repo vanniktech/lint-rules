@@ -78,7 +78,9 @@ private val methodsToStaticallyImport = mapOf(
     "description" to "org.mockito.Mockito.description",
     "debug" to "org.mockito.Mockito.debug",
     "framework" to "org.mockito.Mockito.framework",
-    "mockitoSession" to "org.mockito.Mockito.mockitoSession"
+    "mockitoSession" to "org.mockito.Mockito.mockitoSession",
+    // AssertJ
+    "assertThat" to "org.assertj.core.api.Assertions.assertThat"
 )
 
 @Suppress("Detekt.StringLiteralDuplication")
