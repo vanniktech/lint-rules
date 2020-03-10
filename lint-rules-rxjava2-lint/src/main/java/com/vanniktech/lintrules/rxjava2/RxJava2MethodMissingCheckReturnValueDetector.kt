@@ -62,7 +62,7 @@ class RxJava2MethodMissingCheckReturnValueDetector : Detector(), Detector.UastSc
 
     private fun isTypeThatRequiresAnnotation(psiType: PsiType): Boolean {
       val canonicalText = psiType.canonicalText
-          .replace("<[\\w.]*>".toRegex(), "") // We need to remove the generics.
+          .replace("<[\\w.<>]*>".toRegex(), "") // We need to remove the generics.
 
       return canonicalText.matches("io\\.reactivex\\.[\\w]+".toRegex()) ||
           "io.reactivex.disposables.Disposable" == canonicalText ||
