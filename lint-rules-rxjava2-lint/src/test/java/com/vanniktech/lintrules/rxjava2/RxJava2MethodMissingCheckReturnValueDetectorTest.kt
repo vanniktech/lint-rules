@@ -419,4 +419,49 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
         .run()
         .expectClean()
   }
+
+  @Test fun methodReturningObservableListMissingCheckReturnValue() {
+    lint()
+        .files(rxJava2(), java("""
+          package foo;
+
+          import io.reactivex.Observable;
+
+          class Example {
+            private Observable<List<Object>> foo() {
+              return null;
+            }
+          }""").indented())
+        .issues(ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE)
+        .run()
+        .expect("""
+          |src/foo/Example.java:6: Warning: Method should have @CheckReturnValue annotation. [RxJava2MethodMissingCheckReturnValue]
+          |  private Observable<List<Object>> foo() {
+          |                                   ~~~
+          |0 errors, 1 warnings""".trimMargin())
+        .expectFixDiffs("""
+          |Fix for src/foo/Example.java line 5: Add @CheckReturnValue:
+          |@@ -6 +6
+          |-   private Observable<List<Object>> foo() {
+          |+   @io.reactivex.annotations.CheckReturnValue private Observable<List<Object>> foo() {
+          |""".trimMargin())
+  }
+
+  @Test fun methodReturningObservableListHavingCheckReturnValue() {
+    lint()
+        .files(rxJava2(), java("""
+          package foo;
+
+          import io.reactivex.Observable;
+          import io.reactivex.annotations.CheckReturnValue;
+
+          class Example {
+            @CheckReturnValue public Observable<List<Object>> foo() {
+              return null;
+            }
+          }""").indented())
+        .issues(ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE)
+        .run()
+        .expectClean()
+  }
 }
