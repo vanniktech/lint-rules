@@ -1,5 +1,8 @@
 # Change Log
 
+Version 0.14.0 *(In development)*
+---------------------------------
+
 Version 0.13.0 *(2020-03-22)*
 -----------------------------
 - RxJava2MethodMissingCheckReturnValueDetector: Observable with nested generics [\#303](https://github.com/vanniktech/lint-rules/pull/303) ([verno3632](https://github.com/verno3632))

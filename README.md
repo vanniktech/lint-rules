@@ -7,7 +7,7 @@ A set of very opinionated lint rules.
 
 ```groovy
 compile 'com.vanniktech:lint-rules-android:0.13.0'
-compile 'com.vanniktech:lint-rules-android:0.13.0-SNAPSHOT'
+compile 'com.vanniktech:lint-rules-android:0.14.0-SNAPSHOT'
 ```
 
 - **AlertDialogUsage** - Support library AlertDialog is much more powerful and plays better together with the new theming / styling than the AlertDialog built into the framework.
@@ -48,7 +48,7 @@ compile 'com.vanniktech:lint-rules-android:0.13.0-SNAPSHOT'
 
 ```groovy
 compile 'com.vanniktech:lint-rules-rxjava2:0.13.0'
-compile 'com.vanniktech:lint-rules-rxjava2:0.13.0-SNAPSHOT'
+compile 'com.vanniktech:lint-rules-rxjava2:0.14.0-SNAPSHOT'
 ```
 
 - **RxJava2DefaultScheduler** - Calling this method will rely on a default scheduler. This is not necessary the best default. Being explicit and taking the overload for passing one is preferred.
