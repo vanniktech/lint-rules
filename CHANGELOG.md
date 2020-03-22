@@ -1,7 +1,13 @@
 # Change Log
 
-Version 0.13.0 *(In development)*
----------------------------------
+Version 0.13.0 *(2020-03-22)*
+-----------------------------
+- RxJava2MethodMissingCheckReturnValueDetector: Observable with nested generics [\#303](https://github.com/vanniktech/lint-rules/pull/303) ([verno3632](https://github.com/verno3632))
+- Add AssertJ to static import check [\#301](https://github.com/vanniktech/lint-rules/pull/301) ([tasomaniac](https://github.com/tasomaniac))
+- Update some of the dependencies. [\#300](https://github.com/vanniktech/lint-rules/pull/300) ([vanniktech](https://github.com/vanniktech))
+- RawDimen: Allow 0dp minHeight/minWidth. [\#299](https://github.com/vanniktech/lint-rules/pull/299) ([vanniktech](https://github.com/vanniktech))
+- Update Android Gradle Plugin to 3.6.1 & Lint to 26.6.1 [\#298](https://github.com/vanniktech/lint-rules/pull/298) ([vanniktech](https://github.com/vanniktech))
+- Update dependencies. [\#297](https://github.com/vanniktech/lint-rules/pull/297) ([vanniktech](https://github.com/vanniktech))
 
 Version 0.12.0 *(2019-04-29)*
 -----------------------------
