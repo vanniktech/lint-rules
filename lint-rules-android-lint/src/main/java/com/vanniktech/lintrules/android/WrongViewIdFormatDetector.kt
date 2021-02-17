@@ -1,6 +1,7 @@
 package com.vanniktech.lintrules.android
 
 import com.android.SdkConstants.ATTR_ID
+import com.android.resources.ResourceUrl
 import com.android.tools.lint.detector.api.Category.Companion.CORRECTNESS
 import com.android.tools.lint.detector.api.Implementation
 import com.android.tools.lint.detector.api.Issue
@@ -21,7 +22,9 @@ class WrongViewIdFormatDetector : LayoutDetector() {
   override fun getApplicableAttributes() = listOf(ATTR_ID)
 
   override fun visitAttribute(context: XmlContext, attribute: Attr) {
-    if (!stripIdPrefix(attribute.value).isLowerCamelCase()) {
+    val name = ResourceUrl.parse(attribute.value)?.name
+
+    if (name != null && !name.isLowerCamelCase()) {
       val fix = fix().replace()
           .name("Convert to lowerCamelCase")
           .text(attribute.value)

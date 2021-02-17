@@ -8,7 +8,6 @@ import com.android.tools.lint.detector.api.Project
 import com.android.tools.lint.detector.api.Scope.Companion.RESOURCE_FILE_SCOPE
 import com.android.tools.lint.detector.api.Severity.WARNING
 import com.android.tools.lint.detector.api.XmlContext
-import com.android.tools.lint.detector.api.computeResourcePrefix
 import org.w3c.dom.Document
 
 private val allowedPrefixes = listOf("activity_", "view_", "fragment_", "dialog_", "bottom_sheet_", "adapter_item_", "divider_", "space_", "popup_window_")
@@ -41,4 +40,4 @@ class WrongLayoutNameDetector : LayoutDetector() {
 
 private fun String.forceUnderscoreIfNeeded() = if (isNotEmpty() && !endsWith("_")) plus("_") else this
 
-fun Project.resourcePrefix() = if (isGradleProject) computeResourcePrefix(gradleProjectModel).orEmpty() else ""
+fun Project.resourcePrefix() = buildModule?.resourcePrefix.orEmpty()
