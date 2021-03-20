@@ -8,14 +8,16 @@ import com.android.tools.lint.detector.api.JavaContext
 import com.android.tools.lint.detector.api.Scope.JAVA_FILE
 import com.android.tools.lint.detector.api.Severity.WARNING
 import com.intellij.psi.PsiMethod
-import java.util.EnumSet
 import org.jetbrains.uast.UCallExpression
+import java.util.EnumSet
 
-val ISSUE_DISPOSABLE_ADD_ALL_CALL = Issue.create("RxJava2DisposableAddAllCall",
-    "Marks usage of addAll() on CompositeDisposable.",
-    "Instead of using addAll(), add() should be used separately for each Disposable.",
-    CORRECTNESS, PRIORITY, WARNING,
-    Implementation(RxJava2DisposableAddAllCallDetector::class.java, EnumSet.of(JAVA_FILE)))
+val ISSUE_DISPOSABLE_ADD_ALL_CALL = Issue.create(
+  "RxJava2DisposableAddAllCall",
+  "Marks usage of addAll() on CompositeDisposable.",
+  "Instead of using addAll(), add() should be used separately for each Disposable.",
+  CORRECTNESS, PRIORITY, WARNING,
+  Implementation(RxJava2DisposableAddAllCallDetector::class.java, EnumSet.of(JAVA_FILE))
+)
 
 class RxJava2DisposableAddAllCallDetector : Detector(), Detector.UastScanner {
   override fun getApplicableMethodNames() = listOf("addAll")

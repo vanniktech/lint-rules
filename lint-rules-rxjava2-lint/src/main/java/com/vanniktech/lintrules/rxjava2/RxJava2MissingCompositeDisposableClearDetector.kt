@@ -8,16 +8,18 @@ import com.android.tools.lint.detector.api.Issue
 import com.android.tools.lint.detector.api.JavaContext
 import com.android.tools.lint.detector.api.Scope.JAVA_FILE
 import com.android.tools.lint.detector.api.Severity.ERROR
-import java.util.EnumSet
 import org.jetbrains.uast.UCallExpression
 import org.jetbrains.uast.UClass
 import org.jetbrains.uast.visitor.AbstractUastVisitor
+import java.util.EnumSet
 
-val ISSUE_MISSING_COMPOSITE_DISPOSABLE_CLEAR = Issue.create("RxJava2MissingCompositeDisposableClear",
-    "Marks CompositeDisposables that are not being cleared.",
-    "A class is using CompositeDisposable and not calling clear(). This can leave operations running and even cause memory leaks. It's best to always call clear() once you're done. e.g. in onDestroy() for Activitys.",
-    CORRECTNESS, PRIORITY, ERROR,
-    Implementation(RxJava2MissingCompositeDisposableClearDetector::class.java, EnumSet.of(JAVA_FILE)))
+val ISSUE_MISSING_COMPOSITE_DISPOSABLE_CLEAR = Issue.create(
+  "RxJava2MissingCompositeDisposableClear",
+  "Marks CompositeDisposables that are not being cleared.",
+  "A class is using CompositeDisposable and not calling clear(). This can leave operations running and even cause memory leaks. It's best to always call clear() once you're done. e.g. in onDestroy() for Activitys.",
+  CORRECTNESS, PRIORITY, ERROR,
+  Implementation(RxJava2MissingCompositeDisposableClearDetector::class.java, EnumSet.of(JAVA_FILE))
+)
 
 class RxJava2MissingCompositeDisposableClearDetector : Detector(), Detector.UastScanner {
   override fun getApplicableUastTypes() = listOf(UClass::class.java)
@@ -29,8 +31,8 @@ class RxJava2MissingCompositeDisposableClearDetector : Detector(), Detector.Uast
   ) : UElementHandler() {
     override fun visitClass(node: UClass) {
       val compositeDisposables = node.fields
-          .filter { "io.reactivex.disposables.CompositeDisposable" == it.type.canonicalText }
-          .toMutableSet()
+        .filter { "io.reactivex.disposables.CompositeDisposable" == it.type.canonicalText }
+        .toMutableSet()
 
       node.accept(object : AbstractUastVisitor() {
         override fun visitCallExpression(node: UCallExpression): Boolean {

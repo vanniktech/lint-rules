@@ -8,14 +8,16 @@ import com.android.tools.lint.detector.api.JavaContext
 import com.android.tools.lint.detector.api.Scope.JAVA_FILE
 import com.android.tools.lint.detector.api.Severity.WARNING
 import com.intellij.psi.PsiMethod
-import java.util.EnumSet
 import org.jetbrains.uast.UCallExpression
+import java.util.EnumSet
 
-val ISSUE_DISPOSABLE_DISPOSE_CALL = Issue.create("RxJava2DisposableDisposeCall",
-    "Marks usage of dispose() on CompositeDisposable.",
-    "Instead of using dispose(), clear() should be used. Calling clear will result in a CompositeDisposable that can be used further to add more Disposables. When using dispose() this is not the case.",
-    CORRECTNESS, PRIORITY, WARNING,
-    Implementation(RxJava2DisposableDisposeCallDetector::class.java, EnumSet.of(JAVA_FILE)))
+val ISSUE_DISPOSABLE_DISPOSE_CALL = Issue.create(
+  "RxJava2DisposableDisposeCall",
+  "Marks usage of dispose() on CompositeDisposable.",
+  "Instead of using dispose(), clear() should be used. Calling clear will result in a CompositeDisposable that can be used further to add more Disposables. When using dispose() this is not the case.",
+  CORRECTNESS, PRIORITY, WARNING,
+  Implementation(RxJava2DisposableDisposeCallDetector::class.java, EnumSet.of(JAVA_FILE))
+)
 
 class RxJava2DisposableDisposeCallDetector : Detector(), Detector.UastScanner {
   override fun getApplicableMethodNames() = listOf("dispose")
@@ -23,12 +25,12 @@ class RxJava2DisposableDisposeCallDetector : Detector(), Detector.UastScanner {
   override fun visitMethodCall(context: JavaContext, node: UCallExpression, method: PsiMethod) {
     if (context.evaluator.isMemberInClass(method, "io.reactivex.disposables.CompositeDisposable")) {
       val fix = fix()
-          .name("Fix it")
-          .replace()
-          .text("dispose")
-          .with("clear")
-          .autoFix()
-          .build()
+        .name("Fix it")
+        .replace()
+        .text("dispose")
+        .with("clear")
+        .autoFix()
+        .build()
 
       context.report(ISSUE_DISPOSABLE_DISPOSE_CALL, node, context.getNameLocation(node), "Calling dispose instead of clear.", fix)
     }

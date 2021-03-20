@@ -9,7 +9,6 @@ import com.android.tools.lint.detector.api.JavaContext
 import com.android.tools.lint.detector.api.Scope.JAVA_FILE
 import com.android.tools.lint.detector.api.Severity.WARNING
 import com.intellij.psi.PsiNamedElement
-import java.util.EnumSet
 import org.jetbrains.kotlin.psi.KtProperty
 import org.jetbrains.kotlin.psi.psiUtil.isTopLevelKtOrJavaMember
 import org.jetbrains.uast.UClass
@@ -18,12 +17,15 @@ import org.jetbrains.uast.UEnumConstant
 import org.jetbrains.uast.UMethod
 import org.jetbrains.uast.UVariable
 import org.jetbrains.uast.kotlin.declarations.KotlinUMethod
+import java.util.EnumSet
 
-val ISSUE_NAMING_PATTERN = Issue.create("NamingPattern",
-    "Names should be well named.",
-    """Sometimes there is more than one reasonable way to convert an English phrase into camel case, such as when acronyms or unusual constructs like "IPv6" or "iOS" are present. XML HTTP request becomes XmlHttpRequest. XMLHTTPRequest would be incorrect.""",
-    CORRECTNESS, PRIORITY, WARNING,
-    Implementation(NamingPatternDetector::class.java, EnumSet.of(JAVA_FILE)))
+val ISSUE_NAMING_PATTERN = Issue.create(
+  "NamingPattern",
+  "Names should be well named.",
+  """Sometimes there is more than one reasonable way to convert an English phrase into camel case, such as when acronyms or unusual constructs like "IPv6" or "iOS" are present. XML HTTP request becomes XmlHttpRequest. XMLHTTPRequest would be incorrect.""",
+  CORRECTNESS, PRIORITY, WARNING,
+  Implementation(NamingPatternDetector::class.java, EnumSet.of(JAVA_FILE))
+)
 
 class NamingPatternDetector : Detector(), Detector.UastScanner {
   override fun getApplicableUastTypes() = listOf<Class<out UElement>>(UVariable::class.java, UMethod::class.java, UClass::class.java)
@@ -61,6 +63,6 @@ class NamingPatternDetector : Detector(), Detector.UastScanner {
 private fun String.isDefinedCamelCase(): Boolean {
   val toCharArray = toCharArray()
   return toCharArray
-      .mapIndexed { index, current -> current to toCharArray.getOrNull(index + 1) }
-      .none { it.first.isUpperCase() && it.second?.isUpperCase() ?: false }
+    .mapIndexed { index, current -> current to toCharArray.getOrNull(index + 1) }
+    .none { it.first.isUpperCase() && it.second?.isUpperCase() ?: false }
 }

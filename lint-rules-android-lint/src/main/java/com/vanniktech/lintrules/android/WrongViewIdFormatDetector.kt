@@ -11,11 +11,13 @@ import com.android.tools.lint.detector.api.Severity.WARNING
 import com.android.tools.lint.detector.api.XmlContext
 import org.w3c.dom.Attr
 
-val ISSUE_WRONG_VIEW_ID_FORMAT = Issue.create("WrongViewIdFormat",
-    "Flag view ids that are not in lowerCamelCase Format.",
-    "View ids should be in lowerCamelCase format. This has the benefit of saving an unnecessary underscore and also just looks nicer.",
-    CORRECTNESS, PRIORITY, WARNING,
-    Implementation(WrongViewIdFormatDetector::class.java, RESOURCE_FILE_SCOPE))
+val ISSUE_WRONG_VIEW_ID_FORMAT = Issue.create(
+  "WrongViewIdFormat",
+  "Flag view ids that are not in lowerCamelCase Format.",
+  "View ids should be in lowerCamelCase format. This has the benefit of saving an unnecessary underscore and also just looks nicer.",
+  CORRECTNESS, PRIORITY, WARNING,
+  Implementation(WrongViewIdFormatDetector::class.java, RESOURCE_FILE_SCOPE)
+)
 
 class WrongViewIdFormatDetector : LayoutDetector() {
   override fun getApplicableAttributes() = listOf(ATTR_ID)
@@ -25,11 +27,11 @@ class WrongViewIdFormatDetector : LayoutDetector() {
 
     if (name != null && !name.isLowerCamelCase()) {
       val fix = fix().replace()
-          .name("Convert to lowerCamelCase")
-          .text(attribute.value)
-          .with(attribute.value.idToLowerCamelCase())
-          .autoFix()
-          .build()
+        .name("Convert to lowerCamelCase")
+        .text(attribute.value)
+        .with(attribute.value.idToLowerCamelCase())
+        .autoFix()
+        .build()
 
       context.report(ISSUE_WRONG_VIEW_ID_FORMAT, attribute, context.getValueLocation(attribute), "Id is not in lowerCamelCaseFormat", fix)
     }

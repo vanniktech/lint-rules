@@ -11,18 +11,20 @@ import com.android.tools.lint.detector.api.Scope.Companion.RESOURCE_FILE_SCOPE
 import com.android.tools.lint.detector.api.Severity.WARNING
 import java.util.Arrays.asList
 
-val ISSUE_SUPERFLUOUS_MARGIN_DECLARATION = Issue.create("SuperfluousMarginDeclaration",
-    "Flags margin declarations that can be simplified.",
-    "Instead of using start-, end-, bottom- and top margins, layout_margin can be used.",
-    CORRECTNESS, PRIORITY, WARNING,
-    Implementation(SuperfluousMarginDeclarationDetector::class.java, RESOURCE_FILE_SCOPE))
+val ISSUE_SUPERFLUOUS_MARGIN_DECLARATION = Issue.create(
+  "SuperfluousMarginDeclaration",
+  "Flags margin declarations that can be simplified.",
+  "Instead of using start-, end-, bottom- and top margins, layout_margin can be used.",
+  CORRECTNESS, PRIORITY, WARNING,
+  Implementation(SuperfluousMarginDeclarationDetector::class.java, RESOURCE_FILE_SCOPE)
+)
 
 class SuperfluousMarginDeclarationDetector : SuperfluousDeclarationDetector(
   applicableSuperfluousAttributes = asList(
-      ATTR_LAYOUT_MARGIN_TOP,
-      ATTR_LAYOUT_MARGIN_BOTTOM,
-      ATTR_LAYOUT_MARGIN_START,
-      ATTR_LAYOUT_MARGIN_END
+    ATTR_LAYOUT_MARGIN_TOP,
+    ATTR_LAYOUT_MARGIN_BOTTOM,
+    ATTR_LAYOUT_MARGIN_START,
+    ATTR_LAYOUT_MARGIN_END
   ),
   issue = ISSUE_SUPERFLUOUS_MARGIN_DECLARATION,
   message = "Should be using layout_margin instead."

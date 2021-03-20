@@ -9,22 +9,24 @@ import com.android.tools.lint.detector.api.Location
 import com.android.tools.lint.detector.api.Scope.GRADLE_FILE
 import com.android.tools.lint.detector.api.Scope.JAVA_FILE
 import com.android.tools.lint.detector.api.Severity.WARNING
+import org.jetbrains.uast.UClass
 import java.net.MalformedURLException
 import java.net.URL
 import java.util.EnumSet
 import java.util.regex.Pattern
-import org.jetbrains.uast.UClass
 
 private const val COMMENT = "//"
 private const val COMMENT_BEGINNING_INDEX = 3
 private val allowedEndings = listOf(".", "?", "!", ")")
 private val pattern = Pattern.compile("[\\t]*$COMMENT.*")
 
-val ISSUE_INVALID_SINGLE_LINE_COMMENT = Issue.create("InvalidSingleLineComment",
-    "Marks single line comments that are not sentences.",
-    "Single line comments should always be sentences. They're part of the code and hence they deserve as much detail and respect as code.",
-    CORRECTNESS, PRIORITY, WARNING,
-    Implementation(InvalidSingleLineCommentDetector::class.java, EnumSet.of(JAVA_FILE, GRADLE_FILE), EnumSet.of(JAVA_FILE, GRADLE_FILE)))
+val ISSUE_INVALID_SINGLE_LINE_COMMENT = Issue.create(
+  "InvalidSingleLineComment",
+  "Marks single line comments that are not sentences.",
+  "Single line comments should always be sentences. They're part of the code and hence they deserve as much detail and respect as code.",
+  CORRECTNESS, PRIORITY, WARNING,
+  Implementation(InvalidSingleLineCommentDetector::class.java, EnumSet.of(JAVA_FILE, GRADLE_FILE), EnumSet.of(JAVA_FILE, GRADLE_FILE))
+)
 
 class InvalidSingleLineCommentDetector : Detector(), Detector.UastScanner, Detector.GradleScanner {
   override fun getApplicableUastTypes() = listOf(UClass::class.java)
@@ -58,12 +60,12 @@ class InvalidSingleLineCommentDetector : Detector(), Detector.UastScanner, Detec
   private fun handlePeriod(context: Context, source: String, start: Int, end: Int, group: String) {
     val location = Location.create(context.file, source, start, end)
     val fix = fix()
-        .name("Add period")
-        .replace()
-        .text(group)
-        .with("$group.")
-        .autoFix(true, false)
-        .build()
+      .name("Add period")
+      .replace()
+      .text(group)
+      .with("$group.")
+      .autoFix(true, false)
+      .build()
 
     context.report(ISSUE_INVALID_SINGLE_LINE_COMMENT, location, "Comment does not end with a period.", fix)
   }
@@ -71,12 +73,12 @@ class InvalidSingleLineCommentDetector : Detector(), Detector.UastScanner, Detec
   private fun handleFirstWordCapitalization(context: Context, source: String, start: Int, end: Int, group: String) {
     val location = Location.create(context.file, source, start + COMMENT_BEGINNING_INDEX, end + COMMENT_BEGINNING_INDEX + 1)
     val fix = fix()
-        .name("Capitalized first word")
-        .replace()
-        .text(group.substring(1))
-        .with(Character.toUpperCase(group[1]) + group.substring(2))
-        .autoFix(true, false)
-        .build()
+      .name("Capitalized first word")
+      .replace()
+      .text(group.substring(1))
+      .with(Character.toUpperCase(group[1]) + group.substring(2))
+      .autoFix(true, false)
+      .build()
 
     context.report(ISSUE_INVALID_SINGLE_LINE_COMMENT, location, "Comments first word should be capitalized.", fix)
   }
@@ -84,12 +86,12 @@ class InvalidSingleLineCommentDetector : Detector(), Detector.UastScanner, Detec
   private fun handleTrailingWhiteSpace(context: Context, source: String, start: Int, end: Int, group: String) {
     val location = Location.create(context.file, source, start, end)
     val fix = fix()
-        .name("Remove trailing whitespace")
-        .replace()
-        .text(group)
-        .with(group.trimEnd())
-        .autoFix(true, false)
-        .build()
+      .name("Remove trailing whitespace")
+      .replace()
+      .text(group)
+      .with(group.trimEnd())
+      .autoFix(true, false)
+      .build()
 
     context.report(ISSUE_INVALID_SINGLE_LINE_COMMENT, location, "Comment contains trailing whitespace.", fix)
   }
@@ -97,12 +99,12 @@ class InvalidSingleLineCommentDetector : Detector(), Detector.UastScanner, Detec
   private fun handleRecedingSpace(context: Context, source: String, start: Int) {
     val location = Location.create(context.file, source, start, start + COMMENT_BEGINNING_INDEX)
     val fix = fix()
-        .name("Add space")
-        .replace()
-        .text(COMMENT)
-        .with("// ")
-        .autoFix(true, false)
-        .build()
+      .name("Add space")
+      .replace()
+      .text(COMMENT)
+      .with("// ")
+      .autoFix(true, false)
+      .build()
 
     context.report(ISSUE_INVALID_SINGLE_LINE_COMMENT, location, "Comment does not contain a space at the beginning.", fix)
   }
@@ -110,12 +112,12 @@ class InvalidSingleLineCommentDetector : Detector(), Detector.UastScanner, Detec
   private fun handlePrecedingSpace(context: Context, source: String, start: Int) {
     val location = Location.create(context.file, source, start - 1, start + 2)
     val fix = fix()
-        .name("Add space")
-        .replace()
-        .text(COMMENT)
-        .with(" //")
-        .autoFix(true, false)
-        .build()
+      .name("Add space")
+      .replace()
+      .text(COMMENT)
+      .with(" //")
+      .autoFix(true, false)
+      .build()
 
     context.report(ISSUE_INVALID_SINGLE_LINE_COMMENT, location, "Comment declaration is not preceded by a single space.", fix)
   }
@@ -131,12 +133,12 @@ class InvalidSingleLineCommentDetector : Detector(), Detector.UastScanner, Detec
   }
 
   private fun isUrl(string: String) = listOfNotNull(string, string.split(" ").lastOrNull())
-      .any {
-        try {
-          URL(it)
-          true
-        } catch (ignore: MalformedURLException) {
-          false
-        }
+    .any {
+      try {
+        URL(it)
+        true
+      } catch (ignore: MalformedURLException) {
+        false
       }
+    }
 }

@@ -7,224 +7,339 @@ import org.junit.Test
 class RawDimenDetectorTest {
   @Test fun toolsMargin() {
     lint()
-        .files(xml("res/layout/ids.xml", """
-          <TextView xmlns:tools="http://schemas.android.com/tools" tools:layout_margin="16dp"/>""").indented())
-        .issues(ISSUE_RAW_DIMEN)
-        .run()
-        .expectClean()
+      .files(
+        xml(
+          "res/layout/ids.xml",
+          """
+          <TextView xmlns:tools="http://schemas.android.com/tools" tools:layout_margin="16dp"/>"""
+        ).indented()
+      )
+      .issues(ISSUE_RAW_DIMEN)
+      .run()
+      .expectClean()
   }
 
   @Test fun appCustom() {
     lint()
-        .files(xml("res/layout/ids.xml", """
-          <TextView xmlns:app="http://schemas.android.com/apk/res-auto" app:someCustomAttribute="16dp"/>""").indented())
-        .issues(ISSUE_RAW_DIMEN)
-        .run()
-        .expect("""
+      .files(
+        xml(
+          "res/layout/ids.xml",
+          """
+          <TextView xmlns:app="http://schemas.android.com/apk/res-auto" app:someCustomAttribute="16dp"/>"""
+        ).indented()
+      )
+      .issues(ISSUE_RAW_DIMEN)
+      .run()
+      .expect(
+        """
           |res/layout/ids.xml:1: Warning: Should be using a dimension resource instead. [RawDimen]
           |<TextView xmlns:app="http://schemas.android.com/apk/res-auto" app:someCustomAttribute="16dp"/>
           |                                                                                       ~~~~
-          |0 errors, 1 warnings""".trimMargin())
+          |0 errors, 1 warnings""".trimMargin()
+      )
   }
 
   @Test fun androidMarginSuggestion() {
     lint()
-        .files(xml("res/layout/ids.xml", """
+      .files(
+        xml(
+          "res/layout/ids.xml",
+          """
           <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_margin="16dp"/>""").indented(),
-            xml("res/values/dimens.xml", """
+             android:layout_margin="16dp"/>"""
+        ).indented(),
+        xml(
+          "res/values/dimens.xml",
+          """
           <resources>
            <dimen name="content_margin">16dp</dimen>
-          </resources>""").indented())
-        .issues(ISSUE_RAW_DIMEN)
-        .run()
-        .expect("""
+          </resources>"""
+        ).indented()
+      )
+      .issues(ISSUE_RAW_DIMEN)
+      .run()
+      .expect(
+        """
           |res/layout/ids.xml:2: Warning: Should be using a dimension resource instead. [RawDimen]
           |   android:layout_margin="16dp"/>
           |                          ~~~~
-          |0 errors, 1 warnings""".trimMargin())
-        .expectFixDiffs("""
+          |0 errors, 1 warnings""".trimMargin()
+      )
+      .expectFixDiffs(
+        """
           |Fix for res/layout/ids.xml line 1: Replace with @dimen/content_margin:
           |@@ -2 +2
           |-    android:layout_margin="16dp"/>
           |@@ -3 +2
           |+    android:layout_margin="@dimen/content_margin"/>
-          |""".trimMargin())
+          |""".trimMargin()
+      )
   }
 
   @Test fun androidMarginIgnored() {
     lint()
-        .files(xml("res/layout/ids.xml", """
+      .files(
+        xml(
+          "res/layout/ids.xml",
+          """
           <TextView xmlns:android="http://schemas.android.com/apk/res/android"
              xmlns:tools="http://schemas.android.com/tools"
              tools:ignore="RawDimen"
-             android:layout_margin="16dp"/>""").indented())
-        .issues(ISSUE_RAW_DIMEN)
-        .run()
-        .expectClean()
+             android:layout_margin="16dp"/>"""
+        ).indented()
+      )
+      .issues(ISSUE_RAW_DIMEN)
+      .run()
+      .expectClean()
   }
 
   @Test fun androidDrawable() {
     lint()
-        .files(xml("res/drawable/drawable.xml", """
+      .files(
+        xml(
+          "res/drawable/drawable.xml",
+          """
           <shape
               xmlns:android="http://schemas.android.com/apk/res/android"
               android:shape="rectangle">
             <solid android:color="#1aeebf"/>
             <size android:height="4dp"/>
-          </shape>""").indented())
-        .issues(ISSUE_RAW_DIMEN)
-        .run()
-        .expect("""
+          </shape>"""
+        ).indented()
+      )
+      .issues(ISSUE_RAW_DIMEN)
+      .run()
+      .expect(
+        """
           |res/drawable/drawable.xml:5: Warning: Should be using a dimension resource instead. [RawDimen]
           |  <size android:height="4dp"/>
           |                        ~~~
-          |0 errors, 1 warnings""".trimMargin())
+          |0 errors, 1 warnings""".trimMargin()
+      )
   }
 
   @Test fun androidLayoutWidth0Dp() {
     lint()
-        .files(xml("res/layout/ids.xml", """
-          <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="0dp"/>""").indented())
-        .issues(ISSUE_RAW_DIMEN)
-        .run()
-        .expect("""
+      .files(
+        xml(
+          "res/layout/ids.xml",
+          """
+          <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="0dp"/>"""
+        ).indented()
+      )
+      .issues(ISSUE_RAW_DIMEN)
+      .run()
+      .expect(
+        """
           |res/layout/ids.xml:1: Warning: Should be using a dimension resource instead. [RawDimen]
           |<TextView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="0dp"/>
           |                                                                                           ~~~
-          |0 errors, 1 warnings""".trimMargin())
+          |0 errors, 1 warnings""".trimMargin()
+      )
   }
 
   @Test fun androidLayoutWidth0DpIgnoreWhenLayoutWeightSet() {
     lint()
-        .files(xml("res/layout/ids.xml", """
-          <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="0dp" android:layout_weight="1"/>""").indented())
-        .issues(ISSUE_RAW_DIMEN)
-        .run()
-        .expectClean()
+      .files(
+        xml(
+          "res/layout/ids.xml",
+          """
+          <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="0dp" android:layout_weight="1"/>"""
+        ).indented()
+      )
+      .issues(ISSUE_RAW_DIMEN)
+      .run()
+      .expectClean()
   }
 
   @Test fun androidLayoutHeight0Dp() {
     lint()
-        .files(xml("res/layout/ids.xml", """
-          <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_height="0dp"/>""").indented())
-        .issues(ISSUE_RAW_DIMEN)
-        .run()
-        .expect("""
+      .files(
+        xml(
+          "res/layout/ids.xml",
+          """
+          <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_height="0dp"/>"""
+        ).indented()
+      )
+      .issues(ISSUE_RAW_DIMEN)
+      .run()
+      .expect(
+        """
           |res/layout/ids.xml:1: Warning: Should be using a dimension resource instead. [RawDimen]
           |<TextView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_height="0dp"/>
           |                                                                                            ~~~
-          |0 errors, 1 warnings""".trimMargin())
+          |0 errors, 1 warnings""".trimMargin()
+      )
   }
 
   @Test fun androidLayoutHeight0DpIgnoreWhenLayoutWeightSet() {
     lint()
-        .files(xml("res/layout/ids.xml", """
-          <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_height="0dp" android:layout_weight="1"/>""").indented())
-        .issues(ISSUE_RAW_DIMEN)
-        .run()
-        .expectClean()
+      .files(
+        xml(
+          "res/layout/ids.xml",
+          """
+          <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_height="0dp" android:layout_weight="1"/>"""
+        ).indented()
+      )
+      .issues(ISSUE_RAW_DIMEN)
+      .run()
+      .expectClean()
   }
 
   @Test fun androidLayoutMinHeight0Ignored() {
     lint()
-        .files(xml("res/layout/ids.xml", """
-          <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:minHeight="0dp"/>""").indented())
-        .issues(ISSUE_RAW_DIMEN)
-        .run()
-        .expectClean()
+      .files(
+        xml(
+          "res/layout/ids.xml",
+          """
+          <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:minHeight="0dp"/>"""
+        ).indented()
+      )
+      .issues(ISSUE_RAW_DIMEN)
+      .run()
+      .expectClean()
   }
 
   @Test fun androidLayoutMinWidth0Ignored() {
     lint()
-        .files(xml("res/layout/ids.xml", """
-          <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:minWidth="0dp"/>""").indented())
-        .issues(ISSUE_RAW_DIMEN)
-        .run()
-        .expectClean()
+      .files(
+        xml(
+          "res/layout/ids.xml",
+          """
+          <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:minWidth="0dp"/>"""
+        ).indented()
+      )
+      .issues(ISSUE_RAW_DIMEN)
+      .run()
+      .expectClean()
   }
 
   @Test fun androidLayoutWidth() {
     lint()
-        .files(xml("res/layout/ids.xml", """
-          <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="16dp"/>""").indented())
-        .issues(ISSUE_RAW_DIMEN)
-        .run()
-        .expect("""
+      .files(
+        xml(
+          "res/layout/ids.xml",
+          """
+          <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="16dp"/>"""
+        ).indented()
+      )
+      .issues(ISSUE_RAW_DIMEN)
+      .run()
+      .expect(
+        """
           |res/layout/ids.xml:1: Warning: Should be using a dimension resource instead. [RawDimen]
           |<TextView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="16dp"/>
           |                                                                                           ~~~~
-          |0 errors, 1 warnings""".trimMargin())
+          |0 errors, 1 warnings""".trimMargin()
+      )
   }
 
   @Test fun androidLayoutHeight() {
     lint()
-        .files(xml("res/layout/ids.xml", """
-          <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_height="16dp"/>""").indented())
-        .issues(ISSUE_RAW_DIMEN)
-        .run()
-        .expect("""
+      .files(
+        xml(
+          "res/layout/ids.xml",
+          """
+          <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_height="16dp"/>"""
+        ).indented()
+      )
+      .issues(ISSUE_RAW_DIMEN)
+      .run()
+      .expect(
+        """
           |res/layout/ids.xml:1: Warning: Should be using a dimension resource instead. [RawDimen]
           |<TextView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_height="16dp"/>
           |                                                                                            ~~~~
-          |0 errors, 1 warnings""".trimMargin())
+          |0 errors, 1 warnings""".trimMargin()
+      )
   }
 
   @Test fun androidMargin() {
     lint()
-        .files(xml("res/layout/ids.xml", """
-          <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_margin="16dp"/>""").indented())
-        .issues(ISSUE_RAW_DIMEN)
-        .run()
-        .expect("""
+      .files(
+        xml(
+          "res/layout/ids.xml",
+          """
+          <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_margin="16dp"/>"""
+        ).indented()
+      )
+      .issues(ISSUE_RAW_DIMEN)
+      .run()
+      .expect(
+        """
           |res/layout/ids.xml:1: Warning: Should be using a dimension resource instead. [RawDimen]
           |<TextView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_margin="16dp"/>
           |                                                                                            ~~~~
-          |0 errors, 1 warnings""".trimMargin())
+          |0 errors, 1 warnings""".trimMargin()
+      )
   }
 
   @Test fun androidMarginHalfDp() {
     lint()
-        .files(xml("res/layout/ids.xml", """
-          <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_margin="0.5dp"/>""").indented())
-        .issues(ISSUE_RAW_DIMEN)
-        .run()
-        .expect("""
+      .files(
+        xml(
+          "res/layout/ids.xml",
+          """
+          <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_margin="0.5dp"/>"""
+        ).indented()
+      )
+      .issues(ISSUE_RAW_DIMEN)
+      .run()
+      .expect(
+        """
           |res/layout/ids.xml:1: Warning: Should be using a dimension resource instead. [RawDimen]
           |<TextView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_margin="0.5dp"/>
           |                                                                                            ~~~~~
-          |0 errors, 1 warnings""".trimMargin())
+          |0 errors, 1 warnings""".trimMargin()
+      )
   }
 
   @Test fun androidMinusPaddingEnd() {
     lint()
-        .files(xml("res/layout/ids.xml", """
-          <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:paddingEnd="-16dp"/>""").indented())
-        .issues(ISSUE_RAW_DIMEN)
-        .run()
-        .expect("""
+      .files(
+        xml(
+          "res/layout/ids.xml",
+          """
+          <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:paddingEnd="-16dp"/>"""
+        ).indented()
+      )
+      .issues(ISSUE_RAW_DIMEN)
+      .run()
+      .expect(
+        """
           |res/layout/ids.xml:1: Warning: Should be using a dimension resource instead. [RawDimen]
           |<TextView xmlns:android="http://schemas.android.com/apk/res/android" android:paddingEnd="-16dp"/>
           |                                                                                         ~~~~~
-          |0 errors, 1 warnings""".trimMargin())
+          |0 errors, 1 warnings""".trimMargin()
+      )
   }
 
   @Test fun androidTextSize() {
     lint()
-        .files(xml("res/layout/ids.xml", """
-          <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:textSize="16dp"/>""").indented())
-        .issues(ISSUE_RAW_DIMEN)
-        .run()
-        .expect("""
+      .files(
+        xml(
+          "res/layout/ids.xml",
+          """
+          <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:textSize="16dp"/>"""
+        ).indented()
+      )
+      .issues(ISSUE_RAW_DIMEN)
+      .run()
+      .expect(
+        """
           |res/layout/ids.xml:1: Warning: Should be using a dimension resource instead. [RawDimen]
           |<TextView xmlns:android="http://schemas.android.com/apk/res/android" android:textSize="16dp"/>
           |                                                                                       ~~~~
-          |0 errors, 1 warnings""".trimMargin())
+          |0 errors, 1 warnings""".trimMargin()
+      )
   }
 
   @Test fun ignore0DpConstraintLayout() {
     lint()
-        .files(xml("res/layout/ids.xml", """
+      .files(
+        xml(
+          "res/layout/ids.xml",
+          """
           <android.support.constraint.ConstraintLayout
               xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
@@ -233,15 +348,20 @@ class RawDimenDetectorTest {
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"/>
-          </android.support.constraint.ConstraintLayout>""").indented())
-        .issues(ISSUE_RAW_DIMEN)
-        .run()
-        .expectClean()
+          </android.support.constraint.ConstraintLayout>"""
+        ).indented()
+      )
+      .issues(ISSUE_RAW_DIMEN)
+      .run()
+      .expectClean()
   }
 
   @Test fun ignore0DpConstraintLayoutAndroidX() {
     lint()
-        .files(xml("res/layout/ids.xml", """
+      .files(
+        xml(
+          "res/layout/ids.xml",
+          """
           <androidx.constraintlayout.widget.ConstraintLayout
               xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
@@ -250,15 +370,20 @@ class RawDimenDetectorTest {
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"/>
-          </androidx.constraintlayout.widget.ConstraintLayout>""").indented())
-        .issues(ISSUE_RAW_DIMEN)
-        .run()
-        .expectClean()
+          </androidx.constraintlayout.widget.ConstraintLayout>"""
+        ).indented()
+      )
+      .issues(ISSUE_RAW_DIMEN)
+      .run()
+      .expectClean()
   }
 
   @Test fun ignore0DpMergeConstraintLayout() {
     lint()
-        .files(xml("res/layout/ids.xml", """
+      .files(
+        xml(
+          "res/layout/ids.xml",
+          """
           <merge
               xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:tools="http://schemas.android.com/tools"
@@ -269,15 +394,20 @@ class RawDimenDetectorTest {
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"/>
-          </merge>""").indented())
-        .issues(ISSUE_RAW_DIMEN)
-        .run()
-        .expectClean()
+          </merge>"""
+        ).indented()
+      )
+      .issues(ISSUE_RAW_DIMEN)
+      .run()
+      .expectClean()
   }
 
   @Test fun ignore0DpMergeConstraintLayoutAndroidX() {
     lint()
-        .files(xml("res/layout/ids.xml", """
+      .files(
+        xml(
+          "res/layout/ids.xml",
+          """
           <merge
               xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:tools="http://schemas.android.com/tools"
@@ -288,15 +418,20 @@ class RawDimenDetectorTest {
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"/>
-          </merge>""").indented())
-        .issues(ISSUE_RAW_DIMEN)
-        .run()
-        .expectClean()
+          </merge>"""
+        ).indented()
+      )
+      .issues(ISSUE_RAW_DIMEN)
+      .run()
+      .expectClean()
   }
 
   @Test fun ignoreVector() {
     lint()
-        .files(xml("res/drawable/icon.xml", """
+      .files(
+        xml(
+          "res/drawable/icon.xml",
+          """
           <?xml version="1.0" encoding="UTF-8" standalone="no"?>
           <vector xmlns:android="http://schemas.android.com/apk/res/android"
               android:height="24dp"
@@ -306,9 +441,11 @@ class RawDimenDetectorTest {
             <path
                 android:fillColor="#000000"
                 android:pathData="M19,13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
-          </vector>""").indented())
-        .issues(ISSUE_RAW_DIMEN)
-        .run()
-        .expectClean()
+          </vector>"""
+        ).indented()
+      )
+      .issues(ISSUE_RAW_DIMEN)
+      .run()
+      .expectClean()
   }
 }

@@ -9,10 +9,12 @@ import com.android.tools.lint.detector.api.Severity.ERROR
 import com.android.tools.lint.detector.api.XmlContext
 import org.w3c.dom.Element
 
-val ISSUE_WRONG_CONSTRAINT_LAYOUT_USAGE = Issue.create("WrongConstraintLayoutUsage", "Marks a wrong usage of the Constraint Layout.",
-    "Instead of using left & right constraints start & end should be used.",
-    CORRECTNESS, PRIORITY, ERROR,
-    Implementation(WrongConstraintLayoutUsageDetector::class.java, RESOURCE_FILE_SCOPE))
+val ISSUE_WRONG_CONSTRAINT_LAYOUT_USAGE = Issue.create(
+  "WrongConstraintLayoutUsage", "Marks a wrong usage of the Constraint Layout.",
+  "Instead of using left & right constraints start & end should be used.",
+  CORRECTNESS, PRIORITY, ERROR,
+  Implementation(WrongConstraintLayoutUsageDetector::class.java, RESOURCE_FILE_SCOPE)
+)
 
 class WrongConstraintLayoutUsageDetector : LayoutDetector() {
   override fun getApplicableElements() = ALL
@@ -26,7 +28,7 @@ class WrongConstraintLayoutUsageDetector : LayoutDetector() {
 
       if (localName != null) {
         val properLocalName = localName.replace("Left", "Start")
-            .replace("Right", "End")
+          .replace("Right", "End")
 
         val isConstraint = localName.contains("layout_constraint")
         val hasLeft = localName.contains("Left")

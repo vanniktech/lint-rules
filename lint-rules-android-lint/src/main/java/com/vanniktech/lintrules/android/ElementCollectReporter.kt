@@ -21,9 +21,9 @@ class ElementCollectReporter(
 
   @Suppress("Detekt.SpreadOperator") fun report(issue: Issue, context: Context, message: String) {
     elementsToReport
-        .forEach { (node, location) ->
+      .forEach { (node, location) ->
         val fixes = possibleSuggestions(node.nodeValue)
-            .map { LintFix.create().replace().all().with(it).build() }
+          .map { LintFix.create().replace().all().with(it).build() }
 
         val fix = if (fixes.isNotEmpty()) LintFix.create().group(*fixes.toTypedArray()) else null
         context.report(issue, location, message, fix)

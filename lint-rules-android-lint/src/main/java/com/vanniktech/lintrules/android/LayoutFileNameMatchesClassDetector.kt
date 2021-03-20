@@ -9,16 +9,18 @@ import com.android.tools.lint.detector.api.JavaContext
 import com.android.tools.lint.detector.api.Scope.JAVA_FILE
 import com.android.tools.lint.detector.api.Severity.WARNING
 import com.intellij.psi.PsiMethod
-import java.util.EnumSet
 import org.jetbrains.uast.UCallExpression
 import org.jetbrains.uast.getContainingUClass
 import org.jetbrains.uast.tryResolveNamed
+import java.util.EnumSet
 
-val ISSUE_LAYOUT_FILE_NAME_MATCHES_CLASS = Issue.create("LayoutFileNameMatchesClass",
-    "Checks that the layout file matches the class name.",
-    "Layout file names should always match the name of the class. FooActivity should have a layout file named activity_foo hence.",
-    CORRECTNESS, PRIORITY, WARNING,
-    Implementation(LayoutFileNameMatchesClassDetector::class.java, EnumSet.of(JAVA_FILE)))
+val ISSUE_LAYOUT_FILE_NAME_MATCHES_CLASS = Issue.create(
+  "LayoutFileNameMatchesClass",
+  "Checks that the layout file matches the class name.",
+  "Layout file names should always match the name of the class. FooActivity should have a layout file named activity_foo hence.",
+  CORRECTNESS, PRIORITY, WARNING,
+  Implementation(LayoutFileNameMatchesClassDetector::class.java, EnumSet.of(JAVA_FILE))
+)
 
 class LayoutFileNameMatchesClassDetector : Detector(), UastScanner {
   override fun getApplicableMethodNames() = listOf("setContentView")
@@ -32,32 +34,32 @@ class LayoutFileNameMatchesClassDetector : Detector(), UastScanner {
     val isNoLayoutReference = firstParameter?.asSourceString()?.startsWith("R.layout") == false
 
     val layoutFileName = firstParameter
-        ?.tryResolveNamed()
-        ?.name
+      ?.tryResolveNamed()
+      ?.name
 
     val className = node.getContainingUClass()
-        ?.name
+      ?.name
 
     if (isNoLayoutReference || layoutFileName == null || className == null) {
       return
     }
 
     val expectedLayoutFileName = className.toSnakeCase()
-        .replace(resourcePrefix, "")
-        .run {
-          val array = split("_")
-          resourcePrefix + array.last() + "_" + array.subList(0, array.size - 1).joinToString(separator = "_")
-        }
+      .replace(resourcePrefix, "")
+      .run {
+        val array = split("_")
+        resourcePrefix + array.last() + "_" + array.subList(0, array.size - 1).joinToString(separator = "_")
+      }
 
     val isExactMatch = layoutFileName + "_" == expectedLayoutFileName
 
     if (layoutFileName != expectedLayoutFileName && !isExactMatch) {
       val fix = fix()
-          .replace()
-          .text(layoutFileName)
-          .with(expectedLayoutFileName)
-          .autoFix()
-          .build()
+        .replace()
+        .text(layoutFileName)
+        .with(expectedLayoutFileName)
+        .autoFix()
+        .build()
 
       context.report(ISSUE_LAYOUT_FILE_NAME_MATCHES_CLASS, node, context.getLocation(node.valueArguments.first()), "Parameter should be named R.layout.$expectedLayoutFileName", fix)
     }

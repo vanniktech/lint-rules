@@ -11,19 +11,20 @@ import com.android.tools.lint.detector.api.Scope.JAVA_FILE
 import com.android.tools.lint.detector.api.Severity.WARNING
 import com.intellij.lang.jvm.JvmModifier
 import com.intellij.psi.PsiType
-import java.util.EnumSet
 import org.jetbrains.kotlin.psi.KtProperty
 import org.jetbrains.kotlin.util.capitalizeDecapitalize.toUpperCaseAsciiOnly
 import org.jetbrains.uast.UAnnotated
 import org.jetbrains.uast.UMethod
 import org.jetbrains.uast.kotlin.declarations.KotlinUMethod
+import java.util.EnumSet
 
 val ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE = Issue.create(
-    "RxJava2MethodMissingCheckReturnValue",
-    "Method is missing the @CheckReturnValue annotation.",
-    "Methods returning RxJava Reactive Types should be annotated with the @CheckReturnValue annotation. Static analyze tools such as Lint or ErrorProne can detect when the return value of a method is not used. This is usually an indication of a bug. If this is done on purpose (e.g. fire & forget) it should be stated explicitly.",
-    CORRECTNESS, PRIORITY, WARNING,
-    Implementation(RxJava2MethodMissingCheckReturnValueDetector::class.java, EnumSet.of(JAVA_FILE)))
+  "RxJava2MethodMissingCheckReturnValue",
+  "Method is missing the @CheckReturnValue annotation.",
+  "Methods returning RxJava Reactive Types should be annotated with the @CheckReturnValue annotation. Static analyze tools such as Lint or ErrorProne can detect when the return value of a method is not used. This is usually an indication of a bug. If this is done on purpose (e.g. fire & forget) it should be stated explicitly.",
+  CORRECTNESS, PRIORITY, WARNING,
+  Implementation(RxJava2MethodMissingCheckReturnValueDetector::class.java, EnumSet.of(JAVA_FILE))
+)
 
 class RxJava2MethodMissingCheckReturnValueDetector : Detector(), Detector.UastScanner {
   override fun getApplicableUastTypes() = listOf(UMethod::class.java)
@@ -46,15 +47,15 @@ class RxJava2MethodMissingCheckReturnValueDetector : Detector(), Detector.UastSc
         val modifier = node.modifierList.children.joinToString(separator = " ") { it.text }
 
         val fix = LintFix.create()
-            .replace()
-            .name("Add @CheckReturnValue")
-            .range(context.getLocation(node))
-            .shortenNames()
-            .reformat(true)
-            .text(modifier)
-            .with("@io.reactivex.annotations.CheckReturnValue $modifier")
-            .autoFix()
-            .build()
+          .replace()
+          .name("Add @CheckReturnValue")
+          .range(context.getLocation(node))
+          .shortenNames()
+          .reformat(true)
+          .text(modifier)
+          .with("@io.reactivex.annotations.CheckReturnValue $modifier")
+          .autoFix()
+          .build()
 
         context.report(ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE, node, context.getNameLocation(node), "Method should have @CheckReturnValue annotation.", fix)
       }
@@ -62,12 +63,12 @@ class RxJava2MethodMissingCheckReturnValueDetector : Detector(), Detector.UastSc
 
     private fun isTypeThatRequiresAnnotation(psiType: PsiType): Boolean {
       val canonicalText = psiType.canonicalText
-          .replace("<[\\w.<>]*>".toRegex(), "") // We need to remove the generics.
+        .replace("<[\\w.<>]*>".toRegex(), "") // We need to remove the generics.
 
       return canonicalText.matches("io\\.reactivex\\.[\\w]+".toRegex()) ||
-          "io.reactivex.disposables.Disposable" == canonicalText ||
-          "io.reactivex.observers.TestObserver" == canonicalText ||
-          "io.reactivex.subscribers.TestSubscriber" == canonicalText
+        "io.reactivex.disposables.Disposable" == canonicalText ||
+        "io.reactivex.observers.TestObserver" == canonicalText ||
+        "io.reactivex.subscribers.TestSubscriber" == canonicalText
     }
 
     companion object {
@@ -75,9 +76,9 @@ class RxJava2MethodMissingCheckReturnValueDetector : Detector(), Detector.UastSc
 
       private fun ignoredModifiers(): List<JvmModifier> {
         return System.getProperty(IGNORE_MODIFIERS_PROP)
-            ?.split(",")
-            ?.map { JvmModifier.valueOf(it.toUpperCaseAsciiOnly()) }
-            .orEmpty()
+          ?.split(",")
+          ?.map { JvmModifier.valueOf(it.toUpperCaseAsciiOnly()) }
+          .orEmpty()
       }
     }
   }

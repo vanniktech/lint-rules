@@ -8,28 +8,29 @@ import org.junit.Test
 class IssueRegistryTest {
   @Test fun everyBriefDescriptionIsASentence() {
     IssueRegistry().issues
-        .map { it.getBriefDescription(RAW) }
-        .forEach { assertTrue("$it is not a sentence", it.first().isUpperCase() && it.last() == '.' && it == it.trim()) }
+      .map { it.getBriefDescription(RAW) }
+      .forEach { assertTrue("$it is not a sentence", it.first().isUpperCase() && it.last() == '.' && it == it.trim()) }
   }
 
   @Test fun everyExplanationConsistsOfSentences() {
     IssueRegistry().issues
-        .map { it.getExplanation(RAW) }
-        .forEach { assertTrue("$it is not a sentence", it.first().isUpperCase() && it.last() == '.' && it == it.trim()) }
+      .map { it.getExplanation(RAW) }
+      .forEach { assertTrue("$it is not a sentence", it.first().isUpperCase() && it.last() == '.' && it == it.trim()) }
   }
 
   @Test fun idsDoNotHaveDetector() {
     IssueRegistry().issues
-        .map { it.id }
-        .forEach { assertTrue("$it is containing Detector", !it.contains("Detector")) }
+      .map { it.id }
+      .forEach { assertTrue("$it is containing Detector", !it.contains("Detector")) }
   }
 
   @Test fun readmeContent() {
     val output = IssueRegistry().issues
-        .sortedBy { it.id }
-        .joinToString(separator = "\n") { "- **${it.id}** - ${it.getExplanation(RAW)}" }
+      .sortedBy { it.id }
+      .joinToString(separator = "\n") { "- **${it.id}** - ${it.getExplanation(RAW)}" }
 
-    assertEquals("""
+    assertEquals(
+      """
         - **AlertDialogUsage** - Support library AlertDialog is much more powerful and plays better together with the new theming / styling than the AlertDialog built into the framework.
         - **AssertjImport** - Importing org.assertj.core.api.Assertions is not ideal. Since it can require Java 8. It's simple as instead org.assertj.core.api.Java6Assertions can be imported and provides guarantee to run on Java 6 as well.
         - **ColorCasing** - Colors should have uppercase letters. #FF0099 is valid while #ff0099 isn't since the ff should be written in uppercase.
@@ -64,6 +65,8 @@ class IssueRegistryTest {
         - **WrongTestMethodName** - The @Test annotation already states that this is a test hence the test prefix is not necessary.
         - **WrongViewIdFormat** - View ids should be in lowerCamelCase format. This has the benefit of saving an unnecessary underscore and also just looks nicer.
         - **XmlSpacing** - Having newlines in xml files just adds noise and should be avoided. The only exception is the new lint at the end of the file.
-        """.trimIndent(), output)
+      """.trimIndent(),
+      output
+    )
   }
 }

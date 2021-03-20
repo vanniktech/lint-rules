@@ -12,24 +12,26 @@ import org.w3c.dom.Document
 
 private val allowedPrefixes = listOf("activity_", "view_", "fragment_", "dialog_", "bottom_sheet_", "adapter_item_", "divider_", "space_", "popup_window_")
 
-val ISSUE_WRONG_LAYOUT_NAME = Issue.create("WrongLayoutName",
-    "Layout names should be prefixed accordingly.",
-    "The layout file name should be prefixed with one of the following: ${allowedPrefixes.joinToString()}. This will improve consistency in your code base as well as enforce a certain structure.",
-    CORRECTNESS, PRIORITY, WARNING,
-    Implementation(WrongLayoutNameDetector::class.java, RESOURCE_FILE_SCOPE))
+val ISSUE_WRONG_LAYOUT_NAME = Issue.create(
+  "WrongLayoutName",
+  "Layout names should be prefixed accordingly.",
+  "The layout file name should be prefixed with one of the following: ${allowedPrefixes.joinToString()}. This will improve consistency in your code base as well as enforce a certain structure.",
+  CORRECTNESS, PRIORITY, WARNING,
+  Implementation(WrongLayoutNameDetector::class.java, RESOURCE_FILE_SCOPE)
+)
 
 class WrongLayoutNameDetector : LayoutDetector() {
   override fun visitDocument(context: XmlContext, document: Document) {
     val modified = allowedPrefixes.map {
       val resourcePrefix = context.project.resourcePrefix()
-          .forceUnderscoreIfNeeded()
+        .forceUnderscoreIfNeeded()
 
       if (resourcePrefix != it) resourcePrefix + it else it
     }
 
     val doesNotStartWithPrefix = modified.none { context.file.name.startsWith(it) }
     val notEquals = modified.map {
-        it.dropLast(1) // Drop the trailing underscore.
+      it.dropLast(1) // Drop the trailing underscore.
     }.none { context.file.name == "$it.xml" }
 
     if (doesNotStartWithPrefix && notEquals) {
