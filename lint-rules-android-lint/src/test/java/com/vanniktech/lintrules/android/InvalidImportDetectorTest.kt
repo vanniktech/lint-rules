@@ -1,3 +1,5 @@
+@file:Suppress("UnstableAPIUSage") // We know that Lint API's aren't final.
+
 package com.vanniktech.lintrules.android
 
 import com.android.tools.lint.checks.infrastructure.TestFiles.java
@@ -67,5 +69,34 @@ class InvalidImportDetectorTest {
           |import com.foo.internal.Foo;
           |       ~~~~~~~~~~~~~~~~~~~~
           |0 errors, 1 warnings""".trimMargin())
+  }
+
+  @Test fun libraryImportingTheirOwnInternals() {
+    lint()
+        .files(internal, java("""
+          package com.foo;
+
+          import com.foo.internal.Foo;
+
+          class Example {
+          }""").indented())
+        .issues(ISSUE_INVALID_IMPORT)
+        .run()
+        .expectClean()
+  }
+
+  @Test fun generatedSqldelightCode() {
+    lint()
+        .files(internal, java("""
+          package com.foo;
+
+          import com.squareup.sqldelight.db.SqlDriver;
+          import com.squareup.sqldelight.internal.copyOnWriteList;
+
+          class Example {
+          }""").indented())
+        .issues(ISSUE_INVALID_IMPORT)
+        .run()
+        .expectClean()
   }
 }
