@@ -24,7 +24,7 @@ class RxJava2DisposableAddAllCallDetector : Detector(), Detector.UastScanner {
 
   override fun visitMethodCall(context: JavaContext, node: UCallExpression, method: PsiMethod) {
     if (context.evaluator.isMemberInClass(method, "io.reactivex.disposables.CompositeDisposable")) {
-      context.report(ISSUE_DISPOSABLE_ADD_ALL_CALL, node, context.getNameLocation(node), "Calling addAll instead of add separately.")
+      context.report(ISSUE_DISPOSABLE_ADD_ALL_CALL, node, context.getNameLocation(node), "Calling `addAll` instead of add separately")
     }
   }
 }

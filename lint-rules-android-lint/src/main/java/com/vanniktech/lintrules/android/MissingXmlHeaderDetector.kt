@@ -31,7 +31,7 @@ class MissingXmlHeaderDetector : ResourceXmlDetector() {
         .autoFix()
         .build()
 
-      context.report(ISSUE_MISSING_XML_HEADER, document, Location.create(context.file, content, 0, content.length), "Missing an xml header.", fix)
+      context.report(ISSUE_MISSING_XML_HEADER, document, Location.create(context.file, content, 0, content.length), "Missing an xml header", fix)
     }
   }
 }

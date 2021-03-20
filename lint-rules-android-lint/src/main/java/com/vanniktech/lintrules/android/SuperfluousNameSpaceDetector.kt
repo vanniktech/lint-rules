@@ -38,7 +38,7 @@ class SuperfluousNameSpaceDetector : LayoutDetector() {
             .all()
             .build()
 
-          context.report(ISSUE_SUPERFLUOUS_NAME_SPACE, it, context.getLocation(it), "This name space is already declared and hence not needed.", fix)
+          context.report(ISSUE_SUPERFLUOUS_NAME_SPACE, it, context.getLocation(it), "This name space is already declared and hence not needed", fix)
         }
     }
   }

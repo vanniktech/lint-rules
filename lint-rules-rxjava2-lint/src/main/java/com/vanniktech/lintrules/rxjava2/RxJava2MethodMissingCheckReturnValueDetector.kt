@@ -57,7 +57,7 @@ class RxJava2MethodMissingCheckReturnValueDetector : Detector(), Detector.UastSc
           .autoFix()
           .build()
 
-        context.report(ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE, node, context.getNameLocation(node), "Method should have @CheckReturnValue annotation.", fix)
+        context.report(ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE, node, context.getNameLocation(node), "Method should have `@CheckReturnValue` annotation", fix)
       }
     }
 

@@ -52,9 +52,11 @@ class ErroneousLayoutAttributeDetectorTest {
       .expectFixDiffs(
         """
           |Fix for res/layout/ids.xml line 5: Delete erroneous attribute:
-          |@@ -5 +5
-          |-     android:orientation="horizontal"
-          |+    
+          |@@ -4 +4
+          |-     android:layout_height="wrap_content"
+          |-     android:orientation="horizontal" />
+          |@@ -6 +4
+          |+     android:layout_height="wrap_content" />
           |""".trimMargin()
       )
   }
@@ -85,9 +87,11 @@ class ErroneousLayoutAttributeDetectorTest {
       .expectFixDiffs(
         """
           |Fix for res/layout/ids.xml line 5: Delete erroneous attribute:
-          |@@ -5 +5
-          |-     android:maxLines="2"
-          |+    
+          |@@ -4 +4
+          |-     android:layout_height="wrap_content"
+          |-     android:maxLines="2" />
+          |@@ -6 +4
+          |+     android:layout_height="wrap_content" />
           |""".trimMargin()
       )
   }
@@ -118,9 +122,11 @@ class ErroneousLayoutAttributeDetectorTest {
       .expectFixDiffs(
         """
         |Fix for res/layout/ids.xml line 5: Delete erroneous attribute:
-        |@@ -5 +5
-        |-     android:orientation="horizontal"
-        |+    
+        |@@ -4 +4
+        |-     android:layout_height="wrap_content"
+        |-     android:orientation="horizontal" />
+        |@@ -6 +4
+        |+     android:layout_height="wrap_content" />
         |""".trimMargin()
       )
   }
@@ -151,9 +157,11 @@ class ErroneousLayoutAttributeDetectorTest {
       .expectFixDiffs(
         """
           |Fix for res/layout/ids.xml line 5: Delete erroneous attribute:
-          |@@ -5 +5
-          |-     android:gravity="horizontal"
-          |+    
+          |@@ -4 +4
+          |-     android:layout_height="wrap_content"
+          |-     android:gravity="horizontal" />
+          |@@ -6 +4
+          |+     android:layout_height="wrap_content" />
           |""".trimMargin()
       )
   }

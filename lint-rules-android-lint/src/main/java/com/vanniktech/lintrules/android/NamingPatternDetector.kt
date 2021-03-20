@@ -54,7 +54,7 @@ class NamingPatternDetector : Detector(), Detector.UastScanner {
       val isKotlinTopLevelOrMember = scope is KotlinUMethod && ((scope.sourcePsi as? KtProperty)?.isMember == true || scope.sourcePsi?.isTopLevelKtOrJavaMember() == true)
 
       if (declaration.name?.isDefinedCamelCase() == false && !isKotlinTopLevelOrMember) {
-        context.report(ISSUE_NAMING_PATTERN, scope, context.getNameLocation(scope), "${declaration.name} is not named in defined camel case.")
+        context.report(ISSUE_NAMING_PATTERN, scope, context.getNameLocation(scope), "${declaration.name} is not named in defined camel case")
       }
     }
   }

@@ -21,7 +21,7 @@ class AlertDialogUsageDetectorTest {
       .run()
       .expect(
         """
-            |src/Test.kt:3: Warning: Should not be using android.app.AlertDialog. [AlertDialogUsage]
+            |src/Test.kt:3: Warning: Should not be using android.app.AlertDialog [AlertDialogUsage]
             |class Test(dialog: AlertDialog)
             |           ~~~~~~~~~~~~~~~~~~~
             |0 errors, 1 warnings""".trimMargin()
@@ -45,7 +45,7 @@ class AlertDialogUsageDetectorTest {
       .run()
       .expect(
         """
-            |src/Test.java:4: Warning: Should not be using android.app.AlertDialog. [AlertDialogUsage]
+            |src/Test.java:4: Warning: Should not be using android.app.AlertDialog [AlertDialogUsage]
             |  public Test(AlertDialog dialog) { }
             |              ~~~~~~~~~~~~~~~~~~
             |0 errors, 1 warnings""".trimMargin()
@@ -67,7 +67,7 @@ class AlertDialogUsageDetectorTest {
       .run()
       .expect(
         """
-            |src/Test.kt:3: Warning: Should not be using android.app.AlertDialog. [AlertDialogUsage]
+            |src/Test.kt:3: Warning: Should not be using android.app.AlertDialog [AlertDialogUsage]
             |class Test : AlertDialog
             |             ~~~~~~~~~~~
             |0 errors, 1 warnings""".trimMargin()
@@ -90,7 +90,7 @@ class AlertDialogUsageDetectorTest {
       .run()
       .expect(
         """
-            |src/Test.java:3: Warning: Should not be using android.app.AlertDialog. [AlertDialogUsage]
+            |src/Test.java:3: Warning: Should not be using android.app.AlertDialog [AlertDialogUsage]
             |class Test extends AlertDialog {
             |                   ~~~~~~~~~~~
             |0 errors, 1 warnings""".trimMargin()

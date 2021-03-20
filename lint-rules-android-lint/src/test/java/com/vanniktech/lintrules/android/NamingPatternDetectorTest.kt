@@ -24,7 +24,7 @@ class NamingPatternDetectorTest {
       .run()
       .expect(
         """
-            |src/foo/Foo.java:5: Warning: iOSVersion is not named in defined camel case. [NamingPattern]
+            |src/foo/Foo.java:5: Warning: iOSVersion is not named in defined camel case [NamingPattern]
             |    String iOSVersion;
             |           ~~~~~~~~~~
             |0 errors, 1 warnings""".trimMargin()
@@ -48,7 +48,7 @@ class NamingPatternDetectorTest {
       .run()
       .expect(
         """
-            |src/foo/Foo.java:4: Warning: makeHTTPRequest is not named in defined camel case. [NamingPattern]
+            |src/foo/Foo.java:4: Warning: makeHTTPRequest is not named in defined camel case [NamingPattern]
             |  private void makeHTTPRequest() {
             |               ~~~~~~~~~~~~~~~
             |0 errors, 1 warnings""".trimMargin()
@@ -120,7 +120,7 @@ class NamingPatternDetectorTest {
       .run()
       .expect(
         """
-            |src/foo/XMLHTTPRequest.java:3: Warning: XMLHTTPRequest is not named in defined camel case. [NamingPattern]
+            |src/foo/XMLHTTPRequest.java:3: Warning: XMLHTTPRequest is not named in defined camel case [NamingPattern]
             |class XMLHTTPRequest {
             |      ~~~~~~~~~~~~~~
             |0 errors, 1 warnings""".trimMargin()
@@ -176,7 +176,7 @@ class NamingPatternDetectorTest {
       .run()
       .expect(
         """
-            |src/foo/Foo.kt:4: Warning: ATimes is not named in defined camel case. [NamingPattern]
+            |src/foo/Foo.kt:4: Warning: ATimes is not named in defined camel case [NamingPattern]
             |  val ATimes = 0
             |      ~~~~~~
             |0 errors, 1 warnings

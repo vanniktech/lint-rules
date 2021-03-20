@@ -41,15 +41,15 @@ class AndroidDetector : Detector(), Detector.UastScanner {
     val methodName = node.methodName
 
     if ("getDrawable" == methodName && isInResources) {
-      context.report(ISSUE_RESOURCES_GET_DRAWABLE, node, context.getNameLocation(node), "Calling deprecated getDrawable.")
+      context.report(ISSUE_RESOURCES_GET_DRAWABLE, node, context.getNameLocation(node), "Calling deprecated `getDrawable`")
     }
 
     if ("getColor" == methodName && isInResources) {
-      context.report(ISSUE_RESOURCES_GET_COLOR, node, context.getNameLocation(node), "Calling deprecated getColor.")
+      context.report(ISSUE_RESOURCES_GET_COLOR, node, context.getNameLocation(node), "Calling deprecated `getColor`")
     }
 
     if ("getColorStateList" == methodName && isInResources) {
-      context.report(ISSUE_RESOURCES_GET_COLOR_STATE_LIST, node, context.getNameLocation(node), "Calling deprecated getColorStateList.")
+      context.report(ISSUE_RESOURCES_GET_COLOR_STATE_LIST, node, context.getNameLocation(node), "Calling deprecated `getColorStateList`")
     }
   }
 }

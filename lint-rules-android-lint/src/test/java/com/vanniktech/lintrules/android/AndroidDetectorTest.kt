@@ -35,7 +35,7 @@ class AndroidDetectorTest {
       .run()
       .expect(
         """
-          |src/foo/Example.java:6: Warning: Calling deprecated getDrawable. [ResourcesGetDrawableCall]
+          |src/foo/Example.java:6: Warning: Calling deprecated getDrawable [ResourcesGetDrawableCall]
           |    resources.getDrawable(0);
           |              ~~~~~~~~~~~
           |0 errors, 1 warnings""".trimMargin()
@@ -62,7 +62,7 @@ class AndroidDetectorTest {
       .run()
       .expect(
         """
-          |src/foo/Example.java:6: Warning: Calling deprecated getColor. [ResourcesGetColorCall]
+          |src/foo/Example.java:6: Warning: Calling deprecated getColor [ResourcesGetColorCall]
           |    resources.getColor(0);
           |              ~~~~~~~~
           |0 errors, 1 warnings""".trimMargin()
@@ -89,7 +89,7 @@ class AndroidDetectorTest {
       .run()
       .expect(
         """
-          |src/foo/Example.java:6: Warning: Calling deprecated getColorStateList. [ResourcesGetColorStateListCall]
+          |src/foo/Example.java:6: Warning: Calling deprecated getColorStateList [ResourcesGetColorStateListCall]
           |    resources.getColorStateList(0);
           |              ~~~~~~~~~~~~~~~~~
           |0 errors, 1 warnings""".trimMargin()

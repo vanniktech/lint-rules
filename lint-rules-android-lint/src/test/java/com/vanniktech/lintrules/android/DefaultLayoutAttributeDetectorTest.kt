@@ -22,7 +22,7 @@ class DefaultLayoutAttributeDetectorTest {
       .run()
       .expect(
         """
-          |res/layout/ids.xml:5: Warning: This is the default and hence you don't need to specify it. [DefaultLayoutAttribute]
+          |res/layout/ids.xml:5: Warning: This is the default and hence you don't need to specify it [DefaultLayoutAttribute]
           |    android:textStyle="normal"/>
           |                       ~~~~~~
           |0 errors, 1 warnings""".trimMargin()

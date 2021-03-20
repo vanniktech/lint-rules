@@ -47,7 +47,7 @@ class RxJava2DefaultSchedulerDetector : Detector(), Detector.UastScanner {
           val value = AnnotationUtil.getStringAttributeValue(annotation, null)
 
           if (!("none" == value || "custom" == value)) {
-            context.report(ISSUE_DEFAULT_SCHEDULER, context.getNameLocation(node), "${identifier.name}() is using its default scheduler.")
+            context.report(ISSUE_DEFAULT_SCHEDULER, context.getNameLocation(node), "${identifier.name}() is using its default scheduler")
           }
         }
       }

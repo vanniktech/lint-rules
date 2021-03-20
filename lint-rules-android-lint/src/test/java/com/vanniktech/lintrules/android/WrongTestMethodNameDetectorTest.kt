@@ -81,7 +81,7 @@ class WrongTestMethodNameDetectorTest {
       .run()
       .expect(
         """
-          |src/foo/MyTest.java:6: Warning: Test method starts with test. [WrongTestMethodName]
+          |src/foo/MyTest.java:6: Warning: Test method starts with test [WrongTestMethodName]
           |  @Test public void testSomething() { }
           |                    ~~~~~~~~~~~~~
           |0 errors, 1 warnings""".trimMargin()
@@ -115,7 +115,7 @@ class WrongTestMethodNameDetectorTest {
       .run()
       .expect(
         """
-          |src/foo/MyTest.java:6: Warning: Test method starts with test. [WrongTestMethodName]
+          |src/foo/MyTest.java:6: Warning: Test method starts with test [WrongTestMethodName]
           |  @Test public void testSomething() { }
           |                    ~~~~~~~~~~~~~
           |0 errors, 1 warnings""".trimMargin()

@@ -25,7 +25,7 @@ class RxJava2DisposableAddAllCallDetectorTest {
       .run()
       .expect(
         """
-          |src/foo/Example.java:6: Warning: Calling addAll instead of add separately. [RxJava2DisposableAddAllCall]
+          |src/foo/Example.java:6: Warning: Calling addAll instead of add separately [RxJava2DisposableAddAllCall]
           |    cd.addAll();
           |       ~~~~~~
           |0 errors, 1 warnings""".trimMargin()

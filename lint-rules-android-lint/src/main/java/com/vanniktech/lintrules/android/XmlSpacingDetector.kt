@@ -39,7 +39,7 @@ class XmlSpacingDetector : ResourceXmlDetector() {
           .autoFix(true, false)
           .build()
 
-        context.report(ISSUE_XML_SPACING, location, "Unnecessary new line at line ${it.index + 1}.", fix)
+        context.report(ISSUE_XML_SPACING, location, "Unnecessary new line at line ${it.index + 1}", fix)
       }
   }
 }

@@ -25,7 +25,7 @@ class InvalidSingleLineCommentDetectorTest {
       .run()
       .expect(
         """
-          |src/foo/Example.java:5: Warning: Comment does not contain a space at the beginning. [InvalidSingleLineComment]
+          |src/foo/Example.java:5: Warning: Comment does not contain a space at the beginning [InvalidSingleLineComment]
           |    //Something.
           |    ~~~
           |0 errors, 1 warnings""".trimMargin()
@@ -58,7 +58,7 @@ class InvalidSingleLineCommentDetectorTest {
       .run()
       .expect(
         """
-          |src/foo/Example.java:5: Warning: Comments first word should be capitalized. [InvalidSingleLineComment]
+          |src/foo/Example.java:5: Warning: Comments first word should be capitalized [InvalidSingleLineComment]
           |    // something.
           |       ^
           |0 errors, 1 warnings""".trimMargin()
@@ -91,7 +91,7 @@ class InvalidSingleLineCommentDetectorTest {
       .run()
       .expect(
         """
-          |src/foo/Example.java:5: Warning: Comment does not end with a period. [InvalidSingleLineComment]
+          |src/foo/Example.java:5: Warning: Comment does not end with a period [InvalidSingleLineComment]
           |    // Something
           |    ~~~~~~~~~~~~
           |0 errors, 1 warnings""".trimMargin()
@@ -146,7 +146,7 @@ class InvalidSingleLineCommentDetectorTest {
       .run()
       .expect(
         """
-          |src/foo/Example.java:5: Warning: Comment declaration is not preceded by a single space. [InvalidSingleLineComment]
+          |src/foo/Example.java:5: Warning: Comment declaration is not preceded by a single space [InvalidSingleLineComment]
           |    int foo = 5 + 5;// Something.
           |                   ~~~
           |0 errors, 1 warnings""".trimMargin()
@@ -312,7 +312,7 @@ class InvalidSingleLineCommentDetectorTest {
       .run()
       .expect(
         """
-          |src/foo/Example.java:5: Warning: Comment contains trailing whitespace. [InvalidSingleLineComment]
+          |src/foo/Example.java:5: Warning: Comment contains trailing whitespace [InvalidSingleLineComment]
           |    //
           |    ~~~
           |0 errors, 1 warnings""".trimMargin().replace("//", "// ")
@@ -347,7 +347,7 @@ class InvalidSingleLineCommentDetectorTest {
       .run()
       .expect(
         """
-          |src/foo/Example.java:5: Warning: Comment contains trailing whitespace. [InvalidSingleLineComment]
+          |src/foo/Example.java:5: Warning: Comment contains trailing whitespace [InvalidSingleLineComment]
           |    // Something.
           |    ~~~~~~~~~~~~~~
           |0 errors, 1 warnings""".trimMargin().replace("// Something.", "// Something. ")
@@ -378,7 +378,7 @@ class InvalidSingleLineCommentDetectorTest {
       .run()
       .expect(
         """
-          |build.gradle:3: Warning: Comments first word should be capitalized. [InvalidSingleLineComment]
+          |build.gradle:3: Warning: Comments first word should be capitalized [InvalidSingleLineComment]
           |    mavenCentral() // we need this.
           |                      ^
           |0 errors, 1 warnings""".trimMargin()

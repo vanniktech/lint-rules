@@ -38,7 +38,7 @@ class AlertDialogUsageDetector : Detector(), Detector.UastScanner {
 
     private fun process(type: PsiType, node: UElement) {
       if (context.evaluator.typeMatches(type, FQDN_ANDROID_ALERT_DIALOG)) {
-        context.report(ISSUE_ALERT_DIALOG_USAGE, node, context.getLocation(node), "Should not be using android.app.AlertDialog.")
+        context.report(ISSUE_ALERT_DIALOG_USAGE, node, context.getLocation(node), "Should not be using `android.app.AlertDialog`")
       }
     }
   }

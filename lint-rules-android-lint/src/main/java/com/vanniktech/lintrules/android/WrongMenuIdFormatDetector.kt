@@ -38,7 +38,7 @@ class WrongMenuIdFormatDetector : ResourceXmlDetector() {
         .autoFix()
         .build()
 
-      context.report(ISSUE_WRONG_MENU_ID_FORMAT, attribute, context.getValueLocation(attribute), "Id is not in lowerCamelCaseFormat", fix)
+      context.report(ISSUE_WRONG_MENU_ID_FORMAT, attribute, context.getValueLocation(attribute), "Id is not in `lowerCamelCaseFormat`", fix)
     }
   }
 }

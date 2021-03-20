@@ -27,7 +27,7 @@ class RxJava2DisposableDisposeCallDetectorTest {
       .run()
       .expect(
         """
-            |src/foo/Example.java:8: Warning: Calling dispose instead of clear. [RxJava2DisposableDisposeCall]
+            |src/foo/Example.java:8: Warning: Calling dispose instead of clear [RxJava2DisposableDisposeCall]
             |    cd.dispose();
             |       ~~~~~~~
             |0 errors, 1 warnings""".trimMargin()

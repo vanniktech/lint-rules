@@ -33,7 +33,7 @@ class WrongViewIdFormatDetector : LayoutDetector() {
         .autoFix()
         .build()
 
-      context.report(ISSUE_WRONG_VIEW_ID_FORMAT, attribute, context.getValueLocation(attribute), "Id is not in lowerCamelCaseFormat", fix)
+      context.report(ISSUE_WRONG_VIEW_ID_FORMAT, attribute, context.getValueLocation(attribute), "Id is not in `lowerCamelCaseFormat`", fix)
     }
   }
 }
