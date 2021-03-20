@@ -15,11 +15,13 @@ import org.w3c.dom.Element
 
 private val possibleUris = setOf(ANDROID_URI, TOOLS_URI, AUTO_URI, AAPT_URI)
 
-val ISSUE_SUPERFLUOUS_NAME_SPACE = Issue.create("SuperfluousNameSpace",
-    "Flags namespaces that are already declared.",
-    "Re-declaring a namespace is unnecessary and hence can be just removed.",
-    CORRECTNESS, PRIORITY, WARNING,
-    Implementation(SuperfluousNameSpaceDetector::class.java, RESOURCE_FILE_SCOPE))
+val ISSUE_SUPERFLUOUS_NAME_SPACE = Issue.create(
+  "SuperfluousNameSpace",
+  "Flags namespaces that are already declared.",
+  "Re-declaring a namespace is unnecessary and hence can be just removed.",
+  CORRECTNESS, PRIORITY, WARNING,
+  Implementation(SuperfluousNameSpaceDetector::class.java, RESOURCE_FILE_SCOPE)
+)
 
 class SuperfluousNameSpaceDetector : LayoutDetector() {
   override fun getApplicableElements() = ALL
@@ -27,17 +29,17 @@ class SuperfluousNameSpaceDetector : LayoutDetector() {
   override fun visitElement(context: XmlContext, element: Element) {
     if (element.parentNode.parentNode != null) {
       element.attributes()
-          .filter { attribute -> possibleUris.any { attribute.toString().contains(it) } }
-          .forEach {
-            val fix = fix()
-                .name("Remove namespace")
-                .replace()
-                .range(context.getLocation(it))
-                .all()
-                .build()
+        .filter { attribute -> possibleUris.any { attribute.toString().contains(it) } }
+        .forEach {
+          val fix = fix()
+            .name("Remove namespace")
+            .replace()
+            .range(context.getLocation(it))
+            .all()
+            .build()
 
-            context.report(ISSUE_SUPERFLUOUS_NAME_SPACE, it, context.getLocation(it), "This name space is already declared and hence not needed.", fix)
-          }
+          context.report(ISSUE_SUPERFLUOUS_NAME_SPACE, it, context.getLocation(it), "This name space is already declared and hence not needed.", fix)
+        }
     }
   }
 }

@@ -8,15 +8,17 @@ import com.android.tools.lint.detector.api.ResourceXmlDetector
 import com.android.tools.lint.detector.api.Scope.Companion.RESOURCE_FILE_SCOPE
 import com.android.tools.lint.detector.api.Severity.WARNING
 import com.android.tools.lint.detector.api.XmlContext
-import java.util.Locale.US
 import org.w3c.dom.Attr
 import org.w3c.dom.Element
+import java.util.Locale.US
 
-val ISSUE_COLOR_CASING = Issue.create("ColorCasing",
-    "Raw colors should be defined with uppercase letters.",
-    "Colors should have uppercase letters. #FF0099 is valid while #ff0099 isn't since the ff should be written in uppercase.",
-    CORRECTNESS, PRIORITY, WARNING,
-    Implementation(ColorCasingDetector::class.java, RESOURCE_FILE_SCOPE))
+val ISSUE_COLOR_CASING = Issue.create(
+  "ColorCasing",
+  "Raw colors should be defined with uppercase letters.",
+  "Colors should have uppercase letters. #FF0099 is valid while #ff0099 isn't since the ff should be written in uppercase.",
+  CORRECTNESS, PRIORITY, WARNING,
+  Implementation(ColorCasingDetector::class.java, RESOURCE_FILE_SCOPE)
+)
 
 class ColorCasingDetector : ResourceXmlDetector() {
   override fun appliesTo(folderType: ResourceFolderType) = true
@@ -25,18 +27,18 @@ class ColorCasingDetector : ResourceXmlDetector() {
 
   override fun visitElement(context: XmlContext, element: Element) {
     element.attributes()
-        .filter { it.nodeValue.matches(COLOR_REGEX) }
-        .filter { it.nodeValue.any { it.isLowerCase() } }
-        .forEach {
-          val fix = fix()
-              .name("Convert to uppercase")
-              .replace()
-              .text(it.nodeValue)
-              .with(it.nodeValue.toUpperCase(US))
-              .autoFix()
-              .build()
+      .filter { it.nodeValue.matches(COLOR_REGEX) }
+      .filter { it.nodeValue.any { it.isLowerCase() } }
+      .forEach {
+        val fix = fix()
+          .name("Convert to uppercase")
+          .replace()
+          .text(it.nodeValue)
+          .with(it.nodeValue.toUpperCase(US))
+          .autoFix()
+          .build()
 
-          context.report(ISSUE_COLOR_CASING, it, context.getValueLocation(it as Attr), "Should be using uppercase letters", fix)
+        context.report(ISSUE_COLOR_CASING, it, context.getValueLocation(it as Attr), "Should be using uppercase letters", fix)
       }
   }
 

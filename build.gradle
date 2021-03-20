@@ -40,7 +40,7 @@ buildscript {
 
 codeQualityTools {
   ktlint {
-    toolVersion = '0.34.2'
+    toolVersion = '0.41.0'
   }
   detekt {
     enabled = false

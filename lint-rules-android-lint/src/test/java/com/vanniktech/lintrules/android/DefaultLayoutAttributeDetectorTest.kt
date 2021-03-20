@@ -7,64 +7,88 @@ import org.junit.Test
 class DefaultLayoutAttributeDetectorTest {
   @Test fun textStyleNormal() {
     lint()
-        .files(xml("res/layout/ids.xml", """
+      .files(
+        xml(
+          "res/layout/ids.xml",
+          """
           <TextView
               xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:textStyle="normal"/>""").indented())
-        .issues(ISSUE_DEFAULT_LAYOUT_ATTRIBUTE)
-        .run()
-        .expect("""
+              android:textStyle="normal"/>"""
+        ).indented()
+      )
+      .issues(ISSUE_DEFAULT_LAYOUT_ATTRIBUTE)
+      .run()
+      .expect(
+        """
           |res/layout/ids.xml:5: Warning: This is the default and hence you don't need to specify it. [DefaultLayoutAttribute]
           |    android:textStyle="normal"/>
           |                       ~~~~~~
-          |0 errors, 1 warnings""".trimMargin())
-        .expectFixDiffs("""
+          |0 errors, 1 warnings""".trimMargin()
+      )
+      .expectFixDiffs(
+        """
           |Fix for res/layout/ids.xml line 4: Remove:
           |@@ -4 +4
           |-     android:layout_height="wrap_content"
           |-     android:textStyle="normal" />
           |@@ -6 +4
           |+     android:layout_height="wrap_content" />
-          |""".trimMargin())
+          |""".trimMargin()
+      )
   }
 
   @Test fun textStyleBold() {
     lint()
-        .files(xml("res/layout/ids.xml", """
+      .files(
+        xml(
+          "res/layout/ids.xml",
+          """
           <TextView
               xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:textStyle="bold"/>""").indented())
-        .issues(ISSUE_DEFAULT_LAYOUT_ATTRIBUTE)
-        .run()
-        .expectClean()
+              android:textStyle="bold"/>"""
+        ).indented()
+      )
+      .issues(ISSUE_DEFAULT_LAYOUT_ATTRIBUTE)
+      .run()
+      .expectClean()
   }
 
   @Test fun textStyleNormalIgnored() {
     lint()
-        .files(xml("res/layout/ids.xml", """
+      .files(
+        xml(
+          "res/layout/ids.xml",
+          """
           <TextView
               xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:textStyle="normal"
-              tools:ignore="DefaultLayoutAttribute"/>""").indented())
-        .issues(ISSUE_DEFAULT_LAYOUT_ATTRIBUTE)
-        .run()
-        .expectClean()
+              tools:ignore="DefaultLayoutAttribute"/>"""
+        ).indented()
+      )
+      .issues(ISSUE_DEFAULT_LAYOUT_ATTRIBUTE)
+      .run()
+      .expectClean()
   }
 
   @Test fun shouldNotCrashWithStyle() {
     lint()
-        .files(xml("res/layout/ids.xml", """
+      .files(
+        xml(
+          "res/layout/ids.xml",
+          """
           <TextView
-              style="?android:attr/borderlessButtonStyle"/>""").indented())
-        .issues(ISSUE_DEFAULT_LAYOUT_ATTRIBUTE)
-        .run()
-        .expectClean()
+              style="?android:attr/borderlessButtonStyle"/>"""
+        ).indented()
+      )
+      .issues(ISSUE_DEFAULT_LAYOUT_ATTRIBUTE)
+      .run()
+      .expectClean()
   }
 }

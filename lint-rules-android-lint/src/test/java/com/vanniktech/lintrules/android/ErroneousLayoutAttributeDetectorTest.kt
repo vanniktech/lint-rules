@@ -9,13 +9,18 @@ import org.junit.Test
 class ErroneousLayoutAttributeDetectorTest {
   @Test fun normalTextView() {
     lint()
-      .files(xml("res/layout/ids.xml", """
+      .files(
+        xml(
+          "res/layout/ids.xml",
+          """
           <TextView
               xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:text="Foo"
-              />""").indented())
+              />"""
+        ).indented()
+      )
       .issues(ISSUE_ERRONEOUS_LAYOUT_ATTRIBUTE)
       .run()
       .expectClean()
@@ -23,97 +28,133 @@ class ErroneousLayoutAttributeDetectorTest {
 
   @Test fun erroneousFrameLayoutOrientation() {
     lint()
-      .files(xml("res/layout/ids.xml", """
+      .files(
+        xml(
+          "res/layout/ids.xml",
+          """
           <FrameLayout
               xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:orientation="horizontal"
-              />""").indented())
+              />"""
+        ).indented()
+      )
       .issues(ISSUE_ERRONEOUS_LAYOUT_ATTRIBUTE)
       .run()
-      .expect("""
+      .expect(
+        """
           |res/layout/ids.xml:5: Warning: Attribute is erroneous on FrameLayout [ErroneousLayoutAttribute]
           |    android:orientation="horizontal"
           |    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-          |0 errors, 1 warnings""".trimMargin())
-      .expectFixDiffs("""
+          |0 errors, 1 warnings""".trimMargin()
+      )
+      .expectFixDiffs(
+        """
           |Fix for res/layout/ids.xml line 5: Delete erroneous attribute:
           |@@ -5 +5
           |-     android:orientation="horizontal"
           |+    
-          |""".trimMargin())
+          |""".trimMargin()
+      )
   }
 
   @Test fun erroneousImageViewMaxLines() {
     lint()
-      .files(xml("res/layout/ids.xml", """
+      .files(
+        xml(
+          "res/layout/ids.xml",
+          """
           <ImageView
               xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:maxLines="2"
-              />""").indented())
+              />"""
+        ).indented()
+      )
       .issues(ISSUE_ERRONEOUS_LAYOUT_ATTRIBUTE)
       .run()
-      .expect("""
+      .expect(
+        """
           |res/layout/ids.xml:5: Warning: Attribute is erroneous on ImageView [ErroneousLayoutAttribute]
           |    android:maxLines="2"
           |    ~~~~~~~~~~~~~~~~~~~~
-          |0 errors, 1 warnings""".trimMargin())
-      .expectFixDiffs("""
+          |0 errors, 1 warnings""".trimMargin()
+      )
+      .expectFixDiffs(
+        """
           |Fix for res/layout/ids.xml line 5: Delete erroneous attribute:
           |@@ -5 +5
           |-     android:maxLines="2"
           |+    
-          |""".trimMargin())
+          |""".trimMargin()
+      )
   }
 
   @Test fun erroneousConstraintLayoutOrientation() {
     lint()
-      .files(xml("res/layout/ids.xml", """
+      .files(
+        xml(
+          "res/layout/ids.xml",
+          """
           <androidx.constraintlayout.widget.ConstraintLayout
               xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:orientation="horizontal"
-              />""").indented())
+              />"""
+        ).indented()
+      )
       .issues(ISSUE_ERRONEOUS_LAYOUT_ATTRIBUTE)
       .run()
-      .expect("""
+      .expect(
+        """
           |res/layout/ids.xml:5: Warning: Attribute is erroneous on androidx.constraintlayout.widget.ConstraintLayout [ErroneousLayoutAttribute]
           |    android:orientation="horizontal"
           |    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-          |0 errors, 1 warnings""".trimMargin())
-      .expectFixDiffs("""
+          |0 errors, 1 warnings""".trimMargin()
+      )
+      .expectFixDiffs(
+        """
         |Fix for res/layout/ids.xml line 5: Delete erroneous attribute:
         |@@ -5 +5
         |-     android:orientation="horizontal"
         |+    
-        |""".trimMargin())
+        |""".trimMargin()
+      )
   }
 
   @Test fun erroneousConstraintLayoutGravity() {
     lint()
-      .files(xml("res/layout/ids.xml", """
+      .files(
+        xml(
+          "res/layout/ids.xml",
+          """
           <androidx.constraintlayout.widget.ConstraintLayout
               xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:gravity="horizontal"
-              />""").indented())
+              />"""
+        ).indented()
+      )
       .issues(ISSUE_ERRONEOUS_LAYOUT_ATTRIBUTE)
       .run()
-      .expect("""
+      .expect(
+        """
           |res/layout/ids.xml:5: Warning: Attribute is erroneous on androidx.constraintlayout.widget.ConstraintLayout [ErroneousLayoutAttribute]
           |    android:gravity="horizontal"
           |    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-          |0 errors, 1 warnings""".trimMargin())
-      .expectFixDiffs("""
+          |0 errors, 1 warnings""".trimMargin()
+      )
+      .expectFixDiffs(
+        """
           |Fix for res/layout/ids.xml line 5: Delete erroneous attribute:
           |@@ -5 +5
           |-     android:gravity="horizontal"
           |+    
-          |""".trimMargin())
+          |""".trimMargin()
+      )
   }
 }

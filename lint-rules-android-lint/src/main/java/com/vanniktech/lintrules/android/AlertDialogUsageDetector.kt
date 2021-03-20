@@ -9,16 +9,18 @@ import com.android.tools.lint.detector.api.JavaContext
 import com.android.tools.lint.detector.api.Scope.JAVA_FILE
 import com.android.tools.lint.detector.api.Severity.WARNING
 import com.intellij.psi.PsiType
-import java.util.EnumSet
 import org.jetbrains.uast.UClass
 import org.jetbrains.uast.UElement
 import org.jetbrains.uast.UVariable
+import java.util.EnumSet
 
-val ISSUE_ALERT_DIALOG_USAGE = Issue.create("AlertDialogUsage",
-    "Use the support library AlertDialog instead of android.app.AlertDialog.",
-    "Support library AlertDialog is much more powerful and plays better together with the new theming / styling than the AlertDialog built into the framework.",
-    CORRECTNESS, PRIORITY, WARNING,
-    Implementation(AlertDialogUsageDetector::class.java, EnumSet.of(JAVA_FILE)))
+val ISSUE_ALERT_DIALOG_USAGE = Issue.create(
+  "AlertDialogUsage",
+  "Use the support library AlertDialog instead of android.app.AlertDialog.",
+  "Support library AlertDialog is much more powerful and plays better together with the new theming / styling than the AlertDialog built into the framework.",
+  CORRECTNESS, PRIORITY, WARNING,
+  Implementation(AlertDialogUsageDetector::class.java, EnumSet.of(JAVA_FILE))
+)
 
 private const val FQDN_ANDROID_ALERT_DIALOG = "android.app.AlertDialog"
 

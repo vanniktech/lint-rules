@@ -3,10 +3,10 @@
 package com.vanniktech.lintrules.android
 
 import com.android.SdkConstants.TOOLS_URI
-import java.util.Locale.US
-import java.util.regex.Pattern
 import org.w3c.dom.Attr
 import org.w3c.dom.Node
+import java.util.Locale.US
+import java.util.regex.Pattern
 
 internal fun Node.hasToolsNamespace() = TOOLS_URI.equals(namespaceURI, ignoreCase = true)
 

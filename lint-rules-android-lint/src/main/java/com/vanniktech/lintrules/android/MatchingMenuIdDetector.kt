@@ -11,13 +11,15 @@ import com.android.tools.lint.detector.api.ResourceXmlDetector
 import com.android.tools.lint.detector.api.Scope.Companion.RESOURCE_FILE_SCOPE
 import com.android.tools.lint.detector.api.Severity.WARNING
 import com.android.tools.lint.detector.api.XmlContext
-import java.util.EnumSet
 import org.w3c.dom.Attr
+import java.util.EnumSet
 
-val ISSUE_MATCHING_MENU_ID = Issue.create("MatchingMenuId", "Flags menu ids that don't match with the file name.",
-    "When the layout file is named menu_home all of the containing ids should be prefixed with menuHome to avoid ambiguity between different menu files across different menu items.",
-    CORRECTNESS, PRIORITY, WARNING,
-    Implementation(MatchingMenuIdDetector::class.java, RESOURCE_FILE_SCOPE))
+val ISSUE_MATCHING_MENU_ID = Issue.create(
+  "MatchingMenuId", "Flags menu ids that don't match with the file name.",
+  "When the layout file is named menu_home all of the containing ids should be prefixed with menuHome to avoid ambiguity between different menu files across different menu items.",
+  CORRECTNESS, PRIORITY, WARNING,
+  Implementation(MatchingMenuIdDetector::class.java, RESOURCE_FILE_SCOPE)
+)
 
 class MatchingMenuIdDetector : ResourceXmlDetector() {
   override fun appliesTo(folderType: ResourceFolderType) = EnumSet.of(MENU).contains(folderType)
@@ -30,11 +32,11 @@ class MatchingMenuIdDetector : ResourceXmlDetector() {
 
     if (fixer.needsFix()) {
       val fix = fix()
-          .replace()
-          .text(id)
-          .with(fixer.fixedId())
-          .autoFix()
-          .build()
+        .replace()
+        .text(id)
+        .with(fixer.fixedId())
+        .autoFix()
+        .build()
 
       context.report(ISSUE_MATCHING_MENU_ID, attribute, context.getValueLocation(attribute), "Id should start with: ${fixer.expectedPrefix}", fix)
     }

@@ -9,11 +9,13 @@ import com.android.tools.lint.detector.api.Severity.WARNING
 import com.android.tools.lint.detector.api.XmlContext
 import org.w3c.dom.Attr
 
-val ISSUE_CONSTRAINT_LAYOUT_TOOLS_EDITOR_ATTRIBUTE_DETECTOR = Issue.create("ConstraintLayoutToolsEditorAttribute",
-    "Flags tools:layout_editor xml properties.",
-    "The tools:layout_editor xml properties are only used for previewing and won't be used in your APK hence they're unnecessary and just add overhead.",
-    CORRECTNESS, PRIORITY, WARNING,
-    Implementation(ConstraintLayoutToolsEditorAttributeDetector::class.java, RESOURCE_FILE_SCOPE))
+val ISSUE_CONSTRAINT_LAYOUT_TOOLS_EDITOR_ATTRIBUTE_DETECTOR = Issue.create(
+  "ConstraintLayoutToolsEditorAttribute",
+  "Flags tools:layout_editor xml properties.",
+  "The tools:layout_editor xml properties are only used for previewing and won't be used in your APK hence they're unnecessary and just add overhead.",
+  CORRECTNESS, PRIORITY, WARNING,
+  Implementation(ConstraintLayoutToolsEditorAttributeDetector::class.java, RESOURCE_FILE_SCOPE)
+)
 
 class ConstraintLayoutToolsEditorAttributeDetector : LayoutDetector() {
   override fun getApplicableAttributes() = ALL
@@ -23,10 +25,10 @@ class ConstraintLayoutToolsEditorAttributeDetector : LayoutDetector() {
 
     if (isLayoutEditorAttribute && attribute.hasToolsNamespace()) {
       val fix = fix()
-          .unset(attribute.namespaceURI, attribute.localName)
-          .name("Remove")
-          .autoFix()
-          .build()
+        .unset(attribute.namespaceURI, attribute.localName)
+        .name("Remove")
+        .autoFix()
+        .build()
 
       context.report(ISSUE_CONSTRAINT_LAYOUT_TOOLS_EDITOR_ATTRIBUTE_DETECTOR, attribute, context.getNameLocation(attribute), "Don't use ${attribute.name}", fix)
     }

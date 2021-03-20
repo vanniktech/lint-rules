@@ -10,17 +10,19 @@ import com.android.tools.lint.detector.api.Scope.JAVA_FILE
 import com.android.tools.lint.detector.api.Severity.WARNING
 import com.intellij.codeInsight.AnnotationUtil
 import com.intellij.psi.PsiMethod
-import java.util.EnumSet
 import org.jetbrains.uast.UCallExpression
 import org.jetbrains.uast.UMethod
 import org.jetbrains.uast.tryResolve
 import org.jetbrains.uast.visitor.AbstractUastVisitor
+import java.util.EnumSet
 
-val ISSUE_DEFAULT_SCHEDULER = Issue.create("RxJava2DefaultScheduler",
-    "Pass a scheduler instead of relying on the default Scheduler.",
-    "Calling this method will rely on a default scheduler. This is not necessary the best default. Being explicit and taking the overload for passing one is preferred.",
-    CORRECTNESS, PRIORITY, WARNING,
-    Implementation(RxJava2DefaultSchedulerDetector::class.java, EnumSet.of(JAVA_FILE)))
+val ISSUE_DEFAULT_SCHEDULER = Issue.create(
+  "RxJava2DefaultScheduler",
+  "Pass a scheduler instead of relying on the default Scheduler.",
+  "Calling this method will rely on a default scheduler. This is not necessary the best default. Being explicit and taking the overload for passing one is preferred.",
+  CORRECTNESS, PRIORITY, WARNING,
+  Implementation(RxJava2DefaultSchedulerDetector::class.java, EnumSet.of(JAVA_FILE))
+)
 
 class RxJava2DefaultSchedulerDetector : Detector(), Detector.UastScanner {
   override fun getApplicableUastTypes() = listOf(UMethod::class.java)

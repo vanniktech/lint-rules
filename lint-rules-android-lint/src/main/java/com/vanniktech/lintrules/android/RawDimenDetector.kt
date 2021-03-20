@@ -20,15 +20,17 @@ import com.android.tools.lint.detector.api.ResourceXmlDetector
 import com.android.tools.lint.detector.api.Scope.Companion.RESOURCE_FILE_SCOPE
 import com.android.tools.lint.detector.api.Severity.WARNING
 import com.android.tools.lint.detector.api.XmlContext
-import java.util.EnumSet
 import org.w3c.dom.Attr
 import org.w3c.dom.Element
+import java.util.EnumSet
 
-val ISSUE_RAW_DIMEN = Issue.create("RawDimen",
-    "Flags dimensions that are not defined as resource.",
-    "Dimensions should all be defined as dimension resources. This has the benefit that you can easily see all of your dimensions in one file. One benefit is that when designers change the outline across the entire app you only have to adjust it in one place. This check will run on layouts as well as xml drawables.",
-    CORRECTNESS, PRIORITY, WARNING,
-    Implementation(RawDimenDetector::class.java, RESOURCE_FILE_SCOPE))
+val ISSUE_RAW_DIMEN = Issue.create(
+  "RawDimen",
+  "Flags dimensions that are not defined as resource.",
+  "Dimensions should all be defined as dimension resources. This has the benefit that you can easily see all of your dimensions in one file. One benefit is that when designers change the outline across the entire app you only have to adjust it in one place. This check will run on layouts as well as xml drawables.",
+  CORRECTNESS, PRIORITY, WARNING,
+  Implementation(RawDimenDetector::class.java, RESOURCE_FILE_SCOPE)
+)
 
 class RawDimenDetector : ResourceXmlDetector() {
   private var collector = ElementCollectReporter(TAG_DIMEN)
@@ -49,14 +51,14 @@ class RawDimenDetector : ResourceXmlDetector() {
     val isVectorGraphic = "vector" == element.localName || "path" == element.localName
 
     element.attributes()
-        .filterNot { it.hasToolsNamespace() }
-        .filterNot { isVectorGraphic }
-        .filterNot { (hasLayoutWeight || isParentConstraintLayout) && it.nodeValue[0] == '0' && (ATTR_LAYOUT_WIDTH == it.localName || ATTR_LAYOUT_HEIGHT == it.localName) }
-        .filterNot { it.nodeValue == "0dp" && listOf(ATTR_MIN_HEIGHT, ATTR_LAYOUT_MIN_HEIGHT, ATTR_MIN_WIDTH, ATTR_LAYOUT_MIN_WIDTH).any { ignorable -> it.localName == ignorable } }
-        .filter { it.nodeValue.matches("-?[\\d.]+(sp|dp|dip)".toRegex()) }
-        .filterNot { context.driver.isSuppressed(context, ISSUE_RAW_DIMEN, it) }
-        .map { it to context.getValueLocation(it as Attr) }
-        .toCollection(collector)
+      .filterNot { it.hasToolsNamespace() }
+      .filterNot { isVectorGraphic }
+      .filterNot { (hasLayoutWeight || isParentConstraintLayout) && it.nodeValue[0] == '0' && (ATTR_LAYOUT_WIDTH == it.localName || ATTR_LAYOUT_HEIGHT == it.localName) }
+      .filterNot { it.nodeValue == "0dp" && listOf(ATTR_MIN_HEIGHT, ATTR_LAYOUT_MIN_HEIGHT, ATTR_MIN_WIDTH, ATTR_LAYOUT_MIN_WIDTH).any { ignorable -> it.localName == ignorable } }
+      .filter { it.nodeValue.matches("-?[\\d.]+(sp|dp|dip)".toRegex()) }
+      .filterNot { context.driver.isSuppressed(context, ISSUE_RAW_DIMEN, it) }
+      .map { it to context.getValueLocation(it as Attr) }
+      .toCollection(collector)
   }
 
   override fun afterCheckEachProject(context: Context) {
