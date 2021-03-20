@@ -21,7 +21,7 @@ class JcenterDetectorTest {
       .run()
       .expect(
         """
-            |build.gradle:3: Warning: Don't use jcenter(). [JCenter]
+            |build.gradle:3: Warning: Don't use jcenter() [JCenter]
             |    jcenter()
             |    ~~~~~~~~~
             |0 errors, 1 warnings""".trimMargin()

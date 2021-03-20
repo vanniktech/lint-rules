@@ -42,7 +42,7 @@ class RxJava2MissingCompositeDisposableClearDetectorTest {
       .run()
       .expect(
         """
-          |src/foo/Example.java:6: Error: clear() is not called. [RxJava2MissingCompositeDisposableClear]
+          |src/foo/Example.java:6: Error: clear() is not called [RxJava2MissingCompositeDisposableClear]
           |  CompositeDisposable cd;
           |  ~~~~~~~~~~~~~~~~~~~~~~~
           |1 errors, 0 warnings""".trimMargin()
@@ -89,10 +89,10 @@ class RxJava2MissingCompositeDisposableClearDetectorTest {
       .run()
       .expect(
         """
-          |src/foo/Example.java:6: Error: clear() is not called. [RxJava2MissingCompositeDisposableClear]
+          |src/foo/Example.java:6: Error: clear() is not called [RxJava2MissingCompositeDisposableClear]
           |  CompositeDisposable cd1;
           |  ~~~~~~~~~~~~~~~~~~~~~~~~
-          |src/foo/Example.java:7: Error: clear() is not called. [RxJava2MissingCompositeDisposableClear]
+          |src/foo/Example.java:7: Error: clear() is not called [RxJava2MissingCompositeDisposableClear]
           |  CompositeDisposable cd2;
           |  ~~~~~~~~~~~~~~~~~~~~~~~~
           |2 errors, 0 warnings
@@ -120,10 +120,10 @@ class RxJava2MissingCompositeDisposableClearDetectorTest {
       .run()
       .expect(
         """
-          |src/foo/Example.kt:6: Error: clear() is not called. [RxJava2MissingCompositeDisposableClear]
+          |src/foo/Example.kt:6: Error: clear() is not called [RxJava2MissingCompositeDisposableClear]
           |  val cd1: CompositeDisposable
           |  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-          |src/foo/Example.kt:7: Error: clear() is not called. [RxJava2MissingCompositeDisposableClear]
+          |src/foo/Example.kt:7: Error: clear() is not called [RxJava2MissingCompositeDisposableClear]
           |  val cd2: CompositeDisposable
           |  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
           |2 errors, 0 warnings
@@ -200,7 +200,7 @@ class RxJava2MissingCompositeDisposableClearDetectorTest {
       .run()
       .expect(
         """
-          |src/foo/Example.java:7: Error: clear() is not called. [RxJava2MissingCompositeDisposableClear]
+          |src/foo/Example.java:7: Error: clear() is not called [RxJava2MissingCompositeDisposableClear]
           |  CompositeDisposable cd2;
           |  ~~~~~~~~~~~~~~~~~~~~~~~~
           |1 errors, 0 warnings""".trimMargin()
@@ -230,7 +230,7 @@ class RxJava2MissingCompositeDisposableClearDetectorTest {
       .run()
       .expect(
         """
-          |src/foo/Example.kt:7: Error: clear() is not called. [RxJava2MissingCompositeDisposableClear]
+          |src/foo/Example.kt:7: Error: clear() is not called [RxJava2MissingCompositeDisposableClear]
           |  val cd2 = CompositeDisposable()
           |  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
           |1 errors, 0 warnings""".trimMargin()

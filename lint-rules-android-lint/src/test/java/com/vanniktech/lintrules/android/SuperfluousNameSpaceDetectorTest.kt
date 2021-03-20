@@ -39,7 +39,7 @@ class SuperfluousNameSpaceDetectorTest {
       .run()
       .expect(
         """
-          |res/layout/activity_home.xml:3: Warning: This name space is already declared and hence not needed. [SuperfluousNameSpace]
+          |res/layout/activity_home.xml:3: Warning: This name space is already declared and hence not needed [SuperfluousNameSpace]
           |      xmlns:android="http://schemas.android.com/apk/res/android"
           |      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
           |0 errors, 1 warnings""".trimMargin()

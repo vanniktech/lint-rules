@@ -10,7 +10,6 @@ import com.android.tools.lint.detector.api.Category
 import com.android.tools.lint.detector.api.Implementation
 import com.android.tools.lint.detector.api.Issue
 import com.android.tools.lint.detector.api.LayoutDetector
-import com.android.tools.lint.detector.api.LintFix
 import com.android.tools.lint.detector.api.Scope.Companion.RESOURCE_FILE_SCOPE
 import com.android.tools.lint.detector.api.Severity.WARNING
 import com.android.tools.lint.detector.api.XmlContext
@@ -58,10 +57,9 @@ class ErroneousLayoutAttributeDetector : LayoutDetector() {
               scope = attribute,
               location = context.getLocation(attribute),
               message = "Attribute is erroneous on ${element.nodeName}",
-              quickfixData = LintFix.create()
-                .replace()
+              quickfixData = fix()
+                .unset(attribute.namespaceURI, attribute.localName)
                 .name("Delete erroneous attribute")
-                .text(attribute.toString())
                 .autoFix()
                 .build()
             )

@@ -42,7 +42,7 @@ class WrongTestMethodNameDetector : Detector(), Detector.UastScanner {
             .with(node.name.replace("test", "", ignoreCase = true).decapitalize())
             .autoFix()
             .build()
-          context.report(ISSUE_WRONG_TEST_METHOD_NAME, node, context.getNameLocation(node), "Test method starts with test.", fix)
+          context.report(ISSUE_WRONG_TEST_METHOD_NAME, node, context.getNameLocation(node), "Test method starts with test", fix)
         }
     }
   }

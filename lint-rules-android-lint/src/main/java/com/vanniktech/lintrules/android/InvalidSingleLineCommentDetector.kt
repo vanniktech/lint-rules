@@ -67,7 +67,7 @@ class InvalidSingleLineCommentDetector : Detector(), Detector.UastScanner, Detec
       .autoFix(true, false)
       .build()
 
-    context.report(ISSUE_INVALID_SINGLE_LINE_COMMENT, location, "Comment does not end with a period.", fix)
+    context.report(ISSUE_INVALID_SINGLE_LINE_COMMENT, location, "Comment does not end with a period", fix)
   }
 
   private fun handleFirstWordCapitalization(context: Context, source: String, start: Int, end: Int, group: String) {
@@ -80,7 +80,7 @@ class InvalidSingleLineCommentDetector : Detector(), Detector.UastScanner, Detec
       .autoFix(true, false)
       .build()
 
-    context.report(ISSUE_INVALID_SINGLE_LINE_COMMENT, location, "Comments first word should be capitalized.", fix)
+    context.report(ISSUE_INVALID_SINGLE_LINE_COMMENT, location, "Comments first word should be capitalized", fix)
   }
 
   private fun handleTrailingWhiteSpace(context: Context, source: String, start: Int, end: Int, group: String) {
@@ -93,7 +93,7 @@ class InvalidSingleLineCommentDetector : Detector(), Detector.UastScanner, Detec
       .autoFix(true, false)
       .build()
 
-    context.report(ISSUE_INVALID_SINGLE_LINE_COMMENT, location, "Comment contains trailing whitespace.", fix)
+    context.report(ISSUE_INVALID_SINGLE_LINE_COMMENT, location, "Comment contains trailing whitespace", fix)
   }
 
   private fun handleRecedingSpace(context: Context, source: String, start: Int) {
@@ -106,7 +106,7 @@ class InvalidSingleLineCommentDetector : Detector(), Detector.UastScanner, Detec
       .autoFix(true, false)
       .build()
 
-    context.report(ISSUE_INVALID_SINGLE_LINE_COMMENT, location, "Comment does not contain a space at the beginning.", fix)
+    context.report(ISSUE_INVALID_SINGLE_LINE_COMMENT, location, "Comment does not contain a space at the beginning", fix)
   }
 
   private fun handlePrecedingSpace(context: Context, source: String, start: Int) {
@@ -119,7 +119,7 @@ class InvalidSingleLineCommentDetector : Detector(), Detector.UastScanner, Detec
       .autoFix(true, false)
       .build()
 
-    context.report(ISSUE_INVALID_SINGLE_LINE_COMMENT, location, "Comment declaration is not preceded by a single space.", fix)
+    context.report(ISSUE_INVALID_SINGLE_LINE_COMMENT, location, "Comment declaration is not preceded by a single space", fix)
   }
 
   private fun shouldSkip(group: String, beforeStart: Char?): Boolean {

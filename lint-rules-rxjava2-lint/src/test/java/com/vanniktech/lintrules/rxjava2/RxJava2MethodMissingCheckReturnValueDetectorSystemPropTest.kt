@@ -85,7 +85,7 @@ class RxJava2MethodMissingCheckReturnValueDetectorSystemPropTest {
       .issues(ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE)
       .run().expect(
         """
-        |src/foo/Example.java:6: Warning: Method should have @CheckReturnValue annotation. [RxJava2MethodMissingCheckReturnValue]
+        |src/foo/Example.java:6: Warning: Method should have @CheckReturnValue annotation [RxJava2MethodMissingCheckReturnValue]
         |  protected Observable<Object> foo() {
         |                               ~~~
         |0 errors, 1 warnings""".trimMargin()

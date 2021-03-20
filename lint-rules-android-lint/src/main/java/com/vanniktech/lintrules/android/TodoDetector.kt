@@ -45,7 +45,7 @@ class TodoDetector : Detector(), Detector.UastScanner, Detector.GradleScanner, D
       val end = matcher.end()
 
       val location = Location.create(context.file, source, start, end)
-      context.report(ISSUE_TODO, location, "Contains todo.")
+      context.report(ISSUE_TODO, location, "Contains todo")
     }
   }
 }

@@ -32,7 +32,7 @@ class RxJava2DisposableDisposeCallDetector : Detector(), Detector.UastScanner {
         .autoFix()
         .build()
 
-      context.report(ISSUE_DISPOSABLE_DISPOSE_CALL, node, context.getNameLocation(node), "Calling dispose instead of clear.", fix)
+      context.report(ISSUE_DISPOSABLE_DISPOSE_CALL, node, context.getNameLocation(node), "Calling `dispose` instead of `clear`", fix)
     }
   }
 }

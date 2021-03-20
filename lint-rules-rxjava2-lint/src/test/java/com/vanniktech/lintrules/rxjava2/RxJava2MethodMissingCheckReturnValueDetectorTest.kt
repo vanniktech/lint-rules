@@ -45,7 +45,7 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
       .run()
       .expect(
         """
-          |src/foo/Example.java:6: Warning: Method should have @CheckReturnValue annotation. [RxJava2MethodMissingCheckReturnValue]
+          |src/foo/Example.java:6: Warning: Method should have @CheckReturnValue annotation [RxJava2MethodMissingCheckReturnValue]
           |  private Observable<Object> foo() {
           |                             ~~~
           |0 errors, 1 warnings""".trimMargin()
@@ -104,7 +104,7 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
       .run()
       .expect(
         """
-          |src/foo/Example.java:6: Warning: Method should have @CheckReturnValue annotation. [RxJava2MethodMissingCheckReturnValue]
+          |src/foo/Example.java:6: Warning: Method should have @CheckReturnValue annotation [RxJava2MethodMissingCheckReturnValue]
           |  protected Flowable<Object> foo() {
           |                             ~~~
           |0 errors, 1 warnings""".trimMargin()
@@ -163,7 +163,7 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
       .run()
       .expect(
         """
-          |src/foo/Example.java:6: Warning: Method should have @CheckReturnValue annotation. [RxJava2MethodMissingCheckReturnValue]
+          |src/foo/Example.java:6: Warning: Method should have @CheckReturnValue annotation [RxJava2MethodMissingCheckReturnValue]
           |  public Single<Object> foo() {
           |                        ~~~
           |0 errors, 1 warnings""".trimMargin()
@@ -220,7 +220,7 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
       .run()
       .expect(
         """
-          |src/foo/Example.java:6: Warning: Method should have @CheckReturnValue annotation. [RxJava2MethodMissingCheckReturnValue]
+          |src/foo/Example.java:6: Warning: Method should have @CheckReturnValue annotation [RxJava2MethodMissingCheckReturnValue]
           |  public Maybe<Object> foo() {
           |                       ~~~
           |0 errors, 1 warnings""".trimMargin()
@@ -279,7 +279,7 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
       .run()
       .expect(
         """
-          |src/foo/Example.java:6: Warning: Method should have @CheckReturnValue annotation. [RxJava2MethodMissingCheckReturnValue]
+          |src/foo/Example.java:6: Warning: Method should have @CheckReturnValue annotation [RxJava2MethodMissingCheckReturnValue]
           |  public Completable foo() {
           |                     ~~~
           |0 errors, 1 warnings""".trimMargin()
@@ -338,7 +338,7 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
       .run()
       .expect(
         """
-          |src/foo/Example.java:6: Warning: Method should have @CheckReturnValue annotation. [RxJava2MethodMissingCheckReturnValue]
+          |src/foo/Example.java:6: Warning: Method should have @CheckReturnValue annotation [RxJava2MethodMissingCheckReturnValue]
           |  public Disposable foo() {
           |                    ~~~
           |0 errors, 1 warnings""".trimMargin()
@@ -397,7 +397,7 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
       .run()
       .expect(
         """
-          |src/foo/Example.java:6: Warning: Method should have @CheckReturnValue annotation. [RxJava2MethodMissingCheckReturnValue]
+          |src/foo/Example.java:6: Warning: Method should have @CheckReturnValue annotation [RxJava2MethodMissingCheckReturnValue]
           |  public TestObserver foo() {
           |                      ~~~
           |0 errors, 1 warnings""".trimMargin()
@@ -456,7 +456,7 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
       .run()
       .expect(
         """
-          |src/foo/Example.java:6: Warning: Method should have @CheckReturnValue annotation. [RxJava2MethodMissingCheckReturnValue]
+          |src/foo/Example.java:6: Warning: Method should have @CheckReturnValue annotation [RxJava2MethodMissingCheckReturnValue]
           |  public TestSubscriber foo() {
           |                        ~~~
           |0 errors, 1 warnings""".trimMargin()
@@ -492,7 +492,7 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
       .run()
       .expect(
         """
-            |src/foo/Example.kt:6: Warning: Method should have @CheckReturnValue annotation. [RxJava2MethodMissingCheckReturnValue]
+            |src/foo/Example.kt:6: Warning: Method should have @CheckReturnValue annotation [RxJava2MethodMissingCheckReturnValue]
             |  fun foo(): Scheduler? {
             |      ~~~
             |0 errors, 1 warnings""".trimMargin()
@@ -571,7 +571,7 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
       .run()
       .expect(
         """
-          |src/foo/Example.java:6: Warning: Method should have @CheckReturnValue annotation. [RxJava2MethodMissingCheckReturnValue]
+          |src/foo/Example.java:6: Warning: Method should have @CheckReturnValue annotation [RxJava2MethodMissingCheckReturnValue]
           |  private Observable<List<Object>> foo() {
           |                                   ~~~
           |0 errors, 1 warnings""".trimMargin()

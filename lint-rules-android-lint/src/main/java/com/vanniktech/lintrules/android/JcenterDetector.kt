@@ -29,7 +29,7 @@ class JcenterDetector : Detector(), Detector.GradleScanner {
         .name("Replace with mavenCentral()")
         .autoFix()
         .build()
-      context.report(ISSUE_JCENTER, statementCookie, context.getLocation(statementCookie), "Don't use jcenter().", fix)
+      context.report(ISSUE_JCENTER, statementCookie, context.getLocation(statementCookie), "Don't use `jcenter()`", fix)
     }
   }
 }

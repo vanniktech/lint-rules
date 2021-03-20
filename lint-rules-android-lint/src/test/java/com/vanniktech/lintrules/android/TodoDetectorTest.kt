@@ -24,7 +24,7 @@ class TodoDetectorTest {
       .run()
       .expect(
         """
-            |src/foo/Example.java:4: Error: Contains todo. [Todo]
+            |src/foo/Example.java:4: Error: Contains todo [Todo]
             |  // TODO: something
             |     ~~~~~~~~~~~~~~~
             |1 errors, 0 warnings""".trimMargin()
@@ -46,7 +46,7 @@ class TodoDetectorTest {
       .run()
       .expect(
         """
-            |res/layout/layout.xml:3: Error: Contains todo. [Todo]
+            |res/layout/layout.xml:3: Error: Contains todo [Todo]
             |<!-- TODO: Fix blub. -->
             |     ~~~~~~~~~~~~~~~~~~~
             |1 errors, 0 warnings""".trimMargin()
@@ -69,7 +69,7 @@ class TodoDetectorTest {
       .run()
       .expect(
         """
-            |build.gradle:3: Error: Contains todo. [Todo]
+            |build.gradle:3: Error: Contains todo [Todo]
             |    mavenCentral() // TODO: we should remove it.
             |                      ~~~~~~~~~~~~~~~~~~~~~~~~~~
             |1 errors, 0 warnings""".trimMargin()
@@ -89,7 +89,7 @@ class TodoDetectorTest {
       .run()
       .expect(
         """
-            |AndroidManifest.xml:1: Error: Contains todo. [Todo]
+            |AndroidManifest.xml:1: Error: Contains todo [Todo]
             |<!-- TODO: Something. -->
             |     ~~~~~~~~~~~~~~~~~~~~
             |1 errors, 0 warnings""".trimMargin()

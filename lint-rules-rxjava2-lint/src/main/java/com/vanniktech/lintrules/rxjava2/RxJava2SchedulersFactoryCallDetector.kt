@@ -42,7 +42,7 @@ class RxJava2SchedulersFactoryCallDetector : Detector(), UastScanner {
       .any { annotation -> listOf("dagger.Provides", "io.reactivex.annotations.SchedulerSupport").any { it == annotation.qualifiedName } }
 
     if ((isSchedulersMatch || isAndroidSchedulersMatch) && !shouldIgnore) {
-      context.report(ISSUE_RAW_SCHEDULER_CALL, node, context.getNameLocation(node), "Inject this Scheduler instead of calling it directly.")
+      context.report(ISSUE_RAW_SCHEDULER_CALL, node, context.getNameLocation(node), "Inject this Scheduler instead of calling it directly")
     }
   }
 }

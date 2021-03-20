@@ -33,7 +33,7 @@ class MissingXmlHeaderDetectorTest {
       .run()
       .expect(
         """
-          |res/values/strings.xml:1: Warning: Missing an xml header. [MissingXmlHeader]
+          |res/values/strings.xml:1: Warning: Missing an xml header [MissingXmlHeader]
           |<resources/>
           |~~~~~~~~~~~~
           |0 errors, 1 warnings""".trimMargin()

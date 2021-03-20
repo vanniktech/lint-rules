@@ -49,7 +49,7 @@ class RxJava2DefaultSchedulerDetectorTest {
       .run()
       .expect(
         """
-          |src/foo/Example.java:8: Warning: interval() is using its default scheduler. [RxJava2DefaultScheduler]
+          |src/foo/Example.java:8: Warning: interval() is using its default scheduler [RxJava2DefaultScheduler]
           |    Observable.interval(5, TimeUnit.SECONDS);
           |               ~~~~~~~~
           |0 errors, 1 warnings""".trimMargin()

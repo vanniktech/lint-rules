@@ -53,7 +53,7 @@ class RxJava2MissingCompositeDisposableClearDetector : Detector(), Detector.Uast
       })
 
       compositeDisposables.forEach {
-        context.report(ISSUE_MISSING_COMPOSITE_DISPOSABLE_CLEAR, it, context.getLocation(it), "clear() is not called.")
+        context.report(ISSUE_MISSING_COMPOSITE_DISPOSABLE_CLEAR, it, context.getLocation(it), "`clear()` is not called")
       }
     }
   }
