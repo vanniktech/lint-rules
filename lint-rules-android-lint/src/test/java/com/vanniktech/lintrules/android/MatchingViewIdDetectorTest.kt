@@ -1,5 +1,8 @@
+@file:Suppress("UnstableAPIUSage") // We know that Lint API's aren't final.
+
 package com.vanniktech.lintrules.android
 
+import com.android.tools.lint.checks.infrastructure.TestFiles.gradle
 import com.android.tools.lint.checks.infrastructure.TestFiles.xml
 import com.android.tools.lint.checks.infrastructure.TestLintTask.lint
 import org.junit.Test
@@ -113,6 +116,16 @@ class MatchingViewIdDetectorTest {
         .expectClean()
   }
 
+  @Test fun wrongIdWithViewBinding() {
+    lint()
+        .files(viewBindingProject(), xml("src/main/res/layout/view_custom.xml", """
+            <TextView xmlns:android="http://schemas.android.com/apk/res/android" 
+                android:id="@+id/textView"/>""").indented())
+        .issues(ISSUE_MATCHING_VIEW_ID)
+        .run()
+        .expectClean()
+  }
+
   @Test fun idAndroidLongId() {
     lint()
         .files(xml("res/layout/view_profile_attribute_display.xml", """
@@ -141,3 +154,12 @@ class MatchingViewIdDetectorTest {
         .expectClean()
   }
 }
+
+fun viewBindingProject() = gradle("""
+        apply plugin: 'com.android.library'
+
+        android {
+          buildFeatures {
+            viewBinding = true
+          }
+        }""").indented()
