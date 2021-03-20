@@ -1,0 +1,73 @@
+@file:Suppress("UnstableAPIUSage") // We know that Lint API's aren't final.
+
+package com.vanniktech.lintrules.android
+
+import com.android.SdkConstants
+import com.android.SdkConstants.CONSTRAINT_LAYOUT
+import com.android.SdkConstants.FRAME_LAYOUT
+import com.android.SdkConstants.IMAGE_VIEW
+import com.android.tools.lint.detector.api.Category
+import com.android.tools.lint.detector.api.Implementation
+import com.android.tools.lint.detector.api.Issue
+import com.android.tools.lint.detector.api.LayoutDetector
+import com.android.tools.lint.detector.api.LintFix
+import com.android.tools.lint.detector.api.Scope.Companion.RESOURCE_FILE_SCOPE
+import com.android.tools.lint.detector.api.Severity.WARNING
+import com.android.tools.lint.detector.api.XmlContext
+import com.android.utils.forEach
+import org.w3c.dom.Element
+
+val ISSUE_ERRONEOUS_LAYOUT_ATTRIBUTE = Issue.create(
+  id = "ErroneousLayoutAttribute",
+  briefDescription = "Layout attribute that's not applicable to a particular view.",
+  explanation = "Flags if a layout attribute is not applicable to a particular view.",
+  category = Category.CORRECTNESS,
+  priority = PRIORITY,
+  severity = WARNING,
+  implementation = Implementation(ErroneousLayoutAttributeDetector::class.java, RESOURCE_FILE_SCOPE)
+)
+
+val ERRONEOUS_LAYOUT_ATTRIBUTES = mapOf(
+  CONSTRAINT_LAYOUT.newName() to listOf(
+    SdkConstants.ATTR_ORIENTATION,
+    SdkConstants.ATTR_GRAVITY
+  ),
+  IMAGE_VIEW to listOf(
+    "maxLines"
+  ),
+  FRAME_LAYOUT to listOf(
+    SdkConstants.ATTR_ORIENTATION
+  )
+)
+
+class ErroneousLayoutAttributeDetector : LayoutDetector() {
+  override fun getApplicableElements() = ALL
+
+  override fun visitElement(
+    context: XmlContext,
+    element: Element
+  ) {
+    val erroneousAttributes = ERRONEOUS_LAYOUT_ATTRIBUTES[element.nodeName].orEmpty()
+
+    if (erroneousAttributes.isNotEmpty()) {
+      element.attributes.forEach { attribute ->
+        erroneousAttributes.forEach { erroneousAttribute ->
+          if (attribute.nodeName.endsWith(erroneousAttribute)) {
+            context.report(
+              issue = ISSUE_ERRONEOUS_LAYOUT_ATTRIBUTE,
+              scope = attribute,
+              location = context.getLocation(attribute),
+              message = "Attribute is erroneous on ${element.nodeName}",
+              quickfixData = LintFix.create()
+                .replace()
+                .name("Delete erroneous attribute")
+                .text(attribute.toString())
+                .autoFix()
+                .build()
+            )
+          }
+        }
+      }
+    }
+  }
+}
