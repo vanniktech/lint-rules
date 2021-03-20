@@ -11,7 +11,6 @@ import com.android.tools.lint.detector.api.ResourceXmlDetector
 import com.android.tools.lint.detector.api.Scope.Companion.RESOURCE_FILE_SCOPE
 import com.android.tools.lint.detector.api.Severity.WARNING
 import com.android.tools.lint.detector.api.XmlContext
-import com.android.tools.lint.detector.api.stripIdPrefix
 import java.util.EnumSet
 import org.w3c.dom.Attr
 

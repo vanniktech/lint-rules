@@ -9,7 +9,6 @@ import com.android.tools.lint.detector.api.LayoutDetector
 import com.android.tools.lint.detector.api.Scope.Companion.RESOURCE_FILE_SCOPE
 import com.android.tools.lint.detector.api.Severity.WARNING
 import com.android.tools.lint.detector.api.XmlContext
-import com.android.tools.lint.detector.api.stripIdPrefix
 import org.w3c.dom.Attr
 
 val ISSUE_WRONG_VIEW_ID_FORMAT = Issue.create("WrongViewIdFormat",

@@ -43,7 +43,7 @@ codeQualityTools {
     toolVersion = '0.34.2'
   }
   detekt {
-    toolVersion = '1.0.0'
+    enabled = false
   }
 }
 
