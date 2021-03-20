@@ -17,3 +17,5 @@ jar {
     attributes('Lint-Registry-v2': 'com.vanniktech.lintrules.android.IssueRegistry')
   }
 }
+
+apply plugin: "com.vanniktech.maven.publish"
