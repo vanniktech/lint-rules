@@ -6,6 +6,13 @@ Version 0.15.0 *(In development)*
 Version 0.14.0 *(2021-03-20)*
 -----------------------------
 
+- Fix Lint issues that are reported on Lint issues. [\#315](https://github.com/vanniktech/lint-rules/pull/315) ([vanniktech](https://github.com/vanniktech))
+- Bump & run ktlint. [\#314](https://github.com/vanniktech/lint-rules/pull/314) ([vanniktech](https://github.com/vanniktech))
+- Also publish Lint artifacts. [\#313](https://github.com/vanniktech/lint-rules/pull/313) ([vanniktech](https://github.com/vanniktech))
+- MatchingViewIdDetector: Don't report when using ViewBinding. [\#312](https://github.com/vanniktech/lint-rules/pull/312) ([vanniktech](https://github.com/vanniktech))
+- InvalidImportDetector: Allow internal's within same package + special treatment for SQLDelight. [\#311](https://github.com/vanniktech/lint-rules/pull/311) ([vanniktech](https://github.com/vanniktech))
+- ErroneousLayoutAttribute: Flag invalid layout attributes. [\#310](https://github.com/vanniktech/lint-rules/pull/310) ([vanniktech](https://github.com/vanniktech))
+- Update Android Gradle Plugin to 4.1.2 & Lint to 27.1.2 [\#308](https://github.com/vanniktech/lint-rules/pull/308) ([vanniktech](https://github.com/vanniktech))
 
 Version 0.13.0 *(2020-03-22)*
 -----------------------------
