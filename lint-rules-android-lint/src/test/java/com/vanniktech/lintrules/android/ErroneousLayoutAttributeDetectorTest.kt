@@ -61,6 +61,40 @@ class ErroneousLayoutAttributeDetectorTest {
       )
   }
 
+  @Test fun erroneousMergeFrameLayoutOrientation() {
+    lint()
+      .files(
+        xml(
+          "res/layout/ids.xml",
+          """
+          <merge
+              xmlns:tools="http://schemas.android.com/tools"
+              xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal"
+              tools:parentTag="FrameLayout"
+              />"""
+        ).indented()
+      )
+      .issues(ISSUE_ERRONEOUS_LAYOUT_ATTRIBUTE)
+      .run()
+      .expect(
+        """
+          |res/layout/ids.xml:6: Warning: Attribute is erroneous on FrameLayout [ErroneousLayoutAttribute]
+          |    android:orientation="horizontal"
+          |    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+          |0 errors, 1 warnings""".trimMargin()
+      )
+      .expectFixDiffs(
+        """
+          |Fix for res/layout/ids.xml line 6: Delete erroneous attribute:
+          |@@ -6 +6
+          |-     android:orientation="horizontal"
+          |""".trimMargin()
+      )
+  }
+
   @Test fun erroneousImageViewMaxLines() {
     lint()
       .files(

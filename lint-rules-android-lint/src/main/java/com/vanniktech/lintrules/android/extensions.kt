@@ -2,11 +2,15 @@
 
 package com.vanniktech.lintrules.android
 
+import com.android.SdkConstants.ATTR_PARENT_TAG
 import com.android.SdkConstants.TOOLS_URI
 import org.w3c.dom.Attr
+import org.w3c.dom.Element
 import org.w3c.dom.Node
 import java.util.Locale.US
 import java.util.regex.Pattern
+
+internal fun Element.parentTag() = getAttributeNS(TOOLS_URI, ATTR_PARENT_TAG)
 
 internal fun Node.hasToolsNamespace() = TOOLS_URI.equals(namespaceURI, ignoreCase = true)
 

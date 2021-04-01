@@ -29,7 +29,8 @@ val ISSUE_ERRONEOUS_LAYOUT_ATTRIBUTE = Issue.create(
 val ERRONEOUS_LAYOUT_ATTRIBUTES = mapOf(
   CONSTRAINT_LAYOUT.newName() to listOf(
     SdkConstants.ATTR_ORIENTATION,
-    SdkConstants.ATTR_GRAVITY
+    SdkConstants.ATTR_GRAVITY,
+    SdkConstants.ATTR_SCALE_TYPE
   ),
   IMAGE_VIEW to listOf(
     "maxLines"
@@ -46,7 +47,12 @@ class ErroneousLayoutAttributeDetector : LayoutDetector() {
     context: XmlContext,
     element: Element
   ) {
-    val erroneousAttributes = ERRONEOUS_LAYOUT_ATTRIBUTES[element.nodeName].orEmpty()
+    val layoutName = when {
+      element.nodeName == "merge" -> element.parentTag()
+      else -> element.nodeName
+    }
+
+    val erroneousAttributes = ERRONEOUS_LAYOUT_ATTRIBUTES[layoutName].orEmpty()
 
     if (erroneousAttributes.isNotEmpty()) {
       element.attributes.forEach { attribute ->
@@ -56,7 +62,7 @@ class ErroneousLayoutAttributeDetector : LayoutDetector() {
               issue = ISSUE_ERRONEOUS_LAYOUT_ATTRIBUTE,
               scope = attribute,
               location = context.getLocation(attribute),
-              message = "Attribute is erroneous on ${element.nodeName}",
+              message = "Attribute is erroneous on $layoutName",
               quickfixData = fix()
                 .unset(attribute.namespaceURI, attribute.localName)
                 .name("Delete erroneous attribute")

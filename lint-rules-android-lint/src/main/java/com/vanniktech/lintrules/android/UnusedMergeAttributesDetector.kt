@@ -24,7 +24,7 @@ class UnusedMergeAttributesDetector : LayoutDetector() {
   override fun getApplicableElements() = listOf(VIEW_MERGE)
 
   override fun visitElement(context: XmlContext, element: Element) {
-    val hasParentTag = element.getAttributeNS(TOOLS_URI, ATTR_PARENT_TAG).isNotEmpty()
+    val hasParentTag = element.parentTag().isNotEmpty()
 
     if (hasParentTag) {
       element.attributes()
