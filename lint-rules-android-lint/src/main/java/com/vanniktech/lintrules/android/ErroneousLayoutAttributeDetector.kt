@@ -10,6 +10,7 @@ import com.android.tools.lint.detector.api.Category
 import com.android.tools.lint.detector.api.Implementation
 import com.android.tools.lint.detector.api.Issue
 import com.android.tools.lint.detector.api.LayoutDetector
+import com.android.tools.lint.detector.api.LintUtils
 import com.android.tools.lint.detector.api.Scope.Companion.RESOURCE_FILE_SCOPE
 import com.android.tools.lint.detector.api.Severity.WARNING
 import com.android.tools.lint.detector.api.XmlContext
@@ -57,7 +58,9 @@ class ErroneousLayoutAttributeDetector : LayoutDetector() {
     if (erroneousAttributes.isNotEmpty()) {
       element.attributes.forEach { attribute ->
         erroneousAttributes.forEach { erroneousAttribute ->
-          if (attribute.nodeName.endsWith(erroneousAttribute)) {
+          val tag = attribute.nodeName.split(":").getOrNull(1)
+
+          if (erroneousAttribute == tag) {
             context.report(
               issue = ISSUE_ERRONEOUS_LAYOUT_ATTRIBUTE,
               scope = attribute,
