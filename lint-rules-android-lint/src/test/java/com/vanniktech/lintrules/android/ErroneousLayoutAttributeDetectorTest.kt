@@ -199,4 +199,27 @@ class ErroneousLayoutAttributeDetectorTest {
           |""".trimMargin()
       )
   }
+
+  @Test fun validLayoutGravity() {
+    lint()
+      .files(
+        xml(
+          "res/layout/ids.xml",
+          """
+          <FrameLayout
+              xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              >
+              <androidx.constraintlayout.widget.ConstraintLayout
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_gravity="center"/>
+          </FrameLayout>"""
+        ).indented()
+      )
+      .issues(ISSUE_ERRONEOUS_LAYOUT_ATTRIBUTE)
+      .run()
+      .expectClean()
+  }
 }
