@@ -227,14 +227,3 @@ class MatchingViewIdDetectorTest {
       .expectClean()
   }
 }
-
-fun viewBindingProject() = gradle(
-  """
-        apply plugin: 'com.android.library'
-
-        android {
-          buildFeatures {
-            viewBinding = true
-          }
-        }"""
-).indented()

@@ -29,3 +29,25 @@ val stubAnnotationSomething = TestFiles.java(
 
     public @interface Something { }"""
 ).indented()
+
+fun viewBindingProject() = TestFiles.gradle(
+  """
+        apply plugin: 'com.android.library'
+
+        android {
+          buildFeatures {
+            viewBinding = true
+          }
+        }"""
+)
+  .indented()
+
+fun resourcePrefix(prefix: String) = TestFiles.gradle(
+  """
+        apply plugin: 'com.android.library'
+
+        android {
+          resourcePrefix '$prefix'
+        }"""
+)
+  .indented()

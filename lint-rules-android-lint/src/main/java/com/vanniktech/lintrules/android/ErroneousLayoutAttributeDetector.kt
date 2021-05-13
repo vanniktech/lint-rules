@@ -48,17 +48,13 @@ class ErroneousLayoutAttributeDetector : LayoutDetector() {
     context: XmlContext,
     element: Element
   ) {
-    val layoutName = when {
-      element.nodeName == "merge" -> element.parentTag()
-      else -> element.nodeName
-    }
-
+    val layoutName = element.layoutName()
     val erroneousAttributes = ERRONEOUS_LAYOUT_ATTRIBUTES[layoutName].orEmpty()
 
     if (erroneousAttributes.isNotEmpty()) {
       element.attributes.forEach { attribute ->
         erroneousAttributes.forEach { erroneousAttribute ->
-          val tag = attribute.nodeName.split(":").getOrNull(1)
+          val tag = attribute.layoutAttribute()
 
           if (erroneousAttribute == tag) {
             context.report(

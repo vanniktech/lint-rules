@@ -10,7 +10,14 @@ import org.w3c.dom.Node
 import java.util.Locale.US
 import java.util.regex.Pattern
 
+internal fun Element.layoutName() = when {
+  nodeName == "merge" -> parentTag()
+  else -> nodeName
+}
+
 internal fun Element.parentTag() = getAttributeNS(TOOLS_URI, ATTR_PARENT_TAG)
+
+internal fun Node.layoutAttribute() = nodeName.split(":").getOrNull(1)
 
 internal fun Node.hasToolsNamespace() = TOOLS_URI.equals(namespaceURI, ignoreCase = true)
 

@@ -44,6 +44,7 @@ class IssueRegistryTest {
         - **LayoutFileNameMatchesClass** - Layout file names should always match the name of the class. FooActivity should have a layout file named activity_foo hence.
         - **MatchingMenuId** - When the layout file is named menu_home all of the containing ids should be prefixed with menuHome to avoid ambiguity between different menu files across different menu items.
         - **MatchingViewId** - When the layout file is named activity_home all of the containing ids should be prefixed with activityHome to avoid ambiguity between different layout files across different views.
+        - **MissingScrollbars** - Every scroll view should explicitly define whether it has scrollbars (none | vertical | horizontal).
         - **MissingXmlHeader** - An xml file should always have the xml header to declare that it is an xml file despite the file ending.
         - **NamingPattern** - Sometimes there is more than one reasonable way to convert an English phrase into camel case, such as when acronyms or unusual constructs like "IPv6" or "iOS" are present. XML HTTP request becomes XmlHttpRequest. XMLHTTPRequest would be incorrect.
         - **RawColor** - Color value should all be defined as color resources. This has the benefit that you can easily see all of your colors in one file. One benefit is an easier addition to Dark Theme for instance. This check will run on layouts as well as xml drawables.
