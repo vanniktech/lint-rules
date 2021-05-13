@@ -90,12 +90,3 @@ class WrongLayoutNameDetectorTest {
       .expectClean()
   }
 }
-
-fun resourcePrefix(prefix: String) = gradle(
-  """
-        apply plugin: 'com.android.library'
-
-        android {
-          resourcePrefix '$prefix'
-        }"""
-).indented()
