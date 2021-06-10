@@ -1,3 +1,5 @@
+@file:Suppress("UnstableApiUsage")
+
 package com.vanniktech.lintrules.android
 
 import com.android.tools.lint.checks.infrastructure.TestFiles.xml
@@ -37,6 +39,20 @@ class RawDimenDetectorTest {
           |                                                                                       ~~~~
           |0 errors, 1 warnings""".trimMargin()
       )
+  }
+
+  @Test fun ignore0DpBottomSheetPeekHeight() {
+    lint()
+      .files(
+        xml(
+          "res/layout/ids.xml",
+          """
+          <TextView xmlns:app="http://schemas.android.com/apk/res-auto" app:behavior_peekHeight="0dp"/>"""
+        ).indented()
+      )
+      .issues(ISSUE_RAW_DIMEN)
+      .run()
+      .expectClean()
   }
 
   @Test fun androidMarginSuggestion() {
@@ -454,9 +470,7 @@ class RawDimenDetectorTest {
     lint()
       .files(
         xml(
-          "res/drawable/icon.xml",
-          """
-          <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+          "res/drawable/icon.xml", """<?xml version="1.0" encoding="UTF-8" standalone="no"?>
           <vector xmlns:android="http://schemas.android.com/apk/res/android"
               android:height="24dp"
               android:viewportHeight="24.0"
