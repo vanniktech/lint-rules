@@ -1,3 +1,5 @@
+@file:Suppress("UnstableApiUsage")
+
 package com.vanniktech.lintrules.android
 
 import com.android.SdkConstants.ATTR_LAYOUT_HEIGHT
@@ -51,9 +53,11 @@ class RawDimenDetector : ResourceXmlDetector() {
     val isVectorGraphic = "vector" == element.localName || "path" == element.localName
 
     element.attributes()
+      .asSequence()
       .filterNot { it.hasToolsNamespace() }
       .filterNot { isVectorGraphic }
-      .filterNot { (hasLayoutWeight || isParentConstraintLayout) && it.nodeValue[0] == '0' && (ATTR_LAYOUT_WIDTH == it.localName || ATTR_LAYOUT_HEIGHT == it.localName) }
+      .filterNot { it.nodeName == "app:behavior_peekHeight" && it.nodeValue == "0dp" }
+      .filterNot { (hasLayoutWeight || isParentConstraintLayout) && it.nodeValue == "0dp" && (ATTR_LAYOUT_WIDTH == it.localName || ATTR_LAYOUT_HEIGHT == it.localName) }
       .filterNot { it.nodeValue == "0dp" && listOf(ATTR_MIN_HEIGHT, ATTR_LAYOUT_MIN_HEIGHT, ATTR_MIN_WIDTH, ATTR_LAYOUT_MIN_WIDTH).any { ignorable -> it.localName == ignorable } }
       .filter { it.nodeValue.matches("-?[\\d.]+(sp|dp|dip)".toRegex()) }
       .filterNot { context.driver.isSuppressed(context, ISSUE_RAW_DIMEN, it) }
