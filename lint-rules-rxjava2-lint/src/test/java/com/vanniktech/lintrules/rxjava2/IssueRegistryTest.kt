@@ -1,11 +1,24 @@
+@file:Suppress("UnstableApiUsage") // We know that Lint API's aren't final.
+
 package com.vanniktech.lintrules.rxjava2
 
+import com.android.tools.lint.client.api.LintClient
 import com.android.tools.lint.detector.api.TextFormat.RAW
+import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
+import org.junit.Before
 import org.junit.Test
 
 class IssueRegistryTest {
+  @Before fun setUp() {
+    LintClient.clientName = "Test"
+  }
+
+  @After fun tearDown() {
+    LintClient.resetClientName()
+  }
+
   @Test fun everyBriefDescriptionIsASentence() {
     IssueRegistry().issues
       .map { it.getBriefDescription(RAW) }

@@ -1,3 +1,5 @@
+@file:Suppress("UnstableApiUsage") // We know that Lint API's aren't final.
+
 package com.vanniktech.lintrules.android
 
 import com.android.tools.lint.detector.api.Category.Companion.CORRECTNESS
@@ -18,18 +20,24 @@ val ISSUE_JCENTER = Issue.create(
 )
 
 class JcenterDetector : Detector(), Detector.GradleScanner {
-  override fun checkDslPropertyAssignment(context: GradleContext, property: String, value: String, parent: String, parentParent: String?, valueCookie: Any, statementCookie: Any) {
-    super.checkDslPropertyAssignment(context, property, value, parent, parentParent, valueCookie, statementCookie)
-
-    if (property == "jcenter") {
+  override fun checkMethodCall(
+    context: GradleContext,
+    statement: String,
+    parent: String?,
+    parentParent: String?,
+    namedArguments: Map<String, String>,
+    unnamedArguments: List<String>,
+    cookie: Any
+  ) {
+    if (statement == "jcenter") {
       val fix = fix()
         .replace()
-        .text(property)
+        .text(statement)
         .with("mavenCentral")
         .name("Replace with mavenCentral()")
         .autoFix()
         .build()
-      context.report(ISSUE_JCENTER, statementCookie, context.getLocation(statementCookie), "Don't use `jcenter()`", fix)
+      context.report(ISSUE_JCENTER, cookie, context.getLocation(cookie), "Don't use `jcenter()`", fix)
     }
   }
 }
