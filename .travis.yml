@@ -13,7 +13,6 @@ install: true
 script: ./gradlew clean build
 
 after_success:
-  - bash <(curl -s https://codecov.io/bash)
   - .buildscript/deploy_snapshot.sh
 
 env:

@@ -1,4 +1,4 @@
-@file:Suppress("UnstableAPIUSage") // We know that Lint API's aren't final.
+@file:Suppress("UnstableApiUsage") // We know that Lint API's aren't final.
 
 package com.vanniktech.lintrules.android
 

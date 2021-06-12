@@ -1,4 +1,4 @@
-@file:Suppress("UnstableAPIUSage") // We know that Lint API's aren't final.
+@file:Suppress("UnstableApiUsage") // We know that Lint API's aren't final.
 
 package com.vanniktech.lintrules.android
 
@@ -27,7 +27,7 @@ class MatchingViewIdDetector : LayoutDetector() {
     val id = ResourceUrl.parse(attribute.value)?.name ?: return
     val fixer = MatchingIdFixer(context, id)
     val isAndroidId = attribute.value.startsWith("@android:id/")
-    val isUsingViewBinding = context.project.buildModule?.buildFeatures?.viewBinding == true
+    val isUsingViewBinding = context.project.buildVariant?.buildFeatures?.viewBinding == true
 
     if (fixer.needsFix() && !isAndroidId && !isUsingViewBinding) {
       val fix = fix()
