@@ -1,6 +1,5 @@
 package com.vanniktech.lintrules.android
 
-import com.android.SdkConstants.ATTR_PARENT_TAG
 import com.android.SdkConstants.TOOLS_URI
 import com.android.SdkConstants.VIEW_MERGE
 import com.android.tools.lint.detector.api.Category.Companion.CORRECTNESS

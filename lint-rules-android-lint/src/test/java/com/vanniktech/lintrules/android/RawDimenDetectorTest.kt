@@ -470,7 +470,8 @@ class RawDimenDetectorTest {
     lint()
       .files(
         xml(
-          "res/drawable/icon.xml", """<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+          "res/drawable/icon.xml",
+          """<?xml version="1.0" encoding="UTF-8" standalone="no"?>
           <vector xmlns:android="http://schemas.android.com/apk/res/android"
               android:height="24dp"
               android:viewportHeight="24.0"
