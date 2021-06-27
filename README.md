@@ -6,7 +6,7 @@ A set of very opinionated lint rules.
 ## Android Lint Rules
 
 ```groovy
-compile 'com.vanniktech:lint-rules-android:0.14.0'
+compile 'com.vanniktech:lint-rules-android:0.15.0'
 compile 'com.vanniktech:lint-rules-android:0.15.0-SNAPSHOT'
 ```
 
@@ -47,7 +47,7 @@ compile 'com.vanniktech:lint-rules-android:0.15.0-SNAPSHOT'
 ## RxJava 2 Lint Rules
 
 ```groovy
-compile 'com.vanniktech:lint-rules-rxjava2:0.14.0'
+compile 'com.vanniktech:lint-rules-rxjava2:0.15.0'
 compile 'com.vanniktech:lint-rules-rxjava2:0.15.0-SNAPSHOT'
 ```
 

@@ -1,7 +1,15 @@
 # Change Log
 
-Version 0.15.0 *(In development)*
----------------------------------
+Version 0.15.0 *(2021-06-27)*
+-----------------------------
+
+- Switch to GitHub workflows. [\#324](https://github.com/vanniktech/lint-rules/pull/324) ([vanniktech](https://github.com/vanniktech))
+- Update Android Gradle Plugin to 4.2.1 & Lint to 27.2.1 [\#323](https://github.com/vanniktech/lint-rules/pull/323) ([vanniktech](https://github.com/vanniktech))
+- RawDimen: Ignore 0dp app:behavior\_peekHeight. [\#322](https://github.com/vanniktech/lint-rules/pull/322) ([vanniktech](https://github.com/vanniktech))
+- MissingScrollbarsDetector: Flag ScrollViews with missing scrollbars. [\#321](https://github.com/vanniktech/lint-rules/pull/321) ([vanniktech](https://github.com/vanniktech))
+- ErroneousLayoutAttributeDetector: Fix false positive with layout\_gravity. [\#320](https://github.com/vanniktech/lint-rules/pull/320) ([vanniktech](https://github.com/vanniktech))
+- ErroneousLayoutAttributeDetector: Also work on merge with parentTag. [\#317](https://github.com/vanniktech/lint-rules/pull/317) ([vanniktech](https://github.com/vanniktech))
+- Update Gradle to 6.8.3 [\#316](https://github.com/vanniktech/lint-rules/pull/316) ([vanniktech](https://github.com/vanniktech))
 
 Version 0.14.0 *(2021-03-20)*
 -----------------------------
