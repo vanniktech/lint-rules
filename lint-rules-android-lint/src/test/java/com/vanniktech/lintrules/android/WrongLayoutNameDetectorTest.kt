@@ -1,6 +1,5 @@
 package com.vanniktech.lintrules.android
 
-import com.android.tools.lint.checks.infrastructure.TestFiles.gradle
 import com.android.tools.lint.checks.infrastructure.TestFiles.xml
 import com.android.tools.lint.checks.infrastructure.TestLintTask.lint
 import org.junit.Test
