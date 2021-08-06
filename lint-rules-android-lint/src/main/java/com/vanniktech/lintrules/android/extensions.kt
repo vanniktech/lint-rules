@@ -4,6 +4,8 @@ package com.vanniktech.lintrules.android
 
 import com.android.SdkConstants.ATTR_PARENT_TAG
 import com.android.SdkConstants.TOOLS_URI
+import com.android.tools.lint.detector.api.Project
+import com.android.tools.lint.detector.api.XmlContext
 import org.w3c.dom.Attr
 import org.w3c.dom.Element
 import org.w3c.dom.Node
@@ -64,4 +66,24 @@ internal fun String.toLowerCamelCase(): String {
 
   sb.setCharAt(0, Character.toLowerCase(sb[0]))
   return sb.toString()
+}
+
+internal fun String.forceUnderscoreIfNeeded() = if (isNotEmpty() && !endsWith("_")) plus("_") else this
+
+internal fun Project.resourcePrefix() = buildModule?.resourcePrefix.orEmpty()
+
+internal fun fileNameSuggestions(allowedPrefixes: List<String>, context: XmlContext): List<String>? {
+  val modified = allowedPrefixes.map {
+    val resourcePrefix = context.project.resourcePrefix()
+      .forceUnderscoreIfNeeded()
+
+    if (resourcePrefix != it) resourcePrefix + it else it
+  }
+
+  val doesNotStartWithPrefix = modified.none { context.file.name.startsWith(it) }
+  val notEquals = modified.map {
+    it.dropLast(1) // Drop the trailing underscore.
+  }.none { context.file.name == "$it.xml" }
+
+  return modified.takeIf { doesNotStartWithPrefix && notEquals }
 }

@@ -6,7 +6,6 @@ import com.android.tools.lint.detector.api.Category.Companion.CORRECTNESS
 import com.android.tools.lint.detector.api.Implementation
 import com.android.tools.lint.detector.api.Issue
 import com.android.tools.lint.detector.api.LayoutDetector
-import com.android.tools.lint.detector.api.Project
 import com.android.tools.lint.detector.api.Scope.Companion.RESOURCE_FILE_SCOPE
 import com.android.tools.lint.detector.api.Severity.WARNING
 import com.android.tools.lint.detector.api.XmlContext
@@ -24,24 +23,10 @@ val ISSUE_WRONG_LAYOUT_NAME = Issue.create(
 
 class WrongLayoutNameDetector : LayoutDetector() {
   override fun visitDocument(context: XmlContext, document: Document) {
-    val modified = allowedPrefixes.map {
-      val resourcePrefix = context.project.resourcePrefix()
-        .forceUnderscoreIfNeeded()
+    val modified = fileNameSuggestions(allowedPrefixes, context)
 
-      if (resourcePrefix != it) resourcePrefix + it else it
-    }
-
-    val doesNotStartWithPrefix = modified.none { context.file.name.startsWith(it) }
-    val notEquals = modified.map {
-      it.dropLast(1) // Drop the trailing underscore.
-    }.none { context.file.name == "$it.xml" }
-
-    if (doesNotStartWithPrefix && notEquals) {
+    if (modified != null) {
       context.report(ISSUE_WRONG_LAYOUT_NAME, document, context.getLocation(document), "Layout does not start with one of the following prefixes: ${modified.joinToString()}")
     }
   }
 }
-
-private fun String.forceUnderscoreIfNeeded() = if (isNotEmpty() && !endsWith("_")) plus("_") else this
-
-fun Project.resourcePrefix() = buildModule?.resourcePrefix.orEmpty()
