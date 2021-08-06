@@ -1,3 +1,5 @@
+@file:Suppress("UnstableApiUsage") // We know that Lint API's aren't final.
+
 package com.vanniktech.lintrules.rxjava2
 
 import com.android.tools.lint.detector.api.CURRENT_API

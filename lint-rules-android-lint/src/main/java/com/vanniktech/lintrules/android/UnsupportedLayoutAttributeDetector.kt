@@ -1,3 +1,5 @@
+@file:Suppress("UnstableApiUsage") // We know that Lint API's aren't final.
+
 package com.vanniktech.lintrules.android
 
 import com.android.SdkConstants.ATTR_ORIENTATION

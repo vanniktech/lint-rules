@@ -42,6 +42,9 @@ codeQualityTools {
   detekt {
     enabled = false
   }
+  errorProne {
+    enabled = false
+  }
 }
 
 allprojects {
