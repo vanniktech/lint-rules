@@ -54,11 +54,17 @@ class NamingPatternDetector : Detector(), Detector.UastScanner {
 
     private fun process(scope: UElement, declaration: PsiNamedElement) {
       val isKotlinTopLevelOrMember = scope is KotlinUMethod && ((scope.sourcePsi as? KtProperty)?.isMember == true || scope.sourcePsi?.isTopLevelKtOrJavaMember() == true)
-
-      if (declaration.name?.isDefinedCamelCase() == false && !isKotlinTopLevelOrMember) {
+      val name = declaration.name
+      if (name?.isDefinedCamelCase() == false && !isKotlinTopLevelOrMember && EXCLUDES.none { name.contains(it) && !name.startsWith(it) }) {
         context.report(ISSUE_NAMING_PATTERN, scope, context.getNameLocation(scope), "${declaration.name} is not named in defined camel case")
       }
     }
+  }
+
+  companion object {
+    val EXCLUDES = listOf(
+      "iOS"
+    )
   }
 }
 
