@@ -107,6 +107,22 @@ class NamingPatternDetectorTest {
       .expectClean()
   }
 
+  @Test fun allowiOSInTheMiddle() {
+    lint()
+      .files(
+        java(
+          """
+            package foo;
+
+            class NowAvailableOniOSView {
+            }"""
+        ).indented()
+      )
+      .issues(ISSUE_NAMING_PATTERN)
+      .run()
+      .expectClean()
+  }
+
   @Test fun incorrectClassName() {
     lint()
       .files(
