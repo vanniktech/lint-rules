@@ -19,7 +19,7 @@ import java.util.regex.Pattern
 
 private const val COMMENT = "//"
 private const val COMMENT_BEGINNING_INDEX = 3
-private val allowedEndings = listOf(".", "?", "!", ")")
+private val allowedEndings = listOf(".", "?", "!", ")", "]")
 private val pattern = Pattern.compile("[\\t]*$COMMENT.*")
 
 val ISSUE_INVALID_SINGLE_LINE_COMMENT = Issue.create(

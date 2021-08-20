@@ -121,6 +121,7 @@ class InvalidSingleLineCommentDetectorTest {
               // Something. Do not modify.
               // Something. Do not modify?
               // Something. (Do not modify)
+              // Something. In the range of [0..100]
             }
           }"""
         ).indented()
