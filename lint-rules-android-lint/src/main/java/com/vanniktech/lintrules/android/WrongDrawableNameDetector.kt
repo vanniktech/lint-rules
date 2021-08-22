@@ -13,14 +13,15 @@ import com.android.tools.lint.detector.api.XmlContext
 import org.w3c.dom.Document
 
 private val allowedPrefixes = listOf(
+  "animated_vector_",
+  "background_",
   "ic_",
   "img_",
-  "notification_icon",
-  "ripple",
+  "notification_icon_",
+  "ripple_",
   "selector_",
+  "shape_",
   "vector_",
-  "animated_vector_",
-  "shape_"
 )
 
 val ISSUE_WRONG_DRAWABLE_NAME = Issue.create(
