@@ -1,7 +1,11 @@
 # Change Log
 
-Version 0.17.0 *(In development)*
----------------------------------
+Version 0.17.0 *(2021-08-22)*
+-----------------------------
+
+- Documents checks automatically from JUnit test. [\#333](https://github.com/vanniktech/lint-rules/pull/333) ([vanniktech](https://github.com/vanniktech))
+- WrongDrawableNameDetector: Add background\_ to allowed prefixes. [\#332](https://github.com/vanniktech/lint-rules/pull/332) ([vanniktech](https://github.com/vanniktech))
+- Update Android Gradle Plugin to 7.0.1 & Lint to 30.0.1 [\#331](https://github.com/vanniktech/lint-rules/pull/331) ([vanniktech](https://github.com/vanniktech))
 
 Version 0.16.0 *(2021-08-22)*
 -----------------------------
