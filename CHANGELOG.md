@@ -1,7 +1,12 @@
 # Change Log
 
-Version 0.16.0 *(In development)*
----------------------------------
+Version 0.16.0 *(2021-08-22)*
+-----------------------------
+
+- InvalidSingleLineCommentDetector: Allow \] at the end of a comment. [\#330](https://github.com/vanniktech/lint-rules/pull/330) ([vanniktech](https://github.com/vanniktech))
+- NamingPatternDetector: Allow iOS in the middle of a name. [\#329](https://github.com/vanniktech/lint-rules/pull/329) ([vanniktech](https://github.com/vanniktech))
+- WrongDrawableNameDetectorTest: Flag invalid drawable file names. [\#327](https://github.com/vanniktech/lint-rules/pull/327) ([vanniktech](https://github.com/vanniktech))
+- WrongGlobalIconColorDetector: Force global color on icons. [\#326](https://github.com/vanniktech/lint-rules/pull/326) ([vanniktech](https://github.com/vanniktech))
 
 Version 0.15.0 *(2021-06-27)*
 -----------------------------
