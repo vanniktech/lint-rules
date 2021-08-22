@@ -72,19 +72,16 @@ class MissingScrollbarsDetectorTest {
           |Fix for res/layout/ids.xml line 1: Set scrollbars to none:
           |@@ -4 +4
           |-     android:layout_height="wrap_content" />
-          |@@ -5 +4
           |+     android:layout_height="wrap_content"
           |+     android:scrollbars="none" />
           |Fix for res/layout/ids.xml line 1: Set scrollbars to vertical:
           |@@ -4 +4
           |-     android:layout_height="wrap_content" />
-          |@@ -5 +4
           |+     android:layout_height="wrap_content"
           |+     android:scrollbars="vertical" />
           |Fix for res/layout/ids.xml line 1: Set scrollbars to horizontal:
           |@@ -4 +4
           |-     android:layout_height="wrap_content" />
-          |@@ -5 +4
           |+     android:layout_height="wrap_content"
           |+     android:scrollbars="horizontal" />
           |""".trimMargin()
@@ -118,19 +115,16 @@ class MissingScrollbarsDetectorTest {
           |Fix for res/layout/ids.xml line 1: Set scrollbars to none:
           |@@ -4 +4
           |-     android:layout_height="wrap_content" />
-          |@@ -5 +4
           |+     android:layout_height="wrap_content"
           |+     android:scrollbars="none" />
           |Fix for res/layout/ids.xml line 1: Set scrollbars to vertical:
           |@@ -4 +4
           |-     android:layout_height="wrap_content" />
-          |@@ -5 +4
           |+     android:layout_height="wrap_content"
           |+     android:scrollbars="vertical" />
           |Fix for res/layout/ids.xml line 1: Set scrollbars to horizontal:
           |@@ -4 +4
           |-     android:layout_height="wrap_content" />
-          |@@ -5 +4
           |+     android:layout_height="wrap_content"
           |+     android:scrollbars="horizontal" />
           |""".trimMargin()

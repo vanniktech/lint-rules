@@ -35,7 +35,6 @@ class DefaultLayoutAttributeDetectorTest {
           |@@ -4 +4
           |-     android:layout_height="wrap_content"
           |-     android:textStyle="normal" />
-          |@@ -6 +4
           |+     android:layout_height="wrap_content" />
           |""".trimMargin()
       )

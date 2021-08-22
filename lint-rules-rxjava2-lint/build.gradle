@@ -6,10 +6,10 @@ sourceCompatibility = JavaVersion.VERSION_1_8
 
 dependencies {
   compileOnly deps.lint.api
-  compileOnly deps.kotlin.stdlib
 
   testImplementation deps.lint.core
   testImplementation deps.lint.tests
+  testImplementation deps.junit
 }
 
 tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {

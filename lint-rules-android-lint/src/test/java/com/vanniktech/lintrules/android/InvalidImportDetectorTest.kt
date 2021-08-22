@@ -115,6 +115,7 @@ class InvalidImportDetectorTest {
 
   @Test fun generatedSqldelightCode() {
     lint()
+      .allowCompilationErrors()
       .files(
         internal,
         java(

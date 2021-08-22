@@ -6,10 +6,6 @@ android {
   defaultConfig {
     minSdkVersion versions.minSdk
   }
-
-  buildFeatures {
-    buildConfig = false
-  }
 }
 
 dependencies {
