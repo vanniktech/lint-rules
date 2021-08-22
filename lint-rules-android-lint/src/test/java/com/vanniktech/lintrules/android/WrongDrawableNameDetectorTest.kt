@@ -46,7 +46,7 @@ class WrongDrawableNameDetectorTest {
       .run()
       .expect(
         """
-          |res/drawable/random.xml: Warning: Drawable does not start with one of the following prefixes: ic_, img_, notification_icon, ripple, selector_, vector_, animated_vector_, shape_ [WrongDrawableName]
+          |res/drawable/random.xml: Warning: Drawable does not start with one of the following prefixes: animated_vector_, background_, ic_, img_, notification_icon_, ripple_, selector_, shape_, vector_ [WrongDrawableName]
           |0 errors, 1 warnings""".trimMargin()
       )
   }
@@ -58,7 +58,7 @@ class WrongDrawableNameDetectorTest {
       .run()
       .expect(
         """
-          |src/main/res/drawable/random.xml: Warning: Drawable does not start with one of the following prefixes: unit_test_prefix_ic_, unit_test_prefix_img_, unit_test_prefix_notification_icon, unit_test_prefix_ripple, unit_test_prefix_selector_, unit_test_prefix_vector_, unit_test_prefix_animated_vector_, unit_test_prefix_shape_ [WrongDrawableName]
+          |src/main/res/drawable/random.xml: Warning: Drawable does not start with one of the following prefixes: unit_test_prefix_animated_vector_, unit_test_prefix_background_, unit_test_prefix_ic_, unit_test_prefix_img_, unit_test_prefix_notification_icon_, unit_test_prefix_ripple_, unit_test_prefix_selector_, unit_test_prefix_shape_, unit_test_prefix_vector_ [WrongDrawableName]
           |0 errors, 1 warnings""".trimMargin()
       )
   }

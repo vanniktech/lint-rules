@@ -74,7 +74,7 @@ class IssueRegistryTest {
         - **UnusedMergeAttributes** - Adding android, app and other attributes to <merge> won't be used by the system for custom views and hence can lead to errors.
         - **WrongAnnotationOrder** - Annotations should always be applied with the same order to have consistency across the code base.
         - **WrongConstraintLayoutUsage** - Instead of using left & right constraints start & end should be used.
-        - **WrongDrawableName** - The drawable file name should be prefixed with one of the following: ic_, img_, notification_icon, ripple, selector_, vector_, animated_vector_, shape_. This will improve consistency in your code base as well as enforce a certain structure.
+        - **WrongDrawableName** - The drawable file name should be prefixed with one of the following: animated_vector_, background_, ic_, img_, notification_icon_, ripple_, selector_, shape_, vector_. This will improve consistency in your code base as well as enforce a certain structure.
         - **WrongGlobalIconColor** - In order to reuse icons, it's best if all icons share the same color and can be used at every position in the app. On the target side, tinting can be applied.
         - **WrongLayoutName** - The layout file name should be prefixed with one of the following: activity_, view_, fragment_, dialog_, bottom_sheet_, adapter_item_, divider_, space_, popup_window_. This will improve consistency in your code base as well as enforce a certain structure.
         - **WrongMenuIdFormat** - Menu ids should be in lowerCamelCase format. This has the benefit of saving an unnecessary underscore and also just looks nicer.
