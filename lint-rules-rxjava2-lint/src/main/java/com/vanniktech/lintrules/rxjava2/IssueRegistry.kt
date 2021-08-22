@@ -2,12 +2,19 @@
 
 package com.vanniktech.lintrules.rxjava2
 
+import com.android.tools.lint.client.api.Vendor
 import com.android.tools.lint.detector.api.CURRENT_API
 
 internal const val PRIORITY = 10 // Does not matter anyways within Lint.
 
 class IssueRegistry : com.android.tools.lint.client.api.IssueRegistry() {
-  override val api = CURRENT_API
+  override val api get() = CURRENT_API
+
+  override val vendor get() = Vendor(
+    vendorName = "vanniktech/lint-rules/",
+    identifier = "com.vanniktech:lint-rules-rxjava2:{version}",
+    feedbackUrl = "https://github.com/vanniktech/lint-rules/issues",
+  )
 
   override val issues get() = listOf(
     ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE,

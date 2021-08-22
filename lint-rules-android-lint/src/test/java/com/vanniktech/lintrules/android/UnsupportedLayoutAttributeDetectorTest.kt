@@ -33,7 +33,6 @@ class UnsupportedLayoutAttributeDetectorTest {
           |@@ -2 +2
           |- <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
           |-     android:orientation="vertical" />
-          |@@ -4 +2
           |+ <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" />
           |""".trimMargin()
       )
@@ -65,7 +64,6 @@ class UnsupportedLayoutAttributeDetectorTest {
           |@@ -2 +2
           |- <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
           |-     android:orientation="vertical" />
-          |@@ -4 +2
           |+ <ScrollView xmlns:android="http://schemas.android.com/apk/res/android" />
           |""".trimMargin()
       )

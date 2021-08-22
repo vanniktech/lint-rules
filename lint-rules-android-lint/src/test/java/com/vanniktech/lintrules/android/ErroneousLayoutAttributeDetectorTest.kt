@@ -55,7 +55,6 @@ class ErroneousLayoutAttributeDetectorTest {
           |@@ -4 +4
           |-     android:layout_height="wrap_content"
           |-     android:orientation="horizontal" />
-          |@@ -6 +4
           |+     android:layout_height="wrap_content" />
           |""".trimMargin()
       )
@@ -124,7 +123,6 @@ class ErroneousLayoutAttributeDetectorTest {
           |@@ -4 +4
           |-     android:layout_height="wrap_content"
           |-     android:maxLines="2" />
-          |@@ -6 +4
           |+     android:layout_height="wrap_content" />
           |""".trimMargin()
       )
@@ -159,7 +157,6 @@ class ErroneousLayoutAttributeDetectorTest {
         |@@ -4 +4
         |-     android:layout_height="wrap_content"
         |-     android:orientation="horizontal" />
-        |@@ -6 +4
         |+     android:layout_height="wrap_content" />
         |""".trimMargin()
       )
@@ -194,7 +191,6 @@ class ErroneousLayoutAttributeDetectorTest {
           |@@ -4 +4
           |-     android:layout_height="wrap_content"
           |-     android:gravity="horizontal" />
-          |@@ -6 +4
           |+     android:layout_height="wrap_content" />
           |""".trimMargin()
       )
