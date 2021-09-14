@@ -36,7 +36,8 @@ val ERRONEOUS_LAYOUT_ATTRIBUTES = mapOf(
     "maxLines"
   ),
   FRAME_LAYOUT to listOf(
-    SdkConstants.ATTR_ORIENTATION
+    SdkConstants.ATTR_ORIENTATION,
+    SdkConstants.ATTR_GRAVITY
   )
 )
 
