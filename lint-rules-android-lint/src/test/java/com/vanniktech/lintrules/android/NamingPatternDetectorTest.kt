@@ -123,6 +123,22 @@ class NamingPatternDetectorTest {
       .expectClean()
   }
 
+  @Test fun allowI18NInTheMiddle() {
+    lint()
+      .files(
+        java(
+          """
+            package foo;
+
+            class SomethingI18NActivity {
+            }"""
+        ).indented()
+      )
+      .issues(ISSUE_NAMING_PATTERN)
+      .run()
+      .expectClean()
+  }
+
   @Test fun incorrectClassName() {
     lint()
       .files(

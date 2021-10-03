@@ -63,7 +63,8 @@ class NamingPatternDetector : Detector(), Detector.UastScanner {
 
   companion object {
     val EXCLUDES = listOf(
-      "iOS"
+      "iOS",
+      "I18N"
     )
   }
 }
