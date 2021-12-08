@@ -64,6 +64,25 @@ class WrongGlobalIconColorDetectorTest {
       .expectClean()
   }
 
+  @Test fun ignoresIcInName() {
+    lint()
+      .files(
+        xml(
+          "res/drawable/img_country_democratic_republic_of_congo.xml",
+          """
+          <shape
+              xmlns:android="http://schemas.android.com/apk/res/android"
+              android:shape="rectangle">
+            <solid android:color="#1aeebf"/>
+            <size android:height="4dp"/>
+          </shape>"""
+        ).indented()
+      )
+      .issues(ISSUE_WRONG_GLOBAL_ICON_COLOR)
+      .run()
+      .expectClean()
+  }
+
   @Test fun flagsIcDrawable() {
     lint()
       .files(

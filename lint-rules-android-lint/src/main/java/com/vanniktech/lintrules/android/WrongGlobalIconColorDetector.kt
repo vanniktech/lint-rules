@@ -33,7 +33,7 @@ class WrongGlobalIconColorDetector : ResourceXmlDetector() {
     val value = attribute.nodeValue
 
     val fileName = context.file.name
-    val fileMatches = fileName.contains("ic_") && EXCLUDES_FILE_NAME.none { fileName.contains(it) }
+    val fileMatches = (fileName.startsWith("ic_") || fileName.contains("_ic_")) && EXCLUDES_FILE_NAME.none { fileName.contains(it) }
     if (fileMatches &&
       COLOR_REGEX.matches(value) &&
       value != EXPECTED_COLOR &&
