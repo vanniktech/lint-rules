@@ -1,7 +1,12 @@
 # Change Log
 
-Version 0.18.0 *(In development)*
----------------------------------
+Version 0.18.0 *(2022-01-29)*
+-----------------------------
+
+- NamingPatternDetector: Improve Kotlin support for various cases. [\#340](https://github.com/vanniktech/lint-rules/pull/340) ([vanniktech](https://github.com/vanniktech))
+- WrongGlobalIconColorDetector: Don't flag resource names that contain ic as part of a name. [\#339](https://github.com/vanniktech/lint-rules/pull/339) ([vanniktech](https://github.com/vanniktech))
+- NamingPatternDetector: Allow I18N in the middle of a name. [\#337](https://github.com/vanniktech/lint-rules/pull/337) ([vanniktech](https://github.com/vanniktech))
+- ErroneousLayoutAttributeDetector: Add android:gravity to FrameLayout. [\#335](https://github.com/vanniktech/lint-rules/pull/335) ([vanniktech](https://github.com/vanniktech))
 
 Version 0.17.0 *(2021-08-22)*
 -----------------------------
