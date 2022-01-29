@@ -178,6 +178,26 @@ class NamingPatternDetectorTest {
       .expectClean()
   }
 
+  @Test fun kotlinExtensionOnCompanionIgnored() {
+    lint()
+      .files(
+        kt(
+          """
+            package foo
+
+            class Foo {
+                companion object
+            }
+
+            val Foo.Companion.INSTANCE = 5
+            val Foo.Companion.INSTANCE get() = 5"""
+        ).indented()
+      )
+      .issues(ISSUE_NAMING_PATTERN)
+      .run()
+      .expectClean()
+  }
+
   @Test fun kotlinTopLevelValIgnored() {
     lint()
       .files(
@@ -213,6 +233,75 @@ class NamingPatternDetectorTest {
             |src/foo/Foo.kt:4: Warning: ATimes is not named in defined camel case [NamingPattern]
             |  val ATimes = 0
             |      ~~~~~~
+            |0 errors, 1 warnings
+            """.trimMargin()
+      )
+  }
+
+  @Test fun kotlinTopLevelFunction() {
+    lint()
+      .files(
+        kt(
+          """
+            package foo
+
+            fun teFO() = Unit"""
+        ).indented()
+      )
+      .issues(ISSUE_NAMING_PATTERN)
+      .run()
+      .expect(
+        """
+            |src/foo/test.kt:3: Warning: teFO is not named in defined camel case [NamingPattern]
+            |fun teFO() = Unit
+            |    ~~~~
+            |0 errors, 1 warnings
+            """.trimMargin()
+      )
+  }
+
+  @Test fun kotlinFunction() {
+    lint()
+      .files(
+        kt(
+          """
+            package foo
+
+            class Test {
+              fun teFO() = Unit
+            }"""
+        ).indented()
+      )
+      .issues(ISSUE_NAMING_PATTERN)
+      .run()
+      .expect(
+        """
+            |src/foo/Test.kt:4: Warning: teFO is not named in defined camel case [NamingPattern]
+            |  fun teFO() = Unit
+            |      ~~~~
+            |0 errors, 1 warnings
+            """.trimMargin()
+      )
+  }
+
+  @Test fun kotlinClass() {
+    lint()
+      .files(
+        kt(
+          """
+            package foo
+
+            class BADName"""
+        ).indented()
+      )
+      .issues(ISSUE_NAMING_PATTERN)
+      .allowDuplicates()
+      .run()
+      .expect(
+        """
+            |src/foo/BADName.kt:3: Warning: BADName is not named in defined camel case [NamingPattern]
+            |class BADName
+            |      ~~~~~~~
             |0 errors, 1 warnings
             """.trimMargin()
       )

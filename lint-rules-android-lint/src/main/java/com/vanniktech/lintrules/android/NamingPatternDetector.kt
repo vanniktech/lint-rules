@@ -12,12 +12,13 @@ import com.android.tools.lint.detector.api.Scope.JAVA_FILE
 import com.android.tools.lint.detector.api.Severity.WARNING
 import com.intellij.psi.PsiNamedElement
 import org.jetbrains.kotlin.psi.KtProperty
-import org.jetbrains.kotlin.psi.psiUtil.isTopLevelKtOrJavaMember
+import org.jetbrains.kotlin.psi.KtPropertyAccessor
 import org.jetbrains.uast.UClass
 import org.jetbrains.uast.UElement
 import org.jetbrains.uast.UEnumConstant
 import org.jetbrains.uast.UMethod
 import org.jetbrains.uast.UVariable
+import org.jetbrains.uast.kotlin.KotlinReceiverUParameter
 import org.jetbrains.uast.kotlin.declarations.KotlinUMethod
 import java.util.EnumSet
 
@@ -40,23 +41,27 @@ class NamingPatternDetector : Detector(), Detector.UastScanner {
       val isEnumConstant = node is UEnumConstant
 
       if (!isConstant && !isEnumConstant) {
-        process(node, node)
+        process(node)
       }
     }
 
-    override fun visitMethod(node: UMethod) {
-      process(node, node)
-    }
+    override fun visitMethod(node: UMethod) = process(node)
 
-    override fun visitClass(node: UClass) {
-      process(node, node)
-    }
+    override fun visitClass(node: UClass) = process(node)
 
-    private fun process(scope: UElement, declaration: PsiNamedElement) {
-      val isKotlinTopLevelOrMember = scope is KotlinUMethod && ((scope.sourcePsi as? KtProperty)?.isMember == true || scope.sourcePsi?.isTopLevelKtOrJavaMember() == true)
-      val name = declaration.name
-      if (name?.isDefinedCamelCase() == false && !isKotlinTopLevelOrMember && EXCLUDES.none { name.contains(it) && !name.startsWith(it) }) {
-        context.report(ISSUE_NAMING_PATTERN, scope, context.getNameLocation(scope), "${declaration.name} is not named in defined camel case")
+    private fun process(element: PsiNamedElement) {
+      val name = element.name
+      val isGeneratedKotlinMethod = element is KotlinUMethod && element.sourcePsi is KtProperty
+      val isGeneratedKotlinMethodAccessor = element is KotlinUMethod && element.sourcePsi is KtPropertyAccessor
+      val isKotlinReceiver = element is KotlinReceiverUParameter
+
+      if (!isGeneratedKotlinMethod &&
+        !isGeneratedKotlinMethodAccessor &&
+        !isKotlinReceiver &&
+        name?.isDefinedCamelCase() == false &&
+        EXCLUDES.none { name.contains(it) && !name.startsWith(it) }
+      ) {
+        context.report(ISSUE_NAMING_PATTERN, element, context.getNameLocation(element), "${element.name} is not named in defined camel case")
       }
     }
   }
