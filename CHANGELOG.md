@@ -1,7 +1,9 @@
 # Change Log
 
-Version 0.19.0 *(In development)*
----------------------------------
+Version 0.19.0 *(2022-03-10)*
+-----------------------------
+
+- Update Android Gradle Plugin to 7.1.2, Lint to 30.1.2 and ktlint to 0.44.0 [\#341](https://github.com/vanniktech/lint-rules/pull/341) ([vanniktech](https://github.com/vanniktech))
 
 Version 0.18.0 *(2022-01-29)*
 -----------------------------
