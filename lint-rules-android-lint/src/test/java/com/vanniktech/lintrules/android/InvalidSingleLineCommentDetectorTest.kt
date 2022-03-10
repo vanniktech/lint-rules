@@ -6,6 +6,7 @@ import com.android.tools.lint.checks.infrastructure.TestFiles.gradle
 import com.android.tools.lint.checks.infrastructure.TestFiles.java
 import com.android.tools.lint.checks.infrastructure.TestFiles.kt
 import com.android.tools.lint.checks.infrastructure.TestLintTask.lint
+import com.android.tools.lint.checks.infrastructure.TestMode
 import org.junit.Test
 
 class InvalidSingleLineCommentDetectorTest {
@@ -24,6 +25,7 @@ class InvalidSingleLineCommentDetectorTest {
         ).indented()
       )
       .issues(ISSUE_INVALID_SINGLE_LINE_COMMENT)
+      .skipTestModes(TestMode.WHITESPACE)
       .run()
       .expect(
         """
@@ -57,6 +59,7 @@ class InvalidSingleLineCommentDetectorTest {
         ).indented()
       )
       .issues(ISSUE_INVALID_SINGLE_LINE_COMMENT)
+      .skipTestModes(TestMode.WHITESPACE)
       .run()
       .expect(
         """
@@ -90,6 +93,7 @@ class InvalidSingleLineCommentDetectorTest {
         ).indented()
       )
       .issues(ISSUE_INVALID_SINGLE_LINE_COMMENT)
+      .skipTestModes(TestMode.WHITESPACE)
       .run()
       .expect(
         """
@@ -127,6 +131,7 @@ class InvalidSingleLineCommentDetectorTest {
         ).indented()
       )
       .issues(ISSUE_INVALID_SINGLE_LINE_COMMENT)
+      .skipTestModes(TestMode.WHITESPACE)
       .run()
       .expectClean()
   }
@@ -146,6 +151,7 @@ class InvalidSingleLineCommentDetectorTest {
         ).indented()
       )
       .issues(ISSUE_INVALID_SINGLE_LINE_COMMENT)
+      .skipTestModes(TestMode.WHITESPACE)
       .run()
       .expect(
         """
@@ -181,6 +187,7 @@ class InvalidSingleLineCommentDetectorTest {
         ).indented()
       )
       .issues(ISSUE_INVALID_SINGLE_LINE_COMMENT)
+      .skipTestModes(TestMode.WHITESPACE)
       .run()
       .expectClean()
   }
@@ -200,6 +207,7 @@ class InvalidSingleLineCommentDetectorTest {
         ).indented()
       )
       .issues(ISSUE_INVALID_SINGLE_LINE_COMMENT)
+      .skipTestModes(TestMode.WHITESPACE)
       .run()
       .expectClean()
   }
@@ -219,6 +227,7 @@ class InvalidSingleLineCommentDetectorTest {
         ).indented()
       )
       .issues(ISSUE_INVALID_SINGLE_LINE_COMMENT)
+      .skipTestModes(TestMode.WHITESPACE)
       .run()
       .expectClean()
   }
@@ -238,6 +247,7 @@ class InvalidSingleLineCommentDetectorTest {
         ).indented()
       )
       .issues(ISSUE_INVALID_SINGLE_LINE_COMMENT)
+      .skipTestModes(TestMode.WHITESPACE)
       .run()
       .expectClean()
   }
@@ -252,6 +262,7 @@ class InvalidSingleLineCommentDetectorTest {
         ).indented()
       )
       .issues(ISSUE_INVALID_SINGLE_LINE_COMMENT)
+      .skipTestModes(TestMode.WHITESPACE)
       .run()
       .expectClean()
   }
@@ -272,6 +283,7 @@ class InvalidSingleLineCommentDetectorTest {
         ).indented()
       )
       .issues(ISSUE_INVALID_SINGLE_LINE_COMMENT)
+      .skipTestModes(TestMode.WHITESPACE)
       .run()
       .expectClean()
   }
@@ -291,6 +303,7 @@ class InvalidSingleLineCommentDetectorTest {
         ).indented()
       )
       .issues(ISSUE_INVALID_SINGLE_LINE_COMMENT)
+      .skipTestModes(TestMode.WHITESPACE)
       .run()
       .expectClean()
   }
@@ -312,6 +325,7 @@ class InvalidSingleLineCommentDetectorTest {
         )
       )
       .issues(ISSUE_INVALID_SINGLE_LINE_COMMENT)
+      .skipTestModes(TestMode.WHITESPACE)
       .run()
       .expect(
         """
@@ -347,6 +361,7 @@ class InvalidSingleLineCommentDetectorTest {
         )
       )
       .issues(ISSUE_INVALID_SINGLE_LINE_COMMENT)
+      .skipTestModes(TestMode.WHITESPACE)
       .run()
       .expect(
         """
@@ -378,6 +393,7 @@ class InvalidSingleLineCommentDetectorTest {
         ).indented()
       )
       .issues(ISSUE_INVALID_SINGLE_LINE_COMMENT)
+      .skipTestModes(TestMode.WHITESPACE)
       .run()
       .expect(
         """

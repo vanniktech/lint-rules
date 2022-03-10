@@ -17,7 +17,7 @@ import org.jetbrains.kotlin.psi.KtProperty
 import org.jetbrains.kotlin.util.capitalizeDecapitalize.toUpperCaseAsciiOnly
 import org.jetbrains.uast.UAnnotated
 import org.jetbrains.uast.UMethod
-import org.jetbrains.uast.kotlin.declarations.KotlinUMethod
+import org.jetbrains.uast.kotlin.KotlinUMethod
 import java.util.EnumSet
 
 val ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE = Issue.create(

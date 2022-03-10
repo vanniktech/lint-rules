@@ -3,14 +3,15 @@
 package com.vanniktech.lintrules.android
 
 import com.android.tools.lint.checks.infrastructure.TestFiles.java
+import com.android.tools.lint.checks.infrastructure.TestFiles.kotlin
 import com.android.tools.lint.checks.infrastructure.TestFiles.kt
 import com.android.tools.lint.checks.infrastructure.TestLintTask.lint
+import com.android.tools.lint.checks.infrastructure.TestMode
 import org.junit.Test
 
 @Suppress("Detekt.LargeClass") class AnnotationOrderDetectorTest {
   @Test fun noAnnotations() {
     lint()
-      .allowCompilationErrors()
       .files(
         java(
           """
@@ -24,13 +25,13 @@ import org.junit.Test
         ).indented()
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
+      .skipTestModes(TestMode.WHITESPACE)
       .run()
       .expectClean()
   }
 
   @Test fun overrideComesFirstOnVariables() {
     lint()
-      .allowCompilationErrors()
       .files(
         java(
           """
@@ -44,6 +45,7 @@ import org.junit.Test
         ).indented()
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
+      .skipTestModes(TestMode.WHITESPACE, TestMode.FULLY_QUALIFIED)
       .run()
       .expect(
         """
@@ -64,7 +66,6 @@ import org.junit.Test
 
   @Test fun overrideComesFirstOnFields() {
     lint()
-      .allowCompilationErrors()
       .files(
         java(
           """
@@ -76,6 +77,7 @@ import org.junit.Test
         ).indented()
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
+      .skipTestModes(TestMode.WHITESPACE, TestMode.FULLY_QUALIFIED)
       .run()
       .expect(
         """
@@ -88,7 +90,6 @@ import org.junit.Test
 
   @Test fun overrideComesFirstOnClass() {
     lint()
-      .allowCompilationErrors()
       .files(
         java(
           """
@@ -99,6 +100,7 @@ import org.junit.Test
         ).indented()
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
+      .skipTestModes(TestMode.WHITESPACE, TestMode.FULLY_QUALIFIED)
       .run()
       .expect(
         """
@@ -119,7 +121,6 @@ import org.junit.Test
 
   @Test fun overrideComesFirstOnParameters() {
     lint()
-      .allowCompilationErrors()
       .files(
         java(
           """
@@ -131,6 +132,7 @@ import org.junit.Test
         ).indented()
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
+      .skipTestModes(TestMode.WHITESPACE, TestMode.FULLY_QUALIFIED)
       .run()
       .expect(
         """
@@ -143,7 +145,6 @@ import org.junit.Test
 
   @Test fun overrideBeforeTest() {
     lint()
-      .allowCompilationErrors()
       .files(
         java(
           """
@@ -155,6 +156,7 @@ import org.junit.Test
         ).indented()
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
+      .skipTestModes(TestMode.WHITESPACE, TestMode.FULLY_QUALIFIED)
       .run()
       .expect(
         """
@@ -167,7 +169,6 @@ import org.junit.Test
 
   @Test fun nullableBeforeStringRes() {
     lint()
-      .allowCompilationErrors()
       .files(
         java(
           """
@@ -179,6 +180,7 @@ import org.junit.Test
         ).indented()
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
+      .skipTestModes(TestMode.WHITESPACE)
       .run()
       .expect(
         """
@@ -191,7 +193,6 @@ import org.junit.Test
 
   @Test fun testBeforeIgnore() {
     lint()
-      .allowCompilationErrors()
       .files(
         java(
           """
@@ -203,6 +204,7 @@ import org.junit.Test
         ).indented()
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
+      .skipTestModes(TestMode.WHITESPACE)
       .run()
       .expect(
         """
@@ -215,7 +217,6 @@ import org.junit.Test
 
   @Test fun deprecatedBeforeOverride() {
     lint()
-      .allowCompilationErrors()
       .files(
         java(
           """
@@ -227,6 +228,7 @@ import org.junit.Test
         ).indented()
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
+      .skipTestModes(TestMode.WHITESPACE, TestMode.FULLY_QUALIFIED)
       .run()
       .expect(
         """
@@ -239,7 +241,6 @@ import org.junit.Test
 
   @Test fun overrideBeforeSuppressWarnings() {
     lint()
-      .allowCompilationErrors()
       .files(
         kt(
           """
@@ -251,6 +252,7 @@ import org.junit.Test
         ).indented()
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
+      .skipTestModes(TestMode.WHITESPACE, TestMode.FULLY_QUALIFIED)
       .run()
       .expect(
         """
@@ -271,7 +273,6 @@ import org.junit.Test
 
   @Test fun bindsBeforeSingletonBeforeNonNull() {
     lint()
-      .allowCompilationErrors()
       .files(
         java(
           """
@@ -283,6 +284,7 @@ import org.junit.Test
         ).indented()
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
+      .skipTestModes(TestMode.WHITESPACE)
       .run()
       .expect(
         """
@@ -303,7 +305,6 @@ import org.junit.Test
 
   @Test fun singletonBeforeNonNullBeforeCustom() {
     lint()
-      .allowCompilationErrors()
       .files(
         java(
           """
@@ -315,6 +316,7 @@ import org.junit.Test
         ).indented()
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
+      .skipTestModes(TestMode.WHITESPACE)
       .run()
       .expect(
         """
@@ -335,7 +337,6 @@ import org.junit.Test
 
   @Test fun nullableBeforeNonNull() {
     lint()
-      .allowCompilationErrors()
       .files(
         java(
           """
@@ -347,6 +348,7 @@ import org.junit.Test
         ).indented()
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
+      .skipTestModes(TestMode.WHITESPACE)
       .run()
       .expect(
         """
@@ -359,7 +361,6 @@ import org.junit.Test
 
   @Test fun checkResultBeforeCheckReturnValue() {
     lint()
-      .allowCompilationErrors()
       .files(
         java(
           """
@@ -371,6 +372,7 @@ import org.junit.Test
         ).indented()
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
+      .skipTestModes(TestMode.WHITESPACE)
       .run()
       .expect(
         """
@@ -383,7 +385,6 @@ import org.junit.Test
 
   @Test fun injectBeforeNullable() {
     lint()
-      .allowCompilationErrors()
       .files(
         java(
           """
@@ -395,6 +396,7 @@ import org.junit.Test
         ).indented()
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
+      .skipTestModes(TestMode.WHITESPACE)
       .run()
       .expect(
         """
@@ -407,7 +409,6 @@ import org.junit.Test
 
   @Test fun injectBeforeNonNull() {
     lint()
-      .allowCompilationErrors()
       .files(
         java(
           """
@@ -419,6 +420,7 @@ import org.junit.Test
         ).indented()
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
+      .skipTestModes(TestMode.WHITESPACE)
       .run()
       .expect(
         """
@@ -431,7 +433,6 @@ import org.junit.Test
 
   @Test fun singletonBeforeComponent() {
     lint()
-      .allowCompilationErrors()
       .files(
         java(
           """
@@ -442,6 +443,7 @@ import org.junit.Test
         ).indented()
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
+      .skipTestModes(TestMode.WHITESPACE)
       .run()
       .expect(
         """
@@ -454,7 +456,6 @@ import org.junit.Test
 
   @Test fun suppressWarningsBeforeModule() {
     lint()
-      .allowCompilationErrors()
       .files(
         java(
           """
@@ -465,6 +466,7 @@ import org.junit.Test
         ).indented()
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
+      .skipTestModes(TestMode.WHITESPACE, TestMode.FULLY_QUALIFIED)
       .run()
       .expect(
         """
@@ -477,7 +479,6 @@ import org.junit.Test
 
   @Test fun assistedModuleBeforeModule() {
     lint()
-      .allowCompilationErrors()
       .files(
         java(
           """
@@ -488,13 +489,13 @@ import org.junit.Test
         ).indented()
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
+      .skipTestModes(TestMode.WHITESPACE)
       .run()
       .expectClean()
   }
 
   @Test fun injectBeforeCustom() {
     lint()
-      .allowCompilationErrors()
       .files(
         java(
           """
@@ -506,6 +507,7 @@ import org.junit.Test
         ).indented()
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
+      .skipTestModes(TestMode.WHITESPACE)
       .run()
       .expect(
         """
@@ -518,7 +520,6 @@ import org.junit.Test
 
   @Test fun checkReturnValueBeforeAuthenticatedBeforePost() {
     lint()
-      .allowCompilationErrors()
       .files(
         kt(
           """
@@ -530,13 +531,13 @@ import org.junit.Test
         ).indented()
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
+      .skipTestModes(TestMode.WHITESPACE)
       .run()
       .expectClean()
   }
 
   @Test fun jsonBeforeJsonQualifier() {
     lint()
-      .allowCompilationErrors()
       .files(
         java(
           """
@@ -548,6 +549,7 @@ import org.junit.Test
         ).indented()
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
+      .skipTestModes(TestMode.WHITESPACE)
       .run()
       .expect(
         """
@@ -560,7 +562,6 @@ import org.junit.Test
 
   @Test fun nullableJsonJsonQualifierNegativeCase() {
     lint()
-      .allowCompilationErrors()
       .files(
         java(
           """
@@ -572,13 +573,13 @@ import org.junit.Test
         ).indented()
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
+      .skipTestModes(TestMode.WHITESPACE)
       .run()
       .expectClean()
   }
 
   @Test fun jvmStaticProvidesSingletonNamedNullable() {
     lint()
-      .allowCompilationErrors()
       .files(
         java(
           """
@@ -590,13 +591,13 @@ import org.junit.Test
         ).indented()
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
+      .skipTestModes(TestMode.WHITESPACE)
       .run()
       .expectClean()
   }
 
   @Test fun documentedBeforeRetention() {
     lint()
-      .allowCompilationErrors()
       .files(
         java(
           """
@@ -608,6 +609,7 @@ import org.junit.Test
         ).indented()
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
+      .skipTestModes(TestMode.WHITESPACE)
       .run()
       .expect(
         """
@@ -620,7 +622,6 @@ import org.junit.Test
 
   @Test fun nullableBeforeJson() {
     lint()
-      .allowCompilationErrors()
       .files(
         java(
           """
@@ -632,6 +633,7 @@ import org.junit.Test
         ).indented()
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
+      .skipTestModes(TestMode.WHITESPACE)
       .run()
       .expect(
         """
@@ -644,7 +646,6 @@ import org.junit.Test
 
   @Test fun retentionBeforeIntDef() {
     lint()
-      .allowCompilationErrors()
       .files(
         java(
           """
@@ -656,6 +657,7 @@ import org.junit.Test
         ).indented()
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
+      .skipTestModes(TestMode.WHITESPACE)
       .run()
       .expect(
         """
@@ -668,7 +670,6 @@ import org.junit.Test
 
   @Test fun suppressBeforeSuppressLintBeforeSuppressWarnings() {
     lint()
-      .allowCompilationErrors()
       .files(
         java(
           """
@@ -680,6 +681,7 @@ import org.junit.Test
         ).indented()
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
+      .skipTestModes(TestMode.WHITESPACE, TestMode.FULLY_QUALIFIED)
       .run()
       .expect(
         """
@@ -692,7 +694,6 @@ import org.junit.Test
 
   @Test fun restrictToBeforeKeepBeforeTargetApi() {
     lint()
-      .allowCompilationErrors()
       .files(
         java(
           """
@@ -704,6 +705,7 @@ import org.junit.Test
         ).indented()
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
+      .skipTestModes(TestMode.WHITESPACE)
       .run()
       .expect(
         """
@@ -716,7 +718,6 @@ import org.junit.Test
 
   @Test fun bindsBeforeIntoMapBeforeActivityKey() {
     lint()
-      .allowCompilationErrors()
       .files(
         java(
           """
@@ -728,6 +729,7 @@ import org.junit.Test
         ).indented()
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
+      .skipTestModes(TestMode.WHITESPACE)
       .run()
       .expect(
         """
@@ -740,7 +742,6 @@ import org.junit.Test
 
   @Test fun kotlinAnnotationClass() {
     lint()
-      .allowCompilationErrors()
       .files(
         kt(
           """
@@ -750,13 +751,13 @@ import org.junit.Test
         ).indented()
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
+      .skipTestModes(TestMode.WHITESPACE)
       .run()
       .expectClean()
   }
 
   @Test fun kotlinAnnotationClassWithRetention() {
     lint()
-      .allowCompilationErrors()
       .files(
         kt(
           """
@@ -768,13 +769,13 @@ import org.junit.Test
         ).indented()
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
+      .skipTestModes(TestMode.WHITESPACE)
       .run()
       .expectClean()
   }
 
   @Test fun bindsBeforeIntoMapBeforeActivityKeyNegativeCase() {
     lint()
-      .allowCompilationErrors()
       .files(
         java(
           """
@@ -786,13 +787,13 @@ import org.junit.Test
         ).indented()
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
+      .skipTestModes(TestMode.WHITESPACE)
       .run()
       .expectClean()
   }
 
   @Test fun restrictToBeforeKeepNegativeCase() {
     lint()
-      .allowCompilationErrors()
       .files(
         java(
           """
@@ -804,13 +805,13 @@ import org.junit.Test
         ).indented()
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
+      .skipTestModes(TestMode.WHITESPACE)
       .run()
       .expectClean()
   }
 
   @Test fun singleCustomAnnotation() {
     lint()
-      .allowCompilationErrors()
       .files(
         java(
           """
@@ -822,13 +823,13 @@ import org.junit.Test
         ).indented()
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
+      .skipTestModes(TestMode.WHITESPACE)
       .run()
       .expectClean()
   }
 
   @Test fun twoCustomsAnnotation() {
     lint()
-      .allowCompilationErrors()
       .files(
         java(
           """
@@ -840,6 +841,7 @@ import org.junit.Test
         ).indented()
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
+      .skipTestModes(TestMode.WHITESPACE)
       .run()
       .expectClean()
   }
@@ -861,6 +863,7 @@ import org.junit.Test
         ).indented()
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
+      .skipTestModes(TestMode.WHITESPACE)
       .run()
       .expectClean()
   }
