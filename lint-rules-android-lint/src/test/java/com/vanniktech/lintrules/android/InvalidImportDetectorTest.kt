@@ -14,7 +14,8 @@ class InvalidImportDetectorTest {
       public final class R {
         public static final class drawable {
         }
-      }"""
+      }
+    """
   ).indented()
 
   private val internal = java(
@@ -22,7 +23,8 @@ class InvalidImportDetectorTest {
       package com.foo.internal;
 
       public final class Foo {
-      }"""
+      }
+    """
   ).indented()
 
   @Test fun normalRImport() {
@@ -36,7 +38,8 @@ class InvalidImportDetectorTest {
           import foo.R;
 
           class Example {
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_INVALID_IMPORT)
@@ -55,7 +58,8 @@ class InvalidImportDetectorTest {
           import foo.R.drawable;
 
           class Example {
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_INVALID_IMPORT)
@@ -65,7 +69,8 @@ class InvalidImportDetectorTest {
           |src/foo/Example.java:3: Warning: Forbidden import [InvalidImport]
           |import foo.R.drawable;
           |       ~~~~~~~~~~~~~~
-          |0 errors, 1 warnings""".trimMargin()
+          |0 errors, 1 warnings
+        """.trimMargin()
       )
   }
 
@@ -80,7 +85,8 @@ class InvalidImportDetectorTest {
           import com.foo.internal.Foo;
 
           class Example {
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_INVALID_IMPORT)
@@ -90,7 +96,8 @@ class InvalidImportDetectorTest {
           |src/foo/Example.java:3: Warning: Forbidden import [InvalidImport]
           |import com.foo.internal.Foo;
           |       ~~~~~~~~~~~~~~~~~~~~
-          |0 errors, 1 warnings""".trimMargin()
+          |0 errors, 1 warnings
+        """.trimMargin()
       )
   }
 
@@ -105,7 +112,8 @@ class InvalidImportDetectorTest {
           import com.foo.internal.Foo;
 
           class Example {
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_INVALID_IMPORT)
@@ -126,7 +134,8 @@ class InvalidImportDetectorTest {
           import com.squareup.sqldelight.internal.copyOnWriteList;
 
           class Example {
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_INVALID_IMPORT)

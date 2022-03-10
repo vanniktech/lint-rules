@@ -14,7 +14,8 @@ class AndroidDetectorTest {
         public void getDrawable(int id) {}
         public void getColor(int id) {}
         public void getColorStateList(int id) {}
-      }"""
+      }
+    """
   ).indented()
 
   @Test fun callingGetDrawable() {
@@ -30,7 +31,8 @@ class AndroidDetectorTest {
               Resources resources = null;
               resources.getDrawable(0);
             }
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_RESOURCES_GET_DRAWABLE)
@@ -40,7 +42,8 @@ class AndroidDetectorTest {
           |src/foo/Example.java:6: Warning: Calling deprecated getDrawable [ResourcesGetDrawableCall]
           |    resources.getDrawable(0);
           |              ~~~~~~~~~~~
-          |0 errors, 1 warnings""".trimMargin()
+          |0 errors, 1 warnings
+        """.trimMargin()
       )
   }
 
@@ -57,7 +60,8 @@ class AndroidDetectorTest {
               Resources resources = null;
               resources.getColor(0);
             }
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_RESOURCES_GET_COLOR)
@@ -67,7 +71,8 @@ class AndroidDetectorTest {
           |src/foo/Example.java:6: Warning: Calling deprecated getColor [ResourcesGetColorCall]
           |    resources.getColor(0);
           |              ~~~~~~~~
-          |0 errors, 1 warnings""".trimMargin()
+          |0 errors, 1 warnings
+        """.trimMargin()
       )
   }
 
@@ -84,7 +89,8 @@ class AndroidDetectorTest {
               Resources resources = null;
               resources.getColorStateList(0);
             }
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_RESOURCES_GET_COLOR_STATE_LIST)
@@ -94,7 +100,8 @@ class AndroidDetectorTest {
           |src/foo/Example.java:6: Warning: Calling deprecated getColorStateList [ResourcesGetColorStateListCall]
           |    resources.getColorStateList(0);
           |              ~~~~~~~~~~~~~~~~~
-          |0 errors, 1 warnings""".trimMargin()
+          |0 errors, 1 warnings
+        """.trimMargin()
       )
   }
 }

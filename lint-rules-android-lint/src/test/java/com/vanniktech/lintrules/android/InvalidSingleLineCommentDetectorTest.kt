@@ -6,6 +6,7 @@ import com.android.tools.lint.checks.infrastructure.TestFiles.gradle
 import com.android.tools.lint.checks.infrastructure.TestFiles.java
 import com.android.tools.lint.checks.infrastructure.TestFiles.kt
 import com.android.tools.lint.checks.infrastructure.TestLintTask.lint
+import com.android.tools.lint.checks.infrastructure.TestMode
 import org.junit.Test
 
 class InvalidSingleLineCommentDetectorTest {
@@ -20,17 +21,20 @@ class InvalidSingleLineCommentDetectorTest {
             public void foo() {
               //Something.
             }
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_INVALID_SINGLE_LINE_COMMENT)
+      .skipTestModes(TestMode.WHITESPACE)
       .run()
       .expect(
         """
           |src/foo/Example.java:5: Warning: Comment does not contain a space at the beginning [InvalidSingleLineComment]
           |    //Something.
           |    ~~~
-          |0 errors, 1 warnings""".trimMargin()
+          |0 errors, 1 warnings
+        """.trimMargin()
       )
       .expectFixDiffs(
         """
@@ -38,7 +42,8 @@ class InvalidSingleLineCommentDetectorTest {
           |@@ -5 +5
           |-     //Something.
           |+     // Something.
-          |""".trimMargin()
+          |
+        """.trimMargin()
       )
   }
 
@@ -53,17 +58,20 @@ class InvalidSingleLineCommentDetectorTest {
             public void foo() {
               // something.
             }
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_INVALID_SINGLE_LINE_COMMENT)
+      .skipTestModes(TestMode.WHITESPACE)
       .run()
       .expect(
         """
           |src/foo/Example.java:5: Warning: Comments first word should be capitalized [InvalidSingleLineComment]
           |    // something.
           |       ^
-          |0 errors, 1 warnings""".trimMargin()
+          |0 errors, 1 warnings
+        """.trimMargin()
       )
       .expectFixDiffs(
         """
@@ -71,7 +79,8 @@ class InvalidSingleLineCommentDetectorTest {
           |@@ -5 +5
           |-     // something.
           |+     // Something.
-          |""".trimMargin()
+          |
+        """.trimMargin()
       )
   }
 
@@ -86,17 +95,20 @@ class InvalidSingleLineCommentDetectorTest {
             public void foo() {
               // Something
             }
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_INVALID_SINGLE_LINE_COMMENT)
+      .skipTestModes(TestMode.WHITESPACE)
       .run()
       .expect(
         """
           |src/foo/Example.java:5: Warning: Comment does not end with a period [InvalidSingleLineComment]
           |    // Something
           |    ~~~~~~~~~~~~
-          |0 errors, 1 warnings""".trimMargin()
+          |0 errors, 1 warnings
+        """.trimMargin()
       )
       .expectFixDiffs(
         """
@@ -104,7 +116,8 @@ class InvalidSingleLineCommentDetectorTest {
           |@@ -5 +5
           |-     // Something
           |+     // Something.
-          |""".trimMargin()
+          |
+        """.trimMargin()
       )
   }
 
@@ -123,10 +136,12 @@ class InvalidSingleLineCommentDetectorTest {
               // Something. (Do not modify)
               // Something. In the range of [0..100]
             }
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_INVALID_SINGLE_LINE_COMMENT)
+      .skipTestModes(TestMode.WHITESPACE)
       .run()
       .expectClean()
   }
@@ -142,17 +157,20 @@ class InvalidSingleLineCommentDetectorTest {
             public void foo() {
               int foo = 5 + 5;// Something.
             }
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_INVALID_SINGLE_LINE_COMMENT)
+      .skipTestModes(TestMode.WHITESPACE)
       .run()
       .expect(
         """
           |src/foo/Example.java:5: Warning: Comment declaration is not preceded by a single space [InvalidSingleLineComment]
           |    int foo = 5 + 5;// Something.
           |                   ~~~
-          |0 errors, 1 warnings""".trimMargin()
+          |0 errors, 1 warnings
+        """.trimMargin()
       )
       .expectFixDiffs(
         """
@@ -160,7 +178,8 @@ class InvalidSingleLineCommentDetectorTest {
           |@@ -5 +5
           |-     int foo = 5 + 5;// Something.
           |+     int foo = 5 + 5; // Something.
-          |""".trimMargin()
+          |
+        """.trimMargin()
       )
   }
 
@@ -177,10 +196,12 @@ class InvalidSingleLineCommentDetectorTest {
               String link2 = "http://android.com/";
               String link3 = "market://details?id=5";
             }
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_INVALID_SINGLE_LINE_COMMENT)
+      .skipTestModes(TestMode.WHITESPACE)
       .run()
       .expectClean()
   }
@@ -196,10 +217,12 @@ class InvalidSingleLineCommentDetectorTest {
             public void foo() {
               // NOPMD
             }
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_INVALID_SINGLE_LINE_COMMENT)
+      .skipTestModes(TestMode.WHITESPACE)
       .run()
       .expectClean()
   }
@@ -215,10 +238,12 @@ class InvalidSingleLineCommentDetectorTest {
             public void foo() {
               // 2 plus 4 equals 6.
             }
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_INVALID_SINGLE_LINE_COMMENT)
+      .skipTestModes(TestMode.WHITESPACE)
       .run()
       .expectClean()
   }
@@ -234,10 +259,12 @@ class InvalidSingleLineCommentDetectorTest {
             public void foo() {
               //noinspection
             }
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_INVALID_SINGLE_LINE_COMMENT)
+      .skipTestModes(TestMode.WHITESPACE)
       .run()
       .expectClean()
   }
@@ -248,10 +275,11 @@ class InvalidSingleLineCommentDetectorTest {
         kt(
           """
            private const val COMMENT = "//"
-           """
+          """
         ).indented()
       )
       .issues(ISSUE_INVALID_SINGLE_LINE_COMMENT)
+      .skipTestModes(TestMode.WHITESPACE)
       .run()
       .expectClean()
   }
@@ -268,10 +296,12 @@ class InvalidSingleLineCommentDetectorTest {
               // http://stackoverflow.com/a/38480079
               // This is expected. http://stackoverflow.com/a/38480079
             }
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_INVALID_SINGLE_LINE_COMMENT)
+      .skipTestModes(TestMode.WHITESPACE)
       .run()
       .expectClean()
   }
@@ -287,10 +317,12 @@ class InvalidSingleLineCommentDetectorTest {
             public void foo() {
               //
             }
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_INVALID_SINGLE_LINE_COMMENT)
+      .skipTestModes(TestMode.WHITESPACE)
       .run()
       .expectClean()
   }
@@ -307,18 +339,21 @@ class InvalidSingleLineCommentDetectorTest {
             public void foo() {
               //
             }
-          }"""
+          }
+            """
           ).indented().contents.replace("//", "// ")
         )
       )
       .issues(ISSUE_INVALID_SINGLE_LINE_COMMENT)
+      .skipTestModes(TestMode.WHITESPACE)
       .run()
       .expect(
         """
           |src/foo/Example.java:5: Warning: Comment contains trailing whitespace [InvalidSingleLineComment]
           |    //
           |    ~~~
-          |0 errors, 1 warnings""".trimMargin().replace("//", "// ")
+          |0 errors, 1 warnings
+        """.trimMargin().replace("//", "// ")
       )
       .expectFixDiffs(
         """
@@ -326,7 +361,8 @@ class InvalidSingleLineCommentDetectorTest {
           |@@ -5 +5
           |-     //
           |+     //
-          |""".trimMargin().replace("-     //", "-     // ")
+          |
+        """.trimMargin().replace("-     //", "-     // ")
       )
   }
 
@@ -342,18 +378,21 @@ class InvalidSingleLineCommentDetectorTest {
             public void foo() {
               // Something.
             }
-          }"""
+          }
+            """
           ).indented().contents.replace("// Something.", "// Something. ")
         )
       )
       .issues(ISSUE_INVALID_SINGLE_LINE_COMMENT)
+      .skipTestModes(TestMode.WHITESPACE)
       .run()
       .expect(
         """
           |src/foo/Example.java:5: Warning: Comment contains trailing whitespace [InvalidSingleLineComment]
           |    // Something.
           |    ~~~~~~~~~~~~~~
-          |0 errors, 1 warnings""".trimMargin().replace("// Something.", "// Something. ")
+          |0 errors, 1 warnings
+        """.trimMargin().replace("// Something.", "// Something. ")
       )
       .expectFixDiffs(
         """
@@ -361,7 +400,8 @@ class InvalidSingleLineCommentDetectorTest {
           |@@ -5 +5
           |-     // Something.
           |+     // Something.
-          |""".trimMargin().replace("-     // Something.", "-     // Something. ")
+          |
+        """.trimMargin().replace("-     // Something.", "-     // Something. ")
       )
   }
 
@@ -374,17 +414,20 @@ class InvalidSingleLineCommentDetectorTest {
             repositories {
               mavenCentral() // we need this.
             }
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_INVALID_SINGLE_LINE_COMMENT)
+      .skipTestModes(TestMode.WHITESPACE)
       .run()
       .expect(
         """
           |build.gradle:3: Warning: Comments first word should be capitalized [InvalidSingleLineComment]
           |    mavenCentral() // we need this.
           |                      ^
-          |0 errors, 1 warnings""".trimMargin()
+          |0 errors, 1 warnings
+        """.trimMargin()
       )
       .expectFixDiffs(
         """
@@ -392,7 +435,8 @@ class InvalidSingleLineCommentDetectorTest {
           |@@ -3 +3
           |-     mavenCentral() // we need this.
           |+     mavenCentral() // We need this.
-          |""".trimMargin()
+          |
+        """.trimMargin()
       )
   }
 }

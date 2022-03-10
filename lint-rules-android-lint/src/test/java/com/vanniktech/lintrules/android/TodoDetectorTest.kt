@@ -19,7 +19,8 @@ class TodoDetectorTest {
 
             class Example {
               // TODO: something
-            }"""
+            }
+          """
         ).indented()
       )
       .issues(ISSUE_TODO)
@@ -29,7 +30,8 @@ class TodoDetectorTest {
             |src/foo/Example.java:4: Error: Contains todo [Todo]
             |  // TODO: something
             |     ~~~~~~~~~~~~~~~
-            |1 errors, 0 warnings""".trimMargin()
+            |1 errors, 0 warnings
+        """.trimMargin()
       )
   }
 
@@ -41,7 +43,8 @@ class TodoDetectorTest {
           """
             <TextView xmlns:android="http://schemas.android.com/apk/res/android"
                 android:text="Blub!"/>
-            <!-- TODO: Fix blub. -->"""
+            <!-- TODO: Fix blub. -->
+          """
         ).indented()
       )
       .issues(ISSUE_TODO)
@@ -51,7 +54,8 @@ class TodoDetectorTest {
             |res/layout/layout.xml:3: Error: Contains todo [Todo]
             |<!-- TODO: Fix blub. -->
             |     ~~~~~~~~~~~~~~~~~~~
-            |1 errors, 0 warnings""".trimMargin()
+            |1 errors, 0 warnings
+        """.trimMargin()
       )
   }
 
@@ -64,7 +68,8 @@ class TodoDetectorTest {
               repositories {
                 mavenCentral() // TODO: we should remove it.
               }
-            }"""
+            }
+          """
         ).indented()
       )
       .issues(ISSUE_TODO)
@@ -74,7 +79,8 @@ class TodoDetectorTest {
             |build.gradle:3: Error: Contains todo [Todo]
             |    mavenCentral() // TODO: we should remove it.
             |                      ~~~~~~~~~~~~~~~~~~~~~~~~~~
-            |1 errors, 0 warnings""".trimMargin()
+            |1 errors, 0 warnings
+        """.trimMargin()
       )
   }
 
@@ -84,7 +90,8 @@ class TodoDetectorTest {
         manifest().withSource(
           """
             <!-- TODO: Something. -->
-            <manifest package="com.vanniktech.lintrulesandroid"/>"""
+            <manifest package="com.vanniktech.lintrulesandroid"/>
+          """
         ).indented()
       )
       .issues(ISSUE_TODO)
@@ -94,7 +101,8 @@ class TodoDetectorTest {
             |AndroidManifest.xml:1: Error: Contains todo [Todo]
             |<!-- TODO: Something. -->
             |     ~~~~~~~~~~~~~~~~~~~~
-            |1 errors, 0 warnings""".trimMargin()
+            |1 errors, 0 warnings
+        """.trimMargin()
       )
   }
 }

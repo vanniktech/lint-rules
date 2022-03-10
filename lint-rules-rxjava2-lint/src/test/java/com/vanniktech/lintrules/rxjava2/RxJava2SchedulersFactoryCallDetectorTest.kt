@@ -24,7 +24,8 @@ class RxJava2SchedulersFactoryCallDetectorTest {
             @Provides Scheduler provideSchedulerIo() {
               return Schedulers.io();
             }
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_RAW_SCHEDULER_CALL)
@@ -48,7 +49,8 @@ class RxJava2SchedulersFactoryCallDetectorTest {
             @SchedulerSupport("io") Scheduler provideSchedulerIo() {
               return Schedulers.io();
             }
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_RAW_SCHEDULER_CALL)
@@ -72,7 +74,8 @@ class RxJava2SchedulersFactoryCallDetectorTest {
             @CheckReturnValue Scheduler provideSchedulerIo() {
               return Schedulers.io();
             }
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_RAW_SCHEDULER_CALL)
@@ -83,7 +86,7 @@ class RxJava2SchedulersFactoryCallDetectorTest {
           |    return Schedulers.io();
           |                      ~~
           |0 errors, 1 warnings
-          """.trimMargin()
+        """.trimMargin()
       )
   }
 
@@ -101,7 +104,8 @@ class RxJava2SchedulersFactoryCallDetectorTest {
             fun test() {
               Schedulers.io()
             }
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_RAW_SCHEDULER_CALL)
@@ -112,7 +116,7 @@ class RxJava2SchedulersFactoryCallDetectorTest {
           |    Schedulers.io()
           |               ~~
           |0 errors, 1 warnings
-          """.trimMargin()
+        """.trimMargin()
       )
   }
 
@@ -130,7 +134,8 @@ class RxJava2SchedulersFactoryCallDetectorTest {
             void test() {
               Schedulers.computation();
             }
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_RAW_SCHEDULER_CALL)
@@ -141,7 +146,7 @@ class RxJava2SchedulersFactoryCallDetectorTest {
           |    Schedulers.computation();
           |               ~~~~~~~~~~~
           |0 errors, 1 warnings
-          """.trimMargin()
+        """.trimMargin()
       )
   }
 
@@ -159,7 +164,8 @@ class RxJava2SchedulersFactoryCallDetectorTest {
             void test() {
               Schedulers.newThread();
             }
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_RAW_SCHEDULER_CALL)
@@ -170,7 +176,7 @@ class RxJava2SchedulersFactoryCallDetectorTest {
           |    Schedulers.newThread();
           |               ~~~~~~~~~
           |0 errors, 1 warnings
-          """.trimMargin()
+        """.trimMargin()
       )
   }
 
@@ -188,7 +194,8 @@ class RxJava2SchedulersFactoryCallDetectorTest {
             void test() {
               Schedulers.single();
             }
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_RAW_SCHEDULER_CALL)
@@ -199,7 +206,7 @@ class RxJava2SchedulersFactoryCallDetectorTest {
           |    Schedulers.single();
           |               ~~~~~~
           |0 errors, 1 warnings
-          """.trimMargin()
+        """.trimMargin()
       )
   }
 
@@ -217,7 +224,8 @@ class RxJava2SchedulersFactoryCallDetectorTest {
             void test() {
               Schedulers.from(null);
             }
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_RAW_SCHEDULER_CALL)
@@ -228,7 +236,7 @@ class RxJava2SchedulersFactoryCallDetectorTest {
           |    Schedulers.from(null);
           |               ~~~~
           |0 errors, 1 warnings
-          """.trimMargin()
+        """.trimMargin()
       )
   }
 
@@ -246,7 +254,8 @@ class RxJava2SchedulersFactoryCallDetectorTest {
             void test() {
               AndroidSchedulers.mainThread();
             }
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_RAW_SCHEDULER_CALL)
@@ -257,7 +266,7 @@ class RxJava2SchedulersFactoryCallDetectorTest {
           |    AndroidSchedulers.mainThread();
           |                      ~~~~~~~~~~
           |0 errors, 1 warnings
-          """.trimMargin()
+        """.trimMargin()
       )
   }
 
@@ -273,7 +282,8 @@ class RxJava2SchedulersFactoryCallDetectorTest {
             private val something by lazy { from() }
 
             fun from() = 5
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_RAW_SCHEDULER_CALL)

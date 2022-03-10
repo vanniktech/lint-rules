@@ -13,7 +13,8 @@ class RawDimenDetectorTest {
         xml(
           "res/layout/ids.xml",
           """
-          <TextView xmlns:tools="http://schemas.android.com/tools" tools:layout_margin="16dp"/>"""
+          <TextView xmlns:tools="http://schemas.android.com/tools" tools:layout_margin="16dp"/>
+          """
         ).indented()
       )
       .issues(ISSUE_RAW_DIMEN)
@@ -27,7 +28,8 @@ class RawDimenDetectorTest {
         xml(
           "res/layout/ids.xml",
           """
-          <TextView xmlns:app="http://schemas.android.com/apk/res-auto" app:someCustomAttribute="16dp"/>"""
+          <TextView xmlns:app="http://schemas.android.com/apk/res-auto" app:someCustomAttribute="16dp"/>
+          """
         ).indented()
       )
       .issues(ISSUE_RAW_DIMEN)
@@ -37,7 +39,8 @@ class RawDimenDetectorTest {
           |res/layout/ids.xml:1: Warning: Should be using a dimension resource instead. [RawDimen]
           |<TextView xmlns:app="http://schemas.android.com/apk/res-auto" app:someCustomAttribute="16dp"/>
           |                                                                                       ~~~~
-          |0 errors, 1 warnings""".trimMargin()
+          |0 errors, 1 warnings
+        """.trimMargin()
       )
   }
 
@@ -47,7 +50,8 @@ class RawDimenDetectorTest {
         xml(
           "res/layout/ids.xml",
           """
-          <TextView xmlns:app="http://schemas.android.com/apk/res-auto" app:behavior_peekHeight="0dp"/>"""
+          <TextView xmlns:app="http://schemas.android.com/apk/res-auto" app:behavior_peekHeight="0dp"/>
+          """
         ).indented()
       )
       .issues(ISSUE_RAW_DIMEN)
@@ -62,14 +66,16 @@ class RawDimenDetectorTest {
           "res/layout/ids.xml",
           """
           <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_margin="16dp"/>"""
+             android:layout_margin="16dp"/>
+          """
         ).indented(),
         xml(
           "res/values/dimens.xml",
           """
           <resources>
            <dimen name="content_margin">16dp</dimen>
-          </resources>"""
+          </resources>
+          """
         ).indented()
       )
       .issues(ISSUE_RAW_DIMEN)
@@ -79,7 +85,8 @@ class RawDimenDetectorTest {
           |res/layout/ids.xml:2: Warning: Should be using a dimension resource instead. [RawDimen]
           |   android:layout_margin="16dp"/>
           |                          ~~~~
-          |0 errors, 1 warnings""".trimMargin()
+          |0 errors, 1 warnings
+        """.trimMargin()
       )
       .expectFixDiffs(
         """
@@ -88,7 +95,8 @@ class RawDimenDetectorTest {
           |-    android:layout_margin="16dp"/>
           |@@ -3 +2
           |+    android:layout_margin="@dimen/content_margin"/>
-          |""".trimMargin()
+          |
+        """.trimMargin()
       )
   }
 
@@ -101,7 +109,8 @@ class RawDimenDetectorTest {
           <TextView xmlns:android="http://schemas.android.com/apk/res/android"
              xmlns:tools="http://schemas.android.com/tools"
              tools:ignore="RawDimen"
-             android:layout_margin="16dp"/>"""
+             android:layout_margin="16dp"/>
+          """
         ).indented()
       )
       .issues(ISSUE_RAW_DIMEN)
@@ -120,7 +129,8 @@ class RawDimenDetectorTest {
               android:shape="rectangle">
             <solid android:color="#1aeebf"/>
             <size android:height="4dp"/>
-          </shape>"""
+          </shape>
+          """
         ).indented()
       )
       .issues(ISSUE_RAW_DIMEN)
@@ -130,7 +140,8 @@ class RawDimenDetectorTest {
           |res/drawable/drawable.xml:5: Warning: Should be using a dimension resource instead. [RawDimen]
           |  <size android:height="4dp"/>
           |                        ~~~
-          |0 errors, 1 warnings""".trimMargin()
+          |0 errors, 1 warnings
+        """.trimMargin()
       )
   }
 
@@ -140,7 +151,8 @@ class RawDimenDetectorTest {
         xml(
           "res/layout/ids.xml",
           """
-          <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="0dp"/>"""
+          <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="0dp"/>
+          """
         ).indented()
       )
       .issues(ISSUE_RAW_DIMEN)
@@ -150,7 +162,8 @@ class RawDimenDetectorTest {
           |res/layout/ids.xml:1: Warning: Should be using a dimension resource instead. [RawDimen]
           |<TextView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="0dp"/>
           |                                                                                           ~~~
-          |0 errors, 1 warnings""".trimMargin()
+          |0 errors, 1 warnings
+        """.trimMargin()
       )
   }
 
@@ -160,7 +173,8 @@ class RawDimenDetectorTest {
         xml(
           "res/layout/ids.xml",
           """
-          <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="0dp" android:layout_weight="1"/>"""
+          <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="0dp" android:layout_weight="1"/>
+          """
         ).indented()
       )
       .issues(ISSUE_RAW_DIMEN)
@@ -174,7 +188,8 @@ class RawDimenDetectorTest {
         xml(
           "res/layout/ids.xml",
           """
-          <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_height="0dp"/>"""
+          <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_height="0dp"/>
+          """
         ).indented()
       )
       .issues(ISSUE_RAW_DIMEN)
@@ -184,7 +199,8 @@ class RawDimenDetectorTest {
           |res/layout/ids.xml:1: Warning: Should be using a dimension resource instead. [RawDimen]
           |<TextView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_height="0dp"/>
           |                                                                                            ~~~
-          |0 errors, 1 warnings""".trimMargin()
+          |0 errors, 1 warnings
+        """.trimMargin()
       )
   }
 
@@ -194,7 +210,8 @@ class RawDimenDetectorTest {
         xml(
           "res/layout/ids.xml",
           """
-          <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_height="0dp" android:layout_weight="1"/>"""
+          <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_height="0dp" android:layout_weight="1"/>
+          """
         ).indented()
       )
       .issues(ISSUE_RAW_DIMEN)
@@ -208,7 +225,8 @@ class RawDimenDetectorTest {
         xml(
           "res/layout/ids.xml",
           """
-          <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:minHeight="0dp"/>"""
+          <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:minHeight="0dp"/>
+          """
         ).indented()
       )
       .issues(ISSUE_RAW_DIMEN)
@@ -222,7 +240,8 @@ class RawDimenDetectorTest {
         xml(
           "res/layout/ids.xml",
           """
-          <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:minWidth="0dp"/>"""
+          <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:minWidth="0dp"/>
+          """
         ).indented()
       )
       .issues(ISSUE_RAW_DIMEN)
@@ -236,7 +255,8 @@ class RawDimenDetectorTest {
         xml(
           "res/layout/ids.xml",
           """
-          <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="16dp"/>"""
+          <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="16dp"/>
+          """
         ).indented()
       )
       .issues(ISSUE_RAW_DIMEN)
@@ -246,7 +266,8 @@ class RawDimenDetectorTest {
           |res/layout/ids.xml:1: Warning: Should be using a dimension resource instead. [RawDimen]
           |<TextView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="16dp"/>
           |                                                                                           ~~~~
-          |0 errors, 1 warnings""".trimMargin()
+          |0 errors, 1 warnings
+        """.trimMargin()
       )
   }
 
@@ -256,7 +277,8 @@ class RawDimenDetectorTest {
         xml(
           "res/layout/ids.xml",
           """
-          <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_height="16dp"/>"""
+          <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_height="16dp"/>
+          """
         ).indented()
       )
       .issues(ISSUE_RAW_DIMEN)
@@ -266,7 +288,8 @@ class RawDimenDetectorTest {
           |res/layout/ids.xml:1: Warning: Should be using a dimension resource instead. [RawDimen]
           |<TextView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_height="16dp"/>
           |                                                                                            ~~~~
-          |0 errors, 1 warnings""".trimMargin()
+          |0 errors, 1 warnings
+        """.trimMargin()
       )
   }
 
@@ -276,7 +299,8 @@ class RawDimenDetectorTest {
         xml(
           "res/layout/ids.xml",
           """
-          <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_margin="16dp"/>"""
+          <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_margin="16dp"/>
+          """
         ).indented()
       )
       .issues(ISSUE_RAW_DIMEN)
@@ -286,7 +310,8 @@ class RawDimenDetectorTest {
           |res/layout/ids.xml:1: Warning: Should be using a dimension resource instead. [RawDimen]
           |<TextView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_margin="16dp"/>
           |                                                                                            ~~~~
-          |0 errors, 1 warnings""".trimMargin()
+          |0 errors, 1 warnings
+        """.trimMargin()
       )
   }
 
@@ -296,7 +321,8 @@ class RawDimenDetectorTest {
         xml(
           "res/layout/ids.xml",
           """
-          <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_margin="0.5dp"/>"""
+          <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_margin="0.5dp"/>
+          """
         ).indented()
       )
       .issues(ISSUE_RAW_DIMEN)
@@ -306,7 +332,8 @@ class RawDimenDetectorTest {
           |res/layout/ids.xml:1: Warning: Should be using a dimension resource instead. [RawDimen]
           |<TextView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_margin="0.5dp"/>
           |                                                                                            ~~~~~
-          |0 errors, 1 warnings""".trimMargin()
+          |0 errors, 1 warnings
+        """.trimMargin()
       )
   }
 
@@ -316,7 +343,8 @@ class RawDimenDetectorTest {
         xml(
           "res/layout/ids.xml",
           """
-          <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:paddingEnd="-16dp"/>"""
+          <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:paddingEnd="-16dp"/>
+          """
         ).indented()
       )
       .issues(ISSUE_RAW_DIMEN)
@@ -326,7 +354,8 @@ class RawDimenDetectorTest {
           |res/layout/ids.xml:1: Warning: Should be using a dimension resource instead. [RawDimen]
           |<TextView xmlns:android="http://schemas.android.com/apk/res/android" android:paddingEnd="-16dp"/>
           |                                                                                         ~~~~~
-          |0 errors, 1 warnings""".trimMargin()
+          |0 errors, 1 warnings
+        """.trimMargin()
       )
   }
 
@@ -336,7 +365,8 @@ class RawDimenDetectorTest {
         xml(
           "res/layout/ids.xml",
           """
-          <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:textSize="16dp"/>"""
+          <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:textSize="16dp"/>
+          """
         ).indented()
       )
       .issues(ISSUE_RAW_DIMEN)
@@ -346,7 +376,8 @@ class RawDimenDetectorTest {
           |res/layout/ids.xml:1: Warning: Should be using a dimension resource instead. [RawDimen]
           |<TextView xmlns:android="http://schemas.android.com/apk/res/android" android:textSize="16dp"/>
           |                                                                                       ~~~~
-          |0 errors, 1 warnings""".trimMargin()
+          |0 errors, 1 warnings
+        """.trimMargin()
       )
   }
 
@@ -364,7 +395,8 @@ class RawDimenDetectorTest {
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"/>
-          </android.support.constraint.ConstraintLayout>"""
+          </android.support.constraint.ConstraintLayout>
+          """
         ).indented()
       )
       .issues(ISSUE_RAW_DIMEN)
@@ -386,7 +418,8 @@ class RawDimenDetectorTest {
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"/>
-          </androidx.constraintlayout.widget.ConstraintLayout>"""
+          </androidx.constraintlayout.widget.ConstraintLayout>
+          """
         ).indented()
       )
       .issues(ISSUE_RAW_DIMEN)
@@ -410,7 +443,8 @@ class RawDimenDetectorTest {
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"/>
-          </merge>"""
+          </merge>
+          """
         ).indented()
       )
       .issues(ISSUE_RAW_DIMEN)
@@ -434,7 +468,8 @@ class RawDimenDetectorTest {
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"/>
-          </merge>"""
+          </merge>
+          """
         ).indented()
       )
       .issues(ISSUE_RAW_DIMEN)
@@ -458,7 +493,8 @@ class RawDimenDetectorTest {
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"/>
-          </merge>"""
+          </merge>
+          """
         ).indented()
       )
       .issues(ISSUE_RAW_DIMEN)
@@ -480,7 +516,8 @@ class RawDimenDetectorTest {
             <path
                 android:fillColor="#000000"
                 android:pathData="M19,13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
-          </vector>"""
+          </vector>
+          """
         ).indented()
       )
       .issues(ISSUE_RAW_DIMEN)

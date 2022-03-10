@@ -14,7 +14,8 @@ class ColorCasingDetectorTest {
           "res/layout/layout.xml",
           """
           <TextView xmlns:tools="http://schemas.android.com/tools"
-              tools:textColor="#FFF"/>"""
+              tools:textColor="#FFF"/>
+          """
         ).indented()
       )
       .issues(ISSUE_COLOR_CASING)
@@ -29,7 +30,8 @@ class ColorCasingDetectorTest {
           "res/layout/layout.xml",
           """
           <TextView xmlns:tools="http://schemas.android.com/tools"
-              tools:textColor="#fff"/>"""
+              tools:textColor="#fff"/>
+          """
         ).indented()
       )
       .issues(ISSUE_COLOR_CASING)
@@ -39,7 +41,8 @@ class ColorCasingDetectorTest {
             |res/layout/layout.xml:2: Warning: Should be using uppercase letters [ColorCasing]
             |    tools:textColor="#fff"/>
             |                     ~~~~
-            |0 errors, 1 warnings""".trimMargin()
+            |0 errors, 1 warnings
+        """.trimMargin()
       )
       .expectFixDiffs(
         """
@@ -48,7 +51,8 @@ class ColorCasingDetectorTest {
             |-     tools:textColor="#fff"/>
             |@@ -3 +2
             |+     tools:textColor="#FFF"/>
-            |""".trimMargin()
+            |
+        """.trimMargin()
       )
   }
 
@@ -63,7 +67,8 @@ class ColorCasingDetectorTest {
               android:shape="rectangle">
             <solid android:color="#1Aeebf"/>
             <size android:height="4dp"/>
-          </shape>"""
+          </shape>
+          """
         ).indented()
       )
       .issues(ISSUE_COLOR_CASING)
@@ -73,7 +78,8 @@ class ColorCasingDetectorTest {
             |res/drawable/drawable.xml:4: Warning: Should be using uppercase letters [ColorCasing]
             |  <solid android:color="#1Aeebf"/>
             |                        ~~~~~~~
-            |0 errors, 1 warnings""".trimMargin()
+            |0 errors, 1 warnings
+        """.trimMargin()
       )
       .expectFixDiffs(
         """
@@ -81,7 +87,8 @@ class ColorCasingDetectorTest {
             |@@ -4 +4
             |-   <solid android:color="#1Aeebf"/>
             |+   <solid android:color="#1AEEBF"/>
-            |""".trimMargin()
+            |
+        """.trimMargin()
       )
   }
 }

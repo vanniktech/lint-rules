@@ -18,7 +18,8 @@ class SuperfluousMarginDeclarationDetectorTest {
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
             android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"/>"""
+            android:layout_marginEnd="16dp"/>
+          """
         ).indented()
       )
       .issues(ISSUE_SUPERFLUOUS_MARGIN_DECLARATION)
@@ -28,7 +29,8 @@ class SuperfluousMarginDeclarationDetectorTest {
           |res/layout/ids.xml:1: Warning: Should be using layout_margin instead. [SuperfluousMarginDeclaration]
           |<TextView
           |^
-          |0 errors, 1 warnings""".trimMargin()
+          |0 errors, 1 warnings
+        """.trimMargin()
       )
       .expectFixDiffs("""""".trimMargin())
   }
@@ -44,7 +46,8 @@ class SuperfluousMarginDeclarationDetectorTest {
             android:layout_marginTop="8dp"
             android:layout_marginBottom="16dp"
             android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"/>"""
+            android:layout_marginEnd="16dp"/>
+          """
         ).indented()
       )
       .issues(ISSUE_SUPERFLUOUS_MARGIN_DECLARATION)
@@ -65,7 +68,8 @@ class SuperfluousMarginDeclarationDetectorTest {
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
             android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"/>"""
+            android:layout_marginEnd="16dp"/>
+          """
         ).indented()
       )
       .issues(ISSUE_SUPERFLUOUS_MARGIN_DECLARATION)
@@ -83,7 +87,8 @@ class SuperfluousMarginDeclarationDetectorTest {
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
-            android:layout_marginEnd="16dp"/>"""
+            android:layout_marginEnd="16dp"/>
+          """
         ).indented()
       )
       .issues(ISSUE_SUPERFLUOUS_MARGIN_DECLARATION)
@@ -101,7 +106,8 @@ class SuperfluousMarginDeclarationDetectorTest {
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
-            android:layout_marginStart="16dp"/>"""
+            android:layout_marginStart="16dp"/>
+          """
         ).indented()
       )
       .issues(ISSUE_SUPERFLUOUS_MARGIN_DECLARATION)
@@ -119,7 +125,8 @@ class SuperfluousMarginDeclarationDetectorTest {
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_marginTop="16dp"
             android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"/>"""
+            android:layout_marginEnd="16dp"/>
+          """
         ).indented()
       )
       .issues(ISSUE_SUPERFLUOUS_MARGIN_DECLARATION)
@@ -137,7 +144,8 @@ class SuperfluousMarginDeclarationDetectorTest {
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_marginBottom="16dp"
             android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"/>"""
+            android:layout_marginEnd="16dp"/>
+          """
         ).indented()
       )
       .issues(ISSUE_SUPERFLUOUS_MARGIN_DECLARATION)
@@ -167,7 +175,8 @@ class SuperfluousMarginDeclarationDetectorTest {
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"/>
 
-          </merge>"""
+          </merge>
+          """
         ).indented()
       )
       .issues(ISSUE_SUPERFLUOUS_MARGIN_DECLARATION)
@@ -186,7 +195,8 @@ class SuperfluousMarginDeclarationDetectorTest {
             tools:layout_marginTop="16dp"
             tools:layout_marginBottom="16dp"
             tools:layout_marginStart="16dp"
-            tools:layout_marginEnd="16dp"/>"""
+            tools:layout_marginEnd="16dp"/>
+          """
         ).indented()
       )
       .issues(ISSUE_SUPERFLUOUS_MARGIN_DECLARATION)

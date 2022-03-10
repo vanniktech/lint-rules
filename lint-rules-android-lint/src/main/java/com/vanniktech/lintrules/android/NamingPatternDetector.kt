@@ -19,7 +19,7 @@ import org.jetbrains.uast.UEnumConstant
 import org.jetbrains.uast.UMethod
 import org.jetbrains.uast.UVariable
 import org.jetbrains.uast.kotlin.KotlinReceiverUParameter
-import org.jetbrains.uast.kotlin.declarations.KotlinUMethod
+import org.jetbrains.uast.kotlin.KotlinUMethod
 import java.util.EnumSet
 
 val ISSUE_NAMING_PATTERN = Issue.create(

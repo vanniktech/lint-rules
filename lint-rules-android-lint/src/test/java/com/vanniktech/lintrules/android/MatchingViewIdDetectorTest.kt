@@ -14,7 +14,8 @@ class MatchingViewIdDetectorTest {
         xml(
           "res/layout/activity_main.xml",
           """
-            <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/activityMainTextView"/>"""
+            <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/activityMainTextView"/>
+          """
         ).indented()
       )
       .issues(ISSUE_MATCHING_VIEW_ID)
@@ -29,7 +30,8 @@ class MatchingViewIdDetectorTest {
         xml(
           "res/layout/activity_main.xml",
           """
-            <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/text"/>"""
+            <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/text"/>
+          """
         ).indented()
       )
       .issues(ISSUE_MATCHING_VIEW_ID)
@@ -39,7 +41,8 @@ class MatchingViewIdDetectorTest {
             |res/layout/activity_main.xml:1: Warning: Id should start with: activityMain [MatchingViewId]
             |<TextView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/text"/>
             |                                                                                 ~~~~~~~~~
-            |0 errors, 1 warnings""".trimMargin()
+            |0 errors, 1 warnings
+        """.trimMargin()
       )
       .expectFixDiffs(
         """
@@ -48,7 +51,8 @@ class MatchingViewIdDetectorTest {
             |- <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/text"/>
             |@@ -2 +1
             |+ <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/activityMainText"/>
-            |""".trimMargin()
+            |
+        """.trimMargin()
       )
   }
 
@@ -58,7 +62,8 @@ class MatchingViewIdDetectorTest {
         xml(
           "res/layout/activity_main.xml",
           """
-            <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/mainActivityTextView"/>"""
+            <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/mainActivityTextView"/>
+          """
         ).indented()
       )
       .issues(ISSUE_MATCHING_VIEW_ID)
@@ -68,7 +73,8 @@ class MatchingViewIdDetectorTest {
             |res/layout/activity_main.xml:1: Warning: Id should start with: activityMain [MatchingViewId]
             |<TextView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/mainActivityTextView"/>
             |                                                                                 ~~~~~~~~~~~~~~~~~~~~~~~~~
-            |0 errors, 1 warnings""".trimMargin()
+            |0 errors, 1 warnings
+        """.trimMargin()
       )
       .expectFixDiffs(
         """
@@ -77,7 +83,8 @@ class MatchingViewIdDetectorTest {
             |- <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/mainActivityTextView"/>
             |@@ -2 +1
             |+ <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/activityMainMainActivityTextView"/>
-            |""".trimMargin()
+            |
+        """.trimMargin()
       )
   }
 
@@ -87,7 +94,8 @@ class MatchingViewIdDetectorTest {
         xml(
           "res/layout/view_custom.xml",
           """
-            <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/viewCustomTextView"/>"""
+            <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/viewCustomTextView"/>
+          """
         ).indented()
       )
       .issues(ISSUE_MATCHING_VIEW_ID)
@@ -101,7 +109,8 @@ class MatchingViewIdDetectorTest {
         xml(
           "res/layout/view_custom.xml",
           """
-            <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/ViewCustomTextView"/>"""
+            <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/ViewCustomTextView"/>
+          """
         ).indented()
       )
       .issues(ISSUE_MATCHING_VIEW_ID)
@@ -111,7 +120,8 @@ class MatchingViewIdDetectorTest {
             |res/layout/view_custom.xml:1: Warning: Id should start with: viewCustom [MatchingViewId]
             |<TextView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/ViewCustomTextView"/>
             |                                                                                 ~~~~~~~~~~~~~~~~~~~~~~~
-            |0 errors, 1 warnings""".trimMargin()
+            |0 errors, 1 warnings
+        """.trimMargin()
       )
       .expectFixDiffs(
         """
@@ -120,7 +130,8 @@ class MatchingViewIdDetectorTest {
             |- <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/ViewCustomTextView"/>
             |@@ -2 +1
             |+ <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/viewCustomTextView"/>
-            |""".trimMargin()
+            |
+        """.trimMargin()
       )
   }
 
@@ -130,7 +141,8 @@ class MatchingViewIdDetectorTest {
         xml(
           "res/layout/view_custom.xml",
           """
-            <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/mainViewTextView"/>"""
+            <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/mainViewTextView"/>
+          """
         ).indented()
       )
       .issues(ISSUE_MATCHING_VIEW_ID)
@@ -140,7 +152,8 @@ class MatchingViewIdDetectorTest {
             |res/layout/view_custom.xml:1: Warning: Id should start with: viewCustom [MatchingViewId]
             |<TextView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/mainViewTextView"/>
             |                                                                                 ~~~~~~~~~~~~~~~~~~~~~
-            |0 errors, 1 warnings""".trimMargin()
+            |0 errors, 1 warnings
+        """.trimMargin()
       )
       .expectFixDiffs(
         """
@@ -149,7 +162,8 @@ class MatchingViewIdDetectorTest {
             |- <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/mainViewTextView"/>
             |@@ -2 +1
             |+ <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/viewCustomMainViewTextView"/>
-            |""".trimMargin()
+            |
+        """.trimMargin()
       )
   }
 
@@ -159,7 +173,8 @@ class MatchingViewIdDetectorTest {
         xml(
           "res/layout/view_profile_attribute_display.xml",
           """
-            <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@android:id/text1"/>"""
+            <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@android:id/text1"/>
+          """
         ).indented()
       )
       .issues(ISSUE_MATCHING_VIEW_ID)
@@ -175,7 +190,8 @@ class MatchingViewIdDetectorTest {
           "src/main/res/layout/view_custom.xml",
           """
             <TextView xmlns:android="http://schemas.android.com/apk/res/android" 
-                android:id="@+id/textView"/>"""
+                android:id="@+id/textView"/>
+          """
         ).indented()
       )
       .issues(ISSUE_MATCHING_VIEW_ID)
@@ -189,7 +205,8 @@ class MatchingViewIdDetectorTest {
         xml(
           "res/layout/view_profile_attribute_display.xml",
           """
-            <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/viewProfileAttributeDisplayHeader"/>"""
+            <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/viewProfileAttributeDisplayHeader"/>
+          """
         ).indented()
       )
       .issues(ISSUE_MATCHING_VIEW_ID)
@@ -203,7 +220,8 @@ class MatchingViewIdDetectorTest {
         xml(
           "res/layout/view_custom.xml",
           """
-            <TextView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools" tools:ignore="MatchingViewId" android:id="@+id/mainViewTextView"/>"""
+            <TextView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools" tools:ignore="MatchingViewId" android:id="@+id/mainViewTextView"/>
+          """
         ).indented()
       )
       .issues(ISSUE_MATCHING_VIEW_ID)
@@ -218,7 +236,8 @@ class MatchingViewIdDetectorTest {
           "res/layout/ids.xml",
           """
             <TextView
-              style="?android:attr/borderlessButtonStyle"/>"""
+              style="?android:attr/borderlessButtonStyle"/>
+          """
         ).indented()
       )
       .issues(ISSUE_MATCHING_VIEW_ID)

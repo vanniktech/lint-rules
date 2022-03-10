@@ -17,7 +17,8 @@ class DefaultLayoutAttributeDetectorTest {
               xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:textStyle="normal"/>"""
+              android:textStyle="normal"/>
+          """
         ).indented()
       )
       .issues(ISSUE_DEFAULT_LAYOUT_ATTRIBUTE)
@@ -27,7 +28,8 @@ class DefaultLayoutAttributeDetectorTest {
           |res/layout/ids.xml:5: Warning: This is the default and hence you don't need to specify it [DefaultLayoutAttribute]
           |    android:textStyle="normal"/>
           |                       ~~~~~~
-          |0 errors, 1 warnings""".trimMargin()
+          |0 errors, 1 warnings
+        """.trimMargin()
       )
       .expectFixDiffs(
         """
@@ -36,7 +38,8 @@ class DefaultLayoutAttributeDetectorTest {
           |-     android:layout_height="wrap_content"
           |-     android:textStyle="normal" />
           |+     android:layout_height="wrap_content" />
-          |""".trimMargin()
+          |
+        """.trimMargin()
       )
   }
 
@@ -50,7 +53,8 @@ class DefaultLayoutAttributeDetectorTest {
               xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:textStyle="bold"/>"""
+              android:textStyle="bold"/>
+          """
         ).indented()
       )
       .issues(ISSUE_DEFAULT_LAYOUT_ATTRIBUTE)
@@ -70,7 +74,8 @@ class DefaultLayoutAttributeDetectorTest {
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:textStyle="normal"
-              tools:ignore="DefaultLayoutAttribute"/>"""
+              tools:ignore="DefaultLayoutAttribute"/>
+          """
         ).indented()
       )
       .issues(ISSUE_DEFAULT_LAYOUT_ATTRIBUTE)
@@ -85,7 +90,8 @@ class DefaultLayoutAttributeDetectorTest {
           "res/layout/ids.xml",
           """
           <TextView
-              style="?android:attr/borderlessButtonStyle"/>"""
+              style="?android:attr/borderlessButtonStyle"/>
+          """
         ).indented()
       )
       .issues(ISSUE_DEFAULT_LAYOUT_ATTRIBUTE)

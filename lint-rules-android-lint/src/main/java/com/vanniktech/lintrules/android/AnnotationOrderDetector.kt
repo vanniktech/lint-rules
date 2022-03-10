@@ -177,7 +177,6 @@ class AnnotationOrderDetector : Detector(), UastScanner {
     }
 
     private fun processAnnotations(element: UElement, modifierListOwner: UAnnotated) {
-
       val annotations = context.evaluator.getAllAnnotations(modifierListOwner, false)
         .filter { it.qualifiedName !in jetbrainsNullityAnnotations }
         .mapNotNull { it.qualifiedName?.split(".")?.lastOrNull() }
@@ -196,7 +195,12 @@ class AnnotationOrderDetector : Detector(), UastScanner {
           .replace()
           .text(annotations.joinToString(separator = " ") { "@$it" })
           .with(correctOrder)
-          .range(context.getLocation(element))
+          .range(
+            when (element) {
+              is UMethod -> context.getLocation(element.uastParent)
+              else -> context.getLocation(element)
+            }
+          )
           .name("Fix order")
           .autoFix()
           .build()

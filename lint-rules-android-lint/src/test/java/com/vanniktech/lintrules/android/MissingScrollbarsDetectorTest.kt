@@ -18,7 +18,8 @@ class MissingScrollbarsDetectorTest {
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:text="Foo"
-              />"""
+              />
+          """
         ).indented()
       )
       .issues(ISSUE_MISSING_SCROLLBARS)
@@ -37,7 +38,8 @@ class MissingScrollbarsDetectorTest {
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:scrollbars="none"
-              />"""
+              />
+          """
         ).indented()
       )
       .issues(ISSUE_MISSING_SCROLLBARS)
@@ -55,7 +57,8 @@ class MissingScrollbarsDetectorTest {
               xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              />"""
+              />
+          """
         ).indented()
       )
       .issues(ISSUE_MISSING_SCROLLBARS)
@@ -65,7 +68,8 @@ class MissingScrollbarsDetectorTest {
           |res/layout/ids.xml:1: Warning: Missing scrollbars on ScrollView [MissingScrollbars]
           |<ScrollView
           |^
-          |0 errors, 1 warnings""".trimMargin()
+          |0 errors, 1 warnings
+        """.trimMargin()
       )
       .expectFixDiffs(
         """
@@ -84,7 +88,8 @@ class MissingScrollbarsDetectorTest {
           |-     android:layout_height="wrap_content" />
           |+     android:layout_height="wrap_content"
           |+     android:scrollbars="horizontal" />
-          |""".trimMargin()
+          |
+        """.trimMargin()
       )
   }
 
@@ -98,7 +103,8 @@ class MissingScrollbarsDetectorTest {
               xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              />"""
+              />
+          """
         ).indented()
       )
       .issues(ISSUE_MISSING_SCROLLBARS)
@@ -108,7 +114,8 @@ class MissingScrollbarsDetectorTest {
           |res/layout/ids.xml:1: Warning: Missing scrollbars on androidx.recyclerview.widget.RecyclerView [MissingScrollbars]
           |<androidx.recyclerview.widget.RecyclerView
           |^
-          |0 errors, 1 warnings""".trimMargin()
+          |0 errors, 1 warnings
+        """.trimMargin()
       )
       .expectFixDiffs(
         """
@@ -127,7 +134,8 @@ class MissingScrollbarsDetectorTest {
           |-     android:layout_height="wrap_content" />
           |+     android:layout_height="wrap_content"
           |+     android:scrollbars="horizontal" />
-          |""".trimMargin()
+          |
+        """.trimMargin()
       )
   }
 }

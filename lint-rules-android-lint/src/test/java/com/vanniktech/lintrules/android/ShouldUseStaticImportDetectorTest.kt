@@ -19,7 +19,8 @@ class ShouldUseStaticImportDetectorTest {
             public void foo() {
               TimeUnit.SECONDS.toDays(1);
             }
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_SHOULD_USE_STATIC_IMPORT)
@@ -29,7 +30,8 @@ class ShouldUseStaticImportDetectorTest {
           |src/foo/Example.java:5: Warning: Should statically import SECONDS [ShouldUseStaticImport]
           |    TimeUnit.SECONDS.toDays(1);
           |             ~~~~~~~
-          |0 errors, 1 warnings""".trimMargin()
+          |0 errors, 1 warnings
+        """.trimMargin()
       )
   }
 
@@ -44,7 +46,8 @@ class ShouldUseStaticImportDetectorTest {
             public void foo() {
               TimeUnit.MINUTES.toDays(1);
             }
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_SHOULD_USE_STATIC_IMPORT)
@@ -54,7 +57,8 @@ class ShouldUseStaticImportDetectorTest {
           |src/foo/Example.java:5: Warning: Should statically import MINUTES [ShouldUseStaticImport]
           |    TimeUnit.MINUTES.toDays(1);
           |             ~~~~~~~
-          |0 errors, 1 warnings""".trimMargin()
+          |0 errors, 1 warnings
+        """.trimMargin()
       )
   }
 
@@ -69,7 +73,8 @@ class ShouldUseStaticImportDetectorTest {
             public void foo() {
               Locale.CANADA.getCountry();
             }
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_SHOULD_USE_STATIC_IMPORT)
@@ -79,7 +84,8 @@ class ShouldUseStaticImportDetectorTest {
           |src/foo/Example.java:5: Warning: Should statically import CANADA [ShouldUseStaticImport]
           |    Locale.CANADA.getCountry();
           |           ~~~~~~
-          |0 errors, 1 warnings""".trimMargin()
+          |0 errors, 1 warnings
+        """.trimMargin()
       )
   }
 
@@ -95,7 +101,8 @@ class ShouldUseStaticImportDetectorTest {
             public void foo() {
               Something ignore = Something.RELEASE;
             }
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_SHOULD_USE_STATIC_IMPORT)
@@ -157,7 +164,8 @@ class ShouldUseStaticImportDetectorTest {
           |src/CustomView.kt:11: Warning: Should statically import INVISIBLE [ShouldUseStaticImport]
           |    visibility = View.INVISIBLE
           |                      ~~~~~~~~~
-          |0 errors, 1 warnings""".trimMargin()
+          |0 errors, 1 warnings
+        """.trimMargin()
       )
   }
 
@@ -172,7 +180,8 @@ class ShouldUseStaticImportDetectorTest {
             public void foo() {
               Locale.setDefault(Locale.CANADA);
             }
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_SHOULD_USE_STATIC_IMPORT)
@@ -182,7 +191,8 @@ class ShouldUseStaticImportDetectorTest {
           |src/foo/Example.java:5: Warning: Should statically import CANADA [ShouldUseStaticImport]
           |    Locale.setDefault(Locale.CANADA);
           |                             ~~~~~~
-          |0 errors, 1 warnings""".trimMargin()
+          |0 errors, 1 warnings
+        """.trimMargin()
       )
   }
 
@@ -197,7 +207,8 @@ class ShouldUseStaticImportDetectorTest {
             public void foo() {
               CANADA.getCountry();
             }
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_SHOULD_USE_STATIC_IMPORT)
@@ -216,7 +227,8 @@ class ShouldUseStaticImportDetectorTest {
             fun foo() {
               CANADA.country
             }
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_SHOULD_USE_STATIC_IMPORT)
@@ -235,7 +247,8 @@ class ShouldUseStaticImportDetectorTest {
             public void foo() {
               asList(1, 2).sort(Integer::compare);
             }
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_SHOULD_USE_STATIC_IMPORT)
@@ -254,7 +267,8 @@ class ShouldUseStaticImportDetectorTest {
             public void foo() {
               Arrays.asList(1, 2);
             }
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_SHOULD_USE_STATIC_IMPORT)
@@ -264,7 +278,8 @@ class ShouldUseStaticImportDetectorTest {
           |src/foo/Example.java:5: Warning: Should statically import asList [ShouldUseStaticImport]
           |    Arrays.asList(1, 2);
           |           ~~~~~~
-          |0 errors, 1 warnings""".trimMargin()
+          |0 errors, 1 warnings
+        """.trimMargin()
       )
   }
 
@@ -279,7 +294,8 @@ class ShouldUseStaticImportDetectorTest {
             public void foo() {
               Collections.singletonList(1);
             }
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_SHOULD_USE_STATIC_IMPORT)
@@ -289,7 +305,8 @@ class ShouldUseStaticImportDetectorTest {
           |src/foo/Example.java:5: Warning: Should statically import singletonList [ShouldUseStaticImport]
           |    Collections.singletonList(1);
           |                ~~~~~~~~~~~~~
-          |0 errors, 1 warnings""".trimMargin()
+          |0 errors, 1 warnings
+        """.trimMargin()
       )
   }
 }

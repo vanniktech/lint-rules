@@ -18,7 +18,8 @@ class ErroneousLayoutAttributeDetectorTest {
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:text="Foo"
-              />"""
+              />
+          """
         ).indented()
       )
       .issues(ISSUE_ERRONEOUS_LAYOUT_ATTRIBUTE)
@@ -37,7 +38,8 @@ class ErroneousLayoutAttributeDetectorTest {
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:orientation="horizontal"
-              />"""
+              />
+          """
         ).indented()
       )
       .issues(ISSUE_ERRONEOUS_LAYOUT_ATTRIBUTE)
@@ -47,7 +49,8 @@ class ErroneousLayoutAttributeDetectorTest {
           |res/layout/ids.xml:5: Warning: Attribute is erroneous on FrameLayout [ErroneousLayoutAttribute]
           |    android:orientation="horizontal"
           |    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-          |0 errors, 1 warnings""".trimMargin()
+          |0 errors, 1 warnings
+        """.trimMargin()
       )
       .expectFixDiffs(
         """
@@ -56,7 +59,8 @@ class ErroneousLayoutAttributeDetectorTest {
           |-     android:layout_height="wrap_content"
           |-     android:orientation="horizontal" />
           |+     android:layout_height="wrap_content" />
-          |""".trimMargin()
+          |
+        """.trimMargin()
       )
   }
 
@@ -73,7 +77,8 @@ class ErroneousLayoutAttributeDetectorTest {
               android:layout_height="wrap_content"
               android:orientation="horizontal"
               tools:parentTag="FrameLayout"
-              />"""
+              />
+          """
         ).indented()
       )
       .issues(ISSUE_ERRONEOUS_LAYOUT_ATTRIBUTE)
@@ -83,14 +88,16 @@ class ErroneousLayoutAttributeDetectorTest {
           |res/layout/ids.xml:6: Warning: Attribute is erroneous on FrameLayout [ErroneousLayoutAttribute]
           |    android:orientation="horizontal"
           |    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-          |0 errors, 1 warnings""".trimMargin()
+          |0 errors, 1 warnings
+        """.trimMargin()
       )
       .expectFixDiffs(
         """
           |Fix for res/layout/ids.xml line 6: Delete erroneous attribute:
           |@@ -6 +6
           |-     android:orientation="horizontal"
-          |""".trimMargin()
+          |
+        """.trimMargin()
       )
   }
 
@@ -105,7 +112,8 @@ class ErroneousLayoutAttributeDetectorTest {
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:maxLines="2"
-              />"""
+              />
+          """
         ).indented()
       )
       .issues(ISSUE_ERRONEOUS_LAYOUT_ATTRIBUTE)
@@ -115,7 +123,8 @@ class ErroneousLayoutAttributeDetectorTest {
           |res/layout/ids.xml:5: Warning: Attribute is erroneous on ImageView [ErroneousLayoutAttribute]
           |    android:maxLines="2"
           |    ~~~~~~~~~~~~~~~~~~~~
-          |0 errors, 1 warnings""".trimMargin()
+          |0 errors, 1 warnings
+        """.trimMargin()
       )
       .expectFixDiffs(
         """
@@ -124,7 +133,8 @@ class ErroneousLayoutAttributeDetectorTest {
           |-     android:layout_height="wrap_content"
           |-     android:maxLines="2" />
           |+     android:layout_height="wrap_content" />
-          |""".trimMargin()
+          |
+        """.trimMargin()
       )
   }
 
@@ -139,7 +149,8 @@ class ErroneousLayoutAttributeDetectorTest {
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:orientation="horizontal"
-              />"""
+              />
+          """
         ).indented()
       )
       .issues(ISSUE_ERRONEOUS_LAYOUT_ATTRIBUTE)
@@ -149,7 +160,8 @@ class ErroneousLayoutAttributeDetectorTest {
           |res/layout/ids.xml:5: Warning: Attribute is erroneous on androidx.constraintlayout.widget.ConstraintLayout [ErroneousLayoutAttribute]
           |    android:orientation="horizontal"
           |    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-          |0 errors, 1 warnings""".trimMargin()
+          |0 errors, 1 warnings
+        """.trimMargin()
       )
       .expectFixDiffs(
         """
@@ -158,7 +170,8 @@ class ErroneousLayoutAttributeDetectorTest {
         |-     android:layout_height="wrap_content"
         |-     android:orientation="horizontal" />
         |+     android:layout_height="wrap_content" />
-        |""".trimMargin()
+        |
+        """.trimMargin()
       )
   }
 
@@ -173,7 +186,8 @@ class ErroneousLayoutAttributeDetectorTest {
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:gravity="horizontal"
-              />"""
+              />
+          """
         ).indented()
       )
       .issues(ISSUE_ERRONEOUS_LAYOUT_ATTRIBUTE)
@@ -183,7 +197,8 @@ class ErroneousLayoutAttributeDetectorTest {
           |res/layout/ids.xml:5: Warning: Attribute is erroneous on androidx.constraintlayout.widget.ConstraintLayout [ErroneousLayoutAttribute]
           |    android:gravity="horizontal"
           |    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-          |0 errors, 1 warnings""".trimMargin()
+          |0 errors, 1 warnings
+        """.trimMargin()
       )
       .expectFixDiffs(
         """
@@ -192,7 +207,8 @@ class ErroneousLayoutAttributeDetectorTest {
           |-     android:layout_height="wrap_content"
           |-     android:gravity="horizontal" />
           |+     android:layout_height="wrap_content" />
-          |""".trimMargin()
+          |
+        """.trimMargin()
       )
   }
 
@@ -211,7 +227,8 @@ class ErroneousLayoutAttributeDetectorTest {
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:layout_gravity="center"/>
-          </FrameLayout>"""
+          </FrameLayout>
+          """
         ).indented()
       )
       .issues(ISSUE_ERRONEOUS_LAYOUT_ATTRIBUTE)

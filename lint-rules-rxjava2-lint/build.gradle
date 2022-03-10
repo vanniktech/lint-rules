@@ -15,6 +15,11 @@ dependencies {
 tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
   kotlinOptions {
     jvmTarget = "1.8"
+
+    // Lint still requires 1.4 (regardless of what version the project uses), so this forces a lower
+    // language level for now. Similar to `targetCompatibility` for Java.
+    apiVersion = "1.4"
+    languageVersion = "1.4"
   }
 }
 

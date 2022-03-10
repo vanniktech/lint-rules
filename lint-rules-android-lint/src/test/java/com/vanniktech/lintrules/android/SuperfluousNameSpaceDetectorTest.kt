@@ -16,7 +16,8 @@ class SuperfluousNameSpaceDetectorTest {
           <merge xmlns:android="http://schemas.android.com/apk/res/android">
             <TextView
                 android:layout_width="wrap_content"/>
-          </merge>"""
+          </merge>
+          """
         ).indented()
       )
       .issues(ISSUE_SUPERFLUOUS_NAME_SPACE)
@@ -34,7 +35,8 @@ class SuperfluousNameSpaceDetectorTest {
             <TextView
                 xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="wrap_content"/>
-          </LinearLayout>"""
+          </LinearLayout>
+          """
         ).indented()
       )
       .issues(ISSUE_SUPERFLUOUS_NAME_SPACE)
@@ -44,14 +46,16 @@ class SuperfluousNameSpaceDetectorTest {
           |res/layout/activity_home.xml:3: Warning: This name space is already declared and hence not needed [SuperfluousNameSpace]
           |      xmlns:android="http://schemas.android.com/apk/res/android"
           |      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-          |0 errors, 1 warnings""".trimMargin()
+          |0 errors, 1 warnings
+        """.trimMargin()
       )
       .expectFixDiffs(
         """
           |Fix for res/layout/activity_home.xml line 2: Remove namespace:
           |@@ -3 +3
           |-       xmlns:android="http://schemas.android.com/apk/res/android"
-          |""".trimMargin()
+          |
+        """.trimMargin()
       )
   }
 
@@ -67,7 +71,8 @@ class SuperfluousNameSpaceDetectorTest {
                   xmlns:android="http://schemas.android.com/apk/res/android"
                   android:layout_width="wrap_content"/>
             </LinearLayout>
-          </LinearLayout>"""
+          </LinearLayout>
+          """
         ).indented()
       )
       .issues(ISSUE_SUPERFLUOUS_NAME_SPACE)
@@ -77,7 +82,8 @@ class SuperfluousNameSpaceDetectorTest {
           |Fix for res/layout/activity_home.xml line 3: Remove namespace:
           |@@ -4 +4
           |-         xmlns:android="http://schemas.android.com/apk/res/android"
-          |""".trimMargin()
+          |
+        """.trimMargin()
       )
   }
 }

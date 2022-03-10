@@ -18,7 +18,8 @@ class SuperfluousPaddingDeclarationDetectorTest {
               android:paddingTop="16dp"
               android:paddingBottom="16dp"
               android:paddingStart="16dp"
-              android:paddingEnd="16dp"/>"""
+              android:paddingEnd="16dp"/>
+          """
         ).indented()
       )
       .issues(ISSUE_SUPERFLUOUS_PADDING_DECLARATION)
@@ -28,7 +29,8 @@ class SuperfluousPaddingDeclarationDetectorTest {
           |res/layout/ids.xml:1: Warning: Should be using padding instead. [SuperfluousPaddingDeclaration]
           |<TextView
           |^
-          |0 errors, 1 warnings""".trimMargin()
+          |0 errors, 1 warnings
+        """.trimMargin()
       )
       .expectFixDiffs("""""".trimMargin())
   }
@@ -44,7 +46,8 @@ class SuperfluousPaddingDeclarationDetectorTest {
               android:paddingTop="8dp"
               android:paddingBottom="16dp"
               android:paddingStart="16dp"
-              android:paddingEnd="16dp"/>"""
+              android:paddingEnd="16dp"/>
+          """
         ).indented()
       )
       .issues(ISSUE_SUPERFLUOUS_PADDING_DECLARATION)
@@ -65,7 +68,8 @@ class SuperfluousPaddingDeclarationDetectorTest {
               android:paddingTop="16dp"
               android:paddingBottom="16dp"
               android:paddingStart="16dp"
-              android:paddingEnd="16dp"/>"""
+              android:paddingEnd="16dp"/>
+          """
         ).indented()
       )
       .issues(ISSUE_SUPERFLUOUS_PADDING_DECLARATION)
@@ -83,7 +87,8 @@ class SuperfluousPaddingDeclarationDetectorTest {
               xmlns:android="http://schemas.android.com/apk/res/android"
               android:paddingTop="16dp"
               android:paddingBottom="16dp"
-              android:paddingEnd="16dp"/>"""
+              android:paddingEnd="16dp"/>
+          """
         ).indented()
       )
       .issues(ISSUE_SUPERFLUOUS_PADDING_DECLARATION)
@@ -101,7 +106,8 @@ class SuperfluousPaddingDeclarationDetectorTest {
               xmlns:android="http://schemas.android.com/apk/res/android"
               android:paddingTop="16dp"
               android:paddingBottom="16dp"
-              android:paddingStart="16dp"/>"""
+              android:paddingStart="16dp"/>
+          """
         ).indented()
       )
       .issues(ISSUE_SUPERFLUOUS_PADDING_DECLARATION)
@@ -119,7 +125,8 @@ class SuperfluousPaddingDeclarationDetectorTest {
               xmlns:android="http://schemas.android.com/apk/res/android"
               android:paddingTop="16dp"
               android:paddingStart="16dp"
-              android:paddingEnd="16dp"/>"""
+              android:paddingEnd="16dp"/>
+          """
         ).indented()
       )
       .issues(ISSUE_SUPERFLUOUS_PADDING_DECLARATION)
@@ -137,7 +144,8 @@ class SuperfluousPaddingDeclarationDetectorTest {
               xmlns:android="http://schemas.android.com/apk/res/android"
               android:paddingBottom="16dp"
               android:paddingStart="16dp"
-              android:paddingEnd="16dp"/>"""
+              android:paddingEnd="16dp"/>
+          """
         ).indented()
       )
       .issues(ISSUE_SUPERFLUOUS_PADDING_DECLARATION)
@@ -167,7 +175,8 @@ class SuperfluousPaddingDeclarationDetectorTest {
                 android:paddingTop="16dp"
                 android:paddingBottom="16dp"/>
 
-          </merge>"""
+          </merge>
+          """
         ).indented()
       )
       .issues(ISSUE_SUPERFLUOUS_PADDING_DECLARATION)
@@ -186,7 +195,8 @@ class SuperfluousPaddingDeclarationDetectorTest {
               tools:paddingTop="16dp"
               tools:paddingBottom="16dp"
               tools:paddingStart="16dp"
-              tools:paddingEnd="16dp"/>"""
+              tools:paddingEnd="16dp"/>
+          """
         ).indented()
       )
       .issues(ISSUE_SUPERFLUOUS_PADDING_DECLARATION)

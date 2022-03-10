@@ -12,6 +12,7 @@ import com.android.tools.lint.detector.api.Scope.JAVA_FILE
 import com.android.tools.lint.detector.api.Severity.ERROR
 import org.jetbrains.uast.UCallExpression
 import org.jetbrains.uast.UClass
+import org.jetbrains.uast.skipParenthesizedExprDown
 import org.jetbrains.uast.visitor.AbstractUastVisitor
 import java.util.EnumSet
 
@@ -42,7 +43,7 @@ class RxJava2MissingCompositeDisposableClearDetector : Detector(), Detector.Uast
             val iterator = compositeDisposables.iterator()
 
             while (iterator.hasNext()) {
-              if (node.receiver?.asRenderString() == iterator.next().name) {
+              if (node.receiver?.skipParenthesizedExprDown()?.asRenderString() == iterator.next().name) {
                 iterator.remove()
               }
             }

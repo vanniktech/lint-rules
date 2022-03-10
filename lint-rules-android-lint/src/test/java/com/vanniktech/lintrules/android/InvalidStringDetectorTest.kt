@@ -15,7 +15,8 @@ class InvalidStringDetectorTest {
           """
           <resources>
             <string name="my_string">My string</string>
-          </resources>"""
+          </resources>
+          """
         ).indented()
       )
       .issues(ISSUE_INVALID_STRING)
@@ -32,7 +33,8 @@ class InvalidStringDetectorTest {
           <resources>
             <string name="my_string">My string"
           </string>
-          </resources>"""
+          </resources>
+          """
         ).indented()
       )
       .issues(ISSUE_INVALID_STRING)
@@ -42,7 +44,8 @@ class InvalidStringDetectorTest {
           |res/values/strings.xml:2: Warning: Text contains new line. [InvalidString]
           |  <string name="my_string">My string"
           |  ^
-          |0 errors, 1 warnings""".trimMargin()
+          |0 errors, 1 warnings
+        """.trimMargin()
       )
       .expectFixDiffs(
         """
@@ -51,7 +54,8 @@ class InvalidStringDetectorTest {
           |-   <string name="my_string">My string"
           |- </string>
           |+   <string name="my_string">My string"</string>
-          |""".trimMargin()
+          |
+        """.trimMargin()
       )
   }
 
@@ -63,7 +67,8 @@ class InvalidStringDetectorTest {
           """
           <resources>
             <string name="my_string">My string   </string>
-          </resources>"""
+          </resources>
+          """
         ).indented()
       )
       .issues(ISSUE_INVALID_STRING)
@@ -73,7 +78,8 @@ class InvalidStringDetectorTest {
           |res/values/strings.xml:2: Warning: Text contains trailing whitespace. [InvalidString]
           |  <string name="my_string">My string   </string>
           |  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-          |0 errors, 1 warnings""".trimMargin()
+          |0 errors, 1 warnings
+        """.trimMargin()
       )
       .expectFixDiffs(
         """
@@ -81,7 +87,8 @@ class InvalidStringDetectorTest {
           |@@ -2 +2
           |-   <string name="my_string">My string   </string>
           |+   <string name="my_string">My string</string>
-          |""".trimMargin()
+          |
+        """.trimMargin()
       )
   }
 
@@ -93,7 +100,8 @@ class InvalidStringDetectorTest {
           """
           <resources>
             <string name="my_string">  My string</string>
-          </resources>"""
+          </resources>
+          """
         ).indented()
       )
       .issues(ISSUE_INVALID_STRING)
@@ -103,7 +111,8 @@ class InvalidStringDetectorTest {
           |res/values/strings.xml:2: Warning: Text contains trailing whitespace. [InvalidString]
           |  <string name="my_string">  My string</string>
           |  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-          |0 errors, 1 warnings""".trimMargin()
+          |0 errors, 1 warnings
+        """.trimMargin()
       )
       .expectFixDiffs(
         """
@@ -111,7 +120,8 @@ class InvalidStringDetectorTest {
           |@@ -2 +2
           |-   <string name="my_string">  My string</string>
           |+   <string name="my_string">My string</string>
-          |""".trimMargin()
+          |
+        """.trimMargin()
       )
   }
 
@@ -124,7 +134,8 @@ class InvalidStringDetectorTest {
           <plurals name="days">
             <item quantity="one">%d Day</item>
             <item quantity="other">%d Days</item>
-          </plurals>"""
+          </plurals>
+          """
         ).indented()
       )
       .issues(ISSUE_INVALID_STRING)
@@ -141,7 +152,8 @@ class InvalidStringDetectorTest {
           <plurals name="days">
             <item quantity="one">  %d Day</item>
             <item quantity="other">%d Days   </item>
-          </plurals>"""
+          </plurals>
+          """
         ).indented()
       )
       .issues(ISSUE_INVALID_STRING)
@@ -154,7 +166,8 @@ class InvalidStringDetectorTest {
           |res/values/strings.xml:3: Warning: Text contains trailing whitespace. [InvalidString]
           |  <item quantity="other">%d Days   </item>
           |  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-          |0 errors, 2 warnings""".trimMargin()
+          |0 errors, 2 warnings
+        """.trimMargin()
       )
       .expectFixDiffs(
         """
@@ -166,7 +179,8 @@ class InvalidStringDetectorTest {
           |@@ -3 +3
           |-   <item quantity="other">%d Days   </item>
           |+   <item quantity="other">%d Days</item>
-          |""".trimMargin()
+          |
+        """.trimMargin()
       )
   }
 
@@ -179,7 +193,8 @@ class InvalidStringDetectorTest {
           <string-array name="foo">
             <item>1</item>
             <item>2</item>
-          </string-array>"""
+          </string-array>
+          """
         ).indented()
       )
       .issues(ISSUE_INVALID_STRING)
@@ -196,7 +211,8 @@ class InvalidStringDetectorTest {
           <string-array name="bar">
             <item>   1</item>
             <item>2   </item>
-          </string-array>"""
+          </string-array>
+          """
         ).indented()
       )
       .issues(ISSUE_INVALID_STRING)
@@ -209,7 +225,8 @@ class InvalidStringDetectorTest {
           |res/values/strings.xml:3: Warning: Text contains trailing whitespace. [InvalidString]
           |  <item>2   </item>
           |  ~~~~~~~~~~~~~~~~~
-          |0 errors, 2 warnings""".trimMargin()
+          |0 errors, 2 warnings
+        """.trimMargin()
       )
       .expectFixDiffs(
         """
@@ -221,7 +238,8 @@ class InvalidStringDetectorTest {
           |@@ -3 +3
           |-   <item>2   </item>
           |+   <item>2</item>
-          |""".trimMargin()
+          |
+        """.trimMargin()
       )
   }
 }

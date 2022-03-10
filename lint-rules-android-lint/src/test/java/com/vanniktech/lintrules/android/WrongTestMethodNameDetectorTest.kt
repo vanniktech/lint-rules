@@ -16,7 +16,8 @@ class WrongTestMethodNameDetectorTest {
 
           public class Something {
             public void testThis() { }
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_WRONG_TEST_METHOD_NAME)
@@ -36,7 +37,8 @@ class WrongTestMethodNameDetectorTest {
 
           public class MyTest {
             @Something public void test() { }
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_WRONG_TEST_METHOD_NAME)
@@ -56,7 +58,8 @@ class WrongTestMethodNameDetectorTest {
 
           public class MyTest {
             @Test public void myTest() { }
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_WRONG_TEST_METHOD_NAME)
@@ -76,7 +79,8 @@ class WrongTestMethodNameDetectorTest {
 
           public class MyTest {
             @Test public void testSomething() { }
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_WRONG_TEST_METHOD_NAME)
@@ -86,7 +90,8 @@ class WrongTestMethodNameDetectorTest {
           |src/foo/MyTest.java:6: Warning: Test method starts with test [WrongTestMethodName]
           |  @Test public void testSomething() { }
           |                    ~~~~~~~~~~~~~
-          |0 errors, 1 warnings""".trimMargin()
+          |0 errors, 1 warnings
+        """.trimMargin()
       )
       .expectFixDiffs(
         """
@@ -94,7 +99,8 @@ class WrongTestMethodNameDetectorTest {
           |@@ -6 +6
           |-   @Test public void testSomething() { }
           |+   @Test public void something() { }
-          |""".trimMargin()
+          |
+        """.trimMargin()
       )
   }
 
@@ -110,7 +116,8 @@ class WrongTestMethodNameDetectorTest {
 
           public class MyTest {
             @Test public void testSomething() { }
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_WRONG_TEST_METHOD_NAME)
@@ -120,7 +127,8 @@ class WrongTestMethodNameDetectorTest {
           |src/foo/MyTest.java:6: Warning: Test method starts with test [WrongTestMethodName]
           |  @Test public void testSomething() { }
           |                    ~~~~~~~~~~~~~
-          |0 errors, 1 warnings""".trimMargin()
+          |0 errors, 1 warnings
+        """.trimMargin()
       )
       .expectFixDiffs(
         """
@@ -128,7 +136,8 @@ class WrongTestMethodNameDetectorTest {
           |@@ -6 +6
           |-   @Test public void testSomething() { }
           |+   @Test public void something() { }
-          |""".trimMargin()
+          |
+        """.trimMargin()
       )
   }
 }

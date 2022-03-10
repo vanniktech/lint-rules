@@ -33,7 +33,11 @@ class LayoutFileNameMatchesClassDetector : Detector(), UastScanner {
     val resourcePrefix = context.project.resourcePrefix()
     val firstParameter = node.valueArguments.getOrNull(0)
 
-    val isNoLayoutReference = firstParameter?.asSourceString()?.startsWith("R.layout") == false
+    val rLayoutString = firstParameter?.asSourceString()
+      ?.split(".")
+      ?.joinToString(separator = ".") { it.trim() }
+      .orEmpty()
+    val isNoLayoutReference = !rLayoutString.startsWith("R.layout") && !rLayoutString.contains(".R.layout")
 
     val layoutFileName = firstParameter
       ?.tryResolveNamed()

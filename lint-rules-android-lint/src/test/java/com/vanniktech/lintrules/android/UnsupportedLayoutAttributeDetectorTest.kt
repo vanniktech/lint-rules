@@ -15,7 +15,8 @@ class UnsupportedLayoutAttributeDetectorTest {
           """
           <RelativeLayout
               xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"/>"""
+              android:orientation="vertical"/>
+          """
         ).indented()
       )
       .issues(ISSUE_UNSUPPORTED_LAYOUT_ATTRIBUTE)
@@ -25,7 +26,8 @@ class UnsupportedLayoutAttributeDetectorTest {
           |res/layout/activity_home.xml:3: Error: orientation is not allowed in RelativeLayout [UnsupportedLayoutAttribute]
           |    android:orientation="vertical"/>
           |    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-          |1 errors, 0 warnings""".trimMargin()
+          |1 errors, 0 warnings
+        """.trimMargin()
       )
       .expectFixDiffs(
         """
@@ -34,7 +36,8 @@ class UnsupportedLayoutAttributeDetectorTest {
           |- <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
           |-     android:orientation="vertical" />
           |+ <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" />
-          |""".trimMargin()
+          |
+        """.trimMargin()
       )
   }
 
@@ -46,7 +49,8 @@ class UnsupportedLayoutAttributeDetectorTest {
           """
           <ScrollView
               xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"/>"""
+              android:orientation="vertical"/>
+          """
         ).indented()
       )
       .issues(ISSUE_UNSUPPORTED_LAYOUT_ATTRIBUTE)
@@ -56,7 +60,8 @@ class UnsupportedLayoutAttributeDetectorTest {
           |res/layout/activity_home.xml:3: Error: orientation is not allowed in ScrollView [UnsupportedLayoutAttribute]
           |    android:orientation="vertical"/>
           |    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-          |1 errors, 0 warnings""".trimMargin()
+          |1 errors, 0 warnings
+        """.trimMargin()
       )
       .expectFixDiffs(
         """
@@ -65,7 +70,8 @@ class UnsupportedLayoutAttributeDetectorTest {
           |- <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
           |-     android:orientation="vertical" />
           |+ <ScrollView xmlns:android="http://schemas.android.com/apk/res/android" />
-          |""".trimMargin()
+          |
+        """.trimMargin()
       )
   }
 
@@ -79,7 +85,8 @@ class UnsupportedLayoutAttributeDetectorTest {
               xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:tools="http://schemas.android.com/tools"
               tools:parentTag="ScrollView"
-              android:orientation="vertical"/>"""
+              android:orientation="vertical"/>
+          """
         ).indented()
       )
       .issues(ISSUE_UNSUPPORTED_LAYOUT_ATTRIBUTE)
@@ -89,7 +96,8 @@ class UnsupportedLayoutAttributeDetectorTest {
           |res/layout/activity_home.xml:5: Error: orientation is not allowed in ScrollView [UnsupportedLayoutAttribute]
           |    android:orientation="vertical"/>
           |    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-          |1 errors, 0 warnings""".trimMargin()
+          |1 errors, 0 warnings
+        """.trimMargin()
       )
   }
 
@@ -101,7 +109,8 @@ class UnsupportedLayoutAttributeDetectorTest {
           """
           <LinearLayout
               xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"/>"""
+              android:orientation="vertical"/>
+          """
         ).indented()
       )
       .issues(ISSUE_UNSUPPORTED_LAYOUT_ATTRIBUTE)

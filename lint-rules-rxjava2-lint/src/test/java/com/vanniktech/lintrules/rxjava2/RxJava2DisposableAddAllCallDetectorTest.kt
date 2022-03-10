@@ -20,7 +20,8 @@ class RxJava2DisposableAddAllCallDetectorTest {
               CompositeDisposable cd = null;
               cd.addAll();
             }
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_DISPOSABLE_ADD_ALL_CALL)
@@ -30,7 +31,8 @@ class RxJava2DisposableAddAllCallDetectorTest {
           |src/foo/Example.java:6: Warning: Calling addAll instead of add separately [RxJava2DisposableAddAllCall]
           |    cd.addAll();
           |       ~~~~~~
-          |0 errors, 1 warnings""".trimMargin()
+          |0 errors, 1 warnings
+        """.trimMargin()
       )
   }
 }

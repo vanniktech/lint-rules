@@ -1,9 +1,9 @@
 buildscript {
   ext.versions = [
-    kotlin: '1.4.32',
+    kotlin: '1.5.31',
     minSdk: 9,
-    compileSdk: 30,
-    lint: '30.0.1',
+    compileSdk: 31,
+    lint: '30.1.2',
   ]
 
   ext.deps = [
@@ -22,9 +22,9 @@ buildscript {
   }
   dependencies {
     classpath 'com.vanniktech:gradle-code-quality-tools-plugin:0.20.0'
-    classpath 'com.vanniktech:gradle-maven-publish-plugin:0.17.0'
+    classpath 'com.vanniktech:gradle-maven-publish-plugin:0.19.0'
 
-    classpath 'com.android.tools.build:gradle:7.0.4'
+    classpath 'com.android.tools.build:gradle:7.1.2'
     classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin}"
   }
 }
@@ -33,7 +33,7 @@ apply plugin: 'com.vanniktech.code.quality.tools'
 
 codeQualityTools {
   ktlint {
-    toolVersion = '0.41.0'
+    toolVersion = '0.44.0'
   }
   detekt {
     enabled = false
@@ -51,6 +51,6 @@ allprojects {
 }
 
 wrapper {
-  gradleVersion = "7.3.3"
+  gradleVersion = "7.4"
   distributionType = Wrapper.DistributionType.ALL
 }
