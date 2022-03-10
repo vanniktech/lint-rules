@@ -7,7 +7,7 @@ A set of very opinionated lint rules.
 
 ```groovy
 compile 'com.vanniktech:lint-rules-android:0.19.0'
-compile 'com.vanniktech:lint-rules-android:0.19.0-SNAPSHOT'
+compile 'com.vanniktech:lint-rules-android:0.20.0-SNAPSHOT'
 ```
 
 [Full list of all checks that are added.](lint-rules-android.md)
@@ -16,7 +16,7 @@ compile 'com.vanniktech:lint-rules-android:0.19.0-SNAPSHOT'
 
 ```groovy
 compile 'com.vanniktech:lint-rules-rxjava2:0.19.0'
-compile 'com.vanniktech:lint-rules-rxjava2:0.19.0-SNAPSHOT'
+compile 'com.vanniktech:lint-rules-rxjava2:0.20.0-SNAPSHOT'
 ```
 
 [Full list of all checks that are added.](lint-rules-rxjava2.md)
