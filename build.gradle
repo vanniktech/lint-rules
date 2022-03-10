@@ -33,7 +33,7 @@ apply plugin: 'com.vanniktech.code.quality.tools'
 
 codeQualityTools {
   ktlint {
-    toolVersion = '0.41.0'
+    toolVersion = '0.44.0'
   }
   detekt {
     enabled = false

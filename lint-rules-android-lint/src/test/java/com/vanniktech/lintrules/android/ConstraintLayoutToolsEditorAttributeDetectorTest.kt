@@ -15,7 +15,8 @@ class ConstraintLayoutToolsEditorAttributeDetectorTest {
           """
           <TextView
               xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_editor_absoluteX="4dp"/>"""
+              android:layout_editor_absoluteX="4dp"/>
+          """
         ).indented()
       )
       .issues(ISSUE_CONSTRAINT_LAYOUT_TOOLS_EDITOR_ATTRIBUTE_DETECTOR)
@@ -31,7 +32,8 @@ class ConstraintLayoutToolsEditorAttributeDetectorTest {
           """
           <TextView
               xmlns:app="http://schemas.android.com/apk/res-auto"
-              app:layout_editor_absoluteX="4dp"/>"""
+              app:layout_editor_absoluteX="4dp"/>
+          """
         ).indented()
       )
       .issues(ISSUE_CONSTRAINT_LAYOUT_TOOLS_EDITOR_ATTRIBUTE_DETECTOR)
@@ -47,7 +49,8 @@ class ConstraintLayoutToolsEditorAttributeDetectorTest {
           """
           <TextView
               xmlns:tools="http://schemas.android.com/tools"
-              tools:layout_editor_absoluteX="4dp"/>"""
+              tools:layout_editor_absoluteX="4dp"/>
+          """
         ).indented()
       )
       .issues(ISSUE_CONSTRAINT_LAYOUT_TOOLS_EDITOR_ATTRIBUTE_DETECTOR)
@@ -57,7 +60,8 @@ class ConstraintLayoutToolsEditorAttributeDetectorTest {
           |res/layout/layout.xml:3: Warning: Don't use tools:layout_editor_absoluteX [ConstraintLayoutToolsEditorAttribute]
           |    tools:layout_editor_absoluteX="4dp"/>
           |    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-          |0 errors, 1 warnings""".trimMargin()
+          |0 errors, 1 warnings
+        """.trimMargin()
       )
       .expectFixDiffs(
         """
@@ -66,7 +70,8 @@ class ConstraintLayoutToolsEditorAttributeDetectorTest {
           |- <TextView xmlns:tools="http://schemas.android.com/tools"
           |-     tools:layout_editor_absoluteX="4dp" />
           |+ <TextView xmlns:tools="http://schemas.android.com/tools" />
-          |""".trimMargin()
+          |
+        """.trimMargin()
       )
   }
 
@@ -78,7 +83,8 @@ class ConstraintLayoutToolsEditorAttributeDetectorTest {
           """
           <TextView
               xmlns:tools="http://schemas.android.com/tools"
-              tools:alayout_editor_absoluteX="4dp"/>"""
+              tools:alayout_editor_absoluteX="4dp"/>
+          """
         ).indented()
       )
       .issues(ISSUE_CONSTRAINT_LAYOUT_TOOLS_EDITOR_ATTRIBUTE_DETECTOR)
@@ -93,7 +99,8 @@ class ConstraintLayoutToolsEditorAttributeDetectorTest {
           "res/layout/layout.xml",
           """
           <TextView
-          style="?android:attr/borderlessButtonStyle"/>"""
+          style="?android:attr/borderlessButtonStyle"/>
+          """
         ).indented()
       )
       .issues(ISSUE_CONSTRAINT_LAYOUT_TOOLS_EDITOR_ATTRIBUTE_DETECTOR)

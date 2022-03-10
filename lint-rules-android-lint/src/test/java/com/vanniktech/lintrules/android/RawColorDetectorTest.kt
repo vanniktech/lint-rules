@@ -14,7 +14,8 @@ class RawColorDetectorTest {
           "res/layout/layout.xml",
           """
           <TextView xmlns:tools="http://schemas.android.com/tools"
-              tools:textColor="#fff"/>"""
+              tools:textColor="#fff"/>
+          """
         ).indented()
       )
       .issues(ISSUE_RAW_COLOR)
@@ -29,7 +30,8 @@ class RawColorDetectorTest {
           "res/layout/layout.xml",
           """
           <TextView xmlns:app="http://schemas.android.com/apk/res-auto"
-              app:someCustomColor="#fff"/>"""
+              app:someCustomColor="#fff"/>
+          """
         ).indented()
       )
       .issues(ISSUE_RAW_COLOR)
@@ -39,7 +41,8 @@ class RawColorDetectorTest {
           |res/layout/layout.xml:2: Warning: Should be using a color resource instead. [RawColor]
           |    app:someCustomColor="#fff"/>
           |                         ~~~~
-          |0 errors, 1 warnings""".trimMargin()
+          |0 errors, 1 warnings
+        """.trimMargin()
       )
   }
 
@@ -50,7 +53,8 @@ class RawColorDetectorTest {
           "res/layout/layout.xml",
           """
           <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-              android:textColor="#fff"/>"""
+              android:textColor="#fff"/>
+          """
         ).indented()
       )
       .issues(ISSUE_RAW_COLOR)
@@ -60,7 +64,8 @@ class RawColorDetectorTest {
           |res/layout/layout.xml:2: Warning: Should be using a color resource instead. [RawColor]
           |    android:textColor="#fff"/>
           |                       ~~~~
-          |0 errors, 1 warnings""".trimMargin()
+          |0 errors, 1 warnings
+        """.trimMargin()
       )
   }
 
@@ -71,14 +76,16 @@ class RawColorDetectorTest {
           "res/layout/layout.xml",
           """
           <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-              android:textColor="#fff"/>"""
+              android:textColor="#fff"/>
+          """
         ).indented(),
         xml(
           "res/values/dimens.xml",
           """
           <resources>
             <color name="white">#fff</color>
-          </resources>"""
+          </resources>
+          """
         ).indented()
       )
       .issues(ISSUE_RAW_COLOR)
@@ -88,7 +95,8 @@ class RawColorDetectorTest {
           |res/layout/layout.xml:2: Warning: Should be using a color resource instead. [RawColor]
           |    android:textColor="#fff"/>
           |                       ~~~~
-          |0 errors, 1 warnings""".trimMargin()
+          |0 errors, 1 warnings
+        """.trimMargin()
       )
       .expectFixDiffs(
         """
@@ -97,7 +105,8 @@ class RawColorDetectorTest {
           |-     android:textColor="#fff"/>
           |@@ -3 +2
           |+     android:textColor="@color/white"/>
-          |""".trimMargin()
+          |
+        """.trimMargin()
       )
   }
 
@@ -108,7 +117,8 @@ class RawColorDetectorTest {
           "res/layout/layout.xml",
           """
           <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-              android:text="Blub!"/>"""
+              android:text="Blub!"/>
+          """
         ).indented()
       )
       .issues(ISSUE_RAW_COLOR)
@@ -125,7 +135,8 @@ class RawColorDetectorTest {
           <TextView xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:tools="http://schemas.android.com/tools"
               android:textColor="#fff"
-              tools:ignore="RawColor"/>"""
+              tools:ignore="RawColor"/>
+          """
         ).indented()
       )
       .issues(ISSUE_RAW_COLOR)
@@ -144,7 +155,8 @@ class RawColorDetectorTest {
               android:shape="rectangle">
             <solid android:color="#1aeebf"/>
             <size android:height="4dp"/>
-          </shape>"""
+          </shape>
+          """
         ).indented()
       )
       .issues(ISSUE_RAW_COLOR)
@@ -154,7 +166,8 @@ class RawColorDetectorTest {
           |res/drawable/drawable.xml:4: Warning: Should be using a color resource instead. [RawColor]
           |  <solid android:color="#1aeebf"/>
           |                        ~~~~~~~
-          |0 errors, 1 warnings""".trimMargin()
+          |0 errors, 1 warnings
+        """.trimMargin()
       )
   }
 
@@ -172,7 +185,8 @@ class RawColorDetectorTest {
             <path
                 android:fillColor="#000000"
                 android:pathData="M19,13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
-          </vector>"""
+          </vector>
+          """
         ).indented()
       )
       .issues(ISSUE_RAW_COLOR)
@@ -191,7 +205,8 @@ class RawColorDetectorTest {
               android:viewportHeight="24.0"
               android:viewportWidth="24.0"
               android:fillColor="#000000"
-              android:width="24dp"/>"""
+              android:width="24dp"/>
+          """
         ).indented()
       )
       .issues(ISSUE_RAW_COLOR)

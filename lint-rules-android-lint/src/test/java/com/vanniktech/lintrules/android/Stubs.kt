@@ -8,28 +8,32 @@ val stubJUnitTest = TestFiles.java(
   """
     package org.junit;
 
-    public @interface Test { }"""
+    public @interface Test { }
+  """
 ).indented()
 
 val stubJUnitIgnore = TestFiles.java(
   """
     package org.junit;
 
-    public @interface Test { }"""
+    public @interface Test { }
+  """
 ).indented()
 
 val stubAnnotationTest = TestFiles.java(
   """
     package my.custom;
 
-    public @interface Test { }"""
+    public @interface Test { }
+  """
 ).indented()
 
 val stubAnnotationSomething = TestFiles.java(
   """
     package my.custom;
 
-    public @interface Something { }"""
+    public @interface Something { }
+  """
 ).indented()
 
 fun viewBindingProject() = TestFiles.gradle(
@@ -40,7 +44,8 @@ fun viewBindingProject() = TestFiles.gradle(
           buildFeatures {
             viewBinding = true
           }
-        }"""
+        }
+  """
 )
   .indented()
 
@@ -50,6 +55,7 @@ fun resourcePrefix(prefix: String) = TestFiles.gradle(
 
         android {
           resourcePrefix '$prefix'
-        }"""
+        }
+  """
 )
   .indented()

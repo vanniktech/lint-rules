@@ -14,7 +14,8 @@ class WrongViewIdFormatDetectorTest {
           "res/layout/ids.xml",
           """
           <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-              android:id="@+id/lowerCamelCase"/>"""
+              android:id="@+id/lowerCamelCase"/>
+          """
         ).indented()
       )
       .issues(ISSUE_WRONG_VIEW_ID_FORMAT)
@@ -29,7 +30,8 @@ class WrongViewIdFormatDetectorTest {
           "res/layout/ids.xml",
           """
           <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-              android:id="@id/lowerCamelCase"/>"""
+              android:id="@id/lowerCamelCase"/>
+          """
         ).indented()
       )
       .issues(ISSUE_WRONG_VIEW_ID_FORMAT)
@@ -44,7 +46,8 @@ class WrongViewIdFormatDetectorTest {
           "res/layout/ids.xml",
           """
           <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-              android:id="@+id/CamelCase"/>"""
+              android:id="@+id/CamelCase"/>
+          """
         ).indented()
       )
       .issues(ISSUE_WRONG_VIEW_ID_FORMAT)
@@ -54,7 +57,8 @@ class WrongViewIdFormatDetectorTest {
           |res/layout/ids.xml:2: Warning: Id is not in lowerCamelCaseFormat [WrongViewIdFormat]
           |    android:id="@+id/CamelCase"/>
           |                ~~~~~~~~~~~~~~
-          |0 errors, 1 warnings""".trimMargin()
+          |0 errors, 1 warnings
+        """.trimMargin()
       )
       .expectFixDiffs(
         """
@@ -63,7 +67,8 @@ class WrongViewIdFormatDetectorTest {
           |-     android:id="@+id/CamelCase"/>
           |@@ -3 +2
           |+     android:id="@+id/camelCase"/>
-          |""".trimMargin()
+          |
+        """.trimMargin()
       )
   }
 
@@ -74,7 +79,8 @@ class WrongViewIdFormatDetectorTest {
           "res/layout/ids.xml",
           """
           <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-              android:id="@+id/snake_case"/>"""
+              android:id="@+id/snake_case"/>
+          """
         ).indented()
       )
       .issues(ISSUE_WRONG_VIEW_ID_FORMAT)
@@ -84,7 +90,8 @@ class WrongViewIdFormatDetectorTest {
           |res/layout/ids.xml:2: Warning: Id is not in lowerCamelCaseFormat [WrongViewIdFormat]
           |    android:id="@+id/snake_case"/>
           |                ~~~~~~~~~~~~~~~
-          |0 errors, 1 warnings""".trimMargin()
+          |0 errors, 1 warnings
+        """.trimMargin()
       )
       .expectFixDiffs(
         """
@@ -93,7 +100,8 @@ class WrongViewIdFormatDetectorTest {
           |-     android:id="@+id/snake_case"/>
           |@@ -3 +2
           |+     android:id="@+id/snakeCase"/>
-          |""".trimMargin()
+          |
+        """.trimMargin()
       )
   }
 }

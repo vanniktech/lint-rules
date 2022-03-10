@@ -16,7 +16,8 @@ class AssertjDetectorTest {
           """
             package foo;
 
-            import org.assertj.core.api.Assertions;"""
+            import org.assertj.core.api.Assertions;
+          """
         ).indented()
       )
       .issues(ISSUE_ASSERTJ_IMPORT)
@@ -26,7 +27,8 @@ class AssertjDetectorTest {
             |src/foo/package-info.java:3: Warning: Should use Java6Assertions instead [AssertjImport]
             |import org.assertj.core.api.Assertions;
             |       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-            |0 errors, 1 warnings""".trimMargin()
+            |0 errors, 1 warnings
+        """.trimMargin()
       )
       .expectFixDiffs(
         """
@@ -35,7 +37,8 @@ class AssertjDetectorTest {
             |- import org.assertj.core.api.Assertions;
             |@@ -4 +3
             |+ import org.assertj.core.api.Java6Assertions;
-            |""".trimMargin()
+            |
+        """.trimMargin()
       )
   }
 
@@ -47,7 +50,8 @@ class AssertjDetectorTest {
           """
             package foo;
 
-            import static org.assertj.core.api.Assertions.assertThat;"""
+            import static org.assertj.core.api.Assertions.assertThat;
+          """
         ).indented()
       )
       .issues(ISSUE_ASSERTJ_IMPORT)
@@ -57,7 +61,8 @@ class AssertjDetectorTest {
             |src/foo/package-info.java:3: Warning: Should use Java6Assertions instead [AssertjImport]
             |import static org.assertj.core.api.Assertions.assertThat;
             |              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-            |0 errors, 1 warnings""".trimMargin()
+            |0 errors, 1 warnings
+        """.trimMargin()
       )
       .expectFixDiffs(
         """
@@ -66,7 +71,8 @@ class AssertjDetectorTest {
             |- import static org.assertj.core.api.Assertions.assertThat;
             |@@ -4 +3
             |+ import static org.assertj.core.api.Java6Assertions.assertThat;
-            |""".trimMargin()
+            |
+        """.trimMargin()
       )
   }
 
@@ -81,7 +87,8 @@ class AssertjDetectorTest {
             |src/test.kt:1: Warning: Should use Java6Assertions instead [AssertjImport]
             |import org.assertj.core.api.Assertions
             |       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-            |0 errors, 1 warnings""".trimMargin()
+            |0 errors, 1 warnings
+        """.trimMargin()
       )
       .expectFixDiffs(
         """
@@ -90,7 +97,8 @@ class AssertjDetectorTest {
             |- import org.assertj.core.api.Assertions
             |@@ -2 +1
             |+ import org.assertj.core.api.Java6Assertions
-            |""".trimMargin()
+            |
+        """.trimMargin()
       )
   }
 
@@ -105,7 +113,8 @@ class AssertjDetectorTest {
             |src/test.kt:1: Warning: Should use Java6Assertions instead [AssertjImport]
             |import org.assertj.core.api.Assertions.assertThat
             |       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-            |0 errors, 1 warnings""".trimMargin()
+            |0 errors, 1 warnings
+        """.trimMargin()
       )
       .expectFixDiffs(
         """
@@ -114,7 +123,8 @@ class AssertjDetectorTest {
             |- import org.assertj.core.api.Assertions.assertThat
             |@@ -2 +1
             |+ import org.assertj.core.api.Java6Assertions.assertThat
-            |""".trimMargin()
+            |
+        """.trimMargin()
       )
   }
 }

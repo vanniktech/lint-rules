@@ -20,7 +20,8 @@ class WrongConstraintLayoutUsageDetectorTest {
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               app:layout_constraintLeft_toLeftOf="parent"
-              tools:ignore="WrongConstraintLayoutUsage"/>"""
+              tools:ignore="WrongConstraintLayoutUsage"/>
+          """
         ).indented()
       )
       .issues(ISSUE_WRONG_CONSTRAINT_LAYOUT_USAGE)
@@ -39,7 +40,8 @@ class WrongConstraintLayoutUsageDetectorTest {
               xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              app:layout_constraintLeft_toLeftOf="parent"/>"""
+              app:layout_constraintLeft_toLeftOf="parent"/>
+          """
         ).indented()
       )
       .issues(ISSUE_WRONG_CONSTRAINT_LAYOUT_USAGE)
@@ -49,7 +51,8 @@ class WrongConstraintLayoutUsageDetectorTest {
           |res/layout/ids.xml:6: Error: This attribute won't work with RTL. Please use layout_constraintStart_toStartOf instead. [WrongConstraintLayoutUsage]
           |    app:layout_constraintLeft_toLeftOf="parent"/>
           |    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-          |1 errors, 0 warnings""".trimMargin()
+          |1 errors, 0 warnings
+        """.trimMargin()
       )
       .expectFixDiffs(
         """
@@ -58,7 +61,8 @@ class WrongConstraintLayoutUsageDetectorTest {
           |-     app:layout_constraintLeft_toLeftOf="parent"/>
           |@@ -7 +6
           |+     app:layout_constraintStart_toStartOf="parent"/>
-          |""".trimMargin()
+          |
+        """.trimMargin()
       )
   }
 
@@ -73,7 +77,8 @@ class WrongConstraintLayoutUsageDetectorTest {
               xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              app:layout_constraintLeft_toRightOf="parent"/>"""
+              app:layout_constraintLeft_toRightOf="parent"/>
+          """
         ).indented()
       )
       .issues(ISSUE_WRONG_CONSTRAINT_LAYOUT_USAGE)
@@ -83,7 +88,8 @@ class WrongConstraintLayoutUsageDetectorTest {
           |res/layout/ids.xml:6: Error: This attribute won't work with RTL. Please use layout_constraintStart_toEndOf instead. [WrongConstraintLayoutUsage]
           |    app:layout_constraintLeft_toRightOf="parent"/>
           |    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-          |1 errors, 0 warnings""".trimMargin()
+          |1 errors, 0 warnings
+        """.trimMargin()
       )
       .expectFixDiffs(
         """
@@ -92,7 +98,8 @@ class WrongConstraintLayoutUsageDetectorTest {
           |-     app:layout_constraintLeft_toRightOf="parent"/>
           |@@ -7 +6
           |+     app:layout_constraintStart_toEndOf="parent"/>
-          |""".trimMargin()
+          |
+        """.trimMargin()
       )
   }
 
@@ -107,7 +114,8 @@ class WrongConstraintLayoutUsageDetectorTest {
               xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              app:layout_constraintRight_toRightOf="parent"/>"""
+              app:layout_constraintRight_toRightOf="parent"/>
+          """
         ).indented()
       )
       .issues(ISSUE_WRONG_CONSTRAINT_LAYOUT_USAGE)
@@ -117,7 +125,8 @@ class WrongConstraintLayoutUsageDetectorTest {
           |res/layout/ids.xml:6: Error: This attribute won't work with RTL. Please use layout_constraintEnd_toEndOf instead. [WrongConstraintLayoutUsage]
           |    app:layout_constraintRight_toRightOf="parent"/>
           |    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-          |1 errors, 0 warnings""".trimMargin()
+          |1 errors, 0 warnings
+        """.trimMargin()
       )
       .expectFixDiffs(
         """
@@ -126,7 +135,8 @@ class WrongConstraintLayoutUsageDetectorTest {
           |-     app:layout_constraintRight_toRightOf="parent"/>
           |@@ -7 +6
           |+     app:layout_constraintEnd_toEndOf="parent"/>
-          |""".trimMargin()
+          |
+        """.trimMargin()
       )
   }
 
@@ -141,7 +151,8 @@ class WrongConstraintLayoutUsageDetectorTest {
               xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              app:layout_constraintRight_toLeftOf="parent"/>"""
+              app:layout_constraintRight_toLeftOf="parent"/>
+          """
         ).indented()
       )
       .issues(ISSUE_WRONG_CONSTRAINT_LAYOUT_USAGE)
@@ -151,7 +162,8 @@ class WrongConstraintLayoutUsageDetectorTest {
           |res/layout/ids.xml:6: Error: This attribute won't work with RTL. Please use layout_constraintEnd_toStartOf instead. [WrongConstraintLayoutUsage]
           |    app:layout_constraintRight_toLeftOf="parent"/>
           |    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-          |1 errors, 0 warnings""".trimMargin()
+          |1 errors, 0 warnings
+        """.trimMargin()
       )
       .expectFixDiffs(
         """
@@ -160,7 +172,8 @@ class WrongConstraintLayoutUsageDetectorTest {
           |-     app:layout_constraintRight_toLeftOf="parent"/>
           |@@ -7 +6
           |+     app:layout_constraintEnd_toStartOf="parent"/>
-          |""".trimMargin()
+          |
+        """.trimMargin()
       )
   }
 
@@ -171,7 +184,8 @@ class WrongConstraintLayoutUsageDetectorTest {
           "res/layout/ids.xml",
           """
           <TextView
-              style="?android:attr/borderlessButtonStyle"/>"""
+              style="?android:attr/borderlessButtonStyle"/>
+          """
         ).indented()
       )
       .issues(ISSUE_WRONG_CONSTRAINT_LAYOUT_USAGE)

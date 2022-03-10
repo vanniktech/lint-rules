@@ -21,7 +21,8 @@ class LayoutFileNameMatchesClassDetectorTest {
           public static final int foo2bar_activity_rider = 4;
           public static final int foo2bar_activity = 5;
         }
-      }"""
+      }
+    """
   ).indented()
 
   private val activity = java(
@@ -30,7 +31,8 @@ class LayoutFileNameMatchesClassDetectorTest {
 
       public abstract class Activity {
         public void setContentView(int viewId) { }
-      }"""
+      }
+    """
   ).indented()
 
   @Test fun nonRUsage() {
@@ -45,7 +47,8 @@ class LayoutFileNameMatchesClassDetectorTest {
             void foo(int id) {
               setContentView(id);
             }
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_LAYOUT_FILE_NAME_MATCHES_CLASS)
@@ -65,7 +68,8 @@ class LayoutFileNameMatchesClassDetectorTest {
             void foo() {
               setContentView(R.layout.activity_foo);
             }
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_LAYOUT_FILE_NAME_MATCHES_CLASS)
@@ -85,7 +89,8 @@ class LayoutFileNameMatchesClassDetectorTest {
             fun foo() {
               setContentView(R.layout.foo2bar_activity_rider)
             }
-          }"""
+          }
+          """
         ).indented(),
         resourcePrefix("foo2bar_")
       )
@@ -106,7 +111,8 @@ class LayoutFileNameMatchesClassDetectorTest {
             fun foo() {
               setContentView(R.layout.foo2bar_activity)
             }
-          }"""
+          }
+          """
         ).indented(),
         resourcePrefix("foo2bar_")
       )
@@ -127,7 +133,8 @@ class LayoutFileNameMatchesClassDetectorTest {
             void foo() {
               setContentView(R.layout.unit_test_activity_foo);
             }
-          }"""
+          }
+          """
         ).indented(),
         resourcePrefix("unit_test_")
       )
@@ -148,7 +155,8 @@ class LayoutFileNameMatchesClassDetectorTest {
             fun foo() {
               setContentView(R.layout.activity_game_times)
             }
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_LAYOUT_FILE_NAME_MATCHES_CLASS)
@@ -168,7 +176,8 @@ class LayoutFileNameMatchesClassDetectorTest {
               void foo() {
                 setContentView(R.layout.activity_bar);
               }
-            }"""
+            }
+          """
         ).indented(),
         resourcePrefix("unit_test_")
       )
@@ -179,7 +188,8 @@ class LayoutFileNameMatchesClassDetectorTest {
             |src/main/java/foo/FooActivity.java:5: Warning: Parameter should be named R.layout.unit_test_activity_foo [LayoutFileNameMatchesClass]
             |    setContentView(R.layout.activity_bar);
             |                   ~~~~~~~~~~~~~~~~~~~~~
-            |0 errors, 1 warnings""".trimMargin()
+            |0 errors, 1 warnings
+        """.trimMargin()
       )
       .expectFixDiffs(
         """
@@ -187,7 +197,8 @@ class LayoutFileNameMatchesClassDetectorTest {
             |@@ -5 +5
             |-     setContentView(R.layout.activity_bar);
             |+     setContentView(R.layout.unit_test_activity_foo);
-            |""".trimMargin()
+            |
+        """.trimMargin()
       )
   }
 
@@ -203,7 +214,8 @@ class LayoutFileNameMatchesClassDetectorTest {
             void foo() {
               setContentView(R.layout.activity_bar);
             }
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_LAYOUT_FILE_NAME_MATCHES_CLASS)
@@ -213,7 +225,8 @@ class LayoutFileNameMatchesClassDetectorTest {
           |src/foo/GameTimesActivity.java:5: Warning: Parameter should be named R.layout.activity_game_times [LayoutFileNameMatchesClass]
           |    setContentView(R.layout.activity_bar);
           |                   ~~~~~~~~~~~~~~~~~~~~~
-          |0 errors, 1 warnings""".trimMargin()
+          |0 errors, 1 warnings
+        """.trimMargin()
       )
       .expectFixDiffs(
         """
@@ -221,7 +234,8 @@ class LayoutFileNameMatchesClassDetectorTest {
           |@@ -5 +5
           |-     setContentView(R.layout.activity_bar);
           |+     setContentView(R.layout.activity_game_times);
-          |""".trimMargin()
+          |
+        """.trimMargin()
       )
   }
 
@@ -237,7 +251,8 @@ class LayoutFileNameMatchesClassDetectorTest {
             fun foo() {
               setContentView(R.layout.activity_bar)
             }
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_LAYOUT_FILE_NAME_MATCHES_CLASS)
@@ -247,7 +262,8 @@ class LayoutFileNameMatchesClassDetectorTest {
           |src/foo/ThemesActivity.kt:5: Warning: Parameter should be named R.layout.activity_themes [LayoutFileNameMatchesClass]
           |    setContentView(R.layout.activity_bar)
           |                   ~~~~~~~~~~~~~~~~~~~~~
-          |0 errors, 1 warnings""".trimMargin()
+          |0 errors, 1 warnings
+        """.trimMargin()
       )
       .expectFixDiffs(
         """
@@ -255,7 +271,8 @@ class LayoutFileNameMatchesClassDetectorTest {
           |@@ -5 +5
           |-     setContentView(R.layout.activity_bar)
           |+     setContentView(R.layout.activity_themes)
-          |""".trimMargin()
+          |
+        """.trimMargin()
       )
   }
 }

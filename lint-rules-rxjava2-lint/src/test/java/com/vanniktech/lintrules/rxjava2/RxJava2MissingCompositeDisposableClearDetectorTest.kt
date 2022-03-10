@@ -17,7 +17,8 @@ class RxJava2MissingCompositeDisposableClearDetectorTest {
           package foo;
 
           class Example {
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_MISSING_COMPOSITE_DISPOSABLE_CLEAR)
@@ -37,7 +38,8 @@ class RxJava2MissingCompositeDisposableClearDetectorTest {
 
           class Example {
             CompositeDisposable cd;
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_MISSING_COMPOSITE_DISPOSABLE_CLEAR)
@@ -47,7 +49,8 @@ class RxJava2MissingCompositeDisposableClearDetectorTest {
           |src/foo/Example.java:6: Error: clear() is not called [RxJava2MissingCompositeDisposableClear]
           |  CompositeDisposable cd;
           |  ~~~~~~~~~~~~~~~~~~~~~~~
-          |1 errors, 0 warnings""".trimMargin()
+          |1 errors, 0 warnings
+        """.trimMargin()
       )
   }
 
@@ -63,7 +66,8 @@ class RxJava2MissingCompositeDisposableClearDetectorTest {
 
           class Example {
             Disposable disposable;
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_MISSING_COMPOSITE_DISPOSABLE_CLEAR)
@@ -84,7 +88,8 @@ class RxJava2MissingCompositeDisposableClearDetectorTest {
           class Example {
             CompositeDisposable cd1;
             CompositeDisposable cd2;
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_MISSING_COMPOSITE_DISPOSABLE_CLEAR)
@@ -98,7 +103,8 @@ class RxJava2MissingCompositeDisposableClearDetectorTest {
           |  CompositeDisposable cd2;
           |  ~~~~~~~~~~~~~~~~~~~~~~~~
           |2 errors, 0 warnings
-          |""".trimMargin()
+          |
+        """.trimMargin()
       )
   }
 
@@ -115,7 +121,8 @@ class RxJava2MissingCompositeDisposableClearDetectorTest {
           class Example {
             val cd1: CompositeDisposable
             val cd2: CompositeDisposable
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_MISSING_COMPOSITE_DISPOSABLE_CLEAR)
@@ -129,7 +136,8 @@ class RxJava2MissingCompositeDisposableClearDetectorTest {
           |  val cd2: CompositeDisposable
           |  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
           |2 errors, 0 warnings
-          |""".trimMargin()
+          |
+        """.trimMargin()
       )
   }
 
@@ -148,7 +156,8 @@ class RxJava2MissingCompositeDisposableClearDetectorTest {
             public void foo() {
              cd.clear();
             }
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_MISSING_COMPOSITE_DISPOSABLE_CLEAR)
@@ -171,7 +180,8 @@ class RxJava2MissingCompositeDisposableClearDetectorTest {
             fun foo() {
              cd.clear()
             }
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_MISSING_COMPOSITE_DISPOSABLE_CLEAR)
@@ -195,7 +205,8 @@ class RxJava2MissingCompositeDisposableClearDetectorTest {
             public void foo() {
              cd1.clear();
             }
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_MISSING_COMPOSITE_DISPOSABLE_CLEAR)
@@ -205,7 +216,8 @@ class RxJava2MissingCompositeDisposableClearDetectorTest {
           |src/foo/Example.java:7: Error: clear() is not called [RxJava2MissingCompositeDisposableClear]
           |  CompositeDisposable cd2;
           |  ~~~~~~~~~~~~~~~~~~~~~~~~
-          |1 errors, 0 warnings""".trimMargin()
+          |1 errors, 0 warnings
+        """.trimMargin()
       )
   }
 
@@ -225,7 +237,8 @@ class RxJava2MissingCompositeDisposableClearDetectorTest {
             fun foo() {
              cd1.clear()
             }
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_MISSING_COMPOSITE_DISPOSABLE_CLEAR)
@@ -235,7 +248,8 @@ class RxJava2MissingCompositeDisposableClearDetectorTest {
           |src/foo/Example.kt:7: Error: clear() is not called [RxJava2MissingCompositeDisposableClear]
           |  val cd2 = CompositeDisposable()
           |  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-          |1 errors, 0 warnings""".trimMargin()
+          |1 errors, 0 warnings
+        """.trimMargin()
       )
   }
 
@@ -266,7 +280,8 @@ class RxJava2MissingCompositeDisposableClearDetectorTest {
               cd2.clear();
             }
           }
-        }"""
+        }
+          """
         ).indented()
       )
       .issues(ISSUE_MISSING_COMPOSITE_DISPOSABLE_CLEAR)
@@ -301,7 +316,8 @@ class RxJava2MissingCompositeDisposableClearDetectorTest {
               cd2.clear()
             }
           }
-        }"""
+        }
+          """
         ).indented()
       )
       .issues(ISSUE_MISSING_COMPOSITE_DISPOSABLE_CLEAR)

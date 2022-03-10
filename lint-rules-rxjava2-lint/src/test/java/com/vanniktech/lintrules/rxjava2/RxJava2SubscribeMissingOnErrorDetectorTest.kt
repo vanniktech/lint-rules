@@ -22,7 +22,8 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
               Observable<Object> o = null;
               o.subscribe();
             }
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
@@ -32,7 +33,8 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
           |src/foo/Example.java:8: Error: Using a version of subscribe() without an error Consumer [RxJava2SubscribeMissingOnError]
           |    o.subscribe();
           |      ~~~~~~~~~
-          |1 errors, 0 warnings""".trimMargin()
+          |1 errors, 0 warnings
+        """.trimMargin()
       )
   }
 
@@ -53,7 +55,8 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
               Consumer<Object> c = new Consumer() { @Override public void accept(Object o) throws Exception { } };
               o.subscribe(c);
             }
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
@@ -63,7 +66,8 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
           |src/foo/Example.java:10: Error: Using a version of subscribe() without an error Consumer [RxJava2SubscribeMissingOnError]
           |    o.subscribe(c);
           |      ~~~~~~~~~
-          |1 errors, 0 warnings""".trimMargin()
+          |1 errors, 0 warnings
+        """.trimMargin()
       )
   }
 
@@ -84,7 +88,8 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
               Consumer<Object> c = new Consumer() { @Override public void accept(Object o) throws Exception { } };
               o.subscribe(c, c);
             }
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
@@ -107,7 +112,8 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
               Flowable<Object> f = null;
               f.subscribe();
             }
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
@@ -117,7 +123,8 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
           |src/foo/Example.java:8: Error: Using a version of subscribe() without an error Consumer [RxJava2SubscribeMissingOnError]
           |    f.subscribe();
           |      ~~~~~~~~~
-          |1 errors, 0 warnings""".trimMargin()
+          |1 errors, 0 warnings
+        """.trimMargin()
       )
   }
 
@@ -138,7 +145,8 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
               Consumer<Object> c = new Consumer() { @Override public void accept(Object o) throws Exception { } };
               f.subscribe(c);
             }
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
@@ -148,7 +156,8 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
           |src/foo/Example.java:10: Error: Using a version of subscribe() without an error Consumer [RxJava2SubscribeMissingOnError]
           |    f.subscribe(c);
           |      ~~~~~~~~~
-          |1 errors, 0 warnings""".trimMargin()
+          |1 errors, 0 warnings
+        """.trimMargin()
       )
   }
 
@@ -169,7 +178,8 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
               Consumer<Object> c = new Consumer() { @Override public void accept(Object o) throws Exception { } };
               f.subscribe(c, c);
             }
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
@@ -192,7 +202,8 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
               Single<Object> s = null;
               s.subscribe();
             }
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
@@ -202,7 +213,8 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
           |src/foo/Example.java:8: Error: Using a version of subscribe() without an error Consumer [RxJava2SubscribeMissingOnError]
           |    s.subscribe();
           |      ~~~~~~~~~
-          |1 errors, 0 warnings""".trimMargin()
+          |1 errors, 0 warnings
+        """.trimMargin()
       )
   }
 
@@ -223,7 +235,8 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
               Consumer<Object> c = new Consumer() { @Override public void accept(Object o) throws Exception { } };
               s.subscribe(c);
             }
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
@@ -233,7 +246,8 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
           |src/foo/Example.java:10: Error: Using a version of subscribe() without an error Consumer [RxJava2SubscribeMissingOnError]
           |    s.subscribe(c);
           |      ~~~~~~~~~
-          |1 errors, 0 warnings""".trimMargin()
+          |1 errors, 0 warnings
+        """.trimMargin()
       )
   }
 
@@ -254,7 +268,8 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
               Consumer<Object> c = new Consumer() { @Override public void accept(Object o) throws Exception { } };
               s.subscribe(c, c);
             }
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
@@ -277,7 +292,8 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
               Completable cp = null;
               cp.subscribe();
             }
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
@@ -287,7 +303,8 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
           |src/foo/Example.java:8: Error: Using a version of subscribe() without an error Consumer [RxJava2SubscribeMissingOnError]
           |    cp.subscribe();
           |       ~~~~~~~~~
-          |1 errors, 0 warnings""".trimMargin()
+          |1 errors, 0 warnings
+        """.trimMargin()
       )
   }
 
@@ -308,7 +325,8 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
               Action a = new Action() { @Override public void run() { } };
               cp.subscribe(a);
             }
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
@@ -318,7 +336,8 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
           |src/foo/Example.java:10: Error: Using a version of subscribe() without an error Consumer [RxJava2SubscribeMissingOnError]
           |    cp.subscribe(a);
           |       ~~~~~~~~~
-          |1 errors, 0 warnings""".trimMargin()
+          |1 errors, 0 warnings
+        """.trimMargin()
       )
   }
 
@@ -341,7 +360,8 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
               Consumer<Throwable> c = new Consumer() { @Override public void accept(Object o) throws Exception { } };
               cp.subscribe(a, c);
             }
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
@@ -364,7 +384,8 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
               Maybe<Object> m = null;
               m.subscribe();
             }
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
@@ -374,7 +395,8 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
           |src/foo/Example.java:8: Error: Using a version of subscribe() without an error Consumer [RxJava2SubscribeMissingOnError]
           |    m.subscribe();
           |      ~~~~~~~~~
-          |1 errors, 0 warnings""".trimMargin()
+          |1 errors, 0 warnings
+        """.trimMargin()
       )
   }
 
@@ -395,7 +417,8 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
               Consumer<Object> c = new Consumer() { @Override public void accept(Object o) throws Exception { } };
               m.subscribe(c);
             }
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
@@ -405,7 +428,8 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
           |src/foo/Example.java:10: Error: Using a version of subscribe() without an error Consumer [RxJava2SubscribeMissingOnError]
           |    m.subscribe(c);
           |      ~~~~~~~~~
-          |1 errors, 0 warnings""".trimMargin()
+          |1 errors, 0 warnings
+        """.trimMargin()
       )
   }
 
@@ -426,7 +450,8 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
               Consumer<Object> c = new Consumer() { @Override public void accept(Object o) throws Exception { } };
               m.subscribe(c, c);
             }
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)

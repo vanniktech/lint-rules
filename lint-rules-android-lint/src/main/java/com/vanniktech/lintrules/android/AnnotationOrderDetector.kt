@@ -17,7 +17,6 @@ import org.jetbrains.uast.UClass
 import org.jetbrains.uast.UElement
 import org.jetbrains.uast.UMethod
 import org.jetbrains.uast.UVariable
-import org.jetbrains.uast.java.JavaUMethod
 import java.util.EnumSet
 
 private val annotationOrder = listOf(
@@ -196,10 +195,12 @@ class AnnotationOrderDetector : Detector(), UastScanner {
           .replace()
           .text(annotations.joinToString(separator = " ") { "@$it" })
           .with(correctOrder)
-          .range(when (element) {
-            is UMethod -> context.getLocation(element.uastParent)
-            else -> context.getLocation(element)
-          })
+          .range(
+            when (element) {
+              is UMethod -> context.getLocation(element.uastParent)
+              else -> context.getLocation(element)
+            }
+          )
           .name("Fix order")
           .autoFix()
           .build()

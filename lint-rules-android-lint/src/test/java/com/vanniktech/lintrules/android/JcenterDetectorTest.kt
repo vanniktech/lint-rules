@@ -16,7 +16,8 @@ class JcenterDetectorTest {
               repositories {
                 jcenter()
               }
-            }"""
+            }
+          """
         ).indented()
       )
       .issues(ISSUE_JCENTER)
@@ -26,7 +27,8 @@ class JcenterDetectorTest {
             |build.gradle:3: Warning: Don't use jcenter() [JCenter]
             |    jcenter()
             |    ~~~~~~~~~
-            |0 errors, 1 warnings""".trimMargin()
+            |0 errors, 1 warnings
+        """.trimMargin()
       )
       .expectFixDiffs(
         """
@@ -34,7 +36,8 @@ class JcenterDetectorTest {
             |@@ -3 +3
             |-     jcenter()
             |+     mavenCentral()
-            |""".trimMargin()
+            |
+        """.trimMargin()
       )
   }
 
@@ -47,7 +50,8 @@ class JcenterDetectorTest {
               repositories {
                 mavenCentral()
               }
-            }"""
+            }
+          """
         ).indented()
       )
       .issues(ISSUE_JCENTER)

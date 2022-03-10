@@ -22,7 +22,8 @@ class RxJava2DisposableDisposeCallDetectorTest {
                 CompositeDisposable cd = null;
                 cd.dispose();
               }
-            }"""
+            }
+          """
         ).indented()
       )
       .issues(ISSUE_DISPOSABLE_DISPOSE_CALL)
@@ -32,7 +33,8 @@ class RxJava2DisposableDisposeCallDetectorTest {
             |src/foo/Example.java:8: Warning: Calling dispose instead of clear [RxJava2DisposableDisposeCall]
             |    cd.dispose();
             |       ~~~~~~~
-            |0 errors, 1 warnings""".trimMargin()
+            |0 errors, 1 warnings
+        """.trimMargin()
       )
       .expectFixDiffs(
         """
@@ -40,7 +42,8 @@ class RxJava2DisposableDisposeCallDetectorTest {
             |@@ -8 +8
             |-     cd.dispose();
             |+     cd.clear();
-            |""".trimMargin()
+            |
+        """.trimMargin()
       )
   }
 }

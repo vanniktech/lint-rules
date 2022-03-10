@@ -18,7 +18,8 @@ class UnusedMergeAttributesDetectorTest {
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_marginTop="64dp"
                 tools:parentTag="LinearLayout"
-                />"""
+                />
+          """
         ).indented()
       )
       .issues(ISSUE_UNUSED_MERGE_ATTRIBUTES)
@@ -28,7 +29,8 @@ class UnusedMergeAttributesDetectorTest {
             |res/layout/view_custom.xml:4: Warning: Attribute won't be used [UnusedMergeAttributes]
             |    android:layout_marginTop="64dp"
             |    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-            |0 errors, 1 warnings""".trimMargin()
+            |0 errors, 1 warnings
+        """.trimMargin()
       )
       .expectFixDiffs(
         """
@@ -36,7 +38,8 @@ class UnusedMergeAttributesDetectorTest {
             |@@ -4 +4
             |-     android:layout_marginTop="64dp"
             |+     tools:layout_marginTop="64dp"
-            |""".trimMargin()
+            |
+        """.trimMargin()
       )
   }
 
@@ -51,7 +54,8 @@ class UnusedMergeAttributesDetectorTest {
                 xmlns:tools="http://schemas.android.com/tools"
                 app:layout_marginTop="64dp"
                 tools:parentTag="LinearLayout"
-                />"""
+                />
+          """
         ).indented()
       )
       .issues(ISSUE_UNUSED_MERGE_ATTRIBUTES)
@@ -61,7 +65,8 @@ class UnusedMergeAttributesDetectorTest {
             |res/layout/view_custom.xml:4: Warning: Attribute won't be used [UnusedMergeAttributes]
             |    app:layout_marginTop="64dp"
             |    ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-            |0 errors, 1 warnings""".trimMargin()
+            |0 errors, 1 warnings
+        """.trimMargin()
       )
       .expectFixDiffs(
         """
@@ -69,7 +74,8 @@ class UnusedMergeAttributesDetectorTest {
             |@@ -4 +4
             |-     app:layout_marginTop="64dp"
             |+     tools:layout_marginTop="64dp"
-            |""".trimMargin()
+            |
+        """.trimMargin()
       )
   }
 
@@ -82,7 +88,8 @@ class UnusedMergeAttributesDetectorTest {
             <merge
                 xmlns:app="http://schemas.android.com/apk/res/android"
                 app:layout_marginTop="64dp"
-                />"""
+                />
+          """
         ).indented()
       )
       .issues(ISSUE_UNUSED_MERGE_ATTRIBUTES)

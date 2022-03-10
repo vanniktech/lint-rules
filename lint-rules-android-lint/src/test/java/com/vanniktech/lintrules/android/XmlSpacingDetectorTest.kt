@@ -16,7 +16,8 @@ class XmlSpacingDetectorTest {
           <merge xmlns:android="http://schemas.android.com/apk/res/android">
             <TextView
                 android:layout_width="wrap_content"/>
-          </merge>"""
+          </merge>
+          """
         ).indented()
       )
       .issues(ISSUE_XML_SPACING)
@@ -84,7 +85,8 @@ class XmlSpacingDetectorTest {
 
                 />
 
-          </LinearLayout>"""
+          </LinearLayout>
+          """
         ).indented()
       )
       .issues(ISSUE_XML_SPACING)
@@ -103,7 +105,8 @@ class XmlSpacingDetectorTest {
           |res/layout/activity_home.xml:9: Warning: Unnecessary new line at line 9 [XmlSpacing]
           |
           |^
-          |0 errors, 4 warnings""".trimMargin()
+          |0 errors, 4 warnings
+        """.trimMargin()
       )
       .expectFixDiffs(
         """
@@ -119,7 +122,8 @@ class XmlSpacingDetectorTest {
           |Fix for res/layout/activity_home.xml line 8: Remove new line:
           |@@ -1 +1
           |-
-          |""".trimMargin()
+          |
+        """.trimMargin()
       )
   }
 }

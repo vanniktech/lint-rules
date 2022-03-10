@@ -21,7 +21,8 @@ class RxJava2DefaultSchedulerDetectorTest {
             public void foo() {
               Observable.just(5);
             }
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_DEFAULT_SCHEDULER)
@@ -44,7 +45,8 @@ class RxJava2DefaultSchedulerDetectorTest {
             public void foo() {
               Observable.interval(5, TimeUnit.SECONDS);
             }
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_DEFAULT_SCHEDULER)
@@ -54,7 +56,8 @@ class RxJava2DefaultSchedulerDetectorTest {
           |src/foo/Example.java:8: Warning: interval() is using its default scheduler [RxJava2DefaultScheduler]
           |    Observable.interval(5, TimeUnit.SECONDS);
           |               ~~~~~~~~
-          |0 errors, 1 warnings""".trimMargin()
+          |0 errors, 1 warnings
+        """.trimMargin()
       )
   }
 
@@ -74,7 +77,8 @@ class RxJava2DefaultSchedulerDetectorTest {
             public void foo() {
               Observable.interval(5, TimeUnit.SECONDS, Schedulers.computation());
             }
-          }"""
+          }
+          """
         ).indented()
       )
       .issues(ISSUE_DEFAULT_SCHEDULER)

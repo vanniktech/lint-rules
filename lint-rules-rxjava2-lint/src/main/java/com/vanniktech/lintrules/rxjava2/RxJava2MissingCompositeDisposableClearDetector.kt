@@ -10,13 +10,9 @@ import com.android.tools.lint.detector.api.Issue
 import com.android.tools.lint.detector.api.JavaContext
 import com.android.tools.lint.detector.api.Scope.JAVA_FILE
 import com.android.tools.lint.detector.api.Severity.ERROR
-import com.intellij.psi.PsiMethod
 import org.jetbrains.uast.UCallExpression
 import org.jetbrains.uast.UClass
-import org.jetbrains.uast.UExpression
-import org.jetbrains.uast.UParenthesizedExpression
 import org.jetbrains.uast.skipParenthesizedExprDown
-import org.jetbrains.uast.skipParenthesizedExprUp
 import org.jetbrains.uast.visitor.AbstractUastVisitor
 import java.util.EnumSet
 
