@@ -126,12 +126,16 @@ class InvalidSingleLineCommentDetector : Detector(), Detector.UastScanner, Detec
 
   private fun shouldSkip(group: String, beforeStart: Char?): Boolean {
     val isEmpty = group.isEmpty()
-    val isNoPmd = " NOPMD" == group
-    val isInspection = group.startsWith("noinspection")
+    val ignores = setOf(
+      " NOPMD",
+      "noinspection",
+      " ktlint-disable"
+    )
+    val shouldIgnore = ignores.any { group.startsWith(it) }
     val isLink = beforeStart != null && beforeStart == ':'
     val isHttpLink = isUrl(group)
     val startsWithQuote = group == "\""
-    return isEmpty || isNoPmd || isInspection || isLink || isHttpLink || startsWithQuote
+    return isEmpty || shouldIgnore || isLink || isHttpLink || startsWithQuote
   }
 
   private fun isUrl(string: String) = listOfNotNull(string, string.split(" ").lastOrNull())

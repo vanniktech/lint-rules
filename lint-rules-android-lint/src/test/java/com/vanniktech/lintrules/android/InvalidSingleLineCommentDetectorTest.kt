@@ -269,6 +269,21 @@ class InvalidSingleLineCommentDetectorTest {
       .expectClean()
   }
 
+  @Test fun invalidSingleLineCommentIgnoresKtlintDisable() {
+    lint()
+      .files(
+        kt(
+          """
+           // ktlint-disable filename
+          """
+        ).indented()
+      )
+      .issues(ISSUE_INVALID_SINGLE_LINE_COMMENT)
+      .skipTestModes(TestMode.WHITESPACE)
+      .run()
+      .expectClean()
+  }
+
   @Test fun invalidSingleLineCommentIgnoresCommentConstant() {
     lint()
       .files(
