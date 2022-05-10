@@ -1,7 +1,10 @@
 # Change Log
 
-Version 0.20.0 *(In development)*
----------------------------------
+Version 0.20.0 *(2022-05-10)*
+-----------------------------
+
+- Update Android Gradle Plugin to 7.2.0 & Lint to 30.2.0 [\#343](https://github.com/vanniktech/lint-rules/pull/343) ([vanniktech](https://github.com/vanniktech))
+- InvalidSingleLineCommentDetector: Don't flag ktlint-disable comments. [\#342](https://github.com/vanniktech/lint-rules/pull/342) ([vanniktech](https://github.com/vanniktech))
 
 Version 0.19.0 *(2022-03-10)*
 -----------------------------
