@@ -10,16 +10,17 @@ import com.android.tools.lint.detector.api.Issue
 import com.android.tools.lint.detector.api.JavaContext
 import com.android.tools.lint.detector.api.Scope.JAVA_FILE
 import com.android.tools.lint.detector.api.Severity.WARNING
+import com.android.tools.lint.detector.api.isReceiver
 import com.intellij.psi.PsiNamedElement
+import org.jetbrains.kotlin.idea.KotlinLanguage
 import org.jetbrains.kotlin.psi.KtProperty
 import org.jetbrains.kotlin.psi.KtPropertyAccessor
 import org.jetbrains.uast.UClass
 import org.jetbrains.uast.UElement
 import org.jetbrains.uast.UEnumConstant
 import org.jetbrains.uast.UMethod
+import org.jetbrains.uast.UParameter
 import org.jetbrains.uast.UVariable
-import org.jetbrains.uast.kotlin.KotlinReceiverUParameter
-import org.jetbrains.uast.kotlin.KotlinUMethod
 import java.util.EnumSet
 
 val ISSUE_NAMING_PATTERN = Issue.create(
@@ -51,9 +52,9 @@ class NamingPatternDetector : Detector(), Detector.UastScanner {
 
     private fun process(element: PsiNamedElement) {
       val name = element.name
-      val isGeneratedKotlinMethod = element is KotlinUMethod && element.sourcePsi is KtProperty
-      val isGeneratedKotlinMethodAccessor = element is KotlinUMethod && element.sourcePsi is KtPropertyAccessor
-      val isKotlinReceiver = element is KotlinReceiverUParameter
+      val isGeneratedKotlinMethod = element is UMethod && element.language is KotlinLanguage && element.sourcePsi is KtProperty
+      val isGeneratedKotlinMethodAccessor = element is UMethod && element.language is KotlinLanguage && element.sourcePsi is KtPropertyAccessor
+      val isKotlinReceiver = element is UParameter && element.isReceiver()
 
       if (!isGeneratedKotlinMethod &&
         !isGeneratedKotlinMethodAccessor &&
