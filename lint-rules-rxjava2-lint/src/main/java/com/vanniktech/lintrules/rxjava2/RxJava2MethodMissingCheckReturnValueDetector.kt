@@ -13,11 +13,11 @@ import com.android.tools.lint.detector.api.Scope.JAVA_FILE
 import com.android.tools.lint.detector.api.Severity.WARNING
 import com.intellij.lang.jvm.JvmModifier
 import com.intellij.psi.PsiType
+import org.jetbrains.kotlin.idea.KotlinLanguage
 import org.jetbrains.kotlin.psi.KtProperty
 import org.jetbrains.kotlin.util.capitalizeDecapitalize.toUpperCaseAsciiOnly
 import org.jetbrains.uast.UAnnotated
 import org.jetbrains.uast.UMethod
-import org.jetbrains.uast.kotlin.KotlinUMethod
 import java.util.EnumSet
 
 val ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE = Issue.create(
@@ -36,7 +36,7 @@ class RxJava2MethodMissingCheckReturnValueDetector : Detector(), Detector.UastSc
   class CheckReturnValueVisitor(private val context: JavaContext) : UElementHandler() {
     override fun visitMethod(node: UMethod) {
       val returnType = node.returnType
-      val isPropertyFunction = node is KotlinUMethod && node.sourcePsi is KtProperty
+      val isPropertyFunction = node.language is KotlinLanguage && node.sourcePsi is KtProperty
 
       if (returnType != null && isTypeThatRequiresAnnotation(returnType) && !isPropertyFunction) {
         val hasAnnotatedMethod = context.evaluator.getAllAnnotations(node as UAnnotated, true)

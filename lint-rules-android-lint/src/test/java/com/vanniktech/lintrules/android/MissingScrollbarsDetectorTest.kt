@@ -73,21 +73,21 @@ class MissingScrollbarsDetectorTest {
       )
       .expectFixDiffs(
         """
-          |Fix for res/layout/ids.xml line 1: Set scrollbars to none:
-          |@@ -4 +4
-          |-     android:layout_height="wrap_content" />
-          |+     android:layout_height="wrap_content"
-          |+     android:scrollbars="none" />
-          |Fix for res/layout/ids.xml line 1: Set scrollbars to vertical:
+          |Fix for res/layout/ids.xml line 1: 1. Set scrollbars to vertical:
           |@@ -4 +4
           |-     android:layout_height="wrap_content" />
           |+     android:layout_height="wrap_content"
           |+     android:scrollbars="vertical" />
-          |Fix for res/layout/ids.xml line 1: Set scrollbars to horizontal:
+          |Fix for res/layout/ids.xml line 1: 2. Set scrollbars to horizontal:
           |@@ -4 +4
           |-     android:layout_height="wrap_content" />
           |+     android:layout_height="wrap_content"
           |+     android:scrollbars="horizontal" />
+          |Fix for res/layout/ids.xml line 1: 3. Set scrollbars to none:
+          |@@ -4 +4
+          |-     android:layout_height="wrap_content" />
+          |+     android:layout_height="wrap_content"
+          |+     android:scrollbars="none" />
           |
         """.trimMargin()
       )
@@ -119,21 +119,21 @@ class MissingScrollbarsDetectorTest {
       )
       .expectFixDiffs(
         """
-          |Fix for res/layout/ids.xml line 1: Set scrollbars to none:
-          |@@ -4 +4
-          |-     android:layout_height="wrap_content" />
-          |+     android:layout_height="wrap_content"
-          |+     android:scrollbars="none" />
-          |Fix for res/layout/ids.xml line 1: Set scrollbars to vertical:
+          |Fix for res/layout/ids.xml line 1: 1. Set scrollbars to vertical:
           |@@ -4 +4
           |-     android:layout_height="wrap_content" />
           |+     android:layout_height="wrap_content"
           |+     android:scrollbars="vertical" />
-          |Fix for res/layout/ids.xml line 1: Set scrollbars to horizontal:
+          |Fix for res/layout/ids.xml line 1: 2. Set scrollbars to horizontal:
           |@@ -4 +4
           |-     android:layout_height="wrap_content" />
           |+     android:layout_height="wrap_content"
           |+     android:scrollbars="horizontal" />
+          |Fix for res/layout/ids.xml line 1: 3. Set scrollbars to none:
+          |@@ -4 +4
+          |-     android:layout_height="wrap_content" />
+          |+     android:layout_height="wrap_content"
+          |+     android:scrollbars="none" />
           |
         """.trimMargin()
       )

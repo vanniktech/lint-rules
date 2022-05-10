@@ -36,13 +36,13 @@ class MissingScrollbarsDetector : LayoutDetector() {
 
       if (!hasScrollbar) {
         val quickFixes = listOf(
-          SdkConstants.VALUE_NONE,
           SdkConstants.VALUE_VERTICAL,
-          SdkConstants.VALUE_HORIZONTAL
-        ).map {
+          SdkConstants.VALUE_HORIZONTAL,
+          SdkConstants.VALUE_NONE
+        ).mapIndexed { index, it ->
           fix()
             .set(ANDROID_URI, SdkConstants.ATTR_SCROLLBARS, it)
-            .name("Set scrollbars to $it")
+            .name("${index + 1}. Set scrollbars to $it")
             .build()
         }.toTypedArray()
 
