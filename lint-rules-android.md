@@ -20,6 +20,7 @@
 - **ResourcesGetColorStateListCall** - Instead of getColorStateList(), ContextCompat or the method with the Theme Overload should be used instead.
 - **ResourcesGetDrawableCall** - Instead of getDrawable(), ContextCompat or the method with the Theme Overload should be used instead.
 - **ShouldUseStaticImport** - Certain declarations like TimeUnit.SECONDS should be statically imported to increase the readability.
+- **StringNotCapitalized** - Every string should be capitalized. If not, it is flagged.
 - **SuperfluousMarginDeclaration** - Instead of using start-, end-, bottom- and top margins, layout_margin can be used.
 - **SuperfluousNameSpace** - Re-declaring a namespace is unnecessary and hence can be just removed.
 - **SuperfluousPaddingDeclaration** - Instead of using start-, end-, bottom- and top paddings, padding can be used.
