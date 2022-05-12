@@ -4,7 +4,6 @@ package com.vanniktech.lintrules.android
 
 import com.android.tools.lint.checks.infrastructure.TestFiles.xml
 import com.android.tools.lint.checks.infrastructure.TestLintTask.lint
-import com.android.tools.lint.checks.infrastructure.TestMode
 import org.junit.Test
 
 class StringNotCapitalizedDetectorTest {
@@ -55,7 +54,6 @@ class StringNotCapitalizedDetectorTest {
         ).indented()
       )
       .issues(ISSUE_STRING_NOT_CAPITALIZED)
-      .skipTestModes(TestMode.CDATA)
       .run()
       .expectClean()
   }
@@ -129,7 +127,6 @@ class StringNotCapitalizedDetectorTest {
         ).indented()
       )
       .issues(ISSUE_STRING_NOT_CAPITALIZED)
-      .skipTestModes(TestMode.CDATA)
       .run()
       .expectFixDiffs(
         """
@@ -155,7 +152,6 @@ class StringNotCapitalizedDetectorTest {
         ).indented()
       )
       .issues(ISSUE_STRING_NOT_CAPITALIZED)
-      .skipTestModes(TestMode.CDATA)
       .run()
       .expect(
         """
