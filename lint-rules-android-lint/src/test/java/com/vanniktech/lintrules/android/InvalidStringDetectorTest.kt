@@ -4,7 +4,6 @@ package com.vanniktech.lintrules.android
 
 import com.android.tools.lint.checks.infrastructure.TestFiles.xml
 import com.android.tools.lint.checks.infrastructure.TestLintTask.lint
-import com.android.tools.lint.checks.infrastructure.TestMode
 import org.junit.Test
 
 class InvalidStringDetectorTest {
@@ -39,7 +38,6 @@ class InvalidStringDetectorTest {
         ).indented()
       )
       .issues(ISSUE_INVALID_STRING)
-      .skipTestModes(TestMode.CDATA)
       .run()
       .expect(
         """
@@ -61,42 +59,6 @@ class InvalidStringDetectorTest {
       )
   }
 
-  @Test fun stringWithCData() {
-    lint()
-      .files(
-        xml(
-          "res/values/strings.xml",
-          """
-          <resources>
-            <string name="my_string"><![CDATA[John Smith
-]]>
-          </string>
-          </resources>
-          """
-        ).indented()
-      )
-      .issues(ISSUE_INVALID_STRING)
-      .skipTestModes(TestMode.CDATA)
-      .run()
-      .expect(
-        """
-          |res/values/strings.xml:2: Warning: Text contains new line. [InvalidString]
-          |            <string name="my_string"><![CDATA[John Smith
-          |            ^
-          |0 errors, 1 warnings
-        """.trimMargin()
-      )
-      .expectFixDiffs(
-        """
-          |Autofix for res/values/strings.xml line 2: Fix it:
-          |@@ -3 +3
-          |- ]]>
-          |-           </string>
-          |+ ]]></string>
-        """.trimMargin()
-      )
-  }
-
   @Test fun trailingWhitespaceAtEndString() {
     lint()
       .files(
@@ -110,7 +72,6 @@ class InvalidStringDetectorTest {
         ).indented()
       )
       .issues(ISSUE_INVALID_STRING)
-      .skipTestModes(TestMode.CDATA)
       .run()
       .expect(
         """
@@ -144,7 +105,6 @@ class InvalidStringDetectorTest {
         ).indented()
       )
       .issues(ISSUE_INVALID_STRING)
-      .skipTestModes(TestMode.CDATA)
       .run()
       .expect(
         """

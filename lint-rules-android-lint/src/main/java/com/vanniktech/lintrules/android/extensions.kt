@@ -47,7 +47,7 @@ internal fun String.toSnakeCase() = toCharArray().fold("") { accumulator, curren
 
 internal fun Node.children() = (0 until childNodes.length).map { childNodes.item(it) }
 
-internal fun Node.isTextNode() = nodeType == Node.TEXT_NODE
+internal fun Node.isTextNode() = nodeType == Node.TEXT_NODE || nodeType == Node.CDATA_SECTION_NODE
 
 internal fun Node.isElementNode() = nodeType == Node.ELEMENT_NODE
 
