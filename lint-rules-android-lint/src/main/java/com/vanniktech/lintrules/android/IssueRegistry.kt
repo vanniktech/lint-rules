@@ -9,6 +9,7 @@ internal const val PRIORITY = 10 // Does not matter anyways within Lint.
 
 class IssueRegistry : com.android.tools.lint.client.api.IssueRegistry() {
   override val api get() = CURRENT_API
+  override val minApi get() = 10
 
   override val vendor get() = Vendor(
     vendorName = "vanniktech/lint-rules/",
