@@ -1,7 +1,11 @@
 # Change Log
 
-Version 0.21.0 *(In development)*
----------------------------------
+Version 0.21.0 *(2022-05-21)*
+-----------------------------
+
+- Lint: Set minApi to 10. [\#348](https://github.com/vanniktech/lint-rules/pull/348) ([vanniktech](https://github.com/vanniktech))
+- Properly support TestMode.CDATA. [\#345](https://github.com/vanniktech/lint-rules/pull/345) ([vanniktech](https://github.com/vanniktech))
+- StringNotCapitalizedDetector: Marks strings which are not capitalized. [\#344](https://github.com/vanniktech/lint-rules/pull/344) ([vanniktech](https://github.com/vanniktech))
 
 Version 0.20.0 *(2022-05-10)*
 -----------------------------
