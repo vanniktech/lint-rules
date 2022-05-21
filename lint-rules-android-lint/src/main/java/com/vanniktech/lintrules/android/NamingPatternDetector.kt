@@ -10,8 +10,8 @@ import com.android.tools.lint.detector.api.Issue
 import com.android.tools.lint.detector.api.JavaContext
 import com.android.tools.lint.detector.api.Scope.JAVA_FILE
 import com.android.tools.lint.detector.api.Severity.WARNING
-import com.android.tools.lint.detector.api.isReceiver
 import com.intellij.psi.PsiNamedElement
+import com.intellij.psi.PsiParameter
 import org.jetbrains.kotlin.idea.KotlinLanguage
 import org.jetbrains.kotlin.psi.KtProperty
 import org.jetbrains.kotlin.psi.KtPropertyAccessor
@@ -80,4 +80,18 @@ private fun String.isDefinedCamelCase(): Boolean {
   return toCharArray
     .mapIndexed { index, current -> current to toCharArray.getOrNull(index + 1) }
     .none { it.first.isUpperCase() && it.second?.isUpperCase() ?: false }
+}
+
+/** Copied to use minApi 10. */
+private fun PsiParameter.isReceiver(): Boolean {
+  // It's tempting to just check
+  //    this is KtUltraLightReceiverParameter
+  // here, but besides that being an internal class, that approach
+  // would only work for source references; for compiled Kotlin
+  // code (including the runtime library) these will just be
+  // ClsParameterImpl, so we have to resort to name patterns anyway.
+
+  // Fully qualified names here because we can't suppress usage in import list
+  val name = name
+  return name.startsWith("\$this") || name.startsWith("\$self")
 }
