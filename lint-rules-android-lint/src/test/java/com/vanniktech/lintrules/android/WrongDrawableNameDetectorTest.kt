@@ -39,6 +39,22 @@ class WrongDrawableNameDetectorTest {
       .expectClean()
   }
 
+  @Test fun exoDrawableFile() {
+    lint()
+      .files(xml("res/drawable/exo_ic_play.xml", "<merge/>"))
+      .issues(ISSUE_WRONG_DRAWABLE_NAME)
+      .run()
+      .expectClean()
+  }
+
+  @Test fun exoDrawableFileWithResourcePrefix() {
+    lint()
+      .files(xml("src/main/res/drawable/exo_ic_play.xml", "<merge/>"), resourcePrefix("unit_test_prefix_"))
+      .issues(ISSUE_WRONG_DRAWABLE_NAME)
+      .run()
+      .expectClean()
+  }
+
   @Test fun randomDrawableFile() {
     lint()
       .files(xml("res/drawable/random.xml", "<merge/>"))
