@@ -47,6 +47,22 @@ class WrongLayoutNameDetectorTest {
       .expectClean()
   }
 
+  @Test fun ignoresExo() {
+    lint()
+      .files(xml("res/layout/exo_styled_player_control_view.xml", "<merge/>"))
+      .issues(ISSUE_WRONG_LAYOUT_NAME)
+      .run()
+      .expectClean()
+  }
+
+  @Test fun ignoresExoWithResourcePrefix() {
+    lint()
+      .files(xml("src/main/res/layout/exo_styled_player_control_view.xml", "<merge/>"), resourcePrefix("unit_test_prefix_"))
+      .issues(ISSUE_WRONG_LAYOUT_NAME)
+      .run()
+      .expectClean()
+  }
+
   @Test fun randomLayoutFile() {
     lint()
       .files(xml("res/layout/random.xml", "<merge/>"))

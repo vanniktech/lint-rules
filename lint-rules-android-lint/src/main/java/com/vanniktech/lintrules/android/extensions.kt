@@ -73,6 +73,12 @@ internal fun String.forceUnderscoreIfNeeded() = if (isNotEmpty() && !endsWith("_
 internal fun Project.resourcePrefix() = buildModule?.resourcePrefix.orEmpty()
 
 internal fun fileNameSuggestions(allowedPrefixes: List<String>, context: XmlContext): List<String>? {
+  val fileName = context.file.name
+
+  if (fileName.startsWith("exo_")) {
+    return null
+  }
+
   val modified = allowedPrefixes.map {
     val resourcePrefix = context.project.resourcePrefix()
       .forceUnderscoreIfNeeded()
@@ -80,10 +86,10 @@ internal fun fileNameSuggestions(allowedPrefixes: List<String>, context: XmlCont
     if (resourcePrefix != it) resourcePrefix + it else it
   }
 
-  val doesNotStartWithPrefix = modified.none { context.file.name.startsWith(it) }
+  val doesNotStartWithPrefix = modified.none { fileName.startsWith(it) }
   val notEquals = modified.map {
     it.dropLast(1) // Drop the trailing underscore.
-  }.none { context.file.name == "$it.xml" }
+  }.none { fileName == "$it.xml" }
 
   return modified.takeIf { doesNotStartWithPrefix && notEquals }
 }
