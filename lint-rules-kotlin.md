@@ -1,0 +1,1 @@
+- **KotlinRequireNotNullUseMessage** - The default generated message from requireNotNull often lacks context, hence it's best to provide a custom message.

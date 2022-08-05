@@ -12,6 +12,15 @@ compile 'com.vanniktech:lint-rules-android:0.22.0-SNAPSHOT'
 
 [Full list of all checks that are added.](lint-rules-android.md)
 
+## Kotlin Lint Rules
+
+```groovy
+compile 'com.vanniktech:lint-rules-kotlin:0.21.0'
+compile 'com.vanniktech:lint-rules-kotlin:0.22.0-SNAPSHOT'
+```
+
+[Full list of all checks that are added.](lint-rules-kotlin.md)
+
 ## RxJava 2 Lint Rules
 
 ```groovy
