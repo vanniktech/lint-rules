@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 
 android {
+  namespace "com.vanniktech.lintrulesandroid"
   compileSdkVersion versions.compileSdk
 
   defaultConfig {
