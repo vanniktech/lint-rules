@@ -1,7 +1,12 @@
 # Change Log
 
-Version 0.22.0 *(In development)*
----------------------------------
+Version 0.22.0 *(2022-08-05)*
+-----------------------------
+
+- Set namespace property & remove empty Manifest. [\#362](https://github.com/vanniktech/lint-rules/pull/362) ([vanniktech](https://github.com/vanniktech))
+- New lint-rules-kotlin module with KotlinRequireNotNullUseMessage. [\#361](https://github.com/vanniktech/lint-rules/pull/361) ([vanniktech](https://github.com/vanniktech))
+- Update dependency com.android.tools.build:gradle to v7.2.2 [\#360](https://github.com/vanniktech/lint-rules/pull/360) ([renovate[bot]](https://github.com/apps/renovate))
+- WrongDrawableNameDetector & WrongLayoutNameDetector: Allow exo\_ prefix. [\#356](https://github.com/vanniktech/lint-rules/pull/356) ([vanniktech](https://github.com/vanniktech))
 
 Version 0.21.0 *(2022-05-21)*
 -----------------------------
