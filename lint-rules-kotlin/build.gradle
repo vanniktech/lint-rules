@@ -1,0 +1,15 @@
+apply plugin: 'com.android.library'
+
+android {
+  compileSdkVersion versions.compileSdk
+
+  defaultConfig {
+    minSdkVersion versions.minSdk
+  }
+}
+
+dependencies {
+  lintPublish project(':lint-rules-kotlin-lint')
+}
+
+apply plugin: "com.vanniktech.maven.publish"
