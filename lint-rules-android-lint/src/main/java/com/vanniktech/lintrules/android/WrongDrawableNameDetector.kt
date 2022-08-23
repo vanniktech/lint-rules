@@ -13,6 +13,7 @@ import com.android.tools.lint.detector.api.XmlContext
 import org.w3c.dom.Document
 
 private val allowedPrefixes = listOf(
+  "animated_selector",
   "animated_vector_",
   "background_",
   "ic_",
