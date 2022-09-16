@@ -21,8 +21,8 @@ class RxJava2DisposableAddAllCallDetectorTest {
               cd.addAll();
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_DISPOSABLE_ADD_ALL_CALL)
       .run()
@@ -32,7 +32,7 @@ class RxJava2DisposableAddAllCallDetectorTest {
           |    cd.addAll();
           |       ~~~~~~
           |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 }

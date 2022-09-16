@@ -15,7 +15,7 @@ val ISSUE_WRONG_CONSTRAINT_LAYOUT_USAGE = Issue.create(
   "WrongConstraintLayoutUsage", "Marks a wrong usage of the Constraint Layout.",
   "Instead of using left & right constraints start & end should be used.",
   CORRECTNESS, PRIORITY, ERROR,
-  Implementation(WrongConstraintLayoutUsageDetector::class.java, RESOURCE_FILE_SCOPE)
+  Implementation(WrongConstraintLayoutUsageDetector::class.java, RESOURCE_FILE_SCOPE),
 )
 
 class WrongConstraintLayoutUsageDetector : LayoutDetector() {

@@ -19,7 +19,7 @@ val ISSUE_COLOR_CASING = Issue.create(
   "Raw colors should be defined with uppercase letters.",
   "Colors should have uppercase letters. #FF0099 is valid while #ff0099 isn't since the ff should be written in uppercase.",
   CORRECTNESS, PRIORITY, WARNING,
-  Implementation(ColorCasingDetector::class.java, RESOURCE_FILE_SCOPE)
+  Implementation(ColorCasingDetector::class.java, RESOURCE_FILE_SCOPE),
 )
 
 class ColorCasingDetector : ResourceXmlDetector() {

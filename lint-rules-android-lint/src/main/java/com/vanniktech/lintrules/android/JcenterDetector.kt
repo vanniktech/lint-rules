@@ -16,7 +16,7 @@ val ISSUE_JCENTER = Issue.create(
   "Marks usage of the jcenter() repository.",
   "JCenter has gotten less and less reliable and it's best to avoid if possible. This check will flag usages of jcenter() in your gradle files.",
   CORRECTNESS, PRIORITY, WARNING,
-  Implementation(JcenterDetector::class.java, EnumSet.of(GRADLE_FILE))
+  Implementation(JcenterDetector::class.java, EnumSet.of(GRADLE_FILE)),
 )
 
 class JcenterDetector : Detector(), Detector.GradleScanner {
@@ -27,7 +27,7 @@ class JcenterDetector : Detector(), Detector.GradleScanner {
     parentParent: String?,
     namedArguments: Map<String, String>,
     unnamedArguments: List<String>,
-    cookie: Any
+    cookie: Any,
   ) {
     if (statement == "jcenter") {
       val fix = fix()

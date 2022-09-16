@@ -18,7 +18,7 @@ val ISSUE_SUBSCRIBE_MISSING_ON_ERROR = Issue.create(
   "Flags a version of the subscribe() method without an error Consumer.",
   "When calling the subscribe() method an error Consumer should always be used. Otherwise errors might be thrown and may crash the application or get forwarded to the Plugin Error handler.",
   CORRECTNESS, PRIORITY, ERROR,
-  Implementation(RxJava2SubscribeMissingOnErrorDetector::class.java, EnumSet.of(JAVA_FILE))
+  Implementation(RxJava2SubscribeMissingOnErrorDetector::class.java, EnumSet.of(JAVA_FILE)),
 )
 
 class RxJava2SubscribeMissingOnErrorDetector : Detector(), Detector.UastScanner {

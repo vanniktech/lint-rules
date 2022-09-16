@@ -21,8 +21,8 @@ import org.junit.Test
                 int something;
               }
             }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
       .skipTestModes(TestMode.WHITESPACE)
@@ -42,8 +42,8 @@ import org.junit.Test
                 @Test @Override int something;
               }
             }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
       .skipTestModes(TestMode.WHITESPACE, TestMode.FULLY_QUALIFIED)
@@ -54,7 +54,7 @@ import org.junit.Test
             |    @Test @Override int something;
             |                        ~~~~~~~~~
             |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
       .expectFixDiffs(
         """
@@ -63,7 +63,7 @@ import org.junit.Test
             |-     @Test @Override int something;
             |+     @Override @Test int something;
             |
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -77,8 +77,8 @@ import org.junit.Test
             public class MyTest {
               @Test @Override int something;
             }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
       .skipTestModes(TestMode.WHITESPACE, TestMode.FULLY_QUALIFIED)
@@ -89,7 +89,7 @@ import org.junit.Test
             |  @Test @Override int something;
             |                      ~~~~~~~~~
             |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -102,8 +102,8 @@ import org.junit.Test
 
             @Test @Override public class MyTest {
             }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
       .skipTestModes(TestMode.WHITESPACE, TestMode.FULLY_QUALIFIED)
@@ -114,7 +114,7 @@ import org.junit.Test
             |@Test @Override public class MyTest {
             |                             ~~~~~~
             |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
       .expectFixDiffs(
         """
@@ -123,7 +123,7 @@ import org.junit.Test
             |- @Test @Override public class MyTest {
             |+ @Override @Test public class MyTest {
             |
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -137,8 +137,8 @@ import org.junit.Test
             public class MyTest {
               public void myTest(@Test @Override int something) { }
             }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
       .skipTestModes(TestMode.WHITESPACE, TestMode.FULLY_QUALIFIED)
@@ -149,7 +149,7 @@ import org.junit.Test
             |  public void myTest(@Test @Override int something) { }
             |                                         ~~~~~~~~~
             |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -163,8 +163,8 @@ import org.junit.Test
             public class MyTest {
               @Test @Override public void myTest() { }
             }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
       .skipTestModes(TestMode.WHITESPACE, TestMode.FULLY_QUALIFIED)
@@ -175,7 +175,7 @@ import org.junit.Test
             |  @Test @Override public void myTest() { }
             |                              ~~~~~~
             |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -189,8 +189,8 @@ import org.junit.Test
             public class MyTest {
               @StringRes @Nullable public void myTest() { }
             }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
       .skipTestModes(TestMode.WHITESPACE)
@@ -201,7 +201,7 @@ import org.junit.Test
             |  @StringRes @Nullable public void myTest() { }
             |                                   ~~~~~~
             |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -215,8 +215,8 @@ import org.junit.Test
             public class MyTest {
               @Ignore @Test public void myTest() { }
             }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
       .skipTestModes(TestMode.WHITESPACE)
@@ -227,7 +227,7 @@ import org.junit.Test
             |  @Ignore @Test public void myTest() { }
             |                            ~~~~~~
             |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -241,8 +241,8 @@ import org.junit.Test
             public class MyTest {
               @Override @Deprecated public void myTest() { }
             }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
       .skipTestModes(TestMode.WHITESPACE, TestMode.FULLY_QUALIFIED)
@@ -253,7 +253,7 @@ import org.junit.Test
             |  @Override @Deprecated public void myTest() { }
             |                                    ~~~~~~
             |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -267,8 +267,8 @@ import org.junit.Test
             class MyTest {
               @SuppressWarnings @Override fun myTest() = Unit
             }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
       .skipTestModes(TestMode.WHITESPACE, TestMode.FULLY_QUALIFIED)
@@ -279,7 +279,7 @@ import org.junit.Test
             |  @SuppressWarnings @Override fun myTest() = Unit
             |                                  ~~~~~~
             |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
       .expectFixDiffs(
         """
@@ -288,7 +288,7 @@ import org.junit.Test
             |-   @SuppressWarnings @Override fun myTest() = Unit
             |+   @Override @SuppressWarnings fun myTest() = Unit
             |
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -302,8 +302,8 @@ import org.junit.Test
             class MyTest {
               @Binds @NonNull @Singleton void test() { }
             }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
       .skipTestModes(TestMode.WHITESPACE)
@@ -314,7 +314,7 @@ import org.junit.Test
             |  @Binds @NonNull @Singleton void test() { }
             |                                  ~~~~
             |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
       .expectFixDiffs(
         """
@@ -323,7 +323,7 @@ import org.junit.Test
             |-   @Binds @NonNull @Singleton void test() { }
             |+   @Binds @Singleton @NonNull void test() { }
             |
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -337,8 +337,8 @@ import org.junit.Test
             class MyTest {
               @Custom @NonNull @Singleton void test() { }
             }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
       .skipTestModes(TestMode.WHITESPACE)
@@ -349,7 +349,7 @@ import org.junit.Test
             |  @Custom @NonNull @Singleton void test() { }
             |                                   ~~~~
             |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
       .expectFixDiffs(
         """
@@ -358,7 +358,7 @@ import org.junit.Test
             |-   @Custom @NonNull @Singleton void test() { }
             |+   @Singleton @NonNull @Custom void test() { }
             |
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -372,8 +372,8 @@ import org.junit.Test
             public class MyTest {
               @NonNull @Nullable public void myTest() { }
             }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
       .skipTestModes(TestMode.WHITESPACE)
@@ -384,7 +384,7 @@ import org.junit.Test
             |  @NonNull @Nullable public void myTest() { }
             |                                 ~~~~~~
             |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -398,8 +398,8 @@ import org.junit.Test
             public class MyTest {
               @CheckReturnValue @CheckResult public void myTest() { }
             }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
       .skipTestModes(TestMode.WHITESPACE)
@@ -410,7 +410,7 @@ import org.junit.Test
             |  @CheckReturnValue @CheckResult public void myTest() { }
             |                                             ~~~~~~
             |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -424,8 +424,8 @@ import org.junit.Test
             public class MyTest {
               @Nullable @Inject public void myTest() { }
             }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
       .skipTestModes(TestMode.WHITESPACE)
@@ -436,7 +436,7 @@ import org.junit.Test
             |  @Nullable @Inject public void myTest() { }
             |                                ~~~~~~
             |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -450,8 +450,8 @@ import org.junit.Test
             public class MyTest {
               @NonNull @Inject public void myTest() { }
             }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
       .skipTestModes(TestMode.WHITESPACE)
@@ -462,7 +462,7 @@ import org.junit.Test
             |  @NonNull @Inject public void myTest() { }
             |                               ~~~~~~
             |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -475,8 +475,8 @@ import org.junit.Test
 
             @Component @Singleton public interface MyComponent {
             }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
       .skipTestModes(TestMode.WHITESPACE)
@@ -487,7 +487,7 @@ import org.junit.Test
             |@Component @Singleton public interface MyComponent {
             |                                       ~~~~~~~~~~~
             |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -500,8 +500,8 @@ import org.junit.Test
 
             @Module @SuppressWarnings public interface MyModule {
             }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
       .skipTestModes(TestMode.WHITESPACE, TestMode.FULLY_QUALIFIED)
@@ -512,7 +512,7 @@ import org.junit.Test
             |@Module @SuppressWarnings public interface MyModule {
             |                                           ~~~~~~~~
             |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -525,8 +525,8 @@ import org.junit.Test
 
             @AssistedModule @Module(includes = AssistedInject_SearchModule.class) public interface MyModule {
             }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
       .skipTestModes(TestMode.WHITESPACE)
@@ -544,8 +544,8 @@ import org.junit.Test
             public class MyTest {
               @Custom @Inject public void myTest() { }
             }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
       .skipTestModes(TestMode.WHITESPACE)
@@ -556,7 +556,7 @@ import org.junit.Test
             |  @Custom @Inject public void myTest() { }
             |                              ~~~~~~
             |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -570,8 +570,8 @@ import org.junit.Test
             interface MyTest {
               @CheckReturnValue @Authenticated @Post fun myTest()
             }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
       .skipTestModes(TestMode.WHITESPACE)
@@ -589,8 +589,8 @@ import org.junit.Test
             public class MyTest {
               @JsonQualifier @Json public void myTest() { }
             }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
       .skipTestModes(TestMode.WHITESPACE)
@@ -601,7 +601,7 @@ import org.junit.Test
             |  @JsonQualifier @Json public void myTest() { }
             |                                   ~~~~~~
             |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -615,8 +615,8 @@ import org.junit.Test
             public class MyTest {
               @Nullable @Json @JsonDate public void myTest() { }
             }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
       .skipTestModes(TestMode.WHITESPACE)
@@ -634,8 +634,8 @@ import org.junit.Test
             public class MyTest {
               @JvmStatic @Provides @Singleton @Named @Nullable public void myTest() { }
             }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
       .skipTestModes(TestMode.WHITESPACE)
@@ -653,8 +653,8 @@ import org.junit.Test
             public class MyTest {
               @Retention @Documented public void myTest() { }
             }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
       .skipTestModes(TestMode.WHITESPACE)
@@ -665,7 +665,7 @@ import org.junit.Test
             |  @Retention @Documented public void myTest() { }
             |                                     ~~~~~~
             |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -679,8 +679,8 @@ import org.junit.Test
             public class MyTest {
               @Json @Nullable public void myTest() { }
             }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
       .skipTestModes(TestMode.WHITESPACE)
@@ -691,7 +691,7 @@ import org.junit.Test
             |  @Json @Nullable public void myTest() { }
             |                              ~~~~~~
             |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -705,8 +705,8 @@ import org.junit.Test
             public class MyTest {
               @IntDef @Retention public void myTest() { }
             }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
       .skipTestModes(TestMode.WHITESPACE)
@@ -717,7 +717,7 @@ import org.junit.Test
             |  @IntDef @Retention public void myTest() { }
             |                                 ~~~~~~
             |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -731,8 +731,8 @@ import org.junit.Test
             public class MyTest {
               @SuppressWarnings @SuppressLint @Suppress public void myTest() { }
             }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
       .skipTestModes(TestMode.WHITESPACE, TestMode.FULLY_QUALIFIED)
@@ -743,7 +743,7 @@ import org.junit.Test
             |  @SuppressWarnings @SuppressLint @Suppress public void myTest() { }
             |                                                        ~~~~~~
             |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -757,8 +757,8 @@ import org.junit.Test
             public class MyTest {
               @TargetApi @RestrictTo @Keep public void myTest() { }
             }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
       .skipTestModes(TestMode.WHITESPACE)
@@ -769,7 +769,7 @@ import org.junit.Test
             |  @TargetApi @RestrictTo @Keep public void myTest() { }
             |                                           ~~~~~~
             |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -783,8 +783,8 @@ import org.junit.Test
             public class MyTest {
               @ActivityKey @IntoMap @Binds public void myTest() { }
             }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
       .skipTestModes(TestMode.WHITESPACE)
@@ -795,7 +795,7 @@ import org.junit.Test
             |  @ActivityKey @IntoMap @Binds public void myTest() { }
             |                                           ~~~~~~
             |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -807,8 +807,8 @@ import org.junit.Test
             package foo
 
             annotation class Foo
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
       .skipTestModes(TestMode.WHITESPACE)
@@ -826,8 +826,8 @@ import org.junit.Test
             import kotlin.annotation.AnnotationRetention.RUNTIME
 
             @Retention(RUNTIME) annotation class Foo
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
       .skipTestModes(TestMode.WHITESPACE)
@@ -845,8 +845,8 @@ import org.junit.Test
             public class MyTest {
               @Binds @IntoMap @ActivityKey public void myTest() { }
             }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
       .skipTestModes(TestMode.WHITESPACE)
@@ -864,8 +864,8 @@ import org.junit.Test
             public class MyTest {
               @RestrictTo @Keep public void myTest() { }
             }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
       .skipTestModes(TestMode.WHITESPACE)
@@ -883,8 +883,8 @@ import org.junit.Test
             public class MyTest {
               @Custom public void myTest() { }
             }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
       .skipTestModes(TestMode.WHITESPACE)
@@ -902,8 +902,8 @@ import org.junit.Test
             public class MyTest {
               @Custom @MyCustom public void myTest() { }
             }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
       .skipTestModes(TestMode.WHITESPACE)
@@ -925,8 +925,8 @@ import org.junit.Test
                 return null
               }
             }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
       .skipTestModes(TestMode.WHITESPACE)

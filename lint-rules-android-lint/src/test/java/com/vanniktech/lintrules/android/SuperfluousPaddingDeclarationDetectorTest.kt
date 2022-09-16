@@ -19,8 +19,8 @@ class SuperfluousPaddingDeclarationDetectorTest {
               android:paddingBottom="16dp"
               android:paddingStart="16dp"
               android:paddingEnd="16dp"/>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_SUPERFLUOUS_PADDING_DECLARATION)
       .run()
@@ -30,7 +30,7 @@ class SuperfluousPaddingDeclarationDetectorTest {
           |<TextView
           |^
           |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
       .expectFixDiffs("""""".trimMargin())
   }
@@ -47,8 +47,8 @@ class SuperfluousPaddingDeclarationDetectorTest {
               android:paddingBottom="16dp"
               android:paddingStart="16dp"
               android:paddingEnd="16dp"/>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_SUPERFLUOUS_PADDING_DECLARATION)
       .run()
@@ -69,8 +69,8 @@ class SuperfluousPaddingDeclarationDetectorTest {
               android:paddingBottom="16dp"
               android:paddingStart="16dp"
               android:paddingEnd="16dp"/>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_SUPERFLUOUS_PADDING_DECLARATION)
       .run()
@@ -88,8 +88,8 @@ class SuperfluousPaddingDeclarationDetectorTest {
               android:paddingTop="16dp"
               android:paddingBottom="16dp"
               android:paddingEnd="16dp"/>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_SUPERFLUOUS_PADDING_DECLARATION)
       .run()
@@ -107,8 +107,8 @@ class SuperfluousPaddingDeclarationDetectorTest {
               android:paddingTop="16dp"
               android:paddingBottom="16dp"
               android:paddingStart="16dp"/>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_SUPERFLUOUS_PADDING_DECLARATION)
       .run()
@@ -126,8 +126,8 @@ class SuperfluousPaddingDeclarationDetectorTest {
               android:paddingTop="16dp"
               android:paddingStart="16dp"
               android:paddingEnd="16dp"/>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_SUPERFLUOUS_PADDING_DECLARATION)
       .run()
@@ -145,8 +145,8 @@ class SuperfluousPaddingDeclarationDetectorTest {
               android:paddingBottom="16dp"
               android:paddingStart="16dp"
               android:paddingEnd="16dp"/>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_SUPERFLUOUS_PADDING_DECLARATION)
       .run()
@@ -176,8 +176,8 @@ class SuperfluousPaddingDeclarationDetectorTest {
                 android:paddingBottom="16dp"/>
 
           </merge>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_SUPERFLUOUS_PADDING_DECLARATION)
       .run()
@@ -196,8 +196,8 @@ class SuperfluousPaddingDeclarationDetectorTest {
               tools:paddingBottom="16dp"
               tools:paddingStart="16dp"
               tools:paddingEnd="16dp"/>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_SUPERFLUOUS_PADDING_DECLARATION)
       .run()

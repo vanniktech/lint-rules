@@ -55,7 +55,7 @@ class IssueRegistryTest {
         ?.parentFile
         ?.parentFile
         ?.parentFile
-        ?.resolve("lint-rules-rxjava2.md")
+        ?.resolve("lint-rules-rxjava2.md"),
     )
       .writeText(output)
   }

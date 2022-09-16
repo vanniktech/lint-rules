@@ -55,7 +55,7 @@ class IssueRegistryTest {
         ?.parentFile
         ?.parentFile
         ?.parentFile
-        ?.resolve("lint-rules-kotlin.md")
+        ?.resolve("lint-rules-kotlin.md"),
     )
       .writeText(output)
   }

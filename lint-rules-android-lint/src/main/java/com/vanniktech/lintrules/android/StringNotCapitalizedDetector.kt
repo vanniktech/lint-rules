@@ -15,7 +15,7 @@ val ISSUE_STRING_NOT_CAPITALIZED = Issue.create(
   "Marks strings which are not capitalized.",
   "Every string should be capitalized. If not, it is flagged.",
   CORRECTNESS, PRIORITY, WARNING,
-  Implementation(StringNotCapitalizedDetector::class.java, RESOURCE_FILE_SCOPE)
+  Implementation(StringNotCapitalizedDetector::class.java, RESOURCE_FILE_SCOPE),
 )
 
 class StringNotCapitalizedDetector : StringXmlDetector() {
@@ -49,12 +49,12 @@ class StringNotCapitalizedDetector : StringXmlDetector() {
   companion object {
     val IGNORED_NAMES = setOf(
       "placeholder",
-      "abbreviation"
+      "abbreviation",
     )
     val LINK_PREFIXES = setOf(
       "www.",
       "https://",
-      "http://"
+      "http://",
     )
     const val CDATA = "<![CDATA["
   }

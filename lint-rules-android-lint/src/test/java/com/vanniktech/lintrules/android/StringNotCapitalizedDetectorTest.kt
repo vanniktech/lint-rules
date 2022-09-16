@@ -16,8 +16,8 @@ class StringNotCapitalizedDetectorTest {
           <resources>
             <string name="my_string">My string</string>
           </resources>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_STRING_NOT_CAPITALIZED)
       .run()
@@ -33,8 +33,8 @@ class StringNotCapitalizedDetectorTest {
           <resources>
             <string name="api_key">abbc</string>
           </resources>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_STRING_NOT_CAPITALIZED)
       .run()
@@ -50,8 +50,8 @@ class StringNotCapitalizedDetectorTest {
           <resources>
             <string name="time_abbreviation_minutes">m</string>
           </resources>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_STRING_NOT_CAPITALIZED)
       .run()
@@ -67,8 +67,8 @@ class StringNotCapitalizedDetectorTest {
           <resources>
             <string name="my_placeholder">your</string>
           </resources>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_STRING_NOT_CAPITALIZED)
       .run()
@@ -84,8 +84,8 @@ class StringNotCapitalizedDetectorTest {
           <resources>
             <string name="fun" translatable="false">log10</string>
           </resources>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_STRING_NOT_CAPITALIZED)
       .run()
@@ -103,8 +103,8 @@ class StringNotCapitalizedDetectorTest {
             <string name="link2">http://www.google.com</string>
             <string name="link3">www.google.com</string>
           </resources>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_STRING_NOT_CAPITALIZED)
       .run()
@@ -123,8 +123,8 @@ class StringNotCapitalizedDetectorTest {
             <string name="key3">Обычай</string>
             <string name="key4">легальный</string>
           </resources>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_STRING_NOT_CAPITALIZED)
       .run()
@@ -135,7 +135,7 @@ class StringNotCapitalizedDetectorTest {
           |-   <string name="key4">легальный</string>
           |+   <string name="key4">Легальный</string>
           |
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -148,8 +148,8 @@ class StringNotCapitalizedDetectorTest {
           <resources>
             <string name="my_string">my string</string>
           </resources>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_STRING_NOT_CAPITALIZED)
       .run()
@@ -159,7 +159,7 @@ class StringNotCapitalizedDetectorTest {
         |  <string name="my_string">my string</string>
         |  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
       .expectFixDiffs(
         """
@@ -168,7 +168,7 @@ class StringNotCapitalizedDetectorTest {
         |-   <string name="my_string">my string</string>
         |+   <string name="my_string">My string</string>
         |
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 }

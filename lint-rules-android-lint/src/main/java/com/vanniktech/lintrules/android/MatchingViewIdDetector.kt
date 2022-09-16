@@ -17,7 +17,7 @@ val ISSUE_MATCHING_VIEW_ID = Issue.create(
   "MatchingViewId", "Flags view ids that don't match with the file name.",
   "When the layout file is named activity_home all of the containing ids should be prefixed with activityHome to avoid ambiguity between different layout files across different views.",
   CORRECTNESS, PRIORITY, WARNING,
-  Implementation(MatchingViewIdDetector::class.java, RESOURCE_FILE_SCOPE)
+  Implementation(MatchingViewIdDetector::class.java, RESOURCE_FILE_SCOPE),
 )
 
 class MatchingViewIdDetector : LayoutDetector() {

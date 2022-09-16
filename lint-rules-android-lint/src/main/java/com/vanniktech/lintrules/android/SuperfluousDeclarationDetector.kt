@@ -11,7 +11,7 @@ import java.util.HashSet
 abstract class SuperfluousDeclarationDetector(
   private val issue: Issue,
   private val message: String,
-  private val applicableSuperfluousAttributes: Collection<String>
+  private val applicableSuperfluousAttributes: Collection<String>,
 ) : LayoutDetector() {
   override fun getApplicableElements() = ALL
 

@@ -23,8 +23,8 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
               o.subscribe();
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
       .run()
@@ -34,7 +34,7 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
           |    o.subscribe();
           |      ~~~~~~~~~
           |1 errors, 0 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -56,8 +56,8 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
               o.subscribe(c);
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
       .run()
@@ -67,7 +67,7 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
           |    o.subscribe(c);
           |      ~~~~~~~~~
           |1 errors, 0 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -89,8 +89,8 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
               o.subscribe(c, c);
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
       .run()
@@ -113,8 +113,8 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
               f.subscribe();
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
       .run()
@@ -124,7 +124,7 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
           |    f.subscribe();
           |      ~~~~~~~~~
           |1 errors, 0 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -146,8 +146,8 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
               f.subscribe(c);
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
       .run()
@@ -157,7 +157,7 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
           |    f.subscribe(c);
           |      ~~~~~~~~~
           |1 errors, 0 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -179,8 +179,8 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
               f.subscribe(c, c);
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
       .run()
@@ -203,8 +203,8 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
               s.subscribe();
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
       .run()
@@ -214,7 +214,7 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
           |    s.subscribe();
           |      ~~~~~~~~~
           |1 errors, 0 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -236,8 +236,8 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
               s.subscribe(c);
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
       .run()
@@ -247,7 +247,7 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
           |    s.subscribe(c);
           |      ~~~~~~~~~
           |1 errors, 0 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -269,8 +269,8 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
               s.subscribe(c, c);
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
       .run()
@@ -293,8 +293,8 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
               cp.subscribe();
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
       .run()
@@ -304,7 +304,7 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
           |    cp.subscribe();
           |       ~~~~~~~~~
           |1 errors, 0 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -326,8 +326,8 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
               cp.subscribe(a);
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
       .run()
@@ -337,7 +337,7 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
           |    cp.subscribe(a);
           |       ~~~~~~~~~
           |1 errors, 0 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -361,8 +361,8 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
               cp.subscribe(a, c);
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
       .run()
@@ -385,8 +385,8 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
               m.subscribe();
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
       .run()
@@ -396,7 +396,7 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
           |    m.subscribe();
           |      ~~~~~~~~~
           |1 errors, 0 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -418,8 +418,8 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
               m.subscribe(c);
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
       .run()
@@ -429,7 +429,7 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
           |    m.subscribe(c);
           |      ~~~~~~~~~
           |1 errors, 0 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -451,8 +451,8 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
               m.subscribe(c, c);
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_SUBSCRIBE_MISSING_ON_ERROR)
       .run()

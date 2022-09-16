@@ -21,8 +21,8 @@ class WrongConstraintLayoutUsageDetectorTest {
               android:layout_height="wrap_content"
               app:layout_constraintLeft_toLeftOf="parent"
               tools:ignore="WrongConstraintLayoutUsage"/>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_WRONG_CONSTRAINT_LAYOUT_USAGE)
       .run()
@@ -41,8 +41,8 @@ class WrongConstraintLayoutUsageDetectorTest {
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               app:layout_constraintLeft_toLeftOf="parent"/>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_WRONG_CONSTRAINT_LAYOUT_USAGE)
       .run()
@@ -52,7 +52,7 @@ class WrongConstraintLayoutUsageDetectorTest {
           |    app:layout_constraintLeft_toLeftOf="parent"/>
           |    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
           |1 errors, 0 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
       .expectFixDiffs(
         """
@@ -62,7 +62,7 @@ class WrongConstraintLayoutUsageDetectorTest {
           |@@ -7 +6
           |+     app:layout_constraintStart_toStartOf="parent"/>
           |
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -78,8 +78,8 @@ class WrongConstraintLayoutUsageDetectorTest {
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               app:layout_constraintLeft_toRightOf="parent"/>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_WRONG_CONSTRAINT_LAYOUT_USAGE)
       .run()
@@ -89,7 +89,7 @@ class WrongConstraintLayoutUsageDetectorTest {
           |    app:layout_constraintLeft_toRightOf="parent"/>
           |    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
           |1 errors, 0 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
       .expectFixDiffs(
         """
@@ -99,7 +99,7 @@ class WrongConstraintLayoutUsageDetectorTest {
           |@@ -7 +6
           |+     app:layout_constraintStart_toEndOf="parent"/>
           |
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -115,8 +115,8 @@ class WrongConstraintLayoutUsageDetectorTest {
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               app:layout_constraintRight_toRightOf="parent"/>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_WRONG_CONSTRAINT_LAYOUT_USAGE)
       .run()
@@ -126,7 +126,7 @@ class WrongConstraintLayoutUsageDetectorTest {
           |    app:layout_constraintRight_toRightOf="parent"/>
           |    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
           |1 errors, 0 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
       .expectFixDiffs(
         """
@@ -136,7 +136,7 @@ class WrongConstraintLayoutUsageDetectorTest {
           |@@ -7 +6
           |+     app:layout_constraintEnd_toEndOf="parent"/>
           |
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -152,8 +152,8 @@ class WrongConstraintLayoutUsageDetectorTest {
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               app:layout_constraintRight_toLeftOf="parent"/>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_WRONG_CONSTRAINT_LAYOUT_USAGE)
       .run()
@@ -163,7 +163,7 @@ class WrongConstraintLayoutUsageDetectorTest {
           |    app:layout_constraintRight_toLeftOf="parent"/>
           |    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
           |1 errors, 0 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
       .expectFixDiffs(
         """
@@ -173,7 +173,7 @@ class WrongConstraintLayoutUsageDetectorTest {
           |@@ -7 +6
           |+     app:layout_constraintEnd_toStartOf="parent"/>
           |
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -185,8 +185,8 @@ class WrongConstraintLayoutUsageDetectorTest {
           """
           <TextView
               style="?android:attr/borderlessButtonStyle"/>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_WRONG_CONSTRAINT_LAYOUT_USAGE)
       .run()

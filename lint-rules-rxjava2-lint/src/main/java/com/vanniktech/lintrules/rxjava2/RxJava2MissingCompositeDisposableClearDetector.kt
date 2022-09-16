@@ -21,7 +21,7 @@ val ISSUE_MISSING_COMPOSITE_DISPOSABLE_CLEAR = Issue.create(
   "Marks CompositeDisposables that are not being cleared.",
   "A class is using CompositeDisposable and not calling clear(). This can leave operations running and even cause memory leaks. It's best to always call clear() once you're done. e.g. in onDestroy() for Activitys.",
   CORRECTNESS, PRIORITY, ERROR,
-  Implementation(RxJava2MissingCompositeDisposableClearDetector::class.java, EnumSet.of(JAVA_FILE))
+  Implementation(RxJava2MissingCompositeDisposableClearDetector::class.java, EnumSet.of(JAVA_FILE)),
 )
 
 class RxJava2MissingCompositeDisposableClearDetector : Detector(), Detector.UastScanner {
@@ -30,7 +30,7 @@ class RxJava2MissingCompositeDisposableClearDetector : Detector(), Detector.Uast
   override fun createUastHandler(context: JavaContext) = MissingCompositeDisposableClearVisitor(context)
 
   class MissingCompositeDisposableClearVisitor(
-    private val context: JavaContext
+    private val context: JavaContext,
   ) : UElementHandler() {
     override fun visitClass(node: UClass) {
       val compositeDisposables = node.fields
@@ -53,7 +53,8 @@ class RxJava2MissingCompositeDisposableClearDetector : Detector(), Detector.Uast
             super.visitCallExpression(node)
           }
         }
-      })
+      },
+      )
 
       compositeDisposables.forEach {
         context.report(ISSUE_MISSING_COMPOSITE_DISPOSABLE_CLEAR, it, context.getLocation(it), "`clear()` is not called")

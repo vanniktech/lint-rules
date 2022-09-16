@@ -22,8 +22,8 @@ class RxJava2DefaultSchedulerDetectorTest {
               Observable.just(5);
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_DEFAULT_SCHEDULER)
       .run()
@@ -46,8 +46,8 @@ class RxJava2DefaultSchedulerDetectorTest {
               Observable.interval(5, TimeUnit.SECONDS);
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_DEFAULT_SCHEDULER)
       .run()
@@ -57,7 +57,7 @@ class RxJava2DefaultSchedulerDetectorTest {
           |    Observable.interval(5, TimeUnit.SECONDS);
           |               ~~~~~~~~
           |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -78,8 +78,8 @@ class RxJava2DefaultSchedulerDetectorTest {
               Observable.interval(5, TimeUnit.SECONDS, Schedulers.computation());
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_DEFAULT_SCHEDULER)
       .run()

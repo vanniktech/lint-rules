@@ -20,8 +20,8 @@ class NamingPatternDetectorTest {
                 String iOSVersion;
               }
             }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_NAMING_PATTERN)
       .run()
@@ -31,7 +31,7 @@ class NamingPatternDetectorTest {
             |    String iOSVersion;
             |           ~~~~~~~~~~
             |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -46,8 +46,8 @@ class NamingPatternDetectorTest {
               private void makeHTTPRequest() {
               }
             }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_NAMING_PATTERN)
       .run()
@@ -57,7 +57,7 @@ class NamingPatternDetectorTest {
             |  private void makeHTTPRequest() {
             |               ~~~~~~~~~~~~~~~
             |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -71,8 +71,8 @@ class NamingPatternDetectorTest {
             public enum Enum {
               FOO
             }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_NAMING_PATTERN)
       .run()
@@ -89,8 +89,8 @@ class NamingPatternDetectorTest {
             interface Something {
               String FOO = "bar";
             }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_NAMING_PATTERN)
       .run()
@@ -106,8 +106,8 @@ class NamingPatternDetectorTest {
 
             class XmlHttpRequest {
             }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_NAMING_PATTERN)
       .run()
@@ -123,8 +123,8 @@ class NamingPatternDetectorTest {
 
             class NowAvailableOniOSView {
             }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_NAMING_PATTERN)
       .run()
@@ -140,8 +140,8 @@ class NamingPatternDetectorTest {
 
             class SomethingI18NActivity {
             }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_NAMING_PATTERN)
       .run()
@@ -157,8 +157,8 @@ class NamingPatternDetectorTest {
 
             class XMLHTTPRequest {
             }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_NAMING_PATTERN)
       .run()
@@ -168,7 +168,7 @@ class NamingPatternDetectorTest {
             |class XMLHTTPRequest {
             |      ~~~~~~~~~~~~~~
             |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -182,8 +182,8 @@ class NamingPatternDetectorTest {
             class Foo {
               val aTimes = 0
             }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_NAMING_PATTERN)
       .run()
@@ -203,8 +203,8 @@ class NamingPatternDetectorTest {
 
             val Foo.Companion.INSTANCE = 5
             val Foo.Companion.INSTANCE get() = 5
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_NAMING_PATTERN)
       .run()
@@ -219,8 +219,8 @@ class NamingPatternDetectorTest {
             package foo
 
             val MY_CONST = 0
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_NAMING_PATTERN)
       .run()
@@ -237,8 +237,8 @@ class NamingPatternDetectorTest {
             class Foo {
               val ATimes = 0
             }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_NAMING_PATTERN)
       .run()
@@ -248,7 +248,7 @@ class NamingPatternDetectorTest {
             |  val ATimes = 0
             |      ~~~~~~
             |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -260,8 +260,8 @@ class NamingPatternDetectorTest {
             package foo
 
             fun teFO() = Unit
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_NAMING_PATTERN)
       .run()
@@ -271,7 +271,7 @@ class NamingPatternDetectorTest {
             |fun teFO() = Unit
             |    ~~~~
             |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -285,8 +285,8 @@ class NamingPatternDetectorTest {
             class Test {
               fun teFO() = Unit
             }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_NAMING_PATTERN)
       .run()
@@ -296,7 +296,7 @@ class NamingPatternDetectorTest {
             |  fun teFO() = Unit
             |      ~~~~
             |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -308,8 +308,8 @@ class NamingPatternDetectorTest {
             package foo
 
             class BADName
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_NAMING_PATTERN)
       .allowDuplicates()
@@ -320,7 +320,7 @@ class NamingPatternDetectorTest {
             |class BADName
             |      ~~~~~~~
             |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -336,8 +336,8 @@ class NamingPatternDetectorTest {
                 val CREATOR = Runnable { }
               }
             }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_NAMING_PATTERN)
       .run()

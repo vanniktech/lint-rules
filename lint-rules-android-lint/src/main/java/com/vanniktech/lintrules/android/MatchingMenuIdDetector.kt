@@ -20,7 +20,7 @@ val ISSUE_MATCHING_MENU_ID = Issue.create(
   "MatchingMenuId", "Flags menu ids that don't match with the file name.",
   "When the layout file is named menu_home all of the containing ids should be prefixed with menuHome to avoid ambiguity between different menu files across different menu items.",
   CORRECTNESS, PRIORITY, WARNING,
-  Implementation(MatchingMenuIdDetector::class.java, RESOURCE_FILE_SCOPE)
+  Implementation(MatchingMenuIdDetector::class.java, RESOURCE_FILE_SCOPE),
 )
 
 class MatchingMenuIdDetector : ResourceXmlDetector() {

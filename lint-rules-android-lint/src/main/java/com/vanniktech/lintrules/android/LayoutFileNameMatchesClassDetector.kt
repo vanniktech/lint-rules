@@ -21,7 +21,7 @@ val ISSUE_LAYOUT_FILE_NAME_MATCHES_CLASS = Issue.create(
   "Checks that the layout file matches the class name.",
   "Layout file names should always match the name of the class. FooActivity should have a layout file named activity_foo hence.",
   CORRECTNESS, PRIORITY, WARNING,
-  Implementation(LayoutFileNameMatchesClassDetector::class.java, EnumSet.of(JAVA_FILE))
+  Implementation(LayoutFileNameMatchesClassDetector::class.java, EnumSet.of(JAVA_FILE)),
 )
 
 class LayoutFileNameMatchesClassDetector : Detector(), UastScanner {

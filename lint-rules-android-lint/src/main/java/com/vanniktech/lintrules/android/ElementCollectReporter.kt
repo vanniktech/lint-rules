@@ -11,7 +11,7 @@ import org.w3c.dom.Node
 
 class ElementCollectReporter(
   private val attributeToCollect: String,
-  private val elementsToReport: MutableList<Pair<Node, Location>> = mutableListOf()
+  private val elementsToReport: MutableList<Pair<Node, Location>> = mutableListOf(),
 ) : MutableCollection<Pair<Node, Location>> by elementsToReport {
   private val items = ArrayList<CollectedElement>()
 
@@ -36,6 +36,6 @@ class ElementCollectReporter(
 
   private data class CollectedElement(
     val name: String,
-    val value: String
+    val value: String,
   )
 }

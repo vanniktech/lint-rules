@@ -19,8 +19,8 @@ class SuperfluousMarginDeclarationDetectorTest {
             android:layout_marginBottom="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"/>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_SUPERFLUOUS_MARGIN_DECLARATION)
       .run()
@@ -30,7 +30,7 @@ class SuperfluousMarginDeclarationDetectorTest {
           |<TextView
           |^
           |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
       .expectFixDiffs("""""".trimMargin())
   }
@@ -47,8 +47,8 @@ class SuperfluousMarginDeclarationDetectorTest {
             android:layout_marginBottom="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"/>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_SUPERFLUOUS_MARGIN_DECLARATION)
       .run()
@@ -69,8 +69,8 @@ class SuperfluousMarginDeclarationDetectorTest {
             android:layout_marginBottom="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"/>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_SUPERFLUOUS_MARGIN_DECLARATION)
       .run()
@@ -88,8 +88,8 @@ class SuperfluousMarginDeclarationDetectorTest {
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
             android:layout_marginEnd="16dp"/>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_SUPERFLUOUS_MARGIN_DECLARATION)
       .run()
@@ -107,8 +107,8 @@ class SuperfluousMarginDeclarationDetectorTest {
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
             android:layout_marginStart="16dp"/>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_SUPERFLUOUS_MARGIN_DECLARATION)
       .run()
@@ -126,8 +126,8 @@ class SuperfluousMarginDeclarationDetectorTest {
             android:layout_marginTop="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"/>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_SUPERFLUOUS_MARGIN_DECLARATION)
       .run()
@@ -145,8 +145,8 @@ class SuperfluousMarginDeclarationDetectorTest {
             android:layout_marginBottom="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"/>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_SUPERFLUOUS_MARGIN_DECLARATION)
       .run()
@@ -176,8 +176,8 @@ class SuperfluousMarginDeclarationDetectorTest {
                 android:layout_marginBottom="16dp"/>
 
           </merge>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_SUPERFLUOUS_MARGIN_DECLARATION)
       .run()
@@ -196,8 +196,8 @@ class SuperfluousMarginDeclarationDetectorTest {
             tools:layout_marginBottom="16dp"
             tools:layout_marginStart="16dp"
             tools:layout_marginEnd="16dp"/>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_SUPERFLUOUS_MARGIN_DECLARATION)
       .run()

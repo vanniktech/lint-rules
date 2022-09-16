@@ -31,7 +31,7 @@ val ISSUE_RAW_DIMEN = Issue.create(
   "Flags dimensions that are not defined as resource.",
   "Dimensions should all be defined as dimension resources. This has the benefit that you can easily see all of your dimensions in one file. One benefit is that when designers change the outline across the entire app you only have to adjust it in one place. This check will run on layouts as well as xml drawables.",
   CORRECTNESS, PRIORITY, WARNING,
-  Implementation(RawDimenDetector::class.java, RESOURCE_FILE_SCOPE)
+  Implementation(RawDimenDetector::class.java, RESOURCE_FILE_SCOPE),
 )
 
 class RawDimenDetector : ResourceXmlDetector() {

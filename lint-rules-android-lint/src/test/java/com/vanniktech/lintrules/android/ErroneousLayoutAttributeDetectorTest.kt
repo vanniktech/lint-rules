@@ -19,8 +19,8 @@ class ErroneousLayoutAttributeDetectorTest {
               android:layout_height="wrap_content"
               android:text="Foo"
               />
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_ERRONEOUS_LAYOUT_ATTRIBUTE)
       .run()
@@ -39,8 +39,8 @@ class ErroneousLayoutAttributeDetectorTest {
               android:layout_height="wrap_content"
               android:orientation="horizontal"
               />
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_ERRONEOUS_LAYOUT_ATTRIBUTE)
       .run()
@@ -50,7 +50,7 @@ class ErroneousLayoutAttributeDetectorTest {
           |    android:orientation="horizontal"
           |    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
           |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
       .expectFixDiffs(
         """
@@ -60,7 +60,7 @@ class ErroneousLayoutAttributeDetectorTest {
           |-     android:orientation="horizontal" />
           |+     android:layout_height="wrap_content" />
           |
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -78,8 +78,8 @@ class ErroneousLayoutAttributeDetectorTest {
               android:orientation="horizontal"
               tools:parentTag="FrameLayout"
               />
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_ERRONEOUS_LAYOUT_ATTRIBUTE)
       .run()
@@ -89,7 +89,7 @@ class ErroneousLayoutAttributeDetectorTest {
           |    android:orientation="horizontal"
           |    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
           |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
       .expectFixDiffs(
         """
@@ -97,7 +97,7 @@ class ErroneousLayoutAttributeDetectorTest {
           |@@ -6 +6
           |-     android:orientation="horizontal"
           |
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -113,8 +113,8 @@ class ErroneousLayoutAttributeDetectorTest {
               android:layout_height="wrap_content"
               android:maxLines="2"
               />
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_ERRONEOUS_LAYOUT_ATTRIBUTE)
       .run()
@@ -124,7 +124,7 @@ class ErroneousLayoutAttributeDetectorTest {
           |    android:maxLines="2"
           |    ~~~~~~~~~~~~~~~~~~~~
           |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
       .expectFixDiffs(
         """
@@ -134,7 +134,7 @@ class ErroneousLayoutAttributeDetectorTest {
           |-     android:maxLines="2" />
           |+     android:layout_height="wrap_content" />
           |
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -150,8 +150,8 @@ class ErroneousLayoutAttributeDetectorTest {
               android:layout_height="wrap_content"
               android:orientation="horizontal"
               />
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_ERRONEOUS_LAYOUT_ATTRIBUTE)
       .run()
@@ -161,7 +161,7 @@ class ErroneousLayoutAttributeDetectorTest {
           |    android:orientation="horizontal"
           |    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
           |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
       .expectFixDiffs(
         """
@@ -171,7 +171,7 @@ class ErroneousLayoutAttributeDetectorTest {
         |-     android:orientation="horizontal" />
         |+     android:layout_height="wrap_content" />
         |
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -187,8 +187,8 @@ class ErroneousLayoutAttributeDetectorTest {
               android:layout_height="wrap_content"
               android:gravity="horizontal"
               />
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_ERRONEOUS_LAYOUT_ATTRIBUTE)
       .run()
@@ -198,7 +198,7 @@ class ErroneousLayoutAttributeDetectorTest {
           |    android:gravity="horizontal"
           |    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
           |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
       .expectFixDiffs(
         """
@@ -208,7 +208,7 @@ class ErroneousLayoutAttributeDetectorTest {
           |-     android:gravity="horizontal" />
           |+     android:layout_height="wrap_content" />
           |
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -228,8 +228,8 @@ class ErroneousLayoutAttributeDetectorTest {
                   android:layout_height="wrap_content"
                   android:layout_gravity="center"/>
           </FrameLayout>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_ERRONEOUS_LAYOUT_ATTRIBUTE)
       .run()

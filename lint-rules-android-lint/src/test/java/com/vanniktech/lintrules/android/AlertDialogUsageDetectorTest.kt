@@ -17,8 +17,8 @@ class AlertDialogUsageDetectorTest {
             import android.app.AlertDialog
 
             class Test(dialog: AlertDialog)
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_ALERT_DIALOG_USAGE)
       .run()
@@ -28,7 +28,7 @@ class AlertDialogUsageDetectorTest {
             |class Test(dialog: AlertDialog)
             |           ~~~~~~~~~~~~~~~~~~~
             |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -43,8 +43,8 @@ class AlertDialogUsageDetectorTest {
             class Test {
               public Test(AlertDialog dialog) { }
             }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_ALERT_DIALOG_USAGE)
       .run()
@@ -54,7 +54,7 @@ class AlertDialogUsageDetectorTest {
             |  public Test(AlertDialog dialog) { }
             |              ~~~~~~~~~~~~~~~~~~
             |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -67,8 +67,8 @@ class AlertDialogUsageDetectorTest {
             import android.app.AlertDialog
 
             class Test : AlertDialog
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_ALERT_DIALOG_USAGE)
       .run()
@@ -78,7 +78,7 @@ class AlertDialogUsageDetectorTest {
             |class Test : AlertDialog
             |             ~~~~~~~~~~~
             |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -92,8 +92,8 @@ class AlertDialogUsageDetectorTest {
 
             class Test extends AlertDialog {
             }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_ALERT_DIALOG_USAGE)
       .run()
@@ -103,7 +103,7 @@ class AlertDialogUsageDetectorTest {
             |class Test extends AlertDialog {
             |                   ~~~~~~~~~~~
             |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 }

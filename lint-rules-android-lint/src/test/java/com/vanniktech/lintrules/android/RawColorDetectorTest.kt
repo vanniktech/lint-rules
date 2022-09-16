@@ -15,8 +15,8 @@ class RawColorDetectorTest {
           """
           <TextView xmlns:tools="http://schemas.android.com/tools"
               tools:textColor="#fff"/>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_RAW_COLOR)
       .run()
@@ -31,8 +31,8 @@ class RawColorDetectorTest {
           """
           <TextView xmlns:app="http://schemas.android.com/apk/res-auto"
               app:someCustomColor="#fff"/>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_RAW_COLOR)
       .run()
@@ -42,7 +42,7 @@ class RawColorDetectorTest {
           |    app:someCustomColor="#fff"/>
           |                         ~~~~
           |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -54,8 +54,8 @@ class RawColorDetectorTest {
           """
           <TextView xmlns:android="http://schemas.android.com/apk/res/android"
               android:textColor="#fff"/>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_RAW_COLOR)
       .run()
@@ -65,7 +65,7 @@ class RawColorDetectorTest {
           |    android:textColor="#fff"/>
           |                       ~~~~
           |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -77,7 +77,7 @@ class RawColorDetectorTest {
           """
           <TextView xmlns:android="http://schemas.android.com/apk/res/android"
               android:textColor="#fff"/>
-          """
+          """,
         ).indented(),
         xml(
           "res/values/dimens.xml",
@@ -85,8 +85,8 @@ class RawColorDetectorTest {
           <resources>
             <color name="white">#fff</color>
           </resources>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_RAW_COLOR)
       .run()
@@ -96,7 +96,7 @@ class RawColorDetectorTest {
           |    android:textColor="#fff"/>
           |                       ~~~~
           |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
       .expectFixDiffs(
         """
@@ -106,7 +106,7 @@ class RawColorDetectorTest {
           |@@ -3 +2
           |+     android:textColor="@color/white"/>
           |
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -118,8 +118,8 @@ class RawColorDetectorTest {
           """
           <TextView xmlns:android="http://schemas.android.com/apk/res/android"
               android:text="Blub!"/>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_RAW_COLOR)
       .run()
@@ -136,8 +136,8 @@ class RawColorDetectorTest {
               xmlns:tools="http://schemas.android.com/tools"
               android:textColor="#fff"
               tools:ignore="RawColor"/>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_RAW_COLOR)
       .run()
@@ -156,8 +156,8 @@ class RawColorDetectorTest {
             <solid android:color="#1aeebf"/>
             <size android:height="4dp"/>
           </shape>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_RAW_COLOR)
       .run()
@@ -167,7 +167,7 @@ class RawColorDetectorTest {
           |  <solid android:color="#1aeebf"/>
           |                        ~~~~~~~
           |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -186,8 +186,8 @@ class RawColorDetectorTest {
                 android:fillColor="#000000"
                 android:pathData="M19,13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
           </vector>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_RAW_COLOR)
       .run()
@@ -206,8 +206,8 @@ class RawColorDetectorTest {
               android:viewportWidth="24.0"
               android:fillColor="#000000"
               android:width="24dp"/>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_RAW_COLOR)
       .run()

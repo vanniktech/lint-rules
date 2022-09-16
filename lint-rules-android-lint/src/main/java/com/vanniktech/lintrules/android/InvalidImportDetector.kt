@@ -19,7 +19,7 @@ val ISSUE_INVALID_IMPORT = Issue.create(
   "Flags invalid imports.",
   "Flags invalid imports. One example is com.foo.bar.R.drawable. Instead just the generated class R should be imported and not R.drawable. Also you should never import anything that's in an internal package.",
   CORRECTNESS, PRIORITY, WARNING,
-  Implementation(InvalidImportDetector::class.java, EnumSet.of(JAVA_FILE))
+  Implementation(InvalidImportDetector::class.java, EnumSet.of(JAVA_FILE)),
 )
 
 private val disallowedImports = listOf(".R.")

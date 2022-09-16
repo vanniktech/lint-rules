@@ -28,7 +28,7 @@ val ISSUE_TODO = Issue.create(
   "Marks todos in any given file.",
   "Marks todo in any given file since they should be resolved.",
   CORRECTNESS, PRIORITY, FATAL,
-  Implementation(TodoDetector::class.java, EnumSet.of(JAVA_FILE, GRADLE_FILE, PROGUARD_FILE, MANIFEST, RESOURCE_FILE), EnumSet.of(JAVA_FILE, GRADLE_FILE, PROGUARD_FILE, MANIFEST, RESOURCE_FILE))
+  Implementation(TodoDetector::class.java, EnumSet.of(JAVA_FILE, GRADLE_FILE, PROGUARD_FILE, MANIFEST, RESOURCE_FILE), EnumSet.of(JAVA_FILE, GRADLE_FILE, PROGUARD_FILE, MANIFEST, RESOURCE_FILE)),
 )
 
 class TodoDetector : Detector(), Detector.UastScanner, Detector.GradleScanner, Detector.OtherFileScanner, Detector.XmlScanner {

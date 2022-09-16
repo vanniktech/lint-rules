@@ -15,8 +15,8 @@ class KotlinRequireNotNullUseMessageDetectorTest {
           fun test(value: Int?) {
             requireNotNull(value)
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_KOTLIN_REQUIRE_NOT_NULL_USE_MESSAGE)
       .run()
@@ -26,7 +26,7 @@ class KotlinRequireNotNullUseMessageDetectorTest {
           |  requireNotNull(value)
           |  ~~~~~~~~~~~~~~
           |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -38,8 +38,8 @@ class KotlinRequireNotNullUseMessageDetectorTest {
           fun test(value: Int?) {
             requireNotNull(value) { "Foo" }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_KOTLIN_REQUIRE_NOT_NULL_USE_MESSAGE)
       .run()

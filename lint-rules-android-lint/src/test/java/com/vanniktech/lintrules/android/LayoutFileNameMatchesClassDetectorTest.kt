@@ -22,7 +22,7 @@ class LayoutFileNameMatchesClassDetectorTest {
           public static final int foo2bar_activity = 5;
         }
       }
-    """
+    """,
   ).indented()
 
   private val activity = java(
@@ -32,7 +32,7 @@ class LayoutFileNameMatchesClassDetectorTest {
       public abstract class Activity {
         public void setContentView(int viewId) { }
       }
-    """
+    """,
   ).indented()
 
   @Test fun nonRUsage() {
@@ -48,8 +48,8 @@ class LayoutFileNameMatchesClassDetectorTest {
               setContentView(id);
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_LAYOUT_FILE_NAME_MATCHES_CLASS)
       .run()
@@ -69,8 +69,8 @@ class LayoutFileNameMatchesClassDetectorTest {
               setContentView(R.layout.activity_foo);
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_LAYOUT_FILE_NAME_MATCHES_CLASS)
       .run()
@@ -90,9 +90,9 @@ class LayoutFileNameMatchesClassDetectorTest {
               setContentView(R.layout.foo2bar_activity_rider)
             }
           }
-          """
+          """,
         ).indented(),
-        resourcePrefix("foo2bar_")
+        resourcePrefix("foo2bar_"),
       )
       .issues(ISSUE_LAYOUT_FILE_NAME_MATCHES_CLASS)
       .run()
@@ -112,9 +112,9 @@ class LayoutFileNameMatchesClassDetectorTest {
               setContentView(R.layout.foo2bar_activity)
             }
           }
-          """
+          """,
         ).indented(),
-        resourcePrefix("foo2bar_")
+        resourcePrefix("foo2bar_"),
       )
       .issues(ISSUE_LAYOUT_FILE_NAME_MATCHES_CLASS)
       .run()
@@ -134,9 +134,9 @@ class LayoutFileNameMatchesClassDetectorTest {
               setContentView(R.layout.unit_test_activity_foo);
             }
           }
-          """
+          """,
         ).indented(),
-        resourcePrefix("unit_test_")
+        resourcePrefix("unit_test_"),
       )
       .issues(ISSUE_LAYOUT_FILE_NAME_MATCHES_CLASS)
       .run()
@@ -156,8 +156,8 @@ class LayoutFileNameMatchesClassDetectorTest {
               setContentView(R.layout.activity_game_times)
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_LAYOUT_FILE_NAME_MATCHES_CLASS)
       .run()
@@ -177,9 +177,9 @@ class LayoutFileNameMatchesClassDetectorTest {
                 setContentView(R.layout.activity_bar);
               }
             }
-          """
+          """,
         ).indented(),
-        resourcePrefix("unit_test_")
+        resourcePrefix("unit_test_"),
       )
       .issues(ISSUE_LAYOUT_FILE_NAME_MATCHES_CLASS)
       .run()
@@ -189,7 +189,7 @@ class LayoutFileNameMatchesClassDetectorTest {
             |    setContentView(R.layout.activity_bar);
             |                   ~~~~~~~~~~~~~~~~~~~~~
             |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
       .expectFixDiffs(
         """
@@ -198,7 +198,7 @@ class LayoutFileNameMatchesClassDetectorTest {
             |-     setContentView(R.layout.activity_bar);
             |+     setContentView(R.layout.unit_test_activity_foo);
             |
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -215,8 +215,8 @@ class LayoutFileNameMatchesClassDetectorTest {
               setContentView(R.layout.activity_bar);
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_LAYOUT_FILE_NAME_MATCHES_CLASS)
       .run()
@@ -226,7 +226,7 @@ class LayoutFileNameMatchesClassDetectorTest {
           |    setContentView(R.layout.activity_bar);
           |                   ~~~~~~~~~~~~~~~~~~~~~
           |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
       .expectFixDiffs(
         """
@@ -235,7 +235,7 @@ class LayoutFileNameMatchesClassDetectorTest {
           |-     setContentView(R.layout.activity_bar);
           |+     setContentView(R.layout.activity_game_times);
           |
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -252,8 +252,8 @@ class LayoutFileNameMatchesClassDetectorTest {
               setContentView(R.layout.activity_bar)
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_LAYOUT_FILE_NAME_MATCHES_CLASS)
       .run()
@@ -263,7 +263,7 @@ class LayoutFileNameMatchesClassDetectorTest {
           |    setContentView(R.layout.activity_bar)
           |                   ~~~~~~~~~~~~~~~~~~~~~
           |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
       .expectFixDiffs(
         """
@@ -272,7 +272,7 @@ class LayoutFileNameMatchesClassDetectorTest {
           |-     setContentView(R.layout.activity_bar)
           |+     setContentView(R.layout.activity_themes)
           |
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 }

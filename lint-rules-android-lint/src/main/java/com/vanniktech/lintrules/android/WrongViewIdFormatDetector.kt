@@ -18,7 +18,7 @@ val ISSUE_WRONG_VIEW_ID_FORMAT = Issue.create(
   "Flag view ids that are not in lowerCamelCase Format.",
   "View ids should be in lowerCamelCase format. This has the benefit of saving an unnecessary underscore and also just looks nicer.",
   CORRECTNESS, PRIORITY, WARNING,
-  Implementation(WrongViewIdFormatDetector::class.java, RESOURCE_FILE_SCOPE)
+  Implementation(WrongViewIdFormatDetector::class.java, RESOURCE_FILE_SCOPE),
 )
 
 class WrongViewIdFormatDetector : LayoutDetector() {

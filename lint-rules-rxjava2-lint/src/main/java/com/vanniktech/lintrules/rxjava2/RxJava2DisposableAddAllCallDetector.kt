@@ -18,7 +18,7 @@ val ISSUE_DISPOSABLE_ADD_ALL_CALL = Issue.create(
   "Marks usage of addAll() on CompositeDisposable.",
   "Instead of using addAll(), add() should be used separately for each Disposable.",
   CORRECTNESS, PRIORITY, WARNING,
-  Implementation(RxJava2DisposableAddAllCallDetector::class.java, EnumSet.of(JAVA_FILE))
+  Implementation(RxJava2DisposableAddAllCallDetector::class.java, EnumSet.of(JAVA_FILE)),
 )
 
 class RxJava2DisposableAddAllCallDetector : Detector(), Detector.UastScanner {

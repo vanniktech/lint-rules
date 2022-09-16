@@ -21,7 +21,7 @@ val ISSUE_RAW_SCHEDULER_CALL = Issue.create(
   "Instead of calling the Schedulers factory methods directly inject the Schedulers.",
   "Injecting the Schedulers instead of accessing them via the factory methods has the benefit that unit testing is way easier. Instead of overriding them via the Plugin mechanism we can just pass a custom Scheduler.",
   CORRECTNESS, PRIORITY, WARNING,
-  Implementation(RxJava2SchedulersFactoryCallDetector::class.java, EnumSet.of(JAVA_FILE))
+  Implementation(RxJava2SchedulersFactoryCallDetector::class.java, EnumSet.of(JAVA_FILE)),
 )
 
 private val schedulersMethods = listOf("io", "computation", "newThread", "single", "from")

@@ -24,7 +24,7 @@ val ISSUE_SHOULD_USE_STATIC_IMPORT = Issue.create(
   "Flags declarations that should be statically imported.",
   "Certain declarations like TimeUnit.SECONDS should be statically imported to increase the readability.",
   CORRECTNESS, PRIORITY, WARNING,
-  Implementation(ShouldUseStaticImportDetector::class.java, EnumSet.of(JAVA_FILE))
+  Implementation(ShouldUseStaticImportDetector::class.java, EnumSet.of(JAVA_FILE)),
 )
 
 @Suppress("Detekt.StringLiteralDuplication")
@@ -84,7 +84,7 @@ private val methodsToStaticallyImport = mapOf(
   "framework" to "org.mockito.Mockito.framework",
   "mockitoSession" to "org.mockito.Mockito.mockitoSession",
   // AssertJ
-  "assertThat" to "org.assertj.core.api.Assertions.assertThat"
+  "assertThat" to "org.assertj.core.api.Assertions.assertThat",
 )
 
 @Suppress("Detekt.StringLiteralDuplication")
@@ -204,7 +204,7 @@ private val referencesToStaticallyImport = mapOf(
   // Mockito.
   "STRICT_STUBS" to "org.mockito.quality.Strictness",
   "WARN" to "org.mockito.quality.Strictness",
-  "LENIENT" to "org.mockito.quality.Strictness"
+  "LENIENT" to "org.mockito.quality.Strictness",
 )
 
 class ShouldUseStaticImportDetector : Detector(), Detector.UastScanner {

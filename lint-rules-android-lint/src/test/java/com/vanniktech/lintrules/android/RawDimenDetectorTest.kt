@@ -14,8 +14,8 @@ class RawDimenDetectorTest {
           "res/layout/ids.xml",
           """
           <TextView xmlns:tools="http://schemas.android.com/tools" tools:layout_margin="16dp"/>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_RAW_DIMEN)
       .run()
@@ -29,8 +29,8 @@ class RawDimenDetectorTest {
           "res/layout/ids.xml",
           """
           <TextView xmlns:app="http://schemas.android.com/apk/res-auto" app:someCustomAttribute="16dp"/>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_RAW_DIMEN)
       .run()
@@ -40,7 +40,7 @@ class RawDimenDetectorTest {
           |<TextView xmlns:app="http://schemas.android.com/apk/res-auto" app:someCustomAttribute="16dp"/>
           |                                                                                       ~~~~
           |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -51,8 +51,8 @@ class RawDimenDetectorTest {
           "res/layout/ids.xml",
           """
           <TextView xmlns:app="http://schemas.android.com/apk/res-auto" app:behavior_peekHeight="0dp"/>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_RAW_DIMEN)
       .run()
@@ -67,7 +67,7 @@ class RawDimenDetectorTest {
           """
           <TextView xmlns:android="http://schemas.android.com/apk/res/android"
              android:layout_margin="16dp"/>
-          """
+          """,
         ).indented(),
         xml(
           "res/values/dimens.xml",
@@ -75,8 +75,8 @@ class RawDimenDetectorTest {
           <resources>
            <dimen name="content_margin">16dp</dimen>
           </resources>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_RAW_DIMEN)
       .run()
@@ -86,7 +86,7 @@ class RawDimenDetectorTest {
           |   android:layout_margin="16dp"/>
           |                          ~~~~
           |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
       .expectFixDiffs(
         """
@@ -96,7 +96,7 @@ class RawDimenDetectorTest {
           |@@ -3 +2
           |+    android:layout_margin="@dimen/content_margin"/>
           |
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -110,8 +110,8 @@ class RawDimenDetectorTest {
              xmlns:tools="http://schemas.android.com/tools"
              tools:ignore="RawDimen"
              android:layout_margin="16dp"/>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_RAW_DIMEN)
       .run()
@@ -130,8 +130,8 @@ class RawDimenDetectorTest {
             <solid android:color="#1aeebf"/>
             <size android:height="4dp"/>
           </shape>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_RAW_DIMEN)
       .run()
@@ -141,7 +141,7 @@ class RawDimenDetectorTest {
           |  <size android:height="4dp"/>
           |                        ~~~
           |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -152,8 +152,8 @@ class RawDimenDetectorTest {
           "res/layout/ids.xml",
           """
           <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="0dp"/>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_RAW_DIMEN)
       .run()
@@ -163,7 +163,7 @@ class RawDimenDetectorTest {
           |<TextView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="0dp"/>
           |                                                                                           ~~~
           |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -174,8 +174,8 @@ class RawDimenDetectorTest {
           "res/layout/ids.xml",
           """
           <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="0dp" android:layout_weight="1"/>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_RAW_DIMEN)
       .run()
@@ -189,8 +189,8 @@ class RawDimenDetectorTest {
           "res/layout/ids.xml",
           """
           <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_height="0dp"/>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_RAW_DIMEN)
       .run()
@@ -200,7 +200,7 @@ class RawDimenDetectorTest {
           |<TextView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_height="0dp"/>
           |                                                                                            ~~~
           |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -211,8 +211,8 @@ class RawDimenDetectorTest {
           "res/layout/ids.xml",
           """
           <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_height="0dp" android:layout_weight="1"/>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_RAW_DIMEN)
       .run()
@@ -226,8 +226,8 @@ class RawDimenDetectorTest {
           "res/layout/ids.xml",
           """
           <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:minHeight="0dp"/>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_RAW_DIMEN)
       .run()
@@ -241,8 +241,8 @@ class RawDimenDetectorTest {
           "res/layout/ids.xml",
           """
           <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:minWidth="0dp"/>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_RAW_DIMEN)
       .run()
@@ -256,8 +256,8 @@ class RawDimenDetectorTest {
           "res/layout/ids.xml",
           """
           <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="16dp"/>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_RAW_DIMEN)
       .run()
@@ -267,7 +267,7 @@ class RawDimenDetectorTest {
           |<TextView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="16dp"/>
           |                                                                                           ~~~~
           |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -278,8 +278,8 @@ class RawDimenDetectorTest {
           "res/layout/ids.xml",
           """
           <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_height="16dp"/>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_RAW_DIMEN)
       .run()
@@ -289,7 +289,7 @@ class RawDimenDetectorTest {
           |<TextView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_height="16dp"/>
           |                                                                                            ~~~~
           |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -300,8 +300,8 @@ class RawDimenDetectorTest {
           "res/layout/ids.xml",
           """
           <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_margin="16dp"/>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_RAW_DIMEN)
       .run()
@@ -311,7 +311,7 @@ class RawDimenDetectorTest {
           |<TextView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_margin="16dp"/>
           |                                                                                            ~~~~
           |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -322,8 +322,8 @@ class RawDimenDetectorTest {
           "res/layout/ids.xml",
           """
           <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_margin="0.5dp"/>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_RAW_DIMEN)
       .run()
@@ -333,7 +333,7 @@ class RawDimenDetectorTest {
           |<TextView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_margin="0.5dp"/>
           |                                                                                            ~~~~~
           |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -344,8 +344,8 @@ class RawDimenDetectorTest {
           "res/layout/ids.xml",
           """
           <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:paddingEnd="-16dp"/>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_RAW_DIMEN)
       .run()
@@ -355,7 +355,7 @@ class RawDimenDetectorTest {
           |<TextView xmlns:android="http://schemas.android.com/apk/res/android" android:paddingEnd="-16dp"/>
           |                                                                                         ~~~~~
           |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -366,8 +366,8 @@ class RawDimenDetectorTest {
           "res/layout/ids.xml",
           """
           <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:textSize="16dp"/>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_RAW_DIMEN)
       .run()
@@ -377,7 +377,7 @@ class RawDimenDetectorTest {
           |<TextView xmlns:android="http://schemas.android.com/apk/res/android" android:textSize="16dp"/>
           |                                                                                       ~~~~
           |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -396,8 +396,8 @@ class RawDimenDetectorTest {
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"/>
           </android.support.constraint.ConstraintLayout>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_RAW_DIMEN)
       .run()
@@ -419,8 +419,8 @@ class RawDimenDetectorTest {
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"/>
           </androidx.constraintlayout.widget.ConstraintLayout>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_RAW_DIMEN)
       .run()
@@ -444,8 +444,8 @@ class RawDimenDetectorTest {
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"/>
           </merge>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_RAW_DIMEN)
       .run()
@@ -469,8 +469,8 @@ class RawDimenDetectorTest {
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"/>
           </merge>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_RAW_DIMEN)
       .run()
@@ -494,8 +494,8 @@ class RawDimenDetectorTest {
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"/>
           </merge>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_RAW_DIMEN)
       .run()
@@ -517,8 +517,8 @@ class RawDimenDetectorTest {
                 android:fillColor="#000000"
                 android:pathData="M19,13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
           </vector>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_RAW_DIMEN)
       .run()

@@ -16,8 +16,8 @@ class WrongMenuIdFormatDetectorTest {
           <menu xmlns:android="http://schemas.android.com/apk/res/android">
             <item android:id="@+id/lowerCamelCase"/>
           </menu>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_WRONG_MENU_ID_FORMAT)
       .run()
@@ -33,8 +33,8 @@ class WrongMenuIdFormatDetectorTest {
           <menu xmlns:android="http://schemas.android.com/apk/res/android">
             <item android:id="@id/lowerCamelCase"/>
           </menu>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_WRONG_MENU_ID_FORMAT)
       .run()
@@ -50,8 +50,8 @@ class WrongMenuIdFormatDetectorTest {
           <menu xmlns:android="http://schemas.android.com/apk/res/android">
             <item android:id="@+id/CamelCase"/>
           </menu>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_WRONG_MENU_ID_FORMAT)
       .run()
@@ -61,7 +61,7 @@ class WrongMenuIdFormatDetectorTest {
           |  <item android:id="@+id/CamelCase"/>
           |                    ~~~~~~~~~~~~~~
           |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
       .expectFixDiffs(
         """
@@ -70,7 +70,7 @@ class WrongMenuIdFormatDetectorTest {
           |-   <item android:id="@+id/CamelCase"/>
           |+   <item android:id="@+id/camelCase"/>
           |
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -83,8 +83,8 @@ class WrongMenuIdFormatDetectorTest {
           <menu xmlns:android="http://schemas.android.com/apk/res/android">
             <item android:id="@+id/snake_case"/>
           </menu>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_WRONG_MENU_ID_FORMAT)
       .run()
@@ -94,7 +94,7 @@ class WrongMenuIdFormatDetectorTest {
           |  <item android:id="@+id/snake_case"/>
           |                    ~~~~~~~~~~~~~~~
           |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
       .expectFixDiffs(
         """
@@ -103,7 +103,7 @@ class WrongMenuIdFormatDetectorTest {
           |-   <item android:id="@+id/snake_case"/>
           |+   <item android:id="@+id/snakeCase"/>
           |
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 }

@@ -23,8 +23,8 @@ class RxJava2DisposableDisposeCallDetectorTest {
                 cd.dispose();
               }
             }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_DISPOSABLE_DISPOSE_CALL)
       .run()
@@ -34,7 +34,7 @@ class RxJava2DisposableDisposeCallDetectorTest {
             |    cd.dispose();
             |       ~~~~~~~
             |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
       .expectFixDiffs(
         """
@@ -43,7 +43,7 @@ class RxJava2DisposableDisposeCallDetectorTest {
             |-     cd.dispose();
             |+     cd.clear();
             |
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 }
