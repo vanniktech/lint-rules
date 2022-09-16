@@ -17,8 +17,8 @@ class WrongTestMethodNameDetectorTest {
           public class Something {
             public void testThis() { }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_WRONG_TEST_METHOD_NAME)
       .run()
@@ -38,8 +38,8 @@ class WrongTestMethodNameDetectorTest {
           public class MyTest {
             @Something public void test() { }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_WRONG_TEST_METHOD_NAME)
       .run()
@@ -59,8 +59,8 @@ class WrongTestMethodNameDetectorTest {
           public class MyTest {
             @Test public void myTest() { }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_WRONG_TEST_METHOD_NAME)
       .run()
@@ -80,8 +80,8 @@ class WrongTestMethodNameDetectorTest {
           public class MyTest {
             @Test public void testSomething() { }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_WRONG_TEST_METHOD_NAME)
       .run()
@@ -91,7 +91,7 @@ class WrongTestMethodNameDetectorTest {
           |  @Test public void testSomething() { }
           |                    ~~~~~~~~~~~~~
           |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
       .expectFixDiffs(
         """
@@ -100,7 +100,7 @@ class WrongTestMethodNameDetectorTest {
           |-   @Test public void testSomething() { }
           |+   @Test public void something() { }
           |
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -117,8 +117,8 @@ class WrongTestMethodNameDetectorTest {
           public class MyTest {
             @Test public void testSomething() { }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_WRONG_TEST_METHOD_NAME)
       .run()
@@ -128,7 +128,7 @@ class WrongTestMethodNameDetectorTest {
           |  @Test public void testSomething() { }
           |                    ~~~~~~~~~~~~~
           |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
       .expectFixDiffs(
         """
@@ -137,7 +137,7 @@ class WrongTestMethodNameDetectorTest {
           |-   @Test public void testSomething() { }
           |+   @Test public void something() { }
           |
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 }

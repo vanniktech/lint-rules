@@ -24,6 +24,6 @@ class IssueRegistry : com.android.tools.lint.client.api.IssueRegistry() {
     ISSUE_DEFAULT_SCHEDULER,
     ISSUE_DISPOSABLE_DISPOSE_CALL,
     ISSUE_SUBSCRIBE_MISSING_ON_ERROR,
-    ISSUE_RAW_SCHEDULER_CALL
+    ISSUE_RAW_SCHEDULER_CALL,
   )
 }

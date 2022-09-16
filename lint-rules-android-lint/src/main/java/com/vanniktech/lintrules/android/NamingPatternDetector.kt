@@ -28,7 +28,7 @@ val ISSUE_NAMING_PATTERN = Issue.create(
   "Names should be well named.",
   """Sometimes there is more than one reasonable way to convert an English phrase into camel case, such as when acronyms or unusual constructs like "IPv6" or "iOS" are present. XML HTTP request becomes XmlHttpRequest. XMLHTTPRequest would be incorrect.""",
   CORRECTNESS, PRIORITY, WARNING,
-  Implementation(NamingPatternDetector::class.java, EnumSet.of(JAVA_FILE))
+  Implementation(NamingPatternDetector::class.java, EnumSet.of(JAVA_FILE)),
 )
 
 class NamingPatternDetector : Detector(), Detector.UastScanner {
@@ -70,7 +70,7 @@ class NamingPatternDetector : Detector(), Detector.UastScanner {
   companion object {
     val EXCLUDES = listOf(
       "iOS",
-      "I18N"
+      "I18N",
     )
   }
 }

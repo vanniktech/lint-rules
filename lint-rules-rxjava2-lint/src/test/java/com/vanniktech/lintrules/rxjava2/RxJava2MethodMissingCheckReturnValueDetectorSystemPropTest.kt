@@ -30,8 +30,8 @@ class RxJava2MethodMissingCheckReturnValueDetectorSystemPropTest {
             return null;
           }
         }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE)
       .run()
@@ -59,8 +59,8 @@ class RxJava2MethodMissingCheckReturnValueDetectorSystemPropTest {
             return null;
           }
         }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE)
       .run()
@@ -84,8 +84,8 @@ class RxJava2MethodMissingCheckReturnValueDetectorSystemPropTest {
             return null;
           }
         }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE)
       .run().expect(
@@ -94,7 +94,7 @@ class RxJava2MethodMissingCheckReturnValueDetectorSystemPropTest {
         |  protected Observable<Object> foo() {
         |                               ~~~
         |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
       .expectFixDiffs(
         """
@@ -103,7 +103,7 @@ class RxJava2MethodMissingCheckReturnValueDetectorSystemPropTest {
         |-   protected Observable<Object> foo() {
         |+   @io.reactivex.annotations.CheckReturnValue protected Observable<Object> foo() {
         |
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -124,8 +124,8 @@ class RxJava2MethodMissingCheckReturnValueDetectorSystemPropTest {
             return null
           }
         }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE)
       .run()

@@ -22,7 +22,7 @@ val ISSUE_SUPERFLUOUS_NAME_SPACE = Issue.create(
   "Flags namespaces that are already declared.",
   "Re-declaring a namespace is unnecessary and hence can be just removed.",
   CORRECTNESS, PRIORITY, WARNING,
-  Implementation(SuperfluousNameSpaceDetector::class.java, RESOURCE_FILE_SCOPE)
+  Implementation(SuperfluousNameSpaceDetector::class.java, RESOURCE_FILE_SCOPE),
 )
 
 class SuperfluousNameSpaceDetector : LayoutDetector() {

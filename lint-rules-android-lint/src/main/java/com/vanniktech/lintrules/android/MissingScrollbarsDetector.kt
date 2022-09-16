@@ -20,7 +20,7 @@ val ISSUE_MISSING_SCROLLBARS = Issue.create(
   category = Category.CORRECTNESS,
   priority = PRIORITY,
   severity = WARNING,
-  implementation = Implementation(MissingScrollbarsDetector::class.java, RESOURCE_FILE_SCOPE)
+  implementation = Implementation(MissingScrollbarsDetector::class.java, RESOURCE_FILE_SCOPE),
 )
 
 class MissingScrollbarsDetector : LayoutDetector() {
@@ -28,7 +28,7 @@ class MissingScrollbarsDetector : LayoutDetector() {
 
   override fun visitElement(
     context: XmlContext,
-    element: Element
+    element: Element,
   ) {
     val layoutName = element.layoutName()
     if (layoutName.endsWith("ScrollView", ignoreCase = true) || layoutName.endsWith("RecyclerView", ignoreCase = true)) {
@@ -38,7 +38,7 @@ class MissingScrollbarsDetector : LayoutDetector() {
         val quickFixes = listOf(
           SdkConstants.VALUE_VERTICAL,
           SdkConstants.VALUE_HORIZONTAL,
-          SdkConstants.VALUE_NONE
+          SdkConstants.VALUE_NONE,
         ).mapIndexed { index, it ->
           fix()
             .set(ANDROID_URI, SdkConstants.ATTR_SCROLLBARS, it)
@@ -51,7 +51,7 @@ class MissingScrollbarsDetector : LayoutDetector() {
           scope = element,
           location = context.getLocation(element),
           message = "Missing scrollbars on $layoutName",
-          quickfixData = fix().alternatives(*quickFixes)
+          quickfixData = fix().alternatives(*quickFixes),
         )
       }
     }

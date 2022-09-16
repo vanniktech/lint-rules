@@ -19,12 +19,12 @@ val ISSUE_UNSUPPORTED_LAYOUT_ATTRIBUTE = Issue.create(
   "Marks layout attributes which are not supported.",
   "Some layout attributes are not supported. Your app will still compile but it makes no sense to have them around. This can happen when refactoring a LinearLayout to a ScrollView. The orientation is no longer needed and can be removed.",
   Category.CORRECTNESS, PRIORITY, ERROR,
-  Implementation(UnsupportedLayoutAttributeDetector::class.java, RESOURCE_FILE_SCOPE)
+  Implementation(UnsupportedLayoutAttributeDetector::class.java, RESOURCE_FILE_SCOPE),
 )
 
 private val unsupportedAttributes = mapOf(
   RELATIVE_LAYOUT to ATTR_ORIENTATION,
-  SCROLL_VIEW to ATTR_ORIENTATION
+  SCROLL_VIEW to ATTR_ORIENTATION,
 )
 
 class UnsupportedLayoutAttributeDetector : LayoutDetector() {

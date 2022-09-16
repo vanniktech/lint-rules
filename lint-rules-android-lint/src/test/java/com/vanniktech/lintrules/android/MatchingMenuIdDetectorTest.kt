@@ -16,8 +16,8 @@ class MatchingMenuIdDetectorTest {
             <menu xmlns:android="http://schemas.android.com/apk/res/android">
               <item android:id="@+id/menuMainSomething"/>
             </menu>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_MATCHING_MENU_ID)
       .run()
@@ -34,8 +34,8 @@ class MatchingMenuIdDetectorTest {
             <menu xmlns:android="http://schemas.android.com/apk/res/android">
               <item android:id="@+id/something"/>
             </menu>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_MATCHING_MENU_ID)
       .run()
@@ -45,7 +45,7 @@ class MatchingMenuIdDetectorTest {
             |  <item android:id="@+id/something"/>
             |                    ~~~~~~~~~~~~~~
             |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
       .expectFixDiffs(
         """
@@ -54,7 +54,7 @@ class MatchingMenuIdDetectorTest {
             |-   <item android:id="@+id/something"/>
             |+   <item android:id="@+id/menuMainSomething"/>
             |
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -67,8 +67,8 @@ class MatchingMenuIdDetectorTest {
             <menu xmlns:android="http://schemas.android.com/apk/res/android">
               <item android:id="@+id/mainMenuSomething"/>
             </menu>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_MATCHING_MENU_ID)
       .run()
@@ -78,7 +78,7 @@ class MatchingMenuIdDetectorTest {
             |  <item android:id="@+id/mainMenuSomething"/>
             |                    ~~~~~~~~~~~~~~~~~~~~~~
             |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
       .expectFixDiffs(
         """
@@ -87,7 +87,7 @@ class MatchingMenuIdDetectorTest {
             |-   <item android:id="@+id/mainMenuSomething"/>
             |+   <item android:id="@+id/menuMainMainMenuSomething"/>
             |
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -100,8 +100,8 @@ class MatchingMenuIdDetectorTest {
             <menu xmlns:android="http://schemas.android.com/apk/res/android">
               <item android:id="@+id/menuCustomTextView"/>
             </menu>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_MATCHING_MENU_ID)
       .run()
@@ -117,8 +117,8 @@ class MatchingMenuIdDetectorTest {
             <menu xmlns:android="http://schemas.android.com/apk/res/android">
               <item android:id="@+id/MenuMainTextView"/>
             </menu>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_MATCHING_MENU_ID)
       .run()
@@ -128,7 +128,7 @@ class MatchingMenuIdDetectorTest {
             |  <item android:id="@+id/MenuMainTextView"/>
             |                    ~~~~~~~~~~~~~~~~~~~~~
             |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
       .expectFixDiffs(
         """
@@ -137,7 +137,7 @@ class MatchingMenuIdDetectorTest {
             |-   <item android:id="@+id/MenuMainTextView"/>
             |+   <item android:id="@+id/menuMainTextView"/>
             |
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -150,8 +150,8 @@ class MatchingMenuIdDetectorTest {
             <menu xmlns:android="http://schemas.android.com/apk/res/android">
               <item android:id="@+id/mainViewTextView"/>
             </menu>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_MATCHING_MENU_ID)
       .run()
@@ -161,7 +161,7 @@ class MatchingMenuIdDetectorTest {
             |  <item android:id="@+id/mainViewTextView"/>
             |                    ~~~~~~~~~~~~~~~~~~~~~
             |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
       .expectFixDiffs(
         """
@@ -170,7 +170,7 @@ class MatchingMenuIdDetectorTest {
             |-   <item android:id="@+id/mainViewTextView"/>
             |+   <item android:id="@+id/viewCustomMainViewTextView"/>
             |
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -183,8 +183,8 @@ class MatchingMenuIdDetectorTest {
             <menu xmlns:android="http://schemas.android.com/apk/res/android">
               <item android:id="@+id/viewProfileAttributeDisplayHeader"/>
             </menu>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_MATCHING_MENU_ID)
       .run()
@@ -200,8 +200,8 @@ class MatchingMenuIdDetectorTest {
             <menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools" tools:ignore="MatchingMenuId" >
               <item android:id="@+id/mainViewTextView"/>
             </menu>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_MATCHING_MENU_ID)
       .run()
@@ -216,8 +216,8 @@ class MatchingMenuIdDetectorTest {
           """
             <TextView
                 style="?android:attr/borderlessButtonStyle"/>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_MATCHING_MENU_ID)
       .run()

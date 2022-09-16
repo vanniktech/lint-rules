@@ -19,8 +19,8 @@ class MissingScrollbarsDetectorTest {
               android:layout_height="wrap_content"
               android:text="Foo"
               />
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_MISSING_SCROLLBARS)
       .run()
@@ -39,8 +39,8 @@ class MissingScrollbarsDetectorTest {
               android:layout_height="wrap_content"
               android:scrollbars="none"
               />
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_MISSING_SCROLLBARS)
       .run()
@@ -58,8 +58,8 @@ class MissingScrollbarsDetectorTest {
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               />
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_MISSING_SCROLLBARS)
       .run()
@@ -69,7 +69,7 @@ class MissingScrollbarsDetectorTest {
           |<ScrollView
           |^
           |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
       .expectFixDiffs(
         """
@@ -89,7 +89,7 @@ class MissingScrollbarsDetectorTest {
           |+     android:layout_height="wrap_content"
           |+     android:scrollbars="none" />
           |
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -104,8 +104,8 @@ class MissingScrollbarsDetectorTest {
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               />
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_MISSING_SCROLLBARS)
       .run()
@@ -115,7 +115,7 @@ class MissingScrollbarsDetectorTest {
           |<androidx.recyclerview.widget.RecyclerView
           |^
           |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
       .expectFixDiffs(
         """
@@ -135,7 +135,7 @@ class MissingScrollbarsDetectorTest {
           |+     android:layout_height="wrap_content"
           |+     android:scrollbars="none" />
           |
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 }

@@ -18,8 +18,8 @@ class DefaultLayoutAttributeDetectorTest {
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:textStyle="normal"/>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_DEFAULT_LAYOUT_ATTRIBUTE)
       .run()
@@ -29,7 +29,7 @@ class DefaultLayoutAttributeDetectorTest {
           |    android:textStyle="normal"/>
           |                       ~~~~~~
           |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
       .expectFixDiffs(
         """
@@ -39,7 +39,7 @@ class DefaultLayoutAttributeDetectorTest {
           |-     android:textStyle="normal" />
           |+     android:layout_height="wrap_content" />
           |
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -54,8 +54,8 @@ class DefaultLayoutAttributeDetectorTest {
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:textStyle="bold"/>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_DEFAULT_LAYOUT_ATTRIBUTE)
       .run()
@@ -75,8 +75,8 @@ class DefaultLayoutAttributeDetectorTest {
               android:layout_height="wrap_content"
               android:textStyle="normal"
               tools:ignore="DefaultLayoutAttribute"/>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_DEFAULT_LAYOUT_ATTRIBUTE)
       .run()
@@ -91,8 +91,8 @@ class DefaultLayoutAttributeDetectorTest {
           """
           <TextView
               style="?android:attr/borderlessButtonStyle"/>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_DEFAULT_LAYOUT_ATTRIBUTE)
       .run()

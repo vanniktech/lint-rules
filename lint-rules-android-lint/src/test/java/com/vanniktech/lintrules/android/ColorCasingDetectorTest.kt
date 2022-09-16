@@ -15,8 +15,8 @@ class ColorCasingDetectorTest {
           """
           <TextView xmlns:tools="http://schemas.android.com/tools"
               tools:textColor="#FFF"/>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_COLOR_CASING)
       .run()
@@ -31,8 +31,8 @@ class ColorCasingDetectorTest {
           """
           <TextView xmlns:tools="http://schemas.android.com/tools"
               tools:textColor="#fff"/>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_COLOR_CASING)
       .run()
@@ -42,7 +42,7 @@ class ColorCasingDetectorTest {
             |    tools:textColor="#fff"/>
             |                     ~~~~
             |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
       .expectFixDiffs(
         """
@@ -52,7 +52,7 @@ class ColorCasingDetectorTest {
             |@@ -3 +2
             |+     tools:textColor="#FFF"/>
             |
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -68,8 +68,8 @@ class ColorCasingDetectorTest {
             <solid android:color="#1Aeebf"/>
             <size android:height="4dp"/>
           </shape>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_COLOR_CASING)
       .run()
@@ -79,7 +79,7 @@ class ColorCasingDetectorTest {
             |  <solid android:color="#1Aeebf"/>
             |                        ~~~~~~~
             |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
       .expectFixDiffs(
         """
@@ -88,7 +88,7 @@ class ColorCasingDetectorTest {
             |-   <solid android:color="#1Aeebf"/>
             |+   <solid android:color="#1AEEBF"/>
             |
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 }

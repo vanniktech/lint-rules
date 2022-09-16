@@ -18,7 +18,7 @@ val ISSUE_SUPERFLUOUS_MARGIN_DECLARATION = Issue.create(
   "Flags margin declarations that can be simplified.",
   "Instead of using start-, end-, bottom- and top margins, layout_margin can be used.",
   CORRECTNESS, PRIORITY, WARNING,
-  Implementation(SuperfluousMarginDeclarationDetector::class.java, RESOURCE_FILE_SCOPE)
+  Implementation(SuperfluousMarginDeclarationDetector::class.java, RESOURCE_FILE_SCOPE),
 )
 
 class SuperfluousMarginDeclarationDetector : SuperfluousDeclarationDetector(
@@ -26,8 +26,8 @@ class SuperfluousMarginDeclarationDetector : SuperfluousDeclarationDetector(
     ATTR_LAYOUT_MARGIN_TOP,
     ATTR_LAYOUT_MARGIN_BOTTOM,
     ATTR_LAYOUT_MARGIN_START,
-    ATTR_LAYOUT_MARGIN_END
+    ATTR_LAYOUT_MARGIN_END,
   ),
   issue = ISSUE_SUPERFLUOUS_MARGIN_DECLARATION,
-  message = "Should be using layout_margin instead."
+  message = "Should be using layout_margin instead.",
 )

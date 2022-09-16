@@ -16,8 +16,8 @@ class UnsupportedLayoutAttributeDetectorTest {
           <RelativeLayout
               xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"/>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_UNSUPPORTED_LAYOUT_ATTRIBUTE)
       .run()
@@ -27,7 +27,7 @@ class UnsupportedLayoutAttributeDetectorTest {
           |    android:orientation="vertical"/>
           |    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
           |1 errors, 0 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
       .expectFixDiffs(
         """
@@ -37,7 +37,7 @@ class UnsupportedLayoutAttributeDetectorTest {
           |-     android:orientation="vertical" />
           |+ <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" />
           |
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -50,8 +50,8 @@ class UnsupportedLayoutAttributeDetectorTest {
           <ScrollView
               xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"/>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_UNSUPPORTED_LAYOUT_ATTRIBUTE)
       .run()
@@ -61,7 +61,7 @@ class UnsupportedLayoutAttributeDetectorTest {
           |    android:orientation="vertical"/>
           |    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
           |1 errors, 0 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
       .expectFixDiffs(
         """
@@ -71,7 +71,7 @@ class UnsupportedLayoutAttributeDetectorTest {
           |-     android:orientation="vertical" />
           |+ <ScrollView xmlns:android="http://schemas.android.com/apk/res/android" />
           |
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -86,8 +86,8 @@ class UnsupportedLayoutAttributeDetectorTest {
               xmlns:tools="http://schemas.android.com/tools"
               tools:parentTag="ScrollView"
               android:orientation="vertical"/>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_UNSUPPORTED_LAYOUT_ATTRIBUTE)
       .run()
@@ -97,7 +97,7 @@ class UnsupportedLayoutAttributeDetectorTest {
           |    android:orientation="vertical"/>
           |    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
           |1 errors, 0 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -110,8 +110,8 @@ class UnsupportedLayoutAttributeDetectorTest {
           <LinearLayout
               xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"/>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_UNSUPPORTED_LAYOUT_ATTRIBUTE)
       .run()

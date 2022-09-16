@@ -16,7 +16,7 @@ val ISSUE_CONSTRAINT_LAYOUT_TOOLS_EDITOR_ATTRIBUTE_DETECTOR = Issue.create(
   "Flags tools:layout_editor xml properties.",
   "The tools:layout_editor xml properties are only used for previewing and won't be used in your APK hence they're unnecessary and just add overhead.",
   CORRECTNESS, PRIORITY, WARNING,
-  Implementation(ConstraintLayoutToolsEditorAttributeDetector::class.java, RESOURCE_FILE_SCOPE)
+  Implementation(ConstraintLayoutToolsEditorAttributeDetector::class.java, RESOURCE_FILE_SCOPE),
 )
 
 class ConstraintLayoutToolsEditorAttributeDetector : LayoutDetector() {

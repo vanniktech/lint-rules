@@ -18,7 +18,7 @@ val ISSUE_UNUSED_MERGE_ATTRIBUTES = Issue.create(
   "Flags android and app attributes that are used on a <merge> attribute for custom Views.",
   "Adding android, app and other attributes to <merge> won't be used by the system for custom views and hence can lead to errors.",
   CORRECTNESS, PRIORITY, WARNING,
-  Implementation(UnusedMergeAttributesDetector::class.java, RESOURCE_FILE_SCOPE)
+  Implementation(UnusedMergeAttributesDetector::class.java, RESOURCE_FILE_SCOPE),
 )
 
 class UnusedMergeAttributesDetector : LayoutDetector() {
@@ -34,7 +34,7 @@ class UnusedMergeAttributesDetector : LayoutDetector() {
         .forEach {
           val fix = fix().name("Change to tools").composite(
             fix().set(TOOLS_URI, it.localName, it.nodeValue).build(),
-            fix().unset(it.namespaceURI, it.localName).build()
+            fix().unset(it.namespaceURI, it.localName).build(),
           ).autoFix()
 
           context.report(ISSUE_UNUSED_MERGE_ATTRIBUTES, it, context.getLocation(it), "Attribute won't be used", fix)

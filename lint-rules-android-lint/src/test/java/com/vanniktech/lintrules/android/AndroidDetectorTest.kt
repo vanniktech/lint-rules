@@ -15,7 +15,7 @@ class AndroidDetectorTest {
         public void getColor(int id) {}
         public void getColorStateList(int id) {}
       }
-    """
+    """,
   ).indented()
 
   @Test fun callingGetDrawable() {
@@ -32,8 +32,8 @@ class AndroidDetectorTest {
               resources.getDrawable(0);
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_RESOURCES_GET_DRAWABLE)
       .run()
@@ -43,7 +43,7 @@ class AndroidDetectorTest {
           |    resources.getDrawable(0);
           |              ~~~~~~~~~~~
           |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -61,8 +61,8 @@ class AndroidDetectorTest {
               resources.getColor(0);
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_RESOURCES_GET_COLOR)
       .run()
@@ -72,7 +72,7 @@ class AndroidDetectorTest {
           |    resources.getColor(0);
           |              ~~~~~~~~
           |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -90,8 +90,8 @@ class AndroidDetectorTest {
               resources.getColorStateList(0);
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_RESOURCES_GET_COLOR_STATE_LIST)
       .run()
@@ -101,7 +101,7 @@ class AndroidDetectorTest {
           |    resources.getColorStateList(0);
           |              ~~~~~~~~~~~~~~~~~
           |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 }

@@ -15,7 +15,7 @@ val ISSUE_INVALID_STRING = Issue.create(
   "Marks invalid translation strings.",
   "A translation string is invalid if it contains new lines instead of the escaped \\n or if it contains trailing whitespace.",
   CORRECTNESS, PRIORITY, WARNING,
-  Implementation(InvalidStringDetector::class.java, RESOURCE_FILE_SCOPE)
+  Implementation(InvalidStringDetector::class.java, RESOURCE_FILE_SCOPE),
 )
 
 class InvalidStringDetector : StringXmlDetector() {

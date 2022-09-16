@@ -22,8 +22,8 @@ class InvalidSingleLineCommentDetectorTest {
               //Something.
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_INVALID_SINGLE_LINE_COMMENT)
       .skipTestModes(TestMode.WHITESPACE)
@@ -34,7 +34,7 @@ class InvalidSingleLineCommentDetectorTest {
           |    //Something.
           |    ~~~
           |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
       .expectFixDiffs(
         """
@@ -43,7 +43,7 @@ class InvalidSingleLineCommentDetectorTest {
           |-     //Something.
           |+     // Something.
           |
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -59,8 +59,8 @@ class InvalidSingleLineCommentDetectorTest {
               // something.
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_INVALID_SINGLE_LINE_COMMENT)
       .skipTestModes(TestMode.WHITESPACE)
@@ -71,7 +71,7 @@ class InvalidSingleLineCommentDetectorTest {
           |    // something.
           |       ^
           |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
       .expectFixDiffs(
         """
@@ -80,7 +80,7 @@ class InvalidSingleLineCommentDetectorTest {
           |-     // something.
           |+     // Something.
           |
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -96,8 +96,8 @@ class InvalidSingleLineCommentDetectorTest {
               // Something
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_INVALID_SINGLE_LINE_COMMENT)
       .skipTestModes(TestMode.WHITESPACE)
@@ -108,7 +108,7 @@ class InvalidSingleLineCommentDetectorTest {
           |    // Something
           |    ~~~~~~~~~~~~
           |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
       .expectFixDiffs(
         """
@@ -117,7 +117,7 @@ class InvalidSingleLineCommentDetectorTest {
           |-     // Something
           |+     // Something.
           |
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -137,8 +137,8 @@ class InvalidSingleLineCommentDetectorTest {
               // Something. In the range of [0..100]
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_INVALID_SINGLE_LINE_COMMENT)
       .skipTestModes(TestMode.WHITESPACE)
@@ -158,8 +158,8 @@ class InvalidSingleLineCommentDetectorTest {
               int foo = 5 + 5;// Something.
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_INVALID_SINGLE_LINE_COMMENT)
       .skipTestModes(TestMode.WHITESPACE)
@@ -170,7 +170,7 @@ class InvalidSingleLineCommentDetectorTest {
           |    int foo = 5 + 5;// Something.
           |                   ~~~
           |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
       .expectFixDiffs(
         """
@@ -179,7 +179,7 @@ class InvalidSingleLineCommentDetectorTest {
           |-     int foo = 5 + 5;// Something.
           |+     int foo = 5 + 5; // Something.
           |
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -197,8 +197,8 @@ class InvalidSingleLineCommentDetectorTest {
               String link3 = "market://details?id=5";
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_INVALID_SINGLE_LINE_COMMENT)
       .skipTestModes(TestMode.WHITESPACE)
@@ -218,8 +218,8 @@ class InvalidSingleLineCommentDetectorTest {
               // NOPMD
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_INVALID_SINGLE_LINE_COMMENT)
       .skipTestModes(TestMode.WHITESPACE)
@@ -239,8 +239,8 @@ class InvalidSingleLineCommentDetectorTest {
               // 2 plus 4 equals 6.
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_INVALID_SINGLE_LINE_COMMENT)
       .skipTestModes(TestMode.WHITESPACE)
@@ -260,8 +260,8 @@ class InvalidSingleLineCommentDetectorTest {
               //noinspection
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_INVALID_SINGLE_LINE_COMMENT)
       .skipTestModes(TestMode.WHITESPACE)
@@ -275,8 +275,8 @@ class InvalidSingleLineCommentDetectorTest {
         kt(
           """
            // ktlint-disable filename
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_INVALID_SINGLE_LINE_COMMENT)
       .skipTestModes(TestMode.WHITESPACE)
@@ -290,8 +290,8 @@ class InvalidSingleLineCommentDetectorTest {
         kt(
           """
            private const val COMMENT = "//"
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_INVALID_SINGLE_LINE_COMMENT)
       .skipTestModes(TestMode.WHITESPACE)
@@ -312,8 +312,8 @@ class InvalidSingleLineCommentDetectorTest {
               // This is expected. http://stackoverflow.com/a/38480079
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_INVALID_SINGLE_LINE_COMMENT)
       .skipTestModes(TestMode.WHITESPACE)
@@ -333,8 +333,8 @@ class InvalidSingleLineCommentDetectorTest {
               //
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_INVALID_SINGLE_LINE_COMMENT)
       .skipTestModes(TestMode.WHITESPACE)
@@ -355,9 +355,9 @@ class InvalidSingleLineCommentDetectorTest {
               //
             }
           }
-            """
-          ).indented().contents.replace("//", "// ")
-        )
+            """,
+          ).indented().contents.replace("//", "// "),
+        ),
       )
       .issues(ISSUE_INVALID_SINGLE_LINE_COMMENT)
       .skipTestModes(TestMode.WHITESPACE)
@@ -368,7 +368,7 @@ class InvalidSingleLineCommentDetectorTest {
           |    //
           |    ~~~
           |0 errors, 1 warnings
-        """.trimMargin().replace("//", "// ")
+        """.trimMargin().replace("//", "// "),
       )
       .expectFixDiffs(
         """
@@ -377,7 +377,7 @@ class InvalidSingleLineCommentDetectorTest {
           |-     //
           |+     //
           |
-        """.trimMargin().replace("-     //", "-     // ")
+        """.trimMargin().replace("-     //", "-     // "),
       )
   }
 
@@ -394,9 +394,9 @@ class InvalidSingleLineCommentDetectorTest {
               // Something.
             }
           }
-            """
-          ).indented().contents.replace("// Something.", "// Something. ")
-        )
+            """,
+          ).indented().contents.replace("// Something.", "// Something. "),
+        ),
       )
       .issues(ISSUE_INVALID_SINGLE_LINE_COMMENT)
       .skipTestModes(TestMode.WHITESPACE)
@@ -407,7 +407,7 @@ class InvalidSingleLineCommentDetectorTest {
           |    // Something.
           |    ~~~~~~~~~~~~~~
           |0 errors, 1 warnings
-        """.trimMargin().replace("// Something.", "// Something. ")
+        """.trimMargin().replace("// Something.", "// Something. "),
       )
       .expectFixDiffs(
         """
@@ -416,7 +416,7 @@ class InvalidSingleLineCommentDetectorTest {
           |-     // Something.
           |+     // Something.
           |
-        """.trimMargin().replace("-     // Something.", "-     // Something. ")
+        """.trimMargin().replace("-     // Something.", "-     // Something. "),
       )
   }
 
@@ -430,8 +430,8 @@ class InvalidSingleLineCommentDetectorTest {
               mavenCentral() // we need this.
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_INVALID_SINGLE_LINE_COMMENT)
       .skipTestModes(TestMode.WHITESPACE)
@@ -442,7 +442,7 @@ class InvalidSingleLineCommentDetectorTest {
           |    mavenCentral() // we need this.
           |                      ^
           |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
       .expectFixDiffs(
         """
@@ -451,7 +451,7 @@ class InvalidSingleLineCommentDetectorTest {
           |-     mavenCentral() // we need this.
           |+     mavenCentral() // We need this.
           |
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 }

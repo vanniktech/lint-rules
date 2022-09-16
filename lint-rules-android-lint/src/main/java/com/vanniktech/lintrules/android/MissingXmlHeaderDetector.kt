@@ -17,7 +17,7 @@ val ISSUE_MISSING_XML_HEADER = Issue.create(
   "Flags xml files that don't have a header.",
   "An xml file should always have the xml header to declare that it is an xml file despite the file ending.",
   CORRECTNESS, PRIORITY, WARNING,
-  Implementation(MissingXmlHeaderDetector::class.java, RESOURCE_FILE_SCOPE)
+  Implementation(MissingXmlHeaderDetector::class.java, RESOURCE_FILE_SCOPE),
 )
 
 class MissingXmlHeaderDetector : ResourceXmlDetector() {

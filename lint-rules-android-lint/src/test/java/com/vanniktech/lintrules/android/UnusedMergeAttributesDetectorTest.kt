@@ -19,8 +19,8 @@ class UnusedMergeAttributesDetectorTest {
                 android:layout_marginTop="64dp"
                 tools:parentTag="LinearLayout"
                 />
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_UNUSED_MERGE_ATTRIBUTES)
       .run()
@@ -30,7 +30,7 @@ class UnusedMergeAttributesDetectorTest {
             |    android:layout_marginTop="64dp"
             |    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
             |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
       .expectFixDiffs(
         """
@@ -39,7 +39,7 @@ class UnusedMergeAttributesDetectorTest {
             |-     android:layout_marginTop="64dp"
             |+     tools:layout_marginTop="64dp"
             |
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -55,8 +55,8 @@ class UnusedMergeAttributesDetectorTest {
                 app:layout_marginTop="64dp"
                 tools:parentTag="LinearLayout"
                 />
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_UNUSED_MERGE_ATTRIBUTES)
       .run()
@@ -66,7 +66,7 @@ class UnusedMergeAttributesDetectorTest {
             |    app:layout_marginTop="64dp"
             |    ~~~~~~~~~~~~~~~~~~~~~~~~~~~
             |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
       .expectFixDiffs(
         """
@@ -75,7 +75,7 @@ class UnusedMergeAttributesDetectorTest {
             |-     app:layout_marginTop="64dp"
             |+     tools:layout_marginTop="64dp"
             |
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -89,8 +89,8 @@ class UnusedMergeAttributesDetectorTest {
                 xmlns:app="http://schemas.android.com/apk/res/android"
                 app:layout_marginTop="64dp"
                 />
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_UNUSED_MERGE_ATTRIBUTES)
       .run()

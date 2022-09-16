@@ -15,7 +15,7 @@ class InvalidImportDetectorTest {
         public static final class drawable {
         }
       }
-    """
+    """,
   ).indented()
 
   private val internal = java(
@@ -24,7 +24,7 @@ class InvalidImportDetectorTest {
 
       public final class Foo {
       }
-    """
+    """,
   ).indented()
 
   @Test fun normalRImport() {
@@ -39,8 +39,8 @@ class InvalidImportDetectorTest {
 
           class Example {
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_INVALID_IMPORT)
       .run()
@@ -59,8 +59,8 @@ class InvalidImportDetectorTest {
 
           class Example {
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_INVALID_IMPORT)
       .run()
@@ -70,7 +70,7 @@ class InvalidImportDetectorTest {
           |import foo.R.drawable;
           |       ~~~~~~~~~~~~~~
           |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -86,8 +86,8 @@ class InvalidImportDetectorTest {
 
           class Example {
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_INVALID_IMPORT)
       .run()
@@ -97,7 +97,7 @@ class InvalidImportDetectorTest {
           |import com.foo.internal.Foo;
           |       ~~~~~~~~~~~~~~~~~~~~
           |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -113,8 +113,8 @@ class InvalidImportDetectorTest {
 
           class Example {
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_INVALID_IMPORT)
       .run()
@@ -135,8 +135,8 @@ class InvalidImportDetectorTest {
 
           class Example {
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_INVALID_IMPORT)
       .run()

@@ -17,8 +17,8 @@ class SuperfluousNameSpaceDetectorTest {
             <TextView
                 android:layout_width="wrap_content"/>
           </merge>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_SUPERFLUOUS_NAME_SPACE)
       .run()
@@ -36,8 +36,8 @@ class SuperfluousNameSpaceDetectorTest {
                 xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="wrap_content"/>
           </LinearLayout>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_SUPERFLUOUS_NAME_SPACE)
       .run()
@@ -47,7 +47,7 @@ class SuperfluousNameSpaceDetectorTest {
           |      xmlns:android="http://schemas.android.com/apk/res/android"
           |      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
           |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
       .expectFixDiffs(
         """
@@ -55,7 +55,7 @@ class SuperfluousNameSpaceDetectorTest {
           |@@ -3 +3
           |-       xmlns:android="http://schemas.android.com/apk/res/android"
           |
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -72,8 +72,8 @@ class SuperfluousNameSpaceDetectorTest {
                   android:layout_width="wrap_content"/>
             </LinearLayout>
           </LinearLayout>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_SUPERFLUOUS_NAME_SPACE)
       .run()
@@ -83,7 +83,7 @@ class SuperfluousNameSpaceDetectorTest {
           |@@ -4 +4
           |-         xmlns:android="http://schemas.android.com/apk/res/android"
           |
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 }

@@ -16,8 +16,8 @@ class InvalidStringDetectorTest {
           <resources>
             <string name="my_string">My string</string>
           </resources>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_INVALID_STRING)
       .run()
@@ -34,8 +34,8 @@ class InvalidStringDetectorTest {
             <string name="my_string">My string"
           </string>
           </resources>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_INVALID_STRING)
       .run()
@@ -45,7 +45,7 @@ class InvalidStringDetectorTest {
           |  <string name="my_string">My string"
           |  ^
           |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
       .expectFixDiffs(
         """
@@ -55,7 +55,7 @@ class InvalidStringDetectorTest {
           |- </string>
           |+   <string name="my_string">My string"</string>
           |
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -68,8 +68,8 @@ class InvalidStringDetectorTest {
           <resources>
             <string name="my_string">My string   </string>
           </resources>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_INVALID_STRING)
       .run()
@@ -79,7 +79,7 @@ class InvalidStringDetectorTest {
           |  <string name="my_string">My string   </string>
           |  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
           |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
       .expectFixDiffs(
         """
@@ -88,7 +88,7 @@ class InvalidStringDetectorTest {
           |-   <string name="my_string">My string   </string>
           |+   <string name="my_string">My string</string>
           |
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -101,8 +101,8 @@ class InvalidStringDetectorTest {
           <resources>
             <string name="my_string">  My string</string>
           </resources>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_INVALID_STRING)
       .run()
@@ -112,7 +112,7 @@ class InvalidStringDetectorTest {
           |  <string name="my_string">  My string</string>
           |  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
           |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
       .expectFixDiffs(
         """
@@ -121,7 +121,7 @@ class InvalidStringDetectorTest {
           |-   <string name="my_string">  My string</string>
           |+   <string name="my_string">My string</string>
           |
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -135,8 +135,8 @@ class InvalidStringDetectorTest {
             <item quantity="one">%d Day</item>
             <item quantity="other">%d Days</item>
           </plurals>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_INVALID_STRING)
       .run()
@@ -153,8 +153,8 @@ class InvalidStringDetectorTest {
             <item quantity="one">  %d Day</item>
             <item quantity="other">%d Days   </item>
           </plurals>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_INVALID_STRING)
       .run()
@@ -167,7 +167,7 @@ class InvalidStringDetectorTest {
           |  <item quantity="other">%d Days   </item>
           |  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
           |0 errors, 2 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
       .expectFixDiffs(
         """
@@ -180,7 +180,7 @@ class InvalidStringDetectorTest {
           |-   <item quantity="other">%d Days   </item>
           |+   <item quantity="other">%d Days</item>
           |
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -194,8 +194,8 @@ class InvalidStringDetectorTest {
             <item>1</item>
             <item>2</item>
           </string-array>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_INVALID_STRING)
       .run()
@@ -212,8 +212,8 @@ class InvalidStringDetectorTest {
             <item>   1</item>
             <item>2   </item>
           </string-array>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_INVALID_STRING)
       .run()
@@ -226,7 +226,7 @@ class InvalidStringDetectorTest {
           |  <item>2   </item>
           |  ~~~~~~~~~~~~~~~~~
           |0 errors, 2 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
       .expectFixDiffs(
         """
@@ -239,7 +239,7 @@ class InvalidStringDetectorTest {
           |-   <item>2   </item>
           |+   <item>2</item>
           |
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 }

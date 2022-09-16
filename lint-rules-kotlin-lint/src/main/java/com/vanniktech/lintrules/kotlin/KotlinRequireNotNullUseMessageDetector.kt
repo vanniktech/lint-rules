@@ -18,7 +18,7 @@ val ISSUE_KOTLIN_REQUIRE_NOT_NULL_USE_MESSAGE = Issue.create(
   "Marks usage of the requireNotNull method without lazy messages.",
   "The default generated message from requireNotNull often lacks context, hence it's best to provide a custom message.",
   CORRECTNESS, PRIORITY, WARNING,
-  Implementation(KotlinRequireNotNullUseMessageDetector::class.java, EnumSet.of(JAVA_FILE))
+  Implementation(KotlinRequireNotNullUseMessageDetector::class.java, EnumSet.of(JAVA_FILE)),
 )
 
 class KotlinRequireNotNullUseMessageDetector : Detector(), Detector.UastScanner {

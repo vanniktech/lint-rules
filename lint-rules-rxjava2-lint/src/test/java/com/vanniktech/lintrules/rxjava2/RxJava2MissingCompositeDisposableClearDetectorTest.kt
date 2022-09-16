@@ -18,8 +18,8 @@ class RxJava2MissingCompositeDisposableClearDetectorTest {
 
           class Example {
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_MISSING_COMPOSITE_DISPOSABLE_CLEAR)
       .run()
@@ -39,8 +39,8 @@ class RxJava2MissingCompositeDisposableClearDetectorTest {
           class Example {
             CompositeDisposable cd;
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_MISSING_COMPOSITE_DISPOSABLE_CLEAR)
       .run()
@@ -50,7 +50,7 @@ class RxJava2MissingCompositeDisposableClearDetectorTest {
           |  CompositeDisposable cd;
           |  ~~~~~~~~~~~~~~~~~~~~~~~
           |1 errors, 0 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -67,8 +67,8 @@ class RxJava2MissingCompositeDisposableClearDetectorTest {
           class Example {
             Disposable disposable;
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_MISSING_COMPOSITE_DISPOSABLE_CLEAR)
       .run()
@@ -89,8 +89,8 @@ class RxJava2MissingCompositeDisposableClearDetectorTest {
             CompositeDisposable cd1;
             CompositeDisposable cd2;
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_MISSING_COMPOSITE_DISPOSABLE_CLEAR)
       .run()
@@ -104,7 +104,7 @@ class RxJava2MissingCompositeDisposableClearDetectorTest {
           |  ~~~~~~~~~~~~~~~~~~~~~~~~
           |2 errors, 0 warnings
           |
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -122,8 +122,8 @@ class RxJava2MissingCompositeDisposableClearDetectorTest {
             val cd1: CompositeDisposable
             val cd2: CompositeDisposable
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_MISSING_COMPOSITE_DISPOSABLE_CLEAR)
       .run()
@@ -137,7 +137,7 @@ class RxJava2MissingCompositeDisposableClearDetectorTest {
           |  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
           |2 errors, 0 warnings
           |
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -157,8 +157,8 @@ class RxJava2MissingCompositeDisposableClearDetectorTest {
              cd.clear();
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_MISSING_COMPOSITE_DISPOSABLE_CLEAR)
       .run()
@@ -181,8 +181,8 @@ class RxJava2MissingCompositeDisposableClearDetectorTest {
              cd.clear()
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_MISSING_COMPOSITE_DISPOSABLE_CLEAR)
       .run()
@@ -206,8 +206,8 @@ class RxJava2MissingCompositeDisposableClearDetectorTest {
              cd1.clear();
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_MISSING_COMPOSITE_DISPOSABLE_CLEAR)
       .run()
@@ -217,7 +217,7 @@ class RxJava2MissingCompositeDisposableClearDetectorTest {
           |  CompositeDisposable cd2;
           |  ~~~~~~~~~~~~~~~~~~~~~~~~
           |1 errors, 0 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -238,8 +238,8 @@ class RxJava2MissingCompositeDisposableClearDetectorTest {
              cd1.clear()
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_MISSING_COMPOSITE_DISPOSABLE_CLEAR)
       .run()
@@ -249,7 +249,7 @@ class RxJava2MissingCompositeDisposableClearDetectorTest {
           |  val cd2 = CompositeDisposable()
           |  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
           |1 errors, 0 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -281,8 +281,8 @@ class RxJava2MissingCompositeDisposableClearDetectorTest {
             }
           }
         }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_MISSING_COMPOSITE_DISPOSABLE_CLEAR)
       .run()
@@ -317,8 +317,8 @@ class RxJava2MissingCompositeDisposableClearDetectorTest {
             }
           }
         }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_MISSING_COMPOSITE_DISPOSABLE_CLEAR)
       .run()

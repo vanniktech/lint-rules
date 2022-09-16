@@ -56,6 +56,6 @@ class IssueRegistry : com.android.tools.lint.client.api.IssueRegistry() {
       ISSUE_WRONG_MENU_ID_FORMAT,
       ISSUE_WRONG_TEST_METHOD_NAME,
       ISSUE_WRONG_VIEW_ID_FORMAT,
-      ISSUE_XML_SPACING
+      ISSUE_XML_SPACING,
     )
 }

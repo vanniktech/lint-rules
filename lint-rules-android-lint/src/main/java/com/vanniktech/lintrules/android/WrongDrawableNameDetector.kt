@@ -30,7 +30,7 @@ val ISSUE_WRONG_DRAWABLE_NAME = Issue.create(
   "Drawable names should be prefixed accordingly.",
   "The drawable file name should be prefixed with one of the following: ${allowedPrefixes.joinToString()}. This will improve consistency in your code base as well as enforce a certain structure.",
   CORRECTNESS, PRIORITY, WARNING,
-  Implementation(WrongDrawableNameDetector::class.java, RESOURCE_FILE_SCOPE)
+  Implementation(WrongDrawableNameDetector::class.java, RESOURCE_FILE_SCOPE),
 )
 
 class WrongDrawableNameDetector : ResourceXmlDetector() {

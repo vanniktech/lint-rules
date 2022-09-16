@@ -18,7 +18,7 @@ val ISSUE_WRONG_GLOBAL_ICON_COLOR = Issue.create(
   "Each icon should have the same global color defined.",
   "In order to reuse icons, it's best if all icons share the same color and can be used at every position in the app. On the target side, tinting can be applied.",
   CORRECTNESS, PRIORITY, WARNING,
-  Implementation(WrongGlobalIconColorDetector::class.java, RESOURCE_FILE_SCOPE)
+  Implementation(WrongGlobalIconColorDetector::class.java, RESOURCE_FILE_SCOPE),
 )
 
 class WrongGlobalIconColorDetector : ResourceXmlDetector() {
@@ -28,7 +28,7 @@ class WrongGlobalIconColorDetector : ResourceXmlDetector() {
 
   override fun visitAttribute(
     context: XmlContext,
-    attribute: Attr
+    attribute: Attr,
   ) {
     val value = attribute.nodeValue
 
@@ -54,11 +54,11 @@ class WrongGlobalIconColorDetector : ResourceXmlDetector() {
   companion object {
     val EXCLUDES_FILE_NAME = listOf(
       "ic_launcher_background",
-      "ic_launcher_foreground"
+      "ic_launcher_foreground",
     )
 
     val EXCLUDES_COLORS = listOf(
-      "#00000000"
+      "#00000000",
     )
 
     val COLOR_REGEX = Regex("(#[a-fA-F\\d]{3,8})|(([@?])[\\w]+:?[\\w]+/[\\w\\d_.]+)")

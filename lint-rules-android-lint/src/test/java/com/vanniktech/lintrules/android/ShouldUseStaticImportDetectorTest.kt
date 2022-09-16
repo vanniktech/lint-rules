@@ -20,8 +20,8 @@ class ShouldUseStaticImportDetectorTest {
               TimeUnit.SECONDS.toDays(1);
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_SHOULD_USE_STATIC_IMPORT)
       .run()
@@ -31,7 +31,7 @@ class ShouldUseStaticImportDetectorTest {
           |    TimeUnit.SECONDS.toDays(1);
           |             ~~~~~~~
           |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -47,8 +47,8 @@ class ShouldUseStaticImportDetectorTest {
               TimeUnit.MINUTES.toDays(1);
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_SHOULD_USE_STATIC_IMPORT)
       .run()
@@ -58,7 +58,7 @@ class ShouldUseStaticImportDetectorTest {
           |    TimeUnit.MINUTES.toDays(1);
           |             ~~~~~~~
           |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -74,8 +74,8 @@ class ShouldUseStaticImportDetectorTest {
               Locale.CANADA.getCountry();
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_SHOULD_USE_STATIC_IMPORT)
       .run()
@@ -85,7 +85,7 @@ class ShouldUseStaticImportDetectorTest {
           |    Locale.CANADA.getCountry();
           |           ~~~~~~
           |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -102,8 +102,8 @@ class ShouldUseStaticImportDetectorTest {
               Something ignore = Something.RELEASE;
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_SHOULD_USE_STATIC_IMPORT)
       .run()
@@ -128,8 +128,8 @@ class ShouldUseStaticImportDetectorTest {
               visibility = INVISIBLE
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_SHOULD_USE_STATIC_IMPORT)
       .run()
@@ -154,8 +154,8 @@ class ShouldUseStaticImportDetectorTest {
               visibility = View.INVISIBLE
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_SHOULD_USE_STATIC_IMPORT)
       .run()
@@ -165,7 +165,7 @@ class ShouldUseStaticImportDetectorTest {
           |    visibility = View.INVISIBLE
           |                      ~~~~~~~~~
           |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -181,8 +181,8 @@ class ShouldUseStaticImportDetectorTest {
               Locale.setDefault(Locale.CANADA);
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_SHOULD_USE_STATIC_IMPORT)
       .run()
@@ -192,7 +192,7 @@ class ShouldUseStaticImportDetectorTest {
           |    Locale.setDefault(Locale.CANADA);
           |                             ~~~~~~
           |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -208,8 +208,8 @@ class ShouldUseStaticImportDetectorTest {
               CANADA.getCountry();
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_SHOULD_USE_STATIC_IMPORT)
       .run()
@@ -228,8 +228,8 @@ class ShouldUseStaticImportDetectorTest {
               CANADA.country
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_SHOULD_USE_STATIC_IMPORT)
       .run()
@@ -248,8 +248,8 @@ class ShouldUseStaticImportDetectorTest {
               asList(1, 2).sort(Integer::compare);
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_SHOULD_USE_STATIC_IMPORT)
       .run()
@@ -268,8 +268,8 @@ class ShouldUseStaticImportDetectorTest {
               Arrays.asList(1, 2);
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_SHOULD_USE_STATIC_IMPORT)
       .run()
@@ -279,7 +279,7 @@ class ShouldUseStaticImportDetectorTest {
           |    Arrays.asList(1, 2);
           |           ~~~~~~
           |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -295,8 +295,8 @@ class ShouldUseStaticImportDetectorTest {
               Collections.singletonList(1);
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_SHOULD_USE_STATIC_IMPORT)
       .run()
@@ -306,7 +306,7 @@ class ShouldUseStaticImportDetectorTest {
           |    Collections.singletonList(1);
           |                ~~~~~~~~~~~~~
           |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 }

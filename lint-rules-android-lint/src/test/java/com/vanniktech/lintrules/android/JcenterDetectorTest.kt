@@ -17,8 +17,8 @@ class JcenterDetectorTest {
                 jcenter()
               }
             }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_JCENTER)
       .run()
@@ -28,7 +28,7 @@ class JcenterDetectorTest {
             |    jcenter()
             |    ~~~~~~~~~
             |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
       .expectFixDiffs(
         """
@@ -37,7 +37,7 @@ class JcenterDetectorTest {
             |-     jcenter()
             |+     mavenCentral()
             |
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -51,8 +51,8 @@ class JcenterDetectorTest {
                 mavenCentral()
               }
             }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_JCENTER)
       .run()

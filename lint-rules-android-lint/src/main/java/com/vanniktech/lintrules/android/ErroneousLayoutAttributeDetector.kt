@@ -23,22 +23,22 @@ val ISSUE_ERRONEOUS_LAYOUT_ATTRIBUTE = Issue.create(
   category = Category.CORRECTNESS,
   priority = PRIORITY,
   severity = WARNING,
-  implementation = Implementation(ErroneousLayoutAttributeDetector::class.java, RESOURCE_FILE_SCOPE)
+  implementation = Implementation(ErroneousLayoutAttributeDetector::class.java, RESOURCE_FILE_SCOPE),
 )
 
 val ERRONEOUS_LAYOUT_ATTRIBUTES = mapOf(
   CONSTRAINT_LAYOUT.newName() to listOf(
     SdkConstants.ATTR_ORIENTATION,
     SdkConstants.ATTR_GRAVITY,
-    SdkConstants.ATTR_SCALE_TYPE
+    SdkConstants.ATTR_SCALE_TYPE,
   ),
   IMAGE_VIEW to listOf(
-    "maxLines"
+    "maxLines",
   ),
   FRAME_LAYOUT to listOf(
     SdkConstants.ATTR_ORIENTATION,
-    SdkConstants.ATTR_GRAVITY
-  )
+    SdkConstants.ATTR_GRAVITY,
+  ),
 )
 
 class ErroneousLayoutAttributeDetector : LayoutDetector() {
@@ -46,7 +46,7 @@ class ErroneousLayoutAttributeDetector : LayoutDetector() {
 
   override fun visitElement(
     context: XmlContext,
-    element: Element
+    element: Element,
   ) {
     val layoutName = element.layoutName()
     val erroneousAttributes = ERRONEOUS_LAYOUT_ATTRIBUTES[layoutName].orEmpty()
@@ -66,7 +66,7 @@ class ErroneousLayoutAttributeDetector : LayoutDetector() {
                 .unset(attribute.namespaceURI, attribute.localName)
                 .name("Delete erroneous attribute")
                 .autoFix()
-                .build()
+                .build(),
             )
           }
         }

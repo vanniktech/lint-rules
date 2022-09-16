@@ -141,12 +141,12 @@ private val annotationOrder = listOf(
   // Ranges and sizes from support annotations.
   "IntRange",
   "FloatRange",
-  "Size"
+  "Size",
 )
 
 private val jetbrainsNullityAnnotations = listOf(
   "org.jetbrains.annotations.Nullable",
-  "org.jetbrains.annotations.NotNull"
+  "org.jetbrains.annotations.NotNull",
 )
 
 val ISSUE_WRONG_ANNOTATION_ORDER = Issue.create(
@@ -154,7 +154,7 @@ val ISSUE_WRONG_ANNOTATION_ORDER = Issue.create(
   "Checks that Annotations comply with a certain order.",
   "Annotations should always be applied with the same order to have consistency across the code base.",
   CORRECTNESS, PRIORITY, WARNING,
-  Implementation(AnnotationOrderDetector::class.java, EnumSet.of(JAVA_FILE))
+  Implementation(AnnotationOrderDetector::class.java, EnumSet.of(JAVA_FILE)),
 )
 
 class AnnotationOrderDetector : Detector(), UastScanner {
@@ -199,7 +199,7 @@ class AnnotationOrderDetector : Detector(), UastScanner {
             when (element) {
               is UMethod -> context.getLocation(element.uastParent)
               else -> context.getLocation(element)
-            }
+            },
           )
           .name("Fix order")
           .autoFix()

@@ -19,8 +19,8 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
             public void foo() {
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE)
       .run()
@@ -42,8 +42,8 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
               return null;
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE)
       .run()
@@ -53,7 +53,7 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
           |  private Observable<Object> foo() {
           |                             ~~~
           |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
       .expectFixDiffs(
         """
@@ -62,7 +62,7 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
           |-   private Observable<Object> foo() {
           |+   @io.reactivex.annotations.CheckReturnValue private Observable<Object> foo() {
           |
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -82,8 +82,8 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
               return null;
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE)
       .run()
@@ -105,8 +105,8 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
               return null;
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE)
       .run()
@@ -116,7 +116,7 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
           |  protected Flowable<Object> foo() {
           |                             ~~~
           |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
       .expectFixDiffs(
         """
@@ -125,7 +125,7 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
           |-   protected Flowable<Object> foo() {
           |+   @io.reactivex.annotations.CheckReturnValue protected Flowable<Object> foo() {
           |
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -145,8 +145,8 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
               return null;
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE)
       .run()
@@ -168,8 +168,8 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
               return null;
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE)
       .run()
@@ -179,7 +179,7 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
           |  public Single<Object> foo() {
           |                        ~~~
           |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
       .expectFixDiffs(
         """
@@ -188,7 +188,7 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
           |-   public Single<Object> foo() {
           |+   @io.reactivex.annotations.CheckReturnValue public Single<Object> foo() {
           |
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -206,8 +206,8 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
               return null;
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE)
       .run()
@@ -229,8 +229,8 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
               return null;
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE)
       .run()
@@ -240,7 +240,7 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
           |  public Maybe<Object> foo() {
           |                       ~~~
           |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
       .expectFixDiffs(
         """
@@ -249,7 +249,7 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
           |-   public Maybe<Object> foo() {
           |+   @io.reactivex.annotations.CheckReturnValue public Maybe<Object> foo() {
           |
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -269,8 +269,8 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
               return null;
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE)
       .run()
@@ -292,8 +292,8 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
               return null;
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE)
       .run()
@@ -303,7 +303,7 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
           |  public Completable foo() {
           |                     ~~~
           |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
       .expectFixDiffs(
         """
@@ -312,7 +312,7 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
           |-   public Completable foo() {
           |+   @io.reactivex.annotations.CheckReturnValue public Completable foo() {
           |
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -332,8 +332,8 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
               return null;
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE)
       .run()
@@ -355,8 +355,8 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
               return null;
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE)
       .run()
@@ -366,7 +366,7 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
           |  public Disposable foo() {
           |                    ~~~
           |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
       .expectFixDiffs(
         """
@@ -375,7 +375,7 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
           |-   public Disposable foo() {
           |+   @io.reactivex.annotations.CheckReturnValue public Disposable foo() {
           |
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -395,8 +395,8 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
               return null;
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE)
       .run()
@@ -418,8 +418,8 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
               return null;
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE)
       .run()
@@ -429,7 +429,7 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
           |  public TestObserver foo() {
           |                      ~~~
           |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
       .expectFixDiffs(
         """
@@ -438,7 +438,7 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
           |-   public TestObserver foo() {
           |+   @io.reactivex.annotations.CheckReturnValue public TestObserver foo() {
           |
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -458,8 +458,8 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
               return null;
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE)
       .run()
@@ -481,8 +481,8 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
               return null;
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE)
       .run()
@@ -492,7 +492,7 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
           |  public TestSubscriber foo() {
           |                        ~~~
           |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
       .expectFixDiffs(
         """
@@ -501,7 +501,7 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
           |-   public TestSubscriber foo() {
           |+   @io.reactivex.annotations.CheckReturnValue public TestSubscriber foo() {
           |
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -520,8 +520,8 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
                 return null
               }
             }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE)
       .run()
@@ -531,7 +531,7 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
             |  fun foo(): Scheduler? {
             |      ~~~
             |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
       .expectFixDiffs(
         """
@@ -540,7 +540,7 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
             |-   fun foo(): Scheduler? {
             |+   @io.reactivex.annotations.CheckReturnValue fun foo(): Scheduler? {
             |
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -560,8 +560,8 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
               return null;
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE)
       .run()
@@ -581,8 +581,8 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
           class Example {
             lateinit var scheduler: Scheduler
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE)
       .run()
@@ -604,8 +604,8 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
               return null;
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE)
       .run()
@@ -615,7 +615,7 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
           |  private Observable<List<Object>> foo() {
           |                                   ~~~
           |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
       .expectFixDiffs(
         """
@@ -624,7 +624,7 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
           |-   private Observable<List<Object>> foo() {
           |+   @io.reactivex.annotations.CheckReturnValue private Observable<List<Object>> foo() {
           |
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -644,8 +644,8 @@ class RxJava2MethodMissingCheckReturnValueDetectorTest {
               return null;
             }
           }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE)
       .run()

@@ -27,7 +27,7 @@ val ISSUE_INVALID_SINGLE_LINE_COMMENT = Issue.create(
   "Marks single line comments that are not sentences.",
   "Single line comments should always be sentences. They're part of the code and hence they deserve as much detail and respect as code.",
   CORRECTNESS, PRIORITY, WARNING,
-  Implementation(InvalidSingleLineCommentDetector::class.java, EnumSet.of(JAVA_FILE, GRADLE_FILE), EnumSet.of(JAVA_FILE, GRADLE_FILE))
+  Implementation(InvalidSingleLineCommentDetector::class.java, EnumSet.of(JAVA_FILE, GRADLE_FILE), EnumSet.of(JAVA_FILE, GRADLE_FILE)),
 )
 
 class InvalidSingleLineCommentDetector : Detector(), Detector.UastScanner, Detector.GradleScanner {
@@ -129,7 +129,7 @@ class InvalidSingleLineCommentDetector : Detector(), Detector.UastScanner, Detec
     val ignores = setOf(
       " NOPMD",
       "noinspection",
-      " ktlint-disable"
+      " ktlint-disable",
     )
     val shouldIgnore = ignores.any { group.startsWith(it) }
     val isLink = beforeStart != null && beforeStart == ':'

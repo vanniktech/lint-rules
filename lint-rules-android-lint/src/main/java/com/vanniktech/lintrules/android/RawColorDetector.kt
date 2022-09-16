@@ -26,7 +26,7 @@ val ISSUE_RAW_COLOR = Issue.create(
   "Flags color that are not defined as resource.",
   "Color value should all be defined as color resources. This has the benefit that you can easily see all of your colors in one file. One benefit is an easier addition to Dark Theme for instance. This check will run on layouts as well as xml drawables.",
   CORRECTNESS, PRIORITY, WARNING,
-  Implementation(RawColorDetector::class.java, RESOURCE_FILE_SCOPE)
+  Implementation(RawColorDetector::class.java, RESOURCE_FILE_SCOPE),
 )
 
 class RawColorDetector : ResourceXmlDetector() {

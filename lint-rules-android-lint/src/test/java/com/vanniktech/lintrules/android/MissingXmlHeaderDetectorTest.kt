@@ -15,8 +15,8 @@ class MissingXmlHeaderDetectorTest {
           """
           <?xml version="1.0" encoding="UTF-8" standalone="no"?>
           <resources/>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_MISSING_XML_HEADER)
       .run()
@@ -30,8 +30,8 @@ class MissingXmlHeaderDetectorTest {
           "res/values/strings.xml",
           """
           <resources/>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_MISSING_XML_HEADER)
       .run()
@@ -41,7 +41,7 @@ class MissingXmlHeaderDetectorTest {
           |<resources/>
           |~~~~~~~~~~~~
           |0 errors, 1 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
       .expectFixDiffs(
         """
@@ -49,7 +49,7 @@ class MissingXmlHeaderDetectorTest {
           |@@ -1 +1
           |+ <?xml version="1.0" encoding="utf-8"?>
           |
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 }

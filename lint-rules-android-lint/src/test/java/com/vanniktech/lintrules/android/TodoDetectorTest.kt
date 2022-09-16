@@ -20,8 +20,8 @@ class TodoDetectorTest {
             class Example {
               // TODO: something
             }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_TODO)
       .run()
@@ -31,7 +31,7 @@ class TodoDetectorTest {
             |  // TODO: something
             |     ~~~~~~~~~~~~~~~
             |1 errors, 0 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -44,8 +44,8 @@ class TodoDetectorTest {
             <TextView xmlns:android="http://schemas.android.com/apk/res/android"
                 android:text="Blub!"/>
             <!-- TODO: Fix blub. -->
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_TODO)
       .run()
@@ -55,7 +55,7 @@ class TodoDetectorTest {
             |<!-- TODO: Fix blub. -->
             |     ~~~~~~~~~~~~~~~~~~~
             |1 errors, 0 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -69,8 +69,8 @@ class TodoDetectorTest {
                 mavenCentral() // TODO: we should remove it.
               }
             }
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_TODO)
       .run()
@@ -80,7 +80,7 @@ class TodoDetectorTest {
             |    mavenCentral() // TODO: we should remove it.
             |                      ~~~~~~~~~~~~~~~~~~~~~~~~~~
             |1 errors, 0 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 
@@ -91,8 +91,8 @@ class TodoDetectorTest {
           """
             <!-- TODO: Something. -->
             <manifest package="com.vanniktech.lintrulesandroid"/>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_TODO)
       .run()
@@ -102,7 +102,7 @@ class TodoDetectorTest {
             |<!-- TODO: Something. -->
             |     ~~~~~~~~~~~~~~~~~~~~
             |1 errors, 0 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 }

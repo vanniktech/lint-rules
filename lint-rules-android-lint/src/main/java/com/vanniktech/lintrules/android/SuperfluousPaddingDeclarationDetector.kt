@@ -18,7 +18,7 @@ val ISSUE_SUPERFLUOUS_PADDING_DECLARATION = Issue.create(
   "Flags padding declarations that can be simplified.",
   "Instead of using start-, end-, bottom- and top paddings, padding can be used.",
   CORRECTNESS, PRIORITY, WARNING,
-  Implementation(SuperfluousPaddingDeclarationDetector::class.java, RESOURCE_FILE_SCOPE)
+  Implementation(SuperfluousPaddingDeclarationDetector::class.java, RESOURCE_FILE_SCOPE),
 )
 
 class SuperfluousPaddingDeclarationDetector : SuperfluousDeclarationDetector(
@@ -26,8 +26,8 @@ class SuperfluousPaddingDeclarationDetector : SuperfluousDeclarationDetector(
     ATTR_PADDING_TOP,
     ATTR_PADDING_BOTTOM,
     ATTR_PADDING_START,
-    ATTR_PADDING_END
+    ATTR_PADDING_END,
   ),
   issue = ISSUE_SUPERFLUOUS_PADDING_DECLARATION,
-  message = "Should be using padding instead."
+  message = "Should be using padding instead.",
 )

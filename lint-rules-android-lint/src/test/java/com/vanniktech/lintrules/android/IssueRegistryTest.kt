@@ -49,7 +49,7 @@ class IssueRegistryTest {
         ?.parentFile
         ?.parentFile
         ?.parentFile
-        ?.resolve("lint-rules-android.md")
+        ?.resolve("lint-rules-android.md"),
     )
       .writeText(output)
   }

@@ -17,8 +17,8 @@ class XmlSpacingDetectorTest {
             <TextView
                 android:layout_width="wrap_content"/>
           </merge>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_XML_SPACING)
       .run()
@@ -43,8 +43,8 @@ class XmlSpacingDetectorTest {
             <TextView
                 android:layout_width="wrap_content"/>
           </merge>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_XML_SPACING)
       .run()
@@ -62,8 +62,8 @@ class XmlSpacingDetectorTest {
 
             <!-- Comment. -->
           </resources>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_XML_SPACING)
       .run()
@@ -86,8 +86,8 @@ class XmlSpacingDetectorTest {
                 />
 
           </LinearLayout>
-          """
-        ).indented()
+          """,
+        ).indented(),
       )
       .issues(ISSUE_XML_SPACING)
       .run()
@@ -106,7 +106,7 @@ class XmlSpacingDetectorTest {
           |
           |^
           |0 errors, 4 warnings
-        """.trimMargin()
+        """.trimMargin(),
       )
       .expectFixDiffs(
         """
@@ -123,7 +123,7 @@ class XmlSpacingDetectorTest {
           |@@ -1 +1
           |-
           |
-        """.trimMargin()
+        """.trimMargin(),
       )
   }
 }
