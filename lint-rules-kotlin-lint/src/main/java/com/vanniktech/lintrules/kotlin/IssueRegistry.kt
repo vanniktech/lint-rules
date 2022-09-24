@@ -13,7 +13,6 @@ class IssueRegistry : com.android.tools.lint.client.api.IssueRegistry() {
 
   override val vendor get() = Vendor(
     vendorName = "vanniktech/lint-rules/",
-    identifier = "com.vanniktech:lint-rules-kotlin:{version}",
     feedbackUrl = "https://github.com/vanniktech/lint-rules/issues",
   )
 
