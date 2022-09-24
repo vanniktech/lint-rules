@@ -1,11 +1,11 @@
-@file:Suppress("UnstableApiUsage") // We know that Lint API's aren't final.
+@file:Suppress("UnstableApiUsage") // We know that Lint APIs aren't final.
 
 package com.vanniktech.lintrules.rxjava2
 
 import com.android.tools.lint.client.api.Vendor
 import com.android.tools.lint.detector.api.CURRENT_API
 
-internal const val PRIORITY = 10 // Does not matter anyways within Lint.
+internal const val PRIORITY = 10 // Does not matter anyway within Lint.
 
 class IssueRegistry : com.android.tools.lint.client.api.IssueRegistry() {
   override val api get() = CURRENT_API
