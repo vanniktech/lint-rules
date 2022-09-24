@@ -1,9 +1,9 @@
 buildscript {
   ext.versions = [
-    kotlin: '1.5.31',
+    kotlin: '1.6.21',
     minSdk: 9,
     compileSdk: 31,
-    lint: '30.2.0',
+    lint: '30.3.0',
   ]
 
   ext.deps = [
@@ -24,7 +24,7 @@ buildscript {
     classpath 'com.vanniktech:gradle-code-quality-tools-plugin:0.22.0'
     classpath 'com.vanniktech:gradle-maven-publish-plugin:0.22.0'
 
-    classpath 'com.android.tools.build:gradle:7.2.2'
+    classpath 'com.android.tools.build:gradle:7.3.0'
     classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin}"
   }
 }
@@ -37,6 +37,9 @@ codeQualityTools {
   }
   detekt {
     enabled = false
+  }
+  kotlin {
+    allWarningsAsErrors = false
   }
 }
 
