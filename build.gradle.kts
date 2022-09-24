@@ -38,7 +38,7 @@ codeQualityTools {
     checkAllWarnings = true
   }
   kotlin {
-    allWarningsAsErrors = true
+    allWarningsAsErrors = false
   }
 }
 
