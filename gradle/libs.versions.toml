@@ -1,0 +1,22 @@
+[versions]
+minSdk = "9"
+compileSdk = "33"
+targetSdk = "33"
+
+androidgradleplugin = "7.3.0"
+lint = "30.3.0"
+kotlin = "1.5.31"
+ktlint = "0.47.1"
+
+[libraries]
+junit = { module = "junit:junit", version = "4.13.2" }
+lint-api = { module = "com.android.tools.lint:lint-api", version.ref = "lint" }
+lint-core = { module = "com.android.tools.lint:lint", version.ref = "lint" }
+lint-tests = { module = "com.android.tools.lint:lint-tests", version.ref = "lint" }
+plugin-androidgradleplugin = { module = "com.android.tools.build:gradle", version.ref = "androidgradleplugin" }
+plugin-publish = { module = "com.vanniktech:gradle-maven-publish-plugin", version = "0.22.0" }
+plugin-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+plugin-dokka = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version = "1.7.10" }
+
+[plugins]
+codequalitytools = { id = "com.vanniktech.code.quality.tools", version = "0.22.0" }
