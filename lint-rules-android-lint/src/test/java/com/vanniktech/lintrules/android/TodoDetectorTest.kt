@@ -18,7 +18,7 @@ class TodoDetectorTest {
             package foo;
 
             class Example {
-              // TODO: something
+              // TODO something
             }
           """,
         ).indented(),
@@ -28,8 +28,8 @@ class TodoDetectorTest {
       .expect(
         """
             |src/foo/Example.java:4: Error: Contains todo [Todo]
-            |  // TODO: something
-            |     ~~~~~~~~~~~~~~~
+            |  // TODO something
+            |     ~~~~~~~~~~~~~~
             |1 errors, 0 warnings
         """.trimMargin(),
       )
@@ -43,7 +43,7 @@ class TodoDetectorTest {
           """
             <TextView xmlns:android="http://schemas.android.com/apk/res/android"
                 android:text="Blub!"/>
-            <!-- TODO: Fix blub. -->
+            <!-- TODO(NIK) Fix blub. -->
           """,
         ).indented(),
       )
@@ -52,8 +52,8 @@ class TodoDetectorTest {
       .expect(
         """
             |res/layout/layout.xml:3: Error: Contains todo [Todo]
-            |<!-- TODO: Fix blub. -->
-            |     ~~~~~~~~~~~~~~~~~~~
+            |<!-- TODO(NIK) Fix blub. -->
+            |     ~~~~~~~~~~~~~~~~~~~~~~~
             |1 errors, 0 warnings
         """.trimMargin(),
       )
@@ -89,7 +89,7 @@ class TodoDetectorTest {
       .files(
         manifest().withSource(
           """
-            <!-- TODO: Something. -->
+            <!-- todo: Something. -->
             <manifest package="com.vanniktech.lintrulesandroid"/>
           """,
         ).indented(),
@@ -99,7 +99,7 @@ class TodoDetectorTest {
       .expect(
         """
             |AndroidManifest.xml:1: Error: Contains todo [Todo]
-            |<!-- TODO: Something. -->
+            |<!-- todo: Something. -->
             |     ~~~~~~~~~~~~~~~~~~~~
             |1 errors, 0 warnings
         """.trimMargin(),
