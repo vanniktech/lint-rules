@@ -15,13 +15,11 @@ import com.android.tools.lint.detector.api.Scope.PROGUARD_FILE
 import com.android.tools.lint.detector.api.Scope.RESOURCE_FILE
 import com.android.tools.lint.detector.api.Severity.FATAL
 import com.android.tools.lint.detector.api.XmlContext
-import org.jetbrains.uast.UClass
 import org.w3c.dom.Document
 import java.util.EnumSet
 import java.util.regex.Pattern
 
-private const val COMMENT = "TODO:"
-private val pattern = Pattern.compile("[\\t]*$COMMENT.*")
+private val pattern = Pattern.compile("\\t*TODO.*", Pattern.CASE_INSENSITIVE)
 
 val ISSUE_TODO = Issue.create(
   "Todo",
@@ -32,10 +30,8 @@ val ISSUE_TODO = Issue.create(
 )
 
 class TodoDetector : Detector(), Detector.UastScanner, Detector.GradleScanner, Detector.OtherFileScanner, Detector.XmlScanner {
-  override fun getApplicableUastTypes() = listOf(UClass::class.java)
-
   override fun visitDocument(context: XmlContext, document: Document) {
-    // Needs to be overridden but we we'll do the work in afterCheckFile.
+    // Needs to be overridden, but we'll do the work in afterCheckFile.
   }
 
   override fun afterCheckFile(context: Context) {
