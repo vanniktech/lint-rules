@@ -19,7 +19,7 @@ import org.w3c.dom.Document
 import java.util.EnumSet
 import java.util.regex.Pattern
 
-private val pattern = Pattern.compile("\\t*TODO.*", Pattern.CASE_INSENSITIVE)
+private val pattern = Pattern.compile("\\t*T[Oo][Dd][Oo][(:\\s]")
 
 val ISSUE_TODO = Issue.create(
   "Todo",
@@ -42,7 +42,7 @@ class TodoDetector : Detector(), Detector.UastScanner, Detector.GradleScanner, D
       val start = matcher.start()
       val end = matcher.end()
 
-      val location = Location.create(context.file, source, start, end)
+      val location = Location.create(context.file, source, start, end - 1)
       context.report(ISSUE_TODO, location, "Contains todo")
     }
   }
