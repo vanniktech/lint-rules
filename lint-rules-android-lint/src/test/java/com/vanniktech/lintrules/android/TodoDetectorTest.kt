@@ -29,7 +29,7 @@ class TodoDetectorTest {
         """
             |src/foo/Example.java:4: Error: Contains todo [Todo]
             |  // TODO something
-            |     ~~~~~~~~~~~~~~
+            |     ~~~~
             |1 errors, 0 warnings
         """.trimMargin(),
       )
@@ -53,7 +53,7 @@ class TodoDetectorTest {
         """
             |res/layout/layout.xml:3: Error: Contains todo [Todo]
             |<!-- TODO(NIK) Fix blub. -->
-            |     ~~~~~~~~~~~~~~~~~~~~~~~
+            |     ~~~~
             |1 errors, 0 warnings
         """.trimMargin(),
       )
@@ -78,10 +78,29 @@ class TodoDetectorTest {
         """
             |build.gradle:3: Error: Contains todo [Todo]
             |    mavenCentral() // TODO: we should remove it.
-            |                      ~~~~~~~~~~~~~~~~~~~~~~~~~~
+            |                      ~~~~
             |1 errors, 0 warnings
         """.trimMargin(),
       )
+  }
+
+  @Test fun ignoresCommentContainingTodo() {
+    lint()
+      .files(
+        gradle(
+          """
+            buildscript {
+              repositories {
+                mavenCentral() // Etiquetar automáticamente todos los lugares
+                mavenCentral() // Todos os cartões aprendidos. Volte a verificar amanhã
+              }
+            }
+          """,
+        ).indented(),
+      )
+      .issues(ISSUE_TODO)
+      .run()
+      .expectClean()
   }
 
   @Test fun manifestFile() {
@@ -89,7 +108,7 @@ class TodoDetectorTest {
       .files(
         manifest().withSource(
           """
-            <!-- todo: Something. -->
+            <!-- Todo: Something. -->
             <manifest package="com.vanniktech.lintrulesandroid"/>
           """,
         ).indented(),
@@ -99,8 +118,8 @@ class TodoDetectorTest {
       .expect(
         """
             |AndroidManifest.xml:1: Error: Contains todo [Todo]
-            |<!-- todo: Something. -->
-            |     ~~~~~~~~~~~~~~~~~~~~
+            |<!-- Todo: Something. -->
+            |     ~~~~
             |1 errors, 0 warnings
         """.trimMargin(),
       )
