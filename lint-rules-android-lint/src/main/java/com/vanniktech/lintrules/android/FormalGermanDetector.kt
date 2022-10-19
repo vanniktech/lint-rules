@@ -19,7 +19,7 @@ val ISSUE_FORMAL_GERMAN = Issue.create(
 )
 
 class FormalGermanDetector : StringXmlDetector() {
-  override fun checkText(context: XmlContext, element: Node, text: String) {
+  override fun checkText(context: XmlContext, element: Node, text: String, textNode: Node) {
     val items = FORMAL
       .flatMap { regex -> regex.findAll(text).map { it.range to it.value.trim() } }
       .distinctBy { it.first.first }
