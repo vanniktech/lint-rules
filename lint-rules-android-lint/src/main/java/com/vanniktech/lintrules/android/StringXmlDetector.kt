@@ -25,14 +25,14 @@ abstract class StringXmlDetector : ResourceXmlDetector() {
         val isStringArrayOrPlurals = child.isElementNode() && (TAG_STRING_ARRAY == element.localName || TAG_PLURALS == element.localName)
 
         if (isStringResource) {
-          checkText(context, element, child.nodeValue, child)
+          checkText(context, element, child)
         } else if (isStringArrayOrPlurals) {
           child.children()
             .filter { it.isTextNode() }
-            .forEach { checkText(context, child, it.nodeValue, it) }
+            .forEach { checkText(context, child, it) }
         }
       }
   }
 
-  abstract fun checkText(context: XmlContext, element: Node, text: String, textNode: Node)
+  abstract fun checkText(context: XmlContext, node: Node, textNode: Node)
 }
