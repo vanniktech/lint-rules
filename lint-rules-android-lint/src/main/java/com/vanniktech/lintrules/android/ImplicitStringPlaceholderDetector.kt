@@ -19,13 +19,13 @@ val ISSUE_IMPLICIT_STRING_PLACEHOLDER = Issue.create(
 )
 
 class ImplicitStringPlaceholderDetector : StringXmlDetector() {
-  override fun checkText(context: XmlContext, element: Node, text: String, textNode: Node) {
+  override fun checkText(context: XmlContext, node: Node, textNode: Node) {
     var index = 0
-    Regex("%s|%d").findAll(text).forEach { match ->
+    Regex("%s|%d").findAll(textNode.nodeValue).forEach { match ->
       val old = match.value
       val new = "%${++index}$" + match.value.last()
       val fix = fix().replace().name("Fix $old with $new").text(old).with(new).autoFix().build()
-      context.report(ISSUE_IMPLICIT_STRING_PLACEHOLDER, element, context.getLocation(textNode, match.range.first, match.range.last + 1), "Implicit placeholder", fix)
+      context.report(ISSUE_IMPLICIT_STRING_PLACEHOLDER, node, context.getLocation(textNode, match.range.first, match.range.last + 1), "Implicit placeholder", fix)
     }
   }
 }

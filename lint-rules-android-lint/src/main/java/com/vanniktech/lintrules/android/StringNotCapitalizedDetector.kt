@@ -19,11 +19,12 @@ val ISSUE_STRING_NOT_CAPITALIZED = Issue.create(
 )
 
 class StringNotCapitalizedDetector : StringXmlDetector() {
-  override fun checkText(context: XmlContext, element: Node, text: String, textNode: Node) {
+  override fun checkText(context: XmlContext, node: Node, textNode: Node) {
+    val text = textNode.nodeValue
     val isConfig = context.file.nameWithoutExtension == "config"
     val isLink = LINK_PREFIXES.any { text.startsWith(it, ignoreCase = true) }
-    val isNonTranslatable = element.attributes.getNamedItem("translatable")?.nodeValue == "false"
-    val name = element.attributes.getNamedItem("name")?.nodeValue
+    val isNonTranslatable = node.attributes.getNamedItem("translatable")?.nodeValue == "false"
+    val name = node.attributes.getNamedItem("name")?.nodeValue
     val isAbbreviation = name != null && IGNORED_NAMES.any {
       name.contains("_$it", ignoreCase = true) ||
         name.contains("${it}_", ignoreCase = true)
@@ -42,7 +43,7 @@ class StringNotCapitalizedDetector : StringXmlDetector() {
     if (char.isLetter() && char.isLowerCase()) {
       val new = chars.take(index).joinToString(separator = "") + char.toUpperCase() + chars.drop(index + 1).joinToString(separator = "")
       val fix = fix().replace().name("Fix it").text(text).with(new).autoFix().build()
-      context.report(ISSUE_STRING_NOT_CAPITALIZED, element, context.getLocation(element), "String is not capitalized", fix)
+      context.report(ISSUE_STRING_NOT_CAPITALIZED, node, context.getLocation(textNode, index, index + new.length), "String is not capitalized", fix)
     }
   }
 

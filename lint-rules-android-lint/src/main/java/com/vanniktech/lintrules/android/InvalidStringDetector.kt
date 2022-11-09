@@ -19,7 +19,8 @@ val ISSUE_INVALID_STRING = Issue.create(
 )
 
 class InvalidStringDetector : StringXmlDetector() {
-  override fun checkText(context: XmlContext, element: Node, text: String, textNode: Node) {
+  override fun checkText(context: XmlContext, node: Node, textNode: Node) {
+    val text = textNode.nodeValue
     val message = when {
       text.contains("\n") -> "Text contains new line."
       text.length != text.trim().length -> "Text contains trailing whitespace."
@@ -28,7 +29,7 @@ class InvalidStringDetector : StringXmlDetector() {
 
     message?.let {
       val fix = fix().replace().name("Fix it").text(text).with(text.trim()).autoFix().build()
-      context.report(ISSUE_INVALID_STRING, element, context.getLocation(element), it, fix)
+      context.report(ISSUE_INVALID_STRING, node, context.getLocation(node), it, fix)
     }
   }
 }

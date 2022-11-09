@@ -19,13 +19,13 @@ val ISSUE_FORMAL_GERMAN = Issue.create(
 )
 
 class FormalGermanDetector : StringXmlDetector() {
-  override fun checkText(context: XmlContext, element: Node, text: String, textNode: Node) {
+  override fun checkText(context: XmlContext, node: Node, textNode: Node) {
     val items = FORMAL
-      .flatMap { regex -> regex.findAll(text).map { it.range to it.value.trim() } }
+      .flatMap { regex -> regex.findAll(textNode.nodeValue).map { it.range to it.value.trim() } }
       .distinctBy { it.first.first }
 
     items.forEach { (range, word) ->
-      context.report(ISSUE_FORMAL_GERMAN, element, context.getLocation(element.firstChild, range.first, range.last), "Formal language \"$word\" detected")
+      context.report(ISSUE_FORMAL_GERMAN, node, context.getLocation(textNode, range.first, range.last), "Formal language \"$word\" detected")
     }
   }
 
