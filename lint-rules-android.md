@@ -5,6 +5,7 @@
 - **DefaultLayoutAttribute** - Flags default layout values that are not needed. One for instance is the textStyle="normal" that can be just removed.
 - **ErroneousLayoutAttribute** - Flags if a layout attribute is not applicable to a particular view.
 - **FormalGerman** - Informal language should be used at all times.
+- **ImplicitStringPlaceholder** - It's better and more explicit to use numbered placeholders.
 - **InvalidImport** - Flags invalid imports. One example is com.foo.bar.R.drawable. Instead just the generated class R should be imported and not R.drawable. Also you should never import anything that's in an internal package.
 - **InvalidSingleLineComment** - Single line comments should always be sentences. They're part of the code and hence they deserve as much detail and respect as code.
 - **InvalidString** - A translation string is invalid if it contains new lines instead of the escaped \n or if it contains trailing whitespace.

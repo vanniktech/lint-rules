@@ -19,7 +19,7 @@ val ISSUE_STRING_NOT_CAPITALIZED = Issue.create(
 )
 
 class StringNotCapitalizedDetector : StringXmlDetector() {
-  override fun checkText(context: XmlContext, element: Node, text: String) {
+  override fun checkText(context: XmlContext, element: Node, text: String, textNode: Node) {
     val isConfig = context.file.nameWithoutExtension == "config"
     val isLink = LINK_PREFIXES.any { text.startsWith(it, ignoreCase = true) }
     val isNonTranslatable = element.attributes.getNamedItem("translatable")?.nodeValue == "false"
