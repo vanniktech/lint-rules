@@ -70,7 +70,6 @@ class ConstraintLayoutToolsEditorAttributeDetectorTest {
           |- <TextView xmlns:tools="http://schemas.android.com/tools"
           |-     tools:layout_editor_absoluteX="4dp" />
           |+ <TextView xmlns:tools="http://schemas.android.com/tools" />
-          |
         """.trimMargin(),
       )
   }

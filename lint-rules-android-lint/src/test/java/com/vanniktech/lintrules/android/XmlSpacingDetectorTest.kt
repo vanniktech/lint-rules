@@ -122,7 +122,6 @@ class XmlSpacingDetectorTest {
           |Fix for res/layout/activity_home.xml line 8: Remove new line:
           |@@ -1 +1
           |-
-          |
         """.trimMargin(),
       )
   }

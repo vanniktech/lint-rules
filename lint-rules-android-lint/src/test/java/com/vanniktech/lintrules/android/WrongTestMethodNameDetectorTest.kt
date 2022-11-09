@@ -99,7 +99,6 @@ class WrongTestMethodNameDetectorTest {
           |@@ -6 +6
           |-   @Test public void testSomething() { }
           |+   @Test public void something() { }
-          |
         """.trimMargin(),
       )
   }
@@ -136,7 +135,6 @@ class WrongTestMethodNameDetectorTest {
           |@@ -6 +6
           |-   @Test public void testSomething() { }
           |+   @Test public void something() { }
-          |
         """.trimMargin(),
       )
   }

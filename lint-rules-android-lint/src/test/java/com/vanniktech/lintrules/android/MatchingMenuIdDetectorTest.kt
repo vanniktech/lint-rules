@@ -53,7 +53,6 @@ class MatchingMenuIdDetectorTest {
             |@@ -2 +2
             |-   <item android:id="@+id/something"/>
             |+   <item android:id="@+id/menuMainSomething"/>
-            |
         """.trimMargin(),
       )
   }
@@ -86,7 +85,6 @@ class MatchingMenuIdDetectorTest {
             |@@ -2 +2
             |-   <item android:id="@+id/mainMenuSomething"/>
             |+   <item android:id="@+id/menuMainMainMenuSomething"/>
-            |
         """.trimMargin(),
       )
   }
@@ -136,7 +134,6 @@ class MatchingMenuIdDetectorTest {
             |@@ -2 +2
             |-   <item android:id="@+id/MenuMainTextView"/>
             |+   <item android:id="@+id/menuMainTextView"/>
-            |
         """.trimMargin(),
       )
   }
@@ -169,7 +166,6 @@ class MatchingMenuIdDetectorTest {
             |@@ -2 +2
             |-   <item android:id="@+id/mainViewTextView"/>
             |+   <item android:id="@+id/viewCustomMainViewTextView"/>
-            |
         """.trimMargin(),
       )
   }

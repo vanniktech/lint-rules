@@ -51,7 +51,6 @@ class ColorCasingDetectorTest {
             |-     tools:textColor="#fff"/>
             |@@ -3 +2
             |+     tools:textColor="#FFF"/>
-            |
         """.trimMargin(),
       )
   }
@@ -87,7 +86,6 @@ class ColorCasingDetectorTest {
             |@@ -4 +4
             |-   <solid android:color="#1Aeebf"/>
             |+   <solid android:color="#1AEEBF"/>
-            |
         """.trimMargin(),
       )
   }

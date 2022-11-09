@@ -42,7 +42,6 @@ class InvalidSingleLineCommentDetectorTest {
           |@@ -5 +5
           |-     //Something.
           |+     // Something.
-          |
         """.trimMargin(),
       )
   }
@@ -79,7 +78,6 @@ class InvalidSingleLineCommentDetectorTest {
           |@@ -5 +5
           |-     // something.
           |+     // Something.
-          |
         """.trimMargin(),
       )
   }
@@ -116,7 +114,6 @@ class InvalidSingleLineCommentDetectorTest {
           |@@ -5 +5
           |-     // Something
           |+     // Something.
-          |
         """.trimMargin(),
       )
   }
@@ -178,7 +175,6 @@ class InvalidSingleLineCommentDetectorTest {
           |@@ -5 +5
           |-     int foo = 5 + 5;// Something.
           |+     int foo = 5 + 5; // Something.
-          |
         """.trimMargin(),
       )
   }
@@ -450,7 +446,6 @@ class InvalidSingleLineCommentDetectorTest {
           |@@ -3 +3
           |-     mavenCentral() // we need this.
           |+     mavenCentral() // We need this.
-          |
         """.trimMargin(),
       )
   }

@@ -103,7 +103,6 @@ class RxJava2MissingCompositeDisposableClearDetectorTest {
           |  CompositeDisposable cd2;
           |  ~~~~~~~~~~~~~~~~~~~~~~~~
           |2 errors, 0 warnings
-          |
         """.trimMargin(),
       )
   }
@@ -136,7 +135,6 @@ class RxJava2MissingCompositeDisposableClearDetectorTest {
           |  val cd2: CompositeDisposable
           |  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
           |2 errors, 0 warnings
-          |
         """.trimMargin(),
       )
   }

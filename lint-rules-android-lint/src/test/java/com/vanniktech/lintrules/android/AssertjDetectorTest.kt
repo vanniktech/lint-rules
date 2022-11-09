@@ -37,7 +37,6 @@ class AssertjDetectorTest {
             |- import org.assertj.core.api.Assertions;
             |@@ -4 +3
             |+ import org.assertj.core.api.Java6Assertions;
-            |
         """.trimMargin(),
       )
   }
@@ -71,7 +70,6 @@ class AssertjDetectorTest {
             |- import static org.assertj.core.api.Assertions.assertThat;
             |@@ -4 +3
             |+ import static org.assertj.core.api.Java6Assertions.assertThat;
-            |
         """.trimMargin(),
       )
   }
@@ -97,7 +95,6 @@ class AssertjDetectorTest {
             |- import org.assertj.core.api.Assertions
             |@@ -2 +1
             |+ import org.assertj.core.api.Java6Assertions
-            |
         """.trimMargin(),
       )
   }
@@ -123,7 +120,6 @@ class AssertjDetectorTest {
             |- import org.assertj.core.api.Assertions.assertThat
             |@@ -2 +1
             |+ import org.assertj.core.api.Java6Assertions.assertThat
-            |
         """.trimMargin(),
       )
   }

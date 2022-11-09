@@ -62,7 +62,6 @@ import org.junit.Test
             |@@ -5 +5
             |-     @Test @Override int something;
             |+     @Override @Test int something;
-            |
         """.trimMargin(),
       )
   }
@@ -122,7 +121,6 @@ import org.junit.Test
             |@@ -3 +3
             |- @Test @Override public class MyTest {
             |+ @Override @Test public class MyTest {
-            |
         """.trimMargin(),
       )
   }
@@ -287,7 +285,6 @@ import org.junit.Test
             |@@ -4 +4
             |-   @SuppressWarnings @Override fun myTest() = Unit
             |+   @Override @SuppressWarnings fun myTest() = Unit
-            |
         """.trimMargin(),
       )
   }
@@ -322,7 +319,6 @@ import org.junit.Test
             |@@ -4 +4
             |-   @Binds @NonNull @Singleton void test() { }
             |+   @Binds @Singleton @NonNull void test() { }
-            |
         """.trimMargin(),
       )
   }
@@ -357,7 +353,6 @@ import org.junit.Test
             |@@ -4 +4
             |-   @Custom @NonNull @Singleton void test() { }
             |+   @Singleton @NonNull @Custom void test() { }
-            |
         """.trimMargin(),
       )
   }

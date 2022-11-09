@@ -134,7 +134,6 @@ class StringNotCapitalizedDetectorTest {
           |@@ -5 +5
           |-   <string name="key4">легальный</string>
           |+   <string name="key4">Легальный</string>
-          |
         """.trimMargin(),
       )
   }
@@ -167,7 +166,6 @@ class StringNotCapitalizedDetectorTest {
         |@@ -2 +2
         |-   <string name="my_string">my string</string>
         |+   <string name="my_string">My string</string>
-        |
         """.trimMargin(),
       )
   }

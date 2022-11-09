@@ -102,7 +102,6 @@ class RxJava2MethodMissingCheckReturnValueDetectorSystemPropTest {
         |@@ -6 +6
         |-   protected Observable<Object> foo() {
         |+   @io.reactivex.annotations.CheckReturnValue protected Observable<Object> foo() {
-        |
         """.trimMargin(),
       )
   }

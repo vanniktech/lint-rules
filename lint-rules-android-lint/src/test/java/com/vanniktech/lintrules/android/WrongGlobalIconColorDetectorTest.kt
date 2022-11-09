@@ -122,7 +122,6 @@ class WrongGlobalIconColorDetectorTest {
           |@@ -7 +7
           |-       android:fillColor="#FF0000"
           |+       android:fillColor="#62FF00"
-          |
         """.trimMargin(),
       )
   }
@@ -162,7 +161,6 @@ class WrongGlobalIconColorDetectorTest {
           |@@ -7 +7
           |-       android:fillColor="@android:color/white"
           |+       android:fillColor="#62FF00"
-          |
         """.trimMargin(),
       )
   }
@@ -202,7 +200,6 @@ class WrongGlobalIconColorDetectorTest {
           |@@ -7 +7
           |-       android:fillColor="?attr/colorSecondary"
           |+       android:fillColor="#62FF00"
-          |
         """.trimMargin(),
       )
   }
