@@ -51,7 +51,6 @@ class MatchingViewIdDetectorTest {
             |- <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/text"/>
             |@@ -2 +1
             |+ <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/activityMainText"/>
-            |
         """.trimMargin(),
       )
   }
@@ -83,7 +82,6 @@ class MatchingViewIdDetectorTest {
             |- <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/mainActivityTextView"/>
             |@@ -2 +1
             |+ <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/activityMainMainActivityTextView"/>
-            |
         """.trimMargin(),
       )
   }
@@ -130,7 +128,6 @@ class MatchingViewIdDetectorTest {
             |- <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/ViewCustomTextView"/>
             |@@ -2 +1
             |+ <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/viewCustomTextView"/>
-            |
         """.trimMargin(),
       )
   }
@@ -162,7 +159,6 @@ class MatchingViewIdDetectorTest {
             |- <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/mainViewTextView"/>
             |@@ -2 +1
             |+ <TextView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/viewCustomMainViewTextView"/>
-            |
         """.trimMargin(),
       )
   }

@@ -36,7 +36,6 @@ class JcenterDetectorTest {
             |@@ -3 +3
             |-     jcenter()
             |+     mavenCentral()
-            |
         """.trimMargin(),
       )
   }

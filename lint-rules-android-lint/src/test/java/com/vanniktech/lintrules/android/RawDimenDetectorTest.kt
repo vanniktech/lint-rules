@@ -95,7 +95,6 @@ class RawDimenDetectorTest {
           |-    android:layout_margin="16dp"/>
           |@@ -3 +2
           |+    android:layout_margin="@dimen/content_margin"/>
-          |
         """.trimMargin(),
       )
   }

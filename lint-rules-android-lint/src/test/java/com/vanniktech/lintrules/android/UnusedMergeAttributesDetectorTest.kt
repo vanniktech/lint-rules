@@ -38,7 +38,6 @@ class UnusedMergeAttributesDetectorTest {
             |@@ -4 +4
             |-     android:layout_marginTop="64dp"
             |+     tools:layout_marginTop="64dp"
-            |
         """.trimMargin(),
       )
   }
@@ -74,7 +73,6 @@ class UnusedMergeAttributesDetectorTest {
             |@@ -4 +4
             |-     app:layout_marginTop="64dp"
             |+     tools:layout_marginTop="64dp"
-            |
         """.trimMargin(),
       )
   }

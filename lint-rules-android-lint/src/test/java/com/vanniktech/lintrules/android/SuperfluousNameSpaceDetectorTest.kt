@@ -54,7 +54,6 @@ class SuperfluousNameSpaceDetectorTest {
           |Fix for res/layout/activity_home.xml line 2: Remove namespace:
           |@@ -3 +3
           |-       xmlns:android="http://schemas.android.com/apk/res/android"
-          |
         """.trimMargin(),
       )
   }
@@ -82,7 +81,6 @@ class SuperfluousNameSpaceDetectorTest {
           |Fix for res/layout/activity_home.xml line 3: Remove namespace:
           |@@ -4 +4
           |-         xmlns:android="http://schemas.android.com/apk/res/android"
-          |
         """.trimMargin(),
       )
   }

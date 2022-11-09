@@ -59,7 +59,6 @@ class ErroneousLayoutAttributeDetectorTest {
           |-     android:layout_height="wrap_content"
           |-     android:orientation="horizontal" />
           |+     android:layout_height="wrap_content" />
-          |
         """.trimMargin(),
       )
   }
@@ -96,7 +95,6 @@ class ErroneousLayoutAttributeDetectorTest {
           |Fix for res/layout/ids.xml line 6: Delete erroneous attribute:
           |@@ -6 +6
           |-     android:orientation="horizontal"
-          |
         """.trimMargin(),
       )
   }
@@ -133,7 +131,6 @@ class ErroneousLayoutAttributeDetectorTest {
           |-     android:layout_height="wrap_content"
           |-     android:maxLines="2" />
           |+     android:layout_height="wrap_content" />
-          |
         """.trimMargin(),
       )
   }
@@ -170,7 +167,6 @@ class ErroneousLayoutAttributeDetectorTest {
         |-     android:layout_height="wrap_content"
         |-     android:orientation="horizontal" />
         |+     android:layout_height="wrap_content" />
-        |
         """.trimMargin(),
       )
   }
@@ -207,7 +203,6 @@ class ErroneousLayoutAttributeDetectorTest {
           |-     android:layout_height="wrap_content"
           |-     android:gravity="horizontal" />
           |+     android:layout_height="wrap_content" />
-          |
         """.trimMargin(),
       )
   }

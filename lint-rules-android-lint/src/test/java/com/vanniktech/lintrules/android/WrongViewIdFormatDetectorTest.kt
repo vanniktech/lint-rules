@@ -67,7 +67,6 @@ class WrongViewIdFormatDetectorTest {
           |-     android:id="@+id/CamelCase"/>
           |@@ -3 +2
           |+     android:id="@+id/camelCase"/>
-          |
         """.trimMargin(),
       )
   }
@@ -100,7 +99,6 @@ class WrongViewIdFormatDetectorTest {
           |-     android:id="@+id/snake_case"/>
           |@@ -3 +2
           |+     android:id="@+id/snakeCase"/>
-          |
         """.trimMargin(),
       )
   }

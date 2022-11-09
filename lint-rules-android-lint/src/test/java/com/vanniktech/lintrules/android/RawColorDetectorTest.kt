@@ -105,7 +105,6 @@ class RawColorDetectorTest {
           |-     android:textColor="#fff"/>
           |@@ -3 +2
           |+     android:textColor="@color/white"/>
-          |
         """.trimMargin(),
       )
   }

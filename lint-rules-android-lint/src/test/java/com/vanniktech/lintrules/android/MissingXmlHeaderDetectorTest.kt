@@ -48,7 +48,6 @@ class MissingXmlHeaderDetectorTest {
           |Fix for res/values/strings.xml line 0: Add xml header:
           |@@ -1 +1
           |+ <?xml version="1.0" encoding="utf-8"?>
-          |
         """.trimMargin(),
       )
   }

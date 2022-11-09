@@ -42,7 +42,6 @@ class RxJava2DisposableDisposeCallDetectorTest {
             |@@ -8 +8
             |-     cd.dispose();
             |+     cd.clear();
-            |
         """.trimMargin(),
       )
   }

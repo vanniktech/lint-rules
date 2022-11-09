@@ -61,7 +61,6 @@ class WrongConstraintLayoutUsageDetectorTest {
           |-     app:layout_constraintLeft_toLeftOf="parent"/>
           |@@ -7 +6
           |+     app:layout_constraintStart_toStartOf="parent"/>
-          |
         """.trimMargin(),
       )
   }
@@ -98,7 +97,6 @@ class WrongConstraintLayoutUsageDetectorTest {
           |-     app:layout_constraintLeft_toRightOf="parent"/>
           |@@ -7 +6
           |+     app:layout_constraintStart_toEndOf="parent"/>
-          |
         """.trimMargin(),
       )
   }
@@ -135,7 +133,6 @@ class WrongConstraintLayoutUsageDetectorTest {
           |-     app:layout_constraintRight_toRightOf="parent"/>
           |@@ -7 +6
           |+     app:layout_constraintEnd_toEndOf="parent"/>
-          |
         """.trimMargin(),
       )
   }
@@ -172,7 +169,6 @@ class WrongConstraintLayoutUsageDetectorTest {
           |-     app:layout_constraintRight_toLeftOf="parent"/>
           |@@ -7 +6
           |+     app:layout_constraintEnd_toStartOf="parent"/>
-          |
         """.trimMargin(),
       )
   }

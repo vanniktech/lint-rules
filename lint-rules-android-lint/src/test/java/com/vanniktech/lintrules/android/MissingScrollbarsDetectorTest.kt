@@ -88,7 +88,6 @@ class MissingScrollbarsDetectorTest {
           |-     android:layout_height="wrap_content" />
           |+     android:layout_height="wrap_content"
           |+     android:scrollbars="none" />
-          |
         """.trimMargin(),
       )
   }
@@ -134,7 +133,6 @@ class MissingScrollbarsDetectorTest {
           |-     android:layout_height="wrap_content" />
           |+     android:layout_height="wrap_content"
           |+     android:scrollbars="none" />
-          |
         """.trimMargin(),
       )
   }

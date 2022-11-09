@@ -197,7 +197,6 @@ class LayoutFileNameMatchesClassDetectorTest {
             |@@ -5 +5
             |-     setContentView(R.layout.activity_bar);
             |+     setContentView(R.layout.unit_test_activity_foo);
-            |
         """.trimMargin(),
       )
   }
@@ -234,7 +233,6 @@ class LayoutFileNameMatchesClassDetectorTest {
           |@@ -5 +5
           |-     setContentView(R.layout.activity_bar);
           |+     setContentView(R.layout.activity_game_times);
-          |
         """.trimMargin(),
       )
   }
@@ -271,7 +269,6 @@ class LayoutFileNameMatchesClassDetectorTest {
           |@@ -5 +5
           |-     setContentView(R.layout.activity_bar)
           |+     setContentView(R.layout.activity_themes)
-          |
         """.trimMargin(),
       )
   }

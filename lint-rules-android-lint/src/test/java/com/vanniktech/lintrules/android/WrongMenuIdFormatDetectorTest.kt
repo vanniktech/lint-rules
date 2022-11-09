@@ -69,7 +69,6 @@ class WrongMenuIdFormatDetectorTest {
           |@@ -2 +2
           |-   <item android:id="@+id/CamelCase"/>
           |+   <item android:id="@+id/camelCase"/>
-          |
         """.trimMargin(),
       )
   }
@@ -102,7 +101,6 @@ class WrongMenuIdFormatDetectorTest {
           |@@ -2 +2
           |-   <item android:id="@+id/snake_case"/>
           |+   <item android:id="@+id/snakeCase"/>
-          |
         """.trimMargin(),
       )
   }

@@ -54,7 +54,6 @@ class InvalidStringDetectorTest {
           |-   <string name="my_string">My string"
           |- </string>
           |+   <string name="my_string">My string"</string>
-          |
         """.trimMargin(),
       )
   }
@@ -87,7 +86,6 @@ class InvalidStringDetectorTest {
           |@@ -2 +2
           |-   <string name="my_string">My string   </string>
           |+   <string name="my_string">My string</string>
-          |
         """.trimMargin(),
       )
   }
@@ -120,7 +118,6 @@ class InvalidStringDetectorTest {
           |@@ -2 +2
           |-   <string name="my_string">  My string</string>
           |+   <string name="my_string">My string</string>
-          |
         """.trimMargin(),
       )
   }
@@ -179,7 +176,6 @@ class InvalidStringDetectorTest {
           |@@ -3 +3
           |-   <item quantity="other">%d Days   </item>
           |+   <item quantity="other">%d Days</item>
-          |
         """.trimMargin(),
       )
   }
@@ -238,7 +234,6 @@ class InvalidStringDetectorTest {
           |@@ -3 +3
           |-   <item>2   </item>
           |+   <item>2</item>
-          |
         """.trimMargin(),
       )
   }
