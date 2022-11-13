@@ -51,24 +51,39 @@ class ErroneousLayoutAttributeDetector : LayoutDetector() {
     val layoutName = element.layoutName()
     val erroneousAttributes = ERRONEOUS_LAYOUT_ATTRIBUTES[layoutName].orEmpty()
 
-    if (erroneousAttributes.isNotEmpty()) {
-      element.attributes.forEach { attribute ->
-        erroneousAttributes.forEach { erroneousAttribute ->
-          val tag = attribute.layoutAttribute()
+    element.attributes.forEach { attribute ->
+      val tag = attribute.layoutAttribute()
+      if (tag?.startsWith("layout_constraint") == true) {
+        val parentLayout = (element.parentNode as Element).layoutName()
 
-          if (erroneousAttribute == tag) {
-            context.report(
-              issue = ISSUE_ERRONEOUS_LAYOUT_ATTRIBUTE,
-              scope = attribute,
-              location = context.getLocation(attribute),
-              message = "Attribute is erroneous on $layoutName",
-              quickfixData = fix()
-                .unset(attribute.namespaceURI, attribute.localName)
-                .name("Delete erroneous attribute")
-                .autoFix()
-                .build(),
-            )
-          }
+        if (!CONSTRAINT_LAYOUT.isEquals(parentLayout) && !parentLayout.contains("ConstraintLayout")) {
+          context.report(
+            issue = ISSUE_ERRONEOUS_LAYOUT_ATTRIBUTE,
+            scope = attribute,
+            location = context.getLocation(attribute),
+            message = "$tag is not allowed since we have a $parentLayout parent",
+            quickfixData = fix()
+              .unset(attribute.namespaceURI, attribute.localName)
+              .name("Delete erroneous $tag attribute")
+              .autoFix()
+              .build(),
+          )
+        }
+      }
+
+      erroneousAttributes.forEach { erroneousAttribute ->
+        if (erroneousAttribute == tag) {
+          context.report(
+            issue = ISSUE_ERRONEOUS_LAYOUT_ATTRIBUTE,
+            scope = attribute,
+            location = context.getLocation(attribute),
+            message = "Attribute is erroneous on $layoutName",
+            quickfixData = fix()
+              .unset(attribute.namespaceURI, attribute.localName)
+              .name("Delete erroneous $tag attribute")
+              .autoFix()
+              .build(),
+          )
         }
       }
     }

@@ -15,6 +15,7 @@ import com.android.tools.lint.detector.api.Severity.WARNING
 import org.jetbrains.uast.UAnnotated
 import org.jetbrains.uast.UMethod
 import java.util.EnumSet
+import java.util.Locale
 
 val ISSUE_WRONG_TEST_METHOD_NAME = Issue.create(
   "WrongTestMethodName",
@@ -40,8 +41,7 @@ class WrongTestMethodNameDetector : Detector(), Detector.UastScanner {
             .name("Remove test prefix")
             .replace()
             .text(node.name)
-            //noinspection AndroidLintDefaultLocale - https://issuetracker.google.com/issues/133465551
-            .with(node.name.replace("test", "", ignoreCase = true).decapitalize())
+            .with(node.name.replace("test", "", ignoreCase = true).decapitalize(Locale.ROOT))
             .autoFix()
             .build()
           context.report(ISSUE_WRONG_TEST_METHOD_NAME, node, context.getNameLocation(node), "Test method starts with test", fix)
