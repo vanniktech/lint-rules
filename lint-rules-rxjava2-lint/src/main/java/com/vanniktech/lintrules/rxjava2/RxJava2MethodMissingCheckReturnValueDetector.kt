@@ -67,14 +67,15 @@ class RxJava2MethodMissingCheckReturnValueDetector : Detector(), Detector.UastSc
       val canonicalText = psiType.canonicalText
         .replace("<[\\w.<>]*>".toRegex(), "") // We need to remove the generics.
 
-      return canonicalText.matches("io\\.reactivex\\.[\\w]+".toRegex()) ||
+      return canonicalText.matches("io\\.reactivex\\.\\w+".toRegex()) ||
         "io.reactivex.disposables.Disposable" == canonicalText ||
+        "io.reactivex.disposables.CompositeDisposable" == canonicalText ||
         "io.reactivex.observers.TestObserver" == canonicalText ||
         "io.reactivex.subscribers.TestSubscriber" == canonicalText
     }
 
     companion object {
-      private const val IGNORE_MODIFIERS_PROP = "com.vanniktech.lintrules.rxjava2.RxJava2MethodMissingCheckReturnValueDetector.ignoreMethodAccessModifiers"
+      internal const val IGNORE_MODIFIERS_PROP = "com.vanniktech.lintrules.rxjava2.RxJava2MethodMissingCheckReturnValueDetector.ignoreMethodAccessModifiers"
 
       private fun ignoredModifiers(): List<JvmModifier> {
         return System.getProperty(IGNORE_MODIFIERS_PROP)
