@@ -12,6 +12,8 @@ import com.android.tools.lint.detector.api.Scope.JAVA_FILE
 import com.android.tools.lint.detector.api.Severity.ERROR
 import org.jetbrains.uast.UCallExpression
 import org.jetbrains.uast.UClass
+import org.jetbrains.uast.UExpression
+import org.jetbrains.uast.UReturnExpression
 import org.jetbrains.uast.skipParenthesizedExprDown
 import org.jetbrains.uast.visitor.AbstractUastVisitor
 import java.util.EnumSet
@@ -37,17 +39,25 @@ class RxJava2MissingCompositeDisposableClearDetector : Detector(), Detector.Uast
         .filter { "io.reactivex.disposables.CompositeDisposable" == it.type.canonicalText }
         .toMutableSet()
 
+      fun remove(node: UExpression?) {
+        val iterator = compositeDisposables.iterator()
+
+        while (iterator.hasNext()) {
+          if (node?.skipParenthesizedExprDown()?.asRenderString() == iterator.next().name) {
+            iterator.remove()
+          }
+        }
+      }
+
       node.accept(object : AbstractUastVisitor() {
+        override fun visitReturnExpression(node: UReturnExpression): Boolean {
+          remove(node.returnExpression)
+          return super.visitReturnExpression(node)
+        }
+
         override fun visitCallExpression(node: UCallExpression): Boolean {
           return if ("clear" == node.methodName) {
-            val iterator = compositeDisposables.iterator()
-
-            while (iterator.hasNext()) {
-              if (node.receiver?.skipParenthesizedExprDown()?.asRenderString() == iterator.next().name) {
-                iterator.remove()
-              }
-            }
-
+            remove(node.receiver)
             true
           } else {
             super.visitCallExpression(node)

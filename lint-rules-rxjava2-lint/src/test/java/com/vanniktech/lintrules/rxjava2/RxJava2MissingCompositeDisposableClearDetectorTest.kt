@@ -46,11 +46,11 @@ class RxJava2MissingCompositeDisposableClearDetectorTest {
       .run()
       .expect(
         """
-          |src/foo/Example.java:6: Error: clear() is not called [RxJava2MissingCompositeDisposableClear]
-          |  CompositeDisposable cd;
-          |  ~~~~~~~~~~~~~~~~~~~~~~~
-          |1 errors, 0 warnings
-        """.trimMargin(),
+        src/foo/Example.java:6: Error: clear() is not called [RxJava2MissingCompositeDisposableClear]
+          CompositeDisposable cd;
+          ~~~~~~~~~~~~~~~~~~~~~~~
+        1 errors, 0 warnings
+        """.trimIndent(),
       )
   }
 
@@ -96,14 +96,14 @@ class RxJava2MissingCompositeDisposableClearDetectorTest {
       .run()
       .expect(
         """
-          |src/foo/Example.java:6: Error: clear() is not called [RxJava2MissingCompositeDisposableClear]
-          |  CompositeDisposable cd1;
-          |  ~~~~~~~~~~~~~~~~~~~~~~~~
-          |src/foo/Example.java:7: Error: clear() is not called [RxJava2MissingCompositeDisposableClear]
-          |  CompositeDisposable cd2;
-          |  ~~~~~~~~~~~~~~~~~~~~~~~~
-          |2 errors, 0 warnings
-        """.trimMargin(),
+        src/foo/Example.java:6: Error: clear() is not called [RxJava2MissingCompositeDisposableClear]
+          CompositeDisposable cd1;
+          ~~~~~~~~~~~~~~~~~~~~~~~~
+        src/foo/Example.java:7: Error: clear() is not called [RxJava2MissingCompositeDisposableClear]
+          CompositeDisposable cd2;
+          ~~~~~~~~~~~~~~~~~~~~~~~~
+        2 errors, 0 warnings
+        """.trimIndent(),
       )
   }
 
@@ -128,14 +128,14 @@ class RxJava2MissingCompositeDisposableClearDetectorTest {
       .run()
       .expect(
         """
-          |src/foo/Example.kt:6: Error: clear() is not called [RxJava2MissingCompositeDisposableClear]
-          |  val cd1: CompositeDisposable
-          |  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-          |src/foo/Example.kt:7: Error: clear() is not called [RxJava2MissingCompositeDisposableClear]
-          |  val cd2: CompositeDisposable
-          |  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-          |2 errors, 0 warnings
-        """.trimMargin(),
+        src/foo/Example.kt:6: Error: clear() is not called [RxJava2MissingCompositeDisposableClear]
+          val cd1: CompositeDisposable
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        src/foo/Example.kt:7: Error: clear() is not called [RxJava2MissingCompositeDisposableClear]
+          val cd2: CompositeDisposable
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        2 errors, 0 warnings
+        """.trimIndent(),
       )
   }
 
@@ -211,11 +211,11 @@ class RxJava2MissingCompositeDisposableClearDetectorTest {
       .run()
       .expect(
         """
-          |src/foo/Example.java:7: Error: clear() is not called [RxJava2MissingCompositeDisposableClear]
-          |  CompositeDisposable cd2;
-          |  ~~~~~~~~~~~~~~~~~~~~~~~~
-          |1 errors, 0 warnings
-        """.trimMargin(),
+        src/foo/Example.java:7: Error: clear() is not called [RxJava2MissingCompositeDisposableClear]
+          CompositeDisposable cd2;
+          ~~~~~~~~~~~~~~~~~~~~~~~~
+        1 errors, 0 warnings
+        """.trimIndent(),
       )
   }
 
@@ -243,11 +243,11 @@ class RxJava2MissingCompositeDisposableClearDetectorTest {
       .run()
       .expect(
         """
-          |src/foo/Example.kt:7: Error: clear() is not called [RxJava2MissingCompositeDisposableClear]
-          |  val cd2 = CompositeDisposable()
-          |  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-          |1 errors, 0 warnings
-        """.trimMargin(),
+        src/foo/Example.kt:7: Error: clear() is not called [RxJava2MissingCompositeDisposableClear]
+          val cd2 = CompositeDisposable()
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        1 errors, 0 warnings
+        """.trimIndent(),
       )
   }
 
@@ -257,28 +257,28 @@ class RxJava2MissingCompositeDisposableClearDetectorTest {
         rxJava2(),
         java(
           """
-        package foo;
+          package foo;
 
-        import io.reactivex.disposables.CompositeDisposable;
+          import io.reactivex.disposables.CompositeDisposable;
 
-        class Example {
-          CompositeDisposable cd;
-          CompositeDisposable cd2;
+          class Example {
+            CompositeDisposable cd;
+            CompositeDisposable cd2;
 
-          public void foo() {
-            if (true) {
-              cd.clear();
+            public void foo() {
+              if (true) {
+                cd.clear();
+              }
+            }
+
+            public void foo2(){
+              if (false) {
+
+              } else {
+                cd2.clear();
+              }
             }
           }
-
-          public void foo2(){
-            if (false) {
-
-            } else {
-              cd2.clear();
-            }
-          }
-        }
           """,
         ).indented(),
       )
@@ -293,28 +293,79 @@ class RxJava2MissingCompositeDisposableClearDetectorTest {
         rxJava2(),
         kt(
           """
-        package foo
+          package foo
 
-        import io.reactivex.disposables.CompositeDisposable
+          import io.reactivex.disposables.CompositeDisposable
 
-        class Example {
-          val cd: CompositeDisposable
-          val cd2: CompositeDisposable
+          class Example {
+            val cd: CompositeDisposable
+            val cd2: CompositeDisposable
 
-          fun foo() {
-            if (true) {
-              cd.clear()
+            fun foo() {
+              if (true) {
+                cd.clear()
+              }
+            }
+
+            fun foo2(){
+              if (false) {
+
+              } else {
+                cd2.clear()
+              }
             }
           }
+          """,
+        ).indented(),
+      )
+      .issues(ISSUE_MISSING_COMPOSITE_DISPOSABLE_CLEAR)
+      .run()
+      .expectClean()
+  }
 
-          fun foo2(){
-            if (false) {
+  @Test fun returningCompositeDisposableInJava() {
+    lint()
+      .files(
+        rxJava2(),
+        java(
+          """
+          package foo;
 
-            } else {
-              cd2.clear()
+          import io.reactivex.disposables.CompositeDisposable;
+
+          class Example {
+            CompositeDisposable cd;
+
+            public CompositeDisposable foo() {
+              return cd;
             }
           }
-        }
+          """,
+        ).indented(),
+      )
+      .issues(ISSUE_MISSING_COMPOSITE_DISPOSABLE_CLEAR)
+      .run()
+      .expectClean()
+  }
+
+  @Test fun returningCompositeDisposableInKotlin() {
+    lint()
+      .files(
+        rxJava2(),
+        kt(
+          """
+          package foo
+
+          import io.reactivex.disposables.CompositeDisposable
+          import io.reactivex.disposables.Disposable
+
+          class Example {
+            val cd: CompositeDisposable
+
+            fun something(): Disposable {
+              return cd
+            }
+          }
           """,
         ).indented(),
       )
