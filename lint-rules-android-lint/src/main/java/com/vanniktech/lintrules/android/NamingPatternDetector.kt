@@ -60,6 +60,7 @@ class NamingPatternDetector : Detector(), Detector.UastScanner {
         !isGeneratedKotlinMethodAccessor &&
         !isKotlinReceiver &&
         name?.isDefinedCamelCase() == false &&
+        !name.contains("-") &&
         EXCLUDES.none { name.contains(it) && !name.startsWith(it) }
       ) {
         context.report(ISSUE_NAMING_PATTERN, element, context.getNameLocation(element), "${element.name} is not named in defined camel case")
