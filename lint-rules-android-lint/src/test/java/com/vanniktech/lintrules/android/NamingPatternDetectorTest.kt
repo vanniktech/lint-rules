@@ -172,6 +172,27 @@ class NamingPatternDetectorTest {
       )
   }
 
+  @Test fun kotlinInlineValueClassGetsIgnored() {
+    lint()
+      .files(
+        kt(
+          """
+            package foo
+
+            @JvmInline value class Inline(val string: String)
+
+            data class Foo(
+              val inline: Inline,
+              val int: Int,
+            )
+          """,
+        ).indented(),
+      )
+      .issues(ISSUE_NAMING_PATTERN)
+      .run()
+      .expectClean()
+  }
+
   @Test fun kotlinValGetMethodIgnored() {
     lint()
       .files(
