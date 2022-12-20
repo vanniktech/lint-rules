@@ -3,7 +3,7 @@
     "config:base",
     ":disableDependencyDashboard"
   ],
-  "ignoredDeps": [
+  "ignoreDeps": [
     "org.jetbrains.kotlin:kotlin-gradle-plugin"
   ]
 }
