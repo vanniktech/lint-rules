@@ -1,7 +1,20 @@
 # Change Log
 
-Version 0.23.0 *(In development)*
----------------------------------
+Version 0.23.0 *(2022-12-20)*
+-----------------------------
+
+- NamingPatternDetector: Ignore generated Kotlin methods. [\#398](https://github.com/vanniktech/lint-rules/pull/398) ([vanniktech](https://github.com/vanniktech))
+- RxJava2MissingCompositeDisposableClearDetector: Don't flag CompositeDisposable if it's returned in a method. [\#392](https://github.com/vanniktech/lint-rules/pull/392) ([vanniktech](https://github.com/vanniktech))
+- RxJava2MethodMissingCheckReturnValueDetector: Add io.reactivex.disposables.CompositeDisposable [\#391](https://github.com/vanniktech/lint-rules/pull/391) ([vanniktech](https://github.com/vanniktech))
+- ErroneousLayoutAttributeDetector: Flag ConstraintLayout attribute usages with non ConstraintLayout parent layouts. [\#389](https://github.com/vanniktech/lint-rules/pull/389) ([vanniktech](https://github.com/vanniktech))
+- StringNotCapitalizedDetector: Correctly pin point where it went wrong. [\#388](https://github.com/vanniktech/lint-rules/pull/388) ([vanniktech](https://github.com/vanniktech))
+- ImplicitStringPlaceholderDetector: Marks implicit placeholders in strings without an index. [\#386](https://github.com/vanniktech/lint-rules/pull/386) ([vanniktech](https://github.com/vanniktech))
+- Update Android Gradle Plugin to 7.3.1 & Lint to 30.3.1 [\#383](https://github.com/vanniktech/lint-rules/pull/383) ([vanniktech](https://github.com/vanniktech))
+- FormalGermanDetector: Flags formal usage of German words. [\#379](https://github.com/vanniktech/lint-rules/pull/379) ([vanniktech](https://github.com/vanniktech))
+- TodoDetector: Fix few false positive with last change. [\#378](https://github.com/vanniktech/lint-rules/pull/378) ([vanniktech](https://github.com/vanniktech))
+- TodoDetector: Todo is now case insensitive and finds more. [\#376](https://github.com/vanniktech/lint-rules/pull/376) ([vanniktech](https://github.com/vanniktech))
+- Let Lint figure out the identifier from the Maven Coordinates. [\#372](https://github.com/vanniktech/lint-rules/pull/372) ([vanniktech](https://github.com/vanniktech))
+- WrongDrawableNameDetector: Allow animated\_selector prefix. [\#365](https://github.com/vanniktech/lint-rules/pull/365) ([vanniktech](https://github.com/vanniktech))
 
 Version 0.22.0 *(2022-08-05)*
 -----------------------------
