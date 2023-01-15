@@ -19,7 +19,7 @@ import org.w3c.dom.Document
 import java.util.EnumSet
 import java.util.regex.Pattern
 
-private val pattern = Pattern.compile("\\t*T[Oo][Dd][Oo][(:\\s]")
+private val pattern = Pattern.compile("(?<=\\s|^|/)T[Oo][Dd][Oo][(:\\s]")
 
 val ISSUE_TODO = Issue.create(
   "Todo",

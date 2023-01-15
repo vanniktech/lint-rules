@@ -4,6 +4,7 @@ package com.vanniktech.lintrules.android
 
 import com.android.tools.lint.checks.infrastructure.TestFiles.gradle
 import com.android.tools.lint.checks.infrastructure.TestFiles.java
+import com.android.tools.lint.checks.infrastructure.TestFiles.kt
 import com.android.tools.lint.checks.infrastructure.TestFiles.manifest
 import com.android.tools.lint.checks.infrastructure.TestFiles.xml
 import com.android.tools.lint.checks.infrastructure.TestLintTask.lint
@@ -27,12 +28,27 @@ class TodoDetectorTest {
       .run()
       .expect(
         """
-            |src/foo/Example.java:4: Error: Contains todo [Todo]
-            |  // TODO something
-            |     ~~~~
-            |1 errors, 0 warnings
-        """.trimMargin(),
+          src/foo/Example.java:4: Error: Contains todo [Todo]
+            // TODO something
+               ~~~~
+          1 errors, 0 warnings
+        """.trimIndent(),
       )
+  }
+
+  @Test fun ignoresFunctionName() {
+    lint()
+      .files(
+        kt(
+          """
+            fun createTodo() {
+            }
+          """,
+        ).indented(),
+      )
+      .issues(ISSUE_TODO)
+      .run()
+      .expectClean()
   }
 
   @Test fun layoutFile() {
@@ -51,11 +67,11 @@ class TodoDetectorTest {
       .run()
       .expect(
         """
-            |res/layout/layout.xml:3: Error: Contains todo [Todo]
-            |<!-- TODO(NIK) Fix blub. -->
-            |     ~~~~
-            |1 errors, 0 warnings
-        """.trimMargin(),
+          res/layout/layout.xml:3: Error: Contains todo [Todo]
+          <!-- TODO(NIK) Fix blub. -->
+               ~~~~
+          1 errors, 0 warnings
+        """.trimIndent(),
       )
   }
 
@@ -67,6 +83,7 @@ class TodoDetectorTest {
             buildscript {
               repositories {
                 mavenCentral() // TODO: we should remove it.
+                jcenter() //TODO: we should remove it.
               }
             }
           """,
@@ -76,11 +93,14 @@ class TodoDetectorTest {
       .run()
       .expect(
         """
-            |build.gradle:3: Error: Contains todo [Todo]
-            |    mavenCentral() // TODO: we should remove it.
-            |                      ~~~~
-            |1 errors, 0 warnings
-        """.trimMargin(),
+          build.gradle:3: Error: Contains todo [Todo]
+              mavenCentral() // TODO: we should remove it.
+                                ~~~~
+          build.gradle:4: Error: Contains todo [Todo]
+              jcenter() //TODO: we should remove it.
+                          ~~~~
+          2 errors, 0 warnings
+        """.trimIndent(),
       )
   }
 
@@ -117,11 +137,11 @@ class TodoDetectorTest {
       .run()
       .expect(
         """
-            |AndroidManifest.xml:1: Error: Contains todo [Todo]
-            |<!-- Todo: Something. -->
-            |     ~~~~
-            |1 errors, 0 warnings
-        """.trimMargin(),
+          AndroidManifest.xml:1: Error: Contains todo [Todo]
+          <!-- Todo: Something. -->
+               ~~~~
+          1 errors, 0 warnings
+        """.trimIndent(),
       )
   }
 }
