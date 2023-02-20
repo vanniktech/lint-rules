@@ -4,8 +4,8 @@ plugins {
 }
 
 java {
-  sourceCompatibility = JavaVersion.VERSION_1_8
-  targetCompatibility = JavaVersion.VERSION_1_8
+  sourceCompatibility = JavaVersion.VERSION_11
+  targetCompatibility = JavaVersion.VERSION_11
 }
 
 dependencies {
@@ -19,7 +19,7 @@ dependencies {
 }
 
 tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile::class.java).all {
-  kotlinOptions.jvmTarget = "1.8"
+  kotlinOptions.jvmTarget = "11"
 
   // Lint still requires 1.4 (regardless of what version the project uses), so this forces a lower
   // language level for now. Similar to `targetCompatibility` for Java.

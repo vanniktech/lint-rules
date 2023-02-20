@@ -2,8 +2,8 @@
 
 package com.vanniktech.lintrules.android
 
+import com.android.AndroidXConstants.CONSTRAINT_LAYOUT
 import com.android.SdkConstants
-import com.android.SdkConstants.CONSTRAINT_LAYOUT
 import com.android.SdkConstants.FRAME_LAYOUT
 import com.android.SdkConstants.IMAGE_VIEW
 import com.android.tools.lint.detector.api.Category
@@ -42,7 +42,7 @@ val ERRONEOUS_LAYOUT_ATTRIBUTES = mapOf(
 )
 
 class ErroneousLayoutAttributeDetector : LayoutDetector() {
-  override fun getApplicableElements() = ALL
+  override fun getApplicableElements(): List<String> = ALL
 
   override fun visitElement(
     context: XmlContext,
