@@ -2,13 +2,13 @@
 
 package com.vanniktech.lintrules.android
 
+import com.android.AndroidXConstants.CLASS_CONSTRAINT_LAYOUT
 import com.android.SdkConstants.ATTR_LAYOUT_HEIGHT
 import com.android.SdkConstants.ATTR_LAYOUT_MIN_HEIGHT
 import com.android.SdkConstants.ATTR_LAYOUT_MIN_WIDTH
 import com.android.SdkConstants.ATTR_LAYOUT_WIDTH
 import com.android.SdkConstants.ATTR_MIN_HEIGHT
 import com.android.SdkConstants.ATTR_MIN_WIDTH
-import com.android.SdkConstants.CLASS_CONSTRAINT_LAYOUT
 import com.android.SdkConstants.TAG_DIMEN
 import com.android.resources.ResourceFolderType
 import com.android.resources.ResourceFolderType.DRAWABLE
