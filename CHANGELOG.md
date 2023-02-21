@@ -1,7 +1,11 @@
 # Change Log
 
-Version 0.24.0 *(In development)*
----------------------------------
+Version 0.24.0 *(2023-02-21)*
+-----------------------------
+
+- Update Android Gradle Plugin to 7.4.1 & Lint to 30.4.1 [\#409](https://github.com/vanniktech/lint-rules/pull/409) ([vanniktech](https://github.com/vanniktech))
+- TodoDetector: Optimise regex. [\#404](https://github.com/vanniktech/lint-rules/pull/404) ([vanniktech](https://github.com/vanniktech))
+- InvalidAccessibilityDetector: Marks invalid accessibility usages. [\#399](https://github.com/vanniktech/lint-rules/pull/399) ([vanniktech](https://github.com/vanniktech))
 
 Version 0.23.0 *(2022-12-20)*
 -----------------------------
