@@ -55,6 +55,7 @@ class WrongGlobalIconColorDetector : ResourceXmlDetector() {
     val EXCLUDES_FILE_NAME = listOf(
       "ic_launcher_background",
       "ic_launcher_foreground",
+      "ic_notification",
     )
 
     val EXCLUDES_COLORS = listOf(
