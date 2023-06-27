@@ -16,7 +16,7 @@ lint-tests = { module = "com.android.tools.lint:lint-tests", version.ref = "lint
 plugin-androidgradleplugin = { module = "com.android.tools.build:gradle", version.ref = "androidgradleplugin" }
 plugin-publish = { module = "com.vanniktech:gradle-maven-publish-plugin", version = "0.25.2" }
 plugin-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
-plugin-dokka = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version = "1.8.10" }
+plugin-dokka = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version = "1.8.20" }
 
 [plugins]
 codequalitytools = { id = "com.vanniktech.code.quality.tools", version = "0.22.0" }
