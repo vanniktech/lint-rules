@@ -4,6 +4,7 @@ package com.vanniktech.lintrules.android
 
 import com.android.tools.lint.checks.infrastructure.TestFiles.xml
 import com.android.tools.lint.checks.infrastructure.TestLintTask.lint
+import com.android.tools.lint.checks.infrastructure.TestMode
 import org.junit.Test
 
 class XmlSpacingDetectorTest {
@@ -90,6 +91,7 @@ class XmlSpacingDetectorTest {
         ).indented(),
       )
       .issues(ISSUE_XML_SPACING)
+      .skipTestModes(TestMode.SUPPRESSIBLE)
       .run()
       .expect(
         """

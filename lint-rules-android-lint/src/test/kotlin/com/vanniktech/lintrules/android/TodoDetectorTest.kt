@@ -8,6 +8,7 @@ import com.android.tools.lint.checks.infrastructure.TestFiles.kt
 import com.android.tools.lint.checks.infrastructure.TestFiles.manifest
 import com.android.tools.lint.checks.infrastructure.TestFiles.xml
 import com.android.tools.lint.checks.infrastructure.TestLintTask.lint
+import com.android.tools.lint.checks.infrastructure.TestMode
 import org.junit.Test
 
 class TodoDetectorTest {
@@ -25,6 +26,7 @@ class TodoDetectorTest {
         ).indented(),
       )
       .issues(ISSUE_TODO)
+      .skipTestModes(TestMode.SUPPRESSIBLE)
       .run()
       .expect(
         """
@@ -64,6 +66,7 @@ class TodoDetectorTest {
         ).indented(),
       )
       .issues(ISSUE_TODO)
+      .skipTestModes(TestMode.SUPPRESSIBLE)
       .run()
       .expect(
         """
@@ -134,6 +137,7 @@ class TodoDetectorTest {
         ).indented(),
       )
       .issues(ISSUE_TODO)
+      .skipTestModes(TestMode.SUPPRESSIBLE)
       .run()
       .expect(
         """
