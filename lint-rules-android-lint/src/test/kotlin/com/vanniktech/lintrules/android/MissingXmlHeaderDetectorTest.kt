@@ -4,6 +4,7 @@ package com.vanniktech.lintrules.android
 
 import com.android.tools.lint.checks.infrastructure.TestFiles.xml
 import com.android.tools.lint.checks.infrastructure.TestLintTask.lint
+import com.android.tools.lint.checks.infrastructure.TestMode
 import org.junit.Test
 
 class MissingXmlHeaderDetectorTest {
@@ -34,6 +35,7 @@ class MissingXmlHeaderDetectorTest {
         ).indented(),
       )
       .issues(ISSUE_MISSING_XML_HEADER)
+      .skipTestModes(TestMode.SUPPRESSIBLE)
       .run()
       .expect(
         """

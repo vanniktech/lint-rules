@@ -26,7 +26,7 @@ class InvalidSingleLineCommentDetectorTest {
         ).indented(),
       )
       .issues(ISSUE_INVALID_SINGLE_LINE_COMMENT)
-      .skipTestModes(TestMode.WHITESPACE)
+      .skipTestModes(TestMode.WHITESPACE, TestMode.SUPPRESSIBLE)
       .run()
       .expect(
         """
@@ -62,7 +62,7 @@ class InvalidSingleLineCommentDetectorTest {
         ).indented(),
       )
       .issues(ISSUE_INVALID_SINGLE_LINE_COMMENT)
-      .skipTestModes(TestMode.WHITESPACE)
+      .skipTestModes(TestMode.WHITESPACE, TestMode.SUPPRESSIBLE)
       .run()
       .expect(
         """
@@ -98,7 +98,7 @@ class InvalidSingleLineCommentDetectorTest {
         ).indented(),
       )
       .issues(ISSUE_INVALID_SINGLE_LINE_COMMENT)
-      .skipTestModes(TestMode.WHITESPACE)
+      .skipTestModes(TestMode.WHITESPACE, TestMode.SUPPRESSIBLE)
       .run()
       .expect(
         """
@@ -159,7 +159,7 @@ class InvalidSingleLineCommentDetectorTest {
         ).indented(),
       )
       .issues(ISSUE_INVALID_SINGLE_LINE_COMMENT)
-      .skipTestModes(TestMode.WHITESPACE)
+      .skipTestModes(TestMode.WHITESPACE, TestMode.SUPPRESSIBLE)
       .run()
       .expect(
         """
@@ -356,7 +356,7 @@ class InvalidSingleLineCommentDetectorTest {
         ),
       )
       .issues(ISSUE_INVALID_SINGLE_LINE_COMMENT)
-      .skipTestModes(TestMode.WHITESPACE)
+      .skipTestModes(TestMode.WHITESPACE, TestMode.SUPPRESSIBLE)
       .run()
       .expect(
         """
@@ -395,7 +395,7 @@ class InvalidSingleLineCommentDetectorTest {
         ),
       )
       .issues(ISSUE_INVALID_SINGLE_LINE_COMMENT)
-      .skipTestModes(TestMode.WHITESPACE)
+      .skipTestModes(TestMode.WHITESPACE, TestMode.SUPPRESSIBLE)
       .run()
       .expect(
         """
