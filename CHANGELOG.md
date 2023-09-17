@@ -1,7 +1,10 @@
 # Change Log
 
-Version 0.25.0 *(In development)*
----------------------------------
+Version 0.25.0 *(2023-09-17)*
+-----------------------------
+
+- Update Android Gradle Plugin to 8.1.1 & Lint to 31.1.1 [\#431](https://github.com/vanniktech/lint-rules/pull/431) ([vanniktech](https://github.com/vanniktech))
+- WrongGlobalIconColorDetector: Ignore ic\_notification files. [\#420](https://github.com/vanniktech/lint-rules/pull/420) ([vanniktech](https://github.com/vanniktech))
 
 Version 0.24.0 *(2023-02-21)*
 -----------------------------
