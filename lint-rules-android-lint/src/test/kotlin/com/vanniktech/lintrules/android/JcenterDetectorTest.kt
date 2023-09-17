@@ -8,7 +8,7 @@ import org.junit.Ignore
 import org.junit.Test
 
 class JcenterDetectorTest {
-  @Test @Ignore("https://issuetracker.google.com/issues/289624524") fun jcenter() {
+  @Test @Ignore("https://issuetracker.google.com/issues/300765221") fun jcenter() {
     lint()
       .files(
         gradle(

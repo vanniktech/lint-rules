@@ -12,7 +12,6 @@ import com.android.tools.lint.detector.api.Severity.WARNING
 import com.android.tools.lint.detector.api.XmlContext
 import org.w3c.dom.Attr
 import org.w3c.dom.Element
-import java.util.Locale.US
 
 val ISSUE_COLOR_CASING = Issue.create(
   "ColorCasing",
@@ -36,7 +35,7 @@ class ColorCasingDetector : ResourceXmlDetector() {
           .name("Convert to uppercase")
           .replace()
           .text(it.nodeValue)
-          .with(it.nodeValue.toUpperCase(US))
+          .with(it.nodeValue.uppercase())
           .autoFix()
           .build()
 

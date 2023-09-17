@@ -12,10 +12,10 @@ import com.android.tools.lint.detector.api.LintFix
 import com.android.tools.lint.detector.api.Scope.JAVA_FILE
 import com.android.tools.lint.detector.api.Scope.TEST_SOURCES
 import com.android.tools.lint.detector.api.Severity.WARNING
+import com.android.utils.usLocaleDecapitalize
 import org.jetbrains.uast.UAnnotated
 import org.jetbrains.uast.UMethod
 import java.util.EnumSet
-import java.util.Locale
 
 val ISSUE_WRONG_TEST_METHOD_NAME = Issue.create(
   "WrongTestMethodName",
@@ -41,7 +41,7 @@ class WrongTestMethodNameDetector : Detector(), Detector.UastScanner {
             .name("Remove test prefix")
             .replace()
             .text(node.name)
-            .with(node.name.replace("test", "", ignoreCase = true).decapitalize(Locale.ROOT))
+            .with(node.name.replace("test", "", ignoreCase = true).usLocaleDecapitalize())
             .autoFix()
             .build()
           context.report(ISSUE_WRONG_TEST_METHOD_NAME, node, context.getNameLocation(node), "Test method starts with test", fix)
