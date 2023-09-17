@@ -41,7 +41,7 @@ class StringNotCapitalizedDetector : StringXmlDetector() {
     val char = chars.getOrNull(index) ?: return
 
     if (char.isLetter() && char.isLowerCase()) {
-      val new = chars.take(index).joinToString(separator = "") + char.toUpperCase() + chars.drop(index + 1).joinToString(separator = "")
+      val new = chars.take(index).joinToString(separator = "") + char.uppercase() + chars.drop(index + 1).joinToString(separator = "")
       val fix = fix().replace().name("Fix it").text(text).with(new).autoFix().build()
       context.report(ISSUE_STRING_NOT_CAPITALIZED, node, context.getLocation(textNode, index, index + new.length), "String is not capitalized", fix)
     }

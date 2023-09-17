@@ -9,7 +9,6 @@ import com.android.tools.lint.detector.api.XmlContext
 import org.w3c.dom.Attr
 import org.w3c.dom.Element
 import org.w3c.dom.Node
-import java.util.Locale.US
 import java.util.regex.Pattern
 
 internal fun Element.layoutName() = when {
@@ -42,7 +41,7 @@ internal fun String.toSnakeCase() = toCharArray().fold("") { accumulator, curren
     else -> ""
   }
 
-  accumulator + prefix + current.toLowerCase()
+  accumulator + prefix + current.lowercase()
 }
 
 internal fun Node.children() = (0 until childNodes.length).map { childNodes.item(it) }
@@ -59,7 +58,7 @@ internal fun String.toLowerCamelCase(): String {
   val sb = StringBuffer()
 
   while (matcher.find()) {
-    matcher.appendReplacement(sb, matcher.group(1).toUpperCase(US))
+    matcher.appendReplacement(sb, matcher.group(1).uppercase())
   }
 
   matcher.appendTail(sb)

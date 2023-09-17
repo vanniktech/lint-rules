@@ -3,7 +3,7 @@
 package com.vanniktech.lintrules.android
 
 import com.android.tools.lint.detector.api.XmlContext
-import java.util.Locale
+import com.android.utils.usLocaleCapitalize
 
 class MatchingIdFixer(context: XmlContext, private val id: String) {
   private val layoutName = context.file.name.replace(".xml", "")
@@ -15,7 +15,7 @@ class MatchingIdFixer(context: XmlContext, private val id: String) {
     return if (id.startsWith(expectedPrefix, ignoreCase = true)) {
       expectedPrefix + id.substring(expectedPrefix.length)
     } else {
-      expectedPrefix + id.capitalize(Locale.ROOT)
+      expectedPrefix + id.usLocaleCapitalize()
     }
   }
 }
