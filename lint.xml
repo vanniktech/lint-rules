@@ -3,4 +3,8 @@
   <issue id="UnknownNullness">
     <ignore regexp=".*"/>
   </issue>
+  <!-- Our pace. -->
+  <issue id="GradleDependency" severity="ignore" in="cli,gradle"/>
+  <issue id="NewerVersionAvailable" severity="ignore" in="cli,gradle"/>
+  <issue id="AndroidGradlePluginVersion" severity="ignore" in="cli,gradle"/>
 </lint>
