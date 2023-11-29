@@ -19,4 +19,4 @@ plugin-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.
 plugin-dokka = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version = "1.9.10" }
 
 [plugins]
-codequalitytools = { id = "com.vanniktech.code.quality.tools", version = "0.23.0" }
+codequalitytools = { id = "com.vanniktech.code.quality.tools", version = "0.24.0" }
