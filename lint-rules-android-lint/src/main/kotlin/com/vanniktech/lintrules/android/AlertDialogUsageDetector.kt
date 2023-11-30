@@ -20,13 +20,17 @@ val ISSUE_ALERT_DIALOG_USAGE = Issue.create(
   "AlertDialogUsage",
   "Use the support library AlertDialog instead of android.app.AlertDialog.",
   "Support library AlertDialog is much more powerful and plays better together with the new theming / styling than the AlertDialog built into the framework.",
-  CORRECTNESS, PRIORITY, WARNING,
+  CORRECTNESS,
+  PRIORITY,
+  WARNING,
   Implementation(AlertDialogUsageDetector::class.java, EnumSet.of(JAVA_FILE)),
 )
 
 private const val FQDN_ANDROID_ALERT_DIALOG = "android.app.AlertDialog"
 
-class AlertDialogUsageDetector : Detector(), Detector.UastScanner {
+class AlertDialogUsageDetector :
+  Detector(),
+  Detector.UastScanner {
   override fun getApplicableUastTypes() = listOf<Class<out UElement>>(UVariable::class.java, UClass::class.java)
 
   override fun createUastHandler(context: JavaContext) = AlertDialogUsageHandler(context)

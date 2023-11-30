@@ -153,11 +153,15 @@ val ISSUE_WRONG_ANNOTATION_ORDER = Issue.create(
   "WrongAnnotationOrder",
   "Checks that Annotations comply with a certain order.",
   "Annotations should always be applied with the same order to have consistency across the code base.",
-  CORRECTNESS, PRIORITY, WARNING,
+  CORRECTNESS,
+  PRIORITY,
+  WARNING,
   Implementation(AnnotationOrderDetector::class.java, EnumSet.of(JAVA_FILE)),
 )
 
-class AnnotationOrderDetector : Detector(), UastScanner {
+class AnnotationOrderDetector :
+  Detector(),
+  UastScanner {
   override fun getApplicableUastTypes() = listOf<Class<out UElement>>(UVariable::class.java, UMethod::class.java, UClass::class.java)
 
   override fun createUastHandler(context: JavaContext) = AnnotationOrderVisitor(context)

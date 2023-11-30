@@ -23,7 +23,9 @@ val ISSUE_SHOULD_USE_STATIC_IMPORT = Issue.create(
   "ShouldUseStaticImport",
   "Flags declarations that should be statically imported.",
   "Certain declarations like TimeUnit.SECONDS should be statically imported to increase the readability.",
-  CORRECTNESS, PRIORITY, WARNING,
+  CORRECTNESS,
+  PRIORITY,
+  WARNING,
   Implementation(ShouldUseStaticImportDetector::class.java, EnumSet.of(JAVA_FILE)),
 )
 
@@ -207,7 +209,9 @@ private val referencesToStaticallyImport = mapOf(
   "LENIENT" to "org.mockito.quality.Strictness",
 )
 
-class ShouldUseStaticImportDetector : Detector(), Detector.UastScanner {
+class ShouldUseStaticImportDetector :
+  Detector(),
+  Detector.UastScanner {
   override fun getApplicableMethodNames() = methodsToStaticallyImport.keys.toList()
 
   override fun visitMethodCall(context: JavaContext, node: UCallExpression, method: PsiMethod) {

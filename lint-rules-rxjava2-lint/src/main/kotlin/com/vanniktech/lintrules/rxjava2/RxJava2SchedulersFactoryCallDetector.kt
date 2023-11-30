@@ -20,14 +20,18 @@ val ISSUE_RAW_SCHEDULER_CALL = Issue.create(
   "RxJava2SchedulersFactoryCall",
   "Instead of calling the Schedulers factory methods directly inject the Schedulers.",
   "Injecting the Schedulers instead of accessing them via the factory methods has the benefit that unit testing is way easier. Instead of overriding them via the Plugin mechanism we can just pass a custom Scheduler.",
-  CORRECTNESS, PRIORITY, WARNING,
+  CORRECTNESS,
+  PRIORITY,
+  WARNING,
   Implementation(RxJava2SchedulersFactoryCallDetector::class.java, EnumSet.of(JAVA_FILE)),
 )
 
 private val schedulersMethods = listOf("io", "computation", "newThread", "single", "from")
 private val androidSchedulersMethods = listOf("mainThread")
 
-class RxJava2SchedulersFactoryCallDetector : Detector(), UastScanner {
+class RxJava2SchedulersFactoryCallDetector :
+  Detector(),
+  UastScanner {
   override fun getApplicableMethodNames() = schedulersMethods + androidSchedulersMethods
 
   override fun visitMethodCall(context: JavaContext, node: UCallExpression, method: PsiMethod) {

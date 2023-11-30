@@ -16,7 +16,9 @@ val ISSUE_DEFAULT_LAYOUT_ATTRIBUTE = Issue.create(
   "DefaultLayoutAttribute",
   "Flags default layout values.",
   "Flags default layout values that are not needed. One for instance is the textStyle=\"normal\" that can be just removed.",
-  CORRECTNESS, PRIORITY, WARNING,
+  CORRECTNESS,
+  PRIORITY,
+  WARNING,
   Implementation(DefaultLayoutAttributeDetector::class.java, RESOURCE_FILE_SCOPE),
 )
 

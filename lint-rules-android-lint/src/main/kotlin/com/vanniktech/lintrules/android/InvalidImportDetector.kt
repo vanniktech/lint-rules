@@ -18,14 +18,18 @@ val ISSUE_INVALID_IMPORT = Issue.create(
   "InvalidImport",
   "Flags invalid imports.",
   "Flags invalid imports. One example is com.foo.bar.R.drawable. Instead just the generated class R should be imported and not R.drawable. Also you should never import anything that's in an internal package.",
-  CORRECTNESS, PRIORITY, WARNING,
+  CORRECTNESS,
+  PRIORITY,
+  WARNING,
   Implementation(InvalidImportDetector::class.java, EnumSet.of(JAVA_FILE)),
 )
 
 private val disallowedImports = listOf(".R.")
 private val disallowedInternalImports = listOf("internal.", "internaI.")
 
-class InvalidImportDetector : Detector(), Detector.UastScanner {
+class InvalidImportDetector :
+  Detector(),
+  Detector.UastScanner {
   override fun getApplicableUastTypes() = listOf(UImportStatement::class.java)
 
   override fun createUastHandler(context: JavaContext) = InvalidImportHandler(context)

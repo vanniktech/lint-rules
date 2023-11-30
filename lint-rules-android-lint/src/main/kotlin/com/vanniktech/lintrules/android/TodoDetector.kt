@@ -25,11 +25,18 @@ val ISSUE_TODO = Issue.create(
   "Todo",
   "Marks todos in any given file.",
   "Marks todo in any given file since they should be resolved.",
-  CORRECTNESS, PRIORITY, FATAL,
+  CORRECTNESS,
+  PRIORITY,
+  FATAL,
   Implementation(TodoDetector::class.java, EnumSet.of(JAVA_FILE, GRADLE_FILE, PROGUARD_FILE, MANIFEST, RESOURCE_FILE), EnumSet.of(JAVA_FILE, GRADLE_FILE, PROGUARD_FILE, MANIFEST, RESOURCE_FILE)),
 )
 
-class TodoDetector : Detector(), Detector.UastScanner, Detector.GradleScanner, Detector.OtherFileScanner, Detector.XmlScanner {
+class TodoDetector :
+  Detector(),
+  Detector.UastScanner,
+  Detector.GradleScanner,
+  Detector.OtherFileScanner,
+  Detector.XmlScanner {
   override fun visitDocument(context: XmlContext, document: Document) {
     // Needs to be overridden, but we'll do the work in afterCheckFile.
   }

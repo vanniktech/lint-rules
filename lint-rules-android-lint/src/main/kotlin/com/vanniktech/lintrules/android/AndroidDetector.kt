@@ -15,27 +15,38 @@ import java.util.Arrays.asList
 import java.util.EnumSet
 
 val ISSUE_RESOURCES_GET_DRAWABLE = Issue.create(
-  "ResourcesGetDrawableCall", "Marks usage of deprecated getDrawable() on Resources.",
+  "ResourcesGetDrawableCall",
+  "Marks usage of deprecated getDrawable() on Resources.",
   "Instead of getDrawable(), ContextCompat or the method with the Theme Overload should be used instead.",
-  MESSAGES, PRIORITY, WARNING,
+  MESSAGES,
+  PRIORITY,
+  WARNING,
   Implementation(AndroidDetector::class.java, EnumSet.of(JAVA_FILE)),
 )
 
 val ISSUE_RESOURCES_GET_COLOR = Issue.create(
-  "ResourcesGetColorCall", "Marks usage of deprecated getColor() on Resources.",
+  "ResourcesGetColorCall",
+  "Marks usage of deprecated getColor() on Resources.",
   "Instead of getColor(), ContextCompat or the method with the Theme Overload should be used instead.",
-  MESSAGES, PRIORITY, WARNING,
+  MESSAGES,
+  PRIORITY,
+  WARNING,
   Implementation(AndroidDetector::class.java, EnumSet.of(JAVA_FILE)),
 )
 
 val ISSUE_RESOURCES_GET_COLOR_STATE_LIST = Issue.create(
-  "ResourcesGetColorStateListCall", "Marks usage of deprecated getColorStateList() on Resources.",
+  "ResourcesGetColorStateListCall",
+  "Marks usage of deprecated getColorStateList() on Resources.",
   "Instead of getColorStateList(), ContextCompat or the method with the Theme Overload should be used instead.",
-  MESSAGES, PRIORITY, WARNING,
+  MESSAGES,
+  PRIORITY,
+  WARNING,
   Implementation(AndroidDetector::class.java, EnumSet.of(JAVA_FILE)),
 )
 
-class AndroidDetector : Detector(), Detector.UastScanner {
+class AndroidDetector :
+  Detector(),
+  Detector.UastScanner {
   override fun getApplicableMethodNames() = asList("getColor", "getDrawable", "getColorStateList")
 
   override fun visitMethodCall(context: JavaContext, node: UCallExpression, method: PsiMethod) {

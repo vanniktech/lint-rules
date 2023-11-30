@@ -14,7 +14,9 @@ val ISSUE_STRING_NOT_CAPITALIZED = Issue.create(
   "StringNotCapitalized",
   "Marks strings which are not capitalized.",
   "Every string should be capitalized. If not, it is flagged.",
-  CORRECTNESS, PRIORITY, WARNING,
+  CORRECTNESS,
+  PRIORITY,
+  WARNING,
   Implementation(StringNotCapitalizedDetector::class.java, RESOURCE_FILE_SCOPE),
 )
 

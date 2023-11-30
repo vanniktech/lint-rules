@@ -17,7 +17,9 @@ val ISSUE_WRONG_GLOBAL_ICON_COLOR = Issue.create(
   "WrongGlobalIconColor",
   "Each icon should have the same global color defined.",
   "In order to reuse icons, it's best if all icons share the same color and can be used at every position in the app. On the target side, tinting can be applied.",
-  CORRECTNESS, PRIORITY, WARNING,
+  CORRECTNESS,
+  PRIORITY,
+  WARNING,
   Implementation(WrongGlobalIconColorDetector::class.java, RESOURCE_FILE_SCOPE),
 )
 
