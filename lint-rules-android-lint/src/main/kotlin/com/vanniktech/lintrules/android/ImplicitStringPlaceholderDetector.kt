@@ -14,7 +14,9 @@ val ISSUE_IMPLICIT_STRING_PLACEHOLDER = Issue.create(
   "ImplicitStringPlaceholder",
   "Marks implicit placeholders in strings without an index.",
   "It's better and more explicit to use numbered placeholders.",
-  CORRECTNESS, PRIORITY, WARNING,
+  CORRECTNESS,
+  PRIORITY,
+  WARNING,
   Implementation(ImplicitStringPlaceholderDetector::class.java, RESOURCE_FILE_SCOPE),
 )
 

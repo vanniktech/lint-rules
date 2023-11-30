@@ -20,11 +20,15 @@ val ISSUE_LAYOUT_FILE_NAME_MATCHES_CLASS = Issue.create(
   "LayoutFileNameMatchesClass",
   "Checks that the layout file matches the class name.",
   "Layout file names should always match the name of the class. FooActivity should have a layout file named activity_foo hence.",
-  CORRECTNESS, PRIORITY, WARNING,
+  CORRECTNESS,
+  PRIORITY,
+  WARNING,
   Implementation(LayoutFileNameMatchesClassDetector::class.java, EnumSet.of(JAVA_FILE)),
 )
 
-class LayoutFileNameMatchesClassDetector : Detector(), UastScanner {
+class LayoutFileNameMatchesClassDetector :
+  Detector(),
+  UastScanner {
   override fun getApplicableMethodNames() = listOf("setContentView")
 
   override fun visitMethodCall(context: JavaContext, node: UCallExpression, method: PsiMethod) {

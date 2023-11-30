@@ -12,9 +12,12 @@ import com.android.tools.lint.detector.api.XmlContext
 import org.w3c.dom.Element
 
 val ISSUE_WRONG_CONSTRAINT_LAYOUT_USAGE = Issue.create(
-  "WrongConstraintLayoutUsage", "Marks a wrong usage of the Constraint Layout.",
+  "WrongConstraintLayoutUsage",
+  "Marks a wrong usage of the Constraint Layout.",
   "Instead of using left & right constraints start & end should be used.",
-  CORRECTNESS, PRIORITY, ERROR,
+  CORRECTNESS,
+  PRIORITY,
+  ERROR,
   Implementation(WrongConstraintLayoutUsageDetector::class.java, RESOURCE_FILE_SCOPE),
 )
 

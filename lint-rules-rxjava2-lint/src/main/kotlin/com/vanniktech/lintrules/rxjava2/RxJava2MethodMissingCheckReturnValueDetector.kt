@@ -24,11 +24,15 @@ val ISSUE_METHOD_MISSING_CHECK_RETURN_VALUE = Issue.create(
   "RxJava2MethodMissingCheckReturnValue",
   "Method is missing the @CheckReturnValue annotation.",
   "Methods returning RxJava Reactive Types should be annotated with the @CheckReturnValue annotation. Static analyze tools such as Lint or ErrorProne can detect when the return value of a method is not used. This is usually an indication of a bug. If this is done on purpose (e.g. fire & forget) it should be stated explicitly.",
-  CORRECTNESS, PRIORITY, WARNING,
+  CORRECTNESS,
+  PRIORITY,
+  WARNING,
   Implementation(RxJava2MethodMissingCheckReturnValueDetector::class.java, EnumSet.of(JAVA_FILE)),
 )
 
-class RxJava2MethodMissingCheckReturnValueDetector : Detector(), Detector.UastScanner {
+class RxJava2MethodMissingCheckReturnValueDetector :
+  Detector(),
+  Detector.UastScanner {
   override fun getApplicableUastTypes() = listOf(UMethod::class.java)
 
   override fun createUastHandler(context: JavaContext) = CheckReturnValueVisitor(context)
@@ -77,12 +81,10 @@ class RxJava2MethodMissingCheckReturnValueDetector : Detector(), Detector.UastSc
     companion object {
       internal const val IGNORE_MODIFIERS_PROP = "com.vanniktech.lintrules.rxjava2.RxJava2MethodMissingCheckReturnValueDetector.ignoreMethodAccessModifiers"
 
-      private fun ignoredModifiers(): List<JvmModifier> {
-        return System.getProperty(IGNORE_MODIFIERS_PROP)
-          ?.split(",")
-          ?.map { JvmModifier.valueOf(it.toUpperCaseAsciiOnly()) }
-          .orEmpty()
-      }
+      private fun ignoredModifiers(): List<JvmModifier> = System.getProperty(IGNORE_MODIFIERS_PROP)
+        ?.split(",")
+        ?.map { JvmModifier.valueOf(it.toUpperCaseAsciiOnly()) }
+        .orEmpty()
     }
   }
 }

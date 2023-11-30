@@ -14,7 +14,9 @@ val ISSUE_FORMAL_GERMAN = Issue.create(
   "FormalGerman",
   "Marks strings which contain formal German words.",
   "Informal language should be used at all times.",
-  CORRECTNESS, PRIORITY, WARNING,
+  CORRECTNESS,
+  PRIORITY,
+  WARNING,
   Implementation(FormalGermanDetector::class.java, RESOURCE_FILE_SCOPE),
 )
 

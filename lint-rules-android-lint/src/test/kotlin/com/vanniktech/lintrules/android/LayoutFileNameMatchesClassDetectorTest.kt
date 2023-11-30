@@ -38,7 +38,8 @@ class LayoutFileNameMatchesClassDetectorTest {
   @Test fun nonRUsage() {
     lint()
       .files(
-        r, activity,
+        r,
+        activity,
         java(
           """
           package foo;
@@ -59,7 +60,8 @@ class LayoutFileNameMatchesClassDetectorTest {
   @Test fun fooActivityUsesActivityFoo() {
     lint()
       .files(
-        r, activity,
+        r,
+        activity,
         java(
           """
           package foo;
@@ -80,7 +82,8 @@ class LayoutFileNameMatchesClassDetectorTest {
   @Test fun foo2BarRiderActivityUsesActivitySomethingWithResourcePrefix() {
     lint()
       .files(
-        r, activity,
+        r,
+        activity,
         kt(
           """
           package foo
@@ -102,7 +105,8 @@ class LayoutFileNameMatchesClassDetectorTest {
   @Test fun foo2BarActivityUsesActivityWithResourcePrefix() {
     lint()
       .files(
-        r, activity,
+        r,
+        activity,
         kt(
           """
           package foo
@@ -124,7 +128,8 @@ class LayoutFileNameMatchesClassDetectorTest {
   @Test fun fooActivityUsesActivityFooWithResourcePrefix() {
     lint()
       .files(
-        r, activity,
+        r,
+        activity,
         java(
           """
           package foo;
@@ -146,7 +151,8 @@ class LayoutFileNameMatchesClassDetectorTest {
   @Test fun gameTimesActivityUsesActivityGameTimes() {
     lint()
       .files(
-        r, activity,
+        r,
+        activity,
         kt(
           """
           package foo
@@ -167,7 +173,8 @@ class LayoutFileNameMatchesClassDetectorTest {
   @Test fun fooActivityUsesActivityBarWithResourcePrefix() {
     lint()
       .files(
-        r, activity,
+        r,
+        activity,
         java(
           """
             package foo;
@@ -204,7 +211,8 @@ class LayoutFileNameMatchesClassDetectorTest {
   @Test fun gameTimesActivityUsesActivityBar() {
     lint()
       .files(
-        r, activity,
+        r,
+        activity,
         java(
           """
           package foo;
@@ -240,7 +248,8 @@ class LayoutFileNameMatchesClassDetectorTest {
   @Test fun themesActivityUsesActivityBarInKotlin() {
     lint()
       .files(
-        r, activity,
+        r,
+        activity,
         kt(
           """
           package foo

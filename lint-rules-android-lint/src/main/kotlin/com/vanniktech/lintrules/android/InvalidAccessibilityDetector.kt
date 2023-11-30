@@ -18,7 +18,9 @@ val ISSUE_INVALID_ACCESSIBILITY = Issue.create(
   "InvalidAccessibility",
   "Marks invalid accessibility usages.",
   "Marks usages of invalid accessibility and suggests corrections.",
-  CORRECTNESS, PRIORITY, WARNING,
+  CORRECTNESS,
+  PRIORITY,
+  WARNING,
   Implementation(InvalidAccessibilityDetector::class.java, RESOURCE_FILE_SCOPE),
 )
 

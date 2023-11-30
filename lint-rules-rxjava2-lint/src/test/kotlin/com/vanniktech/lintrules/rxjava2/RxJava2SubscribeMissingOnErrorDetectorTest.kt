@@ -100,7 +100,8 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
   @Test fun callingFlowableSubscribe() {
     lint()
       .files(
-        reactiveStreams(), rxJava2(),
+        reactiveStreams(),
+        rxJava2(),
         java(
           """
           package foo;
@@ -131,7 +132,8 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
   @Test fun callingFlowableSubscribeOnSuccess() {
     lint()
       .files(
-        reactiveStreams(), rxJava2(),
+        reactiveStreams(),
+        rxJava2(),
         java(
           """
           package foo;
@@ -164,7 +166,8 @@ class RxJava2SubscribeMissingOnErrorDetectorTest {
   @Test fun callingFlowableSubscribeOnSuccessWithError() {
     lint()
       .files(
-        reactiveStreams(), rxJava2(),
+        reactiveStreams(),
+        rxJava2(),
         java(
           """
           package foo;

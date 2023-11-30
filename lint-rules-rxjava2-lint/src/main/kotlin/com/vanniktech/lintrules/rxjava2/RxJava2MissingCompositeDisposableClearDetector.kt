@@ -22,11 +22,15 @@ val ISSUE_MISSING_COMPOSITE_DISPOSABLE_CLEAR = Issue.create(
   "RxJava2MissingCompositeDisposableClear",
   "Marks CompositeDisposables that are not being cleared.",
   "A class is using CompositeDisposable and not calling clear(). This can leave operations running and even cause memory leaks. It's best to always call clear() once you're done. e.g. in onDestroy() for Activitys.",
-  CORRECTNESS, PRIORITY, ERROR,
+  CORRECTNESS,
+  PRIORITY,
+  ERROR,
   Implementation(RxJava2MissingCompositeDisposableClearDetector::class.java, EnumSet.of(JAVA_FILE)),
 )
 
-class RxJava2MissingCompositeDisposableClearDetector : Detector(), Detector.UastScanner {
+class RxJava2MissingCompositeDisposableClearDetector :
+  Detector(),
+  Detector.UastScanner {
   override fun getApplicableUastTypes() = listOf(UClass::class.java)
 
   override fun createUastHandler(context: JavaContext) = MissingCompositeDisposableClearVisitor(context)
@@ -49,21 +53,20 @@ class RxJava2MissingCompositeDisposableClearDetector : Detector(), Detector.Uast
         }
       }
 
-      node.accept(object : AbstractUastVisitor() {
-        override fun visitReturnExpression(node: UReturnExpression): Boolean {
-          remove(node.returnExpression)
-          return super.visitReturnExpression(node)
-        }
+      node.accept(
+        object : AbstractUastVisitor() {
+          override fun visitReturnExpression(node: UReturnExpression): Boolean {
+            remove(node.returnExpression)
+            return super.visitReturnExpression(node)
+          }
 
-        override fun visitCallExpression(node: UCallExpression): Boolean {
-          return if ("clear" == node.methodName) {
+          override fun visitCallExpression(node: UCallExpression): Boolean = if ("clear" == node.methodName) {
             remove(node.receiver)
             true
           } else {
             super.visitCallExpression(node)
           }
-        }
-      },
+        },
       )
 
       compositeDisposables.forEach {

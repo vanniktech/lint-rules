@@ -17,7 +17,9 @@ val ISSUE_UNUSED_MERGE_ATTRIBUTES = Issue.create(
   "UnusedMergeAttributes",
   "Flags android and app attributes that are used on a <merge> attribute for custom Views.",
   "Adding android, app and other attributes to <merge> won't be used by the system for custom views and hence can lead to errors.",
-  CORRECTNESS, PRIORITY, WARNING,
+  CORRECTNESS,
+  PRIORITY,
+  WARNING,
   Implementation(UnusedMergeAttributesDetector::class.java, RESOURCE_FILE_SCOPE),
 )
 

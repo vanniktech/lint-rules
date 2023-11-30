@@ -11,7 +11,8 @@ class RxJava2SchedulersFactoryCallDetectorTest {
   @Test fun ioCallInsideDaggerProvidesMethod() {
     lint()
       .files(
-        dagger2(), rxJava2(),
+        dagger2(),
+        rxJava2(),
         java(
           """
           package foo;
@@ -243,7 +244,8 @@ class RxJava2SchedulersFactoryCallDetectorTest {
   @Test fun mainThreadCall() {
     lint()
       .files(
-        rxJava2(), rxAndroid2(),
+        rxJava2(),
+        rxAndroid2(),
         java(
           """
           package foo;

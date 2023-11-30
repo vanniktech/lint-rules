@@ -26,11 +26,16 @@ val ISSUE_INVALID_SINGLE_LINE_COMMENT = Issue.create(
   "InvalidSingleLineComment",
   "Marks single line comments that are not sentences.",
   "Single line comments should always be sentences. They're part of the code and hence they deserve as much detail and respect as code.",
-  CORRECTNESS, PRIORITY, WARNING,
+  CORRECTNESS,
+  PRIORITY,
+  WARNING,
   Implementation(InvalidSingleLineCommentDetector::class.java, EnumSet.of(JAVA_FILE, GRADLE_FILE), EnumSet.of(JAVA_FILE, GRADLE_FILE)),
 )
 
-class InvalidSingleLineCommentDetector : Detector(), Detector.UastScanner, Detector.GradleScanner {
+class InvalidSingleLineCommentDetector :
+  Detector(),
+  Detector.UastScanner,
+  Detector.GradleScanner {
   override fun getApplicableUastTypes() = listOf(UClass::class.java)
 
   override fun afterCheckFile(context: Context) {

@@ -11,11 +11,9 @@ class MatchingIdFixer(context: XmlContext, private val id: String) {
 
   fun needsFix() = !id.startsWith(expectedPrefix)
 
-  fun fixedId(): String {
-    return if (id.startsWith(expectedPrefix, ignoreCase = true)) {
-      expectedPrefix + id.substring(expectedPrefix.length)
-    } else {
-      expectedPrefix + id.usLocaleCapitalize()
-    }
+  fun fixedId(): String = if (id.startsWith(expectedPrefix, ignoreCase = true)) {
+    expectedPrefix + id.substring(expectedPrefix.length)
+  } else {
+    expectedPrefix + id.usLocaleCapitalize()
   }
 }
