@@ -17,6 +17,7 @@
 - **MissingScrollbars** - Every scroll view should explicitly define whether it has scrollbars (none | vertical | horizontal).
 - **MissingXmlHeader** - An xml file should always have the xml header to declare that it is an xml file despite the file ending.
 - **NamingPattern** - Sometimes there is more than one reasonable way to convert an English phrase into camel case, such as when acronyms or unusual constructs like "IPv6" or "iOS" are present. XML HTTP request becomes XmlHttpRequest. XMLHTTPRequest would be incorrect.
+- **Quotes** - It's better to replace them with their appropriate quotes in each language.
 - **RawColor** - Color value should all be defined as color resources. This has the benefit that you can easily see all of your colors in one file. One benefit is an easier addition to Dark Theme for instance. This check will run on layouts as well as xml drawables.
 - **RawDimen** - Dimensions should all be defined as dimension resources. This has the benefit that you can easily see all of your dimensions in one file. One benefit is that when designers change the outline across the entire app you only have to adjust it in one place. This check will run on layouts as well as xml drawables.
 - **ResourcesGetColorCall** - Instead of getColor(), ContextCompat or the method with the Theme Overload should be used instead.
