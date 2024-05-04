@@ -36,6 +36,7 @@ class IssueRegistry : com.android.tools.lint.client.api.IssueRegistry() {
       ISSUE_MISSING_SCROLLBARS,
       ISSUE_MISSING_XML_HEADER,
       ISSUE_NAMING_PATTERN,
+      ISSUE_QUOTES,
       ISSUE_RAW_COLOR,
       ISSUE_RAW_DIMEN,
       ISSUE_RESOURCES_GET_COLOR,
