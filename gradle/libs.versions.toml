@@ -6,7 +6,7 @@ targetSdk = "34"
 androidgradleplugin = "8.4.0"
 lint = "31.4.0"
 kotlin = "1.9.21"
-ktlint = "1.0.1"
+ktlint = "1.2.1"
 
 [libraries]
 junit = { module = "junit:junit", version = "4.13.2" }
