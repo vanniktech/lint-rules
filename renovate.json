@@ -3,7 +3,11 @@
     "config:base",
     ":disableDependencyDashboard"
   ],
-  "ignoreDeps": [
-    "org.jetbrains.kotlin:kotlin-gradle-plugin"
+  "packageRules": [
+    {
+      "description": "Automerge updates",
+      "matchUpdateTypes": ["major", "minor", "patch"],
+      "automerge": true
+    }
   ]
 }
