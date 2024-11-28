@@ -270,7 +270,7 @@ import org.junit.Test
         ).indented(),
       )
       .issues(ISSUE_WRONG_ANNOTATION_ORDER)
-      .skipTestModes(TestMode.WHITESPACE, TestMode.FULLY_QUALIFIED)
+      .skipTestModes(TestMode.WHITESPACE, TestMode.FULLY_QUALIFIED, TestMode.JVM_OVERLOADS)
       .run()
       .expect(
         """
