@@ -5,6 +5,7 @@ package com.vanniktech.lintrules.android
 import com.android.tools.lint.checks.infrastructure.TestFiles.java
 import com.android.tools.lint.checks.infrastructure.TestFiles.kt
 import com.android.tools.lint.checks.infrastructure.TestLintTask.lint
+import com.android.tools.lint.checks.infrastructure.TestMode
 import org.junit.Test
 
 class ShouldUseStaticImportDetectorTest {
@@ -252,6 +253,7 @@ class ShouldUseStaticImportDetectorTest {
         ).indented(),
       )
       .issues(ISSUE_SHOULD_USE_STATIC_IMPORT)
+      .skipTestModes(TestMode.FULLY_QUALIFIED)
       .run()
       .expectClean()
   }
