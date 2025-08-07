@@ -156,7 +156,7 @@ class StringNotCapitalizedDetectorTest {
         """
         |res/values/strings.xml:2: Warning: String is not capitalized [StringNotCapitalized]
         |  <string name="my_string">my string</string>
-        |                           ^
+        |                           ~~~~~~~~~
         |0 errors, 1 warnings
         """.trimMargin(),
       )

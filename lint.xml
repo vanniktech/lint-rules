@@ -3,6 +3,7 @@
   <issue id="UnknownNullness">
     <ignore regexp=".*"/>
   </issue>
+  <issue id="UElementAsPsi" severity="ignore"/>
   <!-- Our pace. -->
   <issue id="GradleDependency" severity="ignore" in="cli,gradle"/>
   <issue id="NewerVersionAvailable" severity="ignore" in="cli,gradle"/>

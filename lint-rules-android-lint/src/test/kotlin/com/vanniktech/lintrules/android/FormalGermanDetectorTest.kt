@@ -67,19 +67,19 @@ class FormalGermanDetectorTest {
         """
         res/values/config.xml:2: Warning: Formal language "Ihr" detected [FormalGerman]
           <string name="my_string_1">Wie lautet Ihr Name?</string>
-                                                ^
+                                                ~~~
         res/values/config.xml:3: Warning: Formal language "Sie?" detected [FormalGerman]
           <string name="my_string_2">Wie heissen Sie?</string>
-                                                 ^
+                                                 ~~~
         res/values/config.xml:4: Warning: Formal language "Ihrem" detected [FormalGerman]
           <string name="my_string_3">Frag nach Ihrem Namen.</string>
-                                               ^
+                                               ~~~~~
         res/values/config.xml:5: Warning: Formal language "Sie" detected [FormalGerman]
           <string name="my_string_4">Wie Sie möchten</string>
-                                         ^
+                                         ~~~
         res/values/config.xml:6: Warning: Formal language "Ihre" detected [FormalGerman]
           <string name="my_string_5">Ihre Historie</string>
-                                     ^
+                                     ~~~~
         0 errors, 5 warnings
         """.trimIndent(),
       )

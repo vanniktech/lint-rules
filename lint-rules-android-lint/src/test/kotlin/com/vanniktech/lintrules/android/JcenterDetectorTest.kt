@@ -4,11 +4,10 @@ package com.vanniktech.lintrules.android
 
 import com.android.tools.lint.checks.infrastructure.TestFiles.gradle
 import com.android.tools.lint.checks.infrastructure.TestLintTask.lint
-import org.junit.Ignore
 import org.junit.Test
 
 class JcenterDetectorTest {
-  @Test @Ignore("https://issuetracker.google.com/issues/300765221") fun jcenter() {
+  @Test fun jcenter() {
     lint()
       .files(
         gradle(

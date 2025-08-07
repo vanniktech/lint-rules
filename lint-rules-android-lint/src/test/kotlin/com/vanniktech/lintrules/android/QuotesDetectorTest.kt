@@ -26,7 +26,7 @@ class QuotesDetectorTest {
         """
         res/values/strings.xml:2: Warning: Invalid quotes [Quotes]
           <string name="my_string_1">Hallo "Niklas"</string>
-                                           ^
+                                           ~~~~~~~~
         0 errors, 1 warnings
         """.trimIndent(),
       )
@@ -95,7 +95,7 @@ class QuotesDetectorTest {
           """
         res/values-$locale/strings.xml:2: Warning: Invalid quotes [Quotes]
           <string name="my_string_1">Hallo "Niklas"</string>
-                                           ^
+                                           ~~~~~~~~
         0 errors, 1 warnings
           """.trimIndent(),
         )

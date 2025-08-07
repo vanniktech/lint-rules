@@ -6,7 +6,6 @@ import com.android.tools.lint.checks.infrastructure.TestFiles.java
 import com.android.tools.lint.checks.infrastructure.TestFiles.kt
 import com.android.tools.lint.checks.infrastructure.TestLintTask.lint
 import com.android.tools.lint.checks.infrastructure.TestMode
-import org.junit.Ignore
 import org.junit.Test
 
 @Suppress("Detekt.LargeClass") class AnnotationOrderDetectorTest {
@@ -487,7 +486,7 @@ import org.junit.Test
       )
   }
 
-  @Test @Ignore("https://issuetracker.google.com/issues/289695599") fun suppressWarningsBeforeModule() {
+  @Test fun suppressWarningsBeforeModule() {
     lint()
       .files(
         java(
@@ -717,7 +716,7 @@ import org.junit.Test
       )
   }
 
-  @Test @Ignore("https://issuetracker.google.com/issues/289695599") fun suppressBeforeSuppressLintBeforeSuppressWarnings() {
+  @Test fun suppressBeforeSuppressLintBeforeSuppressWarnings() {
     lint()
       .files(
         java(

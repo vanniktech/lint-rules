@@ -57,7 +57,7 @@ class InvalidSingleLineCommentDetector :
       when {
         beforeStart != null && !Character.isWhitespace(beforeStart) -> handlePrecedingSpace(context, source, start)
         group[0] != ' ' -> handleRecedingSpace(context, source, start)
-        " " == group || group.trim { it <= ' ' }.length != group.length - 1 -> handleTrailingWhiteSpace(context, source, start, end, group)
+        " " == group || group.trim().length != group.length - 1 -> handleTrailingWhiteSpace(context, source, start, end, group)
         Character.isLowerCase(group[1]) -> handleFirstWordCapitalization(context, source, start, end, group)
         allowedEndings.none { group.endsWith(it) } -> handlePeriod(context, source, start, end, group)
       }

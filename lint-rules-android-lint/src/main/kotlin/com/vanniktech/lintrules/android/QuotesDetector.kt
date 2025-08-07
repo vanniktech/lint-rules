@@ -58,7 +58,7 @@ class QuotesDetector : StringXmlDetector() {
 
     if (string != expected) {
       val fix = fix().replace().name("Fix quotes").text(string).with(expected).autoFix().range(context.getLocation(textNode)).build()
-      context.report(ISSUE_QUOTES, node, context.getLocation(textNode, quotes.first(), quotes.last()), "Invalid quotes", fix)
+      context.report(ISSUE_QUOTES, node, context.getLocation(textNode, quotes.first(), quotes.last() + 1), "Invalid quotes", fix)
     }
   }
 }
