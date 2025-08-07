@@ -12,9 +12,7 @@ import com.android.tools.lint.detector.api.Scope.JAVA_FILE
 import com.android.tools.lint.detector.api.Severity.WARNING
 import com.intellij.psi.PsiMethod
 import org.jetbrains.uast.UCallExpression
-import org.jetbrains.uast.UClass
 import org.jetbrains.uast.getContainingUClass
-import org.jetbrains.uast.getParentOfType
 import org.jetbrains.uast.tryResolveNamed
 import java.util.EnumSet
 
