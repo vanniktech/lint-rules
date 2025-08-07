@@ -43,7 +43,7 @@ class ImplicitStringPlaceholderDetectorTest {
         """
           res/values/strings.xml:2: Warning: Implicit placeholder [ImplicitStringPlaceholder]
             <string name="my_string">Hello %s</string>
-                                           ^
+                                           ~~
           0 errors, 1 warnings
         """.trimIndent(),
       )
@@ -75,13 +75,13 @@ class ImplicitStringPlaceholderDetectorTest {
         """
           res/values/strings.xml:2: Warning: Implicit placeholder [ImplicitStringPlaceholder]
             <string name="my_string">Hello %s, %d days ago, what did you like %s?</string>
-                                           ^
+                                           ~~
           res/values/strings.xml:2: Warning: Implicit placeholder [ImplicitStringPlaceholder]
             <string name="my_string">Hello %s, %d days ago, what did you like %s?</string>
-                                               ^
+                                               ~~
           res/values/strings.xml:2: Warning: Implicit placeholder [ImplicitStringPlaceholder]
             <string name="my_string">Hello %s, %d days ago, what did you like %s?</string>
-                                                                              ^
+                                                                              ~~
           0 errors, 3 warnings
         """.trimIndent(),
       )
