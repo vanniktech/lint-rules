@@ -40,17 +40,17 @@ class RxJava2MethodMissingCheckReturnValueDetector :
   class CheckReturnValueVisitor(private val context: JavaContext) : UElementHandler() {
     override fun visitMethod(node: UMethod) {
       val returnType = node.returnType
-      val isPropertyFunction = node.language is KotlinLanguage && node.sourcePsi is KtProperty
+      val isPropertyFunction = node.lang is KotlinLanguage && node.sourcePsi is KtProperty
 
       if (returnType != null && isTypeThatRequiresAnnotation(returnType) && !isPropertyFunction) {
         val hasAnnotatedMethod = context.evaluator.getAllAnnotations(node as UAnnotated, true)
           .any { "io.reactivex.annotations.CheckReturnValue" == it.qualifiedName }
         if (hasAnnotatedMethod) return
 
-        val hasIgnoredModifier = ignoredModifiers().any { node.hasModifier(it) }
+        val hasIgnoredModifier = ignoredModifiers().any { node.javaPsi.hasModifier(it) }
         if (hasIgnoredModifier) return
 
-        val modifier = node.modifierList.children.joinToString(separator = " ") { it.text }
+        val modifier = node.javaPsi.modifierList.children.joinToString(separator = " ") { it.text }
 
         val fix = LintFix.create()
           .replace()

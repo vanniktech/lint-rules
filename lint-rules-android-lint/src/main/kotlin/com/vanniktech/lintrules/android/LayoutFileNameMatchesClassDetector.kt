@@ -10,6 +10,7 @@ import com.android.tools.lint.detector.api.Issue
 import com.android.tools.lint.detector.api.JavaContext
 import com.android.tools.lint.detector.api.Scope.JAVA_FILE
 import com.android.tools.lint.detector.api.Severity.WARNING
+import com.android.tools.lint.detector.api.nameFromSource
 import com.intellij.psi.PsiMethod
 import org.jetbrains.uast.UCallExpression
 import org.jetbrains.uast.getContainingUClass
@@ -48,7 +49,7 @@ class LayoutFileNameMatchesClassDetector :
       ?.name
 
     val className = node.getContainingUClass()
-      ?.name
+      ?.nameFromSource
 
     if (isNoLayoutReference || layoutFileName == null || className == null) {
       return
