@@ -10,6 +10,8 @@ import com.android.tools.lint.detector.api.Issue
 import com.android.tools.lint.detector.api.JavaContext
 import com.android.tools.lint.detector.api.Scope.JAVA_FILE
 import com.android.tools.lint.detector.api.Severity.ERROR
+import com.android.tools.lint.detector.api.nameFromSource
+import com.android.tools.lint.detector.api.typeFromPsi
 import org.jetbrains.uast.UCallExpression
 import org.jetbrains.uast.UClass
 import org.jetbrains.uast.UExpression
@@ -40,14 +42,14 @@ class RxJava2MissingCompositeDisposableClearDetector :
   ) : UElementHandler() {
     override fun visitClass(node: UClass) {
       val compositeDisposables = node.fields
-        .filter { "io.reactivex.disposables.CompositeDisposable" == it.type.canonicalText }
+        .filter { "io.reactivex.disposables.CompositeDisposable" == it.typeFromPsi?.canonicalText }
         .toMutableSet()
 
       fun remove(node: UExpression?) {
         val iterator = compositeDisposables.iterator()
 
         while (iterator.hasNext()) {
-          if (node?.skipParenthesizedExprDown()?.asRenderString() == iterator.next().name) {
+          if (node?.skipParenthesizedExprDown()?.asRenderString() == iterator.next().nameFromSource) {
             iterator.remove()
           }
         }

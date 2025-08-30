@@ -10,12 +10,14 @@ import com.android.tools.lint.detector.api.Issue
 import com.android.tools.lint.detector.api.JavaContext
 import com.android.tools.lint.detector.api.Scope.JAVA_FILE
 import com.android.tools.lint.detector.api.Severity.WARNING
+import com.android.tools.lint.detector.api.nameFromSource
 import com.intellij.psi.PsiNamedElement
 import com.intellij.psi.PsiParameter
 import org.jetbrains.kotlin.idea.KotlinLanguage
 import org.jetbrains.kotlin.psi.KtProperty
 import org.jetbrains.kotlin.psi.KtPropertyAccessor
 import org.jetbrains.uast.UClass
+import org.jetbrains.uast.UDeclaration
 import org.jetbrains.uast.UElement
 import org.jetbrains.uast.UEnumConstant
 import org.jetbrains.uast.UMethod
@@ -54,11 +56,11 @@ class NamingPatternDetector :
 
     override fun visitClass(node: UClass) = process(node)
 
-    private fun process(element: PsiNamedElement) {
-      val name = element.name
-      val isGeneratedKotlinMethod = element is UMethod && element.language is KotlinLanguage && element.sourcePsi is KtProperty
-      val isGeneratedKotlinMethodAccessor = element is UMethod && element.language is KotlinLanguage && element.sourcePsi is KtPropertyAccessor
-      val isKotlinReceiver = element is UParameter && element.isReceiver()
+    private fun <T> process(element: T) where T : PsiNamedElement, T : UDeclaration {
+      val name = element.nameFromSource
+      val isGeneratedKotlinMethod = element is UMethod && element.lang is KotlinLanguage && element.sourcePsi is KtProperty
+      val isGeneratedKotlinMethodAccessor = element is UMethod && element.lang is KotlinLanguage && element.sourcePsi is KtPropertyAccessor
+      val isKotlinReceiver = element is UParameter && (element.javaPsi as? PsiParameter)?.isReceiver() == true
 
       if (!isGeneratedKotlinMethod &&
         !isGeneratedKotlinMethodAccessor &&
@@ -67,7 +69,7 @@ class NamingPatternDetector :
         !name.contains("-") &&
         EXCLUDES.none { name.contains(it) && !name.startsWith(it) }
       ) {
-        context.report(ISSUE_NAMING_PATTERN, element, context.getNameLocation(element), "${element.name} is not named in defined camel case")
+        context.report(ISSUE_NAMING_PATTERN, element as UElement, context.getNameLocation(element), "$name is not named in defined camel case")
       }
     }
   }
