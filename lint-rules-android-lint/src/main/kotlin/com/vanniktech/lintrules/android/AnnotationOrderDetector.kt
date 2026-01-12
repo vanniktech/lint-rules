@@ -215,21 +215,22 @@ class AnnotationOrderDetector :
 
     @Suppress("Detekt.LabeledExpression") private fun isInCorrectOrder(annotations: List<String>): Boolean {
       var size = 0
-      return annotationOrder.contains(annotations.firstOrNull()) && annotations.all {
-        if (annotationOrder.contains(it)) {
-          for (i in size until annotationOrder.size) {
-            size++
+      return annotationOrder.contains(annotations.firstOrNull()) &&
+        annotations.all {
+          if (annotationOrder.contains(it)) {
+            for (i in size until annotationOrder.size) {
+              size++
 
-            if (it == annotationOrder[i]) {
-              return@all true
+              if (it == annotationOrder[i]) {
+                return@all true
+              }
             }
+
+            return@all false
           }
 
-          return@all false
+          return@all true
         }
-
-        return@all true
-      }
     }
   }
 }

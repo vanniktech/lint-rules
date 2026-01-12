@@ -44,8 +44,9 @@ class RxJava2SchedulersFactoryCallDetector :
     val isAndroidSchedulersMatch = androidSchedulersMethods.contains(node.methodName) && isInAndroidSchedulers
 
     val containingMethod = node.getContainingUMethod()
-    val shouldIgnore = containingMethod != null && context.evaluator.getAllAnnotations(containingMethod as UAnnotated, false)
-      .any { annotation -> listOf("dagger.Provides", "io.reactivex.annotations.SchedulerSupport").any { it == annotation.qualifiedName } }
+    val shouldIgnore = containingMethod != null &&
+      context.evaluator.getAllAnnotations(containingMethod as UAnnotated, false)
+        .any { annotation -> listOf("dagger.Provides", "io.reactivex.annotations.SchedulerSupport").any { it == annotation.qualifiedName } }
 
     if ((isSchedulersMatch || isAndroidSchedulersMatch) && !shouldIgnore) {
       context.report(ISSUE_RAW_SCHEDULER_CALL, node, context.getNameLocation(node), "Inject this Scheduler instead of calling it directly")
