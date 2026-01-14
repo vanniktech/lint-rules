@@ -6,7 +6,7 @@ targetSdk = "36"
 androidgradleplugin = "8.13.2"
 lint = "31.13.2"
 kotlin = "2.2.21"
-ktlint = "1.4.1"
+ktlint = "1.8.0"
 
 [libraries]
 junit = { module = "junit:junit", version = "4.13.2" }
@@ -19,4 +19,4 @@ plugin-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.
 plugin-dokka = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version = "2.1.0" }
 
 [plugins]
-codequalitytools = { id = "com.vanniktech.code.quality.tools", version = "0.24.0" }
+codequalitytools = { id = "com.vanniktech.code.quality.tools", version = "0.25.0" }

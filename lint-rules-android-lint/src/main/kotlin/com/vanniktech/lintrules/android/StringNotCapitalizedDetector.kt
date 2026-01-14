@@ -27,10 +27,11 @@ class StringNotCapitalizedDetector : StringXmlDetector() {
     val isLink = LINK_PREFIXES.any { text.startsWith(it, ignoreCase = true) }
     val isNonTranslatable = node.attributes.getNamedItem("translatable")?.nodeValue == "false"
     val name = node.attributes.getNamedItem("name")?.nodeValue
-    val isAbbreviation = name != null && IGNORED_NAMES.any {
-      name.contains("_$it", ignoreCase = true) ||
-        name.contains("${it}_", ignoreCase = true)
-    }
+    val isAbbreviation = name != null &&
+      IGNORED_NAMES.any {
+        name.contains("_$it", ignoreCase = true) ||
+          name.contains("${it}_", ignoreCase = true)
+      }
     if (isConfig || isLink || isNonTranslatable || isAbbreviation) {
       return
     }

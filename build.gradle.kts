@@ -26,9 +26,6 @@ codeQualityTools {
   ktlint {
     toolVersion = libs.versions.ktlint.get()
   }
-  detekt {
-    enabled = false // Don"t want.
-  }
   cpd {
     enabled = false // Kotlin only.
   }
