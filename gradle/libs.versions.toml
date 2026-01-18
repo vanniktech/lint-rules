@@ -14,7 +14,7 @@ lint-api = { module = "com.android.tools.lint:lint-api", version.ref = "lint" }
 lint-core = { module = "com.android.tools.lint:lint", version.ref = "lint" }
 lint-tests = { module = "com.android.tools.lint:lint-tests", version.ref = "lint" }
 plugin-androidgradleplugin = { module = "com.android.tools.build:gradle", version.ref = "androidgradleplugin" }
-plugin-publish = { module = "com.vanniktech:gradle-maven-publish-plugin", version = "0.35.0" }
+plugin-publish = { module = "com.vanniktech:gradle-maven-publish-plugin", version = "0.36.0" }
 plugin-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 plugin-dokka = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version = "2.1.0" }
 
